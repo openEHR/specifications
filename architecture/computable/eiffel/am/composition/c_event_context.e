@@ -14,8 +14,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/am/composition/SCCS/s.c_event_context.e $"
-	revision:    "$Revision: 1.4 $"
-	last_change: "$Date: 04/02/13 01:13:43+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class C_EVENT_CONTEXT
 

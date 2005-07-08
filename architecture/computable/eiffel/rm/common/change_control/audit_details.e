@@ -14,8 +14,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/common/change_control/SCCS/s.audit_details.e $"
-	revision:    "$Revision: 1.1 $"
-	last_change: "$Date: 03/11/14 14:08:13+00:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class AUDIT_DETAILS
 

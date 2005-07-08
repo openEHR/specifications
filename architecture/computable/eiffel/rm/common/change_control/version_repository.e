@@ -15,8 +15,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/common/change_control/SCCS/s.version_repository.e $"
-	revision:    "$Revision: 1.4 $"
-	last_change: "$Date: 04/04/06 23:56:29+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class VERSION_REPOSITORY [G]
 

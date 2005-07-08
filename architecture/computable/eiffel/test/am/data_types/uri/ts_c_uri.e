@@ -10,8 +10,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/test/am/data_types/uri/SCCS/s.ts_c_uri.e $"
-	revision:    "$Revision: 1.2 $"
-	last_change: "$Date: 04/03/19 14:22:44+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class TS_C_URI
 

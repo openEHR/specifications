@@ -10,8 +10,8 @@ indexing
 	license:     "See notice at bottom of class"
 	
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/test/rm/data_structures/history/SCCS/s.tc_event_series.e $"
-	revision:    "$Revision: 1.3 $"
-	last_change: "$Date: 04/03/19 14:18:32+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class TC_EVENT_SERIES
 

@@ -10,8 +10,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/support/measurement/SCCS/s.measurement_service_access.e $"
-	revision:    "$Revision: 1.1 $"
-	last_change: "$Date: 04/03/10 10:27:21+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class MEASUREMENT_SERVICE_ACCESS
 

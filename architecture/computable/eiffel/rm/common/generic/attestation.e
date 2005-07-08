@@ -12,8 +12,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/common/generic/SCCS/s.attestation.e $"
-	revision:    "$Revision: 1.2 $"
-	last_change: "$Date: 04/03/10 10:26:36+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class ATTESTATION
 

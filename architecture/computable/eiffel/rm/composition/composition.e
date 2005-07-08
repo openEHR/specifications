@@ -19,8 +19,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/composition/SCCS/s.composition.e $"
-	revision:    "$Revision: 1.4 $"
-	last_change: "$Date: 04/03/11 21:08:30+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class COMPOSITION
 

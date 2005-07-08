@@ -12,8 +12,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/am/data_types/quantity/date_time/SCCS/s.c_dv_world_time.e $"
-	revision:    "$Revision: 1.1 $"
-	last_change: "$Date: 03/11/14 14:08:09+00:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 deferred class C_DV_WORLD_TIME
 

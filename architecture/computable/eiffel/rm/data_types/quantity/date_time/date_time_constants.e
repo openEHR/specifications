@@ -12,8 +12,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/BitKeeper/deleted/SCCS/s..del-date_time_constants.e~b10d3e5f $"
-	revision:    "$Revision: 1.1 $"
-	last_change: "$Date: 03/11/14 14:08:18+00:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class DATE_TIME_CONSTANTS
 

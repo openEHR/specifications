@@ -10,8 +10,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/test/rm/data_types/basic/SCCS/s.tc_dv_state.e $"
-	revision:    "$Revision: 1.3 $"
-	last_change: "$Date: 04/03/19 14:19:10+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class TC_DV_STATE
 

@@ -16,8 +16,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/support/identification/SCCS/s.object_id.e $"
-	revision:    "$Revision: 1.2 $"
-	last_change: "$Date: 04/01/14 23:18:38+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 deferred class OBJECT_ID
 

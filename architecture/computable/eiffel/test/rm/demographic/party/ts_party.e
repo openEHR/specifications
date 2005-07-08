@@ -10,8 +10,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/test/rm/demographic/party/SCCS/s.ts_party.e $"
-	revision:    "$Revision: 1.3 $"
-	last_change: "$Date: 04/03/21 17:23:59+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class TS_DEMO_PARTY
 

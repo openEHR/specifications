@@ -13,8 +13,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/am/support/relationship/SCCS/s.c_rel_single.e $"
-	revision:    "$Revision: 1.1 $"
-	last_change: "$Date: 03/11/14 14:08:11+00:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class C_REL_SINGLE[G]
 

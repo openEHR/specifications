@@ -14,8 +14,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/am/composition/content/navigation/SCCS/s.c_organiser_proxy.e $"
-	revision:    "$Revision: 1.2 $"
-	last_change: "$Date: 04/02/12 22:16:48+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class C_ORGANISER_PROXY
 

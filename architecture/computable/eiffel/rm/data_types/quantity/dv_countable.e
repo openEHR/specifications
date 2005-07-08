@@ -15,8 +15,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/data_types/quantity/SCCS/s.dv_countable.e $"
-	revision:    "$Revision: 1.2 $"
-	last_change: "$Date: 04/03/11 21:08:31+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class DV_COUNT
 

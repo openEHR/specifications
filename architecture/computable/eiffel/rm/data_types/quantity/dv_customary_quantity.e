@@ -18,8 +18,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/data_types/quantity/SCCS/s.dv_customary_quantity.e $"
-	revision:    "$Revision: 1.3 $"
-	last_change: "$Date: 04/03/10 10:26:39+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 deferred class DV_CUSTOMARY_QUANTITY
 

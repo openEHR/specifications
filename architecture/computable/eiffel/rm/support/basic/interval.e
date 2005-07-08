@@ -14,8 +14,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/BitKeeper/deleted/SCCS/s..del-interval.e~b26c181f $"
-	revision:    "$Revision: 1.3 $"
-	last_change: "$Date: 04/02/07 01:11:04+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class INTERVAL [G -> PART_COMPARABLE]
 

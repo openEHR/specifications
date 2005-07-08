@@ -14,8 +14,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/BitKeeper/deleted/SCCS/s..del-version_audit.e~b0022b03 $"
-	revision:    "$Revision: 1.2 $"
-	last_change: "$Date: 04/03/10 10:26:35+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class VERSION_AUDIT
 

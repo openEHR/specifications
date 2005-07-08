@@ -10,8 +10,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/test/am/data_types/time_specification/SCCS/s.tc_c_dv_general_time_specification.e $"
-	revision:    "$Revision: 1.2 $"
-	last_change: "$Date: 04/03/19 14:22:38+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class TC_C_DV_GENERAL_TIME_SPECIFICATION
 

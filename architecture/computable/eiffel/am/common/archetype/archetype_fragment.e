@@ -16,8 +16,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/am/common/archetype/SCCS/s.archetype_fragment.e $"
-	revision:    "$Revision: 1.1 $"
-	last_change: "$Date: 03/11/14 14:08:05+00:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 deferred class ARCHETYPE_FRAGMENT
 

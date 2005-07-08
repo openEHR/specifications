@@ -18,8 +18,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/composition/content/entry/SCCS/s.observation.e $"
-	revision:    "$Revision: 1.2 $"
-	last_change: "$Date: 04/03/10 10:26:37+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class OBSERVATION
 

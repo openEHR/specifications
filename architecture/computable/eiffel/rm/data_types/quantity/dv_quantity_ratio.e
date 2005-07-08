@@ -20,8 +20,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/data_types/quantity/SCCS/s.dv_quantity_ratio.e $"
-	revision:    "$Revision: 1.1 $"
-	last_change: "$Date: 03/11/14 14:08:20+00:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class DV_QUANTITY_RATIO
 

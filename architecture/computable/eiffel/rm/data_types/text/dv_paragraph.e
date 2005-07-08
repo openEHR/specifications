@@ -18,8 +18,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/data_types/text/SCCS/s.dv_paragraph.e $"
-	revision:    "$Revision: 1.1 $"
-	last_change: "$Date: 03/11/14 14:08:21+00:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class DV_PARAGRAPH
 

@@ -13,8 +13,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/data_types/quantity/date_time/SCCS/s.dv_date_time.e $"
-	revision:    "$Revision: 1.1 $"
-	last_change: "$Date: 03/11/14 14:08:19+00:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class DV_DATE_TIME
 

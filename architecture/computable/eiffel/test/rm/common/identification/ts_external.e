@@ -10,8 +10,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/test/rm/common/identification/SCCS/s.ts_external.e $"
-	revision:    "$Revision: 1.4 $"
-	last_change: "$Date: 04/03/21 17:23:58+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class TS_COMMON_IDENTIFICATION
 

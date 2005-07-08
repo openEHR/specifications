@@ -13,8 +13,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/am/data_structures/structure/SCCS/s.c_single_s.e $"
-	revision:    "$Revision: 1.1 $"
-	last_change: "$Date: 03/11/14 14:08:07+00:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class C_SINGLE_S
 

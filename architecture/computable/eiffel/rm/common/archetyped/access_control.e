@@ -11,8 +11,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/common/archetyped/SCCS/s.access_control.e $"
-	revision:    "$Revision: 1.1 $"
-	last_change: "$Date: 03/11/14 14:08:13+00:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class ACCESS_GROUP
 

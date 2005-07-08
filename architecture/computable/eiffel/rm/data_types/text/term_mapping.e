@@ -13,8 +13,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/data_types/text/SCCS/s.term_mapping.e $"
-	revision:    "$Revision: 1.3 $"
-	last_change: "$Date: 04/03/21 17:23:56+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 
 class TERM_MAPPING

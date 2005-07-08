@@ -1,7 +1,7 @@
 indexing
 	description: "Objects that provide access to constants loaded from files."
-	date: "$Date: 04/03/21 17:24:01+10:00 $"
-	revision: "$Revision: 1.1 $"
+	date: "$Date$"
+	revision: "$Revision$"
 
 class
 	CONSTANTS_IMP

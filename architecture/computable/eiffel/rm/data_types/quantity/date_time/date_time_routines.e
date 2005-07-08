@@ -9,8 +9,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/BitKeeper/deleted/SCCS/s..del-date_time_routines.e~b111b2c2 $"
-	revision:    "$Revision: 1.4 $"
-	last_change: "$Date: 04/01/28 14:22:30+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class DATE_TIME_ROUTINES
 

@@ -16,8 +16,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/data_types/text/SCCS/s.dv_coded_text.e $"
-	revision:    "$Revision: 1.5 $"
-	last_change: "$Date: 04/04/06 23:56:29+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class DV_CODED_TEXT
     

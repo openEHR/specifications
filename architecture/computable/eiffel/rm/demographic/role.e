@@ -18,8 +18,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/demographic/SCCS/s.role.e $"
-	revision:    "$Revision: 1.1 $"
-	last_change: "$Date: 03/11/14 14:08:23+00:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class ROLE
 

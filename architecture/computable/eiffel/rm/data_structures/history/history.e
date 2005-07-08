@@ -21,8 +21,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/data_structures/history/SCCS/s.history.e $"
-	revision:    "$Revision: 1.2 $"
-	last_change: "$Date: 04/03/10 10:26:37+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 deferred class HISTORY [G -> ITEM_STRUCTURE]
 

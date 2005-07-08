@@ -1,8 +1,8 @@
 indexing
 	description: "Objects that ..."
 	author: ""
-	date: "$Date: 04/03/21 17:23:58+10:00 $"
-	revision: "$Revision: 1.4 $"
+	date: "$Date$"
+	revision: "$Revision$"
 
 class TS_DT_DATE_TIME
 

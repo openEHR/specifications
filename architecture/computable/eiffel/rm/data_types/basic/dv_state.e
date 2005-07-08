@@ -16,8 +16,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/data_types/basic/SCCS/s.dv_state.e $"
-	revision:    "$Revision: 1.3 $"
-	last_change: "$Date: 04/03/21 17:23:55+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class DV_STATE
 

@@ -10,8 +10,8 @@ indexing
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/test/rm/ehr_extract/SCCS/s.ts_ehr_extract.e $"
-	revision:    "$Revision: 1.4 $"
-	last_change: "$Date: 04/03/19 14:15:42+10:00 $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class TS_EHR_EXTRACT
 
