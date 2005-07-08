@@ -1,0 +1,138 @@
+system
+	"openehr_rm_test"
+
+root
+	application: make_and_launch
+
+default
+	namespace ("openehr")
+	precompiled ("$ISE_EIFFEL\precomp\spec\$ISE_PLATFORM\vision2")
+	assertion (require)
+	disabled_debug (yes)
+	disabled_debug ("dlg_dispatcher")
+	disabled_debug ("gelex")
+	disabled_debug ("geyacc")
+	disabled_debug ("vision2_windows")
+	disabled_debug ("vision2_windows_gdi")
+	disabled_debug ("wel")
+	disabled_debug ("wel_gdi_count")
+	disabled_debug ("wel_gdi_references")
+	disabled_debug ("win_dispatcher")
+	debug (no)
+	line_generation (no)
+	profile (no)
+	trace (no)
+	check_vape (yes)
+	console_application (no)
+	syntax_warning (no)
+	address_expression (no)
+	array_optimization (no)
+	dead_code_removal (yes)
+	dynamic_runtime (no)
+	exception_trace (yes)
+	inlining (no)
+	multithreaded (no)
+
+
+--	all openehr_kernel_factory (openehr_impl):		"$\reference\eiffel\kernel\factory"
+--		exclude
+--			"SCCS"; 
+--		default
+--			assertion (no)
+--			assertion (require)
+--			assertion (ensure)
+--			assertion (invariant)
+--		end
+
+cluster
+	openehr_root:		"$OPENEHR"
+
+
+	openehr_spec (openehr_root):		"$\spec-0.9_D\architecture\reference_model\computable\eiffel"
+
+	openehr_impl (openehr_root):		"$\implementation"
+
+	all openehr_test (openehr_spec):		"$\test"
+		exclude
+			"SCCS"; 
+		default
+			assertion (no)
+			assertion (require)
+			assertion (ensure)
+		end
+
+	all openehr_rm (openehr_spec):		"$\rm"
+		exclude
+			"SCCS"; 
+		default
+			assertion (no)
+			assertion (check)
+			assertion (require)
+			assertion (ensure)
+			assertion (loop)
+			assertion (invariant)
+		end
+
+	all openehr_am (openehr_spec):		"$\am"
+		exclude
+			"SCCS"; 
+		default
+			assertion (no)
+			assertion (check)
+			assertion (require)
+			assertion (ensure)
+			assertion (loop)
+			assertion (invariant)
+		end
+
+	all openehr_library (openehr_impl):		"$\library\eiffel"
+		exclude
+			"SCCS"; "test"; 
+		default
+			assertion (no)
+			assertion (require)
+			assertion (ensure)
+			assertion (invariant)
+		end
+
+	gobo:		"$GOBO\library"
+
+	library ut_support (gobo):		"$\utility"
+
+	library kl_kernel (gobo):		"$\kernel"
+		exclude
+			"spec"; 
+		end
+
+	library kl_kernel_spec (gobo):		"$\kernel\spec\ise"
+
+	library kl_lexical (gobo):		"$\lexical"
+
+	library kl_parse (gobo):		"$\parse"
+
+	library gobo_structure (gobo):		"$\structure"
+
+	library regexp (gobo):		"$\regexp"
+
+	library design_pattern (gobo):		"$\pattern"
+
+	time:		"$ISE_EIFFEL\library\time"
+
+	time_format (time):		"$\format"
+
+	library time_format_english (time_format):		"$\en-int"
+
+external
+
+	include_path:
+		"$(ISE_EIFFEL)\library\wel\spec\windows\include",
+		"$(ISE_EIFFEL)\library\vision2\spec\include",
+		"$(GOBO)\library\kernel\include"
+
+	object:
+		"$(ISE_EIFFEL)\library\wel\spec\$(ISE_C_COMPILER)\lib\wel.lib",
+		"$(ISE_EIFFEL)\library\vision2\spec\$(ISE_C_COMPILER)\lib\vision2.lib",
+		"$(ISE_EIFFEL)\library\vision2\spec\$(ISE_C_COMPILER)\lib\zlib.lib",
+		"$(ISE_EIFFEL)\library\vision2\spec\$(ISE_C_COMPILER)\lib\libpng.lib"
+
+end

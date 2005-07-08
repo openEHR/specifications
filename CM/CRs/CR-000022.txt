@@ -1,0 +1,39 @@
+
+[summary]
+id:			CR-000022
+date_raised:	23/03/2003
+raised_by:		Grahame Grieve
+title:		TERM_MAPPING.purpose should be coded
+owner:
+status:		completed
+
+[change information]
+change_category:	Change
+impact_analysis:		Change to TERM_MAPPING class only.
+
+analyst:
+
+problem_description:	TERM_MAPPING.purpose should be coded for reliable
+		automatic processing, based on Grahame's experience in Kestral
+		with mapping of local pathology and standard code sets e.g. LOINC.
+
+change_description:	Add a coding domain for TERM_MAPPING.purpose and
+				change its type to DV_TEXT (allowing exceptions)
+
+changed_components:	Data types RM 1.7.4
+				Support RM 0.9.3
+				Data types AM 0.6
+
+authorised_by:
+
+implementor:		Thomas Beale
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:		20/06/2003
+reason_for_rejection:
+notes:

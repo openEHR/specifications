@@ -1,0 +1,52 @@
+
+[summary]
+id:			CR-000044
+date_raised:	21/10/2003
+raised_by:		Thomas Beale, David Lloyd
+title:		Add reverse ref from VERSION_REPOSITORY<T> to owner object
+
+owner:	CC
+
+status:		completed
+
+[change information]
+change_category:	change
+
+analyst:	Thomas Beale
+
+problem_description: Currently the class VERSION_REPOSITORY<T> does not
+		include a foreign key attribute representing the id of the
+		repository to which it belongs. Where objects of this class are
+		logically part of a distinct repository such as a patient EHR,
+		not having such an id may be dangerous if the database is
+		corrupted, or if whole VERSION_REPOSITORY instances are sent to
+		another location. It is also inconvenient when querying for
+		VERSION_REPOSITORY instances not to have the foreign key of the
+		owning repository.
+
+change_description:	Add an attribute owner_id: OBJECT_REF to the class
+		VERSION_REPOSITORY<T>. This attribute will be inherited into the
+		classes VERSIONED_COMPOSITION and DIRECTORY, the latter two of 
+		which should also have the following invariant added:
+
+		invariant
+			owner_id.type.is_equal("EHR")
+
+impact_analysis:		low
+
+changed_components:	RM.COMMON 1.4.9
+				RM.EHR 4.3.6
+
+authorised_by:
+implementor:	Thomas Beale
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:	13/02/2004
+reason_for_rejection:
+notes:
+

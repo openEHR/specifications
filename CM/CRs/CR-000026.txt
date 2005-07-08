@@ -1,0 +1,42 @@
+
+[summary]
+id:			CR-000026
+date_raised:	29/05/2003
+raised_by:		Thomas Beale
+title:		Rename DV_QUANTITY.value to magnitude
+owner:
+status:		completed
+
+[change information]
+change_category:	Change
+
+analyst:
+
+problem_description:	The attribute name magnitude would be more technically
+			correct than 'value', and the latter is confusing because 
+			it leads to references to the magnitude of a QUANTITY ELEMENT 
+			as 'value.value'. Correspondingly, the derived property
+			canonical_value should be renamed to canonical_magnitude.
+
+change_description:	Change DV_QUANTITY.value to magnitude; canonical_value
+			to canonical_magnitude.
+
+changed_components:	Data Types RM 1.7.3
+				Data Types AM 0.6
+
+impact_analysis:		Change to DV_QUANTITY class, any class containing an
+			invariant referring to DV_QUANTITY.value. Also Data types 
+			archetype model.
+
+authorised_by:
+implementor:
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:	09/10/2003	
+reason_for_rejection:
+notes:

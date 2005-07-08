@@ -1,0 +1,42 @@
+
+[summary]
+id:			CR-000036
+date_raised:	15/08/2003
+raised_by:		Thomas Beale
+title:		Add HIERARCHICAL_OBJECT_ID to OBJECT_ID model
+
+owner:
+status:		completed
+
+[change information]
+change_category:	change
+
+analyst:	Thomas Beale
+
+problem_description:	The model of the string identifier in OBJECT_ID is
+		designed as a hierarchical id, but OBJECT_ID also has the
+		ARCHETYPE_ID subtype, which is a multi-axial, not hierarchical id.
+
+change_description:	The correct solution is to create a new class called
+		HIER_OBJECT_ID which models these things, as a subtype of
+		OBJECT_ID. OBJECT_ID then should not specify any particular
+		syntax of the id string. It can be made abstract and its
+		attributes local_id and context_id moved to HIER_OBJECT_ID.
+
+impact_analysis:		
+
+changed_components:	Support Reference Model v0.9.4
+				(due to CR-000043, changed to Common RM)
+
+authorised_by:
+implementor:
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:		09/10/2003
+reason_for_rejection:
+notes:

@@ -1,0 +1,46 @@
+
+[summary]
+id:			CR-000042
+date_raised:	08/10/2003
+raised_by:		David Lloyd
+title:		Make DV_ORDINAL.rubric a DV_CODED_TEXT; type attribute not needed
+
+owner:		CM
+status:		completed
+
+[change information]
+change_category:	model change
+
+analyst:	Thomas Beale
+
+problem_description: If DV_ORDINAL rubric (values like "low", "medium", "high"
+		etc) and type (values like "pain", "reflex reaction" etc) are to
+		be interoperable, they need to incorporate language, and to be
+		coded. 
+
+		The type attribute, in which it was thought that the category of
+		values would go (e.g. "pain", "protein concentration" etc) to
+		ensure that even if the same symbols were used (e.g. "++"), they
+		could not be mixed up.
+
+		A better name for the rubric attribute would be "symbol".
+
+change_description:	Remove the type attribute; change definition of rubric
+		attribute to symbol: DV_CODED_TEXT.
+
+impact_analysis:		documentation and reference and archetype models
+
+changed_components:	RM.DATA_TYPES 1.7.7
+
+authorised_by:
+implementor:	Thomas Beale
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:	25/10/2003
+reason_for_rejection:
+notes:

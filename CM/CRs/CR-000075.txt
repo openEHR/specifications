@@ -1,0 +1,39 @@
+
+[summary]
+id:			CR-000075
+date_raised:	28/12/2003
+raised_by:		Sam Heard
+title:		Add predefined clinical types library to ADL
+
+owner:		PG
+
+status:		completed
+
+[change information]
+change_category:	design
+
+analyst:	Thomas Beale, Sam Heard
+
+problem_description: Predefined types for clinical textual items, quantities
+		and date/time constraints need to be added.
+
+change_description:  Add a new section to the ADL manual describing the
+		clinical constraint types corresponding to major types used in
+		openEHR, CEN and HL7v3.
+
+impact_analysis:	   Addition of section to ADL manual; existing ADL
+		archetypes can be upgraded.
+
+changed_components:	ADL manual 0.9.8
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	0.9
+test_release:	0.9
+test_status:	
+
+[resolution]
+date_closed:

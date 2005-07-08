@@ -1,0 +1,36 @@
+
+[summary]
+id:			CR-000017
+date_raised:	1/03/2002
+raised_by:		Dipak Kalra
+title:		Rename VERSION.parent_version_id to preceding_version_id
+owner:
+status:		completed
+
+[change information]
+change_category:	Change
+impact_analysis:		minimal impact on documents, implementations.
+
+analyst:
+
+problem_description:	VERSION.parent_version_id is ambiguously named.
+
+change_description:	Suggest renaming VERSION.parent_version_id to 
+		preceding_version_id since this is more consistent with its use 
+		and with the explanatory text in Section 5.4.3 
+
+changed_components:	Common RM 1.4.3 PARTICIPATION
+				Common AM 0.5 C_PARTICIPATION
+
+authorised_by:
+implementor:	Thomas Beale
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:		11/04/2003
+reason_for_rejection:
+notes:

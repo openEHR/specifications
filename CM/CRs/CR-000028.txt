@@ -1,0 +1,48 @@
+
+[summary]
+id:			CR-000028
+
+date_raised:	20/06/2003
+
+raised_by:		Heath Frankel, Thomas Beale
+
+title:		Change name of STRUCTURE class to avoid clashes
+
+owner:		PG
+
+status:		completed
+
+[change information]
+change_category:	Change
+
+analyst:		Thomas Beale
+
+problem_description:	The class name STRUCTURE clashes with a class of the 
+				same name in VB.NET (at least).
+
+change_description:	Rename class in same way as LIST_S, e.g. STRUCTURE_S
+		or similar.
+		DK: I recognise Heath's concerns. There is no need for us to adopt 
+		a name that is unhelpful to implementers. I would suggest a name like 
+		ITEM_STRUCTURE. This could be applied to all of the inheritors of
+		ITEM_STRUCTURE, i.e. LIST_S -> ITEM_LIST etc.
+
+changed_components:	EHR Data Structures RM
+				EHR Data Structures AM
+
+impact_analysis:		Name change only in specs; unknown impact on
+				implementations.
+
+authorised_by:
+implementor:
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:		03-03-2004
+reason_for_rejection:
+notes:
+

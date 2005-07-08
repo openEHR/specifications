@@ -1,0 +1,38 @@
+
+[summary]
+id:			CR-000043
+date_raised:	08/10/2003
+raised_by:		David Lloyd
+title:		Move External package to Common RM and rename to Identification
+
+owner:
+status:		completed
+
+[change information]
+change_category:	documentation and package name change
+
+analyst:	Thomas Beale
+
+problem_description: The Support package is really only intended for
+		externally defined things outside the control of openEHR, such as
+		terminology name constants and primitive type descriptions. 
+
+change_description:	Move the External package to the COmmon RM and rename
+		it "Identification"
+
+impact_analysis:		low
+
+changed_components:	RM.DATA_TYPES 1.7.7
+
+authorised_by:
+implementor:	Thomas Beale
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:	09/10/2003
+reason_for_rejection:
+notes:

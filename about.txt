@@ -1,0 +1,7 @@
+The openEHR Specification repository contains all of the openEHR formal
+specifications, including for the EHR and Demographic reference models, for
+ADL (the Archetype Definition Language). It also contains 'engineering'
+expressions of these models, i.e. expressions in formalisms designed for
+direct use in implementation technologies such as XML, various programming
+languages, and database schema languages. These engineering expressions are
+found in the 'engineering' directory.

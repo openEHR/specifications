@@ -1,0 +1,68 @@
+
+[summary]
+id:			CR-000071
+
+date_raised:	16/12/2003
+
+raised_by:		Thomas Beale
+
+title:		Allow version ids to be optional in TERMINOLOGY_ID
+
+owner:		CC
+
+status:		completed
+
+[change information]
+change_category:	design
+
+analyst:	Thomas Beale
+
+problem_description: Currently openEHR refers to terminologies using a human
+		readable identifier, e.g. "snomed_ct", which has a version
+		included, e.g. "snomed_ct(2002)". The first problem is that there 
+		is no standard for these names. There are Oids defined, but using
+		these in archetypes and real data makes them unreadable without an
+		Oid-dereferencing service. The second problem is that versions
+		seem to be needed because we cannot trust terminologies to stick
+		by the rules of never re-using a term code; ICD-9-CM is known to
+		be a problem in this regard, although it is being fixed.
+
+		Harold Solbrig suggests to keep human readable names inside a
+		known scope (e.g. openEHR) and define a mapping table from them to
+		the relevant Oids.  He also supports the use of URI style ids for
+		terminologies
+		
+		Stan Huff thinks that the versions could also be dropped from ids, 
+		since we can trust 'most' terminologies, and we can define
+		distinct oids for distinct versions of ill-behaved terminologies 
+		as if they were separate terminologies (but then there is no easy
+		way to tell that such terminologies are closely related).
+
+		DK: I think I'm with Harold, but not with Stan on this! Too much 
+		experience of version release errors with Read Codes.
+
+change_description:  Currently we should make the version indicator optional
+		in the class TERMINOLOGY_ID.
+
+impact_analysis:		minimal
+
+changed_components:	RM.DATA_TYPES.TEXT 1.7.9
+				RM.COMMON 1.4.11
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	0.9
+test_release:
+
+test_status:
+
+[resolution]
+date_closed:	13/02/2004
+
+reason_for_rejection:	
+
+notes:	
+

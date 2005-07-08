@@ -1,0 +1,39 @@
+
+[summary]
+id:			CR-000080
+date_raised:	25-02-2004
+raised_by:		DSTC-Titanium
+title:		Remove ARCHETYPED.concept - not needed in data
+
+owner:		PG
+
+status:		completed
+
+[change information]
+change_category:	design
+
+analyst:	Andrew Goodchild, Sam Heard, Thomas Beale
+
+problem_description: The concept attribute in the class ARCHETYPED does not
+		seem to be needed.
+
+change_description:  Remove ARCHETYPED.concept - it is only required in the
+		archetype, not the data.  
+
+impact_analysis:		Low
+
+changed_components:	RM.COMMON.ARCHETYPED 1.4.12
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	0.9
+test_release:
+test_status:	
+
+[resolution]
+date_closed:	03-03-2004
+reason_for_rejection:	
+notes:		

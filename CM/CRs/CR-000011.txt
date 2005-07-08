@@ -1,0 +1,46 @@
+
+[summary]
+id:			CR-000011
+date_raised:	1/11/2002
+raised_by:		SH
+title:		Add author to TRANSACTION.context
+owner:
+status:		completed
+
+[change information]
+change_category:		Change
+impact_analysis:		Documents and implementations of TRANSACTION.
+		
+analyst:
+
+problem_description:	There should be a 'composer' of each TRANSACTION - i.e. 
+		primary person who was responsible for it in the clinical sense.
+		THis it the id which should appear on the screen. It could be a
+		junior doctor who did all the work, even if not legally
+		responsible, or it could be a nurse or senior doctor. It may or
+		may not be the person who entered the data.
+
+		Dipak - it is not the legally_resp person, who might be in charge 
+		but have nothing to do with this composition. Agree it needs to 
+		be added.
+
+		TB - recommend calling this attribute 'author' to fit in with CDA
+		2.0
+
+change_description:	Add author:PARTY_REF attribute to EVENT_CONTEXT
+
+changed_components:	EHR RM 4.3.3 EVENT_CONTEXT
+				EHR AM 0.5
+
+authorised_by:
+implementor:	Thomas Beale
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:		20/06/2003
+reason_for_rejection:
+notes:

@@ -1,0 +1,50 @@
+
+[summary]
+id:			CR-000007
+date_raised:	1/03/2003
+raised_by:		SH, TB, DK
+title:		Replace subject and subject_relationship with RELATED_PARTY
+owner:
+status:		completed
+
+[change information]
+change_category:		Change
+
+impact_analysis:		Simplifies and corrects problems in the two ENTRY
+		subject attributes. 
+		
+analyst:
+
+problem_description:	Subject should not be mandatory
+		as a PARTY_REF - there are many occasions in which it could be
+		inappropriate to include the demographic party ref of the subject
+		e.g. foetus, organ donor, anonymous person from whom subject has
+		contracted an infection, and even family members. However, the
+		relationship is highly important. 
+		
+change_description:	THe change suggested is to
+		replace the subject attributes in ENTRY with just subject:
+		RELATED_PARTY, where the latter is defined as follows:
+
+			class RELATED_PARTY
+			   party[0..1]: PARTY_REF
+			   relationship[1]: DV_TEXT
+			end 
+
+changed_components:	EHR RM 4.3 ENTRY
+				EHR AM 0.5
+				COMMON RM 1.4.3
+				COMMON RM 0.5
+				SUPPORT RM 0.9.2
+
+authorised_by:
+implementor:	T Beale
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:	11/April/2003	
+notes:

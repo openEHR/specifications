@@ -1,0 +1,38 @@
+
+[summary]
+id:			CR-000054
+date_raised:	01/11/2003
+raised_by:		Thomas Beale
+title:		Move DV_QUANTIFIED.is_normal to DV_ORDERED
+
+owner:
+status:		completed
+
+[change information]
+change_category:	change
+
+analyst:	Thomas Beale
+
+problem_description: The is_normal property of DV_QUANTIFIED is incorrectly
+		specified; it should have been a property of DV_ORDERED, since
+		this is the class containing attributes for reference_ranges and 
+		a normal range.
+
+change_description: Move DV_QUANTIFIED.is_normal to DV_ORDERED.is_normal.
+
+impact_analysis:		low
+
+changed_components:	RM.DATA_TYPES.QUANTITY.DV_DURATION, Data Types IM 1.7.7
+
+authorised_by:
+implementor:	Thomas Beale
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:	02/11/2003
+reason_for_rejection:
+notes:

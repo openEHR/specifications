@@ -1,0 +1,36 @@
+
+[summary]
+id:			CR-000016
+date_raised:	1/03/2002
+raised_by:		Dipak Kalra
+title:		Rename PARTICIPATION.mode to method or medium
+owner:
+status:		rejected
+
+[change information]
+change_category:	Change
+impact_analysis:		minimal impact on documents, implementations.
+
+analyst:	Dipak Kalra, Thomas Beale
+
+change_description:	The current name 'mode' was taken from HL7, but the
+		names 'medium' or 'method' would be better. TB: 'medium' seems the
+		obvious choice here.
+
+changed_components:	Common RM 1.4.3 PARTICIPATION
+				Common AM 0.5 C_PARTICIPATION
+
+authorised_by:
+implementor:
+
+[test and release]
+target_release:		none
+test_release:
+test_status:
+
+[closure]
+date_closed:		10/06/2003
+reason_for_rejection: 	After further analysis, it is clear that the possible
+				values are not just communication media, and that mode
+				is probably a reasonable name for the attribute.
+notes:

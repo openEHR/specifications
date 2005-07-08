@@ -1,0 +1,45 @@
+
+[summary]
+id:			CR-000100
+
+date_raised:	02-04-2004
+
+raised_by:		Thomas Beale
+
+title:		Correct inheritance error in ITEM_STRUCTURE package
+
+owner:		ARB
+
+status:		initial
+
+[change information]
+
+change_category:	error
+
+analyst:	Thomas Beale
+
+problem_description: The diagram in DATA_STRUCTURE.ITEM_STRUCTURE.
+		REPRESENTATION has ITEM inheriting from DATA_STRUCTURE, when it
+		should be inheriting from LOCATABLE.
+
+change_description: Change diagram to make ITEM inherit from LOCATABLE only.
+
+impact_analysis:		Low
+
+changed_components:	RM.DATA_STRUCTURES.ITEM_STRUCTURE.REPRESENTATION	1.4
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	1.0
+
+test_release:	1.0
+
+test_status:	
+
+[resolution]
+date_closed:	
+reason_for_rejection:	
+notes:		

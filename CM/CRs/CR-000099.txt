@@ -1,0 +1,45 @@
+
+[summary]
+id:			CR-000099
+
+date_raised:	24-03-2004
+
+raised_by:		Russell Shackel
+
+title:		Common.Generic diagram should show PARTICIPATION: DV_TEXT
+
+owner:		PG
+
+status:		initial
+
+[change information]
+
+change_category:	error
+
+analyst:	Thomas Beale
+
+problem_description: The diagram in COMMON.GENERIC shows PARTICIPATION as
+		being of type DV_CODED_TEXT, when it should be of type DV_TEXT.
+
+change_description: Change diagram to match specification - using type
+		DV_TEXT.
+
+impact_analysis:		Low
+
+changed_components:	RM.COMMON.GENERIC		1.5
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	1.0
+
+test_release:	1.0
+
+test_status:	
+
+[resolution]
+date_closed:	
+reason_for_rejection:	
+notes:		

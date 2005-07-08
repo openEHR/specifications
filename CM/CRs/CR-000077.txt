@@ -1,0 +1,55 @@
+
+[summary]
+id:			CR-000077
+date_raised:	04/01/2004
+raised_by:		Sam Heard
+title:		Add cADL date/time pattern constraints
+
+owner:		PG
+
+status:		completed
+
+[change information]
+change_category:	design
+
+analyst:	Thomas Beale, Sam Heard
+
+problem_description: Currently cADL date/time constraints are in the form
+		of ranges of absolute dates and times, which is not useful for
+		archetypes which are intended to be time-independent.
+
+change_description:  The kinds of cosntraints needed are as follows:
+		date: yyyy-mm-dd	-- full date must be supplied
+			yyyy-mm-??	-- partial date - day may be missing
+			yyyy-??-??	-- partial date - month and day may be missing
+
+		time: hh:mm:ss	-- full time must be supplied
+			hh:mm:??	-- partial time with missing seconds ok
+			hh:??:??	-- partial time with missing minutes, seconds ok
+
+		date_time:
+			the above can be combined as follows:
+			yyyy-mm-dd <any time constraint>
+			yyyy-mm-?? ??:??:??
+			yyyy-??-?? ??:??:??
+
+		duration:
+			any absolute duration, in ISO8601 form, e.g.:
+			P0d0h1m0s	-- 1 minute
+			P1d8h0m0s	-- 1 day 8 hrs
+
+impact_analysis:	   minimal - makes no difference to current implementations.
+
+changed_components:	ADL manual 0.9.9
+
+approved_by:	
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	0.9
+test_release:	0.9
+test_status:	<unknown>
+
+[resolution]
+date_closed:	13/01/2004

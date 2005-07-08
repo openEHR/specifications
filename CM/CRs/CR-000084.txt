@@ -1,0 +1,43 @@
+
+[summary]
+id:			CR-000084
+
+date_raised:	25-02-2004
+
+raised_by:		DSTC-Titanium
+
+title:		Rename DV_COUNTABLE to DV_COUNT
+
+owner:		PG
+
+status:		completed
+
+[change information]
+
+change_category:	design
+
+analyst:	Andrew Goodchild, Sam Heard, Thomas Beale, Dipak Kalra
+
+problem_description: The DV_COUNTABLE class is named using an adjective, which
+		would be more appropriate for an abstract class. A noun-based name
+		should be found.
+
+change_description:  Rename to DV_COUNT.
+
+impact_analysis:		Low
+
+changed_components:	RM.COMMON.GENERIC 1.4.12
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	0.9
+test_release:
+test_status:	
+
+[resolution]
+date_closed:	03-03-2004
+reason_for_rejection:	
+notes:		

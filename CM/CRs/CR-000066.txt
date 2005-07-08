@@ -1,0 +1,44 @@
+[summary]
+id:			CR-000066
+
+date_raised:	09/11/2003
+
+raised_by:		Zar Zar Tun
+
+title:		Make DV_ORDERED.normal_range a function
+
+owner:		configuration_controller
+
+status:		completed
+
+[change information]
+change_category:	design
+
+analyst:	Thomas Beale
+
+problem_description: The normal_range attribute of the class DV_ORDERED
+		effectively creates a duplicate data representation of the
+		reference_ranges attribute, when it could be redefined as a
+		function.
+
+change_description:  Make DV_ORDERED.normal_range a function.
+
+impact_analysis:		Low impact on documentation and XML-schema
+		specifications.
+
+changed_components:	RM.DATA_TYPES.QUANTITY 1.7.8
+
+approved_by:	ARB
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	0.9
+test_release:	0.9
+test_status:
+
+[resolution]
+date_closed:	10/11/2003
+reason_for_rejection:
+notes:
+

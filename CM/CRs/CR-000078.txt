@@ -1,0 +1,42 @@
+
+[summary]
+id:			CR-000078
+date_raised:	04/01/2004
+raised_by:		Sam Heard
+title:		Add predefined clinical type library to ADL
+
+owner:		PG
+
+status:		completed
+
+[change information]
+change_category:	design
+
+analyst:	Thomas Beale, Sam Heard
+
+problem_description: The general notion of a domain-specific type library
+		needs to be added to ADL, in order to define constraint syntax for
+		higher-level types such as Ordinal, Quantity, and various textual
+		types.
+
+change_description:  A predefined type library section should be added to the
+		ADL manual. Types described should include:
+			- partial dates and times
+			- ordinal, countable, quantity
+			- text, coded_text, code_phrase
+
+impact_analysis:	   medium - some re-arrangement of manual needed
+
+changed_components:	ADL manual 0.9.9
+
+approved_by:	
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	0.9
+test_release:	0.9
+test_status:
+
+[resolution]
+date_closed:	14/01/2004

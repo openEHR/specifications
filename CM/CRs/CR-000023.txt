@@ -1,0 +1,46 @@
+
+[summary]
+id:			CR-000023
+date_raised:	23/03/2003
+raised_by:		Grahame Grieve
+title:		TERM_MAPPING.match should be coded/enumerated
+owner:
+status:		completed
+
+[change information]
+change_category:	Change
+
+analyst:	Dipak Kalra, Matthew Darlison
+
+problem_description:	TERM_MAPPING.match should be a coded or enumerated
+		type since unbounded integers could be misused. 
+		
+change_description: TB: should we go back to the original scheme of 
+		‘<‘, ‘=’, ‘>’, based on ISO 2788 and ISO 5964? (ISO 
+		2788 = ”Guide to Establishment and development of monolingual 
+		thesauri” and ISO 5964 = ”Guide to Establishment and 
+		development of multilingual thesauri”).
+
+		Dipak - this will have to be a very simple approach if it is to be 
+		used consistently. Stan shepherd and henk lamberts originally 
+		proposed <, =, > as the set.
+
+
+changed_components:	Data types RM 1.7.3
+				Data types AM 0.6
+
+impact_analysis:		Change to TERM_MAPPING class only.
+
+authorised_by:
+
+implementor: 	Thomas Beale
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:		10/02/2004
+reason_for_rejection:
+notes:

@@ -1,0 +1,64 @@
+
+[summary]
+id:			CR-000064
+
+date_raised:	21/01/2003
+
+raised_by:		Dipak Kalra
+
+title:		Re-evaluate COMPOSITION.is_persistent attribute
+
+owner:	PG
+
+status:		initial
+
+[change information]
+change_category:	change
+
+analyst:	Dipak Kalra
+
+problem_description: While there is a clear need to be able to differentiate
+		between "persistent" (e.g. family history, therapeutic
+		precautions) and "event" Compositions (patient contact, test
+		result), there may be more types which need to be classified, e.g.
+		types such as current medications and problem list whcih are
+		currently seen as persistent, perhaps should be a subtype which
+		means "persistent, regeneratable", meaning their content may be
+		partly derived from querying. Other Compositions to do with e.g.
+		pregnancy which are relatively long-lived, but do have finite
+		durations and are not of interest for much time past the end,
+		should perhaps be marked as "process" or similar.
+
+		One solution would be to change COMPOSITION and
+		VERSIONED_COMPOSITION.is_persistent: Boolean to e.g. type:
+		DV_TEXT, and make the types a controlled vocabulary.
+
+analysis:	DK: We are about to review the code-set for revision_status in 
+		EHRcom to consider these issues. Can I suggest that we adopt a 
+		placeholder attribute that is not Boolean, and add a code-set 
+		in a couple of months.
+		
+		The functional behaviour requirements which this attribute
+		satisfies should be described in the documentation.
+
+		DL: describe behaviour on record opening, committal, etc.
+
+change_description: 
+
+impact_analysis:		low
+
+changed_components:	RM.COMMON
+
+authorised_by:
+implementor:	Thomas Beale
+
+[test and release]
+target_release:		1.0
+test_release:
+test_status:
+
+[closure]
+date_closed:	
+reason_for_rejection:
+notes:
+

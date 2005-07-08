@@ -1,0 +1,39 @@
+
+[summary]
+id:			CR-000053
+date_raised:	01/11/2003
+raised_by:		Thomas Beale
+title:		Make DV_ORDINAL.limits a function
+
+owner:
+status:		completed
+
+[change information]
+change_category:	change
+
+analyst:	Thomas Beale
+
+problem_description: The limits property of DV_ORDINAL  does not need to be 
+		an attribute, since there is already an inherited attribute
+		reference_ranges which should contain the limits reference range.
+
+change_description: Change DV_ORDINAL.limits from being an attribute to being
+		a function which extracts a reference range with meaning "limits"
+		from the reference_ranges attribute.
+
+impact_analysis:		low
+
+changed_components:	RM.DATA_TYPES.QUANTITY.DV_DURATION, Data Types IM 1.7.7
+
+authorised_by:
+implementor:	Thomas Beale
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:	02/11/2003
+reason_for_rejection:
+notes:

@@ -1,0 +1,57 @@
+[summary]
+id:			CR-000060
+
+date_raised:	21/01/2003
+
+raised_by:		Thomas Beale
+
+title:		Improve modelling of QUANTITY_RATIO class
+
+owner:	CC
+
+status:		rejected
+
+[change information]
+change_category:	change
+
+analyst:	Thomas Beale
+
+problem_description: a) The DV_QUANTITY_RATIO class should probably be generic,
+		i.e.  have the specification DV_QUANTITY_RATIO <N->DV_QUANTIFIED,
+		M->DV_QUANTIFIED> - this would allow archetypes to state exactly
+		what kind of ratio it was (e.g. mass / volume). 
+		
+		b) Should it also inherit from DV_QUANTIFIED, as is done in HL7? 
+		Have to investigate which of the arithmetic operations are 
+		meaningful.
+
+		DK: Supportive of generic approach proposed for a). Not sure if 
+		I have understood (b) correctly: a ratio to inherit from a 
+		quantity? I thought we previously felt this was inappropriate 
+		modelling practice. 
+
+		DK/TB: agree that b) would be incorrect - there appears to be no
+		argument for QUANTITY_RATIOs to inherit from QUANTITY.
+
+change_description: 
+
+impact_analysis:		low
+
+changed_components:	RM.DATA_STRUCTURES
+
+authorised_by:
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:		none
+test_release:
+test_status:
+
+[closure]
+date_closed:	
+reason_for_rejection: no change is needed to enable archetypes to specify
+		types of ratio numerator and denominator. The second proposal is
+		also rejected for the reasons above.
+notes:
+

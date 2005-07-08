@@ -1,0 +1,51 @@
+
+[summary]
+id:			CR-000088
+
+date_raised:	02-03-2004
+
+raised_by:		Thomas Beale, Dipak Kalra
+
+title:		Move INSTRUCTION.guideline_id to ENTRY
+
+owner:		PG
+
+status:		completed
+
+[change information]
+
+change_category:	design
+
+analyst:	Dipak Kalra, Sam Heard, Thomas Beale
+
+problem_description: The guideline_id attribute is intended to record the
+		identification of a guideline which caused an ENTRY to be created.
+		It needs to be available on all ENTRY types.
+
+		A guideline system  might "propose" any kind of ENTRY: the 
+		collection of a new observation  , the prescription of a new drug 
+		or the ordering of a new test, or as  you suggest propose a new 
+		diagnosis. Logically it is part of the why  (reasoning) but ought 
+		to be differentiated from the composers reasoning  (which might 
+		actually be why they do NOT follow the advice as  referenced by 
+		the guideline_id!)
+
+change_description:  Move guideline_id to ENTRY.
+
+impact_analysis:		Low
+
+changed_components:	RM.EHR.CONTENT 4.3.10
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	0.9
+test_release:
+test_status:	
+
+[resolution]
+date_closed:	03-03-2004
+reason_for_rejection:	
+notes:		

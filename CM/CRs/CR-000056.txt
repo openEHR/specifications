@@ -1,0 +1,43 @@
+
+[summary]
+id:			CR-000056
+date_raised:	01/11/2003
+raised_by:		Thomas Beale
+title:		References in COMMON.Version classes should be OBJECT_REFs
+
+owner:
+status:		completed
+
+[change information]
+change_category:	change
+
+analyst:	Thomas Beale
+
+problem_description: The attributes CONTRIBUTION.versions,
+		VERSION.contribution, VERSION.version_repository_id should be
+		defined to be of type OBJECT_REF rather than OBJECT_ID, since this
+		makes the direction of referencing clearer, and OBJECT_REFs
+		include the type name of the referenced object.
+
+change_description: Change the three attributes to have the following
+		signatures:
+			CONTRIBUTION.versions: Set<OBJECT_REF>
+			VERSION.contribution: OBJECT_REF
+			VERSION.version_repository_id: OBJECT_REF
+
+impact_analysis:		low
+
+changed_components:	RM.COMMON.CHANGE_CONTROL 1.4.10
+
+authorised_by:
+implementor:	Thomas Beale
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:	02/11/2003
+reason_for_rejection:
+notes:

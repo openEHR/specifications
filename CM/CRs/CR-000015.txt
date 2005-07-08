@@ -1,0 +1,66 @@
+
+[summary]
+id:			CR-000015
+date_raised:	1/03/2002
+raised_by:		SH
+title:		Empty ENTRY
+owner:
+status:		analysis
+
+[change information]
+change_category:	Change
+
+analyst:
+
+problem_description:	There needs to be a way of representing empty or
+		negative ENTRYs, e.g. for when there is a heading "allergies" and
+		the physician wants to put "none". Also the situation when there
+		is an OBSERVATION recording "smoking - yes; 1 pack/day" and the
+		physican wants to confirm that at a later time (i.e update the
+		currency of the fact but the fact itself is no different.)
+		
+		DK: we could add a third data-quality value, like null flavour,
+		whose purpose was to express null/missing/zero, etc.
+		We should wait for domain termlist work in CEN to produce
+		something as well.
+
+change_description:	Dipak - surely this can be through a) allowing 
+		cardinality of zero or more to permit an empty object, and/or 
+		b) to use flavour of null to indicate that no value is pertinent here.
+		Might need to add an empty composition sometimes, to replace one 
+		that was added to the wrong record.  
+
+		DL: the case of empty content Composition, Entry needs to be
+		allowed - therefore change should be made to cardinality on
+		Composition.content and Entry.data - it should be 0..*.
+
+		DK: Three choices: 
+			- specialised attribute none_declared in Entry to indicate 
+			  "none"
+			- use a standard data element in Entry whose value is e.g. a
+			  coded_text "none"
+			- name the Entry at runtime to "none" or similar.
+
+		TB: need the effect of an Allergen Entry which evaluates to
+		Allergens=none when querying occurs.
+
+
+changed_components:	EHR RM 4.3
+				EHR AM 0.5
+
+impact_analysis:		minimal impact on documents, probably no change to
+		implementations.
+
+authorised_by:
+
+implementor:
+
+[test and release]
+target_release:		1.0
+test_release:
+test_status:
+
+[closure]
+date_closed:		
+reason_for_rejection:
+notes:

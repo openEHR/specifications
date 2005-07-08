@@ -1,0 +1,40 @@
+
+[summary]
+id:			CR-000079
+date_raised:	18/01/2004
+raised_by:		Thomas Beale
+title:		Change interval value syntax in ADL
+
+owner:		PG
+
+status:		completed
+
+[change information]
+change_category:	design
+
+analyst:	Thomas Beale
+
+problem_description: Intervals of integers, dates etc, use the symbols 
+		'>', '<' for expressing ones-sided intervals. However, if interval
+		values are to be used in dADL, which appears perfectly reasonable,
+		these symbols clash with the dADL block delimiters.
+
+change_description:  Intervals should be delimited with  the '|' symbol,
+		making for a visually intuitive representation of an interval,
+		e.g. |100..200|, |>=60|, |<.005| and so on.
+
+impact_analysis:	   lexical and parser changes required.
+
+changed_components:	ADL manual 1.0
+
+approved_by:	
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	0.9
+test_release:	0.9
+test_status:	<unknown>
+
+[resolution]
+date_closed:	24/01/2004

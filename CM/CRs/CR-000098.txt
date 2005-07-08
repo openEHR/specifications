@@ -1,0 +1,46 @@
+
+[summary]
+id:			CR-000098
+
+date_raised:	17-03-2004
+
+raised_by:		Andrew Goodchild (DSTC)
+
+title:		EVENT_CONTEXT.time should allow optional end time
+
+owner:		PG
+
+status:		initial
+
+[change information]
+
+change_category:	design
+
+analyst:	Sam Heard, Thomas Beale
+
+problem_description: The time of the clinical session, which is recorded in
+		the EVENT_CONTEXT.time attribute is mandatory. However, it is
+		often the case that data from outside systems does not include
+		the end time.
+
+change_description: Replace the time attribute with two separate attributes,
+		start_time and end_time, each of type DATE_TIME, with end_time
+		being an optional attribute.
+
+impact_analysis:		Low
+
+changed_components:	RM.EHR.COMPOSITION 4.4
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	1.0
+test_release:
+test_status:	
+
+[resolution]
+date_closed:
+reason_for_rejection:	
+notes:		

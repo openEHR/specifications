@@ -1,0 +1,57 @@
+
+[summary]
+id:			CR-000074
+date_raised:	20/12/2003
+raised_by:		Thomas Beale
+title:		Rename COORDINATED_TERM class for standards compatibility
+
+owner:		PG
+
+status:	completed
+
+[change information]
+change_category:	design
+
+analyst:	Thomas Beale
+
+problem_description: The name of the class COORDINATED_TERM is not a generally
+		known term among terminology experts. A better name should be
+		chosen, one which is also compatible if possible with equivalents 
+		concepts in CEN and HL7.
+
+change_description:  The class COORDINATED_TERM should be renamed CODE_PHRASE,
+		since this describes exactly what it is, and is a recognised term
+		amongst terminologists. It is roughly equivalent to the CV (coded 
+		value) class in HL7 and CEN, but not completely, since both of
+		these try to model code phrases using qualifiers (CR class in
+		HL7), which is probably wrong for a number of reasons:
+			* a structural model of linguistic combinations including 
+			  plurality, laterality and word order is not in general
+			  possible;
+			* phrases should only be coordinated inside the knowledge
+			  environment, e.g. in a terminology service, not outside.
+			  By the time they arrive in the EHR, they should have been
+			  coordinated, and the code phrase provided by the
+			  terminology service is the key to this coordination.
+		For similar reasons, the attribute CODED_TEXT.definition should be
+		renamed to "code", which is congruent with HL7 and CEN.
+
+		See CR-000046.
+
+impact_analysis:		Change to documents, change to CODED_TERM and
+		COORDINATED_TERM classes.
+
+changed_components:	RM.DATA_TYPES.TEXT	1.7.9
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	0.9
+test_release:	
+test_status:	
+
+[resolution]
+date_closed:	01/03/2004
+

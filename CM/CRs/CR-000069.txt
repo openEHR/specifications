@@ -1,0 +1,51 @@
+
+[summary]
+id:			CR-000069
+date_raised:	16/12/2003
+raised_by:		Andrew Goodchild
+title:		Correct date/time types statistical descriptions
+
+owner:		ARB
+
+status:		completed
+
+[change information]
+change_category:	error
+
+analyst:	Andrew Goodchild, Thomas Beale
+
+problem_description: The probable_date and possible_date features of the
+		DV_PARTIAL_XXX classes do not generate statistically neutral ranges 
+		or dates, since using a midpoint for e.g birthdates with no month 
+		or day would skew the database toward june births. 
+
+change_description:  The probable_date and possible_date features of the
+		DV_PARTIAL_XXX classes should either be removed or changed to some
+		neutral names, and the text amended.
+
+		DK: Surely statistical functions (even differences) are relatively 
+		ambiguous in coarse grained date or time specifications. Whilst 
+		humans might do this, I suspect that a computed function provided 
+		as part of the EHR server is not safe. E.g. one cannot even calculate 
+		someone's age today correctly if only the year of birth is known, 
+		but a human would work on an approximation. Shouldn't we therefore 
+		remove these functions?
+
+impact_analysis:		minimal
+
+changed_components:	RM.DATA_TYPES.QUANTITY.DATE_TIME 1.7.9
+
+approved_by:	ARB
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	0.9
+test_release:	0.9
+test_status:	
+
+[resolution]
+date_closed:	10/02/2004
+reason_for_rejection:	
+notes:		
+

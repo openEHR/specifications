@@ -1,0 +1,57 @@
+[summary]
+id:			CR-000040
+date_raised:	24/09/2003
+raised_by:		Sam Heard
+title:		Add units to DV_DURATION
+
+owner:	PG
+
+status:		rejected
+
+[change information]
+change_category:	change
+
+analyst:	Sam Heard, Dipak Kalra
+
+problem_description: When DV_DURATIONs are used in time histories, the
+		intended unit of recording, e.g. "mins", "s", "days" etc needs to
+		be known. However, this is not the case with DV_TIME, DV_DATE_TIME, 
+		DV_DATE, since they are usually understood as points from an epoch
+		or origin. Durations used in time based recording commonly differ
+		in the primary unit they are recorded in.
+
+analysis: DK: How does this approach fit in with the CEN data types and the 
+		likely direction of ISO? It would make sense for us to converge if 
+		this is practical and technically rigourous.
+
+		This change is probably not required, since there is aready
+		provision for seconds to be the scientific unit for all customary
+		time quantities, to enable regular scientific style computation.
+
+change_description:	Add an attribute units: STRING to DV_DURATION, same
+		description as DV_QUANTITY.units. Consider moving DV_QUANTITY.
+		property to DV_QUANTIFIED, so that the customary time types 
+		have the property set to time. In this way, the units for 
+		all DV_DURATIONs can be forced to be time units.
+
+impact_analysis:	
+
+changed_components:	RM.DATA_TYPES.QUANTITY.DATE_TIME DV_DURATION
+
+authorised_by:
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:		none
+test_release:
+
+test_status:
+
+[closure]
+date_closed:
+
+reason_for_rejection:
+
+notes:
+

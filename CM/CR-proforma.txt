@@ -1,0 +1,51 @@
+
+[summary]
+
+id:			CR-<6 digit 0-packed number>
+
+date_raised:	<dd/mm/yyyy>
+
+raised_by:		<name(s)>
+
+title:		<short title>
+
+owner:		<CM, project_team, ARB>
+
+status:		<initial | rejected | analysis | implementation | test | obsolete | superseded | closed>
+
+
+[change information]
+
+change_category:	<documentation | error | design | requirements>
+
+analyst:		<name(s)>
+
+problem_description: <description; SUCCESSIVE LINES MUST BE INDENTED!>
+
+change_description:  <description; SUCCESSIVE LINES MUST BE INDENTED!>
+
+impact_analysis:		<text; SUCCESSIVE LINES MUST BE INDENTED!>
+
+changed_components:	<ids and versions of components to be changed>
+
+approved_by:	<name>
+
+implementor:	<name(s)>
+
+
+[test and release]
+
+target_release:	<release in which this CR will have been applied>
+
+test_release:	<release in which this CR will first appear for testing>
+
+test_status:	<in_test | passed | failed>
+
+
+[resolution]
+
+date_closed:	<date>
+
+reason_for_rejection:	<text; SUCCESSIVE LINES MUST BE INDENTED!>
+
+notes:		<text; SUCCESSIVE LINES MUST BE INDENTED!>

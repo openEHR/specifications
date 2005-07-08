@@ -1,0 +1,33 @@
+
+[summary]
+id:			PR-000007
+date_raised:	01/05/2003
+raised_by:		Thomas Beale, DSTC
+title:		Locking semantics of EHR check-out check-in not defined
+
+status:		opened
+
+[problem description]
+component:	RM.EHR
+
+problem_description: Formal semantics are required for locking of Compositions
+		in the EHR due to modification, in the same way such semantics are
+		required in software configuration management systems. There are
+		various possibilities:
+			- check-out causes locking; problem: what if no check-in in
+			  reasonabe time?
+			- check-out causes time-limited locking - lock disappears
+			  after a certain time, or is given away on another request
+			  to change. Have to be careful with complexity here.
+			- check-out does not create locks, and merging is needed to
+			  resolve conflicting changes.
+		It would be possible to employ all of these strategies in a
+		system, with different ones being applied to specific data, or
+		specific Composition groups.
+
+resolution_description: 
+
+[resolution]
+date_closed:
+reason_for_rejection:
+notes:

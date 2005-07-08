@@ -1,0 +1,44 @@
+
+[summary]
+id:			CR-000030
+date_raised:	07/07/2003
+raised_by:		Thomas Beale
+title:		ARCHETYPE.description does not handle foreign languages
+owner:
+status:		analysis
+
+[change information]
+change_category:	Change
+
+analyst:		Tom Beale
+
+problem_description:	The purpose, use and misuse fields in the archetype
+			meta-data are all free text and may need to be translated 
+			if the terminology section of the archetype is translated.
+
+change_description:	Probably change the ARCHETYPE_DESCRIPTION class so it
+			has a 'text' attribute of a new type which contains the 3 
+			free text fields, and 0..* more 'text_translation' fields 
+			keyed by language, to provide for translations.
+			DK: I'd support this.
+
+impact_analysis:		Minimal change to archetype Common model and
+			implementations. Will affect ADL specification slightly, 
+			and the ADL parser.
+
+changed_components:	Common AM
+				ADL specification
+
+authorised_by:
+implementor:
+
+[test and release]
+target_release:		1.0
+test_release:
+test_status:
+
+[closure]
+date_closed:		
+reason_for_rejection:
+notes:
+

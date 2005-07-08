@@ -1,0 +1,32 @@
+
+[summary]
+cr_id:		6-digit number
+date_raised:	dd-mm-yyyy
+raised_by:		free text name
+title:		1-line title
+owner:		name of current owner group = CCB | TAG | implementation | test
+status:		opened | analysis | implementation | closed | rejected
+
+[problem]
+problem_priority:	low | medium | high | critical
+problem_component:	logical name of component - choose from list
+problem_originator:	free text name
+problem_description:	free text
+
+[change information]
+change_category:		requirements | specification | implementation | ...
+impact_analysis:		free text
+analyst:			free text name
+change_description:	free text
+changed_components:	List of CI Ids
+implementor:		free text name
+
+[test and release]
+target_release:		release Id
+test_release:		release Id
+test_status:		awaiting_test | in_test | passed | failed_test
+
+[closure]
+date_closed:		date
+reason_for_rejection:	free text
+notes:			free text

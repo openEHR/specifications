@@ -1,0 +1,71 @@
+[summary]
+id:			CR-000058
+
+date_raised:	05/12/2002
+
+raised_by:		David Lloyd, Andrew Goodchild, Thomas Beale
+
+title:		Add expandable audit items to AUDIT_DETAILS class
+
+owner:		CC
+
+status:		rejected
+
+[change information]
+change_category:	change
+
+analyst:	Thomas Beale
+
+problem_description: There is likely to be a need to be able to add unforeseen
+		meta-data to version audits. One example is the "work time" taken
+		on the computer doing changes to the EHR - such information might
+		be used for process improvement or cost recovery (e.g. when it is
+		discovered that GPs spend quite a bit of time on the computer
+		after the actual consultation, the real costs of seeing patients
+		are more than the visit times). A general approach to this would
+		be to add a tagged-value data structure to the audit trail
+		classes.
+
+change_description: Add a new attribute to the class AUDIT_DETAILS, which is
+		of the form other_details: TABLE<String, String>. It has to be
+		determined whether to add a TABLE class and define its semantics
+		or whether to do something like List<TAGGED_VALUE> where
+		TAGGED_VALUE is a new class:
+			class TAGGED_VALUE
+				name: String
+				value: String
+			end
+		Using TABLE is more attractive in the abstract specifications, and
+		most programming languages would have direct support. However, in
+		the XML ITS, an explicit mapping to either List<TAGGED_VALUE> or
+		some other XML-specific abstraction would be needed.
+
+impact_analysis:		low
+
+changed_components:	RM.COMMON
+
+authorised_by:
+
+implementor:	
+
+[test and release]
+target_release:		none
+test_release:
+test_status:
+
+[closure]
+date_closed:
+reason_for_rejection:	DK/DL: there are various reasons not to do this:
+		1. this would be changing the scope  of the AUDIT_DETAILS class
+		   away from pure recording of the commit process.
+		2. recording of resources used, e.g. time, needles, drugs would
+		   more sensibly be recorded in COMPOSITION.context - which
+		   is of type EVENT_CONTEXT - this object has an other_details
+		   attribute of type STRUCTURE which would allow archetyping to
+		   control the addition of a whole lot of extra items.
+		3. Not convinced that the kind of info (e.g. resource usage data)
+		   would be in the EHR - it could well be in other enterprise
+		   services.
+
+notes:
+

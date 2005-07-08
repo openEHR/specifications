@@ -1,0 +1,38 @@
+
+[summary]
+id:			CR-000035
+date_raised:	12/08/2003
+raised_by:		DSTC Titanium Group
+title:		Clarify circular relationships between PARTY and PARTY_REL
+
+owner:
+status:		completed
+
+[change information]
+change_category:	change
+
+analyst:	Thomas Beale
+
+problem_description:	The current UML diagram and classes show a circular
+		relationship between PARTY and PARTY_RELATIONSHIP. 
+
+change_description:	This should be changed by adding a unique identifier 
+		attribute to PARTY, enabling PARTY_RELATIONSHIP to refer to it with 
+		the id.
+
+impact_analysis:		
+
+changed_components:	Demographic Model RM 1.4.1
+
+authorised_by:
+implementor:
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:		
+reason_for_rejection:
+notes:

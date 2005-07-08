@@ -1,0 +1,32 @@
+
+[summary]
+id:			PR-000009
+date_raised:	20/09/2002
+raised_by:		Thomas Beale
+title:		Support needed for EHR "watchlist"
+
+status:		opened
+
+[problem description]
+component:	RM.EHR
+
+problem_description: Add list of symbolically identified variables from within
+		EHR for easy access by querying and applications. Variables might
+		include things like $weight, $age, $sex, $smoking_status,
+		$diabetic_status and so on. Different sets of variable for each
+		patient are likely, based on their situation. These variables
+		would probably be implemented as a list of named paths or queries,
+		enabling applications to do the queries without having to build
+		the paths themselves. Each path for a potentially queryable item
+		would be built during writing, not reading, to improve the
+		performance of querying. 
+		
+		In order to enable interoperability for applications, the
+		watchlist should probably be implemented in the EHR API.
+
+resolution_description: 
+
+[resolution]
+date_closed:
+reason_for_rejection:
+notes:

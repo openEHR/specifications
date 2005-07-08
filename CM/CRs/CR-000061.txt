@@ -1,0 +1,48 @@
+
+[summary]
+id:			CR-000061
+
+date_raised:	21/01/2003
+
+raised_by:		Thomas Beale
+
+title:		Add remaining HL7 data types
+
+owner:	PG
+
+status:		analysis
+
+[change information]
+change_category:	change
+
+analyst:	Thomas Beale, David Lloyd
+
+problem_description: The generic probabilistic types defined in HL7 will
+		probably have to be mirrored in openEHR, i.e. UVP<T> etc.
+
+analysis: DK: Given active evolution within HL7, CEN and now ISO on data 
+		types, suggest deferring this until the standards are more 
+		stable, unless we are obviously missing a vital data type 
+		ourselves.
+
+change_description: 
+
+impact_analysis:		low
+
+
+changed_components:	RM.DATA_TYPES
+
+authorised_by:
+
+implementor:	
+
+[test and release]
+target_release:		1.0
+test_release:
+test_status:
+
+[closure]
+date_closed:	
+reason_for_rejection:
+notes:
+

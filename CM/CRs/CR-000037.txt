@@ -1,0 +1,92 @@
+[summary]
+id:			CR-000037
+date_raised:	15/09/2003
+raised_by:		Thomas Beale, Sam Heard
+title:		Date/time datum last confirmed.
+
+owner:	CC
+
+status:	rejected
+
+[change information]
+change_category:	change
+
+analyst:	Sam Heard, Thomas Beale, Dipak Kalra
+
+problem_description:	when voluminous data sources like home-care monitoring
+		devices and ICU monitors are in the EHR environment, there is a
+		question of what part of the data to put in the EHR. Usually, the 
+		clinical users of the EHR want only  "important" data,
+		particularly abnormal values, changes etc. One way to accommodate
+		this kind of data would be to include a baseline sample, and then
+		add a date/time stamp for when that value was last verified. To
+		make this work properly, small fluctuations cannot cause new data
+		points - there has to be an operating range where the datum is
+		considered to be the same at each measurement. 
+
+		A related scenario is when there is already an entry about a
+		patient, e.g. recording tobacco use or alcohol intake. The GP
+		might verify whether the current statements are still the case -
+		in this case there is a need to be able to just mark the existing
+		entry(s) as having been reconfirmed at the date when they are
+		verified. There are several ways this could be done. The most
+		obvious seems to be a new Entry with a link to the original entry
+		and an additional  'last_confirmed' date/time. However, the
+		consequences for sending data need to be considered (since this
+		will be one of the kinds of link types that always has to be
+		followed). The other possibility might be to create a new version
+		of the original Composition in which the same observation is just
+		repeated, but at the new date and time.
+
+		DK: This does concern me quite a bit. I can see the value in 
+		workflow terms of having a clinical application deliver this 
+		functionality, but I believe that each ENTRY in an EHR ought 
+		to be self-consistent unless there are specific linkages between 
+		components. I would personally favour duplicating data that has 
+		been explicitly re-verified: if the fact is still true and the 
+		composer has elected to wish to e-state that fact then it should 
+		be re-committed as a fact. (Clearly everyday clinical practice 
+		involves accepting many historic facts, with ad hoc re-verification 
+		that is not explicitly re-recorded - we are not here seeking to 
+		change clinical practice, only to confirm what should be persisted 
+		as a consequence of clinical re-verification.)
+
+change_description:	One approach is to add the ability to record just the
+		fact of "date/time this value last confirmed" to a recorded item.
+		Parameters of what is considered a change would also need to be
+		added, so that subsequent differential recording works properly.
+		Then only sgnificantly new values will cause new additions. The
+		current HISTORY<T> class already accommodates this (nearly) since
+		time points can have widths, meaning that long periods of no
+		change can be recorded as a single event in a HISTORY, with the
+		appropriate time width.
+
+		For the GP scenario, it seems more likely that we would want an
+		attribute on ENTRY called last_verified: DV_DATE_TIME or similar.
+
+impact_analysis:		
+
+changed_components:	EHR RM
+
+authorised_by:
+
+implementor:
+
+[test and release]
+target_release:		none
+test_release:
+test_status:
+
+[closure]
+date_closed:		09/02/2004
+
+reason_for_rejection:	DK: we should do this simply be recording a new ENTRY 
+		containing the the same value as it was last time, and put a link 
+		between the new one and the previous one, with a meaning e.g. 
+		"confirmed", or also values like "no longer true". These values 
+		should come out of the domain termlist work in CEN TC/251. The
+		same logic can apply to reducing the amount of data needed to be
+		recorded due to high volume output of monitoring instruments.
+
+notes:
+

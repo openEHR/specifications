@@ -1,0 +1,42 @@
+
+[summary]
+id:			CR-000052
+date_raised:	01/09/2003
+raised_by:		Thomas Beale
+title:		Change DV_DURATION.sign to prefix "-" operation.
+
+owner:
+status:		completed
+
+[change information]
+change_category:	change
+
+analyst:	Thomas Beale
+
+problem_description: The sign attribute of DV_DURATION is incompatible with
+		the normal way of representing negation of a quantity. It is not		
+		helpful in computations using durations. A prefix "-" operator
+		should be defined to enable normal arithmetic to be used with
+		DV_DURATIONs.
+
+change_description: The current sign attribute of DV_DURATION should be
+		replaced with a prefix "-" operation. The as_string feature also 
+		needs to be modified so that the sign is output at the beginning 
+		of the ISO8601 format string.
+
+impact_analysis:		low
+
+changed_components:	RM.DATA_TYPES.QUANTITY.DV_DURATION, Data Types IM 1.7.7
+
+authorised_by:
+implementor:	Thomas Beale
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:	26/10/2003
+reason_for_rejection:
+notes:

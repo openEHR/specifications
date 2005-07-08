@@ -1,0 +1,40 @@
+
+[summary]
+id:			PR-000001
+
+date_raised:	01/01/2003
+
+raised_by:		Sam Heard, Dipak Kalra, Thomas Beale
+
+title:		Vocabulary needed for RELATED_PARTY.relationship
+
+status:		opened
+
+[problem description]
+component:	RM all
+
+problem_description: Details of vocabularies are needed for various 
+		attributes in the openEHR models. These include-
+		vocabulary for RELATED_PARTY.relationship?
+		  HL7 only has RoleClass, which includes all kinds of 
+		  relationships, some in appropriate for clinical sitations.
+		vocabulary for VERSION_AUDIT.change_type. Possible values 
+		  include: “corrected to”, “later found to be”, “in retrospect”
+		vocabulary for TERMINOLOGY_IDs themselves. Ids should 
+		  probably be coded from ISO 11179. For registered coding 
+		  schemes; this standard also includes ranges for local code 
+		  schemes. Get details for ISO7826 (see 13606); superseded 
+		  by ISO 11179? See also HL7 domain CodeSystem. Problem - 
+		  how to include local ids, ids not yet put in by HL7 or 
+		  ISO? Need an online real-time system...
+		vocabulary for DV_QUANTITY.property names. Could one be derived
+		  from CEN ENV12435?
+
+[resolution]
+resolution_description: 
+
+date_closed:
+
+reason_for_rejection:
+
+notes:

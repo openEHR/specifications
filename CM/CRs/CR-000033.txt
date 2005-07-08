@@ -1,0 +1,42 @@
+
+[summary]
+id:			CR-000033
+date_raised:	12/08/2003
+raised_by:		DSTC Titanium Group
+title:		Remove to_canonical_string and to_display_string routines
+
+owner:
+status:		completed
+
+[change information]
+change_category:	change
+
+analyst:
+
+problem_description:	These routines serve no useful purpose in the abstract
+	data type specifications, since any standardised serialisation should be
+	specified in the ITS for the serialisation formalism, such as XML or
+	IDL. Note: there is a dependence on them by invariants in the date/time 
+	types, so a routine specific to these types has to be retained for this 
+	purpose.
+
+change_description:	Remove all instances of these routines in the abstract
+	data types specification.
+
+impact_analysis:		Minimal: change only to documentation. Software is not
+	invalidated by this change.
+
+changed_components:	All data types classes.
+
+authorised_by:
+implementor:
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:		07/10/2003
+reason_for_rejection:
+notes:

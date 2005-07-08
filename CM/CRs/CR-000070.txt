@@ -1,0 +1,43 @@
+
+[summary]
+id:			CR-000070
+
+date_raised:	27/11/2003
+
+raised_by:		Thomas Beale
+
+title:		Create Archetype System Description
+
+owner:		configuration_controller
+
+status:		completed
+
+[change information]
+change_category:	design
+
+analyst:	Thomas Beale, Sam Heard
+
+problem_description: There is currently no official description of the openEHR
+		system of archetype authoring, quality assurance, registration and
+		propagation to systems.
+
+change_description:  Create a new document "The openEHR Archetype System".
+
+impact_analysis:	Move Archetype Identification section from existing ADL
+		manual to new document.
+
+changed_components:	
+
+approved_by:	ARB
+
+implementor:	Sam Heard
+
+[test and release]
+target_release:	0.9
+test_release:	0.9
+test_status:
+
+[resolution]
+date_closed:	20/12/2003
+reason_for_rejection:
+notes:

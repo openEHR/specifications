@@ -1,0 +1,47 @@
+
+[summary]
+id:			CR-000041
+date_raised:	04/10/2003
+raised_by:		David Lloyd
+title:		Visually differentiate primitive types in openEHR documents
+
+owner:
+status:		completed
+
+[change information]
+change_category:	documentation style
+
+analyst:	Thomas Beale
+
+problem_description: The documentation of the openEHR abstract models does not
+		visually differentiate between the assumed inbuilt types (Integer, 
+		Real, Boolean, Character, String, List<>, Set<>, Array<>) and
+		types defined in openEHR (although the Support Reference Model
+		does explain the difference). Because of specifications from HL7
+		and CEN using a different set of data types in which the
+		distinction between e.g. a primitive String and a so-called "ST",
+		some readers are not clear on the origin of types in the openEHR
+		documentation.
+
+change_description:	It is proposed to change the capitalisation of all
+		primitive types to follow the "capitalised" convention, leaving
+		the openEHR defined types in upper case. This, the types mentioned
+		above will all appear in the documentation as "String", "Integer"
+		etc.
+
+impact_analysis:		documentation only
+
+changed_components:	RM
+
+authorised_by:
+implementor:	Thomas Beale
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:	05/10/2003
+reason_for_rejection:
+notes:

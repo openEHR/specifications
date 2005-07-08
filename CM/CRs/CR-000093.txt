@@ -1,0 +1,51 @@
+
+[summary]
+id:			CR-000093
+
+date_raised:	04-03-2004
+
+raised_by:		DSTC
+
+title:		Correct anomalies in use of ISO Oids
+
+owner:		PG
+
+status:		completed
+
+[change information]
+
+change_category:	design
+
+analyst:	Andrew Goodchild, Sam Heard, Thomas Beale
+
+problem_description: The Class ARCHETYPED currently requires a Uid from its
+		archetype, in addition to the archetype_id. This Uid is not
+		necessary; if it is required, it can be obtained from the
+		archetype.
+
+		The second problem is that a Uid (i.e. an ISO Oid) may be required
+		for root nodes in the data. A new Oid would be generated for every
+		new root node in all data, regardless of what archetype it came
+		from. This would allow the CEN ENV 13606 reference semantics to be
+		implemented properly.
+
+change_description:  remove ARCHETYPED.uid; add a new attribute LOCATABLE.uid,
+		which is optional.
+
+impact_analysis:		Low
+
+changed_components:	RM.COMMON.ARCHETYPED 1.4.11
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	0.9
+test_release:
+test_status:	
+
+[resolution]
+date_closed:	09-03-2004
+reason_for_rejection:	
+notes:		

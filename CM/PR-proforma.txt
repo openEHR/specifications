@@ -1,0 +1,28 @@
+
+[summary]
+
+id:			PR-<6 digit 0-packed number>
+
+date_raised:	<dd/mm/yyyy>
+
+raised_by:		<name(s)>
+
+title:		<short title>
+
+status:		<opened | in_review | resolved | obsolete | rejected>
+
+[problem description]
+
+component:		<openEHR component name>
+
+problem_description: <description; SUCCESSIVE LINES MUST BE INDENTED!>
+
+resolution_description: <description; SUCCESSIVE LINES MUST BE INDENTED!>
+
+[resolution]
+
+date_closed:	<dd/mm/yyyy>
+
+reason_for_rejection: <description; SUCCESSIVE LINES MUST BE INDENTED!>
+
+notes: 		<description; SUCCESSIVE LINES MUST BE INDENTED!>

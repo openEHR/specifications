@@ -1,0 +1,58 @@
+
+				 openEHR CHANGE REQUEST 
+ ID <cr_id>                                         Date Raised: <date_raised>
+
+		  <Title>
+
+ OWNER: <owner>                                          STATUS: <status>
+
+
+ +------------------------ PROBLEM DESCRIPTION -------------------------------+
+ |                                                                    	      |
+ |  PRIORITY:  <problem_priority>                                             |
+ |  COMPONENT: <problem_component>                                            |
+ |  ORIGINATOR:  <problem_originator>                                         |
+ |  DESCRIPTION: <problem_description>                                        |
+ |                                                                            |
+ +----------------------------------------------------------------------------+
+
+ +------------------------- CHANGE INFORMATION -------------------------------+
+ |                                                                            |
+ |  CATEGORY:  <change_category>                                              |
+ |  IMPACT ANALYSIS: <impact_analysis>                                        |
+ |  ANALYST:            <analyst>                                             |
+ |                                                                            |
+ |                                                                            |
+ |  CHANGE DESCRIPTION: <change_description>                                  |
+ |                                                                            |
+ |                                                                            |
+ |  ITEMS AFFECTED:                                                           |
+ |      Component #1    <change_components>                                   |
+ |          CI title:                                                         |
+ |          CI number:                                                        |
+ |          CI version:                                                       |
+ |      Component #2                                                          |
+ |          CI title:                                                         |
+ |          CI number:                                                        |
+ |          CI version:                                                       |
+ |      etc                                                                   |
+ |                                                                            |
+ |  AUTHORISED by:      <authorised_by>                                       |
+ |  IMPLEMENTOR:        <implementor>                                         |
+ +----------------------------------------------------------------------------+
+
+ +--------------------------- TEST & RELEASE ---------------------------------+
+ |                                                                            |
+ |  TARGET Release: <target_release>                                          |
+ |  TEST Release:   <test_release> Test Status: <test_status>                 |
+ |                                                                            |
+ +----------------------------------------------------------------------------+
+
+ +----------------------------- FINALISATION ---------------------------------+
+ |  Date Closed: <date_closed>                                                |
+ |  [Reason for Rejection:] <reason_for_rejection>                            |
+ |                                                                            |
+ |  NOTES: <notes>                                                            |
+ |                                                                            |
+ +----------------------------------------------------------------------------+
+

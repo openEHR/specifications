@@ -1,0 +1,40 @@
+
+[summary]
+id:			CR-000055
+date_raised:	01/11/2003
+raised_by:		Thomas Beale
+title:		Redefine DV_ORDERED.less_than as infix function '<'
+
+owner:
+status:		completed
+
+[change information]
+change_category:	change
+
+analyst:	Thomas Beale
+
+problem_description: The function "less_than" of the class DV_ORDERED should
+		be defined as an inbfix function '<' since infix and prefix
+		functions are already used elsewhere. If there are concrete formalisms
+		which do not support infix operators, this function can be renamed
+		to "less_than" in the relevant ITS.
+
+change_description: Redefine DV_ORDERED.less_than as:
+			infix '<' (other: like Current): Boolean
+
+impact_analysis:		low
+
+changed_components:	RM.DATA_TYPES.QUANTITY.DV_DURATION, Data Types IM 1.7.7
+
+authorised_by:
+implementor:	Thomas Beale
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:	02/11/2003
+reason_for_rejection:
+notes:

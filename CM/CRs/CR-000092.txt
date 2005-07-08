@@ -1,0 +1,50 @@
+
+[summary]
+id:			CR-000092
+
+date_raised:	04-03-2004
+
+raised_by:		Sam Heard, Thomas Beale
+
+title:		Improve EVENT_CONTEXT modelling
+
+owner:		PG
+
+status:		completed
+
+[change information]
+
+change_category:	design
+
+analyst:	Sam Heard, Thomas Beale
+
+problem_description: The EVENT_CONTEXT class needs some adjustments to better
+		correspond to the reality it models. Firstly, 'author' should be
+		renamed to 'composer', to correspond with the emerging CEN
+		ENV13606 standard. 
+		
+		Secondly, the health_care_facility attribute should be optional, 
+		since a care event could occur at the patient's home, with no 
+		involvement at all by a care delivery enterprise (e.g. creation 
+		of some observations; self-administration of a drug).
+
+change_description:  Rename EVENT_CONTEXT.author to composer. Make
+		EVENT_CONTEXT.health_care_facility optional.
+
+impact_analysis:		Low
+
+changed_components:	RM.EHR.COMPOSITION 4.4
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	0.9
+test_release:
+test_status:	
+
+[resolution]
+date_closed:	06-03-2004
+reason_for_rejection:	
+notes:		

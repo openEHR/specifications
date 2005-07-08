@@ -1,0 +1,44 @@
+
+[summary]
+id:			CR-000082
+date_raised:	25-02-2004
+raised_by:		DSTC-Titanium
+title:		LOCATABLE.synthesised not needed.
+
+owner:		PG
+
+status:		completed
+
+[change information]
+change_category:	design
+
+analyst:	Andrew Goodchild, Sam Heard, Thomas Beale
+
+problem_description: The synthesised attribute of LOCATABLE does not solve the
+		problem for which it was intended, namely to mark data items which
+		were created by a legacy data converter, where such items were not
+		available in the source. One problem is that much finer level
+		items can be synthesised, such as DATE/TIME time-zone and so on,
+		which the synthesised attribute would not cater for.
+
+change_description:  Remove the synthesised attribute. Document that for where
+		values or nodes are synthesised in legacy data conversion, a
+		FEEDER_AUDIT object should be used.
+
+impact_analysis:		Low
+
+changed_components:	RM.COMMON.ARCHETYPED 1.4.12
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	0.9
+test_release:
+test_status:	
+
+[resolution]
+date_closed:	03-03-2004
+reason_for_rejection:	
+notes:		

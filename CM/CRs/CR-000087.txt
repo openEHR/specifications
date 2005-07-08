@@ -1,0 +1,42 @@
+
+[summary]
+id:			CR-000087
+
+date_raised:	25-02-2004
+
+raised_by:		DSTC-Titanium
+
+title:		EVENT_CONTEXT.location should be optional
+
+owner:		PG
+
+status:		completed
+
+[change information]
+
+change_category:	design
+
+analyst:	Andrew Goodchild, Sam Heard, Thomas Beale, Dipak Kalra
+
+problem_description: The location attribute of EVENT_CONTEXT cannot always be
+		set to a sensible value, and should be optional.
+
+change_description:  Make EVENT_CONTEXT.location optional.
+
+impact_analysis:		Low
+
+changed_components:	RM.EHR.COMPOSITION 4.3.10
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:	0.9
+test_release:
+test_status:	
+
+[resolution]
+date_closed:	03-03-2004
+reason_for_rejection:	
+notes:		

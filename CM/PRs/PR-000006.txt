@@ -1,0 +1,21 @@
+
+[summary]
+id:			PR-000006
+date_raised:	01/01/2003
+raised_by:		Thomas Beale
+title:		Patient-matching information needed for EHR Extracts
+
+status:		opened
+
+[problem description]
+component:	RM.EHR_EXTRACT
+
+problem_description: A comprehensive patient macthing approach is needed for
+		EHR_Extracts, as per CEN 13606:2000 part 4.
+
+resolution_description: 
+
+[resolution]
+date_closed:
+reason_for_rejection:
+notes:

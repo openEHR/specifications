@@ -1,0 +1,51 @@
+
+[summary]
+id:			CR-000014
+date_raised:	1/04/2002
+raised_by:		TB, DK
+title:		Adjust HISTORY
+owner:
+status:		analysis
+
+[change information]
+change_category:	Change
+
+analyst:	Dipak Kalra, Sam Heard
+
+problem_description: 
+
+change_description:	There are various proposals to change HISTORY<T>, as
+		follows:
+		- instead of using orgin & offsets, use intervals in each EVENT
+		- make it optional (AG) because many instances of OBSERVATION will
+		  not specifically record their own observation time - they
+		  'inherit' the time of the clinical session. (TB: I agree with 
+		  the point - in today's GP consults - since there is almost no
+		  automated recording of anything, but disagree with the solution.
+		  Recording of observation time is essential, and even if the
+		  absolute times of multiple observations in a GP consult are
+		  uninteresting, the order may be significant.
+
+		Dipak - agree with latter, agnostic on former but everyone else 
+		appears to be going down the interval pathway. Might make life 
+		easier if we follow, since both representations are mappable.
+
+changed_components:	Data_structures RM 1.3.1 HISTORY
+				Data_structures AM 0.4 C_HISTORY
+
+impact_analysis:		minimal impact on documents, localised changes to
+		implementations.
+
+authorised_by:
+
+implementor:
+
+[test and release]
+target_release:		1.0
+test_release:
+test_status:
+
+[closure]
+date_closed:		
+reason_for_rejection:
+notes:

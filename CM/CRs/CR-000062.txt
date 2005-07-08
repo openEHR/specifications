@@ -1,0 +1,65 @@
+
+[summary]
+id:			CR-000062
+
+date_raised:	21/01/2003
+
+raised_by:		Thomas Beale
+
+title:		Strengthen LINK class semantics
+
+owner:	PG
+
+status:	analysis
+
+[change information]
+change_category:	change
+
+analyst:	Dipak Kalra, Thomas Beale
+
+problem_description: [Due to discussions at the Jan 2003 CEN meeting in Rome]
+		There may be a need to add a time_validity attribute to LINKs to
+		model the fact that some causal links will only be valid for
+		certain times. Solid use cases need to be found for this. It
+		appears that all the Act.effective_time justifications are already
+		taken care of in particular classes in openEHR. It is not clear if
+		there are other reasons to recorded intended/expected
+		time-validity of a link - one example may be if a provisional test
+		result is supplied from a lab - the  "result" link from a causing
+		order might have a time-limit set on it.
+
+		TB: A more general approach might be to add other_details:
+		STRUCTURE<T> to LINK, enabling it to include any level of details 
+		needed in the future. The most likely need is further meta-data
+		supporting workflow data representation, going by experience in
+		Denmark, for example.
+
+		DK: I think we need to be clearer about use cases for this. I am 
+		concerned about putting time validity on links without being clear 
+		about the implications for applications retrieving the source and 
+		or target components. Suggest defer to v1.0 giving us time to 
+		explore further.
+
+change_description: 
+
+impact_analysis:		low
+
+changed_components:	RM.DATA_TYPES
+
+authorised_by:
+
+implementor:	Thomas Beale
+
+[test and release]
+target_release:		1.0
+test_release:
+
+test_status:
+
+[closure]
+date_closed:	
+
+reason_for_rejection:
+
+notes:
+

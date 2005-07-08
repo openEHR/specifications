@@ -1,0 +1,23 @@
+
+[summary]
+id:			PR-000004
+date_raised:	01/01/2003
+raised_by:		Thomas Beale
+title:		ISO8601 form for partial dates and times?
+
+status:		opened
+
+[problem description]
+component:	RM all
+
+problem_description: What is the ISO8601-compliant string form for a date or
+		time which has parts missing, e.g. a partial date is ??/Oct/2003;
+		a partial time is 05:??:??. What are the ISO8601 rules for
+		creating the correct strings?
+
+resolution_description: 
+
+[resolution]
+date_closed:
+reason_for_rejection:
+notes:

@@ -1,0 +1,36 @@
+[summary]
+id:			CR-000003
+date_raised:	10/03/2003
+raised_by:		TB
+title:		ARCHETYPED/LOCATABLE simplification
+owner:
+status:		completed
+
+[change information]
+change_category:	Change
+impact_analysis:
+analyst:
+
+problem_description:	Increase archetyping flexibility - need to allow
+				archetyping of small parts of the model.
+
+change_description:	Make ARCHETYPED an attribute of LOCATABLE
+
+changed_components:	Common RM 1.4.2 ARCHETYPED, LOCATABLE
+				Common AM 0.4 C_ORGANISER, C_CONTENT_ITEM
+				EHR RM 4.2 TRANSACTION, ORGANISER, ENTRY
+				EHR AM 0.4 C_ORGANISER
+
+authorised_by:
+implementor:
+
+[test and release]
+target_release:		0.9
+test_release:
+test_status:
+
+[closure]
+date_closed:	1/4/2003
+reason_for_rejection:
+notes:
+
