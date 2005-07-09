@@ -44,6 +44,13 @@ feature -- Status Report
 		do
 		end
 		
+feature -- Conversion
+
+	as_hierarchy: CLUSTER is
+			-- the physical representation as a CEN 13606-compliant structure
+		do
+		end
+
 end
 
 

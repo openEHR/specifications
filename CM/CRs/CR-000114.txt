@@ -1,0 +1,58 @@
+
+[summary]
+
+id:			CR-000114
+
+date_raised:	15/11/2004
+
+raised_by:		Andrew Goodchild
+
+title:		Add archetypable other_details attribute to FEEDER_AUDIT
+
+owner:		ARB
+
+status:		analysis
+
+
+[change information]
+
+change_category:	enhancement
+
+analyst:		Andrew Goodchild, Thomas Beale
+
+problem_description: The FEEDER_AUDIT type used in the LOCATBALE class in the
+		ARCHETYPED cluster needs an attribute which can be freely
+		archetyped, which can contain various data from feeder systems. An
+		example from the Brisbane South HealthConnect Trial (BSHCT) in
+		Australia is to capture patient ids from HL7v2 messages so that if 
+		information from a message is put into the wrong EHR, its source
+		system patient id can be used to diagnose and correct the error.
+
+change_description:  Add the attribute other_details: ITEM_STRUCTURE to the 
+		class FEEDER_AUDIT.
+
+impact_analysis:	Minimal
+
+changed_components:	openehr.rm.common.archetyped
+
+approved_by:	ARB
+
+implementor:	Thomas Beale
+
+
+[test and release]
+
+target_release:	1.0
+
+test_release:	1.0
+
+test_status:	<in_test | passed | failed>
+
+
+[resolution]
+
+date_closed:	
+
+reason_for_rejection:	
+
+notes:		

@@ -1,11 +1,16 @@
 
 [summary]
 id:			CR-000024
+
 date_raised:	09/04/2003
+
 raised_by:		Sam Heard, Thomas Beale
-title:		Revert meaning to STRING
-owner:
-status:		analysis
+
+title:		Revert meaning to STRING and rename as archetype_node_id
+
+owner:		ARB
+
+status:		completed
 
 [change information]
 change_category:	Change
@@ -37,6 +42,15 @@ problem_description:	Recent analysis on an archetype language has shown
 		would be corrected by replacing at0017 with at0016 (and presumably
 		vice versa). Not recording the text value of the node term in the
 		meaning attribute would prevent this from working.
+
+		Input from Vince MacCauley, Dipak Kalra, and others supports the
+		change to a String, and also the change of name from 'meaning' to
+		'node_id'. 
+
+		In addition, support is required for including terms at the top of
+		EHR Extracts, to allow for Extracts to be completely
+		interpretable, now that only the codes will be available in the
+		'node_id' field of the archetyped data.
 		
 change_description: Meanings are thus given codes local to the archetype 
 		and these are mapped to one or more terminologies at the bottom 
@@ -53,10 +67,16 @@ change_description: Meanings are thus given codes local to the archetype
 		archetype was used, even if this language is not the primary
 		language of the archetype.
 
-changed_components:	Common RM 1.4.3
-				Common AM 0.5
+		The final changes agreed after a net discussion:
+			- rename LOCATABLE.meaning to archetype_node_id
+			- change its type to String
+			- change EHR Extract to include terminology extracted from
+			  the archetypes in the extract.
 
-impact_analysis:		Change to LOCATABLE, ARCHETYPE_FRAGMENT classes.
+changed_components:	openehr.rm.common.archetype 1.4.3
+				openehr.rm.common.archetype.ehr_extract IM
+
+impact_analysis:		Change to LOCATABLE classes.
 
 authorised_by:
 
@@ -68,6 +88,6 @@ test_release:
 test_status:
 
 [closure]
-date_closed:		
+date_closed:		01/02/2005
 reason_for_rejection:
 notes:

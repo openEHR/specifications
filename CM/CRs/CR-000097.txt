@@ -10,7 +10,7 @@ title:		Correct errors in version diagrams in Common model
 
 owner:		PG
 
-status:		initial
+status:		completed
 
 [change information]
 
@@ -35,9 +35,9 @@ implementor:	Thomas Beale
 [test and release]
 target_release:	1.0
 test_release:
-test_status:	
+test_status:	passed
 
 [resolution]
-date_closed:
+date_closed:	15/11/2004
 reason_for_rejection:	
 notes:		

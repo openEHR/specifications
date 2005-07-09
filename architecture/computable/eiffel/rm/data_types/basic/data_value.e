@@ -23,9 +23,9 @@ inherit
 
 feature -- Initialization
 	
-	make_from_string(str:STRING) is
+	make_from_string(a_str:STRING) is
 		require
-			String_exists: str /= Void and then not str.is_empty
+			String_exists: a_str /= Void
 		deferred
 		end
 

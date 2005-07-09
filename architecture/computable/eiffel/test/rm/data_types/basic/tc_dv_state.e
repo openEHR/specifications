@@ -20,6 +20,11 @@ inherit
 		redefine 
 			check_result
 		end
+	
+	XML_TOOLS
+		export
+			{NONE} all
+		end
 
 creation
 	make
@@ -38,8 +43,31 @@ feature -- Initialisation
 		local
 			a_datum: DV_STATE
 		do
-			create a_datum.make_from_canonical_string("<value>initial</value>")
-			io_output.put_string(a_datum.as_canonical_string)
+			create a_datum.make_from_canonical_string("				%
+			%	<value>												%
+			%			<value>initial</value>						%
+			%			<language>									%
+			%					<terminology_id>					%
+			%						<name>languages</name>			%
+			%					</terminology_id>					%
+			%					<code_string>en</code_string>		%
+			%			</language>									%
+			%			<charset>									%
+			%					<terminology_id>					%
+			%						<name>character sets</name>		%
+			%					</terminology_id>					%
+			%					<code_string>utf-8</code_string>	%
+			%			</charset>									%
+			%			<defining_code>								%
+			%					<terminology_id>					%
+			%						<name>openehr</name>			%
+			%					</terminology_id>					%
+			%					<code_string>11111111</code_string>	%
+			%			</defining_code>							%
+			%	</value>											%
+			%	<is_terminal>False</is_terminal>					%
+			%")
+			io_output.put_string(xml_tag_indent(a_datum.as_canonical_string))
 			io_output.new_line
 		end
 

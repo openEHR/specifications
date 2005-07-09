@@ -24,10 +24,7 @@ indexing
 deferred class ENTRY
 
 inherit
-	OPENEHR_TERMINOLOGY_IDS
-		export
-			{NONE} all
-		end
+	TERMINOLOGY_SERVICE_ACCESS
 
 	CONTENT_ITEM
 
@@ -42,6 +39,14 @@ feature -- Definitions
 		end
 
 feature -- Access
+
+	language: CODE_PHRASE	
+			-- Mandatory indicator of the localised language in which this 
+			-- Entry is written. Coded from openEHR Code Set “languages”.
+			
+	encoding: CODE_PHRASE
+			-- Name of character set in which text values in this Entry are encoded. 
+			-- Coded from openEHR Code Set “character sets”.
 
 	subject: RELATED_PARTY
 			-- Identity of human subject of the information in this entry
@@ -62,6 +67,9 @@ feature -- Access
 			-- to which this ENTRY corresponds in some way. This identifier might 
 			-- have internal syntax and meaning to an external processor.
 
+	act_status: DV_CODED_TEXT	
+			-- Optional act status indicator for this entry.
+
 	guideline_id: OBJECT_REF	
 			-- Identifier of guideline creating this action if relevant
 
@@ -70,14 +78,15 @@ feature -- Access
 
 invariant
 	Subject_exists: subject /= Void
-	Subject_relationship_valid: subject.relationship.generating_type.is_equal("DV_CODED_TEXT")
-	--	implies Terminology_id_Subject_relationships.has (subject.relationship.terminology_id.value)
-	Provider_exists: provider /= Void
-	Provider_function_valid: provider.function.generating_type.is_equal("DV_CODED_TEXT") 
-	--	implies Terminology_id_Provider_functions.has (provider.function.terminology_id.value)
+	Provider_valid: provider /= Void
+	Act_status_valid: act_status /= Void implies 
+		terminology("openehr").codes_for_group_name("act status", "en")
+		.has(act_status.defining_code)
 	Other_participations_valid: other_participations /= Void implies not other_participations.is_empty
 	Archetype_root_point: is_archetype_root
-
+	Language_valid: language /= Void and then code_set("languages").has(language)
+	Encoding_valid: encoding /= Void and then code_set("character sets").has(encoding)
+	
 end
 
 

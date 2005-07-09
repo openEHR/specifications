@@ -21,12 +21,30 @@ indexing
 class EVENT [G -> ITEM_STRUCTURE]
 
 inherit
+	LOCATABLE
 	ITEM_EVENT [G]
 
 feature -- Access
 
 	offset: DV_DURATION 
 			-- offset of this sample from the origin of the history
+
+	path_of_item (a_loc: LOCATABLE): STRING is
+			-- The path to an item relative to the root of this archetyped structure.
+		do
+		end
+
+	item_at_path (a_path: STRING): LOCATABLE is
+			-- The item at a path (relative to this item).
+		do
+		end
+
+feature -- Status Report
+
+	valid_path (a_path: STRING): BOOLEAN is
+			-- True if the path is valid with respect to the current item.
+		do
+		end
 
 invariant
 	offset_exists: offset /= Void	

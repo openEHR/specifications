@@ -27,8 +27,8 @@ feature -- Access
 	name: DV_TEXT
 			-- name of this item in structure; forms an element of runtime path 
 
-	meaning: DV_TEXT
-			-- `meaning' from archetype; constitutes the path element from the 
+	archetype_node_id: STRING
+			-- `node_id' from archetype; constitutes the path element from the 
 			-- archetype structure, used for re-attaching content to archetypes, 
 			-- as well as in querying
 
@@ -68,7 +68,7 @@ feature -- Status Report
 
 invariant
 	Name_exists: name /= Void
-	Meaning_valid: meaning /= Void
+	Archetype_node_id_valid: archetype_node_id /= Void and then not archetype_node_id.is_empty
 	Archetype_validity: archetype_details = Void xor is_archetype_root
 	Links_valid: links /= Void implies not links.is_empty
 

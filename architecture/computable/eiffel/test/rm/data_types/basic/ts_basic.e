@@ -30,9 +30,10 @@ feature -- Access
 			create Result.make
 			create {TC_DV_BOOLEAN} tc.make(Void) 		Result.extend(tc)
 			create {TC_DV_STATE} tc.make(Void) 		Result.extend(tc)
+			create {TC_DV_IDENTIFIER} tc.make(Void) 		Result.extend(tc)
 		end
 
-	title:STRING is "Basic tests"
+	title:STRING is "DATA TYPE - Basic tests"
 
 feature -- Initialisation
 

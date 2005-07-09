@@ -1,0 +1,56 @@
+
+[summary]
+
+id:			CR-000115
+
+date_raised:	16/11/2004
+
+raised_by:		Thomas Beale
+
+title:		Correct "/[xxx]" path grammar error in ADL
+
+owner:		ARB
+
+status:		implementation
+
+
+[change information]
+
+change_category:	error
+
+analyst:		Thomas Beale
+
+problem_description: Legal paths in ADL can currently start with an object id,
+		e.g. [at0005]/.... However, in these situations, the path is
+		always absolute, and should start with a '/', to be compatible
+		with Xpath, and with most peoples' idea of an absolute path.
+
+change_description:  Change ADL documentation and syntax to make paths
+		starting with [xxx] illegal, and paths starting with /[xxx] legal
+		for ab absolute path.
+
+impact_analysis:	Minimal
+
+changed_components:	ADL specification
+
+approved_by:	
+
+implementor:	Thomas Beale
+
+
+[test and release]
+
+target_release:	1.0
+
+test_release:	1.0
+
+test_status:	<in_test | passed | failed>
+
+
+[resolution]
+
+date_closed:	
+
+reason_for_rejection:	
+
+notes:		

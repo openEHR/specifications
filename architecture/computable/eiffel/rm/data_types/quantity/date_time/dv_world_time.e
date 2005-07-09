@@ -31,6 +31,21 @@ inherit
 
 feature -- Access
 
+	Min_timezone: DV_DURATION is
+		once
+			create Result.make_definite(0, 12, 0, 0)
+			Result := -Result
+		ensure
+			Result.as_string.is_equal("-12:00:00")
+		end
+
+	Max_timezone: DV_DURATION is
+		once
+			create Result.make_definite(0, 12, 0, 0)
+		ensure
+			Result.as_string.is_equal("12:00:00")
+		end
+
 	timezone: DV_DURATION	
 			-- offset from Universal Coordinated Time, in the range -1200 - +1200 
 			-- (note that this can affect the date even if no time is recorded).

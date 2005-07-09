@@ -1,0 +1,57 @@
+
+[summary]
+
+id:			CR-000110
+
+date_raised:	15/10/2004
+
+raised_by:		Thomas Beale
+
+title:		Update ADL and AOM documents
+
+owner:		PG
+
+status:		completed
+
+
+[change information]
+
+change_category:	enhancement
+
+analyst:		Thomas Beale, Tony Austin, Dipak Kalra, Sam Heard, Nathan
+			Lea, Andrew Goodchild
+
+problem_description: The openEHR Archetype Definition Language (ADL) document
+		needs to be brought up to date with the latest developments in the
+		tools. An Archetype Object Model (AOM) document needs to be written 
+		to provide a UML expression of ADL.
+
+change_description:  The current openEHR Archetype Definition Language (ADL) 
+		document is replaced with the latest draft of 1.2 version.
+		The AOM draft needs to be added.
+
+impact_analysis:	Minimal
+
+changed_components:	none
+
+approved_by:	ARB
+
+implementor:	Thomas Beale
+
+
+[test and release]
+
+target_release:	1.0
+
+test_release:	1.0
+
+test_status:	passed
+
+
+[resolution]
+
+date_closed:	15/11/2004
+
+reason_for_rejection:	
+
+notes:		

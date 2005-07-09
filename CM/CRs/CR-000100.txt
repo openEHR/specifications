@@ -2,15 +2,15 @@
 [summary]
 id:			CR-000100
 
-date_raised:	02-04-2004
+date_raised:	02/04/2004
 
 raised_by:		Thomas Beale
 
 title:		Correct inheritance error in ITEM_STRUCTURE package
 
-owner:		ARB
+owner:		PG
 
-status:		initial
+status:		completed
 
 [change information]
 
@@ -40,6 +40,6 @@ test_release:	1.0
 test_status:	
 
 [resolution]
-date_closed:	
+date_closed:	15/11/2004
 reason_for_rejection:	
 notes:		

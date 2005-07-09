@@ -1,0 +1,55 @@
+
+[summary]
+
+id:			CR-000122
+
+date_raised:	09/12/2004
+
+raised_by:		David Lloyd
+
+title:		Fix UML in Terminology_access classes in Support model
+
+owner:		PG
+
+status:		completed
+
+
+[change information]
+
+change_category:	documentation
+
+analyst:		David Lloyd, Thomas Beale
+
+problem_description: The UML for the package rm.support.terminology shows the
+		features defined on various service classes as attributes rather
+		than functions.
+
+change_description:  CHange the UML so that all features of the classes in
+		this cluster appear in the normal UML 3rd compartment of the class 
+		boxes.
+
+impact_analysis:	Minimal
+
+changed_components:	openEHR Support IM
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+
+[test and release]
+
+target_release:	1.0
+
+test_release:	1.0
+
+test_status:	<in_test | passed | failed>
+
+
+[resolution]
+
+date_closed:	09/12/2004
+
+reason_for_rejection:	
+
+notes:		

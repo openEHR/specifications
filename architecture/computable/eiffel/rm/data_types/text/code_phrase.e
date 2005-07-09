@@ -79,8 +79,11 @@ feature -- Initialization
 
 	make_from_canonical_string(str:STRING) is
 			-- make from string of form:
-			-- "<terminology_id>TERMINOLOGY_ID</terminology_id>
-			-- <code_string>string</code_string>"
+			-- <terminology_id>
+			--		<name>string</name>
+			-- 		[<version_id>string</version_id>]
+			-- </terminology_id>
+			-- <code_string>string</code_string>
 		do
 			create terminology_id.make_from_canonical_string(xml_extract_from_tags(str, "terminology_id", 1))
 			code_string := xml_extract_from_tags(str, "code_string", 1)
@@ -142,9 +145,9 @@ feature -- Output
 		end
 		
 	out: STRING is
-			-- same as `as_string'
+			-- '['  + `as_string' + ']'
 		do
-			Result := as_string
+			Result := "[" + as_string + "]"
 		end
 		
 	

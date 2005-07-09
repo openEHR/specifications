@@ -1,0 +1,49 @@
+
+[summary]
+
+id:			CR-000128
+
+date_raised:	06/02/2005
+
+raised_by:		Thomas Beale
+
+title:		Update Support assumed types to ISO 11404:2003.
+
+owner:		PG
+
+status:		completed
+
+
+[change information]
+
+change_category:	documentation
+
+analyst:		Thomas Beale
+
+problem_description: The existing documentation on inbuilt data types is now
+		out of date, and should be updated to reflect ISO 11404 2003
+		revision.
+
+change_description:  change documentation
+
+impact_analysis:	minimal
+
+changed_components:	rm.support
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+
+[test and release]
+
+target_release:	1.0
+
+
+[resolution]
+
+date_closed:	10/02/2005
+
+reason_for_rejection:	
+
+notes:		

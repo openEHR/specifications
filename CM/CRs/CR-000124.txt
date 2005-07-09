@@ -1,0 +1,53 @@
+
+[summary]
+
+id:			CR-000124
+
+date_raised:	09/12/2004
+
+raised_by:		Thomas Beale
+
+title:		Fix path syntax in data structures IM document
+
+owner:		PG
+
+status:		completed
+
+
+[change information]
+
+change_category:	error
+
+analyst:		Thomas Beale
+
+problem_description: The path syntax and examples in the Data Structures IM
+		are out of date with respect to the rest of the specification, and 
+		need to be fixed. Specifically, the Xpath style '[' and ']'
+		brackets have not been used, and the path separators are still '|'
+		instead of '/' as required in Xpath.
+
+change_description:  CHange the Data Structures document to be in line with
+		the rest of the openEHR IM specifications, in particular, the EHR
+		IM.
+
+impact_analysis:	minimal
+
+changed_components:	rm.data_structures
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+
+[test and release]
+
+target_release:	1.0
+
+
+[resolution]
+
+date_closed:	11/12/2004
+
+reason_for_rejection:	
+
+notes:		

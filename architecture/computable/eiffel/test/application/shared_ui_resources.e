@@ -13,13 +13,10 @@ indexing
 
 class SHARED_UI_RESOURCES
 
+inherit
+	SHARED_RESOURCES
+	
 feature -- Access
-
-	startup_directory: STRING is
-			-- directory application started in
-		once
-			 Result := execution_environment.current_working_directory
-		end
 
 	has_icon_directory: BOOLEAN is
 			-- True if icon directory available
@@ -57,11 +54,6 @@ feature -- Access
 			Result.append("%TISE Eiffel (see www.eiffel.com)%N")
 			Result.append("%TGobo parsing libraries & tools (see www.gobosoft.com)%N")
 		end
-
-	execution_environment: EXECUTION_ENVIRONMENT is
-	    once
-	        create Result
-	    end
 
 end
 

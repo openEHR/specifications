@@ -29,10 +29,10 @@ feature {NONE} -- Initialization
 
 feature -- Access
 
-	test_case_list_width: INTEGER is 
-			-- `Result' is INTEGER constant named test_case_list_width.
+	test_list_width: INTEGER is 
+			-- `Result' is INTEGER constant named test_list_width.
 		once
-			Result := integer_constant_by_name ("test_case_list_width")
+			Result := integer_constant_by_name ("test_list_width")
 		end
 
 	test_cases_label: STRING is
@@ -51,12 +51,6 @@ feature -- Access
 			-- `Result' is STRING constant named `test_suites_label'.
 		once
 			Result := string_constant_by_name ("test_suites_label")
-		end
-
-	test_output_text_width: INTEGER is 
-			-- `Result' is INTEGER constant named test_output_text_width.
-		once
-			Result := integer_constant_by_name ("test_output_text_width")
 		end
 
 	execution_label_name: STRING is
@@ -101,16 +95,22 @@ feature -- Access
 			Result := integer_constant_by_name ("screen_width")
 		end
 
+	test_case_list_width: INTEGER is 
+			-- `Result' is INTEGER constant named test_case_list_width.
+		once
+			Result := integer_constant_by_name ("test_case_list_width")
+		end
+
+	test_output_text_width: INTEGER is 
+			-- `Result' is INTEGER constant named test_output_text_width.
+		once
+			Result := integer_constant_by_name ("test_output_text_width")
+		end
+
 	test_case_output_name: STRING is
 			-- `Result' is STRING constant named `test_case_output_name'.
 		once
 			Result := string_constant_by_name ("test_case_output_name")
-		end
-
-	test_list_width: INTEGER is 
-			-- `Result' is INTEGER constant named test_list_width.
-		once
-			Result := integer_constant_by_name ("test_list_width")
 		end
 
 	test_case_report: STRING is

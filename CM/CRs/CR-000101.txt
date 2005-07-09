@@ -11,7 +11,7 @@ title:		Improve modelling of Structure classes
 
 owner:		ARB
 
-status:		initial
+status:		completed
 
 
 [change information]
@@ -28,15 +28,17 @@ problem_description: The current model for the STRUCTURE classes means that
 change_description: Change the model to have efficient representations for all
 		the data structure types (but still based on CLUSTER and ELEMENT), 
 		including ITEM_LIST. Show in the text how these structures would
-		be coded in CEN ENV 13606 structures.
+		be coded in CEN ENV 13606 structures. Add a function
+		as_hierarchy:ITEM to DATA_STRUCTURE, and describe how this would
+		be implemented in all subtypes of DATA_STRUCTURE.
 
 impact_analysis:		Medium.
 
 changed_components:	RM.DATA_STRUCTURES.ITEM_STRUCTURE 1.4
 
-approved_by:	
+approved_by:	ARB
 
-implementor:
+implementor:	Thomas Beale
 
 
 [test and release]

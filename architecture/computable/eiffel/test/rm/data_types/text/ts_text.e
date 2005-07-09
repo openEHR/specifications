@@ -33,7 +33,7 @@ feature -- Access
 			create {TC_DV_PARAGRAPH} tc.make(Void) 		Result.extend(tc)
 		end
 
-	title:STRING is "Text tests"
+	title:STRING is "DATA TYPE - Text tests"
 
 feature -- Initialisation
 

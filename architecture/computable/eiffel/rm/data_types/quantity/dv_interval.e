@@ -26,7 +26,7 @@ inherit
 		undefine
 			is_equal
 		end
-	INTERVAL [G]
+	OE_INTERVAL [G]
 		redefine
 			as_string
 		end

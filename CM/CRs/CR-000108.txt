@@ -1,0 +1,66 @@
+
+[summary]
+
+id:			CR-000108
+
+date_raised:	31/08/2004
+
+raised_by:		Thomas Beale
+
+title:		Minor changes to Change_control package
+
+owner:		ARB
+
+status:		completed
+
+
+[change information]
+
+change_category:	enhancement
+
+analyst:		Thomas Beale
+
+problem_description: The Common.Change_control package contains a number of
+		minor problems or inconsistencies, as follows:
+		- the attribute 'node' in the class AUDIT_DETAILS is poorly named
+		- the 'description' attribute the CONTRIBUTION class should be in
+		  the AUDIT_DETAILS class, since any kind of audit record might
+		  include a description. For example, BitKeeper has description
+		  for both change-set and for every file changed in a change set.
+		- rather than inheriting from AUDIT_DETAILS, the CONTRIBUTION
+		  class should have an association relation with it, because
+		  CONTRIBUTIONS are not as such, audit objects.
+		- it would be simpler if the 'change_type' attribute of the class
+		  VERSION_AUDIT were moved to AUDIT_DETAILS, since this attribute
+		  could be used for audits pertaining to CONTRIBUTIONs as well.
+		- following the above changes, the class VERSION_AUDIT can be
+		  removed, and the class AUDIT_DETAILS made concrete.
+
+change_description:  The proposed changes are shown in the attached PDF file
+		CR-000108.pdf.
+
+impact_analysis:	The Change_control package appears to have been implemented
+		by few developers so far. This proposal will cause some changes to
+		software, but will simplify the it in the long run.
+
+changed_components:	rm.common.change_control
+
+approved_by:	ARB
+
+implementor:	Thomas Beale
+
+
+[test and release]
+
+target_release:	1.0
+
+test_release:	1.0
+
+
+[resolution]
+
+date_closed:	10/01/2005
+
+reason_for_rejection:	
+
+notes:		

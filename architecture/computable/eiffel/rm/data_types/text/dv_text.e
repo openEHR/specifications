@@ -92,11 +92,34 @@ feature -- Initialization
 	make_from_canonical_string(str:STRING) is
 			-- make from a string of the form
 			-- <value>xxxx</value>
-			-- <language>CODE_PHRASE</language>
+			-- <language>
+			-- 		<terminology_id>
+			--			<name>string</name>
+			-- 			[<version_id>string</version_id>]
+			-- 		</terminology_id>
+			-- 		<code_string>string</code_string>
+			-- </language>
+			-- <charset>
+			-- 		<terminology_id>
+			--			<name>string</name>
+			-- 			[<version_id>string</version_id>]
+			-- 		</terminology_id>
+			-- 		<code_string>string</code_string>
+			-- </charset>
 			-- [<hyperlink>DV_URI</hyperlink>]
 			-- [<formatting>xxxx</formatting>]
 			-- [<mappings>
-			--		<item>TERM_MAPPING</item>
+			--		<item>
+			-- 			<target>
+			-- 				<terminology_id>
+			--					<name>string</name>
+			-- 					[<version_id>string</version_id>]
+			-- 				</terminology_id>
+			-- 				<code_string>string</code_string>
+			-- 			</target>
+			-- 			<match>character</match>
+			-- 			[<purpose>DV_CODED_TEXT</purpose>]			
+			-- 		</item>
 			--		<item>TERM_MAPPING</item>
 			-- <mappings>]
 		local
@@ -105,7 +128,7 @@ feature -- Initialization
 		do
 			value := xml_extract_from_tags(str, "value", 1)
 			create language.make_from_canonical_string(xml_extract_from_tags(str, "language", 1))
-			create language.make_from_canonical_string(xml_extract_from_tags(str, "charset", 1))
+			create encoding.make_from_canonical_string(xml_extract_from_tags(str, "encoding", 1))
 			
 			if xml_has_tag(str, "hyperlink", 1) then
 				create hyperlink.make_from_canonical_string(xml_extract_from_tags(str, "hyperlink", 1))
@@ -135,7 +158,7 @@ feature -- Status Report
 	valid_canonical_string(str: STRING): BOOLEAN is
 			-- True if str contains required tags
 		do
-			Result := xml_has_tag(str, "value", 1) and xml_has_tag(str, "language", 1)
+			Result := xml_has_tag(str, "value", 1) and xml_has_tag(str, "language", 1) and xml_has_tag(str, "charset", 1)
 		end
 
 feature -- Access
@@ -158,13 +181,13 @@ feature -- Access
 			-- The localised language in which the value is written. Coded from 
 			-- openEHR Code Set “languages”.
 
-	charset: CODE_PHRASE
+	encoding: CODE_PHRASE
 			-- Name of character set in which value expressed. Coded from openEHR 
 			-- Code Set “character sets”.
 
 feature -- Status Report
 
-	has_mapping (other: DV_CODED_TEXT): BOOLEAN is
+	has_mapping (other: CODE_PHRASE): BOOLEAN is
 			-- True if there is any mapping `other' in the list of mappings
 		do
 			if mappings /= void then
@@ -189,9 +212,9 @@ feature -- Comparison
 	
 feature -- Modification
 
-	add_mapping (a_mapping: DV_CODED_TEXT; a_match:INTEGER; a_purpose: DV_CODED_TEXT) is
+	add_mapping (a_target: CODE_PHRASE; a_match:CHARACTER; a_purpose: DV_CODED_TEXT) is
 		require
-			mapping: a_mapping /= void and then not has_mapping (a_mapping)
+			mapping: a_target /= void and then not has_mapping (a_target)
 			match: is_valid_match_code(a_match)
 			purpose_valid: a_purpose /= void
 		local
@@ -201,7 +224,7 @@ feature -- Modification
 				create mappings.make
 				mappings.compare_objects
 			end
-			create tm.make(a_mapping, a_match, a_purpose)
+			create tm.make(a_target, a_match, a_purpose)
 			mappings.extend (tm)
 		end
 	
@@ -217,8 +240,12 @@ feature -- Output
 		do
 			create Result.make(0)
 			Result.append("<value>" + value + "</value>")
-			
-			Result.append("<language>" + language.as_canonical_string + "</language>")
+			if language /= Void then
+				Result.append("<language>" + language.as_canonical_string + "</language>")			
+			end
+			if encoding /= Void then
+				Result.append("<encoding>" + encoding.as_canonical_string + "</encoding>")				
+			end
 			
 			if mappings /= Void then
 				Result.append("<mappings>")
@@ -251,7 +278,7 @@ invariant
 	Formatting_valid: formatting /= void implies not formatting.is_empty
 
 	Language_valid: language /= Void and then code_set("languages").has(language)
-	charset_valid: charset /= Void and then code_set("character sets").has(charset)
+	Encoding_valid: encoding /= Void and then code_set("character sets").has(encoding)
 
 end
 

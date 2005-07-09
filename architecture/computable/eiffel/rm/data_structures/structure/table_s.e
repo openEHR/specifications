@@ -52,14 +52,11 @@ class ITEM_TABLE
 
 inherit
 	ITEM_STRUCTURE
-		redefine
-			representation
-		end
 
 feature -- Access
 
-	representation: CLUSTER
-			-- item containing list elements
+	columns: LIST[CLUSTER]
+			-- CLUSTERs containing column data
 
 	row_count:INTEGER is
 			-- Return the number of rows
@@ -151,6 +148,13 @@ feature -- Status Report
 
 	valid_path (a_path: STRING): BOOLEAN is
 			-- True if the path is valid with respect to the current item.
+		do
+		end
+
+feature -- Conversion
+
+	as_hierarchy: CLUSTER is
+			-- the physical representation as a CEN 13606-compliant structure
 		do
 		end
 

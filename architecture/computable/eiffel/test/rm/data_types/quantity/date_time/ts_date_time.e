@@ -1,8 +1,16 @@
 indexing
-	description: "Objects that ..."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	component:   "Ocean openEHR kernel test framework"
+	description: "Test DV_DATE_TIME"
+	keywords:    "test, date"
+
+	author:      "Thomas Beale"
+	support:     "Ocean Informatics <support@OceanInformatics.biz>"
+	copyright:   "Copyright (c) 2000-2004 The openEHR Foundation <http://www.openEHR.org>"
+	license:     "See notice at bottom of class"
+
+	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/test/rm/data_types/quantity/date_time/SCCS/s.ts_date_time.e $"
+	revision:    "$Revision$"
+	last_change: "$Date$"
 
 class TS_DT_DATE_TIME
 
@@ -24,6 +32,7 @@ feature -- Access
 			create {TC_DV_DATE_TIME} tc.make(Void) 		Result.extend(tc)
 			create {TC_DV_DURATION} tc.make(Void) 		Result.extend(tc)
 			create {TC_DV_PARTIAL_DATE} tc.make(Void) 		Result.extend(tc)
+			create {TC_DV_PARTIAL_DATE_TIME} tc.make(Void) 		Result.extend(tc)
 		end
 
 	title:STRING is "Date/time tests"

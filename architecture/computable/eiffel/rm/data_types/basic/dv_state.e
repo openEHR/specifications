@@ -60,7 +60,31 @@ feature -- Initialization
 		end
 
 	make_from_canonical_string (a_str:STRING) is
-			-- <value>xxxxxx</value>
+			-- <value>
+			-- 		<value>xxxx</value>
+			-- 		<language>
+			-- 				<terminology_id>
+			--					<name>string</name>
+			-- 					[<version_id>string</version_id>]
+			-- 				</terminology_id>
+			-- 				<code_string>string</code_string>
+			-- 		</language>
+			-- 		<charset>
+			-- 				<terminology_id>
+			--					<name>string</name>
+			-- 					[<version_id>string</version_id>]
+			-- 				</terminology_id>
+			-- 				<code_string>string</code_string>
+			-- 		</charset>
+			-- 		<defining_code>
+			-- 				<terminology_id>
+			--					<name>string</name>
+			-- 					[<version_id>string</version_id>]
+			-- 				</terminology_id>
+			-- 				<code_string>string</code_string>
+			-- 		</defining_code>
+			-- </value>
+			-- <is_terminal>boolean</is_terminal>
 		do
 			create value.make_from_canonical_string(xml_extract_from_tags(a_str, "value", 1))
 		end

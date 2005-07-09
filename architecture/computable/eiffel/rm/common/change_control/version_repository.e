@@ -93,7 +93,7 @@ feature -- Status Report
 
 feature -- Modify
 
-	commit(a_parent_version_id: STRING; an_audit: VERSION_AUDIT; a_data: G)
+	commit(a_parent_version_id: STRING; an_audit: AUDIT_DETAILS; a_data: G)
 		is
 			-- commit new version. No locking (i.e. checking out) is needed to commit. 
 			-- 'parent_version_id' is the id of latest version in this VERSIONED<T>, at the time of

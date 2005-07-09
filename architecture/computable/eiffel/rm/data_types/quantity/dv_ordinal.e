@@ -68,20 +68,20 @@ feature -- Access
 			-- which may be strings made from “+” symbols, or other enumerations 
 			-- of terms such as “mild”, “moderate”, “severe”.
 
-	limits: REFERENCE_RANGE [like Current] is
+	limits: REFERENCE_RANGE [DV_ORDINAL] is
 			-- limits of the ordinal enumeration, to allow comparison of an ordinal value to its limits.
 		do
 		end
 
 feature -- Comparison
 
-	is_strictly_comparable_to (other: like Current): BOOLEAN is
+	is_strictly_comparable_to (other: DV_ORDINAL): BOOLEAN is
 			-- two ordinals can be compared if they come from the same series
 		do
 			Result := symbol.is_comparable(other.symbol)
 		end
 
-	infix "<" (other: like Current): BOOLEAN is
+	infix "<" (other: DV_ORDINAL): BOOLEAN is
 			-- Is current object less than `other'?
 		do
 			Result := value < other.value

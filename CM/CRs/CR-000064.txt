@@ -8,9 +8,9 @@ raised_by:		Dipak Kalra
 
 title:		Re-evaluate COMPOSITION.is_persistent attribute
 
-owner:	PG
+owner:	ARB
 
-status:		initial
+status:		completed
 
 [change information]
 change_category:	change
@@ -43,22 +43,53 @@ analysis:	DK: We are about to review the code-set for revision_status in
 
 		DL: describe behaviour on record opening, committal, etc.
 
-change_description: 
+change_description: The attribute is_persistent should be changed to a an
+		attribute called "category" of type DV_CODED_TEXT, where the code
+		must come from the openEHR vocabulary for "composition category".
+		This is ensured by the following invariant in the class
+		Composition:
+			Category_validity: category /= Void and then 
+			terminology(“openehr”).codes_for_group_name(“composition
+			category", “en”).has(category.defining_code)
 
-impact_analysis:		low
+		To remain backward compatible and for convenience, a function
+		"is_persistent: Boolean" is added to Composition. This has the
+		same signature as the attribute being replaced, and should return
+		True when the new category attribute contains the code for
+		"persistent".
 
-changed_components:	RM.COMMON
+		The related invariant:
+			Is_persistent_validity: is_persistent xor context /= Void
+		should be modified to the weaker version:
+			Is_persistent_validity: not (is_persistent and context
+			/= Void)
+		Another invariant should be added to guarantee that
+		'is_persistent' returns True when 'category' has the code for the
+		term "persistent":
+			Is_persistent_value: is_persistent implies 
+			terminology(“openehr”).rubric_for_code(category.defining_code.
+				code_string, “en”).is_equal(“persistent”)
 
-authorised_by:
+		A vocabulary needs to be added to the support model, which
+		initially will contain only the terms for "persistent", "event"
+		and "process" until a more standardised vocabulary becomes
+		available.
+
+impact_analysis:		medium
+
+changed_components:	RM.COMMON, RM.SUPPORT
+
+approved_by:	ARB
+
 implementor:	Thomas Beale
 
 [test and release]
 target_release:		1.0
-test_release:
-test_status:
 
 [closure]
-date_closed:	
+date_closed:	10/12/2004
+
 reason_for_rejection:
+
 notes:
 

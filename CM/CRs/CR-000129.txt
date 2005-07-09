@@ -1,0 +1,49 @@
+
+[summary]
+
+id:			CR-000129
+
+date_raised:	21/02/2005
+
+raised_by:		David Lloyd
+
+title:		Fix errors in UML & specs of Identification package
+
+owner:		PG
+
+status:		initial
+
+
+[change information]
+
+change_category:	error
+
+analyst:		Thomas Beale, David Lloyd
+
+problem_description: In the rm.support.identification package, some classes
+		have functions with cardinality markers. Probably the invariants
+		need to be altered as well.
+
+change_description:  
+
+impact_analysis:	minimal
+
+changed_components:	rm.common.identification
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+
+[test and release]
+
+target_release:	1.0
+
+
+[resolution]
+
+date_closed:	
+
+reason_for_rejection:	
+
+notes:		

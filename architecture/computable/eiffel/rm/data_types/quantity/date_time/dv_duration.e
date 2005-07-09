@@ -175,7 +175,7 @@ feature -- Conversion
 feature -- Output
 
 	as_string: STRING is
-			-- output as N seconds
+			-- output as ISO 8601 string
 		do
 			Result := duration_to_iso8601_string(impl)
 		end

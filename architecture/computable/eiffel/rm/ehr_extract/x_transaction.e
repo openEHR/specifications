@@ -37,7 +37,7 @@ feature -- Access
 invariant
 	Original_path_exists: original_path /= Void
 	Transaction_exists: transaction /= Void
-	Attestations_validity: attestations /= Void implies not attestations.empty	
+	Attestations_validity: attestations /= Void implies not attestations.is_empty	
 
 end
 

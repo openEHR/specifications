@@ -69,8 +69,22 @@ feature -- Initialization
 
 	make_from_string (str: STRING) is
 			-- make from string using specified format
+			-- hh:mm:ss[.sss][Z|+zzzz]
+		local
+			l_time_string, l_tz_string: STRING
 		do
-			create impl.make_from_string (str, Default_time_format)
+			-- remove time zone section if it exists
+			if str.index_of('Z', 1) > 0 then
+				l_time_string := str.substring(1, str.count-1)
+				create timezone.make_from_string("P0h0m")
+			elseif str.index_of('+', 1) > 0 then
+				l_time_string := str.substring(1, str.index_of('+', 1)-1)
+				l_tz_string := str.substring(str.index_of('+', 1)+1, str.count)		
+				check l_tz_string.count = 4 end
+				create timezone.make_from_string("P" + l_tz_string.substring(1,2) + "h" + 
+													l_tz_string.substring(3,4) + "m")
+			end
+			create impl.make_from_string (l_time_string, Default_time_format)
 		end
 
 	make_from_canonical_string (str: STRING) is
@@ -160,8 +174,22 @@ feature -- Conversion
 feature -- Output
 
 	as_string: STRING is
+		local
+			l_tz: STRING
 		do
 			Result := impl.formatted_out (Default_time_format)
+			if timezone /= Void then
+				Result.append_character('+')
+				l_tz := timezone.minutes.out
+				if l_tz.count = 1 then
+					l_tz.prepend_character('0')
+				end
+				l_tz.prepend(timezone.hours.out)
+				if l_tz.count = 3 then
+					l_tz.prepend_character('0')
+				end
+				Result.append(l_tz)
+			end
 		end
 	
 	as_canonical_string: STRING is

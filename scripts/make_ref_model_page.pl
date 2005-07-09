@@ -1,10 +1,16 @@
 #!/usr/bin/perl
 #
 # $Source: C:/project/openehr/spec-dev/scripts/SCCS/s.make_ref_model_page.pl $
-# $Date: 04/01/20 23:59:45+10:00 $
-# $Revision: 1.2 $
+# $Date: 04/07/17 09:54:20+10:00 $
+# $Revision: 1.3 $
+#
+# This script inserts hot links to PDFs into the REV_HIST.html pages found 
+# in the architecture directory. A link is put under the version number
+# in the top row of each REV_HIST file, pointing to the pdf file found
+# in the directory
 #
 # Example usage: make_ref_model_page.pl
+#
 # Copyright (C) 2004, Ocean Informatics Pty Ltd
 #----------------------------------------------------------------
 
@@ -90,7 +96,7 @@ sub process_arguments {
 # print table of file names with links
 
 sub convert_rev_hist {
-  my ($file_hash_ref) = @_;
+  my ($fname) = @_;
 
   # open the file REV_HIST.html
 
@@ -113,8 +119,7 @@ sub convert_rev_hist {
 	  }
   }
 
-  my @key_matches;
-
+  my $match_found;
   while (<INPUT>) {
 	$line = $_;
 
@@ -129,49 +134,39 @@ sub convert_rev_hist {
 		$readme_done=1;
 	}
 
-	foreach my $key (keys %$file_hash_ref) {
-		# detect version pattern and insert link
-		if ($line =~ $key) {
-			my $str = "><a href=\"$file_hash_ref->{$key}\"$key/a><";
-			if ($line =~ $str) {	# not already substituted due to be run multiple times
-				print "\t(Link for $key already done)\n";
-			}
-			else {
-				$line =~ s/$key/$str/;
-			}
-			push @key_matches, $key;
-			last;
+	# detect version pattern and insert link
+	if (!$match_found && $line =~ /[0-9]+\.[0-9]+[0-9.]*/) {
+		my $key = $1;
+		$match_found = 1;
+		my $str = "><a href=\"$fname\" $key/a><";
+		if ($line =~ $str) {	# not already substituted due to be run multiple times
+			print "\t(Link for $key already done)\n";
+		}
+		else {
+			$line =~ s/$key/$str/;
 		}
 	}
 	print OUTPUT $line;
   } 
   
-  foreach my $key (keys %$file_hash_ref) {
-	my $found = 0;
-  	foreach my $matched_key (@key_matches) {
-		if ($key eq $matched_key) {
-			$found = 1;
-		}
-	}
-	if (! $found) {
-		print "\tunmatched key: $key\n";
-	}
+  if (!$match_found) {
+	print "\tunmatched file: $fname\n";
   }
 
   close(INPUT) || die "can't close $file: $!";
   close(OUTPUT) || die "can't close $file: $!";
 
   # overwrite the REV_HIST.html file with the result
-  my @args;
-  if (! -w "REV_HIST.html") {
-      @args = ("bk", "edit", "REV_HIST.html");
-	print "@args\n";
-      system(@args) == 0 || die "system @args failed: $?";
-  }
-  @args = ("cp", "REV_HIST.html", "REV_HIST.html.bak");
-  system(@args) == 0 || die "system @args failed: $?";
-  @args = ("mv", "index.html", "REV_HIST.html");
-  system(@args) == 0 || die "system @args failed: $?";
+#  my @args;
+#  if (! -w "REV_HIST.html") {
+#      @args = ("bk", "edit", "REV_HIST.html");
+#	print "@args\n";
+#      system(@args) == 0 || die "system @args failed: $?";
+#  }
+#  @args = ("cp", "REV_HIST.html", "REV_HIST.html.bak");
+#  system(@args) == 0 || die "system @args failed: $?";
+#  @args = ("mv", "index.html", "REV_HIST.html");
+#  system(@args) == 0 || die "system @args failed: $?";
 }
 
 #----------------------------------------------------------------
@@ -180,7 +175,7 @@ sub main {
   my $version = "1.0";
   my $changeset = "1.1";
 
-  my $root_dir = "$ENV{OPENEHR}/spec-0.9_D";
+  my $root_dir = "$ENV{OPENEHR}/spec-dev";
   my $outfile = "index.html";
   my $page_title = "Summary";
   print "root_dir is: $root_dir\n";
@@ -188,7 +183,7 @@ sub main {
   process_arguments(\@version, \@changeset);
 
   # get a list of directories to go into
-  my @dir_list = `find $root_dir/publishing ! -name SCCS -type d -print`;
+  my @dir_list = `find $root_dir/publishing ! -name computable ! -name SCCS -type d -print`;
 
   print "dir list is: @dir_list\n";
 
@@ -200,31 +195,10 @@ sub main {
 		print "generating page for directory $dir\n";
 
 		# generate file list for this directory
-		foreach my $fname (`ls -1`) {
-			chomp($fname);
-			my $keep = 1;
-			if (! -d $fname) {
-				foreach my $rejpat (@reject_patterns) {
-					if (! $keep || ($fname =~ /$rejpat/)) {
-						$keep = 0;
-					}
-				}
-				if ($keep) {
-					# if it's a versioned filename like "ehr_im-0_9_7.pdf" then
-					# generate a version key like "0.97" to find in the REV_HIST.html file,
-					# which is generated from the Frame TOC file of the doc
-					if ($fname =~ /[a-zA-Z0-9_]+-[0-9_]+\.pdf/) {
-						my $key = $fname;
-						$key =~ s/^[a-zA-Z0-9_]+-([0-9_]+)\.pdf$/$1/;	# get the version
-						$key =~ s/_/./g;						# convert dots to underscores
-						$key = ">$key<";						# to guarantee precise match in HTML text
-						$file_list{$key} = $fname;
-					}
-				}
-			}
-		}
+		$fname = `ls -1 *.pdf`;
+		chomp($fname);
 	
-		convert_rev_hist(\%file_list);
+		convert_rev_hist($fname);
 		chdir "$root_dir/publishing";
 	}
   }

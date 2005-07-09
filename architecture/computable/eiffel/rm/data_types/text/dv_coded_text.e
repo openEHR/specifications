@@ -66,7 +66,45 @@ feature -- Initialization
 
 	make_from_canonical_string(str:STRING) is
 			-- make from a string of the form:
-			-- 
+			--
+			-- <value>xxxx</value>
+			-- <language>
+			-- 		<terminology_id>
+			--			<name>string</name>
+			-- 			[<version_id>string</version_id>]
+			-- 		</terminology_id>
+			-- 		<code_string>string</code_string>
+			-- </language>
+			-- <charset>
+			-- 		<terminology_id>
+			--			<name>string</name>
+			-- 			[<version_id>string</version_id>]
+			-- 		</terminology_id>
+			-- 		<code_string>string</code_string>
+			-- </charset>
+			-- <defining_code>
+			-- 		<terminology_id>
+			--			<name>string</name>
+			-- 			[<version_id>string</version_id>]
+			-- 		</terminology_id>
+			-- 		<code_string>string</code_string>
+			-- </defining_code>
+			-- [<hyperlink>DV_URI</hyperlink>]
+			-- [<formatting>xxxx</formatting>]
+			-- [<mappings>
+			--		<item>
+			-- 			<target>
+			-- 				<terminology_id>
+			--					<name>string</name>
+			-- 					[<version_id>string</version_id>]
+			-- 				</terminology_id>
+			-- 				<code_string>string</code_string>
+			-- 			</target>
+			-- 			<match>character</match>
+			-- 			[<purpose>DV_CODED_TEXT</purpose>]			
+			--		</item>
+			--		<item>...</item>
+			-- <mappings>]
 		do
 			precursor(str)
 			create defining_code.make_from_canonical_string(xml_extract_from_tags(str, "defining_code", 1))

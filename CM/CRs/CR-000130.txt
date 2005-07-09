@@ -1,0 +1,240 @@
+
+[summary]
+
+id:			CR-000130
+
+date_raised:	04/02/2005
+
+raised_by:		Thomas Beale
+
+title:		Rationalise LOCATABLE with CEN EN13606 RC class
+
+owner:		PG
+
+status:		initial
+
+
+[change information]
+
+change_category:	requirements
+
+analyst:		Thomas Beale
+
+problem_description: 
+	 There are some small but important changes we can do to 
+	 EHRcom and openEHR, which will make them closer, reduce naming 
+	 differences, and really enable a) EHRcom users to have confidence 
+	 that an openEHR implementation could underpin an EHRcom-enabled 
+	 system; b) openEHR users to know that they will definitely be able 
+	 to generate and receive EHRcom EHR Extracts. The point is not to 
+	 have the models the same, but to have them as compatible as 
+	 possible, so for example where there are attributes and functions 
+	 with the same purpose, they are named the same way, and have 
+	 compatible if not the same types. What follows is prompted by 
+	 Philippe Lagouarde's very sharp review of the latest CEN part 2, 
+	 part 1 and data modelling done in Paris mid 2004. Note also that 
+	 the Windows for change are closing for both CEN and openEHR 
+	 (which is putting out release 1.0 in March).
+
+	Current Situation
+	openEHR currently has the following root class:
+
+	class LOCATABLE
+	    uid[0..1]: OBJECT_ID
+	    archetype_details[0..1]: ARCHETYPED
+	    archetype_node_id[1]: String
+	    name: DV_TEXT
+	    ...
+	    meaning(lang: String): DV_CODED_TEXT
+	end
+
+	class ARCHETYPED
+	    archetype_id[1]: ARCHETYPE_ID
+	    rm_version[1]: String
+	    access_control[0..1]: ACCESS_GROUP_REF
+	end
+
+	Note that meaning is now a function in openEHR, evaluated by 
+	extracting the term description from the relevant archetype, 
+	using the archetype_node_id. Archetype_node_id is now just a 
+	String, and contains the id of the relevant archetype node, 
+	e.g. "at0004". The change was done to reduce the unnecessary 
+	data in the XML and other forms of data representation (the 
+	full CODED_TEXT form of the archetype node id is not needed 
+	in the data - it can always be obtained from the archetype, 
+	and/or the archetype terms can be included in EHR Extracts 
+	if necessary).
+
+	EHRcom has the top class:
+
+	class RECORD_COMPONENT
+	    rc_id[1]: II
+	    archetype_id[0..1]: II
+	    meaning[0..1]: CV
+	    name[1]: TEXT
+	    ..
+	    archetype_root: BL
+	    ...
+	    policy_ids: Set<II>
+	    ...
+	end
+
+change_description:  
+	Unique node_id
+		Both models have a node_id unique to each data node, 
+		called respectively uid and rc_id; they are of compatible 
+		types - openEHR OBJECT_ID is easy to map to and from II; 
+		however, OBJECT_ID is more flexible, and doesn't force the 
+		use of ISO OIDs which have a high space cost. Also, openEHR 
+		does not require the unique node id to be there, because both 
+		the archetype_node_id and the name can be guaranteed to be 
+		used to generate paths to any node. It is arguable as to 
+		whether OIDs or similar are needed on every node in fine-
+		grained data - indeed it is debatable as to whether fine-
+		grained nodes like interior CLUSTERs and ELEMENTs should 
+		ever be directly addressed (except during instance management 
+		in the database itself- but the db will have its own ids for 
+		that). The experience of the current openEHR system in 
+		Brisbane, Australia, is that node-level OIDs are not necessary 
+		for data management - they don't use them at all. In other 
+		systems I have built, I have never found a need for this. 
+		THe theoretical reason is that you never address the interior 
+		of a business object, only the business object itself (i.e. 
+		its root instance).
+
+	The changes I suggest are as follows.
+	    * openEHR: rename uid to node_id, and make it mandatory on 
+	      archetype root points
+	    * EN13606: rename rc_id to node_id and make it optional, 
+	      except on archetype root points where it should be mandatory. 
+		This is suggested on the same basis as any "lowest common 
+		denominator" requirement of 13606-1 - i.e. its goal is not 
+		to say what a "good EHR" is, but to accommodate many possible 
+		EHRs, including new and legacy systems.
+
+	Archetype_id
+		Both models store the archetype_id at archetype root points, 
+		e.g. an id like "openEHR-EHR-ENTRY.bp_measurement.v1" (or 
+		whatever the world agrees is the right archetype identification 
+		method; however, a meaningful id has a lot of attractions...). 
+		openEHR does it with the class ARCHETYPED, which I now think 
+		could be modelled more like 13606 - based for one thing on 
+		XML experience.
+
+		In openEHR the type is ARCHETYPE_ID, whereas in 13606 it is II. 
+		ARCHETYPE_ID is a meaningful, multi-part identifier which will 
+		act as a key into an archetype library. ARCHETYPE_IDs also carry 
+		the version number explicitly. II is (presumably) an OID, and 
+		cannot be used without a) being registered in the OID map, and 
+		b) without software to process it (it is not practically 
+		human-readable). I don't think we yet know what the right way 
+		to identify archetypes is, but certainly the openEHR multipart 
+		id is very useful. I suspect that EN13606 should be changed to 
+		accommodate any kind of identifier, not just OIDs.
+
+	rm_id/rm_version
+		In EN13606 it is in the Extract, but nowhere else; this means 
+		that when the data is taken from the extract and put into the 
+		EHR, the rm_id is lost (or at least not recorded in the 
+		Compositions - maybe recorded elsewhere). In openEHR, it is in 
+		ARCHETYPED, meaning it could be different at different archetype 
+		root points in the data of the same COMPOSITION, which might 
+		just be possible through the addition of new versions of say 
+		an Entry, by older software; probably it should not be allowed.
+
+		The names are also different. The attribute name "rm_id" 
+		implies that it is identifying the reference model. The 
+		documentation gives an example: "EN13606:rev1.0". In openEHR, 
+		only the version of the reference model is given (actually, 
+		the release), e.g. "release 1.0". I suggest that openEHR and 
+		EN13606 adopt the same way of doing this, and name their 
+		attributes the same way..
+
+	Possible changes:
+
+	    * openEHR: rename rm_version to rm_id, and move it to Composition
+	    * EN13606: add a slot called rm_id to Composition
+
+		Question: if I send an EHR extract from an openEHR system to 
+		someone, using EN13606, where does it say in the 13606 extract 
+		that the RM of the original data is "openEHR release 1.0"?
+
+	Archetype_node_id / meaning
+		This, along with "name", is the attribute that Philippe is concerned 
+		about. openEHR has renamed meaning to archetype_node_id, and changed 
+		its type to a String. This is the definitive archetype id you need 
+		in every node, as a simple string. The CEN version is still meaning, 
+		as a CV, which was the old openEHR way of doing this. DSTC experience 
+		shows that this bloats the XML (apparently important now that our 
+		lives are all ruled by this poverty-stricken technology;-).
+
+		The consequence of the new openEHR approach is that if there is a meaning 
+		"problem" (at0005 let's say), only the "at0005" is in the data, not the 
+		word "problem" - you have to go to the archetype for that. But there is 
+		a name e.g. "diabetes", represented as a TEXT/CODED_TEXT in both models. 
+		On the other hand, it is thought that in 95% of all data nodes, the 
+		meaning and the name will be the same, and that the meaning won't give 
+		you any extra information. Sam's theory is that the meaning is only 
+		useful if you are doing archetype processing anyway, whereas Dipak's has 
+		historically been that the CODED_TEXT of the meaning should be in the data.
+
+		My question is this: can meaning every be significantly different from 
+		name (apart from being standardised by the archetype)? Can we really have 
+		the situation of meaning=problem and name=diabetes? We have always thought 
+		it would occur in a Section, in which case, the "diabetes" is just a 
+		heading. I can't imagine why you would ever want to see "problem" and 
+		"diabetes" in a heading. In an ENTRY, we could have an ELEMENT with 
+		meaning=problem, name=problem, value=(CODED_TEXT)diabetes. It is in 
+		ENTRYs where reliable meaning is found, and where you do get the triplet 
+		"at0005", "problem" and "diabetes".
+
+		For harmonisation, I think EN13606 should at least define a function 
+		"archetype_node_id" which extracts the node id from the meaning. It is 
+		the archetype_node_id that is used in fast path processing.
+
+	name
+		THis attribute is compatibly defined in both specifications at the moment.
+
+	archetype_root: BL
+		This is an attribute in EN13606 that should really be a function, since 
+		its value is derived from archetype_id /= Void. A better name would be 
+		"is_archetype_root" - this is the style of attribute name used by ISO 
+		specifications for boolean-reurning functions which report on the state 
+		of an object. openEHR probably should add this function.
+
+	access_control / policy_ids
+		In EN13606, "policy_ids" appears to be the equivalent of "access_control" 
+		in openEHR. The type in openEHR is ACCESS_GROUP_REF, which is a reference 
+		to an object with some id, in a namespace="access control" (can be 
+		understood as service name) and a type of object="ACCESS_GROUP". I think 
+		this is probably too specific, and we should just use a set of policy ids 
+		as well.
+
+		However, I don't think either the openEHR or the CEN name is right. The 
+		openEHR name doesn't tell you that it is about policies; the CEN name 
+		doesn't tell you what the policies relate to. I suggest that both CEN 
+		and openEHR change this attribute name to: "access_control_policies". 
+		openEHR would use a set of Set<OBJECT_REF>, while CEN would keep the 
+		SET<II>. Q: can it ever really be a set?
+
+impact_analysis:	
+
+changed_components:	Data Types
+
+approved_by:	PG
+
+implementor:	Thomas Beale
+
+
+[test and release]
+
+target_release:	1.0
+
+
+[resolution]
+
+date_closed:	
+
+reason_for_rejection:	
+
+notes:		

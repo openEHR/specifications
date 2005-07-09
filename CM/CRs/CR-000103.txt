@@ -1,0 +1,57 @@
+
+[summary]
+
+id:			CR-000103
+
+date_raised:	1/04/2004
+
+raised_by:		Thomas Beale
+
+title:		Redevelop archetype UML model, add new keywords
+
+owner:		PG
+
+status:		completed
+
+
+[change information]
+
+change_category:	enhancement
+
+analyst:		T Beale
+
+problem_description: The current UML models corresponding to the CADL, DADL
+		and ADL syntaxes need to be reworked to be more logical, rather
+		than implementation oriented. 
+
+		New keywords "allow_archetype", "include" and "exclude" need to 
+		be added to support the new ARCHETYPE_SLOT class.
+
+change_description: Change the models and related software, so as to prove the
+		correctness of the models.
+
+impact_analysis:		Medium.
+
+changed_components:	RM.ARCHETYPES.LANGUAGE.ADL
+
+approved_by:	
+
+implementor:
+
+
+[test and release]
+
+target_release:	1.0
+
+test_release:	1.0
+
+test_status:	passed
+
+
+[resolution]
+
+date_closed:	15/11/2004
+
+reason_for_rejection:	
+
+notes:		

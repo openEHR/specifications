@@ -37,12 +37,12 @@ authorised_by:
 implementor:	
 
 [test and release]
-target_release:		1.0
-test_release:
-test_status:
+target_release:		1.1
 
 [closure]
 date_closed:	
+
 reason_for_rejection:
+
 notes:
 

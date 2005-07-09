@@ -39,8 +39,11 @@ feature -- Access
 			-- where the encounter physically took place, but not in the case of patient home visits, 
 			-- internet contacts or emergency care.
 
-	time: DV_INTERVAL [DV_DATE_TIME]
-			-- Start and end times of the clinical session.
+	start_time: DV_DATE_TIME
+			-- Start time of the clinical session.
+
+	end_time: DV_DATE_TIME
+			-- Optional end time of the clinical session.
 
 	participations: LIST [PARTICIPATION]
 			-- Parties involved in the clinical session. These would 
@@ -81,7 +84,7 @@ feature -- Status Report
 invariant
 	composer_exists: composer /= Void
 	health_care_facility_exists: health_care_facility /= Void
-	time_exists: time /= Void
+	start_time_exists: start_time /= Void
 	participations_validity: participations /= Void implies not participations.is_empty
 	location_valid: location /= Void implies not location.is_empty
 	setting_valid: setting /= Void and then 

@@ -27,7 +27,7 @@ feature -- Access
 
 	data: G
 
-	audit: VERSION_AUDIT
+	audit: AUDIT_DETAILS
 
 	lifecycle_state: DV_STATE
 

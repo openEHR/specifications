@@ -1,15 +1,15 @@
 indexing
 	component:   "openEHR Data Types"
 
-	description: "Implementation of DV_PARTIAL_DATE_TIME"
+	description: "Implementation of DV_PARTIAL_DATE"
 	keywords:    "date, time"
 
 	requirements:"ISO 18308 TS V1.0 STR 3.8"
-	design:      "openEHR Data Types Reference Model 1.7"
+	design:      "openEHR Data Types Reference Model 7.3.7"
 
 	author:      "Thomas Beale"
 	support:     "Ocean Informatics <support@OceanInformatics.biz>"
-	copyright:   "Copyright (c) 2000-2004 The openEHR Foundation <http://www.openEHR.org>"
+	copyright:   "Copyright (c) 2000-2005 The openEHR Foundation <http://www.openEHR.org>"
 	license:     "See notice at bottom of class"
 
 	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/data_types/quantity/date_time/SCCS/s.dv_partial_date.e $"
@@ -20,6 +20,9 @@ class DV_PARTIAL_DATE
 
 inherit
 	DV_DATE
+		redefine
+			magnitude, as_string
+		end
 
 feature -- Access
 
@@ -27,19 +30,26 @@ feature -- Access
 			-- Indicates whether month in year is known. If so, the date 
 			-- is of the form y/m/?, if not, it is of the form y/?/
 
-	probable_date: DV_DATE is
+	magnitude: INTEGER_REF is
 		do
-		ensure
-			month_known implies probable_date.day = Middle_day_of_month
-			not month_known implies probable_date.month = Middle_month_of_year and probable_date.day = Last_day_of_middle_month
+		ensure then
+			Result = enclosing_interval.midpoint.magnitude
 		end
 
-	possible_dates: DV_INTERVAL[DV_DATE] is
+	enclosing_interval: DV_INTERVAL[DV_DATE] is
+			-- note that midpoint is available from Result.midpoint
 		do
 		ensure
 			month_known implies Result.lower.day = 1 and Result.upper.day = days_in_month(month, year)
 			not month_known implies Result.lower.month = 1 and Result.upper.month = Months_in_year and 
 				Result.lower.day = 1 and Result.upper.day = days_in_month(Months_in_year, year) 
+		end
+
+feature -- Output
+
+	as_string: STRING is
+			-- Result has form “yyyy-MM-??” where MM, dd might be “??”	Result = follows ISO 8601
+		do
 		end
 
 end

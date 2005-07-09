@@ -38,30 +38,37 @@ create
 
 feature -- Initialization
 
-	make(a_term:DV_CODED_TEXT; a_match: INTEGER; a_purpose: DV_CODED_TEXT) is
+	make(a_target: CODE_PHRASE; a_match: CHARACTER; a_purpose: DV_CODED_TEXT) is
 			-- 
 		require
-			Term_exists: a_term /= Void
+			Term_exists: a_target /= Void
 			Valid_match_code: is_valid_match_code(a_match)
 			Purpose_valid: a_purpose /= Void
 		do
-			target := a_term
+			target := a_target
 			match := a_match
 			purpose := a_purpose			
 		ensure
-			Target_set: target = a_term
+			Target_set: target = a_target
 			Match_set: match = a_match
 			Purpose_set: purpose = a_purpose
 		end
 
-	make_from_canonical_string(str:STRING) is
-			-- make from a string of the form
-			-- <target>DV_CODED_TEXT.as_canonical_string</target>
-			-- <match>INTEGER</match>
-			-- <purpose>....</purpose>
+	make_from_canonical_string(str: STRING) is
+			-- make from a string of the form:
+			--
+			-- <target>
+			-- 		<terminology_id>
+			--			<name>string</name>
+			-- 			[<version_id>string</version_id>]
+			-- 		</terminology_id>
+			-- 		<code_string>string</code_string>
+			-- </target>
+			-- <match>character</match>
+			-- [<purpose>DV_CODED_TEXT</purpose>]
 		do
 			create target.make_from_canonical_string(xml_extract_from_tags(str, "target", 1))
-			match := xml_extract_from_tags(str, "match", 1).to_integer
+			match := xml_extract_from_tags(str, "match", 1).item(1)
 			if xml_has_tag(str, "purpose", 1) then
 				create purpose.make_from_canonical_string(xml_extract_from_tags(str, "purpose", 1))
 			end
@@ -77,15 +84,20 @@ feature -- Status Report
 
 feature -- Access
 
-	target: DV_CODED_TEXT
+	target: CODE_PHRASE
 	
-	match: INTEGER
+	match: CHARACTER
 			-- The relative match of the target term with respect to the mapped text item. 
 			-- Result meanings:
-			-- 	+1: the mapping is to a broader term e.g. orginal text = “arbovirus infection”, target = “viral infection”
-			--  0: the mapping is to a (supposedly) equivalent to the original item
-			--  -1: the mapping is to a narrower term. e.g. original text = “diabetes”, mapping = “diabetes mellitus”.
-			-- Currently, no meaning is assigned to the magnitude of this attribute, but this may change in the future.
+			-- 	‘>’: the mapping is to a broader term
+			-- 			e.g. orginal text = “arbovirus infection”, target = “viral infection”
+			-- 	‘=’: the mapping is to a (supposedly) equivalent to the original item
+			--  ‘<’: the mapping is to a narrower term. e.g. original text = “diabetes”, mapping
+			-- 			= “diabetes mellitus”.
+			-- 	‘?’: the kind of mapping is unknown. 
+			-- The first three values are taken from the ISO standards 2788 (“Guide to Establishment
+			-- and development of monolingual thesauri”) and 5964 (“Guide to Establishment
+			-- and development of multilingual thesauri”).
 
 	purpose: DV_CODED_TEXT
 			-- Purpose of the mapping e.g. "automated data mining", "billing", "epidemiology"

@@ -4,11 +4,15 @@ indexing
 	description: "[
 			  Codes for mapping of a term to a text item:
 			  The relative match of the target term with respect to the mapped text item. 
-			  Result meanings:
-			      +1: the mapping is to a broader term e.g. orginal text = “arbovirus infection”, target = “viral infection”
-			      0: the mapping is to a (supposedly) equivalent to the original item
-			      -1: the mapping is to a narrower term. e.g. original text = “diabetes”, mapping = “diabetes mellitus”.
-			  Currently, no meaning is assigned to the magnitude of this attribute, but this may change in the future.
+			 	‘>’: the mapping is to a broader term
+			 			e.g. orginal text = “arbovirus infection”, target = “viral infection”
+			 	‘=’: the mapping is to a (supposedly) equivalent to the original item
+			 	‘<’: the mapping is to a narrower term. e.g. original text = “diabetes”, mapping
+			 			= “diabetes mellitus”.
+			 	‘?’: the kind of mapping is unknown. 
+			   The first three values are taken from the ISO standards 2788 (“Guide to Establishment
+			   and development of monolingual thesauri”) and 5964 (“Guide to Establishment
+			   and development of multilingual thesauri”).
 			  ]"
 	keywords:    "term, text"
 
@@ -26,16 +30,17 @@ class MATCH_CODES
 	
 feature -- Access
 
-	match_codes: HASH_TABLE [STRING, INTEGER] is
+	match_codes: HASH_TABLE [STRING, CHARACTER] is
 			-- correspondence of match codes and meanings
 		once
 			create Result.make(0)
-			Result.put("broader", 1)
-			Result.put("equivalent", 0)
-			Result.put("narrower", -1)
+			Result.put("broader", '>')
+			Result.put("equivalent", '=')
+			Result.put("narrower", '<')
+			Result.put("unknown", '?')
 		end
 
-	match_code_meaning(a_code:INTEGER):STRING is
+	match_code_meaning(a_code: CHARACTER):STRING is
 		require
 			is_valid_match_code(a_code)
 		do
@@ -44,9 +49,9 @@ feature -- Access
 
 feature -- Status
 
-	is_valid_match_code(i:INTEGER):BOOLEAN is
+	is_valid_match_code(c: CHARACTER):BOOLEAN is
 		do
-			Result := i >= -1 and then i <= 1
+			Result := c = '<' or c = '=' or c = '>' or c = '?'
 		end
 	
 end

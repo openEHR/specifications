@@ -33,26 +33,12 @@ default
 	inlining (no)
 	multithreaded (no)
 
-
---	all openehr_kernel_factory (openehr_impl):		"$\reference\eiffel\kernel\factory"
---		exclude
---			"SCCS"; 
---		default
---			assertion (no)
---			assertion (require)
---			assertion (ensure)
---			assertion (invariant)
---		end
-
 cluster
-	openehr_root:		"$OPENEHR"
+	openehr:				"$OPENEHR\specification\TRUNK\architecture\computable\eiffel"
 
+	adl_app_rep:		"$OPENEHR\adl_ref_parser-dev"
 
-	openehr_spec (openehr_root):		"$\spec-0.9_D\architecture\reference_model\computable\eiffel"
-
-	openehr_impl (openehr_root):		"$\implementation"
-
-	all openehr_test (openehr_spec):		"$\test"
+	all test (openehr):		"$\test"
 		exclude
 			"SCCS"; 
 		default
@@ -61,7 +47,24 @@ cluster
 			assertion (ensure)
 		end
 
-	all openehr_rm (openehr_spec):		"$\rm"
+	all am (adl_app_rep):			"$\src\eiffel\library\archetype_model"
+		exclude
+			"SCCS"; 
+		default
+			assertion (no)
+			assertion (check)
+			assertion (require)
+			assertion (ensure)
+		visible
+			c_coded_term
+				end
+			c_ordinal
+				end
+			c_quantity
+				end
+		end
+
+	all rm (openehr):		"$\rm"
 		exclude
 			"SCCS"; 
 		default
@@ -73,19 +76,7 @@ cluster
 			assertion (invariant)
 		end
 
-	all openehr_am (openehr_spec):		"$\am"
-		exclude
-			"SCCS"; 
-		default
-			assertion (no)
-			assertion (check)
-			assertion (require)
-			assertion (ensure)
-			assertion (loop)
-			assertion (invariant)
-		end
-
-	all openehr_library (openehr_impl):		"$\library\eiffel"
+	all openehr_library:		"$OPENEHR\implem_core-dev\src\eiffel"
 		exclude
 			"SCCS"; "test"; 
 		default

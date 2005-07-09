@@ -17,8 +17,10 @@ class TC_DV_QUANTITY
 
 inherit
 	TEST_CASE
-		redefine 
-			check_result
+
+	XML_TOOLS
+		export
+			{NONE} all
 		end
 
 creation
@@ -41,17 +43,24 @@ feature -- Initialisation
 		do
 			-- make a quantity
 			create a_datum.make(85.0, "kg")
-			io.put_string("INITIAL creation: " + a_datum.as_string + "%N")
+			io_output.put_string("INITIAL creation: " + a_datum.as_string + "%N")
 			
-			a_datum.set_accuracy(1.5, True)
-			io.put_string("Set accuracy: " + a_datum.as_string + "%N")			
+			a_datum.set_accuracy(1.5, False)
+			io_output.put_string("Set accuracy: " + a_datum.as_string + "%N")
+			
+			io_output.put_string(xml_tag_indent(a_datum.as_canonical_string))
+			
+			create a_datum.make_from_canonical_string("				%
+			%		<magnitude>201</magnitude>						%
+			%		<units>ppm</units>								%
+			%		<accuracy>5</accuracy>							%
+			%		<accuracy_is_percent>True</accuracy_is_percent>	%
+			%")
+			io_output.put_string(xml_tag_indent(a_datum.as_canonical_string))
+
 		end
 
 feature -- Access
-
-	check_result is
-		do
-		end
 
 end
 

@@ -43,7 +43,7 @@ authorised_by:
 implementor:	Thomas Beale
 
 [test and release]
-target_release:		1.0
+target_release:		1.1
 test_release:
 test_status:
 

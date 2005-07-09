@@ -3,7 +3,7 @@ indexing
 
 	description: "[
 	              A data structure in the form of a linear list.
-				root:CLUSTER
+				items:
 					item_1: ELEMENT
 					item_2: ELEMENT
 					...	
@@ -36,22 +36,14 @@ class ITEM_LIST
 
 inherit
 	ITEM_STRUCTURE
-		redefine
-			representation
-		end
 
 feature -- Access
 
-	representation: CLUSTER
-			-- item containing list elements
+	items: LIST [ELEMENT]
+			-- Retrieve all items
 
 	item_count: INTEGER is
 			-- Count of all items
-		do
-		end
-
-	items: LIST [ELEMENT]	is
-			-- Retrieve all items
 		do
 		end
 
@@ -86,6 +78,13 @@ feature -- Status Report
 
 	valid_path (a_path: STRING): BOOLEAN is
 			-- True if the path is valid with respect to the current item.
+		do
+		end
+
+feature -- Conversion
+
+	as_hierarchy: CLUSTER is
+			-- the physical representation as a CEN 13606-compliant structure
 		do
 		end
 

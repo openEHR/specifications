@@ -1,0 +1,26 @@
+
+© Copyright openEHR Foundation 2001 - 2005
+All Rights Reserved
+
+	1.	This document is protected by copyright and/or database right throughout the 
+		world and is owned by the openEHR Foundation.
+	2.	You may read and print the document for private, non-commercial use. 
+	3.	You may use this document (in whole or in part) for the purposes of making 
+		presentations and education, so long as such purposes are non-commercial and 
+		are designed to comment on, further the goals of, or inform third parties 
+		about, openEHR. 
+	4.	You must not alter, modify, add to or delete anything from the document you 
+		use (except as is permitted in paragraphs 2 and 3 above). 
+	5.	You shall, in any use of this document, include an acknowledgement in the form: 
+		"© Copyright openEHR Foundation 2001-2005. All rights reserved. www.openEHR.org" 
+	6.	This document is being provided as a service to the academic community and on 
+		a non-commercial basis. Accordingly, to the fullest extent permitted under 
+		applicable law, the openEHR Foundation accepts no liability and offers no 
+		warranties in relation to the materials and documentation and their content.
+	7.	If you wish to commercialise, license, sell, distribute, use or otherwise copy 
+		the materials and documents on this site other than as provided for in 
+		paragraphs 1 to 6 above, you must comply with the terms and conditions of the 
+		openEHR Free Commercial Use Licence, or enter into a separate written agreement 
+		with openEHR Foundation covering such activities. The terms and conditions of 
+		the openEHR Free Commercial Use Licence can be found at 
+		http://www.openehr.org/free_commercial_use.htm

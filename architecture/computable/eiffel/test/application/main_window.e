@@ -33,13 +33,26 @@ inherit
 			default_create, copy
 		end
 
-	SHARED_UI_RESOURCES
+	SHARED_RESOURCES
 		export
 			{NONE} all
 		undefine
 			default_create, copy
 		end
 
+	SHARED_UI_RESOURCES
+		export
+			{NONE} all
+		undefine
+			default_create, copy, Execution_environment
+		end
+
+	SHARED_UNIT_DATABASE
+		export
+			{NONE} all
+		undefine
+			default_create, copy
+		end
 
 	EXCEPTIONS
 		rename
@@ -58,7 +71,14 @@ feature {NONE} -- Initialization
 			-- could not be performed in `initialize',
 			-- (due to regeneration of implementation class)
 			-- can be added here.
+		local
+			units_dir: STRING
 		do
+			units_dir := resource_value("any", "units_dir")
+
+			initialise_unit_database(units_dir + operating_environment.Directory_separator.out + "tables", 
+					units_dir + operating_environment.Directory_separator.out + "prefixes.txt")
+	
 			test_suite_list.disable_multiple_selection
 			set_default_streams (create {EV_TEST_STREAM}.make(test_case_report_text), create {EV_TEST_STREAM}.make(test_case_output_text))
 			populate_test_suite_list
@@ -146,8 +166,9 @@ feature {NONE} -- Implementation
 		do
 			if not exception_encountered then
 				if test_case_list.selected_item /= Void then
+					test_case_output_text.set_text ("")
 					tc := selected_test_suite.test_case_index.item(test_case_list.selected_item.text)
-					tc.execute	
+					tc.execute
 				end
 			else
 				exception_encountered := False

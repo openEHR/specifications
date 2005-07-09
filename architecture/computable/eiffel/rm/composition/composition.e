@@ -49,6 +49,10 @@ feature -- Access
 	context: EVENT_CONTEXT
 			-- The clinical session context of this transaction, 
 			-- i.e. the contextual attributes of the clinical session
+			
+	category: DV_CODED_TEXT	
+			-- Indicates what broad category this Composition is belogs to, 
+			-- e.g. "persistent” - of longitudinal validity, “event”, “process” etc.
 
 	path_of_item (a_loc: LOCATABLE): STRING is
 			-- The path to an item relative to the root of this archetyped structure.
@@ -64,9 +68,12 @@ feature -- Access
 
 feature -- Status Report
 
-	is_persistent: BOOLEAN	
+	is_persistent: BOOLEAN is
 			-- Indicates whether this transaction is considered persistent, i.e. of longitudinal validity or not.
-
+		do
+			
+		end
+		
 	version_id: STRING is
 		do
 		end
@@ -85,8 +92,10 @@ feature {NONE} -- Implementation
 
 invariant
 	content_exists: content /= Void
-	is_persistent_validity: is_persistent xor context /= Void
-	-- name_value: name.value.is_equal(context.time.lower.as_display_string)
+	Category_validity: category /= Void and then terminology("openehr").codes_for_group_name("composition category", "en").has(category.defining_code)
+	Is_persistent_validity: is_persistent implies context = Void
+	Name_value: not is_persistent implies name.value.is_equal(context.health_care_facility.as_string + 
+		context.start_time.as_string)
 	version_id_validity: version_id /= Void and then not version_id.is_empty	
 	archetype_root_point: is_archetype_root
 	territory_valid: territory /= Void and then code_set("countries").has(territory)

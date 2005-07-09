@@ -32,7 +32,7 @@ feature -- Access
 			create {TC_DV_EHR_URI} tc.make(Void) 		Result.extend(tc)
 		end
 
-	title:STRING is "URI tests"
+	title: STRING is "DATA TYPE - URI tests"
 
 feature -- Initialisation
 

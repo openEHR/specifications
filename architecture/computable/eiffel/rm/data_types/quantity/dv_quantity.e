@@ -40,11 +40,11 @@ feature -- Initialization
 
 	make_from_canonical_string(str:STRING) is
 			-- make from string of form:
-			-- <magnitude>magnitude</magnitude>
-			-- [<units>units</units>]
-			-- [<accuracy>accuracy</accuracy>
-			-- <accuracy_is_percent>accuracy_is_percent</accuracy_is_percent>]
-			-- <precision>precision</precision>
+			-- <magnitude>real</magnitude>
+			-- <units>string</units>
+			-- [<accuracy>real</accuracy>
+			-- <accuracy_is_percent>boolean</accuracy_is_percent>]
+			-- <precision>integer</precision>
 		local
 			s: STRING
 		do
@@ -61,9 +61,12 @@ feature -- Initialization
 					accuracy := s.to_integer
 				end
 			end
+			set_units(xml_extract_from_tags(str, "units", 1))
 		end
 
 	make (a_magnitude: like magnitude; a_units: STRING) is
+		require
+			Units_exists: a_units /= Void and then not a_units.is_empty
 		do
 			magnitude := a_magnitude
 			set_units(a_units)
@@ -77,6 +80,7 @@ feature -- Status Report
 	valid_canonical_string(str: STRING): BOOLEAN is
 			-- True if str contains required tags
 		do
+			Result := xml_has_tag(str, "magnitude", 1)
 		end
 		
 	is_integral: BOOLEAN is
@@ -125,7 +129,7 @@ feature -- Modification
 			parser:UNITS_PARSER
 		do
 			create parser.make
-			parser.execute("TO BE IMPLEM", a_units)
+			parser.execute(a_units)
 			if parser.units /= Void then
 				units_impl := parser.units				
 				units := a_units	

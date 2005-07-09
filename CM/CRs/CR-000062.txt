@@ -10,7 +10,7 @@ title:		Strengthen LINK class semantics
 
 owner:	PG
 
-status:	analysis
+status:	rejected
 
 [change information]
 change_category:	change
@@ -46,7 +46,7 @@ impact_analysis:		low
 
 changed_components:	RM.DATA_TYPES
 
-authorised_by:
+authorised_by:	ARB
 
 implementor:	Thomas Beale
 
@@ -57,9 +57,25 @@ test_release:
 test_status:
 
 [closure]
-date_closed:	
+date_closed:	17/12/2005
 
 reason_for_rejection:
+	This CR was created in early 2003 when we thought there should was a need for a
+	validity time range on LINKs - this is an HL7 idea which was being recommended 
+	at the Rome CEN meeting. Dipak commented later that he did not think it was 
+	supported by sufficient evidence. Having since thought about this idea myself, 
+	I am also of the opinion that adding a time validity range would be problematic 
+	for the following reasons:
+	 - in most cases I cannot imagine it being set when it's created - who is 
+	going to judge if a link from say test result to a proposed intervention is 
+	valid for a week or 20 years?
+	 - if the supposed validity time interval becomes known at some later point 
+	in time, it seems unlikely that anyone is going to go back and modify such data
+	 - I would have thought that the time validity of a LINK in most cases would 
+	be defined by how long the link is in use - clearly a vague notion. I.e. is 
+	there even a sharp meaning possible for the "time validity of a link" in general?
+
+	Additionally, no implementor has asked for this.
 
 notes:
 

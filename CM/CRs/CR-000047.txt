@@ -6,16 +6,16 @@ date_raised:	21/10/2003
 
 raised_by:		Thomas Beale, David Lloyd
 
-title:		Clean up specialised subtypes of COORDINATED_TERM
+title:		Improve handling of codes for structural attributes
 
 owner:		PG
 
-status:		analysis
+status:		completed
 
 [change information]
 change_category:	change
 
-analyst:	David Lloyd, Thomas Beale
+analyst:	David Lloyd, Thomas Beale, Sam Heard
 
 problem_description: The definitions of the constants representing terminology
 		id lists in the RM.SUPPORT.DEFINITIONS package and the
@@ -23,8 +23,16 @@ problem_description: The definitions of the constants representing terminology
 		the specification of which character sets, etc should not be in
 		the mainline documentation, but in the support documentation.
 
-change_description: Use the same system of CS subtypes as proposed in the CEN 
-		data types CEN TS 14796 (jan 2004).
+change_description: An initial idea was to use the same system of CS subtypes 
+		as proposed in the CEN data types CEN TS 14796 (jan 2004).
+
+		A better solution has been proposed in which all codes and terms 
+		required in the reference model are defined in the support model 
+		and invariants are used in the rest of the RM, of the form:
+
+		From the PARTICIPATION class:
+			Mode_valid: terminology(“openehr”).codes_for_group_name(
+				“participation modes”, “en”).has(mode)
 
 impact_analysis:		low
 
@@ -33,15 +41,15 @@ changed_components:	RM.DATA_TYPES.TEXT 1.7.7
 
 authorised_by:
 
-implementor:	Thomas Beale
+implementor:	Sam Heard, Thomas Beale
 
 [test and release]
-target_release:		1.0
+target_release:		0.9
 test_release:
 test_status:
 
 [closure]
-date_closed:
+date_closed:		11/03/2004
 reason_for_rejection:
 notes:
 

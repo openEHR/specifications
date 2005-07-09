@@ -1,0 +1,55 @@
+
+[summary]
+
+id:			CR-000123
+
+date_raised:	09/12/2004
+
+raised_by:		Rong Chen
+
+title:		EVENT should inherit from LOCATABLE
+
+owner:		PG
+
+status:		completed
+
+
+[change information]
+
+change_category:	error
+
+analyst:		Thomas Beale
+
+problem_description: The EVENT class in the rm.data_structures.history package
+		does not inherit from LOCATABLE or anything else that would allow
+		it to have name which could be used in a path, even though this is
+		how it is shown in the instance diagrams.
+
+change_description:  CHange the UML and specification so that EVENT inherits
+		from LOCATABLE.
+
+impact_analysis:	unknown
+
+changed_components:	rm.data_structures.history
+
+approved_by:	
+
+implementor:	Thomas Beale
+
+
+[test and release]
+
+target_release:	1.0
+
+test_release:	1.0
+
+test_status:	
+
+
+[resolution]
+
+date_closed:	09/12/2004
+
+reason_for_rejection:	
+
+notes:		

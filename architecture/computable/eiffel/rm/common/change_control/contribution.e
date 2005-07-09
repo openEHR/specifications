@@ -21,34 +21,18 @@ indexing
 
 class CONTRIBUTION
 
-inherit
-	AUDIT_DETAILS
-		export 
-			{NONE} all
-		end
-
-	OPENEHR_TERMINOLOGY_IDS
-		export 
-			{NONE} all
-		end
-
 create
 	make
 	
 feature -- Initialisation
 
-	make(a_node: STRING; a_committer: PARTY_REF; a_time_committed: DV_DATE_TIME; a_description: DV_TEXT) is
-			-- commit new version. No locking (i.e. checking out) is needed to commit. 
-			-- 'parent_version_id' is the id of latest version in this VERSIONED<T>, at the time of
-			-- taking the copy for modification. If the commit is to create the first version, the 
-			-- 'parent_version_id' must be "none".
+	make(an_audit: AUDIT_DETAILS) is
 		require
-			Description_valid: a_description /= Void
+			Audit_valid: an_audit.description /= Void
 		do
-			make_audit_details(a_node, a_committer, a_time_committed)
-			description := a_description
+			audit := an_audit
 		ensure
-			description_set: description = a_description
+			audit_set: audit = an_audit
 		end
 
 feature -- Access
@@ -56,14 +40,14 @@ feature -- Access
 	uid: OBJECT_ID	
 			-- Unique identifier for this contribution.
 
-	description: DV_TEXT
-			-- description of this contribution overall
-
 	versions: SET [OBJECT_ID]
+	
+	audit: AUDIT_DETAILS
 
 invariant
 	Uid_exists: uid /= Void
-	Description_valid: description /= Void
+	Audit_exists: audit /= Void
+	Description_valid: audit.description /= Void
 	Versions_valid: versions /= Void and then not versions.is_empty
 	-- name_valid: name.value.is_equal(committer.id.value + "@" + node + "@" + time_committed.as_string)
 

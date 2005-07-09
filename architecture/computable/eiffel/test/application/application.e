@@ -63,11 +63,23 @@ feature {NONE} -- Implementation
 	
 	has_resources: BOOLEAN is
 			-- True if all resources are available
+		local
+			cfa: CONFIG_FILE_ACCESS
+			s: STRING
 		do
 			Result := True
 			if not has_icon_directory then
 				fail_reason := "Cannot run: 'icons' directory missing"
 				Result := False
+			else
+				s := application_name
+				s.replace_substring_all(".exe", ".cfg")
+				initialise_resource_config_file_name(s)
+				cfa := resource_config_file
+				if not cfa.is_valid then
+					Result := False
+					fail_reason := cfa.fail_reason
+				end
 			end
 		ensure
 			not Result implies fail_reason /= Void

@@ -1,0 +1,51 @@
+
+[summary]
+
+id:			CR-000111
+
+date_raised:	19/10/2004
+
+raised_by:		Thomas Beale
+
+title:		Move Identification Package to Support
+
+owner:		ARB
+
+status:		completed
+
+
+[change information]
+
+change_category:	error
+
+analyst:		Thomas Beale
+
+problem_description: Most pacakges have dependencies on the identification 
+		package, but the latter has none on other packages. 
+
+change_description:  The Identification package should be added to the Support
+		package to facilitate software structuring for implementers.
+
+impact_analysis:	Minimal
+
+changed_components:	none
+
+approved_by:	ARB
+
+implementor:	Thomas Beale
+
+
+[test and release]
+
+target_release:	1.0
+
+test_release:	1.0
+
+
+[resolution]
+
+date_closed:	11/01/2005
+
+reason_for_rejection:	
+
+notes:		

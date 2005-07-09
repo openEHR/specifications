@@ -51,6 +51,13 @@ feature -- Status Report
 		do
 		end
 		
+feature -- Conversion
+
+	as_hierarchy: CLUSTER is
+			-- the physical representation as a CEN 13606-compliant structure
+		do
+		end
+
 invariant
 	items_exists: items /= Void and then not items.is_empty	
 	period_validity: is_periodic xor period = Void	

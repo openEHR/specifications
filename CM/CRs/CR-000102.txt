@@ -1,0 +1,109 @@
+
+[summary]
+
+id:			CR-000102
+
+date_raised:	28/03/2004
+
+raised_by:		DSTC, Thomas Beale
+
+title:		Make DV_TEXT language and charset optional
+
+owner:		ARB
+
+status:		completed
+
+
+[change information]
+
+change_category:	design
+
+analyst:		T Beale, A Goodchild, H Sue, D Kalra, T Churches et al
+
+problem_description: The current model for the DV_TEXT has language and
+		charset as mandatory attributes. Given that it is expected that in
+		almost all cases, all parts of an ENTRY, and most likely a
+		COMPOSITION will be in the same language and character encoding,
+		it would be preferable to make these attributes optional on
+		ELEMENT and CLUSTER, and mandatory higher up the inheritance tree.
+		The benefit will be a significant reduction in the number of coded
+		terms stored in data, which are repetitions of each other within
+		an ENTRY, and usually in a COMPOSITION.
+
+change_description: The requirements with respect to string representation are:
+		   * systems get to store their data in whatever is most convenient 
+		     locally (e.g. whatever the dbms wants to use)
+		   * it must be possible for a 3rd party application which is openEHR 
+		     compliant to read the data in a system, even it if it not in 
+		     its own "preferred" form (vertical interoperability)
+		   * it must be possible for the data to be exported in a way that 
+		     it can be universally read or transformed into a readable form 
+		     for use in another system (horizontal interoperability)
+		   * the specifications commit implementors to as little as possible, 
+		     while allowing the above requirements to be met.
+
+		Based on Hoylen Sue's recent information on unicode, the modelling 
+		solution seems to be:
+
+		1. openEHR states that all strings are in Unicode in its abstract 
+		   specifications.
+
+		   Question: if there are no "simple strings" at all in the data and 
+		   everything is a unicoded string, is this safe?
+
+		2. that the following abstract model is used:
+		   ENTRY class has
+			 - a mandatory 'language' attribute of type CODE_PHRASE,
+			   with the invariant 
+			   	Language_valid: language /= Void and then 
+							code_set(“languages”).has(language)
+			 - a mandatory 'encoding' attribute of type CODE_PHRASE,
+			   with the invariant:
+				encoding_valid: encoding /= Void and then
+				code_set(“character sets”).has(encoding)
+
+			   This says which VERSION and which flavour of unicode, and 
+			   forces the whole ENTRY to be encoded the same way no matter 
+			   what, but also allows distinct ENTRYs in the same
+			   COMPOSITION to be encoded in e.g. in Unicode 3.0/UTF-8, Unicode 
+			   4.0/UTF-16.
+
+		   DV_TEXT class has
+			 - an optional 'language' attribute, same specification as
+			   above, which is understood to override the one from its enclosing 
+			   ENTRY.
+			 - remove the existing charset attribute from this class.
+
+              This allows fragments of narrative inside an ENTRY to be in a different
+              language from the rest of the ENTRY, if needed, but for most situations,
+              the ENTRY is assumed to be in one language.
+
+		3. Implementation specifications like XML-schemas and software APIs 
+		   are required to make the character encoding and Unicode version 
+		   attributes visible, so that clients can process / convert the data 
+		   properly. 
+		   
+		A discussion can be found at the online archives of the
+		openehr-technical mailing list at http://www.openEHR.org.
+
+impact_analysis:		Medium.
+
+changed_components:	RM.DATA_TYPES.TEXT 1.8
+
+approved_by:	ARB
+
+implementor:	Thomas Beale
+
+
+[test and release]
+
+target_release:	1.0
+
+
+[resolution]
+
+date_closed:	02/02/2005
+
+reason_for_rejection:	
+
+notes:		

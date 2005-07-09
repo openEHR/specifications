@@ -64,7 +64,7 @@ feature -- Status Report
 		
 invariant
 	Uid_exists: uid /= Void
-	Type_validity: type = meaning
+	Type_validity: type = name
 	Source_valid: source /= Void -- and then source.relationships.has(Current)
 	Target_valid: target /= Void -- and then not target.reverse_relationships.has(Current)	
 

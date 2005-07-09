@@ -28,7 +28,7 @@ feature -- Access
 			Result.extend(create {TC_DV_ORDINAL}.make(Void))
 		end
 
-	title: STRING is "Quantity tests"
+	title: STRING is "DATA TYPE - Quantity tests"
 
 feature -- Initialisation
 

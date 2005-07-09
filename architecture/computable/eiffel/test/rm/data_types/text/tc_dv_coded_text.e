@@ -21,6 +21,11 @@ inherit
 			check_result
 		end
 
+	XML_TOOLS
+		export
+			{NONE} all
+		end
+
 creation
 	make
 
@@ -61,7 +66,7 @@ feature -- Initialisation
 					%</code_string>%
 				%</defining_code>"
 			)
-			io_output.put_string(a_datum.as_canonical_string)
+			io_output.put_string(xml_tag_indent(a_datum.as_canonical_string))
 			io_output.new_line			
 		end
 

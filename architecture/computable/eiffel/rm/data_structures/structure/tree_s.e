@@ -73,33 +73,52 @@ indexing
 	revision:    "$Revision$"
 	last_change: "$Date$"
 
-deferred class ITEM_TREE
+class ITEM_TREE
 
 inherit
 	ITEM_STRUCTURE
-		redefine
-			representation
-		end
 
 feature -- Access
 
-	representation: CLUSTER
+	root: CLUSTER
 			-- root of tree
 
 	element_at_path(a_path:STRING): ELEMENT is
 			-- Return the leaf element at the path ‘a_path’
 		require
 			has_element_path(a_path)	
-		deferred
+		do
+		end
+
+	path_of_item (a_loc: LOCATABLE): STRING is
+			-- The path to an item relative to the root of this archetyped structure.
+		do
+		end
+
+	item_at_path (a_path: STRING): LOCATABLE is
+			-- The item at a path (relative to this item).
+		do
 		end
 
 feature -- Status Report
 
-	has_element_path(a_path:STRING): BOOLEAN is
-			-- True if path ‘a_path’ is a valid leaf path
-		deferred
+	valid_path (a_path: STRING): BOOLEAN is
+			-- True if the path is valid with respect to the current item.
+		do
 		end
 
+	has_element_path(a_path:STRING): BOOLEAN is
+			-- True if path ‘a_path’ is a valid leaf path
+		do
+		end
+
+feature -- Conversion
+
+	as_hierarchy: CLUSTER is
+			-- the physical representation as a CEN 13606-compliant structure
+		do
+		end
+	
 end
 
 

@@ -23,13 +23,10 @@ class ITEM_SINGLE
 
 inherit
 	ITEM_STRUCTURE
-		redefine
-			representation
-		end
 
 feature -- Access
 
-	representation: ELEMENT
+	item: ELEMENT
 
 	path_of_item (a_loc: LOCATABLE): STRING is
 			-- The path to an item relative to the root of this archetyped structure.
@@ -46,6 +43,14 @@ feature -- Status Report
 	valid_path (a_path: STRING): BOOLEAN is
 			-- True if the path is valid with respect to the current item.
 		do
+		end
+
+feature -- Conversion
+
+	as_hierarchy: ELEMENT is
+			-- the physical representation as a CEN 13606-compliant structure
+		do
+			Result := deep_clone(item)
 		end
 
 end

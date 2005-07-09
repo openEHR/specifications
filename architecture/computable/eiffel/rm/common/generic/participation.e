@@ -38,7 +38,7 @@ feature -- Access
 			-- The function of the Party in this participation (a given party might 
 			-- participate in more than one way in a given activity).
 
-	mode: CODE_PHRASE	
+	mode: DV_CODED_TEXT	
 			-- The modality of the performer / activity interaction, e.g. present, 
 			-- by telephone, by email etc.
 			
@@ -49,8 +49,11 @@ feature -- Access
 			-- in future contexts, such as EHR Instructions.
 
 invariant
-	Mode_valid: terminology("openehr").codes_for_group_name("participation modes", "en").has(mode)
-	Function_exists: function /= Void
+	Mode_valid: terminology("openehr").codes_for_group_name("participation modes", "en").has(mode.defining_code)
+	Function_valid: function /= Void and then function.generating_type.is_equal("DV_CODED_TEXT") 
+-- FIXME: re-instate when a simple way is found to do an 'inline cast'
+--		implies terminology("openehr").codes_for_group_name("participation function", "en")
+--		.has(function.defining_code)
 	Performer_exists: performer /= Void
 
 end

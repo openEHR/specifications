@@ -19,27 +19,39 @@ indexing
 
 class AUDIT_DETAILS
 
+inherit
+	TERMINOLOGY_SERVICE_ACCESS
+		export
+			{NONE} all
+		end
 
 feature -- Initialization
 
-	make_audit_details(a_node: STRING; a_committer: PARTY_REF; a_time_committed: DV_DATE_TIME) is
+	make(a_system_id: STRING; a_committer: PARTY_REF; 
+						a_time_committed: DV_DATE_TIME; a_change_type: DV_CODED_TEXT;
+						a_description: DV_TEXT) is
 		require
-			a_node_valid: a_node /= Void and then not a_node.is_empty
+			a_system_id_valid: a_system_id /= Void and then not a_system_id.is_empty
 			a_committer_valid: a_committer /= Void
 			a_time_committed_valid: a_time_committed /= Void
+			a_change_type_valid: a_change_type /= Void
 		do
-			node := a_node
+			system_id := a_system_id
 			committer := a_committer
 			time_committed := a_time_committed
+			change_type := a_change_type
+			description := a_description
 		ensure
-			node = a_node
+			system_id = a_system_id
 			committer = a_committer
 			time_committed = a_time_committed
+			change_type = a_change_type
+			description = a_description
 		end
 
 feature -- Access
 
-	node: STRING	
+	system_id: STRING	
 			-- Identity of the node where the item was committed.
 
 	committer: PARTY_REF	
@@ -48,10 +60,18 @@ feature -- Access
 	time_committed: DV_DATE_TIME	
 			-- Time of committal of the item.
 
+	change_type: DV_CODED_TEXT
+			-- Type of change. Coded using the openEHR Terminology “audit change type” group.
+
+	description: DV_TEXT
+			-- description of this contribution overall
+
 invariant
-	Node_exists: node /= Void and then not node.is_empty
+	System_id_exists: system_id /= Void and then not system_id.is_empty
 	Committer_exists: committer /= Void
 	Time_committed_exists: time_committed /= Void	
+	Change_type_exists: change_type /= Void and then 
+		terminology("openehr").codes_for_group_name("audit change type", "en").has(change_type.defining_code)
 
 end
 

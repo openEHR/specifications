@@ -21,14 +21,6 @@ deferred class ITEM_STRUCTURE
 inherit
 	DATA_STRUCTURE
 
-feature -- Access
-
-	representation: ITEM
-			-- the physical structure
-	
-invariant
-	Representation_exists: representation /= Void
-
 end
 
 

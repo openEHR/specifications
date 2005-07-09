@@ -1,0 +1,60 @@
+
+[summary]
+
+id:			CR-000105
+
+date_raised:	23/05/2004
+
+raised_by:		Sam Heard
+
+title:		INTERVAL.make_unbounded should be removed
+
+owner:		ARB
+
+status:		implementation
+
+
+[change information]
+
+change_category:	error
+
+analyst:		Sam Heard
+
+problem_description: Interval has a make_unbounded call. If this make routine is called
+		then there is no test to check if the interval remains in this state.
+		If it does, then the as_string routine provides a single bound as does
+		the out routine. This is compounded in C_REAL and may be in other classes
+		that use the interval class.
+
+		It may be best to leave it like this if there is no suitable syntax for an
+		unbounded interval - but the make_unbounded should probably not be present.
+
+change_description: Remove make_unbounded or ensure the as_string and other features have
+		a syntax for unbounded and there is a status call for unbounded.
+
+impact_analysis: Minor - have changed archetype editor to not set magnitude if no bounds on
+		quantity.
+
+changed_components:	rm.interval, am.c_real and others
+
+approved_by:	
+
+implementor:
+
+
+[test and release]
+
+target_release:	1.0
+
+test_release:	1.0
+
+test_status:	in_test
+
+
+[resolution]
+
+date_closed:	
+
+reason_for_rejection:	
+
+notes:		

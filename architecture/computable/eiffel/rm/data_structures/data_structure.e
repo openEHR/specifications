@@ -18,6 +18,16 @@ deferred class DATA_STRUCTURE
 inherit
 	LOCATABLE
 
+feature -- Conversion
+
+	as_hierarchy: ITEM is
+			-- the physical representation as a CEN 13606-compliant structure
+		deferred
+		end
+	
+invariant
+	As_hierarchy: as_hierarchy /= Void
+
 end
 
 

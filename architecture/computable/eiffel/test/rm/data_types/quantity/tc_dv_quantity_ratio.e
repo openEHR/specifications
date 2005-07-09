@@ -21,6 +21,11 @@ inherit
 			check_result
 		end
 
+	XML_TOOLS
+		export
+			{NONE} all
+		end
+
 creation
 	make
 
@@ -36,8 +41,13 @@ feature -- Initialisation
 
 	execute is
 		local
+			q1, q2: DV_QUANTITY
 			a_datum:DV_QUANTITY_RATIO
 		do
+			create q1.make (20.0, "g")
+			create q2.make (500.0, "ml")
+			create a_datum.make(q1, q2)
+			io_output.put_string(xml_tag_indent(a_datum.as_canonical_string))	
 		end
 
 feature -- Access

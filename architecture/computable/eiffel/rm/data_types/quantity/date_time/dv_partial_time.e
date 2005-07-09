@@ -20,6 +20,9 @@ class DV_PARTIAL_TIME
 
 inherit
 	DV_TIME
+		redefine
+			magnitude, as_string
+		end
 
 feature -- Access
 
@@ -27,19 +30,25 @@ feature -- Access
 			-- Indicates whether minute in hour is known. If so, the time 
 			-- is of the form y/m/?, if not, it is of the form y/?/
 
-	probable_time: DV_TIME is
+	magnitude: DOUBLE is
 		do
 		ensure
-			minute_known implies probable_time.second = Middle_second_in_minute
-			not minute_known implies probable_time.minute = Middle_minute_in_hour and probable_time.second = Seconds_in_minute
+			Result = enclosing_interval.midpoint.magnitude
 		end
 
-	possible_times: DV_INTERVAL[DV_TIME] is
+	enclosing_interval: DV_INTERVAL[DV_TIME] is
 		do
 		ensure
 			minute_known implies Result.lower.second = 1 and Result.upper.second = seconds_in_minute
 			not minute_known implies Result.lower.minute = 1 and Result.upper.minute = Minutes_in_hour and 
 				Result.lower.second = 1 and Result.upper.second = seconds_in_minute
+		end
+
+feature -- Output
+
+	as_string: STRING is
+			-- Result has form “hh:mm:??” where mm, ss might be “??”	Result = follows ISO 8601
+		do
 		end
 
 end

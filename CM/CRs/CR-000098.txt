@@ -4,13 +4,13 @@ id:			CR-000098
 
 date_raised:	17-03-2004
 
-raised_by:		Andrew Goodchild (DSTC)
+raised_by:		Sam Heard, Andrew Goodchild (DSTC)
 
 title:		EVENT_CONTEXT.time should allow optional end time
 
 owner:		PG
 
-status:		initial
+status:		completed
 
 [change information]
 
@@ -31,7 +31,7 @@ impact_analysis:		Low
 
 changed_components:	RM.EHR.COMPOSITION 4.4
 
-approved_by:	PG
+approved_by:	ARB
 
 implementor:	Thomas Beale
 
@@ -41,6 +41,6 @@ test_release:
 test_status:	
 
 [resolution]
-date_closed:
+date_closed:	10/12/2004
 reason_for_rejection:	
 notes:		
