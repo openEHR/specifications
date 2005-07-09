@@ -24,10 +24,7 @@ class EVENT_CONTEXT
 inherit
 	LOCATABLE
 
-	TERMINOLOGY_SERVICE_ACCESS
-		export
-			{NONE} all
-		end
+	EXTERNAL_ENVIRONMENT_ACCESS
 	
 feature -- Access
 	

@@ -55,7 +55,7 @@ feature -- Initialization
 	default_create is
 		do
 			create terminology_id.default_create
-			code_string := clone(default_code_string)
+			code_string := default_code_string.twin
 		ensure then
 			Terminology_id_set: terminology_id /= Void
 			Code_string_set: code_string.is_equal(default_code_string)

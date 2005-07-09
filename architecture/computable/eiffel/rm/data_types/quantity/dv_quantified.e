@@ -29,9 +29,7 @@ deferred class DV_QUANTIFIED
 inherit
 	DV_ORDERED
 
-	TERMINOLOGY_SERVICE_ACCESS
-		export
-			{NONE} all
+	EXTERNAL_ENVIRONMENT_ACCESS
 		undefine
 			is_equal
 		end

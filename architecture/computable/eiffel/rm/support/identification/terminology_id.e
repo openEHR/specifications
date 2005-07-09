@@ -96,7 +96,7 @@ feature -- Access
 			-- correspond to distinct (i.e. non-compatible) terminologies. Thus the names "ICD10AM" and "ICD10"
 			-- refer to distinct terminologies.
 		do
-			Result := clone(local_id)
+			Result := local_id.twin
 		ensure
 			Result /= Void and then Result.is_equal(local_id)
 		end

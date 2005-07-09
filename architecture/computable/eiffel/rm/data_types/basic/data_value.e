@@ -20,6 +20,8 @@ deferred class DATA_VALUE
 
 inherit
 	CANONICAL_FRAGMENT
+	
+	OPENEHR_DEFINITIONS
 
 feature -- Initialization
 	

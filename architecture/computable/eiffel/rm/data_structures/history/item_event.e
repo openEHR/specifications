@@ -21,11 +21,8 @@ indexing
 class ITEM_EVENT [G -> ITEM_STRUCTURE]
 
 inherit
-	TERMINOLOGY_SERVICE_ACCESS
-		export
-			{NONE} all
-		end
-
+	EXTERNAL_ENVIRONMENT_ACCESS
+	
 feature -- Access
 
 	item: G	

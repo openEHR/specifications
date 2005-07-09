@@ -20,10 +20,7 @@ indexing
 class TERM_MAPPING
 
 inherit
-	TERMINOLOGY_SERVICE_ACCESS
-		export
-			{NONE} all
-		end
+	EXTERNAL_ENVIRONMENT_ACCESS
 
 	CANONICAL_FRAGMENT
 	

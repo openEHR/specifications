@@ -18,7 +18,7 @@ indexing
 class PARTICIPATION
 
 inherit
-	TERMINOLOGY_SERVICE_ACCESS
+	EXTERNAL_ENVIRONMENT_ACCESS
 
 feature -- Initialization
 

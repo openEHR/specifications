@@ -20,7 +20,7 @@ indexing
 class FEEDER_AUDIT
 
 inherit
-	TERMINOLOGY_SERVICE_ACCESS
+	EXTERNAL_ENVIRONMENT_ACCESS
 		export 
 			{NONE} all
 		end

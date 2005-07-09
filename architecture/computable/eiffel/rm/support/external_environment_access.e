@@ -1,45 +1,32 @@
 indexing
-	component:   "openEHR Data Types"
-
-	description: "[
-	             Abstract class defining the common meta-data of all types of encapsulated data
-			 ]"
-	keywords:    "multimedia, data"
-
-	requirements:"ISO 18308 TS V1.0 STR 2.6"
-	design:      "openEHR Data Types Reference Model 1.7"
+	component:   "openEHR common definitions"
+	
+	description: "Access to services in the external environment"
+	keywords:    "external access, environment"
 
 	author:      "Thomas Beale"
 	support:     "Ocean Informatics <support@OceanInformatics.biz>"
-	copyright:   "Copyright (c) 2000-2004 The openEHR Foundation <http://www.openEHR.org>"
+	copyright:   "Copyright (c) 2005 The openEHR Foundation <http://www.openEHR.org>"
 	license:     "See notice at bottom of class"
 
-	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/data_types/encapsulated/SCCS/s.dv_encapsulated.e $"
-	revision:    "$Revision$"
-	last_change: "$Date$"
+	file:        "$Source: C:/project/openehr/spec-dev/architecture/computable/eiffel/rm/support/SCCS/s.external_environment_access.e $"
+	revision:    "$Revision: 1.1 $"
+	last_change: "$Date: 05/06/27 12:42:51+01:00 $"
 
-deferred class DV_ENCAPSULATED
+class EXTERNAL_ENVIRONMENT_ACCESS
 
 inherit
-	DATA_VALUE
-
-	EXTERNAL_ENVIRONMENT_ACCESS
-
-feature -- Access
-
-	charset: CODE_PHRASE
-
-	language: CODE_PHRASE
-
-	size: INTEGER
-
-invariant
-	Size_positive: size >= 0
-	Language_valid: language /= Void and then code_set("languages").has(language)
-	charset_valid: charset /= Void and then code_set("character sets").has(charset)
+	TERMINOLOGY_SERVICE
+		export
+			{NONE} all
+		end
+		
+	MEASUREMENT_SERVICE
+		export
+			{NONE} all
+		end
 
 end
-
 
 
 --|
@@ -56,10 +43,10 @@ end
 --| for the specific language governing rights and limitations under the
 --| License.
 --|
---| The Original Code is dv_encapsulated.e.
+--| The Original Code is openehr_definitions.e.
 --|
 --| The Initial Developer of the Original Code is Thomas Beale.
---| Portions created by the Initial Developer are Copyright (C) 2003-2004
+--| Portions created by the Initial Developer are Copyright (C) 2005
 --| the Initial Developer. All Rights Reserved.
 --|
 --| Contributor(s):

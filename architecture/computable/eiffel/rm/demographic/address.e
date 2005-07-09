@@ -33,7 +33,7 @@ feature -- Access
 	type: DV_TEXT is
 			-- Type of address, e.g. “electronic”, “locality”. Taken from value of inherited name attribute.
 		do
-			Result := clone(name)
+			Result := name.twin
 		end
 
 	as_string: STRING	

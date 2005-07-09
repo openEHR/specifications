@@ -13,7 +13,7 @@ indexing
 	revision:    "$Revision$"
 	last_change: "$Date$"
 
-class CODE_SET_INTERFACE
+class CODE_SET_ACCESS
 
 create
 	make

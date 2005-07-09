@@ -23,10 +23,7 @@ class ELEMENT
 inherit
 	ITEM
 
-	TERMINOLOGY_SERVICE_ACCESS
-		export
-			{NONE} all
-		end
+	EXTERNAL_ENVIRONMENT_ACCESS
 
 feature -- Access
 

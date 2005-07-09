@@ -24,9 +24,7 @@ deferred class DV_MEASURABLE
 inherit
 	DV_QUANTIFIED
 
-	MEASUREMENT_SERVICE_ACCESS
-		export 
-			{NONE} all
+	EXTERNAL_ENVIRONMENT_ACCESS
 		undefine
 			is_equal
 		end

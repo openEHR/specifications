@@ -42,15 +42,12 @@ inherit
 	MATCH_CODES
 		export
 			{NONE} all;
-			{ANY} is_valid_match_code
+			{ANY} is_valid_match_code, generating_type, twin
 		undefine
 			is_equal, default_create
 		end
 
-	TERMINOLOGY_SERVICE_ACCESS
-		export
-			{NONE} all
-			{ANY} generating_type
+	EXTERNAL_ENVIRONMENT_ACCESS
 		undefine
 			default_create, is_equal
 		end
@@ -73,8 +70,8 @@ feature -- Initialization
 
 	default_create is
 		do
-			language := clone(Default_language)
-			value := clone(Default_value)
+			language := Default_language.twin
+			value := Default_value.twin
 		ensure then
 			Value_set: value.is_equal(Default_value)
 			Language_set: language.is_equal(default_language)
@@ -273,7 +270,8 @@ feature {DV_TEXT} -- Implementation
 		end
 	
 invariant
-	Value_exists: value /= Void and then not value.is_empty
+	Value_valid: value /= void and then not value.is_empty and then not 
+		(value.has(CR) or value.has(LF))	
 	Mappings_valid: mappings /= void implies not mappings.is_empty
 	Formatting_valid: formatting /= void implies not formatting.is_empty
 

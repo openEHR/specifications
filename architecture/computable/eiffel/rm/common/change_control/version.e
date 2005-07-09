@@ -18,7 +18,7 @@ indexing
 class VERSION [G]
 
 inherit
-	TERMINOLOGY_SERVICE_ACCESS
+	EXTERNAL_ENVIRONMENT_ACCESS
 		export
 			{NONE} all
 		end
@@ -42,7 +42,7 @@ feature -- Access
 	uid: OBJECT_ID is
 			-- Unique identifier of this version, derived from version repository id and version id.
 		do
-			Result := clone (version_repository_id)
+			Result := version_repository_id.twin
 		--	Result.set_version_id(version_id)
 		end
 	

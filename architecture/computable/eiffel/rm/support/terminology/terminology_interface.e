@@ -13,7 +13,7 @@ indexing
 	revision:    "$Revision$"
 	last_change: "$Date$"
 
-class TERMINOLOGY_INTERFACE
+class TERMINOLOGY_ACCESS
 
 create
 	make

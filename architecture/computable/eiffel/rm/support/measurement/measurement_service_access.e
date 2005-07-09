@@ -13,7 +13,7 @@ indexing
 	revision:    "$Revision$"
 	last_change: "$Date$"
 
-class MEASUREMENT_SERVICE_ACCESS
+class MEASUREMENT_SERVICE
 
 feature -- Access
 

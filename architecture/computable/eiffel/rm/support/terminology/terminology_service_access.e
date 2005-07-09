@@ -13,11 +13,11 @@ indexing
 	revision:    "$Revision$"
 	last_change: "$Date$"
 
-class TERMINOLOGY_SERVICE_ACCESS
+class TERMINOLOGY_SERVICE
 
 feature -- Access
 
-	terminology(name: STRING): TERMINOLOGY_INTERFACE is
+	terminology(name: STRING): TERMINOLOGY_ACCESS is
 		require
 			name_valid: name /= Void and then has_terminology(name)
 		do
@@ -27,7 +27,7 @@ feature -- Access
 			Result /= Void
 		end
 
-	code_set(name:STRING): CODE_SET_INTERFACE is
+	code_set(name:STRING): CODE_SET_ACCESS is
 		require
 			name_valid: name /= Void and then has_code_set(name)
 		do

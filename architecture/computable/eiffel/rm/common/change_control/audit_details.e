@@ -20,7 +20,7 @@ indexing
 class AUDIT_DETAILS
 
 inherit
-	TERMINOLOGY_SERVICE_ACCESS
+	EXTERNAL_ENVIRONMENT_ACCESS
 		export
 			{NONE} all
 		end

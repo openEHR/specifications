@@ -77,7 +77,7 @@ feature -- Access
 		do
 			create Result.make(0)
 			
-			s := clone(value)
+			s := value.twin
 			s.mirror
 			ver_sep_pos := s.substring_index(version_start_separator, 1) -- position in mirrored string if present
 			local_sep_pos := s.substring_index_in_bounds(context_separator, ver_sep_pos.max(1), s.count)  -- position in mirrored string
@@ -95,7 +95,7 @@ feature -- Access
 			s: STRING
 			ver_sep_pos, ver_pos, end_pos, local_sep_pos, local_id_pos: INTEGER
 		do
-			s := clone(value)
+			s := value.twin
 			s.mirror
 			ver_sep_pos := s.substring_index(version_start_separator, 1) -- position in mirrored string
 			local_sep_pos := s.substring_index_in_bounds(context_separator, ver_sep_pos.max(1), s.count)  -- position in mirrored string
