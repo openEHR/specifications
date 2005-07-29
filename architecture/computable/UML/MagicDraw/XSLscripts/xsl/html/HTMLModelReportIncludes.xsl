@@ -44,8 +44,7 @@
 	<xsl:include href="ShowElementOwner.xsl"/>
 	<xsl:include href="ShowMainDiagram.xsl"/>
 	<xsl:include href="ShowMultiplicity.xsl"/>
-	<xsl:include href="ShowName.xsl"/>
-    <xsl:include href="MiniShowName.xsl"/>    
+	<xsl:include href="ShowName.xsl"/>  
 	<xsl:include href="ShowStateActivityDiagram.xsl"/>
 	<xsl:include href="ShowStateType.xsl"/>
 	<xsl:include href="SubElements.xsl"/>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+                                                           <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<!--
 Template for Tagged values tabel
@@ -149,7 +149,7 @@ Template for constraints table
 				<td colspan="{$colspanNumber}">
 					<b>
 						<font size="+1">
-							<a name="constraints">Class Constraints</a>
+							<a name="constraints">Constraints</a>
 						</font>
 					</b>
 				</td>
