@@ -127,7 +127,7 @@ Template for Class report
 		<xsl:call-template name="SHOW_DOCUMENTATION"/>
 		<p/>
 		<!--            ===========  General information ===========             -->
-		<xsl:call-template name="SHOW_CLASSIFIER_GENERAL_INFO"/>
+		<!--<xsl:call-template name="SHOW_CLASSIFIER_GENERAL_INFO"/>-->
 		<!--    =========  Class stereotypes [optional] ===========      -->
 		<xsl:if test="$hasStereotypes">
 			<br/>
