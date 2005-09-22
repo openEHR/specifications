@@ -33,6 +33,10 @@ var TREE_NODES = [
 			["Terminology", null, null]
 		]
 	],
+	["Proposals", null, null,
+		["Instruction", "proposals/instruction.pdf", "Main"],
+		["Integration IM", "proposals/integration_im.pdf", "Main"]
+	],
 	["ITSs", null, null,
 		["Data Formalisms", null, null,
 			["XML-schema", null, null]
