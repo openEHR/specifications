@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Structure" targetNamespace="openEHR/v1/Structure" elementFormDefault="unqualified"
+    xmlns="openEHR/v1/Structure" xmlns:mstns="openEHR/v1/Structure" xmlns:bt="openEHR/v1/BaseTypes" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="openEHR/v1/BaseTypes" schemaLocation="BaseTypes.xsd" />
+    
+    <xs:element name="items" type="LOCATABLE" />
+    
+    <xs:complexType name="LOCATABLE" abstract="true">
+        <xs:sequence>
+            <xs:element name="name" type="bt:DV_TEXT" minOccurs="0" />
+        </xs:sequence>
+        <xs:attribute name="node_id" type="xs:string" />
+    </xs:complexType>
+     <xs:complexType name="HISTORY">
+        <xs:complexContent>
+            <xs:extension base="LOCATABLE">
+                <xs:sequence>
+                    <xs:element name="events" type="EVENT" minOccurs="1" maxOccurs="unbounded" />
+                    <xs:element name="period" type="bt:DV_DURATION" minOccurs="0" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="EVENT">
+        <xs:complexContent>
+            <xs:extension base="LOCATABLE">
+                <xs:sequence>
+                    <xs:element name="value" type="xs:dateTime" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="width" type="xs:string" minOccurs="0" maxOccurs="1" />
+                    <xs:element name="math_function" type="xs:string" minOccurs="0" maxOccurs="1" />
+                    <xs:element name="display_positive" type="xs:boolean" minOccurs="0" maxOccurs="1" />
+                    <xs:element name="item" type="ITEM_STRUCTURE" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="state" type="ITEM_STRUCTURE" minOccurs="0" maxOccurs="1" />
+                </xs:sequence>
+                <xs:attribute name="lp_value_date" type="xs:date" />
+                <xs:attribute name="lp_value_time" type="xs:time" use="optional" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType abstract="true" name="ITEM_STRUCTURE">
+        <xs:complexContent>
+            <xs:extension base="LOCATABLE"></xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ITEM_SINGLE">
+        <xs:complexContent>
+            <xs:extension base="ITEM_STRUCTURE">
+                <xs:sequence>
+                    <xs:element name="item" type="ELEMENT" minOccurs="0" maxOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ITEM_LIST">
+        <xs:complexContent>
+            <xs:extension base="ITEM_STRUCTURE">
+                <xs:sequence>
+                    <xs:element name="items" type="ELEMENT" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ITEM_TREE">
+        <xs:complexContent>
+            <xs:extension base="ITEM_STRUCTURE">
+                <xs:sequence>
+                    <xs:element name="items" type="ITEM" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ITEM_TABLE">
+        <xs:complexContent>
+            <xs:extension base="ITEM_STRUCTURE">
+                <xs:sequence>
+                    <xs:element name="rotated" type="xs:boolean" />
+                    <xs:element name="number_key_columns" type="xs:integer" />
+                    <xs:element name="items" type="CLUSTER" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType abstract="true" name="ITEM">
+        <xs:complexContent>
+            <xs:extension base="LOCATABLE">
+                <xs:sequence />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="CLUSTER">
+        <xs:complexContent>
+            <xs:extension base="ITEM">
+                <xs:sequence>
+                    <xs:element name="items" type="ITEM" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ELEMENT">
+        <xs:complexContent>
+            <xs:extension base="ITEM">
+                <xs:sequence>
+                    <xs:element name="value" type="bt:DATA_VALUE" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

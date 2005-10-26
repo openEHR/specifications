@@ -3,76 +3,140 @@
 <head>
 
 
+
+
+
+
+  
+  
+  
+  
   <link rel="stylesheet" href="http://www.openehr.org/styles/oe.css" type="text/css">
 </head>
 
 
 <body>
 
-<h1><span style="font-style: italic;">open</span>EHR Specifications</h1>
+
+
+
+
+<h1><span style="font-style: italic;">open</span>EHR Specifications - Release 1.0 Candidate</h1>
+
+
+
+
 
 <hr style="width: 100%; height: 2px;">
+<p><span style="color: rgb(255, 0, 0);">This version of the
+specifications is under development as the candidate for Release 1.0 of
+the openEHR Specification Project. Not all content changes have yet
+been approved by the </span><span style="font-style: italic; color: rgb(255, 0, 0);">open</span><span style="color: rgb(255, 0, 0);">EHR ARB.</span></p>
+
+
+
 <p>The <span style="font-style: italic;">open</span>EHR
 Specifications
 project
 generates the requirements, normative specifications and implementation
 technology specifications of the <span style="font-style: italic;">open</span>EHR
 computing architecture for health records. It also develops a number of
-guides. The deliverables are summarised as follows.</p>
-
-<h2>Guides</h2>
-
-<p>There are three important guiding documents in the
-specification
-project:</p>
-
-<ul>
-
-  <li>Introduction to <span style="font-style: italic;">open</span>EHR:
-an organisational overview</li>
-
-  <li>The <span style="font-style: italic;">open</span>EHR
-Roadmap:
-technical overview of the specifications</li>
-
-  <li>The <span style="font-style: italic;">open</span>EHR
-Modelling
-Guide: the formalisms and modelling methods used in <span style="font-style: italic;">open</span>EHR.
-  </li>
-
-</ul>
-
-<h2>Requirements</h2>
-
-<p>
-The requirements part of the project develops requirements for the EHR,
-and indicates correspondence of the <span style="font-style: italic;">open</span>EHR
-specifications to those requirements as well as published requirements
-material.
-</p>
-
+guides. All deliverables available in the explorer tree to the left.
+Deliverables containing changes with respect to current latest release
+are listed below.</p>
 <h2>Architecture</h2>
+
+
+
+
 
 <p>
 The architecture part of the project develops abstract, formal models
-of the knowledge-enabled EHR.
-</p>
+of the knowledge-enabled EHR.</p>
+
+
+<p style="color: rgb(255, 0, 0);">New drafts:</p>
+
+
+<ul>
+
+
+  <li><a href="architecture/rm/ehr_im.pdf">EHR Information Model</a></li>
+
+
+  <li><a href="architecture/rm/data_structures_im.pdf">Data Structures Information Model</a></li>
+
+  <li><a href="architecture/am/adl.pdf">Archetype Definition Language (ADL)</a></li>
+
+  <li><a href="architecture/am/aom.pdf">Archetype Object Model (AOM)</a></li>
+
+
+</ul>
+
+
+
+
 
 <h2>Implementation Technology
 Specifications
 </h2>
 
+
+
+
+
 <p>
 The ITS part of the project converts the architecture models to
 concrete expressions in implementation technologies, such as XML
 formalisms, programming languages, distributed object formalisms and
-database schemas.
-</p>
+database schemas.</p>
+
+
+<p style="color: rgb(255, 0, 0);">New drafts:</p>
+
+
+<ul>
+
+
+  <li>XML-schemas:&nbsp;</li>
+
+
+  
+  
+  <ul>
+
+
+    <li>BaseTypes - Support, Data Types, Common; <a href="its/XML-schema/BaseTypes.xsd.html">document form</a>; <a href="../ITS/XML-schema/BaseTypes.xsd">XSD file</a></li>
+
+
+    <li>Structures - LOCATABLE + Data Structures; <a href="its/XML-schema/Structure.xsd.html">document form</a>; <a href="../ITS/XML-schema/Structure.xsd">XSD file</a></li>
+
+
+    <li>Content - descendants of CONTENT_ITEM; <a href="its/XML-schema/Content.xsd.html">document form</a>; <a href="../ITS/XML-schema/Content.xsd">XSD file</a></li>
+
+
+    <li>Composition - COMPOSITION class and friends; <a href="its/XML-schema/Composition.xsd.html">document form</a>; <a href="../ITS/XML-schema/Composition.xsd">XSD file</a></li>
+
+
+  
+  
+  </ul>
+
+
+</ul>
+
+
+
+
 
 <hr style="width: 100%; height: 2px;">
 <span class="footer">$LastChangedDate$&nbsp;&nbsp;
 $LastChangedRevision$
 </span><br>
+
+
+
+
 
 
 </body>

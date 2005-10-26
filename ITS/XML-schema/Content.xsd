@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Content" targetNamespace="openEHR/v1/Content" elementFormDefault="unqualified"
+	xmlns="openEHR/v1/Content" xmlns:mstns="openEHR/v1/Content" xmlns:bt="openEHR/v1/BaseTypes" xmlns:st="openEHR/v1/Structure"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:import namespace="openEHR/v1/BaseTypes" schemaLocation="BaseTypes.xsd" />
+	<xs:import namespace="openEHR/v1/Structure" schemaLocation="Structure.xsd" />
+
+	<xs:element name="items" type="CONTENT_ITEM" />
+
+	<xs:complexType name="CONTENT_ITEM" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="st:LOCATABLE">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SECTION">
+		<xs:complexContent>
+			<xs:extension base="CONTENT_ITEM">
+				<xs:sequence>
+					<xs:element name="items" type="CONTENT_ITEM" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ENTRY" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="CONTENT_ITEM">
+				<xs:sequence>
+					<xs:element name="language" type="bt:CODE_PHRASE" />
+					<xs:element name="encoding" type="bt:CODE_PHRASE" />
+					<xs:element name="subject" type="bt:RELATED_PARTY" />
+					<xs:element name="provider" type="bt:PARTICIPATION" minOccurs="0"/>
+					<xs:element name="protocol" type="st:ITEM_STRUCTURE" minOccurs="0" />
+					<xs:element name="other_participations" type="bt:PARTICIPATION" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+				<!-- a boolean attribute to show if the data subject is the record subject -->
+				<xs:attribute name="lp_subject_is_self" type="xs:boolean" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EVALUATION">
+		<xs:complexContent>
+			<xs:extension base="ENTRY">
+				<xs:sequence>
+					<xs:element name="data" type="st:ITEM_STRUCTURE" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OBSERVATION">
+		<xs:complexContent>
+			<xs:extension base="ENTRY">
+				<xs:sequence>
+					<xs:element name="data" type="st:HISTORY" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>
