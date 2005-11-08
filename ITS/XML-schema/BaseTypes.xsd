@@ -178,7 +178,7 @@
 	</xs:complexType>
 	<xs:complexType name="RELATED_PARTY">
 		<xs:sequence>
-			<xs:element name="party" type="PARTY_REF" maxOccurs="1" minOccurs="0" />
+			<xs:element name="party" type="PARTY_PROXY" maxOccurs="1" minOccurs="0" />
 			<xs:element name="relationship" type="DV_CODED_TEXT" maxOccurs="1" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
@@ -209,6 +209,19 @@
 			<xs:element name="type" type="xs:string" maxOccurs="1" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="HASH_DV_TEXT_STRING">
+		<xs:sequence>
+			<xs:element name="key" type="DV_TEXT" maxOccurs="1" minOccurs="1" />
+			<xs:element name="value" type="xs:string" maxOccurs="1" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PARTY_PROXY">
+		<xs:sequence>
+			<xs:element name="external_ref" type="PARTY_REF" maxOccurs="1" minOccurs="0" />
+			<xs:element name="names" type="HASH_DV_TEXT_STRING" maxOccurs="unbounded" minOccurs="0" />
+			<xs:element name="identifiers" type="HASH_DV_TEXT_STRING" maxOccurs="unbounded" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="PARTY_REF">
 		<!-- actually has complex inheritence in openEHR model-->
 		<xs:sequence>
@@ -219,10 +232,19 @@
 	</xs:complexType>
 	<xs:complexType name="PARTICIPATION">
 		<xs:sequence>
-			<xs:element name="performer" type="PARTY_REF" maxOccurs="1" minOccurs="1" />
+			<xs:element name="performer" type="PARTY_PROXY" maxOccurs="1" minOccurs="1" />
 			<xs:element name="start_time" type="DV_DATE_TIME" maxOccurs="1" minOccurs="0" />
 			<xs:element name="end_time" type="DV_DATE_TIME" maxOccurs="1" minOccurs="0" />
 			<xs:element name="mode" type="DV_CODED_TEXT" maxOccurs="1" minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FEEDER_AUDIT">
+		<xs:sequence>
+			<xs:element name="system_id" type="xs:string" maxOccurs="1" minOccurs="1" />
+			<xs:element name="committer" type="xs:string" maxOccurs="1" minOccurs="0" />
+			<xs:element name="time_committed" type="DV_DATE_TIME" maxOccurs="1" minOccurs="0" />
+			<xs:element name="change_type" type="DV_CODED_TEXT" maxOccurs="1" minOccurs="0" />
+			<xs:element name="description" type="DV_TEXT" maxOccurs="1" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

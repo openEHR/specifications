@@ -9,6 +9,8 @@
     <xs:complexType name="LOCATABLE" abstract="true">
         <xs:sequence>
             <xs:element name="name" type="bt:DV_TEXT" minOccurs="0" />
+             <xs:element name="uid" type="bt:OBJECT_REF" minOccurs="0" />
+              <xs:element name="feeder_audit" type="bt:FEEDER_AUDIT" minOccurs="0" />
         </xs:sequence>
         <xs:attribute name="node_id" type="xs:string" />
     </xs:complexType>

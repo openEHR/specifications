@@ -11,6 +11,8 @@
 
 
 
+
+  
   
   
   
@@ -33,7 +35,9 @@
 
 
 
+
 <h1><span style="font-style: italic;">open</span>EHR Specifications - Release 1.0 Candidate</h1>
+
 
 
 
@@ -55,6 +59,7 @@ been approved by the </span><span style="font-style: italic; color: rgb(255, 0, 
 
 
 
+
 <p>The <span style="font-style: italic;">open</span>EHR
 Specifications
 project
@@ -68,7 +73,8 @@ are listed below.</p>
 
 
 
-<h2>Architecture</h2>
+
+<h2>Architecture - <span style="color: rgb(255, 0, 0);">new drafts</span></h2>
 
 
 
@@ -78,16 +84,15 @@ are listed below.</p>
 
 
 
-<p>
-The architecture part of the project develops abstract, formal models
-of the knowledge-enabled EHR.</p>
 
 
 
 
 
 
-<p style="color: rgb(255, 0, 0);">New drafts:</p>
+
+
+
 
 
 
@@ -101,35 +106,50 @@ of the knowledge-enabled EHR.</p>
 
 
 
+
   <li>2 November 2005</li>
 
+
+  
   
   <ul>
 
+
     <li><a href="architecture/rm/common_im.pdf">Common Information Model</a> (added Resource package; moved AUDIT_DETAILS; changed RELATED_PARTY; added directory package)</li>
+
     <li><a href="architecture/rm/ehr_im.pdf">EHR Information Model</a> (ENTRY.provider optional; DIRECTORY moved to Common)</li>
 
+
+  
   
   </ul>
+
 
   <li>30 October 2005</li>
 
 
+
+  
   
   
   <ul>
+
 
 
     
     <li><a href="architecture/am/aom.pdf">Archetype Object Model (AOM)</a> (removed Description package)</li>
 
 
+
+  
   
   
   </ul>
 
 
+
   <li>27 October 2005</li>
+
 
 
 
@@ -137,18 +157,23 @@ of the knowledge-enabled EHR.</p>
   
   
   
+  
   <ul>
 
 
 
-    <li><a href="http://svn.openehr.org/specification/BRANCHES/Release-1.0-candidate/publishing/architecture/rm/support_im.pdf">Support Information Model</a></li>
+
+    <li><a href="architecture/rm/support_im.pdf">Support Information Model</a></li>
 
 
 
+
+  
   
   
   
   </ul>
+
 
 
 
@@ -156,6 +181,7 @@ of the knowledge-enabled EHR.</p>
 
 
 
+
   
   
   
@@ -164,11 +190,13 @@ of the knowledge-enabled EHR.</p>
 
 
 
+  
   
   
   
   
   <ul>
+
 
 
 
@@ -176,6 +204,8 @@ of the knowledge-enabled EHR.</p>
 
 
 
+
+  
   
   
   
@@ -185,6 +215,8 @@ of the knowledge-enabled EHR.</p>
 
 
 
+
+  
   
   
   
@@ -193,14 +225,18 @@ of the knowledge-enabled EHR.</p>
 
 
 
+
     <li><a href="architecture/am/adl.pdf">Archetype Definition Language (ADL)</a></li>
 
 
 
+
+  
   
   
   
   </ul>
+
 
 
 
@@ -209,6 +245,7 @@ of the knowledge-enabled EHR.</p>
   
   
 </ul>
+
 
 
 
@@ -219,8 +256,7 @@ of the knowledge-enabled EHR.</p>
 
 
 <h2>Implementation Technology
-Specifications
-</h2>
+Specifications - <span style="color: rgb(255, 0, 0);">new drafts</span></h2>
 
 
 
@@ -230,24 +266,8 @@ Specifications
 
 
 
-<p>
-The ITS part of the project converts the architecture models to
-concrete expressions in implementation technologies, such as XML
-formalisms, programming languages, distributed object formalisms and
-database schemas.</p>
 
-
-
-
-
-
-<p style="color: rgb(255, 0, 0);">New drafts:</p>
-
-
-
-
-
-
+<h3>XML-schemas</h3>
 <ul>
 
 
@@ -255,13 +275,22 @@ database schemas.</p>
 
 
 
-  <li>XML-schemas:&nbsp;</li>
+
+  <li>08 November 2005</li>
+  <ul>
+    <li>BaseTypes - Support, Data Types, Common; <a href="its/XML-schema/BaseTypes.xsd.html">document form</a>; <a href="../ITS/XML-schema/BaseTypes.xsd">XSD file</a> (added PARTY_PROXY)</li>
+    <li>Structures - LOCATABLE + Data Structures; <a href="its/XML-schema/Structure.xsd.html">document form</a>; <a href="../ITS/XML-schema/Structure.xsd">XSD file</a></li>
+    <li>Composition - COMPOSITION class and friends; <a href="its/XML-schema/Composition.xsd.html">document form</a>; <a href="../ITS/XML-schema/Composition.xsd">XSD file</a></li>
+  </ul>
+  <li>26 October 2005:&nbsp;</li>
 
 
 
 
 
 
+
+  
   
   
   
@@ -269,26 +298,6 @@ database schemas.</p>
   
   
   <ul>
-
-
-
-
-
-
-    <li>BaseTypes - Support, Data Types, Common; <a href="its/XML-schema/BaseTypes.xsd.html">document form</a>; <a href="../ITS/XML-schema/BaseTypes.xsd">XSD file</a></li>
-
-
-
-
-
-
-    <li>Structures - LOCATABLE + Data Structures; <a href="its/XML-schema/Structure.xsd.html">document form</a>; <a href="../ITS/XML-schema/Structure.xsd">XSD file</a></li>
-
-
-
-
-
-
     <li>Content - descendants of CONTENT_ITEM; <a href="its/XML-schema/Content.xsd.html">document form</a>; <a href="../ITS/XML-schema/Content.xsd">XSD file</a></li>
 
 
@@ -296,13 +305,15 @@ database schemas.</p>
 
 
 
-    <li>Composition - COMPOSITION class and friends; <a href="its/XML-schema/Composition.xsd.html">document form</a>; <a href="../ITS/XML-schema/Composition.xsd">XSD file</a></li>
+
+    
 
 
 
 
 
 
+  
   
   
   
@@ -316,7 +327,9 @@ database schemas.</p>
 
 
 
+
 </ul>
+
 
 
 
@@ -330,6 +343,7 @@ database schemas.</p>
 <span class="footer">$LastChangedDate$&nbsp;&nbsp;
 $LastChangedRevision$
 </span><br>
+
 
 
 

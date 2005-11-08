@@ -24,11 +24,11 @@
 	</xs:complexType>
 	<xs:complexType name="EVENT_CONTEXT">
 		<xs:sequence>
-			<xs:element name="composer" type="bt:PARTY_REF" maxOccurs="1" minOccurs="1" />
+			<xs:element name="composer" type="bt:PARTY_PROXY" maxOccurs="1" minOccurs="1" />
 			<xs:element name="start_time" type="bt:DV_DATE_TIME" maxOccurs="1" minOccurs="1" />
 			<xs:element name="end_time" type="bt:DV_DATE_TIME" maxOccurs="1" minOccurs="0" />
 			<xs:element name="setting" type="bt:DV_CODED_TEXT" maxOccurs="1" minOccurs="1" />
-			<xs:element name="health_care_facility" type="bt:PARTY_REF" maxOccurs="1" minOccurs="0" />
+			<xs:element name="health_care_facility" type="bt:PARTY_PROXY" maxOccurs="1" minOccurs="0" />
 			<xs:element name="location" type="xs:string" maxOccurs="1" minOccurs="0" />
 			<xs:element name="participations" type="bt:PARTICIPATION" maxOccurs="unbounded" minOccurs="0" />
 			<xs:element name="other_context" type="st:ITEM_STRUCTURE" maxOccurs="1" minOccurs="0" />
