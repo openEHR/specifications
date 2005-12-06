@@ -4,7 +4,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:import namespace="openEHR/v1/BaseTypes" schemaLocation="BaseTypes.xsd" />
     
-    <xs:element name="items" type="LOCATABLE" />
+    <!-- <xs:element name="items" type="LOCATABLE" /> -->
     
     <xs:complexType name="LOCATABLE" abstract="true">
         <xs:sequence>
@@ -14,11 +14,11 @@
         </xs:sequence>
         <xs:attribute name="node_id" type="xs:string" />
     </xs:complexType>
-     <xs:complexType name="HISTORY">
+     <xs:complexType name="EVENT_SERIES">
         <xs:complexContent>
             <xs:extension base="LOCATABLE">
                 <xs:sequence>
-                    <xs:element name="events" type="EVENT" minOccurs="1" maxOccurs="unbounded" />
+                    <xs:element name="items" type="EVENT" minOccurs="1" maxOccurs="unbounded" />
                     <xs:element name="period" type="bt:DV_DURATION" minOccurs="0" />
                 </xs:sequence>
             </xs:extension>
@@ -40,7 +40,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:complexType abstract="true" name="ITEM_STRUCTURE">
+    <xs:complexType name="ITEM_STRUCTURE" abstract="true">
         <xs:complexContent>
             <xs:extension base="LOCATABLE"></xs:extension>
         </xs:complexContent>

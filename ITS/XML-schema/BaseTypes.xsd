@@ -6,7 +6,7 @@
                   xmlns:mstns="openEHR/v1/BaseTypes"
                   xmlns:xs="http://www.w3.org/2001/XMLSchema">
     
-    <xs:element name="values" type="DATA_VALUE" />
+    <!-- <xs:element name="values" type="DATA_VALUE" /> -->
 
     <xs:complexType name="DATA_VALUE" abstract="true">
 		<xs:sequence></xs:sequence>
@@ -154,6 +154,27 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:complexType name="DV_IDENTIFIER">
+		<xs:complexContent>
+			<xs:extension base="DATA_VALUE">
+				<xs:sequence>
+					<xs:element name="issuer" type="xs:string" maxOccurs="1" minOccurs="1" />
+					<xs:element name="id" type="xs:string" maxOccurs="1" minOccurs="1" />
+					<xs:element name="type" type="xs:string" maxOccurs="1" minOccurs="1" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+		<xs:complexType name="DV_STATE">
+		<xs:complexContent>
+			<xs:extension base="DATA_VALUE">
+				<xs:sequence>
+					<xs:element name="value" type="xs:string" maxOccurs="1" minOccurs="1" />
+					<xs:element name="is_terminal" type="xs:string" maxOccurs="1" minOccurs="1" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 	<xs:complexType name="DV_URI">
 		<xs:complexContent>
 			<xs:extension base="DATA_VALUE">
@@ -177,10 +198,13 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="RELATED_PARTY">
-		<xs:sequence>
-			<xs:element name="party" type="PARTY_PROXY" maxOccurs="1" minOccurs="0" />
-			<xs:element name="relationship" type="DV_CODED_TEXT" maxOccurs="1" minOccurs="0" />
-		</xs:sequence>
+		<xs:complexContent>
+			<xs:extension base="PARTY_IDENTIFIED">
+				<xs:sequence>
+					<xs:element name="relationship" type="DV_CODED_TEXT" maxOccurs="1" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="OBJECT_ID">
 		<xs:sequence>
@@ -209,18 +233,28 @@
 			<xs:element name="type" type="xs:string" maxOccurs="1" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="HASH_DV_TEXT_STRING">
-		<xs:sequence>
-			<xs:element name="key" type="DV_TEXT" maxOccurs="1" minOccurs="1" />
-			<xs:element name="value" type="xs:string" maxOccurs="1" minOccurs="0" />
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="PARTY_PROXY">
+	<xs:complexType name="PARTY_PROXY" abstract="true">
 		<xs:sequence>
 			<xs:element name="external_ref" type="PARTY_REF" maxOccurs="1" minOccurs="0" />
-			<xs:element name="names" type="HASH_DV_TEXT_STRING" maxOccurs="unbounded" minOccurs="0" />
-			<xs:element name="identifiers" type="HASH_DV_TEXT_STRING" maxOccurs="unbounded" minOccurs="0" />
 		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PARTY_IDENTIFIED">
+		<xs:complexContent>
+			<xs:extension base="PARTY_PROXY">
+				<xs:sequence>
+					<xs:element name="name" type="xs:string" maxOccurs="1" minOccurs="0" />
+					<xs:element name="identifiers" type="DV_IDENTIFIER" maxOccurs="unbounded" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+		<xs:complexType name="PARTY_SELF">
+		<xs:complexContent>
+			<xs:extension base="PARTY_PROXY">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="PARTY_REF">
 		<!-- actually has complex inheritence in openEHR model-->

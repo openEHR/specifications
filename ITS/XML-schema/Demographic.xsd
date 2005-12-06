@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema id="demographic" targetNamespace="openEHR/v1/Demographic" elementFormDefault="unqualified"
+    xmlns="openEHR/v1/Demographic" xmlns:mstns="openEHR/v1/Demographic" xmlns:bt="openEHR/v1/BaseTypes"
+    xmlns:ct="openEHR/v1/Content" xmlns:st="openEHR/v1/Structure" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="openEHR/v1/BaseTypes" schemaLocation="BaseTypes.xsd"/>
+    <xs:import namespace="openEHR/v1/Structure" schemaLocation="Structure.xsd"/>
+    <xs:import namespace="openEHR/v1/Content" schemaLocation="Content.xsd"/>
+  
+    
+    <xs:complexType name="PARTY">
+        <xs:complexContent>
+            <xs:extension base="st:LOCATABLE">
+                <xs:sequence>
+                    <xs:element name = "party_uid" type="bt:OBJECT_ID" minOccurs="1"/>
+                    <xs:element name = "Details" type="st:ITEM_STRUCTURE" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="CONTACT">
+        <xs:complexContent>
+            <xs:extension base="st:LOCATABLE">
+                <xs:sequence>
+                    <xs:element name= "time_validity" type="bt:DV_INTERVAL" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ACTOR">
+        <xs:complexContent>
+            <xs:extension base="PARTY">
+                <xs:sequence>
+                    <xs:element name= "languages" type="bt:DV_TEXT" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>    
+    <xs:complexType name="ADDRESS">
+        <xs:complexContent>
+            <xs:extension base="st:LOCATABLE">
+                <xs:sequence>
+                    <xs:element name = "Details" type="st:ITEM_STRUCTURE" minOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AGENT">
+        <xs:complexContent>
+            <xs:extension base="ACTOR"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="CAPABILITY">
+        <xs:complexContent>
+            <xs:extension base="st:LOCATABLE">
+                <xs:sequence>
+                    <xs:element name= "time_validity" type="bt:DV_INTERVAL" minOccurs="0"/>
+                    <xs:element name= "credentials" type="st:ITEM_STRUCTURE" minOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="GROUP">
+           <xs:complexContent>
+                <xs:extension base="ACTOR"/>
+           </xs:complexContent>
+        </xs:complexType>
+    <xs:complexType name="ORGANISATION">
+        <xs:complexContent>
+            <xs:extension base="ACTOR"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="PARTY_IDENTITY">
+        <xs:complexContent>
+            <xs:extension base="st:LOCATABLE">
+                <xs:sequence>
+                    <xs:element name = "Details" type="st:ITEM_STRUCTURE" minOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="PERSON">
+        <xs:complexContent>
+            <xs:extension base="ACTOR"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ROLE">
+        <xs:complexContent>
+            <xs:extension base="PARTY">
+                <xs:sequence>
+                    <xs:element name= "time_validity" type="bt:DV_INTERVAL" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

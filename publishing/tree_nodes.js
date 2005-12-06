@@ -28,7 +28,8 @@ var TREE_NODES = [
 		],
 		["Service Model (SM)", null, null,
 			["EHR", "architecture/sm/ehr_sm.pdf", "Main"]
-		]
+		],
+		["Terminology", "architecture/terminology.pdf", "Main"]
 	],
 	["Proposals", null, null,
 		["Instruction", "proposals/instruction.pdf", "Main"],

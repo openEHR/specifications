@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<xs:schema id="composition" targetNamespace="openEHR/v1/Composition" elementFormDefault="unqualified"
-	xmlns="openEHR/v1/Composition" xmlns:mstns="openEHR/v1/Composition" xmlns:bt="openEHR/v1/BaseTypes" 
+<xs:schema id="Composition" targetNamespace="openEHR/v1/Composition" elementFormDefault="unqualified"
+	xmlns="openEHR/v1/Composition" xmlns:mstns="openEHR/v1/Composition" xmlns:bt="openEHR/v1/BaseTypes"
 	xmlns:ct="openEHR/v1/Content" xmlns:st="openEHR/v1/Structure" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:import namespace="openEHR/v1/BaseTypes" schemaLocation="BaseTypes.xsd" />
 	<xs:import namespace="openEHR/v1/Structure" schemaLocation="Structure.xsd" />
 	<xs:import namespace="openEHR/v1/Content" schemaLocation="Content.xsd" />
-	
-	<xs:element name="Composition" type="COMPOSITION" />
-	
+	<xs:element name="composition" type="COMPOSITION" />
 	<xs:complexType name="COMPOSITION">
 		<xs:complexContent>
 			<xs:extension base="st:LOCATABLE">
 				<xs:sequence>
 					<xs:element name="category" type="bt:DV_CODED_TEXT" />
 					<xs:element name="territory" type="bt:CODE_PHRASE" />
+					<xs:element name="composer" type="bt:PARTY_IDENTIFIED" minOccurs="0" />
 					<xs:element name="context" type="EVENT_CONTEXT" minOccurs="0" />
-					<xs:element name="content" type="ct:CONTENT_ITEM" minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="content" type="ct:CONTENT_ITEM" minOccurs="0" maxOccurs="unbounded" /> <!-- Limited to one content in the current version of XML schema -->
 				</xs:sequence>
 				<!-- node_id is the archetype ID of the composition, as it is for any archetyped instance -->
 				<xs:attribute name="rm_version" type="xs:string" use="required" />
@@ -24,14 +23,13 @@
 	</xs:complexType>
 	<xs:complexType name="EVENT_CONTEXT">
 		<xs:sequence>
-			<xs:element name="composer" type="bt:PARTY_PROXY" maxOccurs="1" minOccurs="1" />
-			<xs:element name="start_time" type="bt:DV_DATE_TIME" maxOccurs="1" minOccurs="1" />
-			<xs:element name="end_time" type="bt:DV_DATE_TIME" maxOccurs="1" minOccurs="0" />
-			<xs:element name="setting" type="bt:DV_CODED_TEXT" maxOccurs="1" minOccurs="1" />
-			<xs:element name="health_care_facility" type="bt:PARTY_PROXY" maxOccurs="1" minOccurs="0" />
-			<xs:element name="location" type="xs:string" maxOccurs="1" minOccurs="0" />
+			<xs:element name="start_time" type="bt:DV_DATE_TIME"  />
+			<xs:element name="end_time" type="bt:DV_DATE_TIME" minOccurs="0" />
+			<xs:element name="setting" type="bt:DV_CODED_TEXT"  />
+			<xs:element name="health_care_facility" type="bt:PARTY_PROXY" minOccurs="0" />
+			<xs:element name="location" type="xs:string" minOccurs="0" />
 			<xs:element name="participations" type="bt:PARTICIPATION" maxOccurs="unbounded" minOccurs="0" />
-			<xs:element name="other_context" type="st:ITEM_STRUCTURE" maxOccurs="1" minOccurs="0" />
+			<xs:element name="other_context" type="st:ITEM_STRUCTURE"  minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

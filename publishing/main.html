@@ -13,6 +13,12 @@
 
 
 
+
+
+
+  
+  
+  
   
   
   
@@ -39,7 +45,13 @@
 
 
 
+
+
+
 <h1><span style="font-style: italic;">open</span>EHR Specifications - Release 1.0 Candidate</h1>
+
+
+
 
 
 
@@ -65,6 +77,9 @@ been approved by the </span><span style="font-style: italic; color: rgb(255, 0, 
 
 
 
+
+
+
 <p>The <span style="font-style: italic;">open</span>EHR
 Specifications
 project
@@ -74,11 +89,22 @@ computing architecture for health records. It also develops a number of
 guides. All deliverables available in the explorer tree to the left.
 Deliverables containing changes with respect to current latest release
 are listed below.</p>
-<p><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/folder_contents">Change Request Database</a></p>
+
+
+<h2>Resources</h2>
 
 
 
+<ul>
 
+
+  <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/folder_contents">Change Request Database</a></li>
+
+
+  <li><span style="font-weight: bold;">Release 1.0 candidate Subversion document tree</span>: <a href="http://svn.openehr.org/specification/BRANCHES/Release-1.0-candidate/publishing/">http://svn.openehr.org/specification/BRANCHES/Release-1.0-candidate/publishing/</a> (<a href="http://svn.openehr.org/specification/TRUNK/project_page.htm">directions on use</a>)</li>
+
+
+</ul>
 
 
 <h2>Architecture - <span style="color: rgb(255, 0, 0);">new drafts</span></h2>
@@ -107,6 +133,9 @@ are listed below.</p>
 
 
 
+
+
+
 <ul>
 
 
@@ -116,10 +145,33 @@ are listed below.</p>
 
 
 
+
+
+
+  <li>05 December 2005</li>
+
+  
+  <ul>
+
+    <li><a href="architecture/terminology.pdf">Support Terminology</a> (CR-000184 - separated out from Support model)</li>
+
+    <li><a href="architecture/rm/support_im.pdf">Support Information Model</a> (CR-000184 - removed terminology)</li>
+
+    <li><a href="architecture/rm/data_structures_im.pdf">Data Structures Information Model</a> (CR-000183 - Remove root node from ITEM_TREE)</li>
+
+  
+  </ul>
+
   <li>19 November 2005</li>
 
 
 
+
+
+
+  
+  
+  
   
   
   
@@ -127,17 +179,32 @@ are listed below.</p>
 
 
 
+
+
+
     <li><a href="architecture/rm/common_im.pdf">Common Information Model</a> (more refinements as part of CR-000162)</li>
+
+
+
 
 
     <li><a href="architecture/rm/ehr_im.pdf">EHR Information Model</a> (more refinements as part of CR-000162; CR-000180, CR-000181, CR-000182)</li>
 
 
 
+
+
+
+  
+  
+  
   
   
   
   </ul>
+
+
+
 
 
 
@@ -146,11 +213,20 @@ are listed below.</p>
 
 
 
+
+
+
+  
+  
+  
   
   
   
   
   <ul>
+
+
+
 
 
 
@@ -161,6 +237,12 @@ are listed below.</p>
 
 
 
+
+
+
+  
+  
+  
   
   
   
@@ -170,7 +252,13 @@ are listed below.</p>
 
 
 
+
+
+
   <li>27 October 2005</li>
+
+
+
 
 
 
@@ -182,24 +270,39 @@ are listed below.</p>
   
   
   
+  
+  
+  
   <ul>
 
 
 
 
 
-    <li><a href="architecture/rm/support_im.pdf">Support Information Model</a></li>
+
+
+
+    <li>Support Information Model</li>
 
 
 
 
 
+
+
+
+  
+  
+  
   
   
   
   
   
   </ul>
+
+
+
 
 
 
@@ -211,6 +314,9 @@ are listed below.</p>
 
 
 
+
+
+
   
   
   
@@ -219,6 +325,9 @@ are listed below.</p>
 
 
 
+  
+  
+  
   
   
   
@@ -231,12 +340,21 @@ are listed below.</p>
 
 
 
-    <li><a href="architecture/rm/data_structures_im.pdf">Data Structures Information Model</a></li>
+
+
+
+    <li>Data Structures Information Model</li>
 
 
 
 
 
+
+
+
+  
+  
+  
   
   
   
@@ -250,6 +368,12 @@ are listed below.</p>
 
 
 
+
+
+
+  
+  
+  
   
   
   
@@ -257,6 +381,9 @@ are listed below.</p>
   
   
   <ul>
+
+
+
 
 
 
@@ -268,6 +395,12 @@ are listed below.</p>
 
 
 
+
+
+
+  
+  
+  
   
   
   
@@ -281,9 +414,15 @@ are listed below.</p>
 
 
 
+
+
+
   
   
 </ul>
+
+
+
 
 
 
@@ -308,7 +447,13 @@ Specifications - <span style="color: rgb(255, 0, 0);">new drafts</span></h2>
 
 
 
+
+
+
 <h3>XML-schemas</h3>
+
+
+
 
 <ul>
 
@@ -319,64 +464,41 @@ Specifications - <span style="color: rgb(255, 0, 0);">new drafts</span></h2>
 
 
 
-  <li>08 November 2005</li>
 
-  
+
+
+  <li>06 December 2005</li>
   <ul>
-
     <li>BaseTypes - Support, Data Types, Common; <a href="its/XML-schema/BaseTypes.xsd.html">document form</a>; <a href="../ITS/XML-schema/BaseTypes.xsd">XSD file</a> (added PARTY_PROXY)</li>
-
     <li>Structures - LOCATABLE + Data Structures; <a href="its/XML-schema/Structure.xsd.html">document form</a>; <a href="../ITS/XML-schema/Structure.xsd">XSD file</a></li>
-
     <li>Composition - COMPOSITION class and friends; <a href="its/XML-schema/Composition.xsd.html">document form</a>; <a href="../ITS/XML-schema/Composition.xsd">XSD file</a></li>
-
-  
-  </ul>
-
-  <li>26 October 2005:&nbsp;</li>
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  <ul>
-
     <li>Content - descendants of CONTENT_ITEM; <a href="its/XML-schema/Content.xsd.html">document form</a>; <a href="../ITS/XML-schema/Content.xsd">XSD file</a></li>
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  
-  
+    <li>Demographics - PARTY class and friends; document form (coming); <a href="../ITS/XML-schema/Demographic.xsd">XSD file</a></li>
   </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 
 
 
@@ -397,10 +519,16 @@ Specifications - <span style="color: rgb(255, 0, 0);">new drafts</span></h2>
 
 
 
+
+
+
 <hr style="width: 100%; height: 2px;">
 <span class="footer">$LastChangedDate$&nbsp;&nbsp;
 $LastChangedRevision$
 </span><br>
+
+
+
 
 
 
