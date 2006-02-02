@@ -1,7 +1,7 @@
 // Tree structure definition
 var TREE_NODES = [
 	["Guides", null, null,
-		["Introducting openEHR", "openEHR/introducing_openehr.pdf", "Main"],
+		["Introducting openEHR", "openEHR/introducing_openEHR.pdf", "Main"],
 		["CM Plan", "CM/CM_plan.pdf", "Main"],
 		["Roadmap", "architecture/roadmap.pdf", "Main"],
 		["Modelling Guide", "architecture/modelling_guide.pdf", "Main"]
@@ -41,6 +41,9 @@ var TREE_NODES = [
 			["XML-schema structures", "its/XML-schema/Structure.xsd.html", "Main"],
 			["XML-schema EHR content", "its/XML-schema/Content.xsd.html", "Main"],
 			["XML-schema Composition", "its/XML-schema/Composition.xsd.html", "Main"]
+		]
+		["Java", null, null,
+			["ITS Guide", "its/Java/openEHR-JavaITS.pdf", "Main"]
 		]
 	],
 	["CM", null, null,
