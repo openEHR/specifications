@@ -2,9 +2,10 @@
 var TREE_NODES = [
 	["Guides", null, null,
 		["Introducting openEHR", "openEHR/introducing_openEHR.pdf", "Main"],
-		["CM Plan", "CM/CM_plan.pdf", "Main"],
-		["Roadmap", "architecture/roadmap.pdf", "Main"],
+		["Architecture Overview", "architecture/overview.pdf", "Main"],
+		["Document Roadmap", "architecture/roadmap.pdf", "Main"],
 		["Modelling Guide", "architecture/modelling_guide.pdf", "Main"]
+		["CM Plan", "CM/CM_plan.pdf", "Main"],
 	],
 	["Requirements", null, null,
 		["ISO TS18308 Conformance", "requirements/iso18308_conformance.pdf", "Main"]
@@ -21,7 +22,8 @@ var TREE_NODES = [
 		],
 		["Archetype Model (AM)", null, null,
 			["Archetype Principles", "architecture/am/archetype_principles.pdf", "Main"],
-			["ADL", "architecture/am/adl.pdf", "Main"],
+			["ADL1", "architecture/am/adl.pdf", "Main"],
+			["ADL2", "architecture/am/adl2.pdf", "Main"],
 			["Archetype Object Model", "architecture/am/aom.pdf", "Main"],
 			["openEHR Archetype Profile", "architecture/am/openehr_archetype_profile.pdf", "Main"],
 			["Archetype System", "architecture/am/archetype_system.pdf", "Main"]

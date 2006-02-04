@@ -1,0 +1,1580 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <title>openEHR Specification Project</title>
+  <link rel="stylesheet" href="http://www.openehr.org/styles/oe.css" type="text/css" />
+</head>
+
+
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1><span style="font-style: italic;">open</span>EHR
+Specification Project<br />
+
+
+
+
+
+
+
+Road Map<span style="color: rgb(153, 51, 153);"></span>
+</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr style="width: 100%; height: 2px;" />
+<h2>Overview</h2>
+
+The following
+table describes the deliverables of the openEHR specification project
+and indicates the current status of each. The meanings of the statuses
+are as follows:<br />
+
+
+
+
+
+<ul>
+
+
+
+
+
+  <li><span style="font-style: italic;">stable</span>: the deliverable has been reviewed and validated by some level of implementation.</li>
+
+
+
+
+
+  <li><span style="font-style: italic;">draft</span>: the deliverable
+is available but should not be considered stable yet, as
+testing of formal semantics is not yet complete.</li>
+
+
+
+
+
+  <li><span style="font-style: italic;">forthcoming</span>: the deliverable is not available yet, but will be in a future release.</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+
+
+
+
+
+  <tbody>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 102);">
+      
+      
+      
+      
+      
+      
+      <h2>Deliverable</h2>
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 102); width: 249px;">
+      
+      
+      
+      
+      
+      
+      <h2>Description</h2>
+
+
+
+
+
+
+      </td>
+
+
+      <td style="background-color: rgb(255, 255, 102); width: 36px;">
+      
+      
+      
+      
+      
+      
+      <h2>Status</h2>
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 102);">
+      
+      
+      
+      
+      
+      
+      <h2>Comments</h2>
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);">
+      
+      
+      
+      
+      
+      
+      <h3>General</h3>
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+      <td style="width: 249px; background-color: rgb(255, 255, 153);"></td>
+
+
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);"></td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><a href="publishing/openEHR/introducing_openEHR.pdf">Introducing <span style="font-style: italic;">open</span>EHR</a></td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); width: 249px;">First introduction to the openEHR Foundation and its activities.</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; color: rgb(0, 153, 0); width: 36px;">Stable</td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><a href="publishing/CM/CM_plan.pdf">CM Plan</a></td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">Technical
+document describing how versioning, changes, and releases are made.
+Describes the workflow of the Architectural Review Board (ARB).</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; color: rgb(0, 153, 0); width: 36px;">Stable</td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);">
+      
+      
+      
+      
+      
+      
+      <h3>Architecture</h3>
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);"></td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    
+    
+    
+    <tr>
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><a href="publishing/architecture/overview.pdf">Architecture Overview</a></td>
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">&ldquo;Read
+me 1st&rdquo; document for the whole architecture. provides a summary
+of the reference, archetype and service models, and describes global
+semantics.</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">This is a new
+document containing some content from the old "roadmap" document as
+well as new content describing the key semantics of the <span style="font-style: italic;">open</span>EHR reference model.</td>
+
+
+
+
+
+    </tr>
+
+
+
+
+
+    <tr>
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><a href="publishing/architecture/modelling_guide.pdf">Modelling Guide</a></td>
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">Describes the use of UML and other related issues in object-oriented modelling.</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+
+    </tr>
+
+
+
+
+
+    
+
+
+
+    <tr>
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><a href="publishing/architecture/terminology.pdf">Terminology</a></td>
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">Documentary
+form of the openEHR terminology, which is a set of vocabularies and
+code sets used by the reference and archetype models.</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);">
+      
+      
+      
+      
+      
+      
+      <h3>Reference Model</h3>
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);"></td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    
+
+
+    <tr>
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><a href="publishing/architecture/rm/ehr_im.pdf">EHR IM</a></td>
+
+      <td style="background-color: rgb(255, 255, 204);">The information model of the openEHR EHR&nbsp;</td>
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+    </tr>
+
+    <tr>
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">EHR Extract IM</td>
+
+      <td style="background-color: rgb(255, 255, 204);">The information model of the EHR Extract, which is a serilialisation of content from an EHR.</td>
+
+      <td style="background-color: rgb(255, 255, 204); width: 36px;"><span style="font-weight: bold; color: rgb(51, 51, 255);">Forthcoming</span></td>
+
+      <td style="background-color: rgb(255, 255, 204);">The EHR
+Extract Information Model has to be redeveloped due to changes in
+semantics in the other models, including the Folder structure, version
+identification and so on. It is scheduled <br />
+
+
+
+
+
+for Release 1.1</td>
+
+    </tr>
+
+    <tr>
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><a href="publishing/architecture/rm/demographic_im.pdf">Demographic IM</a></td>
+
+      <td style="background-color: rgb(255, 255, 204);">The openEHR demographic model.</td>
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+    </tr>
+
+    <tr>
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><a href="publishing/architecture/rm/common_im.pdf">Common IM</a></td>
+
+      <td style="background-color: rgb(255, 255, 204);">Information
+model containing common concepts, including the archetype-enabling
+LOCATABLE class, party references, audits and attestations, change
+control, and authored resources.</td>
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+    </tr>
+
+
+
+
+
+
+    
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><a href="publishing/architecture/rm/data_structures_im.pdf">Data Structures IM</a></td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">Information model of data structures, incuding a powerful model of HISTORY and EVENT.</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    
+
+
+
+
+    <tr>
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><a href="publishing/architecture/rm/data_types_im.pdf">Data Types IM</a></td>
+
+      <td style="background-color: rgb(255, 255, 204);">Information
+model of data types, including quantities, date/times, plain and coded
+text, time specification, multimedia and URIs.</td>
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+    </tr>
+
+
+
+
+
+
+    
+
+
+
+
+    <tr>
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><a href="publishing/architecture/rm/support_im.pdf">Support IM</a></td>
+
+      <td style="background-color: rgb(255, 255, 204);">Support
+model containing low-level concepts, assumed types, and terminology
+interface specification used in the rest of the models.</td>
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+    </tr>
+
+
+
+
+
+
+    
+    <tr>
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Integration IM</td>
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">Model supporting expression of legacy data in a free form for further processing into and out of openEHR information structures.</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(204, 0, 0);">Draft</span></td>
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"><br />
+
+
+
+      </td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);">
+      
+      
+      
+      
+      
+      
+      <h3><span style="font-weight: bold;">Archetype Model</span></h3>
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);"></td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><a href="publishing/architecture/am/adl.pdf">Archetype Definition <br />
+
+
+
+
+
+Language 1.3&nbsp;(ADL)</a></td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">Syntax specification for archetypes.</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(0, 153, 0);">Stable</span></td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">ADL 1.3
+remains the current ADL syntax in use, and most current tools only
+process ADL 1.3. Some improvements that were done as part of the ADL 2
+work will be reverse-engineered into ADL 1.3 in the near future; these
+are mainly to do with pathing.</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><a href="publishing/architecture/am/adl2.pdf">Archetype Definition <br />
+
+
+
+
+
+Language 2.0<br />
+
+ (ADL2)</a></td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">Improved syntax specification for archetypes.</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(204, 0, 0);">Draft</span></td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">ADL version 2.0 is an improved syntax for expressing archetypes, and is has two important<br />
+
+
+
+
+
+features over ADL 1.3: it is extensible without the syntax needing to
+be changed, because in ADL2, &nbsp;an archetype is a dADL document;
+and due to being in dADL/embedded cADL &nbsp;format, it can more easily
+be converted to and from XML.<br />
+
+
+
+
+
+The current version of this specification has not yet been fully
+implemented or tested. Implementors of this specification should
+consider engineering backwards compatibility for ADL 1.3 in their tools.</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><a href="publishing/architecture/am/aom.pdf">Archetype Object <br />
+
+
+
+
+
+Model (AOM)</a></td>
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">Object model of archetypes.</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(0, 153, 0);">Stable</span></td>
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+
+    </tr>
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Template Object Model (TOM)</td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">Object model of templates.</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(51, 51, 255);">Forthcoming</span></td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">The templates document has been partially completed and will be included in Release 1.1.</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+    <tr>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><a href="publishing/architecture/am/openehr_archetype_profile.pdf"><span style="font-style: italic;">open</span>EHR Archetype Profile (OAP)</a></td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">openEHR plug-in additions to the generic archetype object model.</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(0, 153, 0);">Stable</span></td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"><br />
+
+
+
+
+      </td>
+
+
+
+
+    </tr>
+
+
+
+
+    <tr>
+
+      <td style="background-color: rgb(255, 255, 153);">
+      
+      
+      
+      
+      <h3>Service Model</h3>
+
+
+
+
+      </td>
+
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+      <td style="background-color: rgb(255, 255, 153);"></td>
+
+    </tr>
+
+    <tr>
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">EHR Kernel API</td>
+
+      <td style="background-color: rgb(255, 255, 204);">API of a client
+component that provides a virtual EHR interface, including fine-grained
+archetype-based data manipulation, and querying.</td>
+
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(51, 51, 255);">Forthcoming</span></td>
+
+      <td style="background-color: rgb(255, 255, 204);"><br />
+
+
+
+
+      </td>
+
+    </tr>
+
+    <tr>
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">EHR Service</td>
+
+      <td style="background-color: rgb(255, 255, 204);">Coarse-grained service specification for EHR back-end providing check-out, Contribution check-in, querying.</td>
+
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(51, 51, 255);">Forthcoming</span></td>
+
+      <td style="background-color: rgb(255, 255, 204);"><br />
+
+
+
+
+      </td>
+
+    </tr>
+
+    <tr>
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Demographic Service</td>
+
+      <td style="background-color: rgb(255, 255, 204);">Service specification for demographic back-end.</td>
+
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(51, 51, 255);">Forthcoming</span></td>
+
+      <td style="background-color: rgb(255, 255, 204);"><br />
+
+
+
+
+      </td>
+
+    </tr>
+
+    <tr>
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Archetype service</td>
+
+      <td style="background-color: rgb(255, 255, 204);">Archetype repository service specification.</td>
+
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(51, 51, 255);">Forthcoming</span></td>
+
+      <td style="background-color: rgb(255, 255, 204);"><br />
+
+
+
+
+      </td>
+
+    </tr>
+
+    <tr>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);">
+      
+      
+      
+      
+      <h3>Computable</h3>
+
+
+
+
+      </td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);"></td>
+
+
+
+
+    </tr>
+
+
+
+
+    <tr>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">UML computable form of model</td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">Expression of openEHR models in tool-based UML; published in XMI format.</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;"><span style="font-weight: bold; color: rgb(51, 51, 255);">Forthcoming</span></td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">The XML-schemas are undergoing testing in various places.</td>
+
+
+
+
+    </tr>
+
+
+
+
+    <tr>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Terminology as an XML file</td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">Terminology in computable XML form.</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;"><span style="font-weight: bold; color: rgb(51, 51, 255);">Forthcoming</span></td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+    </tr>
+
+
+
+
+    <tr>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);">
+      
+      
+      
+      
+      
+      
+      <h3><span style="font-weight: bold;">ITS</span></h3>
+
+
+
+
+
+
+      </td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);"></td>
+
+
+
+
+    </tr>
+
+
+
+
+    <tr>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">XML schemas</td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">XML-schema expression of the reference model.</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;"><span style="color: rgb(204, 0, 0);">Draft</span></td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">The XML-schemas are undergoing testing in various places.</td>
+
+
+
+
+    </tr>
+
+
+
+
+    <tr>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Java ITS Guide</td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">Guide to java implementation of openEHR.</td>
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;"><span style="color: rgb(0, 153, 0);">Stable</span></td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"><br />
+
+
+
+
+      </td>
+
+
+
+
+    </tr>
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  </tbody>
+</table>
+
+
+
+
+
+
+<h2><a name="Release_Strategy"></a>Release Strategy</h2>
+
+
+
+
+
+
+
+With the advent of Release 1.0 of <span style="font-style: italic;">open</span>EHR,
+more rigorous change management rules come into play. These are
+designed to protect developers and users from adverse effects of
+changes, and to allow them to upgrade in an orderly fashion. Future
+releases will follow a 3-digit numbering scheme similar to many open source projects, e.g. Apache, using identifiers like
+1.0.1 etc. The meaning of a change in each digit is as follows:<br />
+
+
+
+
+
+
+
+<ul>
+
+
+
+
+
+
+
+  <li><span style="font-style: italic;">3rd position</span>: used to indicate <span style="font-weight: bold;">error corrections and minor additions that do not change the
+semantics</span><span style="font-weight: bold;"></span>. Thus, Release 1.0.2 is the second error correction release after Release 1.0.</li>
+
+
+
+
+
+
+
+  <li><span style="font-style: italic;">2nd position</span>: used to indicate <span style="font-weight: bold;">significant additions that do not change the
+semantics</span> of the existing part of the release. Release 1.3.0 would be
+the 3rd release containing compatible additions to Release 1.0.</li>
+
+
+
+
+
+
+
+  <li><span style="font-style: italic;">1st position</span>: used to indicate <span style="font-weight: bold;">changes to the semantics or large
+changes</span>. Release 2.0 would contain changes incompatible in some way
+with Release 1.0, most likely requiring software upgrade and possibly
+data migration.</li>
+
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+<h3>Changes to Documentation</h3>
+
+
+
+
+
+
+
+Where changes to documentation are made, e.g. due to a request to
+clarify an explanation, fix a typographical error, a CR will be raised,
+and the revision number of the affected document(s) will change, but
+there will not be a new release number.
+<h3>Error corrections</h3>
+
+
+
+
+
+
+
+Where the changes made are to correct an error in a model, parsing
+rules or some other aspect of the formal semantics of the
+specifications (and possibly also change explanatory text), an
+error-correction release will be made.
+<h3>Compatible Additions</h3>
+
+
+
+
+
+
+
+Where the changes have the effect of adding a new specification or
+other artifact which is completely compatible with the current release,
+an enhancement release is made.
+<h3>Major Changes</h3>
+
+
+
+
+
+
+
+Where changes actually alter semantics of existing artefacts, a new
+major release is declared. Such changes would normally be grouped into
+as few such releases as possible.
+<h2><a name="Change_Management"></a>Change Management</h2>
+
+
+
+
+
+
+
+As with pre-1.0 releases, change management will remain a displined
+process. &nbsp;There are two documents, the Problem Report (PR) and the
+Change Request (CR) that are used to document problems and changes.
+These are used as follows:<br />
+
+
+
+
+
+
+
+<ul>
+
+
+
+
+
+
+
+  <li>anyone can <a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/PR/">raise a PR</a> to indicate some issue or problem with the
+current release. A PR documents the issue seen from the user's
+perspective, and its resolution.</li>
+
+
+
+
+
+
+
+  <li>only a member of the development team can raise a CR. All CRs can be <a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/">viewed here</a>. A CR
+documents a change to the current release. A CR will either describe
+the problem it is solving, or refer to one or more PRs it is designed
+to address. The CR is a document of the change and the process of
+applying it to the release.</li>
+
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+From Release 1.0 onward, the way&nbsp;CRs &nbsp;are processed will
+change slightly. All changes to the specifications, apart from document
+text changes (e.g. improving explanations, fixing typos) will be
+signalled to the community via the openehr-technical mailing list, and
+a period of time given for the community to inspect the proposed
+changes and provide feedback. This is particularly aimed at allowing
+implementers to indicate the knock-on effects of changes. In
+the process of such discussions it may turn out that the proposed
+change will not go ahead, or that it will go ahead in a later
+release than originally planned. In this way, the community will be
+able to ensure that&nbsp;releases into the future remain stable and
+occur at a reasonable rate.<br />
+
+
+
+
+
+
+
+<hr style="width: 100%; height: 2px;" />
+<span class="footer">$LastChangedDate$
+$LastChangedRevision$</span><br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
