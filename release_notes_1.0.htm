@@ -13,6 +13,9 @@
 
 
 
+
+  
+  
   
   
   
@@ -54,6 +57,7 @@
 
 
 
+
 <h1><span style="font-style: italic;">open</span>EHR
 Specification Project<br />
 
@@ -61,7 +65,9 @@ Specification Project<br />
 
 
 
+
 Release 1.0 - "Reference Model"<br />
+
 
 
 
@@ -81,8 +87,10 @@ Release 1.0 - "Reference Model"<br />
 
 
 
+
 <hr style="width: 100%; height: 2px;" />
 <h2>Overview</h2>
+
 
 
 
@@ -103,11 +111,13 @@ semantics are modelled within archetypes, templates and terminology.
 Various change management rules will now come into effect (see below) in order to
 minimise the effect of changes, and to enable the widest possible
 community input.<br />
+
 <h2>Public Comment Period</h2>
 
 
 
-There will be a 3 month public comment period from 01 Feb 2006 when
+
+There will be a 3 month public comment period from early February 2006 when
 Release 1.0 is published. During this period, the specifications will
 be marked as being for public comment. There is in fact nothing
 different about this period - all of the release and change management
@@ -123,12 +133,14 @@ input continues to be welcomed as per the normal process.<br />
 
 
 
+
 <h3>Is the Release safe to use during this period?</h3>
 
 
 
+
 Yes. From the release date, the only things that will change are a) errors in the models will be corrected and
-b) explanatory text improved. This is no different from the situation going into
+b) explanatory text improved. This is no different from thechange management situation going into
 the future. The only difference between the documents during and after
 the public comment period is that the "public comment" marker
 &nbsp;will be removed from the front page graphic on 1 May.
@@ -136,7 +148,9 @@ the public comment period is that the "public comment" marker
 
 
 
+
 The following is a list of major improvements in Release 1.0 over previous releases:<br />
+
 
 
 
@@ -144,27 +158,23 @@ The following is a list of major improvements in Release 1.0 over previous relea
 
 
 
-  <li>signficant refactoring of models to promote re-use both in the specifications and in software</li>
 
+  <li>signficant refactoring of models to promote re-use both
+in the specifications and in software (the Common IM contains most
+re-usable patterns)</li>
 
-
-  <li>vastly improved model of HISTORY / EVENT, supporting point and
-interval events, overlapping events, and "math function" data, i.e.
-mean, max, min, change etc</li>
 
 
 
   <li>major improvements to ENTRY types, based on a "scientific
 investigator" &nbsp;model; there are now 5 ENTRY subtypes: OBSERVATION,
 EVALUATION, INSTRUCTION, ACTION and ADMIN_ENTRY</li>
-
-
-
   <li>support for archetyping and automated workflows in the INSTRUCTION and ACTION types</li>
-
-
-
+  <li>vastly improved model of HISTORY / EVENT, supporting point and
+interval events, overlapping events, and "math function" data, i.e.
+mean, max, min, change etc;</li>
   <li>redeveloped model of PARTY references from the EHR, supporting anonymous and transparent reference to the patient</li>
+
 
 
 
@@ -172,7 +182,9 @@ EVALUATION, INSTRUCTION, ACTION and ADMIN_ENTRY</li>
 
 
 
+
   <li>enhanced model of versioning and version identification</li>
+
 
 
 
@@ -180,7 +192,9 @@ EVALUATION, INSTRUCTION, ACTION and ADMIN_ENTRY</li>
 
 
 
+
   <li>improved syntax for archetypes, known as ADL2, which is extensible and convertible in and out of XML</li>
+
 
 
 
@@ -188,26 +202,35 @@ EVALUATION, INSTRUCTION, ACTION and ADMIN_ENTRY</li>
 
 
 
+
 </ul>
 
 
 
-During the work on this release, over 50 CRs were processed, with some 36 being implemented.
+
+During the work on this release, over 50 CRs were processed, with some 36 being implemented. The <a href="history.htm">Change History</a> lists CRs that have been implemented in each release. Changes slated for the future are indicated in the <a href="todo.htm">To Do list</a>.
 <h2>What is the status of specifications in this Release?</h2>
+
 
 Almost all of the specifications are in their intended state in this
 release. Work remains on a couple, and there are still of course more
 change requests (CRs) to process for future releases. The table below
 indicates the status of deliverables as of this release. See the <a href="publishing/index.html">roadmap</a> for the descriptions of deliverables and current status.<br />
+
 <br />
+
 
 <table style="text-align: left; width: 80%;" border="1" cellpadding="2" cellspacing="2">
 
+
   <tbody>
+
 
     <tr>
 
+
       <td style="background-color: rgb(255, 255, 102);">
+      
       
       <h2>Deliverable</h2>
 
@@ -216,7 +239,9 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
       </td>
+
 
 
 
@@ -231,6 +256,7 @@ indicates the status of deliverables as of this release. See the <a href="publis
       
       
       
+      
       <h2>Status</h2>
 
 
@@ -238,7 +264,9 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
       </td>
+
 
 
 
@@ -252,7 +280,9 @@ indicates the status of deliverables as of this release. See the <a href="publis
       
       
       
+      
       <h2>Comments</h2>
+
 
 
 
@@ -266,7 +296,9 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
     </tr>
+
 
 
 
@@ -280,7 +312,9 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
       <td style="background-color: rgb(255, 255, 153);">
+      
       
       
       
@@ -294,7 +328,9 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
       </td>
+
 
 
 
@@ -309,7 +345,9 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
       <td style="background-color: rgb(255, 255, 153);"></td>
+
 
 
 
@@ -323,7 +361,9 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
     <tr>
+
 
 
 
@@ -337,8 +377,10 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
       
       <td style="background-color: rgb(255, 255, 204); font-weight: bold; color: rgb(0, 153, 0); width: 36px;">Stable</td>
+
 
 
 
@@ -352,6 +394,7 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
     </tr>
 
 
@@ -359,7 +402,9 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
     <tr>
+
 
 
 
@@ -373,8 +418,10 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
       
       <td style="background-color: rgb(255, 255, 204); font-weight: bold; color: rgb(0, 153, 0); width: 36px;">Stable</td>
+
 
 
 
@@ -388,7 +435,9 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
     </tr>
+
 
 
 
@@ -402,7 +451,9 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
       <td style="background-color: rgb(255, 255, 153);">
+      
       
       
       
@@ -416,7 +467,9 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
       </td>
+
 
 
 
@@ -431,6 +484,7 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
       <td style="background-color: rgb(255, 255, 153);"></td>
 
 
@@ -438,7 +492,9 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
     </tr>
+
 
 
 
@@ -454,7 +510,9 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
 
 
+
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Architecture Overview</td>
+
 
 
 
@@ -462,6 +520,7 @@ indicates the status of deliverables as of this release. See the <a href="publis
 
       
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
 
 
 
@@ -475,7 +534,9 @@ well as new content describing the key semantics of the <span style="font-style:
 
 
 
+
     </tr>
+
 
 
 
@@ -487,7 +548,9 @@ well as new content describing the key semantics of the <span style="font-style:
 
 
 
+
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Modelling Guide</td>
+
 
 
 
@@ -500,13 +563,16 @@ well as new content describing the key semantics of the <span style="font-style:
 
 
 
+
       <td style="background-color: rgb(255, 255, 204);"></td>
 
 
 
 
 
+
     </tr>
+
 
 
 
@@ -520,7 +586,9 @@ well as new content describing the key semantics of the <span style="font-style:
 
 
 
+
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Terminology</td>
+
 
 
 
@@ -529,11 +597,14 @@ well as new content describing the key semantics of the <span style="font-style:
 
 
 
+
       <td style="background-color: rgb(255, 255, 204);"></td>
 
 
 
+
     </tr>
+
 
 
 
@@ -544,7 +615,9 @@ well as new content describing the key semantics of the <span style="font-style:
 
 
 
+
       <td style="background-color: rgb(255, 255, 153);">
+      
       
       
       
@@ -558,7 +631,9 @@ well as new content describing the key semantics of the <span style="font-style:
 
 
 
+
       </td>
+
 
 
 
@@ -573,6 +648,7 @@ well as new content describing the key semantics of the <span style="font-style:
 
 
 
+
       <td style="background-color: rgb(255, 255, 153);"></td>
 
 
@@ -580,7 +656,9 @@ well as new content describing the key semantics of the <span style="font-style:
 
 
 
+
     </tr>
+
 
 
 
@@ -592,19 +670,27 @@ well as new content describing the key semantics of the <span style="font-style:
 
     <tr>
 
+
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">EHR IM</td>
+
 
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
 
+
       <td style="background-color: rgb(255, 255, 204);"></td>
+
 
     </tr>
 
+
     <tr>
+
 
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">EHR Extract IM</td>
 
+
       <td style="background-color: rgb(255, 255, 204); width: 36px;"><span style="font-weight: bold; color: rgb(51, 51, 255);">Forthcoming</span></td>
+
 
       <td style="background-color: rgb(255, 255, 204);">The EHR
 Extract Information Model has to be redeveloped due to changes in
@@ -615,29 +701,42 @@ identification and so on. It is scheduled <br />
 
 
 
+
 for Release 1.1</td>
+
 
     </tr>
 
+
     <tr>
+
 
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Demographic IM</td>
 
+
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
 
       <td style="background-color: rgb(255, 255, 204);"></td>
 
+
     </tr>
+
 
     <tr>
 
+
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Common IM</td>
+
 
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
 
+
       <td style="background-color: rgb(255, 255, 204);"></td>
 
+
     </tr>
+
 
 
 
@@ -650,6 +749,7 @@ for Release 1.1</td>
 
 
     <tr>
+
 
 
 
@@ -663,6 +763,7 @@ for Release 1.1</td>
 
 
 
+
       
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
 
@@ -671,7 +772,9 @@ for Release 1.1</td>
 
 
 
+
       <td style="background-color: rgb(255, 255, 204);"></td>
+
 
 
 
@@ -685,20 +788,26 @@ for Release 1.1</td>
 
 
 
+
     
 
 
 
 
     <tr>
+
 
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Data Types IM</td>
 
+
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
 
       <td style="background-color: rgb(255, 255, 204);"></td>
 
+
     </tr>
+
 
 
 
@@ -711,12 +820,16 @@ for Release 1.1</td>
 
 
     <tr>
+
 
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Support IM</td>
 
+
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
 
+
       <td style="background-color: rgb(255, 255, 204);"></td>
+
 
     </tr>
 
@@ -725,12 +838,15 @@ for Release 1.1</td>
 
 
 
+
     
     <tr>
+
 
 
 
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Integration IM</td>
+
 
 
 
@@ -739,7 +855,9 @@ for Release 1.1</td>
 
 
 
+
       <td style="background-color: rgb(255, 255, 204);"><br />
+
 
 
 
@@ -747,11 +865,14 @@ for Release 1.1</td>
 
 
 
+
     </tr>
 
 
 
+
     <tr>
+
 
 
 
@@ -765,6 +886,7 @@ for Release 1.1</td>
       
       
       
+      
       <h3><span style="font-weight: bold;">Archetype Model</span></h3>
 
 
@@ -772,7 +894,9 @@ for Release 1.1</td>
 
 
 
+
       </td>
+
 
 
 
@@ -787,7 +911,9 @@ for Release 1.1</td>
 
 
 
+
       <td style="background-color: rgb(255, 255, 153);"></td>
+
 
 
 
@@ -801,7 +927,9 @@ for Release 1.1</td>
 
 
 
+
     <tr>
+
 
 
 
@@ -814,7 +942,9 @@ for Release 1.1</td>
 
 
 
+
 Language 1.3&nbsp;(ADL)</td>
+
 
 
 
@@ -823,6 +953,7 @@ Language 1.3&nbsp;(ADL)</td>
 
       
       <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(0, 153, 0);">Stable</span></td>
+
 
 
 
@@ -840,7 +971,9 @@ are mainly to do with pathing.</td>
 
 
 
+
     </tr>
+
 
 
 
@@ -854,7 +987,9 @@ are mainly to do with pathing.</td>
 
 
 
+
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Archetype Definition <br />
+
 
 
 
@@ -862,7 +997,9 @@ are mainly to do with pathing.</td>
 
 Language 2.0<br />
 
+
  (ADL2)</td>
+
 
 
 
@@ -877,7 +1014,9 @@ Language 2.0<br />
 
 
 
+
       <td style="background-color: rgb(255, 255, 204);">ADL version 2.0 is an improved syntax for expressing archetypes, and is has two important<br />
+
 
 
 
@@ -892,9 +1031,11 @@ be converted to and from XML.<br />
 
 
 
+
 The current version of this specification has not yet been fully
 implemented or tested. Implementors of this specification should
 consider engineering backwards compatibility for ADL 1.3 in their tools.</td>
+
 
 
 
@@ -908,7 +1049,9 @@ consider engineering backwards compatibility for ADL 1.3 in their tools.</td>
 
 
 
+
     <tr>
+
 
 
 
@@ -920,7 +1063,9 @@ consider engineering backwards compatibility for ADL 1.3 in their tools.</td>
 
 
 
+
 Model (AOM)</td>
+
 
 
 
@@ -933,13 +1078,16 @@ Model (AOM)</td>
 
 
 
+
       <td style="background-color: rgb(255, 255, 204);"></td>
 
 
 
 
 
+
     </tr>
+
 
 
 
@@ -952,7 +1100,9 @@ Model (AOM)</td>
 
 
 
+
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Template Object Model (TOM)</td>
+
 
 
 
@@ -967,7 +1117,9 @@ Model (AOM)</td>
 
 
 
+
       <td style="background-color: rgb(255, 255, 204);">The templates document has been partially completed and will be included in Release 1.1.</td>
+
 
 
 
@@ -979,12 +1131,15 @@ Model (AOM)</td>
 
 
 
+
     <tr>
 
 
 
 
+
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><span style="font-style: italic;">open</span>EHR Archetype Profile (OAP)</td>
+
 
 
 
@@ -995,12 +1150,15 @@ Model (AOM)</td>
 
 
 
+
       <td style="background-color: rgb(255, 255, 204);"><br />
 
 
 
 
+
       </td>
+
 
 
 
@@ -1010,7 +1168,9 @@ Model (AOM)</td>
 
 
 
+
     <tr>
+
 
 
 
@@ -1020,12 +1180,15 @@ Model (AOM)</td>
       
       
       
+      
       <h3>Computable</h3>
 
 
 
 
+
       </td>
+
 
 
 
@@ -1036,7 +1199,9 @@ Model (AOM)</td>
 
 
 
+
       <td style="background-color: rgb(255, 255, 153);"></td>
+
 
 
 
@@ -1046,7 +1211,9 @@ Model (AOM)</td>
 
 
 
+
     <tr>
+
 
 
 
@@ -1056,13 +1223,19 @@ Model (AOM)</td>
 
 
 
+
       
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;"><span style="font-weight: bold; color: rgb(51, 51, 255);">Forthcoming</span></td>
 
 
 
 
-      <td style="background-color: rgb(255, 255, 204);">The XML-schemas are undergoing testing in various places.</td>
+
+      <td style="background-color: rgb(255, 255, 204);">The UML model of the <span style="font-style: italic;">open</span>EHR
+RM has not yet been upgraded fom 0.95. It is also awaiting a new
+version of the UML tool (MagicDraw) that can generate error-free
+XML-schemas and Java &amp; C# skeletons.</td>
+
 
 
 
@@ -1072,7 +1245,9 @@ Model (AOM)</td>
 
 
 
+
     <tr>
+
 
 
 
@@ -1082,8 +1257,10 @@ Model (AOM)</td>
 
 
 
+
       
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;"><span style="font-weight: bold; color: rgb(51, 51, 255);">Forthcoming</span></td>
+
 
 
 
@@ -1093,7 +1270,9 @@ Model (AOM)</td>
 
 
 
+
     </tr>
+
 
 
 
@@ -1103,7 +1282,9 @@ Model (AOM)</td>
 
 
 
+
       <td style="background-color: rgb(255, 255, 153);">
+      
       
       
       
@@ -1117,7 +1298,9 @@ Model (AOM)</td>
 
 
 
+
       </td>
+
 
 
 
@@ -1128,7 +1311,9 @@ Model (AOM)</td>
 
 
 
+
       <td style="background-color: rgb(255, 255, 153);"></td>
+
 
 
 
@@ -1138,12 +1323,15 @@ Model (AOM)</td>
 
 
 
+
     <tr>
 
 
 
 
+
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">XML schemas</td>
+
 
 
 
@@ -1154,7 +1342,9 @@ Model (AOM)</td>
 
 
 
+
       <td style="background-color: rgb(255, 255, 204);">The XML-schemas are undergoing testing in various places.</td>
+
 
 
 
@@ -1164,12 +1354,15 @@ Model (AOM)</td>
 
 
 
+
     <tr>
 
 
 
 
+
       <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Java ITS Guide</td>
+
 
 
 
@@ -1180,12 +1373,15 @@ Model (AOM)</td>
 
 
 
+
       <td style="background-color: rgb(255, 255, 204);"><br />
 
 
 
 
+
       </td>
+
 
 
 
@@ -1197,6 +1393,8 @@ Model (AOM)</td>
 
 
 
+
+  
   
   
   
@@ -1210,8 +1408,11 @@ Model (AOM)</td>
 
 
 
+
 <br />
+
 <h2>Future Release Strategy</h2>
+
 
 Management of future releases is described in the <a href="publishing/roadmap.html#Release_Strategy">roadmap</a>.
 
@@ -1233,20 +1434,23 @@ $LastChangedRevision$</span><br />
 
 
 
-<br />
-
-
-
-
-
-
-
-
-
-
-
 
 <br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br />
+
 
 
 
