@@ -3,7 +3,6 @@ var TREE_NODES = [
 	["Guides", null, null,
 		["Introducting openEHR", "openEHR/introducing_openEHR.pdf", "Main"],
 		["Architecture Overview", "architecture/overview.pdf", "Main"],
-		["Document Roadmap", "architecture/roadmap.pdf", "Main"],
 		["Modelling Guide", "architecture/modelling_guide.pdf", "Main"]
 		["CM Plan", "CM/CM_plan.pdf", "Main"],
 	],
@@ -33,23 +32,19 @@ var TREE_NODES = [
 		],
 		["Terminology", "architecture/terminology.pdf", "Main"]
 	],
-	["Proposals", null, null,
-		["Instruction", "proposals/instruction.pdf", "Main"],
-		["Integration IM", "proposals/integration_im.pdf", "Main"]
-	],
 	["ITSs", null, null,
 		["XML-schema", null, null,
 			["XML-schema base types", "its/XML-schema/BaseTypes.xsd.html", "Main"],
 			["XML-schema structures", "its/XML-schema/Structure.xsd.html", "Main"],
 			["XML-schema EHR content", "its/XML-schema/Content.xsd.html", "Main"],
 			["XML-schema Composition", "its/XML-schema/Composition.xsd.html", "Main"]
-		]
+		],
 		["Java", null, null,
 			["ITS Guide", "its/Java/openEHR-JavaITS.pdf", "Main"]
 		]
 	],
 	["CM", null, null,
 		["CM Plan", "CM/CM_plan.pdf", "Main"],
-		["Change Requests", "http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/folder_contents", "Main"]
+		["Change Requests", "http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/folder_contents", "_top"]
 	]
 ];
