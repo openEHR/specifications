@@ -1,0 +1,1936 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+
+  
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <title>Release 1.0 - Release notes</title>
+  <link rel="stylesheet" href="http://www.openehr.org/styles/oe.css" type="text/css" />
+</head>
+
+
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1><span style="font-style: italic;">open</span>EHR
+Specification Project<br />
+
+
+
+
+
+
+
+
+Release 1.0 - "Reference Model"<br />
+
+
+
+
+
+
+
+
+<span style="color: rgb(153, 51, 153);">Release Notes</span>
+</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr style="width: 100%; height: 2px;" />
+<h2>Overview</h2>
+
+
+
+
+
+
+
+
+This publication constitutes Release 1.0 of the <span style="font-style: italic;">open</span>EHR
+specification project, also known as the "reference model" release. The
+release has benefited from 3 years of use of earlier releases of the
+specifications, including significant implementations. The primary aim
+of Release 1.0 is to provide the <span style="text-decoration: underline;">definitive stable statement of the
+reference model</span>. From the point of view of software developers, Release
+1.0 is a stable set of specifications for software development
+into the future. Due to the separation of the reference model
+from&nbsp;archetypes in <span style="font-style: italic;">open</span>EHR,
+we expect that the reference model will indeed remain extremely stable
+from this point on, since all clinical and other domain specific
+semantics are modelled within archetypes, templates and terminology.
+Various change management rules will now come into effect (see below) in order to
+minimise the effect of changes, and to enable the widest possible
+community input.<br />
+
+
+
+<h2>Public Comment Period</h2>
+
+
+
+
+
+
+There will be a 3 month public comment period from early February 2006 when
+Release 1.0 is published. During this period, the specifications will
+be marked as being for public comment. There is in fact nothing
+different about this period - all of the release and change management
+rules
+described below apply from 01/Feb/2006. However, the front cover of
+each document will be marked as being in the "public comment" period,
+to a) encourage scrutiny during this period, and b) to differentiate
+the documents from the form that will be published on 1 May 2006. The
+main reason for the public comment period is to give the <span style="font-style: italic;">open</span>EHR
+community a chance to find errors in the documents, and to ask for
+improvements to explanatory text and diagrams. After this period, all
+input continues to be welcomed as per the normal process.<br />
+
+
+
+
+
+
+<h3>Is the Release safe to use during this period?</h3>
+
+
+
+
+
+
+Yes. From the release date, the only things that will change are a) errors in the models will be corrected and
+b) explanatory text improved. This is no different from thechange management situation going into
+the future. The only difference between the documents during and after
+the public comment period is that the "public comment" marker
+&nbsp;will be removed from the front page graphic on 1 May.
+<h2>Functional Improvements in this Release</h2>
+
+
+
+
+
+
+The following is a list of major improvements in Release 1.0 over previous releases:<br />
+
+
+
+
+
+
+<ul>
+
+
+
+
+
+
+  <li>signficant refactoring of models to promote re-use both
+in the specifications and in software (the Common IM contains most
+re-usable patterns)</li>
+
+
+
+
+
+
+  <li>major improvements to ENTRY types, based on a "scientific
+investigator" &nbsp;model; there are now 5 ENTRY subtypes: OBSERVATION,
+EVALUATION, INSTRUCTION, ACTION and ADMIN_ENTRY</li>
+
+
+  <li>support for archetyping and automated workflows in the INSTRUCTION and ACTION types</li>
+
+
+  <li>vastly improved model of HISTORY / EVENT, supporting point and
+interval events, overlapping events, and "math function" data, i.e.
+mean, max, min, change etc;</li>
+
+
+  <li>redeveloped model of PARTY references from the EHR, supporting anonymous and transparent reference to the patient</li>
+
+
+
+
+
+
+  <li>redeveloped model of audits and attestations</li>
+
+
+
+
+
+
+  <li>enhanced model of versioning and version identification</li>
+
+
+
+
+
+
+  <li>redeveloped specification for paths and URIs, compatible with Xpath</li>
+
+
+
+
+
+
+  <li>improved syntax for archetypes, known as ADL2, which is extensible and convertible in and out of XML</li>
+
+
+
+
+
+
+  <li>various minor improvements due to implementation experience.</li>
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+During the work on this release, over 50 CRs were processed, with some 36 being implemented. The <a href="history.htm">Change History</a> lists CRs that have been implemented in each release. Changes slated for the future are indicated in the <a href="todo.htm">To Do list</a>.
+<h2>What is the status of specifications in this Release?</h2>
+
+
+
+
+Almost all of the specifications are in their intended state in this
+release. Work remains on a couple, and there are still of course more
+change requests (CRs) to process for future releases. The table below
+indicates the status of deliverables as of this release. See the <a href="publishing/index.html">roadmap</a> for the descriptions of deliverables and current status.<br />
+
+
+
+<br />
+
+
+
+
+<table style="text-align: left; width: 80%;" border="1" cellpadding="2" cellspacing="2">
+
+
+
+
+  <tbody>
+
+
+
+
+    <tr>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 102);">
+      
+      
+      
+      
+      <h2>Deliverable</h2>
+
+
+
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 102); width: 36px;">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Status</h2>
+
+
+
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 102);">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h2>Comments</h2>
+
+
+
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>General</h3>
+
+
+
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);"></td>
+
+
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Introducing openEHR</td>
+
+
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; color: rgb(0, 153, 0); width: 36px;">Stable</td>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">CM Plan</td>
+
+
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; color: rgb(0, 153, 0); width: 36px;">Stable</td>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+
+    <tr>
+      <td style="background-color: rgb(255, 255, 153);">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>Requirements</h3>
+
+
+
+
+
+
+
+
+
+      </td>
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+      <td style="background-color: rgb(255, 255, 153);"></td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">ISO TS 18308 Conformance</td>
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+      <td style="background-color: rgb(255, 255, 204);"><br />
+      </td>
+    </tr>
+    <tr>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>Architecture</h3>
+
+
+
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);"></td>
+
+
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    <tr>
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Architecture Overview</td>
+
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">This is a new
+document containing some content from the old "roadmap" document as
+well as new content describing the key semantics of the <span style="font-style: italic;">open</span>EHR reference model.</td>
+
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Modelling Guide</td>
+
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+    
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Terminology</td>
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3>Reference Model</h3>
+
+
+
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);"></td>
+
+
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+
+    
+
+
+    <tr>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">EHR IM</td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+    </tr>
+
+
+
+
+    <tr>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">EHR Extract IM</td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); width: 36px;"><span style="font-weight: bold; color: rgb(51, 51, 255);">Forthcoming</span></td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">The EHR
+Extract Information Model has to be redeveloped due to changes in
+semantics in the other models, including the Folder structure, version
+identification and so on. It is scheduled <br />
+
+
+
+
+
+
+
+
+for Release 1.1</td>
+
+
+
+
+    </tr>
+
+
+
+
+    <tr>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Demographic IM</td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+    </tr>
+
+
+
+
+    <tr>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Common IM</td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Data Structures IM</td>
+
+
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <tr>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Data Types IM</td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <tr>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Support IM</td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;">Stable</td>
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+
+    
+    <tr>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Integration IM</td>
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(204, 0, 0);">Draft</span></td>
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"><br />
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3><span style="font-weight: bold;">Archetype Model</span></h3>
+
+
+
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);"></td>
+
+
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+
+    <tr>
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Archetype Principles</td>
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(0, 153, 0);">Stable</span></td>
+      <td style="background-color: rgb(255, 255, 204);"><br />
+      </td>
+    </tr>
+    <tr>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Archetype Definition <br />
+
+
+
+
+
+
+
+
+Language 1.3&nbsp;(ADL)</td>
+
+
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(0, 153, 0);">Stable</span></td>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">ADL 1.3
+remains the current ADL syntax in use, and most current tools only
+process ADL 1.3. Some improvements that were done as part of the ADL 2
+work will be reverse-engineered into ADL 1.3 in the near future; these
+are mainly to do with pathing.</td>
+
+
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Archetype Definition <br />
+
+
+
+
+
+
+
+
+Language 2.0<br />
+
+
+
+
+ (ADL2)</td>
+
+
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(204, 0, 0);">Draft</span></td>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">ADL version 2.0 is an improved syntax for expressing archetypes, and is has two important<br />
+
+
+
+
+
+
+
+
+features over ADL 1.3: it is extensible without the syntax needing to
+be changed, because in ADL2, &nbsp;an archetype is a dADL document;
+and due to being in dADL/embedded cADL &nbsp;format, it can more easily
+be converted to and from XML.<br />
+
+
+
+
+
+
+
+
+The current version of this specification has not yet been fully
+implemented or tested. Implementors of this specification should
+consider engineering backwards compatibility for ADL 1.3 in their tools.</td>
+
+
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Archetype Object <br />
+
+
+
+
+
+
+
+
+Model (AOM)</td>
+
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(0, 153, 0);">Stable</span></td>
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Template Object Model (TOM)</td>
+
+
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(51, 51, 255);">Forthcoming</span></td>
+
+
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">The templates document has been partially completed and will be included in Release 1.1.</td>
+
+
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);"><span style="font-style: italic;">open</span>EHR Archetype Profile (OAP)</td>
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px;"><span style="color: rgb(0, 153, 0);">Stable</span></td>
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"><br />
+
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+    <tr>
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Archetype System</td>
+      <td style="background-color: rgb(255, 255, 204); font-weight: bold; width: 36px; color: rgb(204, 0, 0);">Under<br />
+Redevelopment</td>
+      <td style="background-color: rgb(255, 255, 204);"><br />
+      </td>
+    </tr>
+    <tr>
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);">
+      
+      
+      
+      
+      
+      
+      
+      <h3>Computable</h3>
+
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);"></td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">UML computable form of model</td>
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;"><span style="font-weight: bold; color: rgb(51, 51, 255);">Forthcoming</span></td>
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">The UML model of the <span style="font-style: italic;">open</span>EHR
+RM has not yet been upgraded fom 0.95. It is also awaiting a new
+version of the UML tool (MagicDraw) that can generate error-free
+XML-schemas and Java &amp; C# skeletons.</td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Terminology as an XML file</td>
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;"><span style="font-weight: bold; color: rgb(51, 51, 255);">Forthcoming</span></td>
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"></td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <h3><span style="font-weight: bold;">ITS</span></h3>
+
+
+
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 153); width: 36px;"></td>
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 153);"></td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">XML schemas</td>
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;"><span style="color: rgb(204, 0, 0);">Draft</span></td>
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);">The XML-schemas are undergoing testing in various places.</td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 0, 153);">Java ITS Guide</td>
+
+
+
+
+
+
+
+      
+      <td style="background-color: rgb(255, 255, 204); color: rgb(0, 153, 0); font-weight: bold; width: 36px;"><span style="color: rgb(0, 153, 0);">Stable</span></td>
+
+
+
+
+
+
+
+      <td style="background-color: rgb(255, 255, 204);"><br />
+
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+<br />
+
+
+
+<h2>Future Release Strategy</h2>
+
+
+
+
+Management of future releases is described in the <a href="publishing/roadmap.html#Release_Strategy">roadmap</a>.
+
+
+
+
+<hr style="width: 100%; height: 2px;" />
+<span class="footer">$LastChangedDate$
+$LastChangedRevision$</span><br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
