@@ -17,7 +17,8 @@ var TREE_NODES = [
 			["Common", "architecture/rm/common_im.pdf", "Main"],
 			["Data Structures", "architecture/rm/data_structures_im.pdf", "Main"],
 			["Data Types", "architecture/rm/data_types_im.pdf", "Main"],
-			["Support", "architecture/rm/support_im.pdf", "Main"]
+			["Support", "architecture/rm/support_im.pdf", "Main"],
+			["Integration", "architecture/rm/integration_im.pdf", "Main"]
 		],
 		["Archetype Model (AM)", null, null,
 			["Archetype Principles", "architecture/am/archetype_principles.pdf", "Main"],
