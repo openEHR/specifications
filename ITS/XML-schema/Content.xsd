@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Content" targetNamespace="openEHR/v1/Content" elementFormDefault="unqualified"
+	xmlns="openEHR/v1/Content" xmlns:mstns="openEHR/v1/Content" xmlns:bt="openEHR/v1/BaseTypes" xmlns:st="openEHR/v1/Structure"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:import namespace="openEHR/v1/BaseTypes" schemaLocation="BaseTypes.xsd" />
+	<xs:import namespace="openEHR/v1/Structure" schemaLocation="Structure.xsd" />
+
+	<!-- <xs:element name="items" type="CONTENT_ITEM" /> -->
+
+	<xs:complexType name="CONTENT_ITEM" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="st:LOCATABLE">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SECTION">
+		<xs:complexContent>
+			<xs:extension base="CONTENT_ITEM">
+				<xs:sequence>
+					<xs:element name="items" type="CONTENT_ITEM" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ENTRY" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="CONTENT_ITEM">
+				<xs:sequence>
+					<xs:element name="language" type="bt:CODE_PHRASE" />
+					<xs:element name="encoding" type="bt:CODE_PHRASE" />
+					<xs:element name="subject" type="bt:PARTY_PROXY" />
+					<xs:element name="provider" type="bt:PARTY_PROXY" minOccurs="0"/>
+					<xs:element name="other_participations" type="bt:PARTICIPATION" minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="work_flow_id" type="bt:OBJECT_REF" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ADMIN_ENTRY" >
+		<xs:complexContent>
+			<xs:extension base="ENTRY">
+				<xs:sequence>
+					<xs:element name="data" type="st:ITEM_STRUCTURE" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CARE_ENTRY" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="ENTRY">
+				<xs:sequence>
+					<xs:element name="protocol" type="st:ITEM_STRUCTURE" minOccurs="0" />
+					<xs:element name="guideline_id" type="bt:OBJECT_REF" minOccurs="0"  />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EVALUATION">
+		<xs:complexContent>
+			<xs:extension base="CARE_ENTRY">
+				<xs:sequence>
+					<xs:element name="data" type="st:ITEM_STRUCTURE" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OBSERVATION">
+		<xs:complexContent>
+			<xs:extension base="CARE_ENTRY">
+				<xs:sequence>
+					<xs:element name="data" type="st:HISTORY" />
+					<!-- It is recommended that state data is recorded for each event (see EVENT class)
+						On occasions where it is necessary to have a detailed event model for
+						state separately than the data itself, then use this state History. It is not possible 
+						to use this element and the state element of events contained in the data history.
+					-->
+					<xs:element name="state" type="st:HISTORY" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="INSTRUCTION">
+		<xs:complexContent>
+			<xs:extension base="CARE_ENTRY">
+				<xs:sequence>
+					<xs:element name="narative" type="bt:DV_TEXT" />
+					<xs:element name="expiry_time" type="bt:DV_DATE_TIME" minOccurs="0" />
+					<xs:element name="activities" type="ACTIVITY" minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="wf_definition" type="bt:DV_PARSABLE" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ACTION">
+		<xs:complexContent>
+			<xs:extension base="CARE_ENTRY">
+				<xs:sequence>
+					<xs:element name="time" type="bt:DV_DATE_TIME" />
+					<xs:element name="description" type="st:ITEM_STRUCTURE" />
+					<xs:element name="ism_transition" type="ISM_TRANSITION" />
+					<xs:element name = "instruction_details" type="INSTRUCTION_DETAILS" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ACTIVITY">
+		<xs:sequence>
+			<xs:element name="description" type="st:ITEM_STRUCTURE" />
+			<xs:element name="timing" type="bt:DV_PARSABLE" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="INSTRUCTION_DETAILS">
+		<xs:complexContent>
+			<xs:extension base="st:LOCATABLE">
+				<xs:sequence>
+					<xs:element name="instruction_id" type="bt:LOCATABLE_REF" />
+					<xs:element name="activity_id" type="bt:atCode" />
+					<xs:element name="wf_details" type="st:ITEM_STRUCTURE" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ISM_TRANSITION">
+		<xs:complexContent>
+			<xs:extension base="st:LOCATABLE">
+				<xs:sequence>
+					<xs:element name="current_state" type="bt:DV_CODED_TEXT" />
+					<xs:element name="transition" type="bt:DV_CODED_TEXT" minOccurs="0" />
+					<xs:element name="careflow_step" type="bt:DV_CODED_TEXT" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>	
+</xs:schema>
