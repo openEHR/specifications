@@ -28,6 +28,8 @@
 
 
 
+
+  
   
   
   
@@ -55,12 +57,15 @@
   
   <link rel="stylesheet" href="http://www.openehr.org/styles/oe.css" type="text/css">
 
+
+  
   
   <title>openEHR Terminology</title>
 </head>
 
 
 <body>
+
 
 
 
@@ -114,107 +119,144 @@
 
 
 
+
 <hr style="width: 100%; height: 2px;">
 <h2>Introduction</h2>
 
 
-This page provides access to the XML computable expression of the <span style="font-style: italic;">open</span>EHR terminology, and a set of tools to support the use of this terminology in the Archetype Editor. The <span style="font-style: italic;">open</span>EHR terminology is an adjunct to the <span style="font-style: italic;">open</span>EHR
+
+This page provides access to the XML computable expression of the <span style="font-style: italic;">open</span>EHR
+terminology, and a set of tools to support the use of this terminology
+in a variety of contexts including the Archetype Editor. The tools are
+provided for the <span style="font-style: italic;">open</span>EHR Foundation by <a href="http://www.oceaninformatics.biz">Ocean Informatics</a>. The <span style="font-style: italic;">open</span>EHR terminology is an adjunct to the <span style="font-style: italic;">open</span>EHR
 reference and archetype models, and provides code sets and vocabularies
 needed by the models which are language independent. It is not a "real-world" ontology of any kind -
 i.e. it does not contain representation of facts in areas such as
 diseases or biochemistry - this is the job of much larger terminologies
 such as ICDx, ICPC, SNOMED-CT and so on.<br>
 
+
 <br>
+
 
 The file contains:<br>
 
+
 <ul>
+
 
   <li>Concepts used in the reference model that are DV_CODED_TEXTs and are specified as coming from the <span style="font-style: italic;">open</span>EHR
 Terminology. These concepts are grouped and have a group identifier.
 The group identifier can be found in the terminology tool provided from
 this site.</li>
 
+
   <li>Concepts that are represented in the user interface of the archetype editor, including labels, menus and dialog box messages.</li>
+
 
   <li>Concepts that are properties (e.g. mass, area) which restrict the
 set of units available in a DV_QUANTITY - this enables translation of
 these concepts.</li>
 
+
   <li>Language codes for use with <span style="font-style: italic;">open</span>EHR (ISO).</li>
+
   <li>Territory codes for use with <span style="font-style: italic;">open</span>EHR (ISO).</li>
+
 
   <li>A set of terminology identifiers used by UMLS for linking archetype terms to terminologies.</li>
 
+
 </ul>
+
 
 It does, presently, include the translations of all languages - this will be handled in separate files in future.<br>
 
+
 <h2>File design</h2>
+
 
 The concepts are provided in a file called Terminology.xml with an
 associated schema, Terminology.xsd. The schema is an XML schema - <a href="Terminology.xsd.html">documentation</a> of this file is provided. &nbsp;The file and schema are provided here.<br>
 
+
 <ul>
 
-  <li>Terminology.xml (200K)</li>
 
-  <li>Terminology.xsd (7K)</li>
+  <li><a href="terminology.xml">Terminology.xml</a> (200K)</li>
+
+
+  <li><a href="terminology.xsd">Terminology.xsd</a> (7K)</li>
+
 
 </ul>
 
+
 <h2>Tools</h2>
 
+
 Two tools are provided to manage this small terminology. Please note
-that the Terminology tool is provided for interest - any use of this
-tool must be coordinated with the primary source - presently <a href="mailto:contact@oceaninformatics.biz">Ocean Informatics.</a> The Translation tool can be used independently, submitting the translated Terminology.xml file to <a href="mailto:contact@oceaninformatics.biz">Ocean Informatics </a>for
+that the Terminology tool is provided for interest - any wanting to translate or alter this termset needs to contact <a href="mailto:contact@oceaninformatics.biz">Ocean Informatics</a>
+to ensure the upgrade is coordinated. The Translation tool can be used
+independently, submitting the translated Terminology.xml file to <a href="mailto:contact@oceaninformatics.biz">Ocean Informatics </a>for
 incorporation into the main file. (As explained above, the language
 specific files will be distributed separately in future). The files are:<br>
 
+
 <ol>
+
 
   <li>The <span style="font-style: italic;">open</span>EHR Terminology
 tool which allows the user to expand the terminology, add groups and
 edit any concepts in any language. This tool includes the translation
 tool.</li>
 
+
   <li>The <span style="font-style: italic;">open</span>EHR Translation
 tool which allows the user to translate the terminology to a new
 language. This can display all terms, or only those that are requiring
 translation.</li>
 
+
 </ol>
+
 
 To download the files please click on the links below. The tools are
 provided as .Zip files, but are actually .exe's - they need to be saved
 and run in the same directory as the Terminology.xml file.<br>
 
+
 <ul>
 
-  <li>The Translation tool</li>
 
-  <li>The Terminology tool</li>
+  <li><a href="http://www.oceaninformatics.biz/terminology/openEHR_Translation.zip">The Translation tool</a></li>
+
+
+  <li><a href="http://www.oceaninformatics.biz/terminology/openEHR_Terminology.zip">The Terminology tool</a></li>
+
 
 </ul>
 
 
+
 <h2>Work to be done</h2>
 
+
 The current design of this small terminology is adequate for the
-purpose but there are a lot of potential improvements to the design.
-The most critical of these is to separate the language information from
-the master. The current tools are written in VB.Net by Ocean
+purpose but there are a lot of potential improvements to this design.
+The most critical of these is to separate the language specific terms from
+the master concepts and groups. The current tools are written in VB.Net by Ocean
 Informatics - the source code of these applications can be made
-available to those seeking to improve this terminology. Ocean
-Informatics is incorporating this terminology into a CTS compatible
+available to those seeking to improve this terminology. This terminology is presently being incorportated into a CTS compatible
 terminology service.<br>
+
 
 
 <hr style="width: 100%; height: 2px;">
 <span class="footer">$LastChangedDate$&nbsp;&nbsp;
 $LastChangedRevision$
 </span><br>
+
 
 
 
