@@ -2,167 +2,277 @@
 <html>
 <head>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   <link rel="stylesheet" href="http://www.openehr.org/styles/oe.css" type="text/css">
+  <title>openEHR XML Schemas</title>
+
+
 </head>
 
 
 <body>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h1><span style="font-style: italic;">open</span>EHR XML-schemas</h1>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<h1><span style="font-style: italic;">open</span>EHR
+XML-schemas</h1>
 
 <hr style="width: 100%; height: 2px;">
 <h2>Introduction</h2>
 
-This page provides access to the W3C XML schemas for the <span style="font-style: italic;">open</span>EHR reference model (RM). Separate schemas have been created, as follows:<br>
+This page provides access to the W3C XML schemas for the <span style="font-style: italic;">open</span>EHR reference
+model (RM). Separate schemas have been created, as follows:<br>
+
 <ul>
-  <li>xxx</li>
-  <li>xxxx</li>
-  <li>Content: XXXX</li>
-  <li>xxxx</li>
+
+  <li><a href="documentation/BaseTypes.xsd.html">Basic
+types</a> - includes data types and identification. (<a href="BaseTypes.xsd">xsd</a> file)</li>
+
+  <li><a href="documentation/Structure.xsd.html">Structure</a>
+- data_structures and generic. (<a href="Structure.xsd">xsd</a>
+file)</li>
+
+  <li><a href="documentation/Content.xsd.html">Content</a>
+- item, section, entry and all subtypes. (<a href="Content.xsd">xsd</a>
+file)</li>
+
+  <li><a href="documentation/Composition.xsd.html">Composition</a>
+- composition and event context. (<a href="Composition.xsd">xsd</a>
+file)</li>
+
 </ul>
 
 <h2>Mapping Rules</h2>
 
-The following mapping rules were used in order to create the schema from the reference model.<br>
-INSERT A TABLE HERE<br>
-- describe basic type mappings<br>
-- generic types e.g. INTERVAL&lt;ORDINAL&gt; -&gt; XS_INTERVAL_ORDINAL<br>
-- any removed attributes<br>
-- any added attributes (e.g. which are functions in the RM)<br>
-- other rules<br>
+The following mapping rules were used in order to create the schema
+from the reference model.<br>
 
-<h2>File Links</h2>
-<ul>
-  <li>xxxx; HTML documentation</li>
-  <li>xxxx.
-  </li>
-</ul>
-<hr style="width: 100%; height: 2px;">
-<span class="footer">$LastChangedDate$&nbsp;&nbsp;
+<h3>Basic type mappings</h3>
+
+The basic types utilise the internal XML simpleTypes in accordance with
+the assumed types section in the Support IM. &nbsp;Some changes
+have
+been made to the reference model to accommodate these standards.
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+
+    <tr>
+
+      <td>
+      <h4>Reference model type</h4>
+
+      </td>
+
+      <td>
+      <h4>XML Schema complexType</h4>
+
+      </td>
+
+    </tr>
+
+    <tr>
+
+      <td>DV_DATE_TIME</td>
+
+      <td colspan="1" rowspan="6">DV_DATE_TIME<br>
+
+The value attribute is of xs:dateTime type based on ISO 8601</td>
+
+    </tr>
+
+    <tr>
+
+      <td>DV_DATE</td>
+
+    </tr>
+
+    <tr>
+
+      <td>DV_TIME</td>
+
+    </tr>
+
+    <tr>
+
+      <td>DV_PARTIAL_DATE</td>
+
+    </tr>
+
+    <tr>
+
+      <td>DV_PARTIAL_TIME</td>
+
+    </tr>
+
+    <tr>
+
+      <td>DV_PARTIAL_DATE_TIME</td>
+
+    </tr>
+
+    <tr>
+
+      <td>DV_DURATION</td>
+
+      <td>DV_DURATION<br>
+
+The value attribute is of xs:duration type based on ISO 8601</td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+<h3>Generic types</h3>
+
+The <span style="font-style: italic;">open</span>EHR
+reference model makes use of generic types - in DV_INTERVAL (Data types
+IM) and VERSION (Common IM) for example. As generic types are now
+utilised in C# and Java this is warranted for implementation
+specifications. Generic types are not used in XML Schema, so specific
+types prefixed with 'XS_' have been created to provide the same
+constraints.<br>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+
+    <tr>
+
+      <td>
+      <h4>Reference model type</h4>
+
+      </td>
+
+      <td>
+      <h4>XML Schema complexType</h4>
+
+      </td>
+
+    </tr>
+
+    <tr>
+
+      <td>DV_INTERVAL&lt;&lt;DV_ORDINAL&gt;&gt;</td>
+
+      <td>XS_DV_INTERVAL_ORDINAL</td>
+
+    </tr>
+
+    <tr>
+
+      <td>DV_INTERVAL&lt;&lt;DV_COUNT&gt;&gt;</td>
+
+      <td>XS_DV_INTERVAL_COUNT</td>
+
+    </tr>
+
+    <tr>
+
+      <td>DV_INTERVAL&lt;&lt;DV_QUANTITY&gt;&gt;</td>
+
+      <td>XS_DV_INTERVAL_QUANTITY</td>
+
+    </tr>
+
+    <tr>
+
+      <td>DV_INTERVAL&lt;&lt;DV_DATE_TIME&gt;&gt;</td>
+
+      <td>XS_DV_INTERVAL_DATE_TIME</td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+<br>
+
+<h3>Removed attributes</h3>
+
+Some attributes have been removed for the moment as the lack of surety
+about implementation of this feature is not well understood.<br>
+
+<br>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+
+    <tr>
+
+      <td>
+      <h4>Reference model type</h4>
+
+      </td>
+
+      <td>
+      <h4>XML Schema complexType</h4>
+
+      </td>
+
+    </tr>
+
+    <tr>
+
+      <td>ARCHETYPED<br>
+
+The archetype id is carried in the archetype_node_id attribute and the
+access control group has not had sufficient discussion to warrant
+including it at this stage.</td>
+
+      <td>Removed from LOCATABLE</td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+<br>
+
+<h3>Added attributes</h3>
+
+All added attributes have current change requests outstanding. Any that
+are not accepted within the 3 month public review will be added to this
+table.<br>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+
+    <tr>
+
+      <td>
+      <h4>Reference model type</h4>
+
+      </td>
+
+      <td>
+      <h4>XML Schema complexType</h4>
+
+      </td>
+
+    </tr>
+
+    <tr>
+
+      <td><br>
+
+      </td>
+
+      <td><br>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+<br>
+
+<hr style="width: 100%; height: 2px;"><span class="footer">$LastChangedDate: 2006-02-15 05:57:48 +0930
+(Wed, 15 Feb 2006) $&nbsp;&nbsp;
 $LastChangedRevision$
 </span><br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>
