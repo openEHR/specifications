@@ -17,6 +17,10 @@
 
 
 
+
+
+  
+  
   
   
   
@@ -83,9 +87,15 @@
 
 
 
+
+
   
 
 
+  
+  
+  
+  
   
   
   
@@ -239,6 +249,8 @@
 
 
 
+
+
 <h1><span style="font-style: italic;">open</span>EHR
 Specification Project<br />
 
@@ -261,8 +273,12 @@ Specification Project<br />
 
 
 
+
+
 Release - History
 </h1>
+
+
 
 
 
@@ -395,7 +411,11 @@ Release - History
 
 
 
+
+
 <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+
 
 
 
@@ -497,7 +517,11 @@ Release - History
 
 
 
+
+
     <tr class="table_cell_top_heading">
+
+
 
 
 
@@ -600,7 +624,11 @@ Release 1.0.1 - target: end Jun 2006<br />
 
 
 
+
+
       </td>
+
+
 
 
 
@@ -702,7 +730,11 @@ Release 1.0.1 - target: end Jun 2006<br />
 
 
 
+
+
     <tr>
+
+
 
 
 
@@ -805,8 +837,12 @@ Job </td>
 
 
 
+
+
       <td class="table_cell_top_heading" colspan="1" style="vertical-align: top; background-color: rgb(204, 204, 255);">
 Description </td>
+
+
 
 
 
@@ -970,7 +1006,11 @@ Description </td>
 
 
 
+
+
     <tr>
+
+
 
 
 
@@ -1072,6 +1112,8 @@ Description </td>
 
 
 
+
+
       </td>
 
 
@@ -1123,141 +1165,240 @@ Description </td>
 
 
 
-      <td style="vertical-align: top; background-color: rgb(255, 255, 204);">Changes to Documents<br />
+
+
+      <td style="vertical-align: top; background-color: rgb(255, 255, 204);">Changes to EHR IM<br />
+
+
+
 
       
-      <ul>
-
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/203">CR-000203</a>: Release 1.0 explanatory text improvements **</li>
-
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/200">CR-000200</a>: Correct Release 1.0 typographical errors **</li>
-
       
-      </ul>
-
-Changes to EHR IM<br />
-
-
       
       
       <ul>
 
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/200">CR-000200</a>. Correct Release 1.0 typographical errors. Correct INSTRUCTION_DETAILS.instruction_id type to LOCATABLE_REF. **</li>
 
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/210">CR-000210</a>: Remove LOCATABLE inheritance from ISM_TRANSITION &amp; INSTRUCTION_DETAILS classes **</li>
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/201">CR-000201</a>: Add archetype ids to Instruction ACTIVITY class. **</li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/203">CR-000203</a>:
+Release 1.0 explanatory text improvements. Minor changes to Entry
+section. Improved section on &ldquo;time in the EHR&rdquo;. **</li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/210">CR-000210</a>: Remove LOCATABLE inheritance from ISM_TRANSITION and INSTRUCTION_DETAILS classes</li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/130">CR-000130</a>: Correct security details in LOCATABLE and ARCHETYPED classes. Add EHR_ACCESS class.</li>
 
 
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/201">CR-000201</a>: Add archetype ids to Instruction ACTIVITY class **</li>
 
 
+      
+      
       
       
       </ul>
+
+
 
 
 Changes to Common IM<br />
 
 
+
+
+      
+      
       
       
       <ul>
 
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/209">CR-000209</a>:
+Minor changes to correctly define AUTHORED_RESOURCE.current_revision.
+Functions added to REVISION_HISTORY; AUTHORED_RESOURCE.current_revision
+postcondition added. **</li>
 
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/197">CR-000197</a>:&nbsp;Change LOCATABLE.uid to HIER_OBJECT_ID **</li>
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/206">CR-000206</a>: Change LOCATABLE.item_at_path to return ANY</li>
 
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/212">CR-000212</a>: Allow VERSION.data to be optional to enable logical deletion</li>
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/200">CR-000200</a>:
+Correct Release 1.0 typographical errors. Add missed invariant in
+VERSION to restrict contribution.type to &ldquo;CONTRIBUTION&rdquo;. **</li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/203">CR-000203</a>:
+Release 1.0 explanatory text improvements. Move Explanatory material on
+configuration management and versioning to Architecture Overview. **</li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/202">CR-000202</a>:
+Correct minor errors in VERSION.preceding_version_id. Rename
+preceding_version_id to preceding_version_uid. Add
+preceding_version_uid invariantto VERSION&lt;T&gt;. ** </li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/197">CR-000197</a>: Change LOCATABLE.uid to HIER_OBJECT_ID **</li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/214">CR-000214</a>:
+Changes to VERSION preparatory to EHR Extract upgrade. Added
+lifecycle_state to VERSION&lt;T&gt;, extra functions on
+VERSIONED_OBJECT&lt;T&gt;. Corrected and added commit functions to
+VERSIONED_OBJECT. Added ATTESTATION.attested_view (conforms to CEN EN13606-1).</li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/212">CR-000212</a>: Allow VERSION.data to be optional to enable logical deletion.</li>
 
 
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/206">CR-000206</a>: <span style="color: rgb(0, 0, 0);">Change LOCATABLE.item_at_path to return ANY</span></li>
 
 
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/209">CR-000209</a>: Minor changes to correctly define AUTHORED_RESOURCE.current _revision **</li>
-
-
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/202">CR-000202</a>. <span style="color: rgb(0, 0, 0);">Correct minor errors in VERSION.preceding_version_id</span> **</li>
-
-
+      
+      
       
       
       </ul>
+
+
 
 
 Changes to Data Structures<br />
 
 
+
+
+      
+      
       
       
       <ul>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/207">CR-000207</a>: <span style="color: rgb(0, 0, 0);">Change ITEM_TABLE columns to rows</span></li>
 
+        <li><span style="color: rgb(0, 0, 0);"><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/207">CR-000200</a>. Correct Release 1.0 typographical errors. Minor cosmetic changes to diagrams. **<br />
 
+          </span></li>
+
+
+
+
+      
+      
       
       
       </ul>
+
+
 
 
 Changes to Data Types<br />
 
 
+
+
+      
+      
       
       
       <ul>
 
+        <li><span style="color: rgb(0, 0, 0);"><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/215">CR-000215</a>: Merge DV_PARTIAL_XX date/time classes and move ISO 8601 semantics to Support IM. Remove DV_WORLD_TIME class.</span></li>
 
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/205">CR-000205</a>: <span style="color: rgb(0, 0, 0);">Convert Date/time constants to a class</span> **</li>
+        <li><span style="color: rgb(0, 0, 0);"><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/200">CR-000200</a>.
+Correct Release 1.0 typographical errors. Correct DV_ENCAPSULATED.size
+to abstract in definition table. Correct DV_STATE.value in UML of basic
+package to be DV_CODED_TEXT. Correct DV_ORDINAL.symbol type to
+DV_CODED_TEXT in UML diagram for QUANTITY package. **</span></li>
+
+        <li><span style="color: rgb(0, 0, 0);"><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/198">CR-000198</a>: Change DV_Date/Time/Duration to have value as attribute.&nbsp;</span></li>
+
+        <li><span style="color: rgb(0, 0, 0);"><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/199">CR-000199</a>: Add normal_range attribute to DV_ORDERED.&nbsp;</span></li>
+
+        <li><span style="color: rgb(0, 0, 0);"><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/205">CR-000205</a>: Convert Date/time constants to a class. **</span></li>
+
+        <li><span style="color: rgb(0, 0, 0);"><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/216">CR-000216</a>: Allow mixture of W, D etc in ISO8601 Duration&nbsp;(deviation from standard).<br />
+
+          </span></li>
 
 
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/199">CR-000199</a>: <span style="color: rgb(0, 0, 0);">Add normal range attribute to DV_ORDERED</span></li>
 
 
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/198">CR-000198</a>: <span style="color: rgb(0, 0, 0);">Change DV_Date/Time/Duration to have value as attribute</span></li>
-
-
+      
+      
       
       
       </ul>
+
+
 
 
 Changes to Support IM<br />
 
-
-      
       
       <ul>
 
 
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/204">CR-000204</a>:&nbsp;Add generic id subtype of OBJECT_ID</li>
 
 
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/215">CR-000215</a>: Merge DV_PARTIAL_XX date/time classes and move ISO 8601 semantics to Support IM.&nbsp;</li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/209">CR-000209</a>: Minor changes to correctly define AUTHORED_RESOURCE.current_revision. Add minimal definition for List&lt;T&gt; class.&nbsp;</li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/200">CR-000200</a>: Correct Release 1.0 typographical errors. Move INTERVAL class definition to correct section. Add two invariants. **</li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/202">CR-000202</a>: Correct minor errors in VERSION.preceding_version_id. Added is_first function and invariant to VERSION_TREE_ID class.</li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/204">CR-000204</a>: Add generic id subtype of OBJECT_ID.</li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/216">CR-000216</a>: Allow mixture of W, D etc in ISO8601 Duration (deviation from standard)</li>
+
+
+
+
+      
+      
       
       
       </ul>
+
+
 
 
 Changes to ADL, AOM<br />
 
 
+
+
+      
+      
       
       
       <ul>
 
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/203">CR-000203</a>: Release 1.0 explanatory text improvements. Improve Archetype slot explanation. **</li>
 
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/213">CR-000213</a>: Correct ADL grammar for date/times to be properly ISO8601 compliant **</li>
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/208">CR-000208</a>: Improve ADL grammar for assertion expressions. **</li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/160/pcng_issue_view">CR-000160</a>: Duration constraints. Added ISO 8601 patterns for duration in cADL. **</li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/213">CR-000213</a>:
+Correct ADL grammar for date/times to be properly&nbsp;ISO8601
+compliant. Include &lsquo;T&rsquo; in cADL patterns and dADL and cADL
+Date/time, Time and Duration values. **</li>
+
+        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/216">CR-000216</a>: Allow mixture of W, D etc in ISO8601 Duration (deviation from standard)</li>
 
 
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/208">CR-000208</a>: Improve ADL grammar for assertion expressions **</li>
 
 
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/160/pcng_issue_view">CR-000160</a>. Duration constraints **</li>
-
-
+      
+      
       
       
       </ul>
 
 
+
+
 ** Assessed by Project group, not ARB<span style="color: rgb(204, 0, 0);"><br />
+
+
 
 
 
@@ -1333,6 +1474,8 @@ Changes to ADL, AOM<br />
 
 
 
+
+
       
 
 
@@ -1446,67 +1589,6 @@ Changes to ADL, AOM<br />
 
 
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     
@@ -1541,6 +1623,7 @@ Changes to ADL, AOM<br />
 
 
     
+    
 
 
 
@@ -1571,7 +1654,7 @@ Changes to ADL, AOM<br />
 
 
 
-    <tr>
+    
 
 
 
@@ -1602,6 +1685,7 @@ Changes to ADL, AOM<br />
 
 
 
+    
 
 
 
@@ -1619,7 +1703,6 @@ Changes to ADL, AOM<br />
 
 
 
-      <td class="table_cell_left_heading" style="vertical-align: top; background-color: rgb(255, 255, 153);">CRs - rejected/<br />
 
 
 
@@ -1633,395 +1716,8 @@ Changes to ADL, AOM<br />
 
 
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-superseded<br />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      </td>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <td style="vertical-align: top; background-color: rgb(255, 255, 204);">
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <ul>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/29/pcng_issue_view"></a><br />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      </ul>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      </td>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </tr>
 
 
 
@@ -2406,6 +2102,8 @@ superseded<br />
 
 
 
+  
+  
   
   
   
@@ -2457,6 +2155,8 @@ superseded<br />
   
   </tbody>
 </table>
+
+
 
 
 
@@ -2587,7 +2287,11 @@ superseded<br />
 
 
 
+
+
 <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+
 
 
 
@@ -2689,7 +2393,11 @@ superseded<br />
 
 
 
+
+
     <tr class="table_cell_top_heading">
+
+
 
 
 
@@ -2792,7 +2500,11 @@ Release 1.0 - 7 Feb 2006<br />
 
 
 
+
+
       </td>
+
+
 
 
 
@@ -2894,7 +2606,11 @@ Release 1.0 - 7 Feb 2006<br />
 
 
 
+
+
     <tr>
+
+
 
 
 
@@ -2997,8 +2713,12 @@ Job </td>
 
 
 
+
+
       <td class="table_cell_top_heading" colspan="1" style="vertical-align: top; background-color: rgb(204, 204, 255);">
 Description </td>
+
+
 
 
 
@@ -3162,7 +2882,11 @@ Description </td>
 
 
 
+
+
     <tr>
+
+
 
 
 
@@ -3264,7 +2988,11 @@ Description </td>
 
 
 
+
+
       </td>
+
+
 
 
 
@@ -3365,131 +3093,221 @@ Description </td>
       Changes to EHR IM<br />
 
 
+
+
+      
+      
       
       
       <ul>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/140/pcng_issue_view">CR-000140</a>. Redevelop Instruction, based on workflow principles</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/164/pcng_issue_view">CR-000164</a>. Improve description of use of times in OBSERVATION</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/172/pcng_issue_view">CR-000172</a>. Add is_self Boolean function to Entry</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/174/pcng_issue_view">CR-000174</a>. Add Admin Entry subtype</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/175/pcng_issue_view">CR-000175</a>. Make ENTRY.provider optional</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/180">CR-000180</a>. Move EVENT_CONTEXT.composer to COMPOSITION</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/181">CR-000181</a>: Change ENTRY.provider to PARTY_PROXY</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/177">CR-000177</a>. Make COMPOSITION.content a CONTENT_ITEM</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/191">CR-000191</a>: Add EHR_STATUS class to EHR package.</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/195">CR-000195</a>: Rename EHR.all_compositions to compositions **</li>
 
 
+
+
+      
+      
       
       
       </ul>
 
 
+
+
 Changes to Common IM<br />
 
 
+
+
+      
+      
       
       
       <ul>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/65/pcng_issue_view">CR-000065</a>. Add Revision History to change control package</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/133/">CR-000133</a>.
 Remove details /= Void from PARTY</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/147/pcng_issue_view">CR-000147</a>. Make DIRECTORY Re-usable</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/161/pcng_issue_view">CR-000161</a>. Support distributed versioning</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/162/pcng_issue_view">CR-000162</a>. Allow party identifiers when no demographic data</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/163/pcng_issue_view">CR-000163</a>. Add identifiers to FEEDER_AUDIT for originating and gateway systems</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/165/pcng_issue_view">CR-000165</a>. Clarify use of system_id in FEEDER_AUDIT and AUDIT_DETAILS</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/179">CR-000179</a>. Move AUDIT_DETAILS to Generic package; add REVISION_HISTORY</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/182">CR-000182</a>: Rationalise VERSION.lifecycle_state and ATTESTATION.status</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/187">CR-000187</a>: Correct modelling errors in DIRECTORY class</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/189">CR-000189</a>: Add LOCATABLE.parent</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/190">CR-000190</a>: Rename VERSION_REPOSITORY to VERSIONED_OBJECT **</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/194">CR-000194</a>: Correct anomalies with LOCATABLE.uid **</li>
 
 
+
+
+      
+      
       
       
       </ul>
+
+
 
 
 Changes to Data Structures<br />
 
 
+
+
+      
+      
       
       
       <ul>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/14/pcng_issue_view">CR-000014</a>. Adjust HISTORY</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/155/pcng_issue_view">CR-000155</a>. Summary data</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/183">CR-000183</a>: Remove root node from ITEM_TREE</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/185">CR-000185</a>: Improved EVENT model</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/192">CR-000192</a>: Support change, increase and decrease Events in History</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/193">CR-000193</a>: Simplify INTERVAL_EVENT for archetyping and paths</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/195">CR-000196</a>: Rename HISTORY.items to events **</li>
 
 
+
+
+      
+      
       
       
       </ul>
+
+
 
 
 
@@ -3528,26 +3346,44 @@ Changes to Data Structures<br />
 Changes to Data Types<br />
 
 
+
+
+      
+      
       
       
       <ul>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/121/pcng_issue_view">CR-000121</a>. Make DV_EHR_URI compatible with Xpath style paths **</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/176/pcng_issue_view">CR-000176</a>. Make DV_QUANTIFIED.accuracy&nbsp;optional</li>
 
 
+
+
+      
+      
       
       
       </ul>
 
 
+
+
 Changes to ADL, AOM
       
       
+      
+      
       <ul>
+
+
 
 
 
@@ -3573,7 +3409,11 @@ Changes to ADL, AOM
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/152/pcng_issue_view">CR-000152</a>. Paths within a single archetype **</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/136/pcng_issue_view">CR-000136</a>. Add validity rules to ADL document **</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/153/pcng_issue_view">CR-000153</a>. Synchronise ADL and AOM attribute naming</li>
@@ -3595,7 +3435,11 @@ Changes to ADL, AOM
 
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/154/pcng_issue_view">CR-000154</a>. Convert ADL archetypes to dADL documents</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/167/pcng_issue_view">CR-000167</a>. Move AOM description package to resource package in Common IM</li>
@@ -3622,31 +3466,53 @@ Changes to ADL, AOM
 
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/171/pcng_issue_view">CR-000171</a>. Add validity check for cardinality &amp; occurrences **</li>
 
 
+
+
+      
+      
       
       
       </ul>
+
+
 
 
 Changes to Support Model<br />
 
 
+
+
+      
+      
       
       
       <ul>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/184">CR-000184</a>. Separate out terminology from Support IM</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/188">CR-000188</a>: Add generating_type function to ANY for use in invariants **</li>
 
 
+
+
+      
+      
       
       
       </ul>
+
+
 
 
 ** Assessed by Project group, not ARB
@@ -3664,6 +3530,8 @@ Changes to Support Model<br />
 
 
       </td>
+
+
 
 
 
@@ -3777,6 +3645,8 @@ Changes to Support Model<br />
 
 
     </tr>
+
+
 
 
 
@@ -4000,7 +3870,11 @@ Changes to Support Model<br />
 
 
 
+
+
       <td class="table_cell_left_heading" style="vertical-align: top; background-color: rgb(255, 255, 153);">CRs - rejected/<br />
+
+
 
 
 
@@ -4087,7 +3961,11 @@ superseded<br />
 
 
 
+
+
       </td>
+
+
 
 
 
@@ -4185,7 +4063,11 @@ superseded<br />
       
       
       
+      
+      
       <ul>
+
+
 
 
 
@@ -4251,7 +4133,11 @@ superseded<br />
 
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/150/">CR-000150</a>. Language as String</li>
+
+
 
 
 
@@ -4327,7 +4213,11 @@ superseded<br />
 
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/59/pcng_issue_view">CR-000059</a>. Remove Cluster/Element classes from main abstract spec</li>
+
+
 
 
 
@@ -4395,7 +4285,11 @@ superseded<br />
 
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/151/pcng_issue_view">CR-000151</a>. State representation in ADL (obsolete - duplicate of CR-000014 and CR-000185)</li>
+
+
 
 
 
@@ -4447,7 +4341,11 @@ superseded<br />
 
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/76/pcng_issue_view">CR-000076</a>. Add display_as_absolute flag to DV_QUANTITY</li>
+
+
 
 
 
@@ -4524,6 +4422,10 @@ superseded<br />
 
 
 
+
+
+      
+      
       
       
       
@@ -4621,7 +4523,11 @@ superseded<br />
 
 
 
+
+
       </td>
+
+
 
 
 
@@ -4773,9 +4679,6 @@ superseded<br />
 
 
 
-    
-
-
 
 
     
@@ -4783,55 +4686,7 @@ superseded<br />
 
 
 
-
-
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-    
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -4855,116 +4710,15 @@ superseded<br />
 
 
 
+    
 
-
-
-
-
-
-
-
-
-
-
+    
 
 
     
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
 
 
 
@@ -5054,6 +4808,70 @@ superseded<br />
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 
 
@@ -5110,6 +4928,98 @@ superseded<br />
 
 
 
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
   
   
   
@@ -5211,7 +5121,11 @@ superseded<br />
 
 
 
+
+
 <br />
+
+
 
 
 
@@ -5331,7 +5245,11 @@ superseded<br />
 
 
 
+
+
 <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+
 
 
 
@@ -5433,7 +5351,11 @@ superseded<br />
 
 
 
+
+
     <tr class="table_cell_left_heading table_cell_top_heading">
+
+
 
 
 
@@ -5535,7 +5457,11 @@ superseded<br />
 
 
 
+
+
       </td>
+
+
 
 
 
@@ -5637,7 +5563,11 @@ superseded<br />
 
 
 
+
+
     <tr>
+
+
 
 
 
@@ -5740,7 +5670,11 @@ Job </td>
 
 
 
+
+
       <td class="table_cell_left_heading table_cell_top_heading" style="vertical-align: top; background-color: rgb(204, 204, 255);" colspan="1"> Description </td>
+
+
 
 
 
@@ -5873,7 +5807,11 @@ Job </td>
 
 
 
+
+
     <tr>
+
+
 
 
 
@@ -5975,55 +5913,6 @@ Job </td>
 
 
 
-      <br />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       <br />
@@ -6077,6 +5966,61 @@ Job </td>
 
 
 
+
+
+      <br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <br />
 
 
@@ -6128,7 +6072,11 @@ Job </td>
 
 
 
+
+
       <br />
+
+
 
 
 
@@ -6230,6 +6178,8 @@ Change <br />
 
 
 
+
+
 Requests<br />
 
 
@@ -6281,7 +6231,11 @@ Requests<br />
 
 
 
+
+
       </td>
+
+
 
 
 
@@ -6382,92 +6336,148 @@ Requests<br />
       Changes to Common IM<br />
 
 
+
+
+      
+      
       
       
       <ul>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/159">CR-000159</a>:&nbsp;
 Improve explanation of ATTESTATION in common.change_control (documentation)</li>
 
 
+
+
+      
+      
       
       
       </ul>
 
 
+
+
 Changes to ADL, AOM<br />
 
 
+
+
+      
+      
       
       
       <ul>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/134">CR-000134</a>:
 Various inconsistencies in AOM v0.5.1</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/138">CR-000138</a>:&nbsp;Archetype-level
 assertions </li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/141">CR-000141</a>:
 Allow point intervals in ADL</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/142">CR-000142</a>:
 Update ADL grammar to support assumed values</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/143">CR-000143</a>:
 Add partial dates to dADL</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/146">CR-000146</a>:&nbsp;Alterations
 to am.archetype.description from CEN MetaKnow</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/149">CR-000149</a>:
 Add URIs to dADL and remove query() syntax</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/156">CR-000156</a>:
 Update documentation of container types in dADL</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/157">CR-000157</a>:
 Fix names of OPERATOR_KIND class attributes</li>
 
 
+
+
+      
+      
       
       
       </ul>
 
 
+
+
 Changes to Support IM<br />
 
 
+
+
+      
+      
       
       
       <ul>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/137">CR-000137</a>:
 Add definitions class to support.definition package</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/145">CR-000145</a>:&nbsp;Add
 class for access to external environment</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/129">CR-000129</a>:
 Fix errors in UML &amp; specs of Identification package</li>
 
 
+
+
+      
+      
       
       
       </ul>
+
+
 
 
 
@@ -6519,6 +6529,8 @@ Fix errors in UML &amp; specs of Identification package</li>
 
 
       </td>
+
+
 
 
 
@@ -6651,7 +6663,11 @@ Fix errors in UML &amp; specs of Identification package</li>
 
 
 
+
+
     <tr>
+
+
 
 
 
@@ -6754,7 +6770,11 @@ CM Plan <br />
 
 
 
+
+
 to current plone <br />
+
+
 
 
 
@@ -6856,7 +6876,11 @@ forms + subversion<br />
 
 
 
+
+
       </td>
+
+
 
 
 
@@ -6959,6 +6983,8 @@ CM plan forms and other details do not quite match the plone forms now;<br />
 
 
 
+
+
 directory structures will change due to subversion migration<br />
 
 
@@ -7010,7 +7036,11 @@ directory structures will change due to subversion migration<br />
 
 
 
+
+
       </td>
+
+
 
 
 
@@ -7143,6 +7173,10 @@ directory structures will change due to subversion migration<br />
 
 
 
+
+
+  
+  
   
   
   
@@ -7243,6 +7277,8 @@ directory structures will change due to subversion migration<br />
 
 
 
+
+
 <br />
 
 
@@ -7264,7 +7300,11 @@ directory structures will change due to subversion migration<br />
 
 
 
+
+
 <h2><a name="Release_0.95"></a>Release 0.95</h2>
+
+
 
 
 
@@ -7367,7 +7407,11 @@ directory structures will change due to subversion migration<br />
 
 
 
+
+
   <tbody>
+
+
 
 
 
@@ -7469,7 +7513,11 @@ directory structures will change due to subversion migration<br />
 
 
 
+
+
       <td style="vertical-align: top; background-color: rgb(204, 204, 255);" rowspan="1" colspan="2"> Release 0.95 - 15 Mar 2005<br />
+
+
 
 
 
@@ -7571,6 +7619,8 @@ directory structures will change due to subversion migration<br />
 
 
 
+
+
     </tr>
 
 
@@ -7622,7 +7672,11 @@ directory structures will change due to subversion migration<br />
 
 
 
+
+
     <tr>
+
+
 
 
 
@@ -7725,8 +7779,12 @@ Job </td>
 
 
 
+
+
       <td class="table_cell_top_heading" style="vertical-align: top; background-color: rgb(204, 204, 255);">
 Description </td>
+
+
 
 
 
@@ -7828,7 +7886,11 @@ Description </td>
 
 
 
+
+
     <tr>
+
+
 
 
 
@@ -7930,109 +7992,11 @@ Description </td>
 
 
 
-      <br />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       <br />
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <br />
 
 
 
@@ -8134,109 +8098,11 @@ Description </td>
 
 
 
-      <br />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       <br />
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <br />
 
 
 
@@ -8338,109 +8204,11 @@ Description </td>
 
 
 
-      <br />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       <br />
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <br />
 
 
 
@@ -8542,6 +8310,61 @@ Description </td>
 
 
 
+
+
+      <br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <br />
 
 
@@ -8593,7 +8416,276 @@ Description </td>
 
 
 
+
+
       <br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <br />
+
+
 
 
 
@@ -8645,6 +8737,8 @@ Description </td>
 
 
 CRs - completed</td>
+
+
 
 
 
@@ -8792,173 +8886,281 @@ CRs - completed</td>
       
       
       
+      
+      
       <ul>
 
 
+
+
+      
+      
       
       
       </ul>
 
 
+
+
 General Changes<br />
 
 
+
+
+      
+      
       
       
       <ul>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/118">CR-000118</a>
 - Make package names lower case</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/048">CR-000048</a>
 - Pre-release review of documents </li>
 
 
+
+
+      
+      
       
       
       </ul>
 
 
+
+
 Changes to EHR IM<br />
 
 
+
+
+      
+      
       
       
       <ul>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/109">CR-000109</a>
 - Add act_status to Entry, as in CEN prEN13606</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/098">CR-000098</a>
 - EVENT_CONTEXT.time should allow optional end time</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/064">CR-000064</a>
 - Re-evaluate COMPOSITION.is_persistent attribute</li>
 
 
+
+
+      
+      
       
       
       </ul>
 
 
+
+
 Changes to Common IM<br />
 
 
+
+
+      
+      
       
       
       <ul>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/024">CR-000024</a>
 - Revert meaning to STRING and rename as archetype_node_id</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/116">CR-000116</a>
 - Add PARTICIPATION.function vocabulary and invariant</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/108">CR-000108</a>
 - Minor changes to Change_control package</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/097">CR-000097</a>
 - Correct errors in version diagrams in Common model</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/099">CR-000099</a>
 - PARTICIPATION.function diagram not in sync with spec</li>
 
 
+
+
+      
+      
       
       
       </ul>
 
 
+
+
 Changes to Data Structures<br />
 
 
+
+
+      
+      
       
       
       <ul>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/123">CR-000123</a>
 - EVENT should inherit from LOCATABLE</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/124">CR-000124</a>
 - Fix path syntax in data structures IM document</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/101">CR-000101</a>
 - Improve modelling of Structure classes</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/100">CR-000100</a>
 - Correct inheritance error in ITEM_STRUCTURE package</li>
 
 
+
+
+      
+      
       
       
       </ul>
 
 
+
+
 Changes to Data Types<br />
 
 
+
+
+      
+      
       
       
       <ul>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/119">CR-000119</a>
 - Improve Data types documentation. (documentation)</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/102">CR-000102</a>
 - Make DV_TEXT language and charset optional</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/112">CR-000112</a>
 - Add DV_PARTIAL_DATE_TIME class </li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/113">CR-000113</a>
 - Add DATA_VALUE subtype for identifying real-world entities</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/107">CR-000107</a>
 - Add support for exclusion and inclusion of Interval limits</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/126">CR-000126</a>
 - Correct details of partial date/time classes</li>
 
 
+
+
+      
+      
       
       
       </ul>
 
 
+
+
 Changes to Support IM<br />
 
 
+
+
+      
+      
       
       
       <ul>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/111">CR-000111</a>
 - Move Identification Package to Support</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/122">CR-000122</a>
 - Fix UML in Terminology_access classes in Support model</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/128">CR-000128</a>
@@ -8966,42 +9168,68 @@ Changes to Support IM<br />
 types to ISO 11404:2003</span></li>
 
 
+
+
+      
+      
       
       
       </ul>
 
 
+
+
 Changes to ADL, AOM<br />
 
 
+
+
+      
+      
       
       
       <ul>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/127">CR-000127</a>
 - Restructure archetype specifications</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/125">CR-000125</a>
 - C_QUANTITY example in ADL manual uses old dADL syntax</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/110">CR-000110</a>
 - Update ADL and AOM documents</li>
 
 
+
+
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/103">CR-000103</a>
 - Redevelop archetype UML model, add new keywords</li>
+
+
 
 
         <li><a href="http://coruscant.chime.ucl.ac.uk:8200/openEHR_Collector/projects/specifications/CR/104">CR-000104</a>
 - Fix ordering bug when use_node used</li>
 
 
+
+
+      
+      
       
       
       </ul>
+
+
 
 
 
@@ -9103,6 +9331,8 @@ Changes to ADL, AOM<br />
 
 
 
+
+
     </tr>
 
 
@@ -9154,7 +9384,11 @@ Changes to ADL, AOM<br />
 
 
 
+
+
     <tr>
+
+
 
 
 
@@ -9257,7 +9491,11 @@ Structure<br />
 
 
 
+
+
       </td>
+
+
 
 
 
@@ -9360,7 +9598,11 @@ repositories to be more logical - simplified under structure of RM/SM/AM<br />
 
 
 
+
+
       </td>
+
+
 
 
 
@@ -9462,7 +9704,11 @@ repositories to be more logical - simplified under structure of RM/SM/AM<br />
 
 
 
+
+
     <tr>
+
+
 
 
 
@@ -9565,7 +9811,11 @@ structures naming<br />
 
 
 
+
+
       </td>
+
+
 
 
 
@@ -9669,7 +9919,11 @@ DS IM doc, also in EHR overview &amp; roadmap doc.<br />
 
 
 
+
+
       </td>
+
+
 
 
 
@@ -9771,6 +10025,10 @@ DS IM doc, also in EHR overview &amp; roadmap doc.<br />
 
 
 
+
+
+  
+  
   
   
   
@@ -9872,7 +10130,11 @@ DS IM doc, also in EHR overview &amp; roadmap doc.<br />
 
 
 
+
+
 <br />
+
+
 
 
 
@@ -9975,58 +10237,64 @@ $LastChangedRevision$</span><br />
 
 
 
-<br />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br />
+
+
 
 
 
