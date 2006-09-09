@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
+<meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
+<meta name="LASTUPDATED" content="09/09/06 10:10:33">
+<link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
+<title>8 Versioning  </title>
+</head>
+
+<body background="images/backgrnd.gif">
+
+<table width="331" border="0" align="right" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23"
+    border="0" alt="TOC"> </a></td>
+    <td><a href="security.html"><img src="images/navprev.gif" width="81" height="23"
+    border="0" alt="PREV"> </a></td>
+    <td><a href="identification.html"><img src="images/navnext.gif" width="81" height="23"
+    border="0" alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23"
+    border="0" alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+<p><img src="images/openehr_logo.gif" width="109" height="23" alt="openEHR logo"></p>
+<hr align="left">
+
+<blockquote>
+<h2 class="Heading1">
+  <a name="1142419"> </a>8	 Versioning
+</h2>
+<h3 class="Heading2">
+  <a name="1126991"> </a>8.1	 Overview
+</h3>
+<p class="Body">
+  <a name="1121963"> </a>Version control is an integral part of the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR architecture. An <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR repository for EHR or demographic information is managed as a change-controlled collection of "version containers" (modelled by the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_OBJECT&lt;T&gt;</span> class in the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">common.change_control</span> package), each containing the versions of a top-level content structure (such as a Composition or Party) as it changes over time. A version-controlled top-level content structure is visualised in <a href="versioning.html#1121963">FIGURE 23</a>.<br clear="all" /><table align="left"><tr><td><img src="images/versioninga.gif" height="247" width="648" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<p class="Body">
+  <a name="1127019"> </a>Versioning of single top-level structures is a necessary, but not sufficient requirement for a repository that must provide coherence, traceability, indelibility, rollback, and support for forensic examination of past states of the data. Features supporting "change control" are also required. Under a disciplined change control scheme, changes are not made arbitrarily to single top-level structures, but to the repository itself. Changes take the form of change-sets, called "contributions", that consist of new or changed versions of the controlled items in the repository. The key feature of a change-set is that it acts like a transaction, and takes the repository from one consistent state to another, whereas arbitrary combinations of changes to single controlled items could easily be inconsistent, and even dangerously wrong where clinical data are concerned. 
+</p>
+<p class="Body">
+  <a name="1126581"> </a>These concepts are well-known in configuration management (CM), and are used as the basis for most software and other change management systems, including numerous free and commercial products available today. They are a central design feature of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR architecture. The following sections provide more details
+</p>
+<h3 class="Heading2">
+  <a name="1126584"> </a>8.2	 The Configuration Management Paradigm
+</h3>
+<p class="Body">
+  <a name="1126585"> </a>The "configuration management" (CM) paradigm is well-known in software engineering, and has its own IEEE standard<a href="#1127071"><sup>1</sup></a>. CM is about managed control of changes to a repository of items (formally called "configuration items" or CIs), and is relevant to any logical repository of distinct information items which changes in time. In health information systems, at least two types of information require such management: electronic health records, and demographic information. In most analyses in the past, the need for change management has been expressed in terms of specific requirements for audit trailing of changes, availability of previous states of the repository and so on. In <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR, the aim is to provide a formal, general-purpose model for change control, and show how it applies to health information.
+</p>
+<h4 class="Heading3">
+  <a name="1126586"> </a>8.2.1	 Organisation of the Repository
+</h4>
+<p class="Body">
+  <a name="1126587"> </a>The general organisation of a repository of complex information items such as a software repository, or the EHR consists of the following:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1126588"> </a>a number of distinct information items, or <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">configuration items</span>, each of which is uniquely identified, and may have any amount of internal complexity;
+  <li class="SmartList1"><a name="1126589"> </a>optionally, a directory system of some kind, in which the configurations items are organised;
+  <li class="SmartList1"><a name="1127082"> </a>other environmental information which may be relevant to correctly interpreting the primary versioned items, e.g. versions of tools used to create them.
+</ul>
+<p class="Body">
+  <a name="1126590"> </a>In a software or document repository, the CIs are files arranged in the directories of the file system; in an EHR based on <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR, they are Compositions, the optional Folder structure, Parties in the demographic service and so on. Contributions are made to the repository by users. This general abstraction is visualised in <a href="versioning.html#1126590">FIGURE 24</a>.<br clear="all" /><table align="left"><tr><td><img src="images/versioning2.gif" height="384" width="648" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<h4 class="Heading3">
+  <a name="1126697"> </a>8.2.2	 Change Management
+</h4>
+<p class="Body">
+  <a name="1126698"> </a>Change doesn't occur to CIs in isolation, but to the repository as a whole. Possible types of change include:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1126699"> </a>creation of a new CI;
+  <li class="SmartList1"><a name="1126700"> </a>removal of a CI;
+  <li class="SmartList1"><a name="1126701"> </a>modification of a CI;
+  <li class="SmartList1"><a name="1126702"> </a>creation of, change to or deletion of part of the directory structure;
+  <li class="SmartList1"><a name="1126703"> </a>moving of a CI to another location in the directory structure.
+</ul>
+<p class="Body">
+  <a name="1126704"> </a>The goal of configuration management is to ensure the following:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1126705"> </a>the repository is always in a valid state;
+  <li class="SmartList1"><a name="1126706"> </a>any previous state of the repository can be reconstructed;
+  <li class="SmartList1"><a name="1126707"> </a>all changes are audit-trailed.
+</ul>
+<h3 class="Heading2">
+  <a name="1126708"> </a>8.3	 Managing Change in Time
+</h3>
+<p class="Body">
+  <a name="1126709"> </a>Properly managing changes to the repository requires two mechanisms. The first, <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version control</span>, is used to manage versions of each CI, and of the directory structure if there is one. The second is the concept of the "change-set", known as a <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">contribution</span> in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR. This is the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">set</span> of changes to individual CIs (and the directory structure) made by a user as part of some logical change. For example, in a document repository, the logical change might be an update to a document that consists of multiple files (CIs). There is one contribution, consisting of changes to the document file CIs, to the repository. In the EHR, a contribution might consist of changes to more than one Composition, and possibly to the organising Folder structure.
+</p>
+<p class="Body">
+  <a name="1126713"> </a>A typical sequence of changes to a repository is illustrated below. <a href="versioning.html#1126713">FIGURE 25</a> shows a the effect of four Contributions (indicated by blue ovals on the left hand side) to a repository containing a number of CIs (that the directory tree is not shown for the sake of simplicity). As each Contribution is made, the repository is changed in some way. The first brings into existing a new CI, and modifies three others (changes indicated by the `C' triangles). The second contribution causes the creation of a new CI only. The third causes a creation as well as two changes, while the fourth causes only a change. (Changes to the folder structure are not shown here).<br clear="all" /><table align="left"><tr><td><img src="images/versioning4.gif" height="375" width="648" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<p class="Body">
+  <a name="1126799"> </a>One nuance which should be pointed out is that in <a href="versioning.html#1126713">FIGURE 25</a>, contributions are shown as if they are literally a set of deltas, i.e. exactly the changes which occur to the record. Thus, the first contribution is the set {CI<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: sub">w</span>, C<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: sub">a1</span>, C<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: sub">c1</span>, C<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: sub">d1</span>} and so on. Whether this is literally true depends on the construction of applications. In some situations, some CIs may be updated by the user viewing the current list and entering just the changes - the situation shown in <a href="versioning.html#1126713">FIGURE 25</a>; in others, the system may provide the current state of these CIs for editing by the user, and submit the updated versions, as shown in <a href="versioning.html#1126799">FIGURE 26</a>. Some applications may do both, depending on which CI is being updated. The internal versioning implementation may or may not generate deltas as a way of efficient storage.<br clear="all" /><table align="left"><tr><td><img src="images/versioning3.gif" height="413" width="648" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<p class="Body">
+  <a name="1126895"> </a>For the purposes of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR, a contribution is considered as being the logical set of CIs changed or created at one time, as implied by <a href="versioning.html#1126799">FIGURE 26</a>.
+</p>
+<h4 class="Heading3">
+  <a name="1126899"> </a>8.3.1	 General Model of a Change-controlled Repository
+</h4>
+<p class="Body">
+  <a name="1126903"> </a><a href="versioning.html#1126907">FIGURE 27</a> shows an abstract model of a change-controlled repository, which consists of:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1126904"> </a>version-controlled configuration items - instances of <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_OBJECT&lt;T&gt;</span>;
+  <li class="SmartList1"><a name="1126905"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">CONTRIBUTIONs</span>;
+  <li class="SmartList1"><a name="1126906"> </a>an optional directory system of folders. If folders are used, the folder structure must also be versioned as a unit. 
+</ul>
+<p class="Body">
+  <a name="1126907"> </a>The actual type of links between the controlled repository and the other entities might vary - in some cases it might be association, in others aggregation; cardinalities might also vary. <a href="versioning.html#1126907">FIGURE 27</a> therefore provides a guide to the definition of actual controlled repositories, such as an EHR, rather than a formal specification for them.<br clear="all" /><table align="left"><tr><td><img src="images/versioning5.gif" height="160" width="648" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<h3 class="Heading2">
+  <a name="1140565"> </a>8.4	 The "Virtual Version Tree"
+</h3>
+<p class="Body">
+  <a name="1140566"> </a>An underlying design concept of the versioning model defined in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is known as a "virtual version tree". The idea is simple in the abstract. Information is committed to a repository (such as an EHR) in lumps, each lump being the "data" of one Version. Each Version has its place within a version tree, which in turn is maintained inside a Versioned object (or "version container"). The virtual version tree concept means that any given Versioned object may have numerous copies in various systems, and that the creation of versions in each is done in such a way that all versions so created are in fact compatible with the "virtual" version tree resulting from the superimposition of the version trees of all copies. This is achieved using simple rules for version identification and is done to facilitate data sharing. Two very common scenarios are served by the virtual version tree concept:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1140567"> </a>longitudinal data that stands as a proxy for the state or situation of the patient such as "Medications" or "Problem list" (persistent Compositions in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR) is created and maintained in one or more care delivery organisations, and shared across a larger number of organisations;
+  <li class="SmartList1"><a name="1140568"> </a>some EHRs in an EHR server in one location are mirrored into one or more other EHR servers (e.g. at care providers where the relevant patients are also treated); the mirroring process requires asynchronous synchronisation between servers to work seamlessly, regardless of the location, time, or author of any data created.
+</ul>
+<p class="Body">
+  <a name="1140569"> </a>The versioning scheme used in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR guarantees that no matter where data are created or copied, there are no inconsistencies due to sharing, and that logical copies are explicitly represented. It therefore provides direct support for shared data in a shared care context.
+</p>
+
+  <div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="1127071"> </a><a href="#1126585"><sup>1</sup></a>IEEE 828-2005 - standard for Software Configuration Management Plans.<br>
+</div>
+</blockquote>
+
+<hr>
+
+<table align="right" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="right"><font size="1">
+    <a href="http://www.openEHR.org"><img src="images/openehr_logo.gif" width="109" height="23" border="0"></a><br>
+    openEHR Foundation<br>
+    http://www.openEHR.org<br>
+    </font></td>
+  </tr>
+</table>
+
+<table width="331" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23" border="0"
+    alt="TOC"> </a></td>
+    <td><a href="security.html"><img src="images/navprev.gif" width="81" height="23" border="0"
+    alt="PREV"> </a></td>
+    <td><a href="identification.html"><img src="images/navnext.gif" width="81" height="23" border="0"
+    alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23" border="0"
+    alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+</body>
+</html>

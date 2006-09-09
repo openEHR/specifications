@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
+<meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
+<meta name="LASTUPDATED" content="09/09/06 10:10:30">
+<link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
+<title>Acknowledgements</title>
+</head>
+
+<body background="images/backgrnd.gif">
+
+<table width="331" border="0" align="right" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><img src="images/navtocx.gif" width="84" height="23" border="0" alt="TOC"> </td>
+    <td><img src="images/navprevx.gif" width="81" height="23" border="0" alt="PREV"> </td>
+    <td><a href="overviewTOC.html"><img src="images/navnext.gif" width="81" height="23"
+    border="0" alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23"
+    border="0" alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+<p><img src="images/openehr_logo.gif" width="109" height="23" alt="openEHR logo"></p>
+<hr align="left">
+
+<blockquote>
+<h1 class="Title">
+  <a name="96703"> </a>
+</h1><hr>
+<h1 class="Title">
+  <a name="109768"> </a>openEHR Architecture
+</h1><hr>
+<h1 class="Title">
+  <a name="96705"> </a>Architecture Overview
+</h1><hr>
+<div style="color: #000000;  font-style: italic; font-weight: normal; margin-bottom: 3pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="96697"> </a>Editors:	 {T Beale, S Heard}<a href="#96693"><sup>1</sup></a><br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 12pt; margin-left: 0pt; margin-right: 0pt; margin-top: 12pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="70119"> </a>Revision:	  <a href="front.html#110911">1.1</a><br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 24pt; margin-left: 0pt; margin-right: 0pt; margin-top: 6pt; text-align: center; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="70124"> </a>Pages:  <a href="end.html#670432">81</a><br>
+</div>
+<h1 class="Title">
+  <a name="98611"> </a>Copyright Notice
+</h1><hr>
+<pre  class="PreformattedRelative">
+
+<a name="109796"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">© Copyright openEHR Foundation 2001 - 2006
+</span><a name="111647"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">All Rights Reserved
+</span><a name="111648"> </a>
+
+<a name="111649"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">	1.	This document is protected by copyright and/or database right throughout the 
+</span><a name="111650"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		world and is owned by the openEHR Foundation.
+</span><a name="111651"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">	2.	You may read and print the document for private, non-commercial use. 
+</span><a name="111652"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">	3.	You may use this document (in whole or in part) for the purposes of making 
+</span><a name="111653"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		presentations and education, so long as such purposes are non-commercial and 
+</span><a name="111654"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		are designed to comment on, further the goals of, or inform third parties 
+</span><a name="111655"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		about, openEHR. 
+</span><a name="111656"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">	4.	You must not alter, modify, add to or delete anything from the document you 
+</span><a name="111657"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		use (except as is permitted in paragraphs 2 and 3 above). 
+</span><a name="111658"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">	5.	You shall, in any use of this document, include an acknowledgement in the form: 
+</span><a name="111659"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		&quot;© Copyright openEHR Foundation 2001-2006. All rights reserved. www.openEHR.org&quot; 
+</span><a name="111660"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">	6.	This document is being provided as a service to the academic community and on 
+</span><a name="111661"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		a non-commercial basis. Accordingly, to the fullest extent permitted under 
+</span><a name="111662"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		applicable law, the openEHR Foundation accepts no liability and offers no 
+</span><a name="111663"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		warranties in relation to the materials and documentation and their content.
+</span><a name="111664"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">	7.	If you wish to commercialise, license, sell, distribute, use or otherwise copy 
+</span><a name="111665"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		the materials and documents on this site other than as provided for in 
+</span><a name="111666"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		paragraphs 1 to 6 above, you must comply with the terms and conditions of the 
+</span><a name="111667"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		openEHR Free Commercial Use Licence, or enter into a separate written agreement 
+</span><a name="111668"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		with openEHR Foundation covering such activities. The terms and conditions of 
+</span><a name="111669"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		the openEHR Free Commercial Use Licence can be found at 
+</span><a name="111670"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		http://www.openehr.org/free_commercial_use.htm
+</span><a name="111671"> </a>
+
+<a name="111672"> </a>
+</pre>
+<h1 class="Title">
+  <a name="72522"> </a>Amendment Record
+
+<table border="1" cellpadding="5" cellspacing="0">
+  <caption></caption>
+  <tr bgcolor="#CCCCCC">
+    <th><a name="97011"> </a><div class="CellHeading">Issue</div></th>
+    <th><a name="97013"> </a><div class="CellHeading">Details</div></th>
+    <th><a name="97015"> </a><div class="CellHeading">Raiser</div></th>
+    <th><a name="97017"> </a><div class="CellHeading">Completed</div></th>
+  </tr>
+  <tr>
+    <td colspan="4" rowspan="1"><a name="111630"> </a><div class="CellBody">R E L E A S E 1.0.1</div></td>
+  </tr>
+  <tr>
+    <td><a name="110911"> </a><div class="CellBody">1.1</div></td>
+    <td><div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="111612"> </a><span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">CR-000200</span>. Correct package names in RM diagram.<br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="111695"> </a><span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">CR-000130</span>: Correct security details in <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LOCATABLE</span> and <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ARCHETYPED</span> classes.<br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="111674"> </a><br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="111708"> </a><span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">CR-000203</span>: Release 1.0 explanatory text improvements. Improved path explanation. Slight re-ordering of main headings.<br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="111613"> </a>Added configuration management and versioning material from Common IM.<br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="111614"> </a>Added section on ontological landscape.<br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="111615"> </a>Added section on aims.<br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="111616"> </a>Added section on systems architectures.<br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="111641"> </a>Added section on security.<br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="111694"> </a>Added section on system integration.<br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="121140"> </a>Added section on terminology.<br>
+</div>
+</td>
+    <td><a name="111627"> </a><div class="CellBody">D Lloyd</div><a name="111673"> </a><div class="CellBody">T Beale</div><a name="111704"> </a><div class="CellBody"><br></div><a name="111719"> </a><div class="CellBody"><br></div><a name="111737"> </a><div class="CellBody">T Beale,</div><a name="111732"> </a><div class="CellBody">G Grieve,</div><a name="111733"> </a><div class="CellBody">T Shannon,</div><a name="111739"> </a><div class="CellBody">T Beale</div></td>
+    <td><a name="110919"> </a><div class="CellBody">08 Sep 2006</div></td>
+  </tr>
+  <tr>
+    <td colspan="4" rowspan="1"><a name="111327"> </a><div class="CellBody">R E L E A S E  1.0</div></td>
+  </tr>
+  <tr>
+    <td><a name="111224"> </a><div class="CellBody">1.0</div></td>
+    <td><div style="color: #000000;  font-style: normal; font-weight: bold; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="111226"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Initial Writing</span> -<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> content taken from Roadmap document.</span><br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="111227"> </a><span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">CR-000147</span>. Make <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DIRECTORY</span> Re-usable<br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="111228"> </a><span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">CR-000167</span>. Move AOM description package to resource package in Common IM.<br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="111229"> </a><span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">CR-000185</span>: Improved <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">EVENT</span> model.<br>
+</div>
+</td>
+    <td><a name="111231"> </a><div class="CellBody">T Beale</div></td>
+    <td><a name="111234"> </a><div class="CellBody">29 Jan 2006</div></td>
+  </tr>
+</table>
+
+
+
+
+</h1><hr>
+<h1 class="Title">
+  <a name="90091"> </a>Acknowledgements
+</h1><hr>
+<p class="Body">
+  <a name="96662"> </a>The work reported in this paper has been funded by the University College, London; Ocean Informatics, Australia.
+</p>
+<p class="Body">
+  <a name="90126"> </a>CORBA is a trademark of the Object Management Group
+</p>
+<p class="Body">
+  <a name="110422"> </a>.Net is a trademark of Microsoft Corporation
+</p>
+<p class="Body">
+  <a name="111680"> </a>LEGO<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: super">®</span> is a registered trademark of The LEGO Group.
+</p>
+
+  <div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 135pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="96693"> </a><a href="#96697"><sup>1</sup></a>Ocean Informatics Australia<br>
+</div>
+</blockquote>
+
+<hr>
+
+<table align="right" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="right"><font size="1">
+    <a href="http://www.openEHR.org"><img src="images/openehr_logo.gif" width="109" height="23" border="0"></a><br>
+    openEHR Foundation<br>
+    http://www.openEHR.org<br>
+    </font></td>
+  </tr>
+</table>
+
+<table width="331" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><img src="images/navtocx.gif" width="84" height="23" border="0" alt="TOC"> </td>
+    <td><img src="images/navprevx.gif" width="81" height="23" border="0" alt="PREV"> </td>
+    <td><a href="overviewTOC.html"><img src="images/navnext.gif" width="81" height="23"
+    border="0" alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23"
+    border="0" alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+</body>
+</html>

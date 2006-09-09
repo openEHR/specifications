@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
+<meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
+<meta name="LASTUPDATED" content="09/09/06 10:10:34">
+<link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
+<title>13 Deployment  </title>
+</head>
+
+<body background="images/backgrnd.gif">
+
+<table width="331" border="0" align="right" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23"
+    border="0" alt="TOC"> </a></td>
+    <td><a href="terminology.html"><img src="images/navprev.gif" width="81" height="23"
+    border="0" alt="PREV"> </a></td>
+    <td><a href="integration.html"><img src="images/navnext.gif" width="81" height="23"
+    border="0" alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23"
+    border="0" alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+<p><img src="images/openehr_logo.gif" width="109" height="23" alt="openEHR logo"></p>
+<hr align="left">
+
+<blockquote>
+<h2 class="Heading1">
+  <a name="1147859"> </a>13	 Deployment
+</h2>
+<h3 class="Heading2">
+  <a name="1161024"> </a>13.1	 5-tier System Architecture
+</h3>
+<p class="Body">
+  <a name="1161025"> </a>Previous sections have described the software architecture of the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR specifications. Here we describe how the package architecture can be applied to building real systems. The general architectural approach in any <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR system can be considered as 5 layers (i.e. a "5-tier" architecture). The tiers are as follows.
+</p>
+<ol type="1">
+  <li class="SmartList1" value="1"><a name="1147862"> </a><span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">persistence</span>: data storage and retrieval.
+  <li class="SmartList1" value="2"><a name="1147863"> </a><span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">back-end services</span>: including EHR, demographics, terminology, archetypes, security, record location, and so on. In this layer, the separation of the different services is transparent, and each service has a coarse-grained service interface.
+  <li class="SmartList1" value="3"><a name="1147864"> </a><span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">virtual EHR</span>: this tier is the middleware, and consists of a coherent set of APIs to the various back-end services providing access to the relevant services, thereby allowing user access to the EHR; including EHR, demographics, security, terminology, and archetype services. It also contains an archetype- and template-enabled kernel, the component responsible for creating and processing archetype-enabled data. In this tier, the separation of back-end services is hidden, only the functionality is exposed. Other virtual clients are possible, consisting of APIs for other combinations of back-end services.
+  <li class="SmartList1" value="4"><a name="1147865"> </a><span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">application logic</span>: this tier consists of whatever logic is specific to an application, which might be a user application, or another service such as a query engine.
+  <li class="SmartList1" value="5"><a name="1147866"> </a><span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">presentation layer</span>: this layer consists of the graphical interface of the application, where applicable.
+</ol>
+<p class="Body">
+  <a name="1147870"> </a>The same tiers can be used in large deployments, as shown in <a href="deployment.html#1147870">FIGURE 34</a>, or simply as layers in single-machine applications.<br clear="all" /><table align="left"><tr><td><img src="images/deploymenta.gif" height="405" width="650" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<p class="Body">
+  <a name="1147976"> </a><a href="deployment.html#1147983">FIGURE 35</a> illustrates an approximate mapping of major parts of the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR software architecture to the 5-tier scheme. Clearly where parts of the architecture are used will depend on various implementation choices; the mapping shown is therefore not definitive. Nevertheless, the principal use of parts of the architecture is likely to be similar in most systems, as follows:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1147977"> </a>RM and AM: mainly used to construct an archetype- and template-processing kernel;
+  <li class="SmartList1"><a name="1147978"> </a>RM <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">common.change_control</span> package: provides the logic for versioning in versioned services such as the EHR and demographics;
+  <li class="SmartList1"><a name="1147979"> </a>SM: various service model packages define the exposed interfaces of major services;
+  <li class="SmartList1"><a name="1147980"> </a>SM <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">virtual_ehr</span> package defines the API of the virtual EHR component;
+  <li class="SmartList1"><a name="1147981"> </a>archetypes: archetypes might be assumed directly in some applications, e.g. a specialist peri-natal package might be partly based on a family of archetypes for this specialisation;
+  <li class="SmartList1"><a name="1147982"> </a>templates: both archetypes and templates will be used in the presentation layer of applications. Some will base the GUI code on them, while others will have either tool-generate code, or dynamically generate forms based on particular templates and archetypes.
+</ul>
+<p class="Body">
+  <a name="1147983"> </a>In the future, an abstract persistence API and optimised persistence models (transformations of the existing RM models) are likely to be published by <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR in order to help with the implementation of databases.<br clear="all" /><table align="left"><tr><td><img src="images/deployment2.gif" height="304" width="649" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<p class="Body">
+  <a name="1120385"> </a>
+</p>
+</blockquote>
+
+<hr>
+
+<table align="right" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="right"><font size="1">
+    <a href="http://www.openEHR.org"><img src="images/openehr_logo.gif" width="109" height="23" border="0"></a><br>
+    openEHR Foundation<br>
+    http://www.openEHR.org<br>
+    </font></td>
+  </tr>
+</table>
+
+<table width="331" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23" border="0"
+    alt="TOC"> </a></td>
+    <td><a href="terminology.html"><img src="images/navprev.gif" width="81" height="23" border="0"
+    alt="PREV"> </a></td>
+    <td><a href="integration.html"><img src="images/navnext.gif" width="81" height="23" border="0"
+    alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23" border="0"
+    alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+</body>
+</html>

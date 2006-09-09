@@ -1,0 +1,498 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
+<meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
+<meta name="LASTUPDATED" content="09/09/06 10:10:34">
+<link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
+<title>11 Paths and Locators  </title>
+</head>
+
+<body background="images/backgrnd.gif">
+
+<table width="331" border="0" align="right" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23"
+    border="0" alt="TOC"> </a></td>
+    <td><a href="archetyping.html"><img src="images/navprev.gif" width="81" height="23"
+    border="0" alt="PREV"> </a></td>
+    <td><a href="terminology.html"><img src="images/navnext.gif" width="81" height="23"
+    border="0" alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23"
+    border="0" alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+<p><img src="images/openehr_logo.gif" width="109" height="23" alt="openEHR logo"></p>
+<hr align="left">
+
+<blockquote>
+<h2 class="Heading1">
+  <a name="1123502"> </a>11	 Paths and Locators
+</h2>
+<h3 class="Heading2">
+  <a name="1123503"> </a>11.1	 Overview
+</h3>
+<p class="Body">
+  <a name="1081008"> </a>The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR architecture includes a path mechanism that enables any node within a top level structure to be specified from the top of the structure using a "semantic" (i.e. archetype-based) X-path compatible path. The availability of such paths radically changes the available querying possibilities with health information, and is one of the major distinguishing features of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR.
+</p>
+<p class="Body">
+  <a name="1166410"> </a>Technically, the combination of a path and a Version identifier such as <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_VERSION_ID</span> forms a "globally qualified node reference" which can be expressed using <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LOCATABLE_REF</span>. It can also be expressed in portable URI form as a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DV_EHR_URI</span>, known as a "globally qualified node locator". Either representation enables any <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR data node to be referred to from anywhere. This section describes the syntax and semantics of paths, and of the URI form of reference. In the following, the term "archetype path" means a path extracted from an archetype, while "runtime path" means one that identifies an item in data. They are no different formally, and this terminology is only used to indicate where they are used.
+</p>
+<h3 class="Heading2">
+  <a name="1117926"> </a>11.2	 Paths
+</h3>
+<h4 class="Heading3">
+  <a name="1123882"> </a>11.2.1	 Basic Syntax
+</h4>
+<p class="Body">
+  <a name="1123865"> </a>Paths in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR are defined in an Xpath<a href="#1123864"><sup>1</sup></a>-compatible syntax which is a superset of the path syntax described in the Archetype Definition Language (ADL). The syntax is designed to be easily mappable to Xpath expressions, for use with <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR-based XML.
+</p>
+<p class="Body">
+  <a name="1117284"> </a>The runtime path syntax used in locator expressions follows the general pattern of a path consisting of segments each consisting of an attribute name<a href="#1121788"><sup>2</sup></a>, and separated by the slash (`/') character, i.e.:
+</p>
+<pre  class="PreformattedRelative">
+attribute_name / attribute_name / ... / attribute_name
+<a name="1117158"> </a>
+</pre>
+<p class="Body">
+  <a name="1117129"> </a>Paths select the object which is the value of the final attribute name in the path, when going from some starting point in the tree and following attribute names given in the path. The starting point is indicated by the initial part of the path, and can be specified in two ways:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1117184"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">relative path</span>: path starts with an attribute name, and the starting point is the current point in the tree (given by some previous operation or knowledge);
+  <li class="SmartList1"><a name="1117188"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">absolute path</span>: path starts with a `/'; the starting point is the top of the structure.
+</ul>
+<p class="Body">
+  <a name="1162808"> </a>In addition, the "//" notation from Xpath can be used to define a path pattern:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1117210"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">path pattern</span>: path starts with or contains a the symbol `//' and is taken to be a pattern which can match any number of path segments in the data; the pattern is matched if an actual path can be found anywhere in the structure for which part of the path matches the path section before the `//' symbol, and a later section matches the section appearing after the `//'.
+</ul>
+<h4 class="Heading3">
+  <a name="1117321"> </a>11.2.2	 Predicate Expressions
+</h4>
+<p class="Body">
+  <a name="1117180"> </a>Paths specified solely with attribute names are limited in two ways. Firstly, they can only locate objects in structures in where there are no containers, such as lists or sets. However, in any realistic data, including most <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR data, list, set and hash structures are common. Additional syntax is needed to match a particular object from among the siblings referred to by a container attribute. This takes the form of a predicate expression enclosed in brackets (`[]') after the relevant attribute in a segment, i.e.:
+</p>
+<pre  class="PreformattedRelative">
+attribute_name [predicate expression]
+<a name="1117235"> </a>
+</pre>
+<p class="Body">
+  <a name="1117223"> </a>The general form of a path then resembles the following:
+</p>
+<pre  class="PreformattedRelative">
+attribute_name / attribute_name [predicate expression] / ...
+<a name="1117267"> </a>
+</pre>
+<p class="Body">
+  <a name="1117956"> </a>Here, predicate expressions are used optionally on those attributes defined in the reference model to be of a container type (i.e. having a cardinality of &gt; 1). If a predicate expression is not used on a container attribute, the whole container is selected. 
+</p>
+<p class="Body">
+  <a name="1118126"> </a>The second limitation of basic paths is that they cannot locate objects based on other conditions, such as the object having a child node with a particular value. To address this, predicate expressions can be used to select an object on the basis of other conditions relative to the object, by including boolean expressions including paths, operators, values and parentheses.
+</p>
+<p class="Body">
+  <a name="1117957"> </a>The syntax of predicate expressions used in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is a subset of the Xpath syntax for predicates with a small number of short-cuts. The general form of a predicate statement is a boolean-returning expression consisting of paths, values, operators and parentheses. In the current release of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR, it is expected that only very simple expressions will be used. The simplest such expression is to identify an object by its <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> value, which will be an `at' code from an archetype; in other words, just to use the ADL archetype path against the runtime data. A typical archetype-derived path is the following (applied to an Observation instance):
+</p>
+<pre  class="PreformattedRelative">
+/data/events[at0003]/data/items[at0025]/value/magnitude
+<a name="1117359"> </a>
+</pre>
+<p class="Body">
+  <a name="1117369"> </a>This path refers to the magnitude of a 1-minute Apgar total in an Observation containing a full Apgar result structure. In this path, the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[atNNNN]</span> predicates correspond to <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[@archetype_node_id = "atNNNN"]</span> in standard Xpath, however, the shorthand form is used in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR as it is the only kind of predicate used in archetype paths. In <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR paths identifying runtime data, archetype code predicates are also commonly used, and the same short-cut is allowed. However, runtime path predicates can also include other expressions (including the orthodox Xpath equivalent expression for the archetype node id short-cut), typically based on the value of some other attribute such as <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ELEMENT</span>.<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> or <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">EVENT</span>.<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">time</span>. Combinations of the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> and other such values are likely to be commonly used in querying, such as the following path fragment (applied to an <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBSERVATION</span> instance):
+</p>
+<pre  class="PreformattedRelative">
+/data/events[at0007 AND time &gt;= "24-06-2005 09:30:00"]
+<a name="1117412"> </a>
+</pre>
+<p class="Body">
+  <a name="1117382"> </a>This path would choose Events in Observation.data whose <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> meaning is "summary event" (at0007 in some archetype) and which occurred at or after the given time. The following example would choose an Evaluation containing a diagnosis (at0002.1) of "other bacterial intestinal infections" (ICD10 code A04):
+</p>
+<pre  class="PreformattedRelative">
+/data/items[at0002.1 
+<a name="1117453"> </a>
+	AND 	value/defining_code/terminology_id/value = "ICD10AM" 
+<a name="1117492"> </a>
+	AND value/defining_code/code_string = "A04"]
+<a name="1117486"> </a>
+</pre>
+<h4 class="Heading3">
+  <a name="1125826"> </a>11.2.3	 Paths within Top-level Structures
+</h4>
+<p class="Body">
+  <a name="1125827"> </a>Paths within top-level structures strictly adhere to attribute and function names in the relevant parts of the reference model. Predicate expressions are needed to distinguish multiple siblings in various points in paths into these structures, but particularly at archetype "chaining" points. A chaining point is where one archetype takes over from another as illustrated in <a href="archetyping.html#1135492">FIGURE 30</a>. Chaining points in Compositions occur between the Composition and a Section structure, potentially between a Section structure and other sub-Section structures (constrained by a different Section archetype), and between either Compositions or Section structures, and Entries. Chaining might also occur inside an Entry, if archetyping is used on lower level structures such as Item_lists etc. Most chaining points correspond to container types such as <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">List&lt;T&gt;</span> etc., e.g. <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">COMPOSITION</span>.<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">content</span> is defined to be a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">List&lt;CONTENT_ITEM&gt;</span>, meaning that in real data, the content of a Composition could be a List of Section structures. To distinguish between such sibling structures, predicate expressions are used, based on the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_id</span>. At the root point of an archetype in data (e.g. top of a Section structure), the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_id</span> carries the identifier of the archetype used to create that structure, in the same manner as any interior point in an archetyped structure has an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> attribute carrying archetype <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">node_id</span> values. The chaining point between Sections and Entries works in the same manner, and since multiple Entries can occur under a single Section, <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_id</span> predicates are also used to distinguish them. The same shorthand is used for <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_id</span> predicate expressions as for <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_ids</span>, i.e. instead of using <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[@archetype_id = "xxxxx"]</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[xxxx]</span> can be used instead.
+</p>
+<p class="Body">
+  <a name="1125831"> </a>The following paths are examples of referring to items within a Composition:
+</p>
+<pre  class="PreformattedRelative">
+/content[openEHR-EHR-SECTION.vital_signs.v1]/
+<a name="1125832"> </a>
+	items[openEHR-EHR-OBSERVATION.heart_rate-pulse.v1]/data/
+<a name="1125833"> </a>
+	events[at0003 AND time=&#39;2006-01-25T08:42:20&#39;]/data/items[at0004]
+<a name="1125834"> </a>
+/content[openEHR-EHR-SECTION.vital_signs.v1]/
+<a name="1125835"> </a>
+	items[openEHR-EHR-OBSERVATION.blood_pressure.v1]/data/
+<a name="1125836"> </a>
+	events[at0006 AND time=&#39;2006-01-25T08:42:20&#39;]/data/items[at0004]
+<a name="1125837"> </a>
+/content[openEHR-EHR-SECTION.vital_signs.v1]/
+<a name="1125838"> </a>
+	items[openEHR-EHR-OBSERVATION.blood_pressure.v1]/data/
+<a name="1125839"> </a>
+	events[at0006 AND time=&#39;2006-01-25T08:42:20&#39;]/data/items[at0005]
+<a name="1125840"> </a>
+</pre>
+<p class="Body">
+  <a name="1125841"> </a>Paths within the other top level types follow the same general approach, i.e. are created by following the required attributes down the hierarchy.
+</p>
+<h4 class="Heading3">
+  <a name="1138175"> </a>11.2.4	 Runtime Paths and Uniqueness
+</h4>
+<p class="Body">
+  <a name="1138179"> </a>Archetype paths are not guaranteed to uniquely identify items in data, due to the fact that one archetype node may correspond to multiple instances in the data. However it is often necessary to be able to construct a unique path to an item in real data. This can be done by using attributes other than <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> in path predicates. Consider as an example the following <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBSERVATION</span> archetype:
+</p>
+<pre  class="PreformattedRelative">
+<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">OBSERVATION</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0000]</span> <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">matches {   							</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- blood pressure measurement
+</span><a name="1138184"> </a>
+	data <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">matches {			
+</span><a name="1138186"> </a>
+		<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">HISTORY</span> <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">matches {					
+</span><a name="1138363"> </a>
+			events <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">{1..*} matches { 	
+</span><a name="1138365"> </a>
+				<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">EVENT</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0001]</span> <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">{0..1}  matches {					</span><span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">			</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- any event
+</span><a name="1138329"> </a>
+					<span style="color: #66d16d;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> matches {<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">DV_TEXT</span>			 matches {...}}
+<a name="1138330"> </a>
+					data <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">matches {	
+</span><a name="1138331"> </a>
+<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">						ITEM_LIST</span> matches {		<span style="color: #917200;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">				</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- systemic arterial BP
+</span><a name="1138332"> </a>
+							<span style="color: #66d16d;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">count</span> matches {2..*}
+<a name="1138195"> </a>
+							<span style="color: #66d16d;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">items</span> matches {				
+<a name="1138197"> </a>
+								<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">ELEMENT</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at1100]</span> matches {<span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">			-- systolic BP
+</span><a name="1138198"> </a>
+									<span style="color: #66d16d;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> matches {<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">DV_TEXT</span>			 matches {...}}
+<a name="1141218"> </a>
+									<span style="color: #66d16d;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> matches {<span style="color: #66d16d;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">magnitude </span>matches {...}}
+<a name="1138200"> </a>
+								} 
+<a name="1138201"> </a>
+								<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">ELEMENT</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at1200]</span> matches {<span style="color: #917200;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">			</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- diastolic BP
+</span><a name="1138202"> </a>
+									<span style="color: #66d16d;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> matches {<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">DV_TEXT</span>			 matches {...}}
+<a name="1141222"> </a>
+									<span style="color: #66d16d;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> matches {<span style="color: #66d16d;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">magnitude </span>matches {...}}
+<a name="1138204"> </a>
+								}
+<a name="1138205"> </a>
+							}
+<a name="1138208"> </a>
+						}
+<a name="1138209"> </a>
+					}
+<a name="1138210"> </a>
+				}
+<a name="1138211"> </a>
+			}
+<a name="1138219"> </a>
+		}
+<a name="1138220"> </a>
+
+<a name="1138221"> </a>
+</pre>
+<p class="Body">
+  <a name="1138858"> </a>The following path extracted from the archetype refers to the systolic blood pressure magnitude:
+</p>
+<pre  class="PreformattedRelative">
+/data/events[at0001]/data/items[at1100]/value/magnitude
+<a name="1138859"> </a>
+</pre>
+<p class="Body">
+  <a name="1138860"> </a>The codes <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[atnnnn]</span> at each node of the archetype become the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_ids</span> found in each node in the data. 
+</p>
+<p class="Body">
+  <a name="1138608"> </a>Now consider an <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBSERVATION</span> instance (expressed here in dADL format), in which a history of two blood pressures has been recorded using this archetype:
+</p>
+<pre  class="PreformattedRelative">
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&lt;									</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- OBSERVATION - blood pressure measurement
+</span><a name="1138227"> </a>
+	<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> = &lt;<span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[openEHR-EHR-OBSERVATION.bp_meas.v2]</span>&gt;
+<a name="1138371"> </a>
+	<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">"BP measurement"</span>&gt;&gt;
+<a name="1138228"> </a>
+	<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">data</span> <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;									</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- HISTORY</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">	
+</span><a name="1138229"> </a>
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		</span><span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">origin</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">2005-12-03T09:22:00</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+</span><a name="1138232"> </a>
+		<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">events</span> <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;									</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- List &lt;EVENT&gt;
+</span><a name="1140986"> </a>
+			<span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[</span><span style="color: #0000d3;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">1</span><span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">]</span>	 <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;								</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- EVENT
+</span><a name="1138511"> </a>
+				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0001]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+</span><a name="1138398"> </a>
+				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">"sitting"</span>&gt;&gt;
+<a name="1138234"> </a>
+				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">time</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">2005-12-03T09:22:00</span>&gt;
+<a name="1140963"> </a>
+				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">data</span> <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;									</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- ITEM_LIST</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">	
+</span><a name="1138235"> </a>
+					<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">items</span> = &lt;								<span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- List&lt;ELEMENT&gt;</span>	
+<a name="1138641"> </a>
+						<span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[</span><span style="color: #0000d3;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">1</span><span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">]</span>	 <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;
+</span><a name="1138690"> </a>
+							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">"systolic"</span>&gt;&gt;
+<a name="1141166"> </a>
+<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">							archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at1100]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+</span><a name="1138697"> </a>
+							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">magnitude</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">120.0</span>&gt; ...&gt;
+<a name="1138699"> </a>
+						&gt;
+<a name="1138698"> </a>
+						<span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[</span><span style="color: #0000d3;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">2</span><span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">]</span>	 <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;....
+</span><a name="1138642"> </a>
+							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">"diastolic"</span>&gt;&gt;
+<a name="1141162"> </a>
+<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">							archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at1200]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+</span><a name="1138705"> </a>
+							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">magnitude</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">80.0</span>&gt; ...&gt;
+<a name="1138777"> </a>
+						&gt;
+<a name="1138703"> </a>
+					&gt;
+<a name="1138643"> </a>
+				&gt;
+<a name="1138238"> </a>
+			&gt;
+<a name="1138533"> </a>
+			<span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[</span><span style="color: #0000d3;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">2</span><span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">]</span>	 <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;								</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- EVENT
+</span><a name="1138535"> </a>
+				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0001]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+</span><a name="1138418"> </a>
+				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">"standing"</span>&gt;&gt;
+<a name="1138242"> </a>
+				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">time</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">2005-12-03T09:27:00</span>&gt;
+<a name="1140975"> </a>
+				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">data</span> = &lt;									<span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- ITEM_LIST</span>	
+<a name="1138243"> </a>
+					<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">items</span> = &lt;								<span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- List&lt;ELEMENT&gt;</span>	
+<a name="1138624"> </a>
+						<span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[</span><span style="color: #0000d3;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">1</span><span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">]</span>	 <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;
+</span><a name="1138714"> </a>
+							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">"systolic"</span>&gt;&gt;
+<a name="1141048"> </a>
+<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">							archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at1100]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+</span><a name="1138715"> </a>
+							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">magnitude</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">105.0</span>&gt; ...&gt;
+<a name="1138771"> </a>
+						&gt;
+<a name="1138717"> </a>
+						<span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[</span><span style="color: #0000d3;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">2</span><span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">]</span>	 <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;
+</span><a name="1138718"> </a>
+							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">"diastolic"</span>&gt;<span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+</span><a name="1141052"> </a>
+<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">							archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at1200]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+</span><a name="1138719"> </a>
+							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">magnitude</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">70.0</span>&gt; ...&gt;
+<a name="1138781"> </a>
+						&gt;
+<a name="1138721"> </a>
+					&gt;
+<a name="1138650"> </a>
+				&gt;
+<a name="1138427"> </a>
+			&gt;
+<a name="1138248"> </a>
+		&gt;
+<a name="1138249"> </a>
+&gt;
+<a name="1138546"> </a>
+</pre>
+<p class="Body">
+  <a name="1141071"> </a>[Note: in the above example, name values are shown as if they were all <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DV_TEXTs</span>, whereas in reality in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR they more likely to be <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DV_CODED_TEXT</span> instances; either is allowed by the archetype. This has been done to reduce the size of the example, and makes no difference to the paths shown below].
+</p>
+<p class="Body">
+  <a name="1141186"> </a>The archetype path mentioned above<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">					</span> matches both systolic pressures in the recording. In many querying situations, this may be exactly what is desired. However, to uniquely match each of the systolic pressure nodes, paths need to be created that are based not only on the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> but also on another attribute. In the case above, the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> attribute provides uniqueness. Guaranteed unique paths to the systolic and diastolic pressures of the each event (sitting and standing measurements) are available using the following expressions (identical in Xpath)<a href="#1162829"><sup>3</sup></a>:
+</p>
+<pre  class="PreformattedRelative">
+/data/events[1]/data/items[1]/value/magnitude
+<a name="1141101"> </a>
+/data/events[1]/data/items[2]/value/magnitude
+<a name="1141102"> </a>
+/data/events[2]/data/items[1]/value/magnitude
+<a name="1141078"> </a>
+/data/events[2]/data/items[2]/value/magnitude
+<a name="1141079"> </a>
+</pre>
+<p class="Body">
+  <a name="1141092"> </a>More expressive unique paths based on archetype paths are also possible, as follows:
+</p>
+<pre  class="PreformattedRelative">
+/data/events[at0001 AND 
+
+	name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`sitting'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1100</span>]/value/magnitude
+<a name="1141110"> </a>
+/data/events[at0001 AND 
+<a name="1141072"> </a>
+	name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`sitting'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1200</span>]/value/magnitude
+<a name="1141271"> </a>
+/data/events[at0001 AND 
+<a name="1141116"> </a>
+	name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`standing'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1100</span>]/value/magnitude
+<a name="1141272"> </a>
+/data/events[at0001 AND 
+<a name="1141073"> </a>
+	name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`standing'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1200</span>]/value/magnitude
+<a name="1141273"> </a>
+</pre>
+<p class="Body">
+  <a name="1141074"> </a>Each of these paths has an Xpath equivalent of the following form:
+</p>
+<pre  class="PreformattedRelative">
+/data/events[@archetype_node_id = `at0001' AND
+<a name="1141138"> </a>
+	name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`</span>standing<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">'</span>]/data/items[@archetype_node_id = `at1200']
+<a name="1141169"> </a>
+	/value/magnitude
+<a name="1141185"> </a>
+</pre>
+<p class="Body">
+  <a name="1141136"> </a>As a general rule, one or more other attribute values in the runtime data will uniquely identify any node in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR data. To make construction of unique paths easier, the value of the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> attribute (inherited from the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LOCATABLE</span> class), is <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">required</span> to be unique with respect to the name values of sibling nodes. This has two consequences as follows:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1138900"> </a>a guaranteed unique path can always be constructed to any data item in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR data using a combination of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> and <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name </span>values (as shown in the example paths above);
+  <li class="SmartList1"><a name="1138919"> </a>the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> value may be systematically defined to be a copy of one or more other attribute values. For example, in an <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">EVENT</span> object, name could clearly be a string copy of the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">time</span> attribute.
+</ul>
+<h3 class="Heading2">
+  <a name="1123890"> </a>11.3	 EHR URIs
+</h3>
+<p class="Body">
+  <a name="1117727"> </a>To create a reference to a node in an EHR in the form of a URI (uniform resource identifier), two elements are needed: the path <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">within</span> a top-level structure, and a reference <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">to</span> a top-level structure. These are combined to form a URI in an "ehr" scheme-space, obeying the following syntax:
+</p>
+<pre  class="PreformattedRelative">
+ehr://top_level_structure_locator/path_inside_top_level_structure
+<a name="1117754"> </a>
+</pre>
+<p class="Body">
+  <a name="1117710"> </a>Under this scheme, any object in any <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR is addressable via a URI. The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR data type <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DV_EHR_URI</span> is designed to carry URIs of this form, enabling URIs to be constructed for use within <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LINKs</span> and elsewhere in the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR. (URIs of course are only one method of addressing or querying data in the EHR. Other querying syntaxes and functional interfaces will be developed and used over time.)
+</p>
+<h4 class="Heading3">
+  <a name="1117784"> </a>11.3.1	 Locating Top-Level Structures
+</h4>
+<p class="Body">
+  <a name="1117788"> </a>The first part of an EHR URI needs to identify a top-level structure. As described above, a Version locator can be used to do this. However, this is not the only way: various logical queries can also be used, e.g. "get the latest version from a given Versioned object matching...". For reasons of efficiency, the top-level structure locator part of the URI is also likely to include the EHR id, and possibly the EHR system id, even though neither of these are strictly needed for identification. Thus, the first part of an EHR URI might include the following:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1125751"> </a>EHR id;
+  <li class="SmartList1"><a name="1117803"> </a>EHR system id, depending on whether the EHR id is globally unique or not;
+  <li class="SmartList1"><a name="1125754"> </a>Either:
+  <ul>
+    <li class="SmartList2"><a name="1117804"> </a>version time, i.e. time baseline for retrieving versions, defaults to "now";
+    <li class="SmartList2"><a name="1117809"> </a>identifier of particular Version container object, typically its <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">uid</span>;
+  </ul>
+  <li class="SmartList1"><a name="1125772"> </a>Or:
+  <ul>
+    <li class="SmartList2"><a name="1125773"> </a>a Version identifier, i.e. {Version container object Uid; <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version_tree_id</span>; <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">creating_system_id</span>}
+  </ul>
+</ul>
+<p class="Body">
+  <a name="1117798"> </a>For a number of reasons there is currently no standard syntax for encapsulating these parameters. Firstly, there is an issue to do with how EHRs will be identified in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR systems. Identifiers may be required to conform to local health jurisdiction requirements, or may not. If EHR identifiers are globally unique, or even nationally unique, then in theory the EHR system identifier can be dispensed with. However in a practical sense the identifier of the EHR system can only be dispensed with if there is a health information location service operating in the environment that can perform EHR id -&gt; EHR system id mappings, in much the same way as the internet DNS converts logical domain names to IP addresses.
+</p>
+<p class="Body">
+  <a name="1117838"> </a>Another issue is whether it can be assumed that the version time baseline has already been established in some earlier call or service invocation, and that no version time information is needed.
+</p>
+<p class="Body">
+  <a name="1117815"> </a>Various syntax possibilities include:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1117816"> </a>an Xpath-style syntax; this does not seem desirable as it implies hierarchical data containment structures that don't exist and is likely to be confused with the path part of the URI;
+  <li class="SmartList1"><a name="1117820"> </a>a web-services inspired functional syntax;
+  <li class="SmartList1"><a name="1117821"> </a>a database-inspired query syntax.
+</ul>
+<p class="Body">
+  <a name="1117830"> </a>Currently, a fairly typical URI query style of syntax is used, as shown in the following examples. 
+</p>
+<ul>
+  <li class="SmartList1"><a name="1121465"> </a>This path matches a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_COMPOSITION</span>:
+<pre  class="PreformattedRelative">
+ehr://rdh.health.gov.au?ehr=1234567&amp;versioned_composition=87284370-2D4B-
+<a name="1118344"> </a>
+4e3d-A3F3-F303D2F4F34B 
+<a name="1121477"> </a>
+
+<a name="1121472"> </a>
+</pre>
+  <li class="SmartList1"><a name="1118372"> </a>The following path matches the most recent <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSION&lt;COMPOSITION&gt;</span> from a specified <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_COMPOSITION</span>:
+<pre  class="PreformattedRelative">
+ehr://rdh.health.gov.au?ehr=1234567&amp;versioned_composition=0892BF98-910D-
+<a name="1118347"> </a>
+4df9-BF7E-F10D72C1C81A&amp;latest_version
+<a name="1121478"> </a>
+
+<a name="1121473"> </a>
+</pre>
+  <li class="SmartList1"><a name="1125799"> </a>The following path matches a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">COMPOSITION</span> within <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSION</span> 2 of a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_COMPOSITION</span>:
+<pre  class="PreformattedRelative">
+ehr://rdh.health.gov.au?ehr=1234567&amp;version={F7C5C7B7-75DB-
+<a name="1125800"> </a>
+4b39-9A1E-C0BA9BFDBDEC::au.gov.health.rdh::2}&amp;data
+<a name="1125801"> </a>
+</pre>
+</ul>
+<p class="Body">
+  <a name="1118260"> </a>In these paths, the following pseudo-identifiers are used:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1121527"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">versioned_composition</span>: to indicate an instance of <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_COMPOSITION</span>;
+  <li class="SmartList1"><a name="1118506"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version_tree_id</span>: the version identifier of the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSION</span> within the tree structure of the owning <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_OBJECT</span>; 
+  <li class="SmartList1"><a name="1118526"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">latest_version</span>: a pseudo-identifier used to indicate a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSION</span> instance being the result of the call <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_COMPOSITION</span>.<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">latest_version</span>;
+</ul>
+<p class="Body">
+  <a name="1118505"> </a>Implementors and users of the current release of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR are encouraged to experiment and/or propose improved solutions to the locator requirement described in this section.
+</p>
+
+  <div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="1123864"> </a><a href="#1123865"><sup>1</sup></a>See W3C Xpath 1.0 specification, 1999. Available at <span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: underline; text-transform: none; vertical-align: baseline"><a href="http://www.w3.org/TR/xpath">http://www.w3.org/TR/xpath</a></span>.<br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="1121788"> </a><a href="#1117284"><sup>2</sup></a>In all openEHR documentation, the term "attribute" is used in the object-oriented sense of "property of an object", not in the XML sense of named values appearing within a tag. The syntax described here should not be considered to necessarily have a literal mapping to XML instance, but rather to have a logical mapping to object-oriented data structures.<br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="1162829"> </a><a href="#1141186"><sup>3</sup></a>the notation attr[1] is a Xpath shorthand for attr[position() = 1]<br>
+</div>
+</blockquote>
+
+<hr>
+
+<table align="right" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="right"><font size="1">
+    <a href="http://www.openEHR.org"><img src="images/openehr_logo.gif" width="109" height="23" border="0"></a><br>
+    openEHR Foundation<br>
+    http://www.openEHR.org<br>
+    </font></td>
+  </tr>
+</table>
+
+<table width="331" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23" border="0"
+    alt="TOC"> </a></td>
+    <td><a href="archetyping.html"><img src="images/navprev.gif" width="81" height="23" border="0"
+    alt="PREV"> </a></td>
+    <td><a href="terminology.html"><img src="images/navnext.gif" width="81" height="23" border="0"
+    alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23" border="0"
+    alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+</body>
+</html>
