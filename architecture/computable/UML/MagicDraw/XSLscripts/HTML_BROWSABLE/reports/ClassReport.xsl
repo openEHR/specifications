@@ -2,11 +2,8 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:lxslt="http://xml.apache.org/xslt" xmlns:redirect="org.apache.xalan.lib.Redirect"
 	extension-element-prefixes="redirect">
-	<!-- Global variables -->
-	<!--<xsl:variable name="fromClass"/>-->
-	<!--
-Template for Class report
--->
+	
+	<!--Template for Class report-->
 	<xsl:template name="CREATE_CLASS_REPORT">
 		<xsl:variable name="checkVisibility">
 			<xsl:call-template name="CHECK_VISIBILITY"/>
@@ -155,9 +152,10 @@ Template for Class report
 						<!--            ===========  Report body ===========             -->
 						<!--            =================================             -->
 						<!--         Element type and name             -->
+<!-- First show parent package -->						
 						<xsl:if test="../../@xmi.id != $rootModelID">
 							<xsl:if test="../../Foundation.Core.Namespace.ownedElement = ..">
-								<xsl:text>Package: </xsl:text>
+								<xsl:text>Parent Package: </xsl:text>
 								<a href="{../../@xmi.id}Report.html" target="_self">
 									<xsl:call-template name="SHOW_NAME">
 										<xsl:with-param name="name"
@@ -270,11 +268,7 @@ Template for Class report
 							<br/>
 							<xsl:call-template name="SHOW_BINDINGS"/>
 						</xsl:if>
-						<!--    =========  Class operations [optional] ===========      -->
-						<xsl:if test="$hasOperations">
-							<br/>
-							<xsl:call-template name="SHOW_OPERATIONS"/>
-						</xsl:if>
+						
 						<!--    =========  Class template parameters [optional] ===========      -->
 						<xsl:if test="$hasTemplateParameters">
 							<br/>
@@ -284,6 +278,11 @@ Template for Class report
 						<xsl:if test="$hasInnerElements">
 							<br/>
 							<xsl:call-template name="SHOW_INNER_ELEMENTS"/>
+						</xsl:if>
+						<!--    =========  Class operations [optional] ===========      -->
+						<xsl:if test="$hasOperations">
+							<br/>
+							<xsl:call-template name="SHOW_OPERATIONS"/>
 						</xsl:if>
 						<!--    =========  Class tagged values [optional] ===========      -->
 						<xsl:if test="$hasTaggedValues">
