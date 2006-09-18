@@ -52,10 +52,13 @@
 							<xsl:when test="$generateRelations">
 								<a href="{$linkToReport}" target="_self">
 									<xsl:copy-of select="$ASSOCIATION_ICON"/>
-								</a>
+								</a>	
+							
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:copy-of select="$ASSOCIATION_ICON"/>
+								
+								
 							</xsl:otherwise>
 						</xsl:choose>
 						<xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
@@ -927,10 +930,10 @@ Template for include relationships
 				<td>
 					<b>Signature</b>
 				</td>
-				<td>
+				<td align="center">
 					<b>Optionality</b>
 				</td>
-				<td>
+				<td align="center">
 					<b>Multiplicity</b>
 				</td>
 				<td>
@@ -944,17 +947,17 @@ Template for include relationships
 				</xsl:call-template>
 			</xsl:if>
 			<!--<xsl:call-template name="SHOW_BINDINGS"/>-->
-			<!--<xsl:if test="$showAllRelations">
-				<xsl:call-template name="SHOW_GENERALIZATIONS"/>
-				<xsl:call-template name="SHOW_ABSTRACTIONS"/>
-				<xsl:call-template name="SHOW_BINDINGS"/>
-				<xsl:call-template name="SHOW_DEPENDENCIES"/>
+			<xsl:if test="$showAllRelations">
+				<!--<xsl:call-template name="SHOW_GENERALIZATIONS"/>
+				<xsl:call-template name="SHOW_ABSTRACTIONS"/>-->
+				<!--<xsl:call-template name="SHOW_BINDINGS"/>-->
+				<!--<xsl:call-template name="SHOW_DEPENDENCIES"/>
 				<xsl:call-template name="SHOW_PERMISSIONS"/>
 				<xsl:call-template name="SHOW_USAGES"/>
 				<xsl:call-template name="SHOW_EXTEND_RELATIONSHIPS"/>
 				<xsl:call-template name="SHOW_INCLUDE_RELATIONSHIPS"/>
-				<xsl:call-template name="SHOW_LINKS"/>
-			</xsl:if>-->
+				<xsl:call-template name="SHOW_LINKS"/>-->
+			</xsl:if>
 		</table>
 	</xsl:template>
 	<!--

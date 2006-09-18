@@ -24,10 +24,10 @@ Template for Attributes listing
 				<td>
 					<b>Signature</b>
 				</td>
-				<td>
+				<td align="center">
 					<b>Optionality</b>
 				</td>
-				<td>
+				<td align="center">
 					<b>Multiplicity</b>
 				</td>
 				<td>
@@ -215,7 +215,7 @@ Template for Attributes listing
 							<!--</xsl:for-each>-->
 						</td>
 						<!-- NOW RECALCULATE THE EFFECTIVE MULTIPLICITY FOR THE NEXT COLUMN. -->
-						<td>
+						<td align="center">
 							<!--  First get back the values of low and high-->
 							
 							<xsl:variable name="low">
@@ -268,7 +268,7 @@ Template for Attributes listing
 							<xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
 						</td>
 						<!-- Show the original assocaition Multiplicity -->
-						<td>
+						<td align="center">
 							<xsl:variable name="high">
 								<xsl:call-template name="GET_VARIABLE">
 									<xsl:with-param name="name" select="'high'"/>
@@ -276,7 +276,7 @@ Template for Attributes listing
 							</xsl:variable>
 							<xsl:choose>
 								<xsl:when test="$high != -1">
-									<xsl:text>N/A</xsl:text>
+									<xsl:text>  --  </xsl:text>
 								</xsl:when>
 								<xsl:otherwise>
 									<xsl:variable name="multiplicity">
