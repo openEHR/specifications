@@ -18,7 +18,7 @@
 	<xs:complexType name="LOCATABLE" abstract="true">
 		<xs:sequence>
 			<xs:element name="name" type="bt:DV_TEXT" />
-			<xs:element name="uid" type="bt:OBJECT_ID" minOccurs="0" />
+			<xs:element name="uid" type="bt:HIER_OBJECT_ID" minOccurs="0" />
 			<xs:element name="feeder_audit" type="bt:FEEDER_AUDIT" minOccurs="0" />
 			<xs:element name="links" type="LINK" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
@@ -120,7 +120,7 @@
 							the number of heading rows if the table is rotated
 						</xs:documentation>
 					</xs:annotation>
-					<xs:element name="items" type="CLUSTER" maxOccurs="unbounded" />
+					<xs:element name="rows" type="CLUSTER" maxOccurs="unbounded" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>

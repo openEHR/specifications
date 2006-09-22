@@ -105,30 +105,23 @@
 	</xs:complexType>
 	<xs:complexType name="ACTIVITY">
 		<xs:sequence>
+			<xs:element name="action_archetype_id" type="xs:string" />
 			<xs:element name="description" type="st:ITEM_STRUCTURE" />
 			<xs:element name="timing" type="bt:DV_PARSABLE" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="INSTRUCTION_DETAILS">
-		<xs:complexContent>
-			<xs:extension base="st:LOCATABLE">
-				<xs:sequence>
-					<xs:element name="instruction_id" type="bt:LOCATABLE_REF" />
-					<xs:element name="activity_id" type="bt:atCode" />
-					<xs:element name="wf_details" type="st:ITEM_STRUCTURE" minOccurs="0" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
+		<xs:sequence>
+			<xs:element name="instruction_id" type="bt:LOCATABLE_REF" />
+			<xs:element name="activity_id" type="bt:atCode" />
+			<xs:element name="wf_details" type="st:ITEM_STRUCTURE" minOccurs="0" />
+		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ISM_TRANSITION">
-		<xs:complexContent>
-			<xs:extension base="st:LOCATABLE">
-				<xs:sequence>
-					<xs:element name="current_state" type="bt:DV_CODED_TEXT" />
-					<xs:element name="transition" type="bt:DV_CODED_TEXT" minOccurs="0" />
-					<xs:element name="careflow_step" type="bt:DV_CODED_TEXT" minOccurs="0" />
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
+		<xs:sequence>
+			<xs:element name="current_state" type="bt:DV_CODED_TEXT" />
+			<xs:element name="transition" type="bt:DV_CODED_TEXT" minOccurs="0" />
+			<xs:element name="careflow_step" type="bt:DV_CODED_TEXT" minOccurs="0" />
+		</xs:sequence>
 	</xs:complexType>	
 </xs:schema>

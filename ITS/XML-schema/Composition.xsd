@@ -13,6 +13,7 @@
 				<xs:sequence>
 					<xs:element name="category" type="bt:DV_CODED_TEXT" />
 					<xs:element name="territory" type="bt:CODE_PHRASE" />
+					<xs:element name="language" type="bt:CODE_PHRASE" />
 					<xs:element name="composer" type="bt:PARTY_PROXY" />
 					<xs:element name="context" type="EVENT_CONTEXT" minOccurs="0" />	
 					<xs:element name="content" type="ct:CONTENT_ITEM" minOccurs="0" maxOccurs="unbounded" /> <!-- Limited to one content in the current version of XML schema -->				
