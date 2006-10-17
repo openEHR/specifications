@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
 <meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
-<meta name="LASTUPDATED" content="09/09/06 10:10:32">
+<meta name="LASTUPDATED" content="10/17/06 17:11:22">
 <link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
 <title>5 openEHR Package Structure  </title>
 </head>
@@ -40,14 +40,14 @@
 </td></tr></table><br clear="all">
 </p>
 <p class="Body">
-  <a name="1139209"> </a>One of the important design aims of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is to provide a coherent, consistent and re-usable type system for scientific and health computing. Accordingly, a "common type platform" is defined in the lower part of the RM, providing identifiers, data types, data structures and various common design patterns that can be re-used ubiquitously in the upper layers of the RM, and equally in the AM and SM packages. <a href="package_structure.html#1139209">FIGURE 9</a> illustrates the relationships between the outer packages and their main constituents. The common platform is shown at the bottom.<br clear="all" /><table align="left"><tr><td><img src="images/package_structure5.gif" height="302" width="648" align="left" border="0" hspace="0" vspace="0">
+  <a name="1139209"> </a>One of the important design aims of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is to provide a coherent, consistent and re-usable type system for scientific and health computing. Accordingly, a "common type platform" is defined in the lower part of the RM, providing identifiers, data types, data structures and various common design patterns that can be re-used ubiquitously in the upper layers of the RM, and equally in the AM and SM packages. <a href="package_structure.html#1139209">FIGURE 9</a> illustrates the relationships between the outer packages and their main constituents. The common platform is shown at the bottom.<br clear="all" /><table align="left"><tr><td><img src="images/package_structure5.gif" height="343" width="648" align="left" border="0" hspace="0" vspace="0">
 </td></tr></table><br clear="all">
 </p>
 <h3 class="Heading2">
   <a name="1118777"> </a>5.2	 Reference Model (RM)
 </h3>
 <p class="Body">
-  <a name="1118780"> </a>Each package defines a local context for definition of classes. <a href="package_structure.html#1118788">FIGURE 10</a> illustrates the RM package structure. An informal division into "health information" and "scientific computing" is shown. The packages in the latter group are generic, and are used by all <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR models, in all the outer packages. Together, they provide identification, access to knowledge resources, data types and structures, versioning semantics, and support for archetyping. The packages in the former group define the semantics of enterprise level health information types, including the EHR and demographics.
+  <a name="1118780"> </a>Each package defines a local context for definition of classes. <a href="package_structure.html#1118788">FIGURE 10</a> illustrates the RM package structure. An informal division into "domain", "patterns" and "platform" is shown. The packages in the latter group are generic, and are used by all <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR models, in all the outer packages. Together, they provide identification, access to knowledge resources, data types and structures, versioning semantics, and support for archetyping. The packages in the former group define the semantics of enterprise level health information types, including the EHR and demographics.
 </p>
 <p class="Body">
   <a name="1118788"> </a>Each outer package in <a href="package_structure.html#1118788">FIGURE 10</a> corresponds to one <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR specification document<a href="#1118787"><sup>1</sup></a>, documenting an "information model" (IM). The package structure will normally be replicated in all ITS expressions, e.g. XML schema, programming languages like Java, C# and Eiffel, and interoperability definitions like WSDL, IDL and .Net.<br clear="all" /><table align="center"><tr><td><img src="images/package_structure2.gif" height="681" width="485" align="center" border="0" hspace="0" vspace="0">
@@ -110,19 +110,25 @@
   <a name="1119130"> </a>The EHR IM defines the containment and context semantics of the concepts <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">EHR</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">COMPOSITION</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">SECTION</span>, and <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ENTRY</span>. These classes are the major coarse-grained components of the EHR, and correspond directly to the classes of the same names in CEN EN13606:2005 and fairly closely to the "levels" of the same names in the HL7 Clinical Document Architecture (CDA) release 2.0.
 </p>
 <h5 class="Heading4">
-  <a name="1118964"> </a>EHR Extract
+  <a name="1118964"> </a>EHR Extract Information Model
 </h5>
 <p class="Body">
   <a name="1118965"> </a>The EHR Extract IM defines how an EHR extract is built from <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">COMPOSITIONs</span>, demographic, and access control information from the EHR. A number of Extract variations are supported, including "full <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR", a simplified form for integration with CEN EN13606, and an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR/<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR synchronisation Extract.
 </p>
 <h5 class="Heading4">
-  <a name="1118966"> </a>Demographics
+  <a name="1172773"> </a>Integration Information Model
+</h5>
+<p class="Body">
+  <a name="1172779"> </a>The Integration model defines the class <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">GENERIC_ENTRY</span>, a subtype of <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ENTRY</span> used to represent free-form legacy or external data as a tree. This Entry type has its own archetypes, known as "integration archetypes", which can be used in concert with clinical archetypes as the basis for a tool-based data integration system. See <a href="integration.html#1160800">section 14 on page 77</a> for more details.
+</p>
+<h5 class="Heading4">
+  <a name="1118966"> </a>Demographics Information Model
 </h5>
 <p class="Body">
   <a name="1118967"> </a>The demographic model defines generic concepts of <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTY</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ROLE</span> and related details such as contact addresses. The archetype model defines the semantics of constraint on <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTYs</span>, allowing archetypes for any type of person, organisation, role and role relationship to be described. This approach provides a flexible way of including the arbitrary demographic attributes allowed in the OMG HDTF PIDS standard.
 </p>
 <h5 class="Heading4">
-  <a name="1118968"> </a>Workflow
+  <a name="1118968"> </a>Workflow Information Model (future)
 </h5>
 <p class="Body">
   <a name="1118969"> </a>Workflow is the dynamic side of clinical care, and consists of models to describe the semantics of processes, such as recalls, as well as any care process resulting from execution of guidelines.

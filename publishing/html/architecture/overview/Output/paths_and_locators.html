@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
 <meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
-<meta name="LASTUPDATED" content="09/09/06 10:10:34">
+<meta name="LASTUPDATED" content="10/17/06 17:11:25">
 <link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
 <title>11 Paths and Locators  </title>
 </head>
@@ -132,19 +132,19 @@ attribute_name / attribute_name [predicate expression] / ...
 <a name="1125832"> </a>
 	items[openEHR-EHR-OBSERVATION.heart_rate-pulse.v1]/data/
 <a name="1125833"> </a>
-	events[at0003 AND time=&#39;2006-01-25T08:42:20&#39;]/data/items[at0004]
+	events[at0003 and time=&#39;2006-01-25T08:42:20&#39;]/data/items[at0004]
 <a name="1125834"> </a>
 /content[openEHR-EHR-SECTION.vital_signs.v1]/
 <a name="1125835"> </a>
 	items[openEHR-EHR-OBSERVATION.blood_pressure.v1]/data/
 <a name="1125836"> </a>
-	events[at0006 AND time=&#39;2006-01-25T08:42:20&#39;]/data/items[at0004]
+	events[at0006 and time=&#39;2006-01-25T08:42:20&#39;]/data/items[at0004]
 <a name="1125837"> </a>
 /content[openEHR-EHR-SECTION.vital_signs.v1]/
 <a name="1125838"> </a>
 	items[openEHR-EHR-OBSERVATION.blood_pressure.v1]/data/
 <a name="1125839"> </a>
-	events[at0006 AND time=&#39;2006-01-25T08:42:20&#39;]/data/items[at0005]
+	events[at0006 and time=&#39;2006-01-25T08:42:20&#39;]/data/items[at0005]
 <a name="1125840"> </a>
 </pre>
 <p class="Body">
@@ -335,31 +335,31 @@ attribute_name / attribute_name [predicate expression] / ...
   <a name="1141092"> </a>More expressive unique paths based on archetype paths are also possible, as follows:
 </p>
 <pre  class="PreformattedRelative">
-/data/events[at0001 AND 
+/data/events[at0001 and 
 
 	name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`sitting'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1100</span>]/value/magnitude
 <a name="1141110"> </a>
-/data/events[at0001 AND 
+/data/events[at0001 and 
 <a name="1141072"> </a>
 	name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`sitting'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1200</span>]/value/magnitude
 <a name="1141271"> </a>
-/data/events[at0001 AND 
+/data/events[at0001 and 
 <a name="1141116"> </a>
 	name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`standing'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1100</span>]/value/magnitude
 <a name="1141272"> </a>
-/data/events[at0001 AND 
+/data/events[at0001 and 
 <a name="1141073"> </a>
 	name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`standing'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1200</span>]/value/magnitude
 <a name="1141273"> </a>
 </pre>
 <p class="Body">
-  <a name="1141074"> </a>Each of these paths has an Xpath equivalent of the following form:
+  <a name="1172131"> </a>Each of these paths has an Xpath equivalent of the following form:
 </p>
 <pre  class="PreformattedRelative">
-/data/events[@archetype_node_id = `at0001' AND
-<a name="1141138"> </a>
-	name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`</span>standing<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">'</span>]/data/items[@archetype_node_id = `at1200']
-<a name="1141169"> </a>
+/data/events[@archetype_node_id=`at0001' and name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`</span>standing<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">'</span>]
+<a name="1172132"> </a>
+	/data/items[@archetype_node_id=`at1200']
+<a name="1172136"> </a>
 	/value/magnitude
 <a name="1141185"> </a>
 </pre>
