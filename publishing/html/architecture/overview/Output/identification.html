@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
 <meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
-<meta name="LASTUPDATED" content="10/17/06 17:11:24">
+<meta name="LASTUPDATED" content="11/14/06 13:33:44">
 <link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
 <title>9 Identification  </title>
 </head>
@@ -33,18 +33,36 @@
   <a name="1111834"> </a>9	 Identification
 </h2>
 <h3 class="Heading2">
-  <a name="1123908"> </a>9.1	 General Scheme
+  <a name="1123908"> </a>9.1	 Identification of the EHR
 </h3>
 <p class="Body">
-  <a name="1119855"> </a>The identification scheme described here requires two kinds of "identifier": identifiers proper and references, or locators. An <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">identifier</span> is a unique (within some context) symbol or number given to an object, and usually written into the object, whereas a <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">reference</span> is the use of an identifier by an exterior object, to refer to the object containing the identifier in question. This distinction is the same as that between primary and foreign keys in a relational database system. 
+  <a name="1172113"> </a>In an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR system, each EHR has a unique identifier, known as the EHR id, found in the root EHR object of each EHR. EHR ids should be "strong" globally unique identifiers such as reliably created Oids or Guids. <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">No single system should contain two EHRs for the same subject</span>. If this is not the case, it means that the EHR system has failed to detect the existence of an EHR for a subject, or failed to match provided demographic attributes to the subject.
+</p>
+<p class="Body">
+  <a name="1172125"> </a>In a distributed environment, the correspondence of EHR ids to subjects (i.e. patients) is variable, and depends on the level of integration of the environment. In non-integrated or sporadically connected environments, the same patient is likely to have a separate EHR at each institution, each with its own unique EHR id, but the same subject id. If copies of parts of the patient EHR at one location is requested by another provider, the received items will be merged into the local EHR for that patient. Merges of persistent Compositions in such circumstances are likely to require human intervention. Multiple EHR ids per patient in a distributed context are evidence of a lack of systematic connectivity or identification service.
+</p>
+<p class="Body">
+  <a name="1172138"> </a>In a fully integrated distributed environment, the typical patient will still have local EHRs in multiple locations, but each carrying the same EHR id. When a patient presents in a new location, a request to the environment's identification service could be made to determine if there is already an EHR for this patient. If there is, a clone of all or part of the existing EHR could be made, or a new empty EHR could be created, but in all cases, the EHR id would be the same as that used in other locations for the same patient.
+</p>
+<p class="Body">
+  <a name="1172144"> </a>Note that the above logic only holds where the EHR in each location is an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR.
+</p>
+<h3 class="Heading2">
+  <a name="1172109"> </a>9.2	 Identification of Items within the EHR
+</h3>
+<h4 class="Heading3">
+  <a name="1172151"> </a>9.2.1	 General Scheme
+</h4>
+<p class="Body">
+  <a name="1119855"> </a>While identification of EHRs is not completely definable by <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR, the identification of items with an EHR is fully defined. The scheme described here requires two kinds of "identifier": identifiers proper and references, or locators. An <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">identifier</span> is a unique (within some context) symbol or number given to an object, and usually written into the object, whereas a <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">reference</span> is the use of an identifier by an exterior object, to refer to the object containing the identifier in question. This distinction is the same as that between primary and foreign keys in a relational database system. 
 </p>
 <p class="Body">
   <a name="1125642"> </a>In the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR RM, identifiers and references are implemented with two groups of classes defined in the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">support.identification</span> package. Identifiers of various kinds are defined by descendant classes of <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_ID</span>, while references are defined by the classes inheriting from <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_REF</span>. The distinction is illustrated in <a href="identification.html#1125642">FIGURE 28</a>. Here we see two container objects with <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_IDs</span> (since <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_ID</span> is an abstract type, the actual type will be another <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">XXX_ID</span> class), and various <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_REFs</span> as references. <br clear="all" /><table align="left"><tr><td><img src="images/identificationa.gif" height="197" width="648" align="left" border="0" hspace="0" vspace="0">
 </td></tr></table><br clear="all">
 </p>
-<h3 class="Heading2">
-  <a name="1125708"> </a>9.2	 Levels of Identification
-</h3>
+<h4 class="Heading3">
+  <a name="1125708"> </a>9.2.2	 Levels of Identification
+</h4>
 <p class="Body">
   <a name="1125634"> </a>In order to make data items locatable from the outside, identification is supported at 3 levels in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR, as follows:
 </p>

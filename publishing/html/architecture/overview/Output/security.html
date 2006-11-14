@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
 <meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
-<meta name="LASTUPDATED" content="10/17/06 17:11:23">
+<meta name="LASTUPDATED" content="11/14/06 13:33:37">
 <link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
 <title>7 Security and Confidentiality  </title>
 </head>
@@ -173,7 +173,12 @@
   <a name="1142735"> </a>Digital Signature
 </h5>
 <p class="Body">
-  <a name="1142753"> </a>The possibility exists within an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR to digitally sign each Version in a Versioned object (i.e. for each Version of any logical item, such as medications list, encounter note etc.). The signature is created as a private-key encryption (e.g. RSA-1) of a hash (e.g. MD5) of a canonical representation (such as in schema-based XML) of the Version being committed. A likely candidate for defining the signature and digest strings in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is the openPGP message format (IETF RFC2440<a href="#1155380"><sup>2</sup></a>), due to being an open specification and self-describing. The use of RFC2440 for the format does not imply the use of the PGP distributed certificate infrastructure, or indeed any certification infrastructure; <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is agnostic on this point. If no public key or equivalent infrastructure is available, the encryption step might be omitted, resulting in a digest only of the content. The signature is stored within the Version object, allowing it to be conveniently carried within EHR Extracts. The process is shown in <a href="security.html#1142753">FIGURE 22</a>.<br clear="all" /><table align="left"><tr><td><img src="images/securitya.gif" height="285" width="648" align="left" border="0" hspace="0" vspace="0">
+  <a name="1142753"> </a>The possibility exists within an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR to digitally sign each Version in a Versioned object (i.e. for each Version of any logical item, such as medications list, encounter note etc.). The signature is created as a private-key encryption (e.g. RSA-1) of a hash (e.g. MD5) of a canonical representation (such as in schema-based XML) of the Version being committed. A likely candidate for defining the signature and digest strings in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is the openPGP message format (IETF RFC2440<a href="#1155380"><sup>2</sup></a>), due to being an open specification and self-describing. The use of RFC2440 for the format does not imply the use of the PGP distributed certificate infrastructure, or indeed any certification infrastructure; <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is agnostic on this point. If no public key or equivalent infrastructure is available, the encryption step might be omitted, resulting in a digest only of the content. The signature is stored within the Version object, allowing it to be conveniently carried within EHR Extracts. The process is shown in <a href="security.html#1142753">FIGURE 22</a>.<br clear="all" /><table align="left"><tr><td><img src="images/securitya.gif" usemap="#securitya_gif" height="285" width="648" align="left" border="0" hspace="0" vspace="0">
+<map name="securitya_gif">
+
+<area href="http://www.cl.cam.ac.uk/users/rja14/policy11/policy11.html" shape=rect coords="71,258,598,283">
+<area href="http://www.ietf.org/internet-drafts/draft-ietf-openpgp-rfc2440bis-18.txt" shape=rect coords="71,258,598,283">
+</map>
 </td></tr></table><br clear="all">
 </p>
 <p class="Body">
@@ -213,10 +218,10 @@
 </p>
 
   <div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
-<a name="1156805"> </a><a href="#1156802"><sup>1</sup></a>see e.g. Ross Anderson - "Security in Clinical Information Systems" available at <span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: underline; text-transform: none; vertical-align: baseline"><a href="http://www.cl.cam.ac.uk/users/rja14/policy11/policy11.html">http://www.cl.cam.ac.uk/users/rja14/policy11/policy11.html</a></span>.<br>
+<a name="1156805"> </a><a href="#1156802"><sup>1</sup></a>see e.g. Ross Anderson - "Security in Clinical Information Systems" available at <span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: underline; text-transform: none; vertical-align: baseline">http://www.cl.cam.ac.uk/users/rja14/policy11/policy11.html</span>.<br>
 </div>
 <div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
-<a name="1155380"> </a><a href="#1142753"><sup>2</sup></a>IETF RFC 2440 - <span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: underline; text-transform: none; vertical-align: baseline"><a href="http://www.ietf.org/internet-drafts/draft-ietf-openpgp-rfc2440bis-18.txt">http://www.ietf.org/internet-drafts/draft-ietf-openpgp-rfc2440bis-18.txt</a></span><br>
+<a name="1155380"> </a><a href="#1142753"><sup>2</sup></a>IETF RFC 2440 - <span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: underline; text-transform: none; vertical-align: baseline">http://www.ietf.org/internet-drafts/draft-ietf-openpgp-rfc2440bis-18.txt</span><br>
 </div>
 </blockquote>
 

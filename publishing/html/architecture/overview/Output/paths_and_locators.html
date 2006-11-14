@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
 <meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
-<meta name="LASTUPDATED" content="10/17/06 17:11:25">
+<meta name="LASTUPDATED" content="11/14/06 13:33:50">
 <link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
 <title>11 Paths and Locators  </title>
 </head>
@@ -387,75 +387,84 @@ ehr://top_level_structure_locator/path_inside_top_level_structure
   <a name="1117784"> </a>11.3.1	 Locating Top-Level Structures
 </h4>
 <p class="Body">
-  <a name="1117788"> </a>The first part of an EHR URI needs to identify a top-level structure. As described above, a Version locator can be used to do this. However, this is not the only way: various logical queries can also be used, e.g. "get the latest version from a given Versioned object matching...". For reasons of efficiency, the top-level structure locator part of the URI is also likely to include the EHR id, and possibly the EHR system id, even though neither of these are strictly needed for identification. Thus, the first part of an EHR URI might include the following:
+  <a name="1117788"> </a>The first part of an EHR URI needs to identify a top-level structure. Logically speaking, it must identify the EHR and the content object within the EHR. Neither of these is completely simple, due to the relationship of EHRs to subjects in the former case, and due to versioning in the latter.
+</p>
+<h5 class="Heading4">
+  <a name="1172325"> </a>Identifying the EHR
+</h5>
+<p class="Body">
+  <a name="1172323"> </a>Due to copying / synchronising of the EHR for one subject among multiple providers, a given EHR id may exist at more than one location. It is not guaranteed that each such EHR is an identical complete copy of the others, since partial copying is allowed. Therefore, to identify exactly which EHR is required, the system id is also required, although there may be situations in which it can be left out. In general, the following identifiers are needed to locate a particular instance of an EHR:
 </p>
 <ul>
-  <li class="SmartList1"><a name="1125751"> </a>EHR id;
-  <li class="SmartList1"><a name="1117803"> </a>EHR system id, depending on whether the EHR id is globally unique or not;
-  <li class="SmartList1"><a name="1125754"> </a>Either:
-  <ul>
-    <li class="SmartList2"><a name="1117804"> </a>version time, i.e. time baseline for retrieving versions, defaults to "now";
-    <li class="SmartList2"><a name="1117809"> </a>identifier of particular Version container object, typically its <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">uid</span>;
-  </ul>
-  <li class="SmartList1"><a name="1125772"> </a>Or:
-  <ul>
-    <li class="SmartList2"><a name="1125773"> </a>a Version identifier, i.e. {Version container object Uid; <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version_tree_id</span>; <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">creating_system_id</span>}
-  </ul>
+  <li class="SmartList1"><a name="1172178"> </a>the EHR id;
+  <li class="SmartList1"><a name="1172388"> </a>the EHR system id.
 </ul>
 <p class="Body">
-  <a name="1117798"> </a>For a number of reasons there is currently no standard syntax for encapsulating these parameters. Firstly, there is an issue to do with how EHRs will be identified in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR systems. Identifiers may be required to conform to local health jurisdiction requirements, or may not. If EHR identifiers are globally unique, or even nationally unique, then in theory the EHR system identifier can be dispensed with. However in a practical sense the identifier of the EHR system can only be dispensed with if there is a health information location service operating in the environment that can perform EHR id -&gt; EHR system id mappings, in much the same way as the internet DNS converts logical domain names to IP addresses.
+  <a name="1172393"> </a>There remain issues to do with how EHRs will be identified in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR systems. Identifiers may be required to conform to local health jurisdiction requirements. If EHR identifiers are globally unique, or even nationally unique, then in theory the EHR system identifier can be dispensed with. However in a practical sense the identifier of the EHR system can only be dispensed with if there is a health information location service operating in the environment that can perform EHR id -&gt; EHR system id mappings, in much the same way as the internet DNS converts logical domain names to IP addresses.
 </p>
+<h5 class="Heading4">
+  <a name="1172389"> </a>Identifying the Content Item
+</h5>
 <p class="Body">
-  <a name="1117838"> </a>Another issue is whether it can be assumed that the version time baseline has already been established in some earlier call or service invocation, and that no version time information is needed.
-</p>
-<p class="Body">
-  <a name="1117815"> </a>Various syntax possibilities include:
+  <a name="1172390"> </a>There are two logical ways to identify a content item in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR. The first is by identifying the following:
 </p>
 <ul>
-  <li class="SmartList1"><a name="1117816"> </a>an Xpath-style syntax; this does not seem desirable as it implies hierarchical data containment structures that don't exist and is likely to be confused with the path part of the URI;
-  <li class="SmartList1"><a name="1117820"> </a>a web-services inspired functional syntax;
-  <li class="SmartList1"><a name="1117821"> </a>a database-inspired query syntax.
+  <li class="SmartList1"><a name="1172184"> </a>the logical content object, i.e. Directory, EHR access object, a particular Composition, etc;
+  <li class="SmartList1"><a name="1172191"> </a>the version time.
 </ul>
+<p class="Body">
+  <a name="1172360"> </a>Identifying a logical content object can be done in a number of ways, including via the use of the uid of the relevant <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_OBJECT</span>, or via archetype identifiers, or names. The second way to identify a content object is by using:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1125773"> </a>an exact Version identifier, i.e. {<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Version object Uid</span>; <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version_tree_id</span>; <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">creating_system_id</span>}
+</ul>
+<h5 class="Heading4">
+  <a name="1172375"> </a>Syntax 
+</h5>
 <p class="Body">
   <a name="1117830"> </a>Currently, a fairly typical URI query style of syntax is used, as shown in the following examples. 
 </p>
 <ul>
-  <li class="SmartList1"><a name="1121465"> </a>This path matches a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_COMPOSITION</span>:
+  <li class="SmartList1"><a name="1121465"> </a>The following path matches a top-level object such as a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">COMPOSITION</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DIRECTORY</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">EHR_ACCESS</span>, or <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTY</span> at its latest version:
 <pre  class="PreformattedRelative">
-ehr://rdh.health.gov.au?ehr=1234567&amp;versioned_composition=87284370-2D4B-
+ehr://rdh.health.gov.au?ehr_id=1234567&amp;versioned_object=87284370-2D4B-
 <a name="1118344"> </a>
-4e3d-A3F3-F303D2F4F34B 
+4e3d-A3F3-F303D2F4F34B&amp;version_time=latest
 <a name="1121477"> </a>
 
 <a name="1121472"> </a>
 </pre>
-  <li class="SmartList1"><a name="1118372"> </a>The following path matches the most recent <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSION&lt;COMPOSITION&gt;</span> from a specified <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_COMPOSITION</span>:
+  <li class="SmartList1"><a name="1125799"> </a>The following path matches a top-level object at version 2:
 <pre  class="PreformattedRelative">
-ehr://rdh.health.gov.au?ehr=1234567&amp;versioned_composition=0892BF98-910D-
-<a name="1118347"> </a>
-4df9-BF7E-F10D72C1C81A&amp;latest_version
-<a name="1121478"> </a>
+ehr://rdh.health.gov.au?ehr_id=1234567&amp;versioned_object=87284370-2D4B-
+<a name="1172270"> </a>
+4e3d-A3F3-F303D2F4F34B&amp;version_id=2
 
-<a name="1121473"> </a>
-</pre>
-  <li class="SmartList1"><a name="1125799"> </a>The following path matches a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">COMPOSITION</span> within <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSION</span> 2 of a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_COMPOSITION</span>:
-<pre  class="PreformattedRelative">
-ehr://rdh.health.gov.au?ehr=1234567&amp;version={F7C5C7B7-75DB-
+
 <a name="1125800"> </a>
-4b39-9A1E-C0BA9BFDBDEC::au.gov.health.rdh::2}&amp;data
-<a name="1125801"> </a>
+</pre>
+  <li class="SmartList1"><a name="1172260"> </a>The following path matches the same top-level object using the uid of the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSION</span> object:
+<pre  class="PreformattedRelative">
+ehr://rdh.health.gov.au?ehr_id=1234567&amp;version={F7C5C7B7-75DB-
+<a name="1172261"> </a>
+4b39-9A1E-C0BA9BFDBDEC::au.gov.health.rdh::2}
+<a name="1172262"> </a>
 </pre>
 </ul>
 <p class="Body">
   <a name="1118260"> </a>In these paths, the following pseudo-identifiers are used:
 </p>
 <ul>
-  <li class="SmartList1"><a name="1121527"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">versioned_composition</span>: to indicate an instance of <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_COMPOSITION</span>;
-  <li class="SmartList1"><a name="1118506"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version_tree_id</span>: the version identifier of the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSION</span> within the tree structure of the owning <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_OBJECT</span>; 
-  <li class="SmartList1"><a name="1118526"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">latest_version</span>: a pseudo-identifier used to indicate a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSION</span> instance being the result of the call <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_COMPOSITION</span>.<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">latest_version</span>;
+  <li class="SmartList1"><a name="1172293"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">versioned_object</span>: indicates an instance of <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_OBJECT</span>;
+  <li class="SmartList1"><a name="1121527"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version</span>: indicates the particular version of a top-level object;
+  <li class="SmartList1"><a name="1118506"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version_time</span>: indicates the system time for which the version should be taken; time is in the form of an ISO8601 date/time string or the word "latest";
+  <li class="SmartList1"><a name="1118526"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version_id</span>: version tree identifier of a particular version; takes values such as "1", "2", "1.2.1" etc.
 </ul>
 <p class="Body">
-  <a name="1118505"> </a>Implementors and users of the current release of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR are encouraged to experiment and/or propose improved solutions to the locator requirement described in this section.
+  <a name="1172425"> </a>Other pseudo-identifiers will probably be allowed, including <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">composition</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">party</span>, etc, as long as the semantics can be accurately specified.
+</p>
+<p class="Body">
+  <a name="1118505"> </a>Implementers and users of the current release of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR are encouraged to experiment and/or propose improved solutions to the locator requirement described in this section.
 </p>
 
   <div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
