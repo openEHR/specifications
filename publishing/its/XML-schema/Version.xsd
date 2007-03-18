@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- openEHR Release 1.0 candidate XML schema. Ocean Informatics 2006.01.28  -->
-<xs:schema xmlns="openEHR/v1/Version" xmlns:mstns="openEHR/v1/Version" xmlns:cp="openEHR/v1/Composition" xmlns:bt="openEHR/v1/BaseTypes" xmlns:st="openEHR/v1/Structure" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="openEHR/v1/Version" elementFormDefault="unqualified" id="Version">
-	<xs:import namespace="openEHR/v1/Composition" schemaLocation="Composition.xsd"/>
-	<xs:import namespace="openEHR/v1/BaseTypes" schemaLocation="BaseTypes.xsd"/>
-	<xs:import namespace="openEHR/v1/Structure" schemaLocation="Structure.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.openehr.org/v1/rm" targetNamespace="http://schemas.openehr.org/v1/rm" elementFormDefault="qualified" version="v1.0.1">
+	<xs:include schemaLocation="Composition.xsd"/>
 	<xs:element name="version" type="VERSION"/>
 	<xs:complexType name="VERSION" abstract="true">
 		<xs:sequence>
-			<xs:element name="contribution" type="bt:OBJECT_REF"/>
-			<xs:element name="commit_audit" type="bt:AUDIT_DETAILS"/>
+			<xs:element name="contribution" type="OBJECT_REF"/>
+			<xs:element name="commit_audit" type="AUDIT_DETAILS"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ORIGINAL_VERSION">
 		<xs:complexContent>
 			<xs:extension base="VERSION">
 				<xs:sequence>
-					<xs:element name="uid" type="bt:OBJECT_VERSION_ID"/>
+					<xs:element name="uid" type="OBJECT_VERSION_ID"/>
 					<!-- data attribute is optional to allow for logical deletion; required when transferring entire health record -->
-					<!-- data will be of type="cp:COMPOSITION" for VERSIONED_COMPOSITION -->
-					<xs:element name="data" type="st:LOCATABLE" minOccurs="0"/>
-					<xs:element name="preceding_version_uid" type="bt:OBJECT_VERSION_ID" minOccurs="0"/>
-					<xs:element name="other_input_version_uids" type="bt:OBJECT_VERSION_ID" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element name="attestations" type="bt:ATTESTATION" minOccurs="0" maxOccurs="unbounded"/>
+					<!-- data will be of type="COMPOSITION" for VERSIONED_COMPOSITION -->
+					<xs:element name="data" type="LOCATABLE" minOccurs="0"/>
+					<xs:element name="preceding_version_uid" type="OBJECT_VERSION_ID" minOccurs="0"/>
+					<xs:element name="other_input_version_uids" type="OBJECT_VERSION_ID" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="attestations" type="ATTESTATION" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="is_merged" type="xs:boolean"/>
-					<xs:element name="lifecycle_state" type="bt:DV_CODED_TEXT"/>
+					<xs:element name="lifecycle_state" type="DV_CODED_TEXT"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>

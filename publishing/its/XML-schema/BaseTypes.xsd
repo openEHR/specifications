@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns="openEHR/v1/BaseTypes" xmlns:mstns="openEHR/v1/BaseTypes" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="openEHR/v1/BaseTypes" elementFormDefault="unqualified" id="BaseTypes">
+<!-- openEHR Release 1.0.1 candidate XML schema. Ocean Informatics 2007.03.08  -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.openehr.org/v1/rm" targetNamespace="http://schemas.openehr.org/v1/rm" elementFormDefault="qualified" version="v1.0.1">
 	<!-- <xs:element name="values" type="DATA_VALUE" /> -->
 	<xs:complexType name="DATA_VALUE" abstract="true">
 		<xs:sequence/>
@@ -25,7 +26,7 @@
 				<xs:sequence>
 					<xs:element name="normal_range" type="DV_INTERVAL" minOccurs="0"/>
 					<xs:element name="reference_ranges" type="REFERENCE_RANGE" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element name="is_normal" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="normal_status" type="CODE_PHRASE" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -42,6 +43,7 @@
 				<xs:sequence>
 					<xs:element name="accuracy" type="xs:float" minOccurs="0"/>
 					<xs:element name="accuracy_is_percent" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="magnitude_status" type="xs:string" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -50,7 +52,7 @@
 		<xs:complexContent>
 			<xs:extension base="DV_QUANTIFIED">
 				<xs:sequence>
-					<xs:element name="magnitude" type="xs:unsignedLong"/>
+					<xs:element name="magnitude" type="xs:long"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -61,7 +63,7 @@
 				<xs:sequence>
 					<xs:element name="magnitude" type="xs:double"/>
 					<xs:element name="units" type="xs:string"/>
-					<xs:element name="precision" type="xs:integer"/>
+					<xs:element name="precision" type="xs:int" default="-1" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -70,18 +72,30 @@
 		<xs:complexContent>
 			<xs:extension base="DV_ORDERED">
 				<xs:sequence>
-					<xs:element name="value" type="xs:integer"/>
+					<xs:element name="value" type="xs:int"/>
 					<xs:element name="symbol" type="DV_CODED_TEXT"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="DV_QUANTITY_RATIO">
+	<xs:simpleType name="PROPORTION_KIND">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DV_PROPORTION">
 		<xs:complexContent>
-			<xs:extension base="DATA_VALUE">
+			<xs:extension base="DV_QUANTIFIED">
 				<xs:sequence>
-					<xs:element name="numerator" type="DV_QUANTIFIED"/>
-					<xs:element name="denominator" type="DV_QUANTIFIED"/>
+					<xs:element name="numerator" type="xs:float"/>
+					<xs:element name="denominator" type="xs:float"/>
+					<xs:element name="is_integral" type="xs:boolean"/>
+					<xs:element name="type" type="PROPORTION_KIND"/>
+					<xs:element name="precision" type="xs:int" default="-1"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -118,26 +132,29 @@
 	</xs:complexType>
 	<xs:simpleType name="Iso8601DateTime">
 		<xs:restriction base="xs:string">
-			<xs:pattern value="(([1-9][0-9])|(0[0-9]))(([0-9][0-9])(\-?((0[1-9])|(1[0-2]))(\-?((0[1-9])|([12][0-9])|(3[01])))?)?)?(T?((([01][0-9])|(2[0-3]))(:?[0-5][0-9](:?([0-5][0-9]))?)?|(24(:?00)?(:?00)?))(Z|([+\-]((0[0-9])|(1[0-4]))(:?[0-5][0-9])?))?)?"/>
-			<!-- XML Schema 1.1
-					\-? ([1-9][0-9][0-9][0-9]+) | (0[0-9][0-9][0-9]) \- (0[1-9]) | (1[0-2]) \- (0[1-9]) | ([12][0-9]) | (3[01])
-					T (([01][0-9]) | (2[0-3]) : [0-5][0-9] : ([0-5][0-9]) | (24:00:00) (Z | ([+\-] (0[0-9]) | (1[0-4]) : [0-5][0-9]))?
-					-->
+			<xs:pattern value="\d{4}((0[1-9]|1[0-2])((0[1-9]|[12]\d|3[01])(T?([01]\d|2[0-3])([0-5]\d([0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-2]))(00|30)?))?)?)?)?|\d{4}(\-(0[1-9]|1[0-2])(\-(0[1-9]|[12]\d|3[01])(T([01]\d|2[0-3])(:[0-5]\d(:[0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-2]))(:(00|30))?))?)?)?)?"/>
+			<!--xs:pattern value="(([1-9][0-9])|(0[0-9]))(([0-9][0-9])(\-?((0[1-9])|(1[0-2]))(\-?((0[1-9])|([12][0-9])|(3[01])))?)?)?(T?((([01][0-9])|(2[0-3]))(:?[0-5][0-9](:?([0-5][0-9]))?)?|(24(:?00)?(:?00)?))(Z|([+\-]((0[0-9])|(1[0-4]))(:?[0-5][0-9])?))?)?"/-->
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Iso8601Date">
 		<xs:restriction base="xs:string">
-			<xs:pattern value="(([1-9][0-9])|(0[0-9]))(([0-9][0-9])(\-?((0[1-9])|(1[0-2]))(\-?((0[1-9])|([12][0-9])|(3[01])))?)?)?"/>
+			<xs:pattern value="\d{4}((((0[1-9])|(1[0-2]))((0[1-9])|([12]\d)|(3[01]))?)?|(\-(((0[1-9])|(1[0-2]))(\-((0[1-9])|([12]\d)|(3[01])))?)?)?)"/>
+			<!--xs:pattern value="(([1-9][0-9])|(0[0-9]))(([0-9][0-9])(\-?((0[1-9])|(1[0-2]))(\-?((0[1-9])|([12][0-9])|(3[01])))?)?)?"/-->
+			<!--xs:pattern value="[0-9][0-9][0-9][0-9](\-?(((0[1-9])|(1[0-2]))(\-?((0[1-9])|([12][0-9])|(3[01])))?)?)?"/-->
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Iso8601Time">
 		<xs:restriction base="xs:string">
-			<xs:pattern value="((([01][0-9])|(2[0-3]))(:?[0-5][0-9](:?([0-5][0-9]))?)?|(24(:?00)?(:?00)?))([,.]?[0-9]+)?(Z|([+\-]((0[0-9])|(1[0-4]))(:?[0-5][0-9])?))?"/>
+			<xs:pattern value="([01]\d|2[0-3])([0-5]\d([0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-2]))(00|30)?))?|([01]\d|2[0-3])(:[0-5]\d(:[0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-2]))(:(00|30))?))?"/>
+			<!--xs:pattern value="((([01][0-9])|(2[0-3]))(:?[0-5][0-9](:?([0-5][0-9]))?)?|(24(:?00)?(:?00)?))([,.]?[0-9]+)?(Z|([+\-]((0[0-9])|(1[0-4]))(:?[0-5][0-9])?))?"/-->
+			<!--xs:pattern value="(((([01][0-9])|(2[0-3]))(:?[0-5][0-9](:?[0-5][0-9]([,.][0-9]+)?)?)?)|(24(:?00(:?00([,.][0-9]+)?)?)?))(Z|([+\-]((0[0-9])|(1[0-4]))(:?[0-5][0-9])?))?"/-->
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Iso8601Duration">
 		<xs:restriction base="xs:string">
-			<xs:pattern value="P(\d+[YMWD]){0,4}(T(\d+[HM]){0,2}(\d+(\.\d+)?S)?)?"/>
+			<xs:pattern value="P(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(\d+H)?(\d+M)?(\d+(\.\d+)?S)?)?"/>
+			<!--xs:pattern value="P(\d+[YMWD]){0,4}(T(\d+[HM]){0,2}(\d+(\.\d+)?S)?)?"/-->
+			<!--xs:pattern value="P((\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T((\d+H)?(\d+M)?(\d+([.,]\d+)?S)?)?"/-->
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="DV_DATE_TIME">
@@ -224,7 +241,7 @@
 					<xs:element name="compression_algorithm" type="CODE_PHRASE" minOccurs="0"/>
 					<xs:element name="integrity_check" type="xs:base64Binary" minOccurs="0"/>
 					<xs:element name="integrity_check_algorithm" type="CODE_PHRASE" minOccurs="0"/>
-					<xs:element name="size" type="xs:integer"/>
+					<xs:element name="size" type="xs:int"/>
 					<xs:element name="thumbnail" type="DV_MULTIMEDIA" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
@@ -343,6 +360,16 @@
 			<xs:extension base="OBJECT_ID"/>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:complexType name="ARCHETYPE_ID">
+		<xs:complexContent>
+			<xs:extension base="OBJECT_ID"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TEMPLATE_ID">
+		<xs:complexContent>
+			<xs:extension base="OBJECT_ID"/>
+		</xs:complexContent>
+	</xs:complexType>
 	<xs:complexType name="TERMINOLOGY_ID">
 		<xs:complexContent>
 			<xs:extension base="OBJECT_ID"/>
@@ -357,11 +384,11 @@
 		<xs:complexContent>
 			<xs:extension base="OBJECT_ID">
 				<xs:sequence>
-					<xs:element name="scheme" type="xs:string" />
+					<xs:element name="scheme" type="xs:string"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
-	</xs:complexType>	
+	</xs:complexType>
 	<xs:complexType name="OBJECT_REF">
 		<xs:sequence>
 			<xs:element name="id" type="OBJECT_ID"/>
@@ -443,7 +470,7 @@
 		<xs:complexContent>
 			<xs:extension base="AUDIT_DETAILS">
 				<xs:sequence>
-					<xs:element name="attested_view" type="DV_MULTIMEDIA" minOccurs="0" />
+					<xs:element name="attested_view" type="DV_MULTIMEDIA" minOccurs="0"/>
 					<xs:element name="proof" type="xs:string" minOccurs="0"/>
 					<xs:element name="items" type="DV_EHR_URI" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="reason" type="DV_TEXT"/>
@@ -451,5 +478,16 @@
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="REVISION_HISTORY_ITEM">
+		<xs:sequence>
+			<xs:element name="version_id" type="OBJECT_VERSION_ID"/>
+			<xs:element name="audits" type="AUDIT_DETAILS" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="REVISION_HISTORY">
+		<xs:sequence>
+			<xs:element name="items" type="REVISION_HISTORY_ITEM" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
 	</xs:complexType>
 </xs:schema>
