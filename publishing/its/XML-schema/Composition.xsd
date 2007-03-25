@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- openEHR Release 1.0 candidate XML schema. Ocean Informatics 2006.01.28  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.openehr.org/v1/rm" targetNamespace="http://schemas.openehr.org/v1/rm" elementFormDefault="qualified" version="v1.0.1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.openehr.org/v1" targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified" version="v1.0.1" id="Composition.xsd">
 	<xs:include schemaLocation="Content.xsd"/>
 	<xs:element name="composition" type="COMPOSITION"/>
 	<xs:complexType name="COMPOSITION">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<xs:schema version="v1.0.1" targetNamespace="http://schemas.openehr.org/v1/rm" elementFormDefault="qualified"	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-xmlns="http://schemas.openehr.org/v1/rm">
+<xs:schema version="v1.0.1" targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified"	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns="http://schemas.openehr.org/v1" id="Structure.xsd">
 	<xs:include schemaLocation="BaseTypes.xsd" />
 	
 	<xs:element name="items" type="LOCATABLE" /> 
@@ -17,7 +17,7 @@ xmlns="http://schemas.openehr.org/v1/rm">
 	<xs:complexType name="LOCATABLE" abstract="true">
 		<xs:sequence>
 			<xs:element name="name" type="DV_TEXT" />
-			<xs:element name="uid" type="HIER_OBJECT_ID" minOccurs="0" />
+			<xs:element name="uid" type="UID_BASED_ID" minOccurs="0" />
 			<xs:element name="feeder_audit" type="FEEDER_AUDIT" minOccurs="0" />
 			<xs:element name="archetype_details" type="ARCHETYPED" minOccurs="0" maxOccurs="1" />
 			<xs:element name="links" type="LINK" minOccurs="0" maxOccurs="unbounded"/>
@@ -26,8 +26,8 @@ xmlns="http://schemas.openehr.org/v1/rm">
 	</xs:complexType>
 	<xs:complexType name="ARCHETYPED">
 		<xs:sequence>
-			<xs:element name="archetype_id" type="ARCHETYPE_ID" minOccurs="1" maxOccurs="1"/>
-			<xs:element name="rm_version" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="archetype_id" type="ARCHETYPE_ID" />
+			<xs:element name="rm_version" type="xs:string" />
 			<xs:element name="template_id" type="TEMPLATE_ID" minOccurs="0" maxOccurs="1"/>		
 		</xs:sequence>	
 	</xs:complexType>
@@ -105,7 +105,7 @@ xmlns="http://schemas.openehr.org/v1/rm">
 		<xs:complexContent>
 			<xs:extension base="ITEM_STRUCTURE">
 				<xs:sequence>
-					<xs:element name="item" type="ELEMENT" minOccurs="0" />
+					<xs:element name="item" type="ELEMENT" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -138,12 +138,12 @@ xmlns="http://schemas.openehr.org/v1/rm">
 							the number of heading rows if the table is rotated
 						</xs:documentation>
 					</xs:annotation>
-					<xs:element name="rows" type="CLUSTER" maxOccurs="unbounded" />
+					<xs:element name="rows" type="CLUSTER" minOccurs="0" maxOccurs="unbounded" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType abstract="true" name="ITEM">
+	<xs:complexType name="ITEM" abstract="true">
 		<xs:complexContent>
 			<xs:extension base="LOCATABLE">
 				<xs:sequence />
@@ -154,7 +154,7 @@ xmlns="http://schemas.openehr.org/v1/rm">
 		<xs:complexContent>
 			<xs:extension base="ITEM">
 				<xs:sequence>
-					<xs:element name="items" type="ITEM" minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="items" type="ITEM" maxOccurs="unbounded" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
