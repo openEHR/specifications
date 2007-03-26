@@ -1,17 +1,16 @@
 
-
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml">
    <head>
-      <title>XML Schema Documentation</title>
+      <title>Documentation for Version - Structure.xsd</title>
       <meta http-equiv="Content-Type" content="text/xml; charset=UTF-8"/>
       <style type="text/css">
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* More-configurable styles */
 
 /******** General ********/
-
+         
 /* Document body */
 body {
    color: Black;
@@ -19,6 +18,7 @@ body {
    font-family: Arial, sans-serif;
    font-size: 10pt;
 }
+                  
 /* Horizontal rules */
 hr {
    color: black;
@@ -52,7 +52,22 @@ table.properties td {
    background-color: #eee; /* Gray */
 }
 
+img{
+ border: 0;
+}         
 
+/********* Documentation style *************/
+p.documentation {
+   color:black;
+   font-style:italic;
+         background-color: #EEEEFF;
+         border: 1px solid #DDDDFF;
+         padding-top: 1px;
+         margin-right: 30px;
+         margin-top: 1px;
+}
+
+         
 /******** Table of Contents Section ********/
 
 /* Controls for switching between printing and viewing modes */
@@ -379,7 +394,7 @@ div#legend div.hint {
 </style>
       <script type="text/javascript">
 <!--
-
+          
          
 /**
  * Counter of documentation windows
@@ -439,7 +454,7 @@ function viewDocumentation(compDesc, compName, docTextArray) {
    </head>
    <body>
       <h1>
-         <a name="top">XML Schema Documentation</a>
+         <a name="top">Documentation for Version</a>
       </h1>
       <h2>Table of Contents</h2>
       <ul>
@@ -459,6 +474,10 @@ function viewDocumentation(compDesc, compName, docTextArray) {
                            Global Definitions
                         <ul>
                <li>
+                  <a href="Structure.xsd.html_h743461152.html">Complex Type: <strong>ARCHETYPED</strong>
+                  </a>
+               </li>
+               <li>
                   <a href="Structure.xsd.html_h655292885.html">Complex Type: <strong>CLUSTER</strong>
                   </a>
                </li>
@@ -468,6 +487,10 @@ function viewDocumentation(compDesc, compName, docTextArray) {
                </li>
                <li>
                   <a href="Structure.xsd.html_h-1123444427.html">Complex Type: <strong>EVENT</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="Structure.xsd.html_h-444675821.html">Complex Type: <strong>FOLDER</strong>
                   </a>
                </li>
                <li>
@@ -527,6 +550,9 @@ function viewDocumentation(compDesc, compName, docTextArray) {
             <a href="#Glossary">Glossary</a>
          </li>
       </ul>
+      <h4>Master schema documentation file: 
+            <a href="Version.xsd.html">Version.xsd.html</a>
+      </h4>
       <div style="text-align: right; clear: both;">
          <a href="#top">top</a>
       </div>
@@ -537,18 +563,23 @@ function viewDocumentation(compDesc, compName, docTextArray) {
       <table class="properties">
          <tr>
             <th>
-               <a title="Look up 'Target Namespace' in glossary" href="Structure.xsd.html#term_TargetNS">Target Namespace</a>
+               <a title="Look up 'Target Namespace' in glossary"
+                  href="Structure.xsd.html#term_TargetNS">Target Namespace</a>
             </th>
             <td>
-               <span class="targetNS">openEHR/v1/Structure</span>
+               <span class="targetNS">http://schemas.openehr.org/v1</span>
             </td>
+         </tr>
+         <tr>
+            <th>Version</th>
+            <td>v1.0.1</td>
          </tr>
          <tr>
             <th>Element and Attribute Namespaces</th>
             <td>
                <ul>
                   <li>Global element and attribute declarations belong to this schema's target namespace.</li>
-                  <li>By default, local element declarations have no namespace.</li>
+                  <li>By default, local element declarations belong to this schema's target namespace.</li>
                   <li>By default, local attribute declarations have no namespace.</li>
                </ul>
             </td>
@@ -557,9 +588,11 @@ function viewDocumentation(compDesc, compName, docTextArray) {
             <th>Schema Composition</th>
             <td>
                <ul>
-                  <li>This schema imports schema(s) from the following namespace(s):<ul>
+                  <li>This schema includes components from the following schema document(s):<ul>
                         <li>
-                           <em>openEHR/v1/BaseTypes</em> (at <a title="Jump to schema documentation for 'BaseTypes.xsd'." href="BaseTypes.xsd.html">BaseTypes.xsd</a>)</li>
+                           <a title="Jump to schema documentation for 'BaseTypes.xsd'."
+                              href="BaseTypes.xsd.html">BaseTypes.xsd</a>
+                        </li>
                      </ul>
                   </li>
                </ul>
@@ -567,7 +600,7 @@ function viewDocumentation(compDesc, compName, docTextArray) {
          </tr>
          <tr>
             <th>Documentation</th>
-            <td>
+            <td class="documentation">
 			The locatable class here does not contain the Archetyped class in the reference model; it will probably do so in future
 			as a minor version of this schema, which will be backwardly compatible. This is to allow the development of suitable access
 			control measures to become represented in this class in the future. The archetype id is copied (in the reference model specs)
@@ -587,7 +620,7 @@ function viewDocumentation(compDesc, compName, docTextArray) {
                <a name="ns_">Default namespace</a>
             </td>
             <td>
-               <span class="targetNS">openEHR/v1/Structure</span>
+               <span class="targetNS">http://schemas.openehr.org/v1</span>
             </td>
          </tr>
          <tr>
@@ -598,20 +631,6 @@ function viewDocumentation(compDesc, compName, docTextArray) {
          </tr>
          <tr>
             <td>
-               <a name="ns_mstns">mstns</a>
-            </td>
-            <td>
-               <span class="targetNS">openEHR/v1/Structure</span>
-            </td>
-         </tr>
-         <tr>
-            <td>
-               <a name="ns_bt">bt</a>
-            </td>
-            <td>openEHR/v1/BaseTypes</td>
-         </tr>
-         <tr>
-            <td>
                <a name="ns_xs">xs</a>
             </td>
             <td>http://www.w3.org/2001/XMLSchema</td>
@@ -619,18 +638,20 @@ function viewDocumentation(compDesc, compName, docTextArray) {
       </table>
       <div class="schemaComponent box">
          <div>
-            <input type="button" id="schema_scbox_button" class="control" onclick="switchState('schema_scbox'); return false;" style="display: none"/> 
+            <input type="button" id="schema_scbox_button" class="control"
+                   onclick="switchState('schema_scbox'); return false;"
+                   style="display: none"/> 
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="schema_scbox" class="contents">
             <div style="margin-left: 0em">&lt;<span class="scTag">xs:schema</span> 
-               <span class="scTag">id</span>="<span class="scContent">Structure</span>" <span class="scTag">targetNamespace</span>="<span class="scContent">openEHR/v1/Structure</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">unqualified</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:import</span> 
-                  <span class="scTag">namespace</span>="<span class="scContent">openEHR/v1/BaseTypes</span>" <span class="scTag">schemaLocation</span>="<span class="scContent">BaseTypes.xsd</span>"/&gt;</div>
+               <span class="scTag">version</span>="<span class="scContent">v1.0.1</span>" <span class="scTag">targetNamespace</span>="<span class="scContent">http://schemas.openehr.org/v1</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">qualified</span>" <span class="scTag">id</span>="<span class="scContent">Structure.xsd</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:include</span> 
+                  <span class="scTag">schemaLocation</span>="<span class="scContent">BaseTypes.xsd</span>"/&gt;</div>
                <div class="scContent" style="margin-left: 1.5em">...</div>&lt;/<span class="scTag">xs:schema</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
-setState('schema_scbox', false);
+          setState('schema_scbox', false);
 // -->
 </script>
       </div>
@@ -717,7 +738,8 @@ setState('schema_scbox', false);
                   </span>
                   <br/>
                   <span style="margin-left: 1.5em">&lt;postcode&gt; <span class="constraint">string &lt;&lt;<em>pattern</em> = [1-9][0-9]{3}&gt;&gt;</span> &lt;/postcode&gt; <span class="occurs">[1]</span>
-                     <a href="javascript:void(0)" title="View Documentation" class="documentation" onclick="docArray = new Array('Post code must be a four-digit number.'); viewDocumentation('Element', 'postcode', docArray);">?</a>
+                     <a href="javascript:void(0)" title="View Documentation" class="documentation"
+                        onclick="docArray = new Array('Post code must be a four-digit number.'); viewDocumentation('Element', 'postcode', docArray);">?</a>
                   </span>
                   <br/>
                </span>
@@ -814,12 +836,14 @@ setState('schema_scbox', false);
          <p>
             <span class="glossaryTerm">
                <a name="term_All">All Model Group</a> 
-            </span>Child elements can be provided <em>in any order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-all" href="http://www.w3.org/TR/xmlschema-1/#element-all">http://www.w3.org/TR/xmlschema-1/#element-all</a>.</p>
+            </span>Child elements can be provided <em>in any order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-all"
+               href="http://www.w3.org/TR/xmlschema-1/#element-all">http://www.w3.org/TR/xmlschema-1/#element-all</a>.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_Choice">Choice Model Group</a> 
             </span>
-            <em>Only one</em> from the list of child elements and model groups can be provided in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-choice" href="http://www.w3.org/TR/xmlschema-1/#element-choice">http://www.w3.org/TR/xmlschema-1/#element-choice</a>.</p>
+            <em>Only one</em> from the list of child elements and model groups can be provided in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-choice"
+               href="http://www.w3.org/TR/xmlschema-1/#element-choice">http://www.w3.org/TR/xmlschema-1/#element-choice</a>.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_CollapseWS">Collapse Whitespace Policy</a> 
@@ -827,19 +851,25 @@ setState('schema_scbox', false);
          <p>
             <span class="glossaryTerm">
                <a name="term_ElemBlock">Disallowed Substitutions</a> 
-            </span>(Applies to element declarations). If <em>substitution</em> is specified, then <a title="Look up 'substitution group' in glossary" href="Structure.xsd.html#term_SubGroup">substitution group</a> members cannot be used in place of the given element declaration to validate element instances. If <em>derivation methods</em>, e.g. extension, restriction, are specified, then the given element declaration will not validate element instances that have types derived from the element declaration's type using the specified derivation methods. Normally, element instances can override their declaration's type by specifying an <code>xsi:type</code> attribute.</p>
+            </span>(Applies to element declarations). If <em>substitution</em> is specified, then <a title="Look up 'substitution group' in glossary"
+               href="Structure.xsd.html#term_SubGroup">substitution group</a> members cannot be used in place of the given element declaration to validate element instances. If <em>derivation methods</em>, e.g. extension, restriction, are specified, then the given element declaration will not validate element instances that have types derived from the element declaration's type using the specified derivation methods. Normally, element instances can override their declaration's type by specifying an <code>xsi:type</code> attribute.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_Key">Key Constraint</a> 
-            </span>Like <a title="Look up 'Uniqueness Constraint' in glossary" href="Structure.xsd.html#term_Unique">Uniqueness Constraint</a>, but additionally requires that the specified value(s) must be provided. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions" href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
+            </span>Like <a title="Look up 'Uniqueness Constraint' in glossary"
+               href="Structure.xsd.html#term_Unique">Uniqueness Constraint</a>, but additionally requires that the specified value(s) must be provided. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions"
+               href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_KeyRef">Key Reference Constraint</a> 
-            </span>Ensures that the specified value(s) must match value(s) from a <a title="Look up 'Key Constraint' in glossary" href="Structure.xsd.html#term_Key">Key Constraint</a> or <a title="Look up 'Uniqueness Constraint' in glossary" href="Structure.xsd.html#term_Unique">Uniqueness Constraint</a>. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions" href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
+            </span>Ensures that the specified value(s) must match value(s) from a <a title="Look up 'Key Constraint' in glossary" href="Structure.xsd.html#term_Key">Key Constraint</a> or <a title="Look up 'Uniqueness Constraint' in glossary"
+               href="Structure.xsd.html#term_Unique">Uniqueness Constraint</a>. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions"
+               href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_ModelGroup">Model Group</a> 
-            </span>Groups together element content, specifying the order in which the element content can occur and the number of times the group of element content may be repeated. See: <a title="http://www.w3.org/TR/xmlschema-1/#Model_Groups" href="http://www.w3.org/TR/xmlschema-1/#Model_Groups">http://www.w3.org/TR/xmlschema-1/#Model_Groups</a>.</p>
+            </span>Groups together element content, specifying the order in which the element content can occur and the number of times the group of element content may be repeated. See: <a title="http://www.w3.org/TR/xmlschema-1/#Model_Groups"
+               href="http://www.w3.org/TR/xmlschema-1/#Model_Groups">http://www.w3.org/TR/xmlschema-1/#Model_Groups</a>.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_Nillable">Nillable</a> 
@@ -847,7 +877,8 @@ setState('schema_scbox', false);
          <p>
             <span class="glossaryTerm">
                <a name="term_Notation">Notation</a> 
-            </span>A notation is used to identify the format of a piece of data. Values of elements and attributes that are of type, NOTATION, must come from the names of declared notations. See: <a title="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations" href="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations">http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations</a>.</p>
+            </span>A notation is used to identify the format of a piece of data. Values of elements and attributes that are of type, NOTATION, must come from the names of declared notations. See: <a title="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations"
+               href="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations">http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations</a>.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_PreserveWS">Preserve Whitespace Policy</a> 
@@ -867,7 +898,8 @@ setState('schema_scbox', false);
          <p>
             <span class="glossaryTerm">
                <a name="term_Sequence">Sequence Model Group</a> 
-            </span>Child elements and model groups must be provided <em>in the specified order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-sequence" href="http://www.w3.org/TR/xmlschema-1/#element-sequence">http://www.w3.org/TR/xmlschema-1/#element-sequence</a>.</p>
+            </span>Child elements and model groups must be provided <em>in the specified order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-sequence"
+               href="http://www.w3.org/TR/xmlschema-1/#element-sequence">http://www.w3.org/TR/xmlschema-1/#element-sequence</a>.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_SubGroup">Substitution Group</a> 
@@ -883,7 +915,8 @@ setState('schema_scbox', false);
          <p>
             <span class="glossaryTerm">
                <a name="term_Unique">Uniqueness Constraint</a> 
-            </span>Ensures uniqueness of an element/attribute value, or a combination of values, within a specified scope. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions" href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
+            </span>Ensures uniqueness of an element/attribute value, or a combination of values, within a specified scope. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions"
+               href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
          <div style="text-align: right; clear: both;">
             <a href="#top">top</a>
          </div>
@@ -891,7 +924,7 @@ setState('schema_scbox', false);
       </div>
       <p class="footer">Generated by <a href="http://www.oxygenxml.com">&lt;oXygen/&gt; XML Editor</a> using a modified version of <a href="http://titanium.dstc.edu.au/xml/xs3p">xs3p</a> that adds schema diagrams and chunking support. Last modified: <script type="text/javascript">
 <!--
-document.write(document.lastModified);
+          document.write(document.lastModified);
 // -->
 </script>
       </p>

@@ -1,12 +1,16 @@
 
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml"><head><title>XML Schema Documentation</title><meta http-equiv="Content-Type" content="text/xml; charset=iso-8859-1"></meta><style type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <title>Documentation for Archetype - Archetype.xsd - Element archetype</title>
+      <meta http-equiv="Content-Type" content="text/xml; charset=iso-8859-1"/>
+      <style type="text/css">
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* More-configurable styles */
 
 /******** General ********/
-
+         
 /* Document body */
 body {
    color: Black;
@@ -14,6 +18,7 @@ body {
    font-family: Arial, sans-serif;
    font-size: 10pt;
 }
+                  
 /* Horizontal rules */
 hr {
    color: black;
@@ -47,7 +52,22 @@ table.properties td {
    background-color: #eee; /* Gray */
 }
 
+img{
+ border: 0;
+}         
 
+/********* Documentation style *************/
+p.documentation {
+   color:black;
+   font-style:italic;
+         background-color: #EEEEFF;
+         border: 1px solid #DDDDFF;
+         padding-top: 1px;
+         margin-right: 30px;
+         margin-top: 1px;
+}
+
+         
 /******** Table of Contents Section ********/
 
 /* Controls for switching between printing and viewing modes */
@@ -371,9 +391,10 @@ div#legend div.hint {
 .footer {
    font-size: 8pt;
 }
-</style><script type="text/javascript">
+</style>
+      <script type="text/javascript">
 <!--
-
+          
          
 /**
  * Counter of documentation windows
@@ -429,24 +450,192 @@ function viewDocumentation(compDesc, compName, docTextArray) {
 }         
       
 // -->
-</script></head><body><h1><a name="top">XML Schema Documentation</a></h1><h3>Element: <a name="h-1091479290" class="name">archetype</a></h3><h4><a href="Archetype.xsd.html" class="details">[Table of contents]</a></h4><table class="properties"><tr><th>Name</th><td>archetype</td></tr><tr><th>Type</th><td><span class="type"><a title="Jump to &#34;ARCHETYPE&#34; type definition." href="Archetype.xsd.html_h439624612.html">ARCHETYPE</a></span></td></tr><tr><th><a title="Look up 'Nillable' in glossary" href="Archetype.xsd.html#term_Nillable">Nillable</a></th><td>no</td></tr><tr><th><a title="Look up 'Abstract' in glossary" href="Archetype.xsd.html#term_Abstract">Abstract</a></th><td>no</td></tr></table><div class="sample box"><div><input type="button" id="h-1091479290_logicalDiagram_button" class="control" onclick="switchState('h-1091479290_logicalDiagram'); return false;" style="display: none"></input> <span class="caption">Logical Diagram</span></div><div id="h-1091479290_logicalDiagram" class="contents"><img src="schemaDiagrams/h-672616968.png"></img></div><script type="text/javascript">
+</script>
+   </head>
+   <body>
+      <h1>
+         <a name="top">Documentation for Archetype</a>
+      </h1>
+      <h3>Element: <a name="h-1091479290" class="name">archetype</a>
+      </h3>
+      <h4>
+         <a href="Archetype.xsd.html" class="details">[Table of contents]</a>
+      </h4>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>archetype</td>
+         </tr>
+         <tr>
+            <th>Type</th>
+            <td>
+               <span class="type">
+                  <a title="Jump to &#34;ARCHETYPE&#34; type definition."
+                     href="Archetype.xsd.html_h439624612.html">ARCHETYPE</a>
+               </span>
+            </td>
+         </tr>
+         <tr>
+            <th>
+               <a title="Look up 'Nillable' in glossary" href="Archetype.xsd.html#term_Nillable">Nillable</a>
+            </th>
+            <td>no</td>
+         </tr>
+         <tr>
+            <th>
+               <a title="Look up 'Abstract' in glossary" href="Archetype.xsd.html#term_Abstract">Abstract</a>
+            </th>
+            <td>no</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-1091479290_logicalDiagram_button" class="control"
+                   onclick="switchState('h-1091479290_logicalDiagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Logical Diagram</span>
+         </div>
+         <div id="h-1091479290_logicalDiagram" class="contents">
+            <img usemap="#h-664346589" src="schemaDiagrams/h-664346589.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas//schemaDiagrams/h-664346589.map--><map name="h-664346589">
+</map>
+         </div>
+         <script type="text/javascript">
 <!--
-setState('h-1091479290_logicalDiagram', false);
+          setState('h-1091479290_logicalDiagram', false);
 // -->
-</script></div><div class="sample box"><div><input type="button" id="h-1091479290_xibox_button" class="control" onclick="switchState('h-1091479290_xibox'); return false;" style="display: none"></input> <span class="caption">XML Instance Representation</span></div><div id="h-1091479290_xibox" class="contents"><div style="margin-left: 0em">&lt;archetype&gt; <br></br><div style="margin-left: 1.5em">&lt;archetype_id&gt; <span class="type"><a href="Archetype.xsd.html#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/archetype_id&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;concept_code&gt; <span class="type"><a href="Archetype.xsd.html#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/concept_code&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;parent_archetype_id&gt; <span class="type"><a href="Archetype.xsd.html#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/parent_archetype_id&gt; <span class="occurs">[0..1]</span></div><div style="margin-left: 1.5em">&lt;original_language&gt; <span class="type"><a title="Jump to &#34;CODE_PHRASE&#34; type definition." href="Archetype.xsd.html_h1592245190.html">CODE_PHRASE</a></span> &lt;/original_language&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;is_controlled&gt; <span class="type"><a href="Archetype.xsd.html#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:boolean</span> &lt;/is_controlled&gt; <span class="occurs">[0..1]</span></div><div style="margin-left: 1.5em">&lt;description&gt; <span class="type"><a title="Jump to &#34;RESOURCE_DESCRIPTION&#34; type definition." href="Archetype.xsd.html_h-2133083888.html">RESOURCE_DESCRIPTION</a></span> &lt;/description&gt; <span class="occurs">[0..1]</span></div><div style="margin-left: 1.5em">&lt;translations&gt; <span class="type"><a title="Jump to &#34;TRANSLATION_DETAILS&#34; type definition." href="Archetype.xsd.html_h280872431.html">TRANSLATION_DETAILS</a></span> &lt;/translations&gt; <span class="occurs">[0..*]</span></div><div style="margin-left: 1.5em">&lt;definition&gt; <span class="type"><a title="Jump to &#34;C_COMPLEX_OBJECT&#34; type definition." href="Archetype.xsd.html_h-157986897.html">C_COMPLEX_OBJECT</a></span> &lt;/definition&gt; <span class="occurs">[0..1]</span></div><div style="margin-left: 1.5em">&lt;ontology&gt; <span class="type"><a title="Jump to &#34;ARCHETYPE_ONTOLOGY&#34; type definition." href="Archetype.xsd.html_h1873534858.html">ARCHETYPE_ONTOLOGY</a></span> &lt;/ontology&gt; <span class="occurs">[0..1]</span></div>&lt;/archetype&gt;</div></div><script type="text/javascript">
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-1091479290_xibox_button" class="control"
+                   onclick="switchState('h-1091479290_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="h-1091479290_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;archetype&gt; <br/>
+               <div style="margin-left: 1.5em">&lt;original_language&gt; <span class="type">
+                     <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                        href="basetypes.xsd.html_h1592245190.html"
+                        class="externalLink">CODE_PHRASE</a>
+                  </span> &lt;/original_language&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;is_controlled&gt; <span class="type">
+                     <a href="resource.xsd.html#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:boolean</span> &lt;/is_controlled&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;description&gt; <span class="type">
+                     <a title="Jump to &#34;RESOURCE_DESCRIPTION&#34; type definition(located in external schema documentation)."
+                        href="resource.xsd.html_h-2133083888.html"
+                        class="externalLink">RESOURCE_DESCRIPTION</a>
+                  </span> &lt;/description&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;translations&gt; <span class="type">
+                     <a title="Jump to &#34;TRANSLATION_DETAILS&#34; type definition(located in external schema documentation)."
+                        href="resource.xsd.html_h280872431.html"
+                        class="externalLink">TRANSLATION_DETAILS</a>
+                  </span> &lt;/translations&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;revision_history&gt; <span class="type">
+                     <a title="Jump to &#34;REVISION_HISTORY&#34; type definition(located in external schema documentation)."
+                        href="basetypes.xsd.html_h1989780085.html"
+                        class="externalLink">REVISION_HISTORY</a>
+                  </span> &lt;/revision_history&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;uid&gt; <span class="type">
+                     <a title="Jump to &#34;HIER_OBJECT_ID&#34; type definition(located in external schema documentation)."
+                        href="basetypes.xsd.html_h-35472337.html"
+                        class="externalLink">HIER_OBJECT_ID</a>
+                  </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;archetype_id&gt; <span class="type">
+                     <a title="Jump to &#34;ARCHETYPE_ID&#34; type definition(located in external schema documentation)."
+                        href="basetypes.xsd.html_h1501624214.html"
+                        class="externalLink">ARCHETYPE_ID</a>
+                  </span> &lt;/archetype_id&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;adl_version&gt; <span class="type">
+                     <a href="Archetype.xsd.html#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/adl_version&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;concept&gt; <span class="type">
+                     <a href="Archetype.xsd.html#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/concept&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;parent_archetype_id&gt; <span class="type">
+                     <a title="Jump to &#34;ARCHETYPE_ID&#34; type definition(located in external schema documentation)."
+                        href="basetypes.xsd.html_h1501624214.html"
+                        class="externalLink">ARCHETYPE_ID</a>
+                  </span> &lt;/parent_archetype_id&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;definition&gt; <span class="type">
+                     <a title="Jump to &#34;C_COMPLEX_OBJECT&#34; type definition."
+                        href="Archetype.xsd.html_h-157986897.html">C_COMPLEX_OBJECT</a>
+                  </span> &lt;/definition&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;invariants&gt; <span class="type">
+                     <a title="Jump to &#34;ASSERTION&#34; type definition."
+                        href="Archetype.xsd.html_h-871272419.html">ASSERTION</a>
+                  </span> &lt;/invariants&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;ontology&gt; <span class="type">
+                     <a title="Jump to &#34;ARCHETYPE_ONTOLOGY&#34; type definition."
+                        href="Archetype.xsd.html_h1873534858.html">ARCHETYPE_ONTOLOGY</a>
+                  </span> &lt;/ontology&gt; <span class="occurs">[1]</span>
+               </div>&lt;/archetype&gt;</div>
+         </div>
+         <script type="text/javascript">
 <!--
-setState('h-1091479290_xibox', true);
+          setState('h-1091479290_xibox', true);
 // -->
-</script></div><div class="sample box"><div><input type="button" id="h-1091479290_diagram_button" class="control" onclick="switchState('h-1091479290_diagram'); return false;" style="display: none"></input> <span class="caption">Diagram</span></div><div id="h-1091479290_diagram" class="contents"><img src="schemaDiagrams/h1498401666.png"></img></div><script type="text/javascript">
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-1091479290_diagram_button" class="control"
+                   onclick="switchState('h-1091479290_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h-1091479290_diagram" class="contents">
+            <img usemap="#h-963161255" src="schemaDiagrams/h-963161255.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas//schemaDiagrams/h-963161255.map--><map name="h-963161255">
+</map>
+         </div>
+         <script type="text/javascript">
 <!--
-setState('h-1091479290_diagram', true);
+          setState('h-1091479290_diagram', true);
 // -->
-</script></div><div class="schemaComponent box"><div><input type="button" id="h-1091479290_scbox_button" class="control" onclick="switchState('h-1091479290_scbox'); return false;" style="display: none"></input> <span class="caption">Schema Component Representation</span></div><div id="h-1091479290_scbox" class="contents"><div style="margin-left: 0em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">archetype</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &#34;ARCHETYPE&#34; type definition." href="Archetype.xsd.html_h439624612.html">ARCHETYPE</a></span></span>"/&gt;</div></div><script type="text/javascript">
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h-1091479290_scbox_button" class="control"
+                   onclick="switchState('h-1091479290_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h-1091479290_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">xs:element</span> 
+               <span class="scTag">name</span>="<span class="scContent">archetype</span>" <span class="scTag">type</span>="<span class="scContent">
+                  <span class="type">
+                     <a title="Jump to &#34;ARCHETYPE&#34; type definition."
+                        href="Archetype.xsd.html_h439624612.html">ARCHETYPE</a>
+                  </span>
+               </span>"/&gt;</div>
+         </div>
+         <script type="text/javascript">
 <!--
-setState('h-1091479290_scbox', false);
+          setState('h-1091479290_scbox', false);
 // -->
-</script></div><hr></hr><p class="footer">Generated by <a href="http://www.oxygenxml.com">&lt;oXygen/&gt; XML Editor</a> using a modified version of <a href="http://titanium.dstc.edu.au/xml/xs3p">xs3p</a> that adds schema diagrams and chunking support. Last modified: <script type="text/javascript">
+</script>
+      </div>
+      <hr/>
+      <p class="footer">Generated by <a href="http://www.oxygenxml.com">&lt;oXygen/&gt; XML Editor</a> using a modified version of <a href="http://titanium.dstc.edu.au/xml/xs3p">xs3p</a> that adds schema diagrams and chunking support. Last modified: <script type="text/javascript">
 <!--
-document.write(document.lastModified);
+          document.write(document.lastModified);
 // -->
-</script></p></body></html>
+</script>
+      </p>
+   </body>
+</html>

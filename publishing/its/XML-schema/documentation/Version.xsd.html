@@ -1,17 +1,16 @@
 
-
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml">
    <head>
-      <title>XML Schema Documentation</title>
+      <title>Documentation for Version - Version.xsd</title>
       <meta http-equiv="Content-Type" content="text/xml; charset=UTF-8"/>
       <style type="text/css">
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* More-configurable styles */
 
 /******** General ********/
-
+         
 /* Document body */
 body {
    color: Black;
@@ -19,6 +18,7 @@ body {
    font-family: Arial, sans-serif;
    font-size: 10pt;
 }
+                  
 /* Horizontal rules */
 hr {
    color: black;
@@ -52,7 +52,22 @@ table.properties td {
    background-color: #eee; /* Gray */
 }
 
+img{
+ border: 0;
+}         
 
+/********* Documentation style *************/
+p.documentation {
+   color:black;
+   font-style:italic;
+         background-color: #EEEEFF;
+         border: 1px solid #DDDDFF;
+         padding-top: 1px;
+         margin-right: 30px;
+         margin-top: 1px;
+}
+
+         
 /******** Table of Contents Section ********/
 
 /* Controls for switching between printing and viewing modes */
@@ -379,278 +394,7 @@ div#legend div.hint {
 </style>
       <script type="text/javascript">
 <!--
-/* IDs of XML Instance Representation boxes */
-var xiBoxes = new Array('h-1547229547_xibox', 'h134808755_xibox', 'h24008367_xibox', 'h-1988094750_xibox');
-/* IDs of diagram boxes */
-var diagramBoxes = new Array('h-1547229547_diagram', 'h134808755_diagram', 'h24008367_diagram', 'h-1988094750_diagram');
-/* IDs of logical diagram boxes */
-var logicalDiagramBoxes = new Array('h-1547229547_logicalDiagram');
-/* IDs of Schema Component Representation boxes */
-var scBoxes = new Array('schema_scbox', 'h-1547229547_scbox', 'h134808755_scbox', 'h24008367_scbox', 'h-1988094750_scbox');
-
-/**
- * Can get the ID of the button controlling
- * a collapseable box by concatenating
- * this string onto the ID of the box itself.
- */
-var B_SFIX = "_button";
-
-
-/**
- * Returns an element in the current HTML document.
- * 
- * @param elementID Identifier of HTML element
- * @return               HTML element object
- */
-function getElementObject(elementID) {
-    var elemObj = null;
-    if (document.getElementById) {
-        elemObj = document.getElementById(elementID);
-    }
-    return elemObj;
-}             
-
-/**
- * Closes a collapseable box.
- * 
- * @param boxObj       Collapseable box
- * @param buttonObj Button controlling box
- */
-function closeBox(boxObj, buttonObj) {
-  if (boxObj == null || buttonObj == null) {
-     // Box or button not found
-  } else {
-     // Change 'display' CSS property of box
-     boxObj.style.display="none";
-
-     // Change text of button 
-     if (boxObj.style.display=="none") {
-        buttonObj.value=" + ";
-     }
-  }
-}
-
-/**
- * Opens a collapseable box.
- * 
- * @param boxObj       Collapseable box
- * @param buttonObj Button controlling box
- */
-function openBox(boxObj, buttonObj) {
-  if (boxObj == null || buttonObj == null) {
-     // Box or button not found
-  } else {
-     // Change 'display' CSS property of box
-     boxObj.style.display="block";
-
-     // Change text of button
-     if (boxObj.style.display=="block") {
-        buttonObj.value=" - ";
-     }
-  }
-}
-
-/**
- * Sets the state of a collapseable box.
- * 
- * @param boxID Identifier of box
- * @param open If true, box is "opened",
- *             Otherwise, box is "closed".
- */
-function setState(boxID, open) {
-  var boxObj = getElementObject(boxID);
-  var buttonObj = getElementObject(boxID+B_SFIX);
-  if (boxObj == null || buttonObj == null) {
-     // Box or button not found
-  } else if (open) {
-     openBox(boxObj, buttonObj);
-     // Make button visible
-     buttonObj.style.display="inline";
-  } else {
-     closeBox(boxObj, buttonObj);
-     // Make button visible
-     buttonObj.style.display="inline";
-  }
-}
-
-/**
- * Switches the state of a collapseable box, e.g.
- * if it's opened, it'll be closed, and vice versa.
- * 
- * @param boxID Identifier of box
- */
-function switchState(boxID) {
-  var boxObj = getElementObject(boxID);
-  var buttonObj = getElementObject(boxID+B_SFIX);
-  if (boxObj == null || buttonObj == null) {
-     // Box or button not found
-  } else if (boxObj.style.display=="none") {
-     // Box is closed, so open it
-     openBox(boxObj, buttonObj);
-  } else if (boxObj.style.display=="block") {
-     // Box is opened, so close it
-     closeBox(boxObj, buttonObj);
-  }
-}
-
-/**
- * Closes all boxes in a given list.
- * 
- * @param boxList Array of box IDs
- */
-function collapseAll(boxList) {
-  var idx;
-  for (idx = 0; idx < boxList.length; idx++) {
-     var boxObj = getElementObject(boxList[idx]);
-     var buttonObj = getElementObject(boxList[idx]+B_SFIX);
-     closeBox(boxObj, buttonObj);
-  }
-}
-
-/**
- * Open all boxes in a given list.
- * 
- * @param boxList Array of box IDs
- */
-function expandAll(boxList) {
-  var idx;
-  for (idx = 0; idx < boxList.length; idx++) {
-     var boxObj = getElementObject(boxList[idx]);
-     var buttonObj = getElementObject(boxList[idx]+B_SFIX);
-     openBox(boxObj, buttonObj);
-  }
-}
-
-/**
- * Makes all the control buttons of boxes appear.
- * 
- * @param boxList Array of box IDs
- */
-function viewControlButtons(boxList) {
-    var idx;
-    for (idx = 0; idx < boxList.length; idx++) {
-        buttonObj = getElementObject(boxList[idx]+B_SFIX);
-        if (buttonObj != null) {
-            buttonObj.style.display = "inline";
-        }
-    }
-}
-
-/**
- * Makes all the control buttons of boxes disappear.
- * 
- * @param boxList Array of box IDs
- */
-function hideControlButtons(boxList) {
-    var idx;
-    for (idx = 0; idx < boxList.length; idx++) {
-        buttonObj = getElementObject(boxList[idx]+B_SFIX);
-        if (buttonObj != null) {
-            buttonObj.style.display = "none";
-        }
-    }
-}
-
-/**
- * Sets the page for either printing mode
- * or viewing mode. In printing mode, the page
- * is made to be more readable when printing it out.
- * In viewing mode, the page is more browsable.
- *
- * @param isPrinterVersion If true, display in
- *                                 printing mode; otherwise, 
- *                                 in viewing mode
- */
-function displayMode(isPrinterVersion) {
-    var obj;
-    if (isPrinterVersion) {
-        // Hide global control buttons
-        obj = getElementObject("globalControls");
-        if (obj != null) {
-            obj.style.visibility = "hidden";
-        }
-        // Hide Legend
-        obj = getElementObject("legend");
-        if (obj != null) {
-            obj.style.display = "none";
-        }
-        obj = getElementObject("legendTOC");
-        if (obj != null) {
-            obj.style.display = "none";
-        }
-        // Hide Glossary
-        obj = getElementObject("glossary");
-        if (obj != null) {
-            obj.style.display = "none";
-        }
-        obj = getElementObject("glossaryTOC");
-        if (obj != null) {
-            obj.style.display = "none";
-        }
-
-        // Expand all diagrams
-        expandAll(diagramBoxes);
-        // Expand all logical diagrams
-        expandAll(logicalDiagramBoxes);        
-        // Expand all XML Instance Representation tables
-        expandAll(xiBoxes);
-        // Expand all Schema Component Representation tables
-        expandAll(scBoxes);
-
-        // Hide Control buttons
-        hideControlButtons(diagramBoxes);
-        hideControlButtons(logicalDiagramBoxes);
-        hideControlButtons(xiBoxes);
-        hideControlButtons(scBoxes);
-    } else {
-        // View global control buttons
-        obj = getElementObject("globalControls");
-        if (obj != null) {
-            obj.style.visibility = "visible";
-        }
-        // View Legend
-        obj = getElementObject("legend");
-        if (obj != null) {
-            obj.style.display = "block";
-        }
-        obj = getElementObject("legendTOC");
-        if (obj != null) {
-            obj.style.display = "block";
-        }
-        // View Glossary
-        obj = getElementObject("glossary");
-        if (obj != null) {
-            obj.style.display = "block";
-        }
-        obj = getElementObject("glossaryTOC");
-        if (obj != null) {
-            obj.style.display = "block";
-        }
-
-        // Expand all diagram boxes
-        expandAll(diagramBoxes);
-        // Collapse all logical diagram boxes.
-        collapseAll(logicalDiagramBoxes);
-        // Expand all XML Instance Representation tables
-        expandAll(xiBoxes);
-        // Collapse all Schema Component Representation tables
-        collapseAll(scBoxes);
-
-        // View Control buttons
-        viewControlButtons(diagramBoxes);
-        viewControlButtons(logicalDiagramBoxes);
-        viewControlButtons(xiBoxes);
-        viewControlButtons(scBoxes);
-    }
-}
-
-
-
-// -->
-</script>
-      <script type="text/javascript">
-<!--
-
+          
          
 /**
  * Counter of documentation windows
@@ -710,79 +454,35 @@ function viewDocumentation(compDesc, compName, docTextArray) {
    </head>
    <body>
       <h1>
-         <a name="top">XML Schema Documentation</a>
+         <a name="top">Documentation for Version</a>
       </h1>
-      <div style="float: right;">
-         <div id="printerControls" style="display:none;">
-            <input type="checkbox" onclick="displayMode(this.checked)"/>Printer-friendly Version</div>
-         <script type="text/javascript">
-<!--
-
-var pc = getElementObject("printerControls");
-if (pc != null) {
-   pc.style.display="block";
-}
-               
-// -->
-</script>
-         <div id="globalControls" style="display:none">
-            <strong>Logical Diagram:</strong>
-            <br/>
-            <span style="margin-left: 1em; white-space: nowrap">[ <a href="javascript:void(0)" onclick="expandAll(logicalDiagramBoxes)">Expand All</a> | <a href="javascript:void(0)" onclick="collapseAll(logicalDiagramBoxes)">Collapse All</a> ]</span>
-            <br/>
-            <br/>
-            <strong>XML Instance Representation:</strong>
-            <br/>
-            <span style="margin-left: 1em; white-space: nowrap">[ <a href="javascript:void(0)" onclick="expandAll(xiBoxes)">Expand All</a> | <a href="javascript:void(0)" onclick="collapseAll(xiBoxes)">Collapse All</a> ]</span>
-            <br/>
-            <br/>
-            <strong>Diagram:</strong>
-            <br/>
-            <span style="margin-left: 1em; white-space: nowrap">[ <a href="javascript:void(0)" onclick="expandAll(diagramBoxes)">Expand All</a> | <a href="javascript:void(0)" onclick="collapseAll(diagramBoxes)">Collapse All</a> ]</span>
-            <br/>
-            <br/>
-            <strong>Schema Component Representation:</strong>
-            <br/>
-            <span style="margin-left: 1em; white-space: nowrap">[ <a href="javascript:void(0)" onclick="expandAll(scBoxes)">Expand All</a> | <a href="javascript:void(0)" onclick="collapseAll(scBoxes)">Collapse All</a> ]</span>
-         </div>
-         <script type="text/javascript">
-<!--
-
-var gc = getElementObject("globalControls");
-if (gc != null) {
-   gc.style.display="block";
-}
-               
-// -->
-</script>
-      </div>
       <h2>Table of Contents</h2>
       <ul>
          <li>
             <a href="#SchemaProperties">Schema Document Properties</a>
          </li>
          <li>
-            <a href="#SchemaDeclarations">Global Declarations</a>
-            <ul>
+                           Global Declarations
+                        <ul>
                <li>
-                  <a href="#h-1547229547">Element: <strong>version</strong>
+                  <a href="Version.xsd.html_h-1547229547.html">Element: <strong>version</strong>
                   </a>
                </li>
             </ul>
          </li>
          <li>
-            <a href="#SchemaDefinitions">Global Definitions</a>
-            <ul>
+                           Global Definitions
+                        <ul>
                <li>
-                  <a href="#h-1988094750">Complex Type: <strong>IMPORTED_VERSION</strong>
+                  <a href="Version.xsd.html_h-1988094750.html">Complex Type: <strong>IMPORTED_VERSION</strong>
                   </a>
                </li>
                <li>
-                  <a href="#h24008367">Complex Type: <strong>ORIGINAL_VERSION</strong>
+                  <a href="Version.xsd.html_h24008367.html">Complex Type: <strong>ORIGINAL_VERSION</strong>
                   </a>
                </li>
                <li>
-                  <a href="#h134808755">Complex Type: <strong>VERSION</strong>
+                  <a href="Version.xsd.html_h134808755.html">Complex Type: <strong>VERSION</strong>
                   </a>
                </li>
             </ul>
@@ -808,18 +508,23 @@ if (gc != null) {
       <table class="properties">
          <tr>
             <th>
-               <a title="Look up 'Target Namespace' in glossary" href="Version.xsd.html#term_TargetNS">Target Namespace</a>
+               <a title="Look up 'Target Namespace' in glossary"
+                  href="Version.xsd.html#term_TargetNS">Target Namespace</a>
             </th>
             <td>
-               <span class="targetNS">openEHR/v1/Version</span>
+               <span class="targetNS">http://schemas.openehr.org/v1</span>
             </td>
+         </tr>
+         <tr>
+            <th>Version</th>
+            <td>v1.0.1</td>
          </tr>
          <tr>
             <th>Element and Attribute Namespaces</th>
             <td>
                <ul>
                   <li>Global element and attribute declarations belong to this schema's target namespace.</li>
-                  <li>By default, local element declarations have no namespace.</li>
+                  <li>By default, local element declarations belong to this schema's target namespace.</li>
                   <li>By default, local attribute declarations have no namespace.</li>
                </ul>
             </td>
@@ -828,13 +533,11 @@ if (gc != null) {
             <th>Schema Composition</th>
             <td>
                <ul>
-                  <li>This schema imports schema(s) from the following namespace(s):<ul>
+                  <li>This schema includes components from the following schema document(s):<ul>
                         <li>
-                           <em>openEHR/v1/Composition</em> (at Composition.xsd)</li>
-                        <li>
-                           <em>openEHR/v1/BaseTypes</em> (at BaseTypes.xsd)</li>
-                        <li>
-                           <em>openEHR/v1/Structure</em> (at Structure.xsd)</li>
+                           <a title="Jump to schema documentation for 'Composition.xsd'."
+                              href="Composition.xsd.html">Composition.xsd</a>
+                        </li>
                      </ul>
                   </li>
                </ul>
@@ -852,7 +555,7 @@ if (gc != null) {
                <a name="ns_">Default namespace</a>
             </td>
             <td>
-               <span class="targetNS">openEHR/v1/Version</span>
+               <span class="targetNS">http://schemas.openehr.org/v1</span>
             </td>
          </tr>
          <tr>
@@ -863,32 +566,6 @@ if (gc != null) {
          </tr>
          <tr>
             <td>
-               <a name="ns_mstns">mstns</a>
-            </td>
-            <td>
-               <span class="targetNS">openEHR/v1/Version</span>
-            </td>
-         </tr>
-         <tr>
-            <td>
-               <a name="ns_cp">cp</a>
-            </td>
-            <td>openEHR/v1/Composition</td>
-         </tr>
-         <tr>
-            <td>
-               <a name="ns_bt">bt</a>
-            </td>
-            <td>openEHR/v1/BaseTypes</td>
-         </tr>
-         <tr>
-            <td>
-               <a name="ns_st">st</a>
-            </td>
-            <td>openEHR/v1/Structure</td>
-         </tr>
-         <tr>
-            <td>
                <a name="ns_xs">xs</a>
             </td>
             <td>http://www.w3.org/2001/XMLSchema</td>
@@ -896,482 +573,20 @@ if (gc != null) {
       </table>
       <div class="schemaComponent box">
          <div>
-            <input type="button" id="schema_scbox_button" class="control" onclick="switchState('schema_scbox'); return false;" style="display: none"/> 
+            <input type="button" id="schema_scbox_button" class="control"
+                   onclick="switchState('schema_scbox'); return false;"
+                   style="display: none"/> 
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="schema_scbox" class="contents">
             <div style="margin-left: 0em">&lt;<span class="scTag">xs:schema</span> 
-               <span class="scTag">targetNamespace</span>="<span class="scContent">openEHR/v1/Version</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">unqualified</span>" <span class="scTag">id</span>="<span class="scContent">Version</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:import</span> 
-                  <span class="scTag">namespace</span>="<span class="scContent">openEHR/v1/Composition</span>" <span class="scTag">schemaLocation</span>="<span class="scContent">Composition.xsd</span>"/&gt;</div>
-               <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:import</span> 
-                  <span class="scTag">namespace</span>="<span class="scContent">openEHR/v1/BaseTypes</span>" <span class="scTag">schemaLocation</span>="<span class="scContent">BaseTypes.xsd</span>"/&gt;</div>
-               <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:import</span> 
-                  <span class="scTag">namespace</span>="<span class="scContent">openEHR/v1/Structure</span>" <span class="scTag">schemaLocation</span>="<span class="scContent">Structure.xsd</span>"/&gt;</div>
+               <span class="scTag">targetNamespace</span>="<span class="scContent">http://schemas.openehr.org/v1</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">qualified</span>" <span class="scTag">version</span>="<span class="scContent">v1.0.1</span>" <span class="scTag">id</span>="<span class="scContent">Version.xsd</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:include</span> 
+                  <span class="scTag">schemaLocation</span>="<span class="scContent">Composition.xsd</span>"/&gt;</div>
                <div class="scContent" style="margin-left: 1.5em">...</div>&lt;/<span class="scTag">xs:schema</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
-setState('schema_scbox', false);
-// -->
-</script>
-      </div>
-      <div style="text-align: right; clear: both;">
-         <a href="#top">top</a>
-      </div>
-      <hr/>
-      <h2>
-         <a name="SchemaDeclarations">Global Declarations</a>
-      </h2>
-      <h3>Element: <a name="h-1547229547" class="name">version</a>
-      </h3>
-      <table class="properties">
-         <tr>
-            <th>Name</th>
-            <td>version</td>
-         </tr>
-         <tr>
-            <th>Type</th>
-            <td>
-               <span class="type">
-                  <a title="Jump to &#34;VERSION&#34; type definition." href="#h134808755">VERSION</a>
-               </span>
-            </td>
-         </tr>
-         <tr>
-            <th>
-               <a title="Look up 'Nillable' in glossary" href="Version.xsd.html#term_Nillable">Nillable</a>
-            </th>
-            <td>no</td>
-         </tr>
-         <tr>
-            <th>
-               <a title="Look up 'Abstract' in glossary" href="Version.xsd.html#term_Abstract">Abstract</a>
-            </th>
-            <td>no</td>
-         </tr>
-      </table>
-      <div class="sample box">
-         <div>
-            <input type="button" id="h-1547229547_logicalDiagram_button" class="control" onclick="switchState('h-1547229547_logicalDiagram'); return false;" style="display: none"/> 
-            <span class="caption">Logical Diagram</span>
-         </div>
-         <div id="h-1547229547_logicalDiagram" class="contents">
-            <img src="schemaDiagrams/h-1487161384.png"/>
-         </div>
-         <script type="text/javascript">
-<!--
-setState('h-1547229547_logicalDiagram', false);
-// -->
-</script>
-      </div>
-      <div class="sample box">
-         <div>
-            <input type="button" id="h-1547229547_xibox_button" class="control" onclick="switchState('h-1547229547_xibox'); return false;" style="display: none"/> 
-            <span class="caption">XML Instance Representation</span>
-         </div>
-         <div id="h-1547229547_xibox" class="contents">
-            <div style="margin-left: 0em">&lt;version&gt; <br/>
-               <div style="margin-left: 1.5em">&lt;contribution&gt; <span class="type">
-                     <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;OBJECT_REF&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;OBJECT_REF&#34; type definition could not be found.');">OBJECT_REF</a>
-                  </span> &lt;/contribution&gt; <span class="occurs">[1]</span>
-               </div>
-               <div style="margin-left: 1.5em">&lt;commit_audit&gt; <span class="type">
-                     <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;AUDIT_DETAILS&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;AUDIT_DETAILS&#34; type definition could not be found.');">AUDIT_DETAILS</a>
-                  </span> &lt;/commit_audit&gt; <span class="occurs">[1]</span>
-               </div>&lt;/version&gt;</div>
-         </div>
-         <script type="text/javascript">
-<!--
-setState('h-1547229547_xibox', true);
-// -->
-</script>
-      </div>
-      <div class="sample box">
-         <div>
-            <input type="button" id="h-1547229547_diagram_button" class="control" onclick="switchState('h-1547229547_diagram'); return false;" style="display: none"/> 
-            <span class="caption">Diagram</span>
-         </div>
-         <div id="h-1547229547_diagram" class="contents">
-            <img src="schemaDiagrams/h506669666.png"/>
-         </div>
-         <script type="text/javascript">
-<!--
-setState('h-1547229547_diagram', true);
-// -->
-</script>
-      </div>
-      <div class="schemaComponent box">
-         <div>
-            <input type="button" id="h-1547229547_scbox_button" class="control" onclick="switchState('h-1547229547_scbox'); return false;" style="display: none"/> 
-            <span class="caption">Schema Component Representation</span>
-         </div>
-         <div id="h-1547229547_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:element</span> 
-               <span class="scTag">name</span>="<span class="scContent">version</span>" <span class="scTag">type</span>="<span class="scContent">
-                  <span class="type">
-                     <a title="Jump to &#34;VERSION&#34; type definition." href="#h134808755">VERSION</a>
-                  </span>
-               </span>"/&gt;</div>
-         </div>
-         <script type="text/javascript">
-<!--
-setState('h-1547229547_scbox', false);
-// -->
-</script>
-      </div>
-      <div style="text-align: right; clear: both;">
-         <a href="#top">top</a>
-      </div>
-      <hr/>
-      <h2>
-         <a name="SchemaDefinitions">Global Definitions</a>
-      </h2>
-      <h3>Complex Type: <a name="h-1988094750" class="name">IMPORTED_VERSION</a>
-      </h3>
-      <table class="hierarchy">
-         <tr>
-            <th>Super-types:</th>
-            <td>
-               <span class="type">
-                  <a title="Jump to &#34;VERSION&#34; type definition." href="#h134808755">VERSION</a>
-               </span> &lt; <strong>IMPORTED_VERSION</strong> (by extension)</td>
-         </tr>
-         <tr>
-            <th>Sub-types:</th>
-            <td>None</td>
-         </tr>
-      </table>
-      <table class="properties">
-         <tr>
-            <th>Name</th>
-            <td>IMPORTED_VERSION</td>
-         </tr>
-         <tr>
-            <th>
-               <a title="Look up 'Abstract' in glossary" href="Version.xsd.html#term_Abstract">Abstract</a>
-            </th>
-            <td>no</td>
-         </tr>
-      </table>
-      <div class="sample box">
-         <div>
-            <input type="button" id="h-1988094750_xibox_button" class="control" onclick="switchState('h-1988094750_xibox'); return false;" style="display: none"/> 
-            <span class="caption">XML Instance Representation</span>
-         </div>
-         <div id="h-1988094750_xibox" class="contents">
-            <div style="margin-left: 0em">&lt;...&gt; <br/>
-               <div style="margin-left: 1.5em" class="inherited">&lt;contribution&gt; <span class="type">
-                     <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;OBJECT_REF&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;OBJECT_REF&#34; type definition could not be found.');">OBJECT_REF</a>
-                  </span> &lt;/contribution&gt; <span class="occurs">[1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;commit_audit&gt; <span class="type">
-                     <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;AUDIT_DETAILS&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;AUDIT_DETAILS&#34; type definition could not be found.');">AUDIT_DETAILS</a>
-                  </span> &lt;/commit_audit&gt; <span class="occurs">[1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;item&gt; <span class="type">
-                     <a title="Jump to &#34;ORIGINAL_VERSION&#34; type definition." href="#h24008367">ORIGINAL_VERSION</a>
-                  </span> &lt;/item&gt; <span class="occurs">[1]</span>
-               </div>&lt;/...&gt;</div>
-         </div>
-         <script type="text/javascript">
-<!--
-setState('h-1988094750_xibox', true);
-// -->
-</script>
-      </div>
-      <div class="sample box">
-         <div>
-            <input type="button" id="h-1988094750_diagram_button" class="control" onclick="switchState('h-1988094750_diagram'); return false;" style="display: none"/> 
-            <span class="caption">Diagram</span>
-         </div>
-         <div id="h-1988094750_diagram" class="contents">
-            <img src="schemaDiagrams/h166186117.png"/>
-         </div>
-         <script type="text/javascript">
-<!--
-setState('h-1988094750_diagram', true);
-// -->
-</script>
-      </div>
-      <div class="schemaComponent box">
-         <div>
-            <input type="button" id="h-1988094750_scbox_button" class="control" onclick="switchState('h-1988094750_scbox'); return false;" style="display: none"/> 
-            <span class="caption">Schema Component Representation</span>
-         </div>
-         <div id="h-1988094750_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">IMPORTED_VERSION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:extension</span> 
-                     <span class="scTag">base</span>="<span class="scContent">
-                        <span class="type">
-                           <a title="Jump to &#34;VERSION&#34; type definition." href="#h134808755">VERSION</a>
-                        </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">
-                                 <a title="Jump to &#34;ORIGINAL_VERSION&#34; type definition." href="#h24008367">ORIGINAL_VERSION</a>
-                              </span>
-                           </span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:extension</span>&gt;</div>&lt;/<span class="scTag">xs:complexContent</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
-         </div>
-         <script type="text/javascript">
-<!--
-setState('h-1988094750_scbox', false);
-// -->
-</script>
-      </div>
-      <div style="text-align: right; clear: both;">
-         <a href="#top">top</a>
-      </div>
-      <hr/>
-      <h3>Complex Type: <a name="h24008367" class="name">ORIGINAL_VERSION</a>
-      </h3>
-      <table class="hierarchy">
-         <tr>
-            <th>Super-types:</th>
-            <td>
-               <span class="type">
-                  <a title="Jump to &#34;VERSION&#34; type definition." href="#h134808755">VERSION</a>
-               </span> &lt; <strong>ORIGINAL_VERSION</strong> (by extension)</td>
-         </tr>
-         <tr>
-            <th>Sub-types:</th>
-            <td>None</td>
-         </tr>
-      </table>
-      <table class="properties">
-         <tr>
-            <th>Name</th>
-            <td>ORIGINAL_VERSION</td>
-         </tr>
-         <tr>
-            <th>
-               <a title="Look up 'Abstract' in glossary" href="Version.xsd.html#term_Abstract">Abstract</a>
-            </th>
-            <td>no</td>
-         </tr>
-      </table>
-      <div class="sample box">
-         <div>
-            <input type="button" id="h24008367_xibox_button" class="control" onclick="switchState('h24008367_xibox'); return false;" style="display: none"/> 
-            <span class="caption">XML Instance Representation</span>
-         </div>
-         <div id="h24008367_xibox" class="contents">
-            <div style="margin-left: 0em">&lt;...&gt; <br/>
-               <div style="margin-left: 1.5em" class="inherited">&lt;contribution&gt; <span class="type">
-                     <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;OBJECT_REF&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;OBJECT_REF&#34; type definition could not be found.');">OBJECT_REF</a>
-                  </span> &lt;/contribution&gt; <span class="occurs">[1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;commit_audit&gt; <span class="type">
-                     <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;AUDIT_DETAILS&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;AUDIT_DETAILS&#34; type definition could not be found.');">AUDIT_DETAILS</a>
-                  </span> &lt;/commit_audit&gt; <span class="occurs">[1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;uid&gt; <span class="type">
-                     <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;OBJECT_VERSION_ID&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;OBJECT_VERSION_ID&#34; type definition could not be found.');">OBJECT_VERSION_ID</a>
-                  </span> &lt;/uid&gt; <span class="occurs">[1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;data&gt; <span class="type">
-                     <a href="#ns_st" title="Find out namespace of 'st' prefix">st</a>:<a title="&#34;LOCATABLE&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;LOCATABLE&#34; type definition could not be found.');">LOCATABLE</a>
-                  </span> &lt;/data&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;preceding_version_uid&gt; <span class="type">
-                     <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;OBJECT_VERSION_ID&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;OBJECT_VERSION_ID&#34; type definition could not be found.');">OBJECT_VERSION_ID</a>
-                  </span> &lt;/preceding_version_uid&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;other_input_version_uids&gt; <span class="type">
-                     <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;OBJECT_VERSION_ID&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;OBJECT_VERSION_ID&#34; type definition could not be found.');">OBJECT_VERSION_ID</a>
-                  </span> &lt;/other_input_version_uids&gt; <span class="occurs">[0..*]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;attestations&gt; <span class="type">
-                     <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;ATTESTATION&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;ATTESTATION&#34; type definition could not be found.');">ATTESTATION</a>
-                  </span> &lt;/attestations&gt; <span class="occurs">[0..*]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;is_merged&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:boolean</span> &lt;/is_merged&gt; <span class="occurs">[1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;lifecycle_state&gt; <span class="type">
-                     <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;DV_CODED_TEXT&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;DV_CODED_TEXT&#34; type definition could not be found.');">DV_CODED_TEXT</a>
-                  </span> &lt;/lifecycle_state&gt; <span class="occurs">[1]</span>
-               </div>&lt;/...&gt;</div>
-         </div>
-         <script type="text/javascript">
-<!--
-setState('h24008367_xibox', true);
-// -->
-</script>
-      </div>
-      <div class="sample box">
-         <div>
-            <input type="button" id="h24008367_diagram_button" class="control" onclick="switchState('h24008367_diagram'); return false;" style="display: none"/> 
-            <span class="caption">Diagram</span>
-         </div>
-         <div id="h24008367_diagram" class="contents">
-            <img src="schemaDiagrams/h519421528.png"/>
-         </div>
-         <script type="text/javascript">
-<!--
-setState('h24008367_diagram', true);
-// -->
-</script>
-      </div>
-      <div class="schemaComponent box">
-         <div>
-            <input type="button" id="h24008367_scbox_button" class="control" onclick="switchState('h24008367_scbox'); return false;" style="display: none"/> 
-            <span class="caption">Schema Component Representation</span>
-         </div>
-         <div id="h24008367_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">ORIGINAL_VERSION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:extension</span> 
-                     <span class="scTag">base</span>="<span class="scContent">
-                        <span class="type">
-                           <a title="Jump to &#34;VERSION&#34; type definition." href="#h134808755">VERSION</a>
-                        </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">uid</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">
-                                 <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;OBJECT_VERSION_ID&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;OBJECT_VERSION_ID&#34; type definition could not be found.');">OBJECT_VERSION_ID</a>
-                              </span>
-                           </span>"/&gt;</div>
-                        <div class="comment" style="margin-left: 1.5em">&lt;-- data attribute is optional to allow for logical deletion; required when transferring entire health record --&gt;</div>
-                        <div class="comment" style="margin-left: 1.5em">&lt;-- data will be of type="cp:COMPOSITION" for VERSIONED_COMPOSITION --&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">data</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">
-                                 <a href="#ns_st" title="Find out namespace of 'st' prefix">st</a>:<a title="&#34;LOCATABLE&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;LOCATABLE&#34; type definition could not be found.');">LOCATABLE</a>
-                              </span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">preceding_version_uid</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">
-                                 <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;OBJECT_VERSION_ID&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;OBJECT_VERSION_ID&#34; type definition could not be found.');">OBJECT_VERSION_ID</a>
-                              </span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">other_input_version_uids</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">
-                                 <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;OBJECT_VERSION_ID&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;OBJECT_VERSION_ID&#34; type definition could not be found.');">OBJECT_VERSION_ID</a>
-                              </span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">attestations</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">
-                                 <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;ATTESTATION&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;ATTESTATION&#34; type definition could not be found.');">ATTESTATION</a>
-                              </span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">is_merged</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">
-                                 <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:boolean</span>
-                           </span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">lifecycle_state</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">
-                                 <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;DV_CODED_TEXT&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;DV_CODED_TEXT&#34; type definition could not be found.');">DV_CODED_TEXT</a>
-                              </span>
-                           </span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:extension</span>&gt;</div>&lt;/<span class="scTag">xs:complexContent</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
-         </div>
-         <script type="text/javascript">
-<!--
-setState('h24008367_scbox', false);
-// -->
-</script>
-      </div>
-      <div style="text-align: right; clear: both;">
-         <a href="#top">top</a>
-      </div>
-      <hr/>
-      <h3>Complex Type: <a name="h134808755" class="name">VERSION</a>
-      </h3>
-      <table class="hierarchy">
-         <tr>
-            <th>Super-types:</th>
-            <td>None</td>
-         </tr>
-         <tr>
-            <th>Sub-types:</th>
-            <td>
-               <ul>
-                  <li>
-                     <span class="type">
-                        <a title="Jump to &#34;ORIGINAL_VERSION&#34; type definition." href="#h24008367">ORIGINAL_VERSION</a>
-                     </span> (by extension)</li>
-                  <li>
-                     <span class="type">
-                        <a title="Jump to &#34;IMPORTED_VERSION&#34; type definition." href="#h-1988094750">IMPORTED_VERSION</a>
-                     </span> (by extension)</li>
-               </ul>
-            </td>
-         </tr>
-      </table>
-      <table class="properties">
-         <tr>
-            <th>Name</th>
-            <td>VERSION</td>
-         </tr>
-         <tr>
-            <th>
-               <a title="Look up 'Abstract' in glossary" href="Version.xsd.html#term_Abstract">Abstract</a>
-            </th>
-            <td>yes</td>
-         </tr>
-      </table>
-      <div class="sample box">
-         <div>
-            <input type="button" id="h134808755_xibox_button" class="control" onclick="switchState('h134808755_xibox'); return false;" style="display: none"/> 
-            <span class="caption">XML Instance Representation</span>
-         </div>
-         <div id="h134808755_xibox" class="contents">
-            <div style="margin-left: 0em">&lt;...&gt; <br/>
-               <div style="margin-left: 1.5em">&lt;contribution&gt; <span class="type">
-                     <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;OBJECT_REF&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;OBJECT_REF&#34; type definition could not be found.');">OBJECT_REF</a>
-                  </span> &lt;/contribution&gt; <span class="occurs">[1]</span>
-               </div>
-               <div style="margin-left: 1.5em">&lt;commit_audit&gt; <span class="type">
-                     <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;AUDIT_DETAILS&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;AUDIT_DETAILS&#34; type definition could not be found.');">AUDIT_DETAILS</a>
-                  </span> &lt;/commit_audit&gt; <span class="occurs">[1]</span>
-               </div>&lt;/...&gt;</div>
-         </div>
-         <script type="text/javascript">
-<!--
-setState('h134808755_xibox', true);
-// -->
-</script>
-      </div>
-      <div class="sample box">
-         <div>
-            <input type="button" id="h134808755_diagram_button" class="control" onclick="switchState('h134808755_diagram'); return false;" style="display: none"/> 
-            <span class="caption">Diagram</span>
-         </div>
-         <div id="h134808755_diagram" class="contents">
-            <img src="schemaDiagrams/h-1413606092.png"/>
-         </div>
-         <script type="text/javascript">
-<!--
-setState('h134808755_diagram', true);
-// -->
-</script>
-      </div>
-      <div class="schemaComponent box">
-         <div>
-            <input type="button" id="h134808755_scbox_button" class="control" onclick="switchState('h134808755_scbox'); return false;" style="display: none"/> 
-            <span class="caption">Schema Component Representation</span>
-         </div>
-         <div id="h134808755_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">VERSION</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
-                     <span class="scTag">name</span>="<span class="scContent">contribution</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;OBJECT_REF&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;OBJECT_REF&#34; type definition could not be found.');">OBJECT_REF</a>
-                        </span>
-                     </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
-                     <span class="scTag">name</span>="<span class="scContent">commit_audit</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a href="#ns_bt" title="Find out namespace of 'bt' prefix">bt</a>:<a title="&#34;AUDIT_DETAILS&#34; type definition could not be found." href="javascript:void(0)" onclick="alert('&#34;AUDIT_DETAILS&#34; type definition could not be found.');">AUDIT_DETAILS</a>
-                        </span>
-                     </span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
-         </div>
-         <script type="text/javascript">
-<!--
-setState('h134808755_scbox', false);
+          setState('schema_scbox', false);
 // -->
 </script>
       </div>
@@ -1458,7 +673,8 @@ setState('h134808755_scbox', false);
                   </span>
                   <br/>
                   <span style="margin-left: 1.5em">&lt;postcode&gt; <span class="constraint">string &lt;&lt;<em>pattern</em> = [1-9][0-9]{3}&gt;&gt;</span> &lt;/postcode&gt; <span class="occurs">[1]</span>
-                     <a href="javascript:void(0)" title="View Documentation" class="documentation" onclick="docArray = new Array('Post code must be a four-digit number.'); viewDocumentation('Element', 'postcode', docArray);">?</a>
+                     <a href="javascript:void(0)" title="View Documentation" class="documentation"
+                        onclick="docArray = new Array('Post code must be a four-digit number.'); viewDocumentation('Element', 'postcode', docArray);">?</a>
                   </span>
                   <br/>
                </span>
@@ -1555,12 +771,14 @@ setState('h134808755_scbox', false);
          <p>
             <span class="glossaryTerm">
                <a name="term_All">All Model Group</a> 
-            </span>Child elements can be provided <em>in any order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-all" href="http://www.w3.org/TR/xmlschema-1/#element-all">http://www.w3.org/TR/xmlschema-1/#element-all</a>.</p>
+            </span>Child elements can be provided <em>in any order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-all"
+               href="http://www.w3.org/TR/xmlschema-1/#element-all">http://www.w3.org/TR/xmlschema-1/#element-all</a>.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_Choice">Choice Model Group</a> 
             </span>
-            <em>Only one</em> from the list of child elements and model groups can be provided in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-choice" href="http://www.w3.org/TR/xmlschema-1/#element-choice">http://www.w3.org/TR/xmlschema-1/#element-choice</a>.</p>
+            <em>Only one</em> from the list of child elements and model groups can be provided in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-choice"
+               href="http://www.w3.org/TR/xmlschema-1/#element-choice">http://www.w3.org/TR/xmlschema-1/#element-choice</a>.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_CollapseWS">Collapse Whitespace Policy</a> 
@@ -1568,19 +786,25 @@ setState('h134808755_scbox', false);
          <p>
             <span class="glossaryTerm">
                <a name="term_ElemBlock">Disallowed Substitutions</a> 
-            </span>(Applies to element declarations). If <em>substitution</em> is specified, then <a title="Look up 'substitution group' in glossary" href="Version.xsd.html#term_SubGroup">substitution group</a> members cannot be used in place of the given element declaration to validate element instances. If <em>derivation methods</em>, e.g. extension, restriction, are specified, then the given element declaration will not validate element instances that have types derived from the element declaration's type using the specified derivation methods. Normally, element instances can override their declaration's type by specifying an <code>xsi:type</code> attribute.</p>
+            </span>(Applies to element declarations). If <em>substitution</em> is specified, then <a title="Look up 'substitution group' in glossary"
+               href="Version.xsd.html#term_SubGroup">substitution group</a> members cannot be used in place of the given element declaration to validate element instances. If <em>derivation methods</em>, e.g. extension, restriction, are specified, then the given element declaration will not validate element instances that have types derived from the element declaration's type using the specified derivation methods. Normally, element instances can override their declaration's type by specifying an <code>xsi:type</code> attribute.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_Key">Key Constraint</a> 
-            </span>Like <a title="Look up 'Uniqueness Constraint' in glossary" href="Version.xsd.html#term_Unique">Uniqueness Constraint</a>, but additionally requires that the specified value(s) must be provided. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions" href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
+            </span>Like <a title="Look up 'Uniqueness Constraint' in glossary"
+               href="Version.xsd.html#term_Unique">Uniqueness Constraint</a>, but additionally requires that the specified value(s) must be provided. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions"
+               href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_KeyRef">Key Reference Constraint</a> 
-            </span>Ensures that the specified value(s) must match value(s) from a <a title="Look up 'Key Constraint' in glossary" href="Version.xsd.html#term_Key">Key Constraint</a> or <a title="Look up 'Uniqueness Constraint' in glossary" href="Version.xsd.html#term_Unique">Uniqueness Constraint</a>. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions" href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
+            </span>Ensures that the specified value(s) must match value(s) from a <a title="Look up 'Key Constraint' in glossary" href="Version.xsd.html#term_Key">Key Constraint</a> or <a title="Look up 'Uniqueness Constraint' in glossary"
+               href="Version.xsd.html#term_Unique">Uniqueness Constraint</a>. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions"
+               href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_ModelGroup">Model Group</a> 
-            </span>Groups together element content, specifying the order in which the element content can occur and the number of times the group of element content may be repeated. See: <a title="http://www.w3.org/TR/xmlschema-1/#Model_Groups" href="http://www.w3.org/TR/xmlschema-1/#Model_Groups">http://www.w3.org/TR/xmlschema-1/#Model_Groups</a>.</p>
+            </span>Groups together element content, specifying the order in which the element content can occur and the number of times the group of element content may be repeated. See: <a title="http://www.w3.org/TR/xmlschema-1/#Model_Groups"
+               href="http://www.w3.org/TR/xmlschema-1/#Model_Groups">http://www.w3.org/TR/xmlschema-1/#Model_Groups</a>.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_Nillable">Nillable</a> 
@@ -1588,7 +812,8 @@ setState('h134808755_scbox', false);
          <p>
             <span class="glossaryTerm">
                <a name="term_Notation">Notation</a> 
-            </span>A notation is used to identify the format of a piece of data. Values of elements and attributes that are of type, NOTATION, must come from the names of declared notations. See: <a title="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations" href="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations">http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations</a>.</p>
+            </span>A notation is used to identify the format of a piece of data. Values of elements and attributes that are of type, NOTATION, must come from the names of declared notations. See: <a title="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations"
+               href="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations">http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations</a>.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_PreserveWS">Preserve Whitespace Policy</a> 
@@ -1608,7 +833,8 @@ setState('h134808755_scbox', false);
          <p>
             <span class="glossaryTerm">
                <a name="term_Sequence">Sequence Model Group</a> 
-            </span>Child elements and model groups must be provided <em>in the specified order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-sequence" href="http://www.w3.org/TR/xmlschema-1/#element-sequence">http://www.w3.org/TR/xmlschema-1/#element-sequence</a>.</p>
+            </span>Child elements and model groups must be provided <em>in the specified order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-sequence"
+               href="http://www.w3.org/TR/xmlschema-1/#element-sequence">http://www.w3.org/TR/xmlschema-1/#element-sequence</a>.</p>
          <p>
             <span class="glossaryTerm">
                <a name="term_SubGroup">Substitution Group</a> 
@@ -1624,7 +850,8 @@ setState('h134808755_scbox', false);
          <p>
             <span class="glossaryTerm">
                <a name="term_Unique">Uniqueness Constraint</a> 
-            </span>Ensures uniqueness of an element/attribute value, or a combination of values, within a specified scope. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions" href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
+            </span>Ensures uniqueness of an element/attribute value, or a combination of values, within a specified scope. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions"
+               href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
          <div style="text-align: right; clear: both;">
             <a href="#top">top</a>
          </div>
@@ -1632,7 +859,7 @@ setState('h134808755_scbox', false);
       </div>
       <p class="footer">Generated by <a href="http://www.oxygenxml.com">&lt;oXygen/&gt; XML Editor</a> using a modified version of <a href="http://titanium.dstc.edu.au/xml/xs3p">xs3p</a> that adds schema diagrams and chunking support. Last modified: <script type="text/javascript">
 <!--
-document.write(document.lastModified);
+          document.write(document.lastModified);
 // -->
 </script>
       </p>

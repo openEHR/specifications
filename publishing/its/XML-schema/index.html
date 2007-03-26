@@ -5,6 +5,8 @@
 
 
 
+
+  
   
   
   
@@ -12,6 +14,8 @@
 
 
 
+
+  
   
   
   
@@ -24,8 +28,10 @@
 
 
 
+
 <h1><span style="font-style: italic;">open</span>EHR
 XML-schemas</h1>
+
 
 
 
@@ -36,70 +42,94 @@ XML-schemas</h1>
 
 
 
+
 This page provides access to the W3C XML schemas for the <span style="font-style: italic;">open</span>EHR Reference Model (RM) and Archetype Model (AM).<br>
+
 <h3>Stable Schemas</h3>
+
 
 For the RM, separate schemas have been created, as follows:<br>
 
 
 
 
+
 <ul>
+
 
 
 
 
   <li><a href="documentation/BaseTypes.xsd.html">Basic
-types</a> - types from rm.data_types and rm.support.identification packages. (<a href="BaseTypes.xsd">xsd</a> file)</li>
+types</a> - types from rm.data_types and rm.support.identification packages. (<a href="../../../ITS/XML-schema/BaseTypes.xsd">xsd</a> file)</li>
+
 
 
 
 
   <li><a href="documentation/Structure.xsd.html">Structure</a>
-- types from rm.data_structures and rm.common.generic packages. (<a href="Structure.xsd">xsd</a>
+- types from rm.data_structures and rm.common.generic packages. (<a href="../../../ITS/XML-schema/Structure.xsd">xsd</a>
 file)</li>
-  <li>Resource - types from the rm.common.resource package (<a href="Resource.xsd">xsd</a> file)</li>
+
+  <li><a href="documentation/resource.xsd.html">Resource</a> - types from the rm.common.resource package (<a href="../../../ITS/XML-schema/Resource.xsd">xsd</a> file)</li>
+
 
 
 
 
   <li><a href="documentation/Content.xsd.html">Content</a>
-- item, Section, Entry and all subtypes. (<a href="Content.xsd">xsd</a>
+- item, Section, Entry and all subtypes. (<a href="../../../ITS/XML-schema/Content.xsd">xsd</a>
 file)</li>
+
 
 
 
 
   <li><a href="documentation/Composition.xsd.html">Composition</a>
-- rm.composition. (<a href="Composition.xsd">xsd</a>
+- rm.composition. (<a href="../../../ITS/XML-schema/Composition.xsd">xsd</a>
 file)</li>
 
-  <li><a href="documentation/Version.xsd.html">Version</a> - the Version classes from rm.common.change_control (<a href="Version.xsd">xsd</a> file)</li>
+
+  <li><a href="documentation/Version.xsd.html">Version</a> - the Version classes from rm.common.change_control (<a href="../../../ITS/XML-schema/Version.xsd">xsd</a> file)</li>
+
 
 
 
 
 </ul>
+
 
 For the AM, two schemas are provided:<br>
 
+
 <ul>
 
-  <li><a href="documentation/Archetype.xsd.html">Archetype</a> - types from the Archetype Object Model (AOM) (<a href="Archetype.xsd">xsd</a> file)</li>
-  <li>OpenehrProfile - types from the <span style="font-style: italic;">open</span>EHR  Archetype Profile package (<a href="OpenehrProfile.xsd">xsd</a> file)</li>
+
+  <li><a href="documentation/Archetype.xsd.html">Archetype</a> - types from the Archetype Object Model (AOM) (<a href="../../../ITS/XML-schema/Archetype.xsd">xsd</a> file)</li>
+
+  <li>OpenehrProfile - types from the <span style="font-style: italic;">open</span>EHR  Archetype Profile package (<a href="../../../ITS/XML-schema/OpenehrProfile.xsd">xsd</a> file)</li>
+
 
 </ul>
+
 <h3>Schemas in Development</h3>
+
 Two further schemas are in the draft stage, and are under active development:<br>
+
 <ul>
-  <li>Extract - types from rm.extract package (<a href="Extract.xsd">xsd</a> file)</li>
-  <li>Template - types from&nbsp;am.template package (<a href="Template.xsd">xsd</a> file)</li>
+
+  <li>Extract - types from rm.extract package (<a href="../../../ITS/XML-schema/Extract.xsd">xsd</a> file)</li>
+
+  <li>Template - types from&nbsp;am.template package (<a href="../../../ITS/XML-schema/Template.xsd">xsd</a> file)</li>
+
 </ul>
+
 
 
 
 
 <h2>Mapping Rules</h2>
+
 
 
 
@@ -110,7 +140,9 @@ from the reference model.<br>
 
 
 
+
 <h3>Basic type mappings</h3>
+
 
 
 
@@ -119,7 +151,8 @@ The basic types utilise the internal XML simpleTypes in accordance with
 the assumed types section in the Support IM. &nbsp;Some changes
 have
 been made to the reference model to accommodate these standards.
-<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+<table style="text-align: left;" border="0" cellpadding="2" cellspacing="2">
+
 
 
 
@@ -129,12 +162,15 @@ been made to the reference model to accommodate these standards.
 
 
 
+
     <tr>
 
 
 
 
+
       <td style="background-color: rgb(153, 255, 255);">
+      
       
       
       
@@ -143,7 +179,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       </td>
+
 
 
 
@@ -152,12 +190,15 @@ been made to the reference model to accommodate these standards.
       
       
       
+      
       <h4>XML Schema complexType</h4>
 
 
 
 
+
       </td>
+
 
 
 
@@ -167,7 +208,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
     <tr>
+
 
 
 
@@ -177,7 +220,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       <td colspan="1" rowspan="6">DV_DATE_TIME<br>
+
 
 
 
@@ -187,12 +232,15 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
 
+
     </tr>
 
 
 
 
+
     <tr>
+
 
 
 
@@ -202,12 +250,15 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
 
+
     </tr>
 
 
 
 
+
     <tr>
+
 
 
 
@@ -217,12 +268,15 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
 
+
     </tr>
 
 
 
 
+
     <tr>
+
 
 
 
@@ -232,12 +286,15 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
 
+
     </tr>
 
 
 
 
+
     <tr>
+
 
 
 
@@ -247,12 +304,15 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
 
+
     </tr>
 
 
 
 
+
     <tr>
+
 
 
 
@@ -262,7 +322,9 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
 
+
     </tr>
+
 
 
 
@@ -272,7 +334,9 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
 
+
       <td style="background-color: rgb(204, 255, 255);">DV_DURATION</td>
+
 
 
 
@@ -282,7 +346,9 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
 
+
 The value attribute is of xs:duration type based on ISO 8601</td>
+
 
 
 
@@ -292,6 +358,8 @@ The value attribute is of xs:duration type based on ISO 8601</td>
 
 
 
+
+  
   
   
   
@@ -301,7 +369,9 @@ The value attribute is of xs:duration type based on ISO 8601</td>
 
 
 
+
 <h3>Generic types</h3>
+
 
 
 
@@ -319,7 +389,9 @@ constraints.<br>
 
 
 
-<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+<table style="text-align: left;" cellpadding="2" cellspacing="2">
+
 
 
 
@@ -329,12 +401,15 @@ constraints.<br>
 
 
 
+
     <tr>
 
 
 
 
+
       <td style="background-color: rgb(153, 255, 255);">
+      
       
       
       
@@ -343,7 +418,9 @@ constraints.<br>
 
 
 
+
       </td>
+
 
 
 
@@ -352,12 +429,15 @@ constraints.<br>
       
       
       
+      
       <h4>XML Schema complexType</h4>
 
 
 
 
+
       </td>
+
 
 
 
@@ -367,7 +447,9 @@ constraints.<br>
 
 
 
+
     <tr>
+
 
 
 
@@ -377,7 +459,9 @@ constraints.<br>
 
 
 
+
       <td>XS_DV_INTERVAL_ORDINAL</td>
+
 
 
 
@@ -387,7 +471,9 @@ constraints.<br>
 
 
 
+
     <tr>
+
 
 
 
@@ -397,7 +483,9 @@ constraints.<br>
 
 
 
+
       <td>XS_DV_INTERVAL_COUNT</td>
+
 
 
 
@@ -407,7 +495,9 @@ constraints.<br>
 
 
 
+
     <tr>
+
 
 
 
@@ -417,12 +507,15 @@ constraints.<br>
 
 
 
+
       <td>XS_DV_INTERVAL_QUANTITY</td>
 
 
 
 
+
     </tr>
+
 
 
 
@@ -432,7 +525,9 @@ constraints.<br>
 
 
 
+
       <td style="background-color: rgb(204, 255, 255);">DV_INTERVAL&lt;DV_DATE_TIME&gt;</td>
+
 
 
 
@@ -442,11 +537,14 @@ constraints.<br>
 
 
 
+
     </tr>
 
 
 
 
+
+  
   
   
   
@@ -456,12 +554,15 @@ constraints.<br>
 
 
 
+
 <br>
 
 
 
 
+
 <h3>Removed attributes</h3>
+
 
 
 
@@ -472,12 +573,15 @@ about implementation of this feature is not well understood.<br>
 
 
 
+
 <br>
 
 
 
 
-<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+<table style="text-align: left;" border="0" cellpadding="2" cellspacing="2">
+
 
 
 
@@ -487,12 +591,15 @@ about implementation of this feature is not well understood.<br>
 
 
 
+
     <tr>
 
 
 
 
+
       <td style="background-color: rgb(153, 255, 255);">
+      
       
       
       
@@ -501,7 +608,9 @@ about implementation of this feature is not well understood.<br>
 
 
 
+
       </td>
+
 
 
 
@@ -510,12 +619,15 @@ about implementation of this feature is not well understood.<br>
       
       
       
+      
       <h4>XML Schema complexType</h4>
 
 
 
 
+
       </td>
+
 
 
 
@@ -525,7 +637,9 @@ about implementation of this feature is not well understood.<br>
 
 
 
+
     <tr>
+
 
 
 
@@ -535,9 +649,13 @@ about implementation of this feature is not well understood.<br>
 
 
 
-The archetype id is carried in the archetype_node_id attribute and the
-access control group has not had sufficient discussion to warrant
+
+The archetype id is carried in the <span style="font-style: italic;">archetype_node_id</span> attribute and <br>
+the
+access control group has not had sufficient discussion to <br>
+warrant
 including it at this stage.</td>
+
 
 
 
@@ -547,11 +665,14 @@ including it at this stage.</td>
 
 
 
+
     </tr>
 
 
 
 
+
+  
   
   
   
@@ -561,12 +682,15 @@ including it at this stage.</td>
 
 
 
+
 <br>
 
 
 
 
+
 <h3>Added attributes</h3>
+
 
 
 
@@ -578,7 +702,9 @@ table.<br>
 
 
 
-<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+<table style="text-align: left;" border="0" cellpadding="2" cellspacing="2">
+
 
 
 
@@ -588,12 +714,15 @@ table.<br>
 
 
 
+
     <tr>
 
 
 
 
+
       <td style="background-color: rgb(153, 255, 255);">
+      
       
       
       
@@ -602,7 +731,9 @@ table.<br>
 
 
 
+
       </td>
+
 
 
 
@@ -611,12 +742,15 @@ table.<br>
       
       
       
+      
       <h4>XML Schema complexType</h4>
 
 
 
 
+
       </td>
+
 
 
 
@@ -626,7 +760,9 @@ table.<br>
 
 
 
+
     <tr>
+
 
 
 
@@ -636,7 +772,9 @@ table.<br>
 
 
 
+
       </td>
+
 
 
 
@@ -646,7 +784,9 @@ table.<br>
 
 
 
+
       </td>
+
 
 
 
@@ -656,6 +796,8 @@ table.<br>
 
 
 
+
+  
   
   
   
@@ -665,10 +807,13 @@ table.<br>
 
 
 
+
 <br>
 
 
+
 <h2>Acknowledgements</h2>
+
 
 
 This work was carried out for the <span style="font-style: italic;">open</span>EHR Foundation &nbsp;by <a href="http://www.OceanInformatics.biz">Ocean Informatics</a>. Many thanks to Dr Chunlan Ma, Heath Frankel and Lisa Thurston for maintaining the <span style="font-style: italic;">open</span>EHR schemas. Thanks to the many people in the community who have provided feedback and improved them
@@ -677,6 +822,7 @@ This work was carried out for the <span style="font-style: italic;">open</span>E
 (Wed, 15 Feb 2006) $&nbsp;&nbsp;
 $LastChangedRevision$
 </span><br>
+
 
 
 
