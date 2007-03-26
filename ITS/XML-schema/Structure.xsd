@@ -3,8 +3,7 @@
 xmlns="http://schemas.openehr.org/v1" id="Structure.xsd">
 	<xs:include schemaLocation="BaseTypes.xsd" />
 	
-	<xs:element name="items" type="LOCATABLE" /> 
-	
+	<xs:element name="items" type="LOCATABLE" /> 	
 	<xs:annotation>
 		<xs:documentation>
 			The locatable class here does not contain the Archetyped class in the reference model; it will probably do so in future
