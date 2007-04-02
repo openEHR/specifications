@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- openEHR Release 1.0 candidate XML schema. Ocean Informatics 2006.01.28  -->
+<!-- openEHR Release 1.0.1 Version  XML schema -->
+<!-- Authored by Ocean Informatics 2007.04.02  -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.openehr.org/v1" targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified" version="v1.0.1" id="Version.xsd">
 	<xs:include schemaLocation="Composition.xsd"/>
 	<xs:element name="version" type="VERSION"/>

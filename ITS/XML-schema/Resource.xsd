@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- openEHR Release 1.0.1 Resource XML schema -->
+<!-- Authored by Ocean Informatics 2007.04.02  -->
 <xs:schema xmlns="http://schemas.openehr.org/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified" version="1.0.1"
 	id="Resource.xsd">
 	<xs:include schemaLocation="basetypes.xsd"/>
-
 	<xs:complexType name="AUTHORED_RESOURCE">
 		<xs:sequence>
 			<xs:element name="original_language" type="CODE_PHRASE"/>

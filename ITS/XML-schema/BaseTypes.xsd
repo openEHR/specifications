@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by chunlan (UniSA) -->
-<!-- openEHR Release 1.0 candidate XML schema. Ocean Informatics 2006.01.28  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.openehr.org/v1" targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified" version="v1.0.1" id="BaseTypes.xsd">
-	<!-- <xs:element name="values" type="DATA_VALUE" /> -->
+<!-- openEHR Release 1.0.1 BaseTypes  XML schema -->
+<!-- Authored by Ocean Informatics 2007.04.02  -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.openehr.org/v1" targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified" version="v1.0.1" id="BaseTypes.xsd">	
 	<xs:complexType name="DATA_VALUE" abstract="true">
 		<xs:sequence/>
 	</xs:complexType>

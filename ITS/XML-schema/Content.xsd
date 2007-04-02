@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- openEHR Release 1.0.1 Content  XML schema -->
+<!-- Authored by Ocean Informatics 2007.04.02  -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.openehr.org/v1" targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified" version="v1.0.1" id="Content.xsd">
 	<xs:include schemaLocation="Structure.xsd"/>
-	<!-- <xs:element name="items" type="CONTENT_ITEM" /> -->
 	<xs:complexType name="CONTENT_ITEM" abstract="true">
 		<xs:complexContent>
 			<xs:extension base="LOCATABLE"/>

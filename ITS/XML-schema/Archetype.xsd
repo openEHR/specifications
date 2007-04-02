@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- openEHR Release 1.0.1 Archetype  XML schema -->
+<!-- Authored by Ocean Informatics 2007.04.02  -->
 <xs:schema xmlns="http://schemas.openehr.org/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified" version="1.0.1"
 	id="Archetype.xsd">
-	<xs:include schemaLocation="resource.xsd"/>
-
+	<xs:include schemaLocation="Resource.xsd"/>
 	<xs:element name="archetype" type="ARCHETYPE"/>
 	<xs:complexType name="ARCHETYPE">
 		<xs:complexContent>
@@ -40,9 +41,9 @@
 		<xs:complexContent>
 			<xs:extension base="ARCHETYPE_CONSTRAINT">
 				<xs:sequence>
-					<xs:element name="rm_attribute_name" type="xs:string"/>
-					<xs:element name="children" type="C_OBJECT" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="rm_attribute_name" type="xs:string"/>					
 					<xs:element name="existence" type="interval_of_integer"/>
+					<xs:element name="children" type="C_OBJECT" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 				<xs:attribute name="minOccurs" type="xs:nonNegativeInteger" use="optional"
 					default="1"/>
@@ -422,7 +423,6 @@
 			<xs:element name="term_attribute_names" type="list_of_string"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="language_set">
 		<xs:sequence>
 			<xs:element name="language" type="xs:string"/>
@@ -441,7 +441,6 @@
 			<xs:element name="value" type="xs:string"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="ARCHETYPE_TERM">
 		<xs:sequence>
 			<xs:element name="code" type="xs:string"/>
