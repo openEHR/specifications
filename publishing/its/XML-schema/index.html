@@ -8,6 +8,8 @@
 
 
 
+
+  
   
   
   
@@ -21,6 +23,8 @@
 
 
 
+
+  
   
   
   
@@ -39,8 +43,10 @@
 
 
 
+
 <h1><span style="font-style: italic;">open</span>EHR
 XML-schemas - Release 1.0.1</h1>
+
 
 
 
@@ -57,11 +63,14 @@ XML-schemas - Release 1.0.1</h1>
 
 
 
+
 This page provides access to the W3C XML schemas for the <span style="font-style: italic;">open</span>EHR Reference Model (RM) and Archetype Model (AM).<br>
 
 
 
+
 <h3>Stable Schemas</h3>
+
 
 
 
@@ -74,7 +83,9 @@ For the RM, separate schemas have been created, as follows:<br>
 
 
 
+
 <ul>
+
 
 
 
@@ -91,13 +102,16 @@ types</a> - types from rm.data_types and rm.support.identification packages. (<a
 
 
 
+
   <li><a href="documentation/Structure.xsd.html">Structure</a>
 - types from rm.data_structures and rm.common.generic packages. (<a href="../../../ITS/XML-schema/Structure.xsd">xsd</a>
 file)</li>
 
 
 
+
   <li><a href="documentation/resource.xsd.html">Resource</a> - types from the rm.common.resource package (<a href="../../../ITS/XML-schema/Resource.xsd">xsd</a> file)</li>
+
 
 
 
@@ -115,9 +129,11 @@ file)</li>
 
 
 
+
   <li><a href="documentation/Composition.xsd.html">Composition</a>
 - rm.composition. (<a href="../../../ITS/XML-schema/Composition.xsd">xsd</a>
 file)</li>
+
 
 
 
@@ -130,7 +146,9 @@ file)</li>
 
 
 
+
 </ul>
+
 
 
 
@@ -140,7 +158,9 @@ For the AM, two schemas are provided:<br>
 
 
 
+
 <ul>
+
 
 
 
@@ -149,12 +169,15 @@ For the AM, two schemas are provided:<br>
 
 
 
-  <li>OpenehrProfile - types from the <span style="font-style: italic;">open</span>EHR  Archetype Profile package (<a href="../../../ITS/XML-schema/OpenehrProfile.xsd">xsd</a> file)</li>
+
+  <li><a href="documentation/OpenehrProfile.xsd.html">OpenehrProfile</a> - types from the <span style="font-style: italic;">open</span>EHR  Archetype Profile package (<a href="../../../ITS/XML-schema/OpenehrProfile.xsd">xsd</a> file)</li>
+
 
 
 
 
 </ul>
+
 
 
 
@@ -162,7 +185,9 @@ For the AM, two schemas are provided:<br>
 
 
 
+
 Two further schemas are in the draft stage, and are under active development:<br>
+
 
 
 
@@ -170,7 +195,9 @@ Two further schemas are in the draft stage, and are under active development:<br
 
 
 
+
   <li>Extract - types from rm.extract package (<a href="../../../ITS/XML-schema/Extract.xsd">xsd</a> file)</li>
+
 
 
 
@@ -178,7 +205,9 @@ Two further schemas are in the draft stage, and are under active development:<br
 
 
 
+
 </ul>
+
 
 
 
@@ -194,8 +223,10 @@ Two further schemas are in the draft stage, and are under active development:<br
 
 
 
+
 The following mapping rules were used in order to create the schema
-from the reference model.<span style="color: rgb(204, 0, 0);"> THESE RULES ARE CURRENTLY BEING VERIFIED.</span><br>
+from the reference model.<span style="color: rgb(204, 0, 0);"></span><br>
+
 
 
 
@@ -204,6 +235,7 @@ from the reference model.<span style="color: rgb(204, 0, 0);"> THESE RULES ARE C
 
 
 <h3>Basic type mappings</h3>
+
 
 
 
@@ -223,7 +255,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
   <tbody>
+
 
 
 
@@ -239,7 +273,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       <td style="background-color: rgb(153, 255, 255);">
+      
       
       
       
@@ -254,7 +290,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       </td>
+
 
 
 
@@ -269,6 +307,7 @@ been made to the reference model to accommodate these standards.
       
       
       
+      
       <h4>XML Schema complexType</h4>
 
 
@@ -277,7 +316,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       </td>
+
 
 
 
@@ -293,7 +334,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
     <tr>
+
 
 
 
@@ -309,15 +352,11 @@ been made to the reference model to accommodate these standards.
 
 
 
-      <td colspan="1" rowspan="6">DV_DATE_TIME<br>
 
+      <td colspan="1" rowspan="1">value is of type Iso8601DateTime, a restriction of xs:string, matching regular expression <br>
+\d{4}((0[1-9]|1[0-2])((0[1-9]|[12]\d|3[01])(T?([01]\d|2[0-3])([0-5]\d([0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-2]))(00|30)?))?)?)?)?|<br>
+\d{4}(\-(0[1-9]|1[0-2])(\-(0[1-9]|[12]\d|3[01])(T([01]\d|2[0-3])(:[0-5]\d(:[0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-2]))(:(00|30))?))?)?)?)?</td>
 
-
-
-
-
-
-The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
 
@@ -333,7 +372,9 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
 
+
     <tr>
+
 
 
 
@@ -342,6 +383,10 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
       <td style="background-color: rgb(204, 255, 255);">DV_DATE</td>
+      <td rowspan="1">value is of type Iso8601Date, a restriction of xs:string, matching regular expression <br>
+\d{4}((((0[1-9])|(1[0-2]))((0[1-9])|([12]\d)|(3[01]))?)?<br>
+|(\-(((0[1-9])|(1[0-2]))(\-((0[1-9])|([12]\d)|(3[01])))?)?)?)</td>
+
 
 
 
@@ -357,7 +402,9 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
 
+
     <tr>
+
 
 
 
@@ -366,30 +413,10 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
       <td style="background-color: rgb(204, 255, 255);">DV_TIME</td>
+      <td rowspan="1">value is of type Iso8601Time, a restriction of xs:string, matching regular expression<br>
+([01]\d|2[0-3])([0-5]\d([0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-2]))(00|30)?))?|<br>
+([01]\d|2[0-3])(:[0-5]\d(:[0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-2]))(:(00|30))?))? </td>
 
-
-
-
-
-
-
-    </tr>
-
-
-
-
-
-
-
-    <tr>
-
-
-
-
-
-
-
-      <td style="background-color: rgb(204, 255, 255);">DV_PARTIAL_DATE</td>
 
 
 
@@ -405,7 +432,8 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
 
-    <tr>
+
+    
 
 
 
@@ -413,7 +441,7 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
 
-      <td style="background-color: rgb(204, 255, 255);">DV_PARTIAL_TIME</td>
+    
 
 
 
@@ -421,31 +449,7 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
 
-    </tr>
-
-
-
-
-
-
-
-    <tr>
-
-
-
-
-
-
-
-      <td style="background-color: rgb(204, 255, 255);">DV_PARTIAL_DATE_TIME</td>
-
-
-
-
-
-
-
-    </tr>
+    
 
 
 
@@ -454,6 +458,7 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
     <tr>
+
 
 
 
@@ -469,15 +474,10 @@ The value attribute is of xs:dateTime type based on ISO 8601</td>
 
 
 
-      <td>DV_DURATION<br>
 
+      <td>value is of type DV_Iso8601Duration, a restriction of xs:string, matching regular expression<br>
+P(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(\d+H)?(\d+M)?(\d+(\.\d+)?S)?)?</td>
 
-
-
-
-
-
-The value attribute is of xs:duration type based on ISO 8601</td>
 
 
 
@@ -493,6 +493,8 @@ The value attribute is of xs:duration type based on ISO 8601</td>
 
 
 
+
+  
   
   
   
@@ -508,7 +510,9 @@ The value attribute is of xs:duration type based on ISO 8601</td>
 
 
 
+
 <h3>Generic types</h3>
+
 
 
 
@@ -532,6 +536,7 @@ constraints.<br>
 
 
 
+
 <table style="text-align: left;" cellpadding="2" cellspacing="2">
 
 
@@ -540,7 +545,9 @@ constraints.<br>
 
 
 
+
   <tbody>
+
 
 
 
@@ -556,7 +563,9 @@ constraints.<br>
 
 
 
+
       <td style="background-color: rgb(153, 255, 255);">
+      
       
       
       
@@ -571,7 +580,9 @@ constraints.<br>
 
 
 
+
       </td>
+
 
 
 
@@ -586,7 +597,9 @@ constraints.<br>
       
       
       
+      
       <h4>XML Schema complexType</h4>
+
 
 
 
@@ -602,7 +615,9 @@ constraints.<br>
 
 
 
+
     </tr>
+
 
 
 
@@ -618,7 +633,8 @@ constraints.<br>
 
 
 
-      <td style="background-color: rgb(204, 255, 255);">DV_INTERVAL&lt;DV_ORDINAL&gt;</td>
+
+      <td style="background-color: rgb(204, 255, 255);">DV_INTERVAL&lt;<span style="font-style: italic;">DV_ORDERED&gt;</span></td>
 
 
 
@@ -626,7 +642,10 @@ constraints.<br>
 
 
 
-      <td>XS_DV_INTERVAL_ORDINAL</td>
+
+      <td>only one type is used, namely DV_INTERVAL, with lower and upper of type DV_ORDERED. Software implementations <br>
+of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&nbsp;implement further typing sensibly.</td>
+
 
 
 
@@ -635,6 +654,7 @@ constraints.<br>
 
 
     </tr>
+
 
 
 
@@ -650,7 +670,8 @@ constraints.<br>
 
 
 
-      <td style="background-color: rgb(204, 255, 255);">DV_INTERVAL&lt;DV_COUNT&gt;</td>
+
+      <td style="background-color: rgb(204, 255, 255);">VERSION&lt;T&gt;</td>
 
 
 
@@ -658,39 +679,9 @@ constraints.<br>
 
 
 
-      <td>XS_DV_INTERVAL_COUNT</td>
 
+      <td>only one type is used, namely VERSION. The subtype ORIGINAL_VERSION has its data attribute of type LOCATABLE</td>
 
-
-
-
-
-
-    </tr>
-
-
-
-
-
-
-
-    <tr>
-
-
-
-
-
-
-
-      <td style="background-color: rgb(204, 255, 255);">DV_INTERVAL&lt;DV_QUANTITY&gt;</td>
-
-
-
-
-
-
-
-      <td>XS_DV_INTERVAL_QUANTITY</td>
 
 
 
@@ -706,7 +697,8 @@ constraints.<br>
 
 
 
-    <tr>
+
+    
 
 
 
@@ -714,7 +706,7 @@ constraints.<br>
 
 
 
-      <td style="background-color: rgb(204, 255, 255);">DV_INTERVAL&lt;DV_DATE_TIME&gt;</td>
+    
 
 
 
@@ -722,22 +714,7 @@ constraints.<br>
 
 
 
-      <td>XS_DV_INTERVAL_DATE_TIME</td>
-
-
-
-
-
-
-
-    </tr>
-
-
-
-
-
-
-
+  
   
   
   
@@ -753,7 +730,9 @@ constraints.<br>
 
 
 
+
 <br>
+
 
 
 
@@ -762,172 +741,8 @@ constraints.<br>
 
 
 <h3>Removed attributes</h3>
+None in current release<br>
 
-
-
-
-
-
-
-Some attributes have been removed for the moment as the lack of surety
-about implementation of this feature is not well understood.<br>
-
-
-
-
-
-
-
-<br>
-
-
-
-
-
-
-
-<table style="text-align: left;" border="0" cellpadding="2" cellspacing="2">
-
-
-
-
-
-
-
-  <tbody>
-
-
-
-
-
-
-
-    <tr>
-
-
-
-
-
-
-
-      <td style="background-color: rgb(153, 255, 255);">
-      
-      
-      
-      
-      
-      
-      <h4>Reference model type</h4>
-
-
-
-
-
-
-
-      </td>
-
-
-
-
-
-
-
-      <td style="background-color: rgb(153, 255, 255);">
-      
-      
-      
-      
-      
-      
-      <h4>XML Schema complexType</h4>
-
-
-
-
-
-
-
-      </td>
-
-
-
-
-
-
-
-    </tr>
-
-
-
-
-
-
-
-    <tr>
-
-
-
-
-
-
-
-      <td style="background-color: rgb(204, 255, 255);">ARCHETYPED<br>
-
-
-
-
-
-
-
-The archetype id is carried in the <span style="font-style: italic;">archetype_node_id</span> attribute and <br>
-
-
-the
-access control group has not had sufficient discussion to <br>
-
-
-warrant
-including it at this stage.</td>
-
-
-
-
-
-
-
-      <td>Removed from LOCATABLE</td>
-
-
-
-
-
-
-
-    </tr>
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  </tbody>
-</table>
-
-
-
-
-
-
-
-<br>
 
 
 
@@ -943,175 +758,25 @@ including it at this stage.</td>
 
 
 
-All added attributes have current change requests outstanding. Any that
-are not accepted within the 3 month public review will be added to this
-table.<br>
 
-
-
-
-
-
-
-<table style="text-align: left;" border="0" cellpadding="2" cellspacing="2">
-
-
-
-
-
-
-
-  <tbody>
-
-
-
-
-
-
-
-    <tr>
-
-
-
-
-
-
-
-      <td style="background-color: rgb(153, 255, 255);">
-      
-      
-      
-      
-      
-      
-      <h4>Reference model type</h4>
-
-
-
-
-
-
-
-      </td>
-
-
-
-
-
-
-
-      <td style="background-color: rgb(153, 255, 255);">
-      
-      
-      
-      
-      
-      
-      <h4>XML Schema complexType</h4>
-
-
-
-
-
-
-
-      </td>
-
-
-
-
-
-
-
-    </tr>
-
-
-
-
-
-
-
-    <tr>
-
-
-
-
-
-
-
-      <td>To Be Determined<br>
-
-
-
-
-
-
-
-      </td>
-
-
-
-
-
-
-
-      <td><br>
-
-
-
-
-
-
-
-      </td>
-
-
-
-
-
-
-
-    </tr>
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  </tbody>
-</table>
-
-
-
-
-
-
-
-<br>
-
-
-
-
-
+None in the current release.<br>
 <h2>Acknowledgements</h2>
 
 
 
 
 
-This work was carried out for the <span style="font-style: italic;">open</span>EHR Foundation &nbsp;by <a href="http://www.OceanInformatics.biz">Ocean Informatics</a>. Many thanks to Dr Chunlan Ma, Heath Frankel and Lisa Thurston for maintaining the <span style="font-style: italic;">open</span>EHR schemas. Thanks to the many people in the community who have provided feedback and improved them
+
+This work was carried out for the <span style="font-style: italic;">open</span>EHR Foundation &nbsp;by <a href="http://www.OceanInformatics.biz">Ocean Informatics</a>. Many thanks to Dr Chunlan Ma, Heath Frankel and Lisa Thurston for maintaining the <span style="font-style: italic;">open</span>EHR
+schemas. Thanks to the many people in the community including Mattias
+Forss and Andrew Patterson, who have provided feedback and improved
+them
 
 <hr style="width: 100%; height: 2px;"><span class="footer">$LastChangedDate: 2006-02-15 05:57:48 +0930
 (Wed, 15 Feb 2006) $&nbsp;&nbsp;
 $LastChangedRevision$
 </span><br>
+
 
 
 
