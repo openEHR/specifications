@@ -881,10 +881,10 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="schema_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:schema</span> 
-               <span class="scTag">targetNamespace</span>="<span class="scContent">http://schemas.openehr.org/v1</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">qualified</span>" <span class="scTag">version</span>="<span class="scContent">v1.0.1</span>" <span class="scTag">id</span>="<span class="scContent">Version.xsd</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:include</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">schema</span> 
+               <span class="scTag">targetNamespace</span>="<span class="scContent">http://schemas.openehr.org/v1</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">qualified</span>" <span class="scTag">version</span>="<span class="scContent">v1.0.1</span>" <span class="scTag">id</span>="<span class="scContent">Version.xsd</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">include</span> 
                   <span class="scTag">schemaLocation</span>="<span class="scContent">Composition.xsd</span>"/&gt;</div>
-               <div class="scContent" style="margin-left: 1.5em">...</div>&lt;/<span class="scTag">xs:schema</span>&gt;</div>
+               <div class="scContent" style="margin-left: 1.5em">...</div>&lt;/<span class="scTag">schema</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -963,8 +963,7 @@ if (gc != null) {
                         class="externalLink">AUDIT_DETAILS</a>
                   </span> &lt;/commit_audit&gt; <span class="occurs">[1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;signature&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/signature&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em">&lt;signature&gt; <span class="type">string</span> &lt;/signature&gt; <span class="occurs">[0..1]</span>
                </div>&lt;/version&gt;</div>
          </div>
          <script type="text/javascript">
@@ -1006,7 +1005,7 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h-1547229547_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:element</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">element</span> 
                <span class="scTag">name</span>="<span class="scContent">version</span>" <span class="scTag">type</span>="<span class="scContent">
                   <span class="type">
                      <a title="Jump to &#34;VERSION&#34; type definition." href="#h134808755">VERSION</a>
@@ -1072,8 +1071,7 @@ if (gc != null) {
                         class="externalLink">AUDIT_DETAILS</a>
                   </span> &lt;/commit_audit&gt; <span class="occurs">[1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;signature&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/signature&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;signature&gt; <span class="type">string</span> &lt;/signature&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em" class="newFields">&lt;item&gt; <span class="type">
                      <a title="Jump to &#34;ORIGINAL_VERSION&#34; type definition." href="#h24008367">ORIGINAL_VERSION</a>
@@ -1113,18 +1111,18 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h-1988094750_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">IMPORTED_VERSION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:extension</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">IMPORTED_VERSION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;VERSION&#34; type definition." href="#h134808755">VERSION</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;ORIGINAL_VERSION&#34; type definition." href="#h24008367">ORIGINAL_VERSION</a>
                               </span>
-                           </span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:extension</span>&gt;</div>&lt;/<span class="scTag">xs:complexContent</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                           </span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -1189,8 +1187,7 @@ if (gc != null) {
                         class="externalLink">AUDIT_DETAILS</a>
                   </span> &lt;/commit_audit&gt; <span class="occurs">[1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;signature&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/signature&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;signature&gt; <span class="type">string</span> &lt;/signature&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em" class="newFields">&lt;uid&gt; <span class="type">
                      <a title="Jump to &#34;OBJECT_VERSION_ID&#34; type definition(located in external schema documentation)."
@@ -1198,11 +1195,7 @@ if (gc != null) {
                         class="externalLink">OBJECT_VERSION_ID</a>
                   </span> &lt;/uid&gt; <span class="occurs">[1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;data&gt; <span class="type">
-                     <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
-                        href="Structure.xsd.html#h911858792"
-                        class="externalLink">LOCATABLE</a>
-                  </span> &lt;/data&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em" class="newFields">&lt;data&gt; <span class="type">anyType</span> &lt;/data&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em" class="newFields">&lt;preceding_version_uid&gt; <span class="type">
                      <a title="Jump to &#34;OBJECT_VERSION_ID&#34; type definition(located in external schema documentation)."
@@ -1262,13 +1255,13 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h24008367_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">ORIGINAL_VERSION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:extension</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">ORIGINAL_VERSION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;VERSION&#34; type definition." href="#h134808755">VERSION</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">uid</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;OBJECT_VERSION_ID&#34; type definition(located in external schema documentation)."
@@ -1278,15 +1271,11 @@ if (gc != null) {
                            </span>"/&gt;</div>
                         <div class="comment" style="margin-left: 1.5em">&lt;-- data attribute is optional to allow for logical deletion; required when transferring entire health record --&gt;</div>
                         <div class="comment" style="margin-left: 1.5em">&lt;-- data will be of type="COMPOSITION" for VERSIONED_COMPOSITION --&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">data</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">
-                                 <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
-                                    href="Structure.xsd.html#h911858792"
-                                    class="externalLink">LOCATABLE</a>
-                              </span>
+                              <span class="type">anyType</span>
                            </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">1</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">preceding_version_uid</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;OBJECT_VERSION_ID&#34; type definition(located in external schema documentation)."
@@ -1294,7 +1283,7 @@ if (gc != null) {
                                     class="externalLink">OBJECT_VERSION_ID</a>
                               </span>
                            </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">other_input_version_uids</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;OBJECT_VERSION_ID&#34; type definition(located in external schema documentation)."
@@ -1302,7 +1291,7 @@ if (gc != null) {
                                     class="externalLink">OBJECT_VERSION_ID</a>
                               </span>
                            </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">attestations</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;ATTESTATION&#34; type definition(located in external schema documentation)."
@@ -1310,14 +1299,14 @@ if (gc != null) {
                                     class="externalLink">ATTESTATION</a>
                               </span>
                            </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">lifecycle_state</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;DV_CODED_TEXT&#34; type definition(located in external schema documentation)."
                                     href="BaseTypes.xsd.html#h1544425981"
                                     class="externalLink">DV_CODED_TEXT</a>
                               </span>
-                           </span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:extension</span>&gt;</div>&lt;/<span class="scTag">xs:complexContent</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                           </span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -1390,8 +1379,7 @@ if (gc != null) {
                         class="externalLink">AUDIT_DETAILS</a>
                   </span> &lt;/commit_audit&gt; <span class="occurs">[1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;signature&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/signature&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em">&lt;signature&gt; <span class="type">string</span> &lt;/signature&gt; <span class="occurs">[0..1]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -1433,8 +1421,8 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h134808755_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">VERSION</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">VERSION</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">contribution</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
@@ -1442,7 +1430,7 @@ if (gc != null) {
                               class="externalLink">OBJECT_REF</a>
                         </span>
                      </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">commit_audit</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;AUDIT_DETAILS&#34; type definition(located in external schema documentation)."
@@ -1450,11 +1438,10 @@ if (gc != null) {
                               class="externalLink">AUDIT_DETAILS</a>
                         </span>
                      </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">signature</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                        <span class="type">string</span>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -1466,7 +1453,7 @@ if (gc != null) {
          <a href="#top">top</a>
       </div>
       <hr/>
-      <p class="footer">Authored by Ocean Informatics. Last modified: <script type="text/javascript">
+      <p class="footer">Authored by <a href="http://www.oceaninformatics.biz">Ocean Informatics</a>. Last modified: <script type="text/javascript">
 <!--
           document.write(document.lastModified);
 // -->

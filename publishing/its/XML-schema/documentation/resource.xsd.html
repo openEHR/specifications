@@ -3,7 +3,7 @@
   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
-      <title>openEHR Release 1.0.1 Resource XML schema - Resource.xsd</title>
+      <title>openEHR Release 1.0.1 Resource XML Schema - Resource.xsd</title>
       <meta http-equiv="Content-Type" content="text/xml; charset=UTF-8"/>
       <style type="text/css">
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -725,7 +725,7 @@ function viewDocumentation(compDesc, compName, docTextArray) {
    </head>
    <body>
       <h1>
-         <a name="top">openEHR Release 1.0.1 Resource XML schema</a>
+         <a name="top">openEHR Release 1.0.1 Resource XML Schema</a>
       </h1>
       <div style="float: right;">
          <div id="printerControls" style="display:none;">
@@ -888,10 +888,10 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="schema_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:schema</span> 
-               <span class="scTag">targetNamespace</span>="<span class="scContent">http://schemas.openehr.org/v1</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">qualified</span>" <span class="scTag">version</span>="<span class="scContent">1.0.1</span>" <span class="scTag">id</span>="<span class="scContent">Resource.xsd</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:include</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">schema</span> 
+               <span class="scTag">targetNamespace</span>="<span class="scContent">http://schemas.openehr.org/v1</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">qualified</span>" <span class="scTag">version</span>="<span class="scContent">1.0.1</span>" <span class="scTag">id</span>="<span class="scContent">Resource.xsd</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">include</span> 
                   <span class="scTag">schemaLocation</span>="<span class="scContent">basetypes.xsd</span>"/&gt;</div>
-               <div class="scContent" style="margin-left: 1.5em">...</div>&lt;/<span class="scTag">xs:schema</span>&gt;</div>
+               <div class="scContent" style="margin-left: 1.5em">...</div>&lt;/<span class="scTag">schema</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -943,8 +943,7 @@ if (gc != null) {
                         class="externalLink">CODE_PHRASE</a>
                   </span> &lt;/original_language&gt; <span class="occurs">[1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;is_controlled&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:boolean</span> &lt;/is_controlled&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em">&lt;is_controlled&gt; <span class="type">boolean</span> &lt;/is_controlled&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em">&lt;description&gt; <span class="type">
                      <a title="Jump to &#34;RESOURCE_DESCRIPTION&#34; type definition." href="#h-2133083888">RESOURCE_DESCRIPTION</a>
@@ -1006,8 +1005,8 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h-282029186_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">AUTHORED_RESOURCE</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">AUTHORED_RESOURCE</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">original_language</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
@@ -1015,31 +1014,30 @@ if (gc != null) {
                               class="externalLink">CODE_PHRASE</a>
                         </span>
                      </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">is_controlled</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:boolean</span>
+                        <span class="type">boolean</span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">description</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;RESOURCE_DESCRIPTION&#34; type definition." href="#h-2133083888">RESOURCE_DESCRIPTION</a>
                         </span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">translations</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;TRANSLATION_DETAILS&#34; type definition." href="#h280872431">TRANSLATION_DETAILS</a>
                         </span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">revision_history</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;REVISION_HISTORY&#34; type definition(located in external schema documentation)."
                               href="basetypes.xsd.html#h1989780085"
                               class="externalLink">REVISION_HISTORY</a>
                         </span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -1097,16 +1095,14 @@ if (gc != null) {
                      <a title="Jump to &#34;list_of_string&#34; type definition." href="#h-2045140803">list_of_string</a>
                   </span> &lt;/other_contributors&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;lifecycle_state&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/lifecycle_state&gt; <span class="occurs">[1]</span>
+               <div style="margin-left: 1.5em">&lt;lifecycle_state&gt; <span class="type">string</span> &lt;/lifecycle_state&gt; <span class="occurs">[1]</span>
                </div>
                <div style="margin-left: 1.5em">&lt;details&gt; <span class="type">
                      <a title="Jump to &#34;RESOURCE_DESCRIPTION_ITEM&#34; type definition."
                         href="#h-1589994270">RESOURCE_DESCRIPTION_ITEM</a>
                   </span> &lt;/details&gt; <span class="occurs">[0..*]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;resource_package_uri&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/resource_package_uri&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em">&lt;resource_package_uri&gt; <span class="type">string</span> &lt;/resource_package_uri&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em">&lt;other_details&gt; <span class="type">
                      <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
@@ -1158,42 +1154,40 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h-2133083888_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">RESOURCE_DESCRIPTION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">RESOURCE_DESCRIPTION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">original_author</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
                         </span>
                      </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">other_contributors</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;list_of_string&#34; type definition." href="#h-2045140803">list_of_string</a>
                         </span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">lifecycle_state</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span>
+                        <span class="type">string</span>
                      </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">details</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;RESOURCE_DESCRIPTION_ITEM&#34; type definition."
                               href="#h-1589994270">RESOURCE_DESCRIPTION_ITEM</a>
                         </span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">resource_package_uri</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span>
+                        <span class="type">string</span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">other_details</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
                         </span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -1249,24 +1243,19 @@ if (gc != null) {
                         class="externalLink">CODE_PHRASE</a>
                   </span> &lt;/language&gt; <span class="occurs">[1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;purpose&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/purpose&gt; <span class="occurs">[1]</span>
+               <div style="margin-left: 1.5em">&lt;purpose&gt; <span class="type">string</span> &lt;/purpose&gt; <span class="occurs">[1]</span>
                </div>
                <div style="margin-left: 1.5em">&lt;keywords&gt; <span class="type">
                      <a title="Jump to &#34;list_of_string&#34; type definition." href="#h-2045140803">list_of_string</a>
                   </span> &lt;/keywords&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;use&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/use&gt; <span class="occurs">[1]</span>
+               <div style="margin-left: 1.5em">&lt;use&gt; <span class="type">string</span> &lt;/use&gt; <span class="occurs">[1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;misuse&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/misuse&gt; <span class="occurs">[1]</span>
+               <div style="margin-left: 1.5em">&lt;misuse&gt; <span class="type">string</span> &lt;/misuse&gt; <span class="occurs">[1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;copyright&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/copyright&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em">&lt;copyright&gt; <span class="type">string</span> &lt;/copyright&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;original_resource_uri&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/original_resource_uri&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em">&lt;original_resource_uri&gt; <span class="type">string</span> &lt;/original_resource_uri&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em">&lt;other_details&gt; <span class="type">
                      <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
@@ -1315,8 +1304,8 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h-1589994270_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">RESOURCE_DESCRIPTION_ITEM</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">RESOURCE_DESCRIPTION_ITEM</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">language</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
@@ -1324,43 +1313,38 @@ if (gc != null) {
                               class="externalLink">CODE_PHRASE</a>
                         </span>
                      </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">purpose</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span>
+                        <span class="type">string</span>
                      </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">keywords</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;list_of_string&#34; type definition." href="#h-2045140803">list_of_string</a>
                         </span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">use</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span>
+                        <span class="type">string</span>
                      </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">misuse</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span>
+                        <span class="type">string</span>
                      </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">copyright</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span>
+                        <span class="type">string</span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">original_resource_uri</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span>
+                        <span class="type">string</span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">other_details</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
                         </span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -1420,8 +1404,7 @@ if (gc != null) {
                      <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
                   </span> &lt;/author&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;accreditation&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/accreditation&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em">&lt;accreditation&gt; <span class="type">string</span> &lt;/accreditation&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em">&lt;other_details&gt; <span class="type">
                      <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
@@ -1470,8 +1453,8 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h280872431_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">TRANSLATION_DETAILS</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">TRANSLATION_DETAILS</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">language</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
@@ -1479,23 +1462,22 @@ if (gc != null) {
                               class="externalLink">CODE_PHRASE</a>
                         </span>
                      </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">author</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
                         </span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">accreditation</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span>
+                        <span class="type">string</span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">other_details</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
                         </span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -1545,11 +1527,9 @@ if (gc != null) {
          </div>
          <div id="h776235118_xibox" class="contents">
             <div style="margin-left: 0em">&lt;...&gt; <br/>
-               <div style="margin-left: 1.5em">&lt;key&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/key&gt; <span class="occurs">[1]</span>
+               <div style="margin-left: 1.5em">&lt;key&gt; <span class="type">string</span> &lt;/key&gt; <span class="occurs">[1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;value&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/value&gt; <span class="occurs">[1]</span>
+               <div style="margin-left: 1.5em">&lt;value&gt; <span class="type">string</span> &lt;/value&gt; <span class="occurs">[1]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -1585,17 +1565,15 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h776235118_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">dictionaryItem</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">dictionaryItem</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">key</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span>
+                        <span class="type">string</span>
                      </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">value</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span>
-                     </span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                        <span class="type">string</span>
+                     </span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -1694,13 +1672,13 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h-1403900995_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">hashTableStringString</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">hashTableStringString</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;dictionaryItem&#34; type definition." href="#h776235118">dictionaryItem</a>
                         </span>
-                     </span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                     </span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -1752,8 +1730,7 @@ if (gc != null) {
          </div>
          <div id="h-2045140803_xibox" class="contents">
             <div style="margin-left: 0em">&lt;...&gt; <br/>
-               <div style="margin-left: 1.5em">&lt;item&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/item&gt; <span class="occurs">[1..*]</span>
+               <div style="margin-left: 1.5em">&lt;item&gt; <span class="type">string</span> &lt;/item&gt; <span class="occurs">[1..*]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -1789,12 +1766,11 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h-2045140803_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">list_of_string</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">list_of_string</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span>
-                     </span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                        <span class="type">string</span>
+                     </span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -1806,7 +1782,7 @@ if (gc != null) {
          <a href="#top">top</a>
       </div>
       <hr/>
-      <p class="footer">Authored by Ocean Informatics. Last modified: <script type="text/javascript">
+      <p class="footer">Authored by <a href="http://www.oceaninformatics.biz">Ocean Informatics</a>. Last modified: <script type="text/javascript">
 <!--
           document.write(document.lastModified);
 // -->

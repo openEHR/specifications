@@ -1,20 +1,20 @@
 <map xmlns='http://www.w3.org/1999/xhtml' name='h1749461651'>
  <area
   shape='rect'
-  alt='h1592245190'
-  coords='244,0,330,24'
-  href='BaseTypes.xsd.html#h1592245190'/>
-
- <area
-  shape='rect'
   alt='h-696195919'
-  coords='244,34,329,58'
+  coords='244,0,329,24'
   href='BaseTypes.xsd.html#h-696195919'/>
 
  <area
   shape='rect'
   alt='h1544425981'
-  coords='244,68,339,106'
+  coords='244,34,339,72'
   href='BaseTypes.xsd.html#h1544425981'/>
+
+ <area
+  shape='rect'
+  alt='h1592245190'
+  coords='244,82,330,106'
+  href='BaseTypes.xsd.html#h1592245190'/>
 
 </map>

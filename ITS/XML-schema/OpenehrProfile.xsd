@@ -39,8 +39,8 @@
 	</xs:complexType>
 	<xs:complexType name="C_QUANTITY_ITEM">
 		<xs:sequence>
-			<xs:element name="magnitude" type="interval_of_real" minOccurs="0"/>
-			<xs:element name="precision" type="interval_of_integer" minOccurs="0"/>
+			<xs:element name="magnitude" type="IntervalOfReal" minOccurs="0"/>
+			<xs:element name="precision" type="IntervalOfInteger" minOccurs="0"/>
 			<xs:element name="units" type="xs:string"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -65,7 +65,6 @@
 			<xs:element name="name" type="xs:string"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="NON_TERMINAL_STATE">
 		<xs:complexContent>
 			<xs:extension base="STATE">
@@ -75,7 +74,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-
 	<xs:complexType name="TERMINAL_STATE">
 		<xs:complexContent>
 			<xs:extension base="STATE"/>

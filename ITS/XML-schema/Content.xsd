@@ -17,6 +17,15 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:complexType name="GENERIC_ENTRY">
+		<xs:complexContent>
+			<xs:extension base="CONTENT_ITEM">
+				<xs:sequence>
+					<xs:element name="data" type="ITEM_TREE"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 	<xs:complexType name="ENTRY" abstract="true">
 		<xs:complexContent>
 			<xs:extension base="CONTENT_ITEM">
@@ -80,8 +89,8 @@
 				<xs:sequence>
 					<xs:element name="narrative" type="DV_TEXT"/>
 					<xs:element name="expiry_time" type="DV_DATE_TIME" minOccurs="0"/>
-					<xs:element name="activities" type="ACTIVITY" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="wf_definition" type="DV_PARSABLE" minOccurs="0"/>
+					<xs:element name="activities" type="ACTIVITY" minOccurs="0" maxOccurs="unbounded"/>			
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -102,9 +111,9 @@
 		<xs:complexContent>
 			<xs:extension base="LOCATABLE">
 				<xs:sequence>
-					<xs:element name="action_archetype_id" type="xs:string"/>
 					<xs:element name="description" type="ITEM_STRUCTURE"/>
 					<xs:element name="timing" type="DV_PARSABLE"/>
+					<xs:element name="action_archetype_id" type="xs:string"/>					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>

@@ -3,7 +3,7 @@
   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
-      <title> openEHR Release 1.0.1 Content XML schema - Content.xsd</title>
+      <title>openEHR Release 1.0.1 Content XML Schema - Content.xsd</title>
       <meta http-equiv="Content-Type" content="text/xml; charset=UTF-8"/>
       <style type="text/css">
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -395,13 +395,13 @@ div#legend div.hint {
       <script type="text/javascript">
 <!--
           /* IDs of XML Instance Representation boxes */
-var xiBoxes = new Array('h-679828450_xibox', 'h1753441984_xibox', 'h-1123668211_xibox', 'h570820029_xibox', 'h-547589175_xibox', 'h1822282081_xibox', 'h-65908089_xibox', 'h113272553_xibox', 'h-598660389_xibox', 'h213190260_xibox', 'h-1854434612_xibox', 'h-1080145322_xibox');
+var xiBoxes = new Array('h-679828450_xibox', 'h1753441984_xibox', 'h825677701_xibox', 'h-1123668211_xibox', 'h570820029_xibox', 'h-547589175_xibox', 'h1822282081_xibox', 'h-65908089_xibox', 'h113272553_xibox', 'h-598660389_xibox', 'h213190260_xibox', 'h-1854434612_xibox', 'h-1080145322_xibox');
 /* IDs of diagram boxes */
-var diagramBoxes = new Array('h-679828450_diagram', 'h1753441984_diagram', 'h-1123668211_diagram', 'h570820029_diagram', 'h-547589175_diagram', 'h1822282081_diagram', 'h-65908089_diagram', 'h113272553_diagram', 'h-598660389_diagram', 'h213190260_diagram', 'h-1854434612_diagram', 'h-1080145322_diagram');
+var diagramBoxes = new Array('h-679828450_diagram', 'h1753441984_diagram', 'h825677701_diagram', 'h-1123668211_diagram', 'h570820029_diagram', 'h-547589175_diagram', 'h1822282081_diagram', 'h-65908089_diagram', 'h113272553_diagram', 'h-598660389_diagram', 'h213190260_diagram', 'h-1854434612_diagram', 'h-1080145322_diagram');
 /* IDs of logical diagram boxes */
 var logicalDiagramBoxes = new Array();
 /* IDs of Schema Component Representation boxes */
-var scBoxes = new Array('schema_scbox', 'h-679828450_scbox', 'h1753441984_scbox', 'h-1123668211_scbox', 'h570820029_scbox', 'h-547589175_scbox', 'h1822282081_scbox', 'h-65908089_scbox', 'h113272553_scbox', 'h-598660389_scbox', 'h213190260_scbox', 'h-1854434612_scbox', 'h-1080145322_scbox');
+var scBoxes = new Array('schema_scbox', 'h-679828450_scbox', 'h1753441984_scbox', 'h825677701_scbox', 'h-1123668211_scbox', 'h570820029_scbox', 'h-547589175_scbox', 'h1822282081_scbox', 'h-65908089_scbox', 'h113272553_scbox', 'h-598660389_scbox', 'h213190260_scbox', 'h-1854434612_scbox', 'h-1080145322_scbox');
 
 /**
  * Can get the ID of the button controlling
@@ -725,7 +725,7 @@ function viewDocumentation(compDesc, compName, docTextArray) {
    </head>
    <body>
       <h1>
-         <a name="top"> openEHR Release 1.0.1 Content XML schema</a>
+         <a name="top">openEHR Release 1.0.1 Content XML Schema</a>
       </h1>
       <div style="float: right;">
          <div id="printerControls" style="display:none;">
@@ -805,6 +805,10 @@ if (gc != null) {
                </li>
                <li>
                   <a href="#h1822282081">Complex Type: <strong>EVALUATION</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="#h825677701">Complex Type: <strong>GENERIC_ENTRY</strong>
                   </a>
                </li>
                <li>
@@ -908,10 +912,10 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="schema_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:schema</span> 
-               <span class="scTag">targetNamespace</span>="<span class="scContent">http://schemas.openehr.org/v1</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">qualified</span>" <span class="scTag">version</span>="<span class="scContent">v1.0.1</span>" <span class="scTag">id</span>="<span class="scContent">Content.xsd</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:include</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">schema</span> 
+               <span class="scTag">targetNamespace</span>="<span class="scContent">http://schemas.openehr.org/v1</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">qualified</span>" <span class="scTag">version</span>="<span class="scContent">v1.0.1</span>" <span class="scTag">id</span>="<span class="scContent">Content.xsd</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">include</span> 
                   <span class="scTag">schemaLocation</span>="<span class="scContent">Structure.xsd</span>"/&gt;</div>
-               <div class="scContent" style="margin-left: 1.5em">...</div>&lt;/<span class="scTag">xs:schema</span>&gt;</div>
+               <div class="scContent" style="margin-left: 1.5em">...</div>&lt;/<span class="scTag">schema</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -986,11 +990,11 @@ if (gc != null) {
                         class="externalLink">UID_BASED_ID</a>
                   </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
-                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
-                        href="BaseTypes.xsd.html#h662790700"
-                        class="externalLink">FEEDER_AUDIT</a>
-                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
                      <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
@@ -998,11 +1002,11 @@ if (gc != null) {
                         class="externalLink">ARCHETYPED</a>
                   </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
-                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
-                        href="Structure.xsd.html#h518145503"
-                        class="externalLink">LINK</a>
-                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;language&gt; <span class="type">
                      <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
@@ -1106,13 +1110,13 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h-598660389_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">ACTION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:extension</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">ACTION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;CARE_ENTRY&#34; type definition." href="#h-547589175">CARE_ENTRY</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">time</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;DV_DATE_TIME&#34; type definition(located in external schema documentation)."
@@ -1120,7 +1124,7 @@ if (gc != null) {
                                     class="externalLink">DV_DATE_TIME</a>
                               </span>
                            </span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">description</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
@@ -1128,18 +1132,18 @@ if (gc != null) {
                                     class="externalLink">ITEM_STRUCTURE</a>
                               </span>
                            </span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">ism_transition</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;ISM_TRANSITION&#34; type definition." href="#h-1080145322">ISM_TRANSITION</a>
                               </span>
                            </span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">instruction_details</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;INSTRUCTION_DETAILS&#34; type definition." href="#h-1854434612">INSTRUCTION_DETAILS</a>
                               </span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:extension</span>&gt;</div>&lt;/<span class="scTag">xs:complexContent</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -1212,11 +1216,11 @@ if (gc != null) {
                         class="externalLink">UID_BASED_ID</a>
                   </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
-                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
-                        href="BaseTypes.xsd.html#h662790700"
-                        class="externalLink">FEEDER_AUDIT</a>
-                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
                      <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
@@ -1224,14 +1228,11 @@ if (gc != null) {
                         class="externalLink">ARCHETYPED</a>
                   </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
-                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
-                        href="Structure.xsd.html#h518145503"
-                        class="externalLink">LINK</a>
-                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;action_archetype_id&gt; <span class="type">
-                     <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span> &lt;/action_archetype_id&gt; <span class="occurs">[1]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em" class="newFields">&lt;description&gt; <span class="type">
                      <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
@@ -1244,6 +1245,8 @@ if (gc != null) {
                         href="BaseTypes.xsd.html#h-1934281772"
                         class="externalLink">DV_PARSABLE</a>
                   </span> &lt;/timing&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;action_archetype_id&gt; <span class="type">string</span> &lt;/action_archetype_id&gt; <span class="occurs">[1]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -1279,20 +1282,15 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h213190260_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">ACTIVITY</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:extension</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">ACTIVITY</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
                               href="Structure.xsd.html#h911858792"
                               class="externalLink">LOCATABLE</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">action_archetype_id</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">
-                                 <a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span>
-                           </span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">description</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
@@ -1300,14 +1298,18 @@ if (gc != null) {
                                     class="externalLink">ITEM_STRUCTURE</a>
                               </span>
                            </span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">timing</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;DV_PARSABLE&#34; type definition(located in external schema documentation)."
                                     href="BaseTypes.xsd.html#h-1934281772"
                                     class="externalLink">DV_PARSABLE</a>
                               </span>
-                           </span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:extension</span>&gt;</div>&lt;/<span class="scTag">xs:complexContent</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                           </span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">action_archetype_id</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">string</span>
+                           </span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -1377,11 +1379,11 @@ if (gc != null) {
                         class="externalLink">UID_BASED_ID</a>
                   </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
-                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
-                        href="BaseTypes.xsd.html#h662790700"
-                        class="externalLink">FEEDER_AUDIT</a>
-                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
                      <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
@@ -1389,11 +1391,11 @@ if (gc != null) {
                         class="externalLink">ARCHETYPED</a>
                   </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
-                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
-                        href="Structure.xsd.html#h518145503"
-                        class="externalLink">LINK</a>
-                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;language&gt; <span class="type">
                      <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
@@ -1471,20 +1473,20 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h570820029_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">ADMIN_ENTRY</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:extension</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">ADMIN_ENTRY</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;ENTRY&#34; type definition." href="#h-1123668211">ENTRY</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">data</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
                                     href="Structure.xsd.html#h-1739558196"
                                     class="externalLink">ITEM_STRUCTURE</a>
                               </span>
-                           </span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:extension</span>&gt;</div>&lt;/<span class="scTag">xs:complexContent</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                           </span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -1573,11 +1575,11 @@ if (gc != null) {
                         class="externalLink">UID_BASED_ID</a>
                   </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
-                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
-                        href="BaseTypes.xsd.html#h662790700"
-                        class="externalLink">FEEDER_AUDIT</a>
-                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
                      <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
@@ -1585,11 +1587,11 @@ if (gc != null) {
                         class="externalLink">ARCHETYPED</a>
                   </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
-                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
-                        href="Structure.xsd.html#h518145503"
-                        class="externalLink">LINK</a>
-                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;language&gt; <span class="type">
                      <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
@@ -1673,13 +1675,13 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h-547589175_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">CARE_ENTRY</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:extension</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">CARE_ENTRY</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;ENTRY&#34; type definition." href="#h-1123668211">ENTRY</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">protocol</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
@@ -1687,14 +1689,14 @@ if (gc != null) {
                                     class="externalLink">ITEM_STRUCTURE</a>
                               </span>
                            </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">guideline_id</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
                                     href="BaseTypes.xsd.html#h2031888792"
                                     class="externalLink">OBJECT_REF</a>
                               </span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:extension</span>&gt;</div>&lt;/<span class="scTag">xs:complexContent</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -1725,6 +1727,10 @@ if (gc != null) {
                   <li>
                      <span class="type">
                         <a title="Jump to &#34;SECTION&#34; type definition." href="#h1753441984">SECTION</a>
+                     </span> (by extension)</li>
+                  <li>
+                     <span class="type">
+                        <a title="Jump to &#34;GENERIC_ENTRY&#34; type definition." href="#h825677701">GENERIC_ENTRY</a>
                      </span> (by extension)</li>
                   <li>
                      <span class="type">
@@ -1806,11 +1812,11 @@ if (gc != null) {
                         class="externalLink">UID_BASED_ID</a>
                   </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
-                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
-                        href="BaseTypes.xsd.html#h662790700"
-                        class="externalLink">FEEDER_AUDIT</a>
-                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
                      <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
@@ -1818,11 +1824,11 @@ if (gc != null) {
                         class="externalLink">ARCHETYPED</a>
                   </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
-                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
-                        href="Structure.xsd.html#h518145503"
-                        class="externalLink">LINK</a>
-                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -1861,15 +1867,15 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h-679828450_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">CONTENT_ITEM</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:extension</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">CONTENT_ITEM</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
                               href="Structure.xsd.html#h911858792"
                               class="externalLink">LOCATABLE</a>
                         </span>
-                     </span>"/&gt;</div>&lt;/<span class="scTag">xs:complexContent</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                     </span>"/&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -1966,11 +1972,11 @@ if (gc != null) {
                         class="externalLink">UID_BASED_ID</a>
                   </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
-                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
-                        href="BaseTypes.xsd.html#h662790700"
-                        class="externalLink">FEEDER_AUDIT</a>
-                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
                      <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
@@ -1978,11 +1984,11 @@ if (gc != null) {
                         class="externalLink">ARCHETYPED</a>
                   </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
-                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
-                        href="Structure.xsd.html#h518145503"
-                        class="externalLink">LINK</a>
-                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em" class="newFields">&lt;language&gt; <span class="type">
                      <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
@@ -2054,13 +2060,13 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h-1123668211_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">ENTRY</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:extension</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">ENTRY</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">language</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
@@ -2068,7 +2074,7 @@ if (gc != null) {
                                     class="externalLink">CODE_PHRASE</a>
                               </span>
                            </span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">encoding</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
@@ -2076,7 +2082,7 @@ if (gc != null) {
                                     class="externalLink">CODE_PHRASE</a>
                               </span>
                            </span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">subject</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
@@ -2084,7 +2090,7 @@ if (gc != null) {
                                     class="externalLink">PARTY_PROXY</a>
                               </span>
                            </span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">provider</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
@@ -2092,7 +2098,7 @@ if (gc != null) {
                                     class="externalLink">PARTY_PROXY</a>
                               </span>
                            </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">other_participations</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;PARTICIPATION&#34; type definition(located in external schema documentation)."
@@ -2100,14 +2106,14 @@ if (gc != null) {
                                     class="externalLink">PARTICIPATION</a>
                               </span>
                            </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">work_flow_id</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
                                     href="BaseTypes.xsd.html#h2031888792"
                                     class="externalLink">OBJECT_REF</a>
                               </span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:extension</span>&gt;</div>&lt;/<span class="scTag">xs:complexContent</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -2179,11 +2185,11 @@ if (gc != null) {
                         class="externalLink">UID_BASED_ID</a>
                   </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
-                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
-                        href="BaseTypes.xsd.html#h662790700"
-                        class="externalLink">FEEDER_AUDIT</a>
-                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
                      <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
@@ -2191,11 +2197,11 @@ if (gc != null) {
                         class="externalLink">ARCHETYPED</a>
                   </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
-                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
-                        href="Structure.xsd.html#h518145503"
-                        class="externalLink">LINK</a>
-                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;language&gt; <span class="type">
                      <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
@@ -2285,24 +2291,163 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h1822282081_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">EVALUATION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:extension</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">EVALUATION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;CARE_ENTRY&#34; type definition." href="#h-547589175">CARE_ENTRY</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">data</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
                                     href="Structure.xsd.html#h-1739558196"
                                     class="externalLink">ITEM_STRUCTURE</a>
                               </span>
-                           </span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:extension</span>&gt;</div>&lt;/<span class="scTag">xs:complexContent</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                           </span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
           setState('h1822282081_scbox', false);
+// -->
+</script>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <h3>Complex Type: <a name="h825677701" class="name">GENERIC_ENTRY</a>
+      </h3>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>
+               <span class="type">
+                  <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
+                     href="Structure.xsd.html#h911858792"
+                     class="externalLink">LOCATABLE</a>
+               </span> &lt; <span class="type">
+                  <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+               </span> (by extension) &lt; <strong>GENERIC_ENTRY</strong> (by extension)</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>None</td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>GENERIC_ENTRY</td>
+         </tr>
+         <tr>
+            <th>Abstract</th>
+            <td>no</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h825677701_xibox_button" class="control"
+                   onclick="switchState('h825677701_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="h825677701_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...<br/>
+               <span style="margin-left: 0.5em" class="inherited"> archetype_node_id="<span class="type">
+                     <a title="Jump to &#34;archetypeNodeId&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h288119713"
+                        class="externalLink">archetypeNodeId</a>
+                  </span> 
+                  <span class="occurs">[1]</span>"</span>&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;name&gt; <span class="type">
+                     <a title="Jump to &#34;DV_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1838339253"
+                        class="externalLink">DV_TEXT</a>
+                  </span> &lt;/name&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;uid&gt; <span class="type">
+                     <a title="Jump to &#34;UID_BASED_ID&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-835416741"
+                        class="externalLink">UID_BASED_ID</a>
+                  </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
+                     <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h743461152"
+                        class="externalLink">ARCHETYPED</a>
+                  </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;data&gt; <span class="type">
+                     <a title="Jump to &#34;ITEM_TREE&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h-2298235"
+                        class="externalLink">ITEM_TREE</a>
+                  </span> &lt;/data&gt; <span class="occurs">[1]</span>
+               </div>&lt;/...&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h825677701_xibox', true);
+// -->
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h825677701_diagram_button" class="control"
+                   onclick="switchState('h825677701_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h825677701_diagram" class="contents">
+            <img usemap="#h-1844272872" src="schemaDiagrams/h-1844272872.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h-1844272872.map--><map name="h-1844272872">
+</map>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h825677701_diagram', true);
+// -->
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h825677701_scbox_button" class="control"
+                   onclick="switchState('h825677701_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h825677701_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">GENERIC_ENTRY</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
+                     <span class="scTag">base</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+                        </span>
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">data</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;ITEM_TREE&#34; type definition(located in external schema documentation)."
+                                    href="Structure.xsd.html#h-2298235"
+                                    class="externalLink">ITEM_TREE</a>
+                              </span>
+                           </span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h825677701_scbox', false);
 // -->
 </script>
       </div>
@@ -2370,11 +2515,11 @@ if (gc != null) {
                         class="externalLink">UID_BASED_ID</a>
                   </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
-                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
-                        href="BaseTypes.xsd.html#h662790700"
-                        class="externalLink">FEEDER_AUDIT</a>
-                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
                      <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
@@ -2382,11 +2527,11 @@ if (gc != null) {
                         class="externalLink">ARCHETYPED</a>
                   </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
-                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
-                        href="Structure.xsd.html#h518145503"
-                        class="externalLink">LINK</a>
-                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;language&gt; <span class="type">
                      <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
@@ -2448,15 +2593,15 @@ if (gc != null) {
                         class="externalLink">DV_DATE_TIME</a>
                   </span> &lt;/expiry_time&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;activities&gt; <span class="type">
-                     <a title="Jump to &#34;ACTIVITY&#34; type definition." href="#h213190260">ACTIVITY</a>
-                  </span> &lt;/activities&gt; <span class="occurs">[0..*]</span>
-               </div>
                <div style="margin-left: 1.5em" class="newFields">&lt;wf_definition&gt; <span class="type">
                      <a title="Jump to &#34;DV_PARSABLE&#34; type definition(located in external schema documentation)."
                         href="BaseTypes.xsd.html#h-1934281772"
                         class="externalLink">DV_PARSABLE</a>
                   </span> &lt;/wf_definition&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;activities&gt; <span class="type">
+                     <a title="Jump to &#34;ACTIVITY&#34; type definition." href="#h213190260">ACTIVITY</a>
+                  </span> &lt;/activities&gt; <span class="occurs">[0..*]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -2492,13 +2637,13 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h113272553_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">INSTRUCTION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:extension</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">INSTRUCTION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;CARE_ENTRY&#34; type definition." href="#h-547589175">CARE_ENTRY</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">narrative</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;DV_TEXT&#34; type definition(located in external schema documentation)."
@@ -2506,7 +2651,7 @@ if (gc != null) {
                                     class="externalLink">DV_TEXT</a>
                               </span>
                            </span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">expiry_time</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;DV_DATE_TIME&#34; type definition(located in external schema documentation)."
@@ -2514,20 +2659,20 @@ if (gc != null) {
                                     class="externalLink">DV_DATE_TIME</a>
                               </span>
                            </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">activities</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">
-                                 <a title="Jump to &#34;ACTIVITY&#34; type definition." href="#h213190260">ACTIVITY</a>
-                              </span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">wf_definition</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;DV_PARSABLE&#34; type definition(located in external schema documentation)."
                                     href="BaseTypes.xsd.html#h-1934281772"
                                     class="externalLink">DV_PARSABLE</a>
                               </span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:extension</span>&gt;</div>&lt;/<span class="scTag">xs:complexContent</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">activities</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;ACTIVITY&#34; type definition." href="#h213190260">ACTIVITY</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -2638,8 +2783,8 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h-1854434612_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">INSTRUCTION_DETAILS</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">INSTRUCTION_DETAILS</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">instruction_id</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;LOCATABLE_REF&#34; type definition(located in external schema documentation)."
@@ -2647,7 +2792,7 @@ if (gc != null) {
                               class="externalLink">LOCATABLE_REF</a>
                         </span>
                      </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">activity_id</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;atCode&#34; type definition(located in external schema documentation)."
@@ -2655,14 +2800,14 @@ if (gc != null) {
                               class="externalLink">atCode</a>
                         </span>
                      </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">wf_details</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
                               href="Structure.xsd.html#h-1739558196"
                               class="externalLink">ITEM_STRUCTURE</a>
                         </span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -2773,8 +2918,8 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h-1080145322_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">ISM_TRANSITION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">ISM_TRANSITION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">current_state</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;DV_CODED_TEXT&#34; type definition(located in external schema documentation)."
@@ -2782,7 +2927,7 @@ if (gc != null) {
                               class="externalLink">DV_CODED_TEXT</a>
                         </span>
                      </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">transition</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;DV_CODED_TEXT&#34; type definition(located in external schema documentation)."
@@ -2790,14 +2935,14 @@ if (gc != null) {
                               class="externalLink">DV_CODED_TEXT</a>
                         </span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">careflow_step</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;DV_CODED_TEXT&#34; type definition(located in external schema documentation)."
                               href="BaseTypes.xsd.html#h1544425981"
                               class="externalLink">DV_CODED_TEXT</a>
                         </span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -2869,11 +3014,11 @@ if (gc != null) {
                         class="externalLink">UID_BASED_ID</a>
                   </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
-                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
-                        href="BaseTypes.xsd.html#h662790700"
-                        class="externalLink">FEEDER_AUDIT</a>
-                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
                      <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
@@ -2881,11 +3026,11 @@ if (gc != null) {
                         class="externalLink">ARCHETYPED</a>
                   </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
-                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
-                        href="Structure.xsd.html#h518145503"
-                        class="externalLink">LINK</a>
-                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;language&gt; <span class="type">
                      <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
@@ -2981,13 +3126,13 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h-65908089_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">OBSERVATION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:extension</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">OBSERVATION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;CARE_ENTRY&#34; type definition." href="#h-547589175">CARE_ENTRY</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">data</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;HISTORY&#34; type definition(located in external schema documentation)."
@@ -3000,14 +3145,14 @@ if (gc != null) {
 						state separately than the data itself, then use this state History. It is not possible 
 						to use this element and the state element of events contained in the data history.
 					--&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">state</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;HISTORY&#34; type definition(located in external schema documentation)."
                                     href="Structure.xsd.html#h710134895"
                                     class="externalLink">HISTORY</a>
                               </span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:extension</span>&gt;</div>&lt;/<span class="scTag">xs:complexContent</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -3075,11 +3220,11 @@ if (gc != null) {
                         class="externalLink">UID_BASED_ID</a>
                   </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
-                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
-                        href="BaseTypes.xsd.html#h662790700"
-                        class="externalLink">FEEDER_AUDIT</a>
-                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
                </div>
                <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
                      <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
@@ -3087,11 +3232,11 @@ if (gc != null) {
                         class="externalLink">ARCHETYPED</a>
                   </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
-                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
-                        href="Structure.xsd.html#h518145503"
-                        class="externalLink">LINK</a>
-                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em" class="newFields">&lt;items&gt; <span class="type">
                      <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
@@ -3131,18 +3276,18 @@ if (gc != null) {
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="h1753441984_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">SECTION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:extension</span> 
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">SECTION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">items</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
                               </span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:extension</span>&gt;</div>&lt;/<span class="scTag">xs:complexContent</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -3154,7 +3299,7 @@ if (gc != null) {
          <a href="#top">top</a>
       </div>
       <hr/>
-      <p class="footer">Authored by Ocean Informatics. Last modified: <script type="text/javascript">
+      <p class="footer">Authored by <a href="http://www.oceaninformatics.biz">Ocean Informatics</a>. Last modified: <script type="text/javascript">
 <!--
           document.write(document.lastModified);
 // -->

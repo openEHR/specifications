@@ -6,28 +6,24 @@
 	<xs:element name="composition" type="COMPOSITION"/>
 	<xs:complexType name="COMPOSITION">		
 				<xs:sequence>
-					<xs:element name="category" type="DV_CODED_TEXT"/>
+					<xs:element name="language" type="CODE_PHRASE"/>					
 					<xs:element name="territory" type="CODE_PHRASE"/>
-					<xs:element name="language" type="CODE_PHRASE"/>
+					<xs:element name="category" type="DV_CODED_TEXT"/>					
 					<xs:element name="composer" type="PARTY_PROXY"/>
 					<xs:element name="context" type="EVENT_CONTEXT" minOccurs="0"/>
 					<xs:element name="content" type="CONTENT_ITEM" minOccurs="0" maxOccurs="unbounded"/>
 					<!-- Limited to one content in the current version of XML schema -->
 				</xs:sequence>			
 	</xs:complexType>
-	<xs:complexType name="EVENT_CONTEXT">
-		<xs:complexContent>
-			<xs:extension base="LOCATABLE">
+	<xs:complexType name="EVENT_CONTEXT">		
 				<xs:sequence>
 					<xs:element name="start_time" type="DV_DATE_TIME"/>
 					<xs:element name="end_time" type="DV_DATE_TIME" minOccurs="0"/>
-					<xs:element name="setting" type="DV_CODED_TEXT"/>
-					<xs:element name="health_care_facility" type="PARTY_IDENTIFIED" minOccurs="0"/>
 					<xs:element name="location" type="xs:string" minOccurs="0"/>
-					<xs:element name="participations" type="PARTICIPATION" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="setting" type="DV_CODED_TEXT"/>
 					<xs:element name="other_context" type="ITEM_STRUCTURE" minOccurs="0"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
+					<xs:element name="health_care_facility" type="PARTY_IDENTIFIED" minOccurs="0"/>					
+					<xs:element name="participations" type="PARTICIPATION" minOccurs="0" maxOccurs="unbounded"/>					
+				</xs:sequence>			
 	</xs:complexType>
 </xs:schema>
