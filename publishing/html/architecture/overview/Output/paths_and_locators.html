@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
 <meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
-<meta name="LASTUPDATED" content="04/13/07 11:55:07">
+<meta name="LASTUPDATED" content="04/13/07 15:06:01">
 <link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
 <title>11 Paths and Locators  </title>
 </head>
@@ -91,7 +91,7 @@ attribute_name / attribute_name [predicate expression] / ...
 <a name="1117267"> </a>
 </pre>
 <p class="Body">
-  <a name="1117956"> </a>Here, predicate expressions are used optionally on those attributes defined in the reference model to be of a container type (i.e. having a cardinality of &gt; 1). If a predicate expression is not used on a container attribute, the whole container is selected. 
+  <a name="1117956"> </a>Here, predicate expressions are used optionally on those attributes defined in the reference model to be of a container type (i.e. having a cardinality of &gt; 1). If a predicate expression is not used on a container attribute, the whole container is selected. Note that predicate expressions are often possible even on single-valued attributes, and technically can be used (e.g. if generic path-processing software can't tell the difference) but are not required.
 </p>
 <p class="Body">
   <a name="1118126"> </a>The second limitation of basic paths is that they cannot locate objects based on other conditions, such as the object having a child node with a particular value. To address this, predicate expressions can be used to select an object on the basis of other conditions relative to the object, by including boolean expressions including paths, operators, values and parentheses. The syntax of predicate expressions used in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is a subset of the Xpath syntax for predicates with a small number of short-cuts.
@@ -196,19 +196,19 @@ attribute_name / attribute_name [predicate expression] / ...
 </span><a name="1138363"> </a>
 			events <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">{1..*} matches { 	
 </span><a name="1138365"> </a>
-				<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">EVENT</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0001]</span> <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">{0..1}  matches {					</span><span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">			</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- any event
+				<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">EVENT</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0006]</span> <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">{0..1}  matches {					</span><span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">			</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- any event
 </span><a name="1138329"> </a>
 					<span style="color: #66d16d;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> matches {<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">DV_TEXT</span>			 matches {...}}
 <a name="1138330"> </a>
 					data <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">matches {	
 </span><a name="1138331"> </a>
-<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">						ITEM_LIST</span> matches {		<span style="color: #917200;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">				</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- systemic arterial BP
+<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">						ITEM_LIST</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0003]</span> matches {		<span style="color: #917200;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">				</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- systemic arterial BP
 </span><a name="1138332"> </a>
 							<span style="color: #66d16d;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">count</span> matches {2..*}
 <a name="1138195"> </a>
 							<span style="color: #66d16d;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">items</span> matches {				
 <a name="1138197"> </a>
-								<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">ELEMENT</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at1100]</span> matches {<span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">			-- systolic BP
+								<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">ELEMENT</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0004]</span> matches {<span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">			-- systolic BP
 </span><a name="1138198"> </a>
 									<span style="color: #66d16d;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> matches {<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">DV_TEXT</span>			 matches {...}}
 <a name="1141218"> </a>
@@ -216,7 +216,7 @@ attribute_name / attribute_name [predicate expression] / ...
 <a name="1138200"> </a>
 								} 
 <a name="1138201"> </a>
-								<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">ELEMENT</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at1200]</span> matches {<span style="color: #917200;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">			</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- diastolic BP
+								<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">ELEMENT</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0005]</span> matches {<span style="color: #917200;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">			</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- diastolic BP
 </span><a name="1138202"> </a>
 									<span style="color: #66d16d;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> matches {<span style="color: #66d16d;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">DV_TEXT</span>			 matches {...}}
 <a name="1141222"> </a>
@@ -243,7 +243,7 @@ attribute_name / attribute_name [predicate expression] / ...
   <a name="1138858"> </a>The following path extracted from the archetype refers to the systolic blood pressure magnitude:
 </p>
 <pre  class="PreformattedRelative">
-/data/events[at0001]/data/items[at1100]/value/magnitude
+/data/events[at0006]/data/items[at0004]/value/magnitude
 <a name="1138859"> </a>
 </pre>
 <p class="Body">
@@ -253,21 +253,23 @@ attribute_name / attribute_name [predicate expression] / ...
   <a name="1138608"> </a>Now consider an <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBSERVATION</span> instance (expressed here in dADL format), in which a history of two blood pressures has been recorded using this archetype:
 </p>
 <pre  class="PreformattedRelative">
-<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&lt;									</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- OBSERVATION - blood pressure measurement
+<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&lt;	</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- OBSERVATION - blood pressure measurement
 </span><a name="1138227"> </a>
-	<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> = &lt;<span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[openEHR-EHR-OBSERVATION.bp_meas.v2]</span>&gt;
+	<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> = &lt;<span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[openEHR-EHR-OBSERVATION.blood_pressure.v1]</span>&gt;
 <a name="1138371"> </a>
 	<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">"BP measurement"</span>&gt;&gt;
 <a name="1138228"> </a>
 	<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">data</span> <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;									</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- HISTORY</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">	
 </span><a name="1138229"> </a>
+		<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0001]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+</span><a name="1173372"> </a>
 <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">		</span><span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">origin</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">2005-12-03T09:22:00</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
 </span><a name="1138232"> </a>
 		<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">events</span> <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;									</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- List &lt;EVENT&gt;
 </span><a name="1140986"> </a>
 			<span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[</span><span style="color: #0000d3;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">1</span><span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">]</span>	 <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;								</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- EVENT
 </span><a name="1138511"> </a>
-				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0001]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0006]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
 </span><a name="1138398"> </a>
 				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">"sitting"</span>&gt;&gt;
 <a name="1138234"> </a>
@@ -275,13 +277,15 @@ attribute_name / attribute_name [predicate expression] / ...
 <a name="1140963"> </a>
 				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">data</span> <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;									</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- ITEM_LIST</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">	
 </span><a name="1138235"> </a>
+					<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0003]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+</span><a name="1173396"> </a>
 					<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">items</span> = &lt;								<span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- List&lt;ELEMENT&gt;</span>	
 <a name="1138641"> </a>
 						<span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[</span><span style="color: #0000d3;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">1</span><span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">]</span>	 <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;
 </span><a name="1138690"> </a>
 							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">"systolic"</span>&gt;&gt;
 <a name="1141166"> </a>
-<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">							archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at1100]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">							archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0004]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
 </span><a name="1138697"> </a>
 							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">magnitude</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">120.0</span>&gt; ...&gt;
 <a name="1138699"> </a>
@@ -291,7 +295,7 @@ attribute_name / attribute_name [predicate expression] / ...
 </span><a name="1138642"> </a>
 							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">"diastolic"</span>&gt;&gt;
 <a name="1141162"> </a>
-<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">							archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at1200]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">							archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0005]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
 </span><a name="1138705"> </a>
 							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">magnitude</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">80.0</span>&gt; ...&gt;
 <a name="1138777"> </a>
@@ -305,7 +309,7 @@ attribute_name / attribute_name [predicate expression] / ...
 <a name="1138533"> </a>
 			<span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[</span><span style="color: #0000d3;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">2</span><span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">]</span>	 <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;								</span><span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- EVENT
 </span><a name="1138535"> </a>
-				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0001]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0006]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
 </span><a name="1138418"> </a>
 				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">"standing"</span>&gt;&gt;
 <a name="1138242"> </a>
@@ -313,13 +317,15 @@ attribute_name / attribute_name [predicate expression] / ...
 <a name="1140975"> </a>
 				<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">data</span> = &lt;									<span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- ITEM_LIST</span>	
 <a name="1138243"> </a>
+					<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0003]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+</span><a name="1173402"> </a>
 					<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">items</span> = &lt;								<span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">-- List&lt;ELEMENT&gt;</span>	
 <a name="1138624"> </a>
 						<span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[</span><span style="color: #0000d3;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">1</span><span style="color: #0000d3;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">]</span>	 <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">= &lt;
 </span><a name="1138714"> </a>
 							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">"systolic"</span>&gt;&gt;
 <a name="1141048"> </a>
-<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">							archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at1100]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">							archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0004]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
 </span><a name="1138715"> </a>
 							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">magnitude</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">105.0</span>&gt; ...&gt;
 <a name="1138771"> </a>
@@ -329,7 +335,7 @@ attribute_name / attribute_name [predicate expression] / ...
 </span><a name="1138718"> </a>
 							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">"diastolic"</span>&gt;<span style="color: #917200;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
 </span><a name="1141052"> </a>
-<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">							archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at1200]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
+<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">							archetype_node_id</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline"> = &lt;</span><span style="color: #ff00ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0005]</span><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">&gt;
 </span><a name="1138719"> </a>
 							<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">value</span> = &lt;<span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">magnitude</span> = &lt;<span style="color: #ff0000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">70.0</span>&gt; ...&gt;
 <a name="1138781"> </a>
@@ -366,22 +372,22 @@ attribute_name / attribute_name [predicate expression] / ...
   <a name="1141092"> </a>More expressive unique paths based on archetype paths are also possible, as follows:
 </p>
 <pre  class="PreformattedRelative">
-/data/events[at0001, <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`sitting'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1100</span>]/value/magnitude
+/data/events[at0006, <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`sitting'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at0004</span>]/value/magnitude
 <a name="1141110"> </a>
-/data/events[at0001, <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`sitting'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1200</span>]/value/magnitude
+/data/events[at0006, <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`sitting'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at0005</span>]/value/magnitude
 <a name="1141072"> </a>
-/data/events[at0001, <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`standing'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1100</span>]/value/magnitude
+/data/events[at0006, <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`standing'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at0004</span>]/value/magnitude
 <a name="1141116"> </a>
-/data/events[at0001, <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`standing'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1200</span>]/value/magnitude
+/data/events[at0006, <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`standing'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at0005</span>]/value/magnitude
 <a name="1141073"> </a>
 </pre>
 <p class="Body">
   <a name="1172131"> </a>Each of these paths has an Xpath equivalent of the following form:
 </p>
 <pre  class="PreformattedRelative">
-/data/events[@archetype_node_id=`at0001' and name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`</span>standing<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">'</span>]
+/data/events[@archetype_node_id=`at0006' and name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`</span>standing<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">'</span>]
 <a name="1172132"> </a>
-	/data/items[@archetype_node_id=`at1200']
+	/data/items[@archetype_node_id=`at0004']
 <a name="1172136"> </a>
 	/value/magnitude
 <a name="1141185"> </a>
@@ -461,8 +467,12 @@ ehr://1234567/87284370-2D4B-4e3d-A3F3-F303D2F4F34B::F7C5C7B7-75DB-
   <a name="1172375"> </a>The first URI identifies a top-level item whose version identifier is <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">87284370-2D4B-4e3d-A3F3-F303D2F4F34B::rmh.nhs.net:2</span>, i.e. the second trunk version of the Versioned Object indentified by the Guid, created at an EHR system identified by <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">net.nhs.rmh</span>. The second is the same, but another Guid is used to identify the creating system as well. Note that the mention of a system in the version identifier does not imply that the requested EHR is at that system, only that the top-level object being sought was created at that system.
 </p>
 <p class="Body">
-  <a name="1173277"> </a>If no Version identifier is mentioned, `latest_trunk_version' is always assumed.
+  <a name="1173277"> </a>If no Version identifier is mentioned, `latest_trunk_version' is always assumed, as per the following:
 </p>
+<pre  class="PreformattedRelative">
+ehr://1234567/87284370-2D4B-4e3d-A3F3-F303D2F4F34B
+<a name="1173350"> </a>
+</pre>
 <h5 class="Heading4">
   <a name="1173145"> </a>Item URIs
 </h5>
@@ -476,7 +486,7 @@ ehr://1234567/87284370-2D4B-4e3d-A3F3-F303D2F4F34B@latest_trunk_version/
 <a name="1173253"> </a>
 	items[openEHR-EHR-OBSERVATION.heart_rate-pulse.v1]/data/
 <a name="1173248"> </a>
-	events[at0003, &#39;any event&#39;]/data/items[at0004]
+	events[at0006, &#39;any event&#39;]/data/items[at0004]
 <a name="1173268"> </a>
 </pre>
 <h5 class="Heading4">
@@ -486,21 +496,14 @@ ehr://1234567/87284370-2D4B-4e3d-A3F3-F303D2F4F34B@latest_trunk_version/
   <a name="1173282"> </a>URIs can also be constructed relative to the current EHR, in which case they do not mention the EHR id, as in the following example:
 </p>
 <pre  class="PreformattedRelative">
-ehr::///87284370-2D4B-4e3d-A3F3-F303D2F4F34B@latest_version/
+ehr:///87284370-2D4B-4e3d-A3F3-F303D2F4F34B@latest_version/
 <a name="1173285"> </a>
-	content[openEHR-EHR-SECTION.vital_signs.v1, &#39;Vital signs&#39;]/
+	content[openEHR-EHR-SECTION.vital_signs.v1]/
 <a name="1173294"> </a>
-	items[openEHR-EHR-OBSERVATION.blood_pressure.v1, &#39;Blood pressure&#39;]/
+	items[openEHR-EHR-OBSERVATION.blood_pressure.v1]/
 <a name="1173297"> </a>
 	data/events[at0006, &#39;any event&#39;]/data/items[at0004]
 <a name="1173302"> </a>
-</pre>
-<h4 class="Heading3">
-  <a name="1173136"> </a>11.3.2	 EHR Query URIs
-</h4>
-<pre  class="Preformatted">
-To Be Continued:		 
-<a name="1173141"> </a>
 </pre>
 
   <div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
