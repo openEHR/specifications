@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
 <meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
-<meta name="LASTUPDATED" content="11/14/06 13:33:50">
+<meta name="LASTUPDATED" content="04/13/07 11:55:07">
 <link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
 <title>11 Paths and Locators  </title>
 </head>
@@ -39,7 +39,7 @@
   <a name="1081008"> </a>The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR architecture includes a path mechanism that enables any node within a top level structure to be specified from the top of the structure using a "semantic" (i.e. archetype-based) X-path compatible path. The availability of such paths radically changes the available querying possibilities with health information, and is one of the major distinguishing features of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR.
 </p>
 <p class="Body">
-  <a name="1166410"> </a>Technically, the combination of a path and a Version identifier such as <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_VERSION_ID</span> forms a "globally qualified node reference" which can be expressed using <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LOCATABLE_REF</span>. It can also be expressed in portable URI form as a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DV_EHR_URI</span>, known as a "globally qualified node locator". Either representation enables any <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR data node to be referred to from anywhere. This section describes the syntax and semantics of paths, and of the URI form of reference. In the following, the term "archetype path" means a path extracted from an archetype, while "runtime path" means one that identifies an item in data. They are no different formally, and this terminology is only used to indicate where they are used.
+  <a name="1166410"> </a>Technically, the combination of a path and a Version identifier such as <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_VERSION_ID</span> forms a "globally qualified node reference" which can be expressed using <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LOCATABLE_REF</span>. It can also be expressed in portable URI form as a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DV_EHR_URI</span>, known as a "globally qualified node locator". Either representation enables any <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR data node to be referred to from anywhere. This section describes the syntax and semantics of paths, and of the URI form of reference. In the following, the term "archetype path" means a path extracted from an archetype, while "data path" means one that identifies an item in data. They are no different formally, and this terminology is only used to indicate where they are used.
 </p>
 <h3 class="Heading2">
   <a name="1117926"> </a>11.2	 Paths
@@ -51,7 +51,7 @@
   <a name="1123865"> </a>Paths in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR are defined in an Xpath<a href="#1123864"><sup>1</sup></a>-compatible syntax which is a superset of the path syntax described in the Archetype Definition Language (ADL). The syntax is designed to be easily mappable to Xpath expressions, for use with <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR-based XML.
 </p>
 <p class="Body">
-  <a name="1117284"> </a>The runtime path syntax used in locator expressions follows the general pattern of a path consisting of segments each consisting of an attribute name<a href="#1121788"><sup>2</sup></a>, and separated by the slash (`/') character, i.e.:
+  <a name="1117284"> </a>The data path syntax used in locator expressions follows the general pattern of a path consisting of segments each consisting of an attribute name<a href="#1121788"><sup>2</sup></a>, and separated by the slash (`/') character, i.e.:
 </p>
 <pre  class="PreformattedRelative">
 attribute_name / attribute_name / ... / attribute_name
@@ -68,13 +68,16 @@ attribute_name / attribute_name / ... / attribute_name
   <a name="1162808"> </a>In addition, the "//" notation from Xpath can be used to define a path pattern:
 </p>
 <ul>
-  <li class="SmartList1"><a name="1117210"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">path pattern</span>: path starts with or contains a the symbol `//' and is taken to be a pattern which can match any number of path segments in the data; the pattern is matched if an actual path can be found anywhere in the structure for which part of the path matches the path section before the `//' symbol, and a later section matches the section appearing after the `//'.
+  <li class="SmartList1"><a name="1172662"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">path pattern</span>: path starts with or contains a the symbol `//' and is taken to be a pattern which can match any number of path segments in the data; the pattern is matched if an actual path can be found anywhere in the structure for which part of the path matches the path section before the `//' symbol, and a later section matches the section appearing after the `//'.
 </ul>
 <h4 class="Heading3">
-  <a name="1117321"> </a>11.2.2	 Predicate Expressions
+  <a name="1172663"> </a>11.2.2	 Predicate Expressions
 </h4>
+<h5 class="Heading4">
+  <a name="1172664"> </a>Overview
+</h5>
 <p class="Body">
-  <a name="1117180"> </a>Paths specified solely with attribute names are limited in two ways. Firstly, they can only locate objects in structures in where there are no containers, such as lists or sets. However, in any realistic data, including most <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR data, list, set and hash structures are common. Additional syntax is needed to match a particular object from among the siblings referred to by a container attribute. This takes the form of a predicate expression enclosed in brackets (`[]') after the relevant attribute in a segment, i.e.:
+  <a name="1117180"> </a>Paths specified solely with attribute names are limited in two ways. Firstly, they can only locate objects in structures in which there are no containers such as lists or sets. However, in any realistic data, including most <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR data, list, set and hash structures are common. Additional syntax is needed to match a particular object from among the siblings referred to by a container attribute. This takes the form of a predicate expression enclosed in brackets (`[]') after the relevant attribute in a segment, i.e.:
 </p>
 <pre  class="PreformattedRelative">
 attribute_name [predicate expression]
@@ -91,17 +94,43 @@ attribute_name / attribute_name [predicate expression] / ...
   <a name="1117956"> </a>Here, predicate expressions are used optionally on those attributes defined in the reference model to be of a container type (i.e. having a cardinality of &gt; 1). If a predicate expression is not used on a container attribute, the whole container is selected. 
 </p>
 <p class="Body">
-  <a name="1118126"> </a>The second limitation of basic paths is that they cannot locate objects based on other conditions, such as the object having a child node with a particular value. To address this, predicate expressions can be used to select an object on the basis of other conditions relative to the object, by including boolean expressions including paths, operators, values and parentheses.
+  <a name="1118126"> </a>The second limitation of basic paths is that they cannot locate objects based on other conditions, such as the object having a child node with a particular value. To address this, predicate expressions can be used to select an object on the basis of other conditions relative to the object, by including boolean expressions including paths, operators, values and parentheses. The syntax of predicate expressions used in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is a subset of the Xpath syntax for predicates with a small number of short-cuts.
 </p>
+<h5 class="Heading4">
+  <a name="1172684"> </a>Archetype path Predicate
+</h5>
 <p class="Body">
-  <a name="1117957"> </a>The syntax of predicate expressions used in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is a subset of the Xpath syntax for predicates with a small number of short-cuts. The general form of a predicate statement is a boolean-returning expression consisting of paths, values, operators and parentheses. In the current release of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR, it is expected that only very simple expressions will be used. The simplest such expression is to identify an object by its <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> value, which will be an `at' code from an archetype; in other words, just to use the ADL archetype path against the runtime data. A typical archetype-derived path is the following (applied to an Observation instance):
+  <a name="1117957"> </a>The most important predicate uses the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> value (inherited from <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LOCATABLE</span>) to limit the items returned from a container, such as to certain <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ELEMENTs</span> within a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">CLUSTER</span>. The shortcut form allows the archetype code to be included on its own as the predicate, e.g. <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[at0003]</span>. This shortcut corresponds to using an archetype path against the runtime data. A typical archetype-derived path is the following (applied to an Observation instance):
 </p>
 <pre  class="PreformattedRelative">
 /data/events[at0003]/data/items[at0025]/value/magnitude
 <a name="1117359"> </a>
 </pre>
 <p class="Body">
-  <a name="1117369"> </a>This path refers to the magnitude of a 1-minute Apgar total in an Observation containing a full Apgar result structure. In this path, the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[atNNNN]</span> predicates correspond to <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[@archetype_node_id = "atNNNN"]</span> in standard Xpath, however, the shorthand form is used in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR as it is the only kind of predicate used in archetype paths. In <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR paths identifying runtime data, archetype code predicates are also commonly used, and the same short-cut is allowed. However, runtime path predicates can also include other expressions (including the orthodox Xpath equivalent expression for the archetype node id short-cut), typically based on the value of some other attribute such as <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ELEMENT</span>.<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> or <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">EVENT</span>.<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">time</span>. Combinations of the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> and other such values are likely to be commonly used in querying, such as the following path fragment (applied to an <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBSERVATION</span> instance):
+  <a name="1117369"> </a>This path refers to the magnitude of a 1-minute Apgar total in an Observation containing a full Apgar result structure. In this path, the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[atNNNN]</span> predicates are a shortcut for <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">[@archetype_node_id = `atNNNN']</span> in standard Xpath. Note that while an archetype path is always unique in an archetype, it can correspond to more than one item in runtime data, due to the repeated use of the same archetype node within a container.
+</p>
+<h5 class="Heading4">
+  <a name="1172735"> </a>Name-based Predicate
+</h5>
+<p class="Body">
+  <a name="1172734"> </a>In order to create a guaranteed unique data path, predicates can also include the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> value (also inherited from <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LOCATABLE</span>) as well as the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> value. The standard Xpath form of this expression is exemplified by the following:
+</p>
+<pre  class="PreformattedRelative">
+/data/events[at0001 and <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">name/value=`standing'</span>]
+<a name="1172766"> </a>
+</pre>
+<p class="Body">
+  <a name="1172763"> </a>Since the combination of an archetype node identifier and a name value is very common in archetyped databases, a shortcut is also available for the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name/value</span> expression, which is to simply include the value after a comma as follows:
+</p>
+<pre  class="PreformattedRelative">
+/data/events[at0001, <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`standing'</span>]
+<a name="1172780"> </a>
+</pre>
+<h5 class="Heading4">
+  <a name="1172786"> </a>Other Predicates
+</h5>
+<p class="Body">
+  <a name="1172764"> </a>Other predicates can be used, based on the value of other attributes such as <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ELEMENT</span>.<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> or <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">EVENT</span>.<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">time</span>. Combinations of the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> and other such values are commonly used in querying, such as the following path fragment (applied to an <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBSERVATION</span> instance):
 </p>
 <pre  class="PreformattedRelative">
 /data/events[at0007 AND time &gt;= "24-06-2005 09:30:00"]
@@ -128,30 +157,32 @@ attribute_name / attribute_name [predicate expression] / ...
   <a name="1125831"> </a>The following paths are examples of referring to items within a Composition:
 </p>
 <pre  class="PreformattedRelative">
-/content[openEHR-EHR-SECTION.vital_signs.v1]/
-<a name="1125832"> </a>
-	items[openEHR-EHR-OBSERVATION.heart_rate-pulse.v1]/data/
-<a name="1125833"> </a>
-	events[at0003 and time=&#39;2006-01-25T08:42:20&#39;]/data/items[at0004]
-<a name="1125834"> </a>
-/content[openEHR-EHR-SECTION.vital_signs.v1]/
-<a name="1125835"> </a>
-	items[openEHR-EHR-OBSERVATION.blood_pressure.v1]/data/
-<a name="1125836"> </a>
-	events[at0006 and time=&#39;2006-01-25T08:42:20&#39;]/data/items[at0004]
-<a name="1125837"> </a>
-/content[openEHR-EHR-SECTION.vital_signs.v1]/
-<a name="1125838"> </a>
-	items[openEHR-EHR-OBSERVATION.blood_pressure.v1]/data/
-<a name="1125839"> </a>
-	events[at0006 and time=&#39;2006-01-25T08:42:20&#39;]/data/items[at0005]
-<a name="1125840"> </a>
+/content[openEHR-EHR-SECTION.vital_signs.v1 and name/value=&#39;Vital signs&#39;]/
+<a name="1173192"> </a>
+	items[openEHR-EHR-OBSERVATION.heart_rate-pulse.v1 and name/value=&#39;Pulse&#39;]/
+<a name="1173204"> </a>
+	data/events[at0003 and name/value=&#39;Any event&#39;]/data/items[at1005]
+<a name="1173207"> </a>
+/content[openEHR-EHR-SECTION.vital_signs.v1 and name/value=&#39;Vital signs&#39;]/
+<a name="1173211"> </a>
+	items[openEHR-EHR-OBSERVATION.blood_pressure.v1 and 
+<a name="1173238"> </a>
+	name/value=&#39;Blood pressure&#39;]/data/events[at0006 and name/value=&#39;any event&#39;]/
+<a name="1173242"> </a>
+	data/items[at0004]
+<a name="1173239"> </a>
+/content[openEHR-EHR-SECTION.vital_signs.v1, &#39;Vital signs&#39;]/
+<a name="1173224"> </a>
+	items[openEHR-EHR-OBSERVATION.blood_pressure.v1, &#39;Blood pressure&#39;]/
+<a name="1173231"> </a>
+	data/events[at0006, &#39;any event&#39;]/data/items[at0005]
+<a name="1173234"> </a>
 </pre>
 <p class="Body">
   <a name="1125841"> </a>Paths within the other top level types follow the same general approach, i.e. are created by following the required attributes down the hierarchy.
 </p>
 <h4 class="Heading3">
-  <a name="1138175"> </a>11.2.4	 Runtime Paths and Uniqueness
+  <a name="1138175"> </a>11.2.4	 Data Paths and Uniqueness
 </h4>
 <p class="Body">
   <a name="1138179"> </a>Archetype paths are not guaranteed to uniquely identify items in data, due to the fact that one archetype node may correspond to multiple instances in the data. However it is often necessary to be able to construct a unique path to an item in real data. This can be done by using attributes other than <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> in path predicates. Consider as an example the following <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBSERVATION</span> archetype:
@@ -319,7 +350,7 @@ attribute_name / attribute_name [predicate expression] / ...
   <a name="1141071"> </a>[Note: in the above example, name values are shown as if they were all <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DV_TEXTs</span>, whereas in reality in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR they more likely to be <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DV_CODED_TEXT</span> instances; either is allowed by the archetype. This has been done to reduce the size of the example, and makes no difference to the paths shown below].
 </p>
 <p class="Body">
-  <a name="1141186"> </a>The archetype path mentioned above<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">					</span> matches both systolic pressures in the recording. In many querying situations, this may be exactly what is desired. However, to uniquely match each of the systolic pressure nodes, paths need to be created that are based not only on the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> but also on another attribute. In the case above, the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> attribute provides uniqueness. Guaranteed unique paths to the systolic and diastolic pressures of the each event (sitting and standing measurements) are available using the following expressions (identical in Xpath)<a href="#1162829"><sup>3</sup></a>:
+  <a name="1141186"> </a>The archetype path mentioned above<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">					</span> matches both systolic pressures in the recording. In many querying situations, this may be exactly what is desired. However, to uniquely match each of the systolic pressure nodes, paths need to be created that are based not only on the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> but also on another attribute. In the case above, the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">name</span> attribute provides uniqueness. Guaranteed unique paths to the systolic and diastolic pressures of each event (sitting and standing measurements) are available using the following expressions (identical in Xpath)<a href="#1162829"><sup>3</sup></a>:
 </p>
 <pre  class="PreformattedRelative">
 /data/events[1]/data/items[1]/value/magnitude
@@ -335,22 +366,14 @@ attribute_name / attribute_name [predicate expression] / ...
   <a name="1141092"> </a>More expressive unique paths based on archetype paths are also possible, as follows:
 </p>
 <pre  class="PreformattedRelative">
-/data/events[at0001 and 
-
-	name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`sitting'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1100</span>]/value/magnitude
+/data/events[at0001, <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`sitting'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1100</span>]/value/magnitude
 <a name="1141110"> </a>
-/data/events[at0001 and 
+/data/events[at0001, <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`sitting'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1200</span>]/value/magnitude
 <a name="1141072"> </a>
-	name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`sitting'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1200</span>]/value/magnitude
-<a name="1141271"> </a>
-/data/events[at0001 and 
+/data/events[at0001, <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`standing'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1100</span>]/value/magnitude
 <a name="1141116"> </a>
-	name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`standing'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1100</span>]/value/magnitude
-<a name="1141272"> </a>
-/data/events[at0001 and 
+/data/events[at0001, <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`standing'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1200</span>]/value/magnitude
 <a name="1141073"> </a>
-	name/value=<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">`standing'</span>]/data/items[<span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">at1200</span>]/value/magnitude
-<a name="1141273"> </a>
 </pre>
 <p class="Body">
   <a name="1172131"> </a>Each of these paths has an Xpath equivalent of the following form:
@@ -374,98 +397,111 @@ attribute_name / attribute_name [predicate expression] / ...
   <a name="1123890"> </a>11.3	 EHR URIs
 </h3>
 <p class="Body">
-  <a name="1117727"> </a>To create a reference to a node in an EHR in the form of a URI (uniform resource identifier), two elements are needed: the path <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">within</span> a top-level structure, and a reference <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">to</span> a top-level structure. These are combined to form a URI in an "ehr" scheme-space, obeying the following syntax:
+  <a name="1173113"> </a>There are two broad categories of URIs that can be used with any resource: direct references, and queries. The first kind are usually generated by the system containing the referred-to item, and passed to other systems as definitive references, while the second are queries from the requesting system in the form of a URI.
+</p>
+<h4 class="Heading3">
+  <a name="1173114"> </a>11.3.1	 EHR Reference URIs
+</h4>
+<p class="Body">
+  <a name="1117727"> </a>To create a reference to a node in an EHR in the form of a URI (uniform resource identifier), three elements are needed: the path <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">within</span> a top-level structure, a reference <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">to</span> a top-level structure within an EHR, and a reference to an EHR. These can be combined to form a URI in an "ehr" scheme-space, obeying the following syntax:
 </p>
 <pre  class="PreformattedRelative">
-ehr://top_level_structure_locator/path_inside_top_level_structure
+ehr://ehr_locator/top_level_structure_locator/path_inside_top_level_structure
 <a name="1117754"> </a>
 </pre>
 <p class="Body">
-  <a name="1117710"> </a>Under this scheme, any object in any <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR is addressable via a URI. The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR data type <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DV_EHR_URI</span> is designed to carry URIs of this form, enabling URIs to be constructed for use within <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LINKs</span> and elsewhere in the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR. (URIs of course are only one method of addressing or querying data in the EHR. Other querying syntaxes and functional interfaces will be developed and used over time.)
+  <a name="1172870"> </a>In this way, any object in any <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR is addressable via a URI. Within ehr-space, URL-style references to particular servers, hosts etc are not used, due to not being reliable in the long term. Instead, logical identifiers for EHRs and/or subjects are used, ensuring that URIs remain correct for the lifetime of the resources to which they refer. The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR data type <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DV_EHR_URI</span> is designed to carry URIs of this form, enabling URIs to be constructed for use within <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LINKs</span> and elsewhere in the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR.
 </p>
+<p class="Body">
+  <a name="1172866"> </a>An <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ehr://</span> URI implies the availability of a name resolution mechanism in ehr-space, similar to the DNS, which provides such services for http-, ftp- and other well-known URI schemes. Until such services are established, <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ad hoc</span> means of dealing with <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ehr://</span> URIs are likely to be used, as well as more traditional <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">http://</span> style references. The subsections below describe how URIs of both kinds can be constructed.
+</p>
+<h5 class="Heading4">
+  <a name="1117784"> </a>EHR Location
+</h5>
+<p class="Body">
+  <a name="1172934"> </a>In ehr-space, a direct locator for an EHR is an EHR identifier as distinct from a subject or patient identifier or query. Normally the copy in the `local system' is the one required, and a majority of the time, may be the only one in existence. In this case, the required EHR can be identified simply by an unqualified identifier, giving a URI of the form:
+</p>
+<pre  class="PreformattedRelative">
+ehr://1234567/
+<a name="1172947"> </a>
+</pre>
+<p class="Body">
+  <a name="1172944"> </a>However, due to copying / synchronising of the EHR for one subject among multiple EHR systems, a given EHR identifier may exist at more than one location. It is not guaranteed that each such EHR is a completely identical copy of the others, since partial copying is allowed. Therefore, in an environment where EHR copies exist, and there is a need to identify exactly which EHR instance is required, an system identifier is also required, giving a URI of the form:
+</p>
+<pre  class="PreformattedRelative">
+ehr://1234567@rmh.nhs.net/
+<a name="1172974"> </a>
+</pre>
+<h5 class="Heading4">
+  <a name="1172389"> </a>Top-level Structure Locator
+</h5>
+<p class="Body">
+  <a name="1172390"> </a>There are two logical ways to identify a top-level structure in an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR. The first is via the combination of the identifier of the required top-level object and the version time (i.e. `system' or `commit' time). The former can be done in a number of ways, including via the use of the uid of the relevant <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_OBJECT</span>, or via archetype identifiers, or names. This would lead to URIs like the following:
+</p>
+<pre  class="PreformattedRelative">
+ehr://1234567/87284370-2D4B-4e3d-A3F3-F303D2F4F34B@latest_trunk_version -- a VO Guid
+<a name="1173030"> </a>
+ehr://1234567/87284370-2D4B-4e3d-A3F3-F303D2F4F34B@2005-08-02T04:30:00 -- using time
+<a name="1173048"> </a>
+</pre>
+<p class="Body">
+  <a name="1172989"> </a>The second way to identify a top-level structure is by using an exact Version identifier, i.e. the standard <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR Version identifier, which takes the form <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version_object_uid::version_tree_id::creating_system_id</span>. This leads to URIs like the following:
+</p>
+<pre  class="PreformattedRelative">
+ehr://1234567/87284370-2D4B-4e3d-A3F3-F303D2F4F34B::rmh.nhs.net:2
+<a name="1173059"> </a>
+
+<a name="1173246"> </a>
+ehr://1234567/87284370-2D4B-4e3d-A3F3-F303D2F4F34B::F7C5C7B7-75DB-
+<a name="1173086"> </a>
+	4b39-9A1E-C0BA9BFDBDEC:2
+<a name="1173080"> </a>
+</pre>
+<p class="Body">
+  <a name="1172375"> </a>The first URI identifies a top-level item whose version identifier is <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">87284370-2D4B-4e3d-A3F3-F303D2F4F34B::rmh.nhs.net:2</span>, i.e. the second trunk version of the Versioned Object indentified by the Guid, created at an EHR system identified by <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">net.nhs.rmh</span>. The second is the same, but another Guid is used to identify the creating system as well. Note that the mention of a system in the version identifier does not imply that the requested EHR is at that system, only that the top-level object being sought was created at that system.
+</p>
+<p class="Body">
+  <a name="1173277"> </a>If no Version identifier is mentioned, `latest_trunk_version' is always assumed.
+</p>
+<h5 class="Heading4">
+  <a name="1173145"> </a>Item URIs
+</h5>
+<p class="Body">
+  <a name="1173149"> </a>With the addition of path expressions as described earlier, URIs can be constructed that refer to the finest grained items in the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR, such as the following:
+</p>
+<pre  class="PreformattedRelative">
+ehr://1234567/87284370-2D4B-4e3d-A3F3-F303D2F4F34B@latest_trunk_version/
+<a name="1173155"> </a>
+	content[openEHR-EHR-SECTION.vital_signs.v1]/
+<a name="1173253"> </a>
+	items[openEHR-EHR-OBSERVATION.heart_rate-pulse.v1]/data/
+<a name="1173248"> </a>
+	events[at0003, &#39;any event&#39;]/data/items[at0004]
+<a name="1173268"> </a>
+</pre>
+<h5 class="Heading4">
+  <a name="1173278"> </a>Relative URIs
+</h5>
+<p class="Body">
+  <a name="1173282"> </a>URIs can also be constructed relative to the current EHR, in which case they do not mention the EHR id, as in the following example:
+</p>
+<pre  class="PreformattedRelative">
+ehr::///87284370-2D4B-4e3d-A3F3-F303D2F4F34B@latest_version/
+<a name="1173285"> </a>
+	content[openEHR-EHR-SECTION.vital_signs.v1, &#39;Vital signs&#39;]/
+<a name="1173294"> </a>
+	items[openEHR-EHR-OBSERVATION.blood_pressure.v1, &#39;Blood pressure&#39;]/
+<a name="1173297"> </a>
+	data/events[at0006, &#39;any event&#39;]/data/items[at0004]
+<a name="1173302"> </a>
+</pre>
 <h4 class="Heading3">
-  <a name="1117784"> </a>11.3.1	 Locating Top-Level Structures
+  <a name="1173136"> </a>11.3.2	 EHR Query URIs
 </h4>
-<p class="Body">
-  <a name="1117788"> </a>The first part of an EHR URI needs to identify a top-level structure. Logically speaking, it must identify the EHR and the content object within the EHR. Neither of these is completely simple, due to the relationship of EHRs to subjects in the former case, and due to versioning in the latter.
-</p>
-<h5 class="Heading4">
-  <a name="1172325"> </a>Identifying the EHR
-</h5>
-<p class="Body">
-  <a name="1172323"> </a>Due to copying / synchronising of the EHR for one subject among multiple providers, a given EHR id may exist at more than one location. It is not guaranteed that each such EHR is an identical complete copy of the others, since partial copying is allowed. Therefore, to identify exactly which EHR is required, the system id is also required, although there may be situations in which it can be left out. In general, the following identifiers are needed to locate a particular instance of an EHR:
-</p>
-<ul>
-  <li class="SmartList1"><a name="1172178"> </a>the EHR id;
-  <li class="SmartList1"><a name="1172388"> </a>the EHR system id.
-</ul>
-<p class="Body">
-  <a name="1172393"> </a>There remain issues to do with how EHRs will be identified in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR systems. Identifiers may be required to conform to local health jurisdiction requirements. If EHR identifiers are globally unique, or even nationally unique, then in theory the EHR system identifier can be dispensed with. However in a practical sense the identifier of the EHR system can only be dispensed with if there is a health information location service operating in the environment that can perform EHR id -&gt; EHR system id mappings, in much the same way as the internet DNS converts logical domain names to IP addresses.
-</p>
-<h5 class="Heading4">
-  <a name="1172389"> </a>Identifying the Content Item
-</h5>
-<p class="Body">
-  <a name="1172390"> </a>There are two logical ways to identify a content item in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR. The first is by identifying the following:
-</p>
-<ul>
-  <li class="SmartList1"><a name="1172184"> </a>the logical content object, i.e. Directory, EHR access object, a particular Composition, etc;
-  <li class="SmartList1"><a name="1172191"> </a>the version time.
-</ul>
-<p class="Body">
-  <a name="1172360"> </a>Identifying a logical content object can be done in a number of ways, including via the use of the uid of the relevant <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_OBJECT</span>, or via archetype identifiers, or names. The second way to identify a content object is by using:
-</p>
-<ul>
-  <li class="SmartList1"><a name="1125773"> </a>an exact Version identifier, i.e. {<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Version object Uid</span>; <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version_tree_id</span>; <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">creating_system_id</span>}
-</ul>
-<h5 class="Heading4">
-  <a name="1172375"> </a>Syntax 
-</h5>
-<p class="Body">
-  <a name="1117830"> </a>Currently, a fairly typical URI query style of syntax is used, as shown in the following examples. 
-</p>
-<ul>
-  <li class="SmartList1"><a name="1121465"> </a>The following path matches a top-level object such as a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">COMPOSITION</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DIRECTORY</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">EHR_ACCESS</span>, or <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTY</span> at its latest version:
-<pre  class="PreformattedRelative">
-ehr://rdh.health.gov.au?ehr_id=1234567&amp;versioned_object=87284370-2D4B-
-<a name="1118344"> </a>
-4e3d-A3F3-F303D2F4F34B&amp;version_time=latest
-<a name="1121477"> </a>
-
-<a name="1121472"> </a>
+<pre  class="Preformatted">
+To Be Continued:		 
+<a name="1173141"> </a>
 </pre>
-  <li class="SmartList1"><a name="1125799"> </a>The following path matches a top-level object at version 2:
-<pre  class="PreformattedRelative">
-ehr://rdh.health.gov.au?ehr_id=1234567&amp;versioned_object=87284370-2D4B-
-<a name="1172270"> </a>
-4e3d-A3F3-F303D2F4F34B&amp;version_id=2
-
-
-<a name="1125800"> </a>
-</pre>
-  <li class="SmartList1"><a name="1172260"> </a>The following path matches the same top-level object using the uid of the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSION</span> object:
-<pre  class="PreformattedRelative">
-ehr://rdh.health.gov.au?ehr_id=1234567&amp;version={F7C5C7B7-75DB-
-<a name="1172261"> </a>
-4b39-9A1E-C0BA9BFDBDEC::au.gov.health.rdh::2}
-<a name="1172262"> </a>
-</pre>
-</ul>
-<p class="Body">
-  <a name="1118260"> </a>In these paths, the following pseudo-identifiers are used:
-</p>
-<ul>
-  <li class="SmartList1"><a name="1172293"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">versioned_object</span>: indicates an instance of <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_OBJECT</span>;
-  <li class="SmartList1"><a name="1121527"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version</span>: indicates the particular version of a top-level object;
-  <li class="SmartList1"><a name="1118506"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version_time</span>: indicates the system time for which the version should be taken; time is in the form of an ISO8601 date/time string or the word "latest";
-  <li class="SmartList1"><a name="1118526"> </a><span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version_id</span>: version tree identifier of a particular version; takes values such as "1", "2", "1.2.1" etc.
-</ul>
-<p class="Body">
-  <a name="1172425"> </a>Other pseudo-identifiers will probably be allowed, including <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">composition</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">party</span>, etc, as long as the semantics can be accurately specified.
-</p>
-<p class="Body">
-  <a name="1118505"> </a>Implementers and users of the current release of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR are encouraged to experiment and/or propose improved solutions to the locator requirement described in this section.
-</p>
 
   <div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
 <a name="1123864"> </a><a href="#1123865"><sup>1</sup></a>See W3C Xpath 1.0 specification, 1999. Available at <span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: underline; text-transform: none; vertical-align: baseline"><a href="http://www.w3.org/TR/xpath">http://www.w3.org/TR/xpath</a></span>.<br>
