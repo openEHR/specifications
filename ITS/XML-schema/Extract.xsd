@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- openEHR Release 1.0.1 XML schema. Ocean Informatics 2007.04.02  -->
+<!-- openEHR Release 1.0.1 Extract  XML schema -->
+<!-- Authored by Ocean Informatics 2007.04.13  -->
 <xs:schema xmlns="http://schemas.openehr.org/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified" version="v1.0.1" id="Extract.xsd">
 	<xs:include schemaLocation="Version.xsd"/>
 	<xs:element name="extract_request" type="EXTRACT_REQUEST"/>

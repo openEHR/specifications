@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- openEHR Release 1.0.1 Archetype  XML schema -->
-<!-- Authored by Ocean Informatics 2007.04.02  -->
+<!-- Authored by Ocean Informatics 2007.04.13  -->
 <xs:schema xmlns="http://schemas.openehr.org/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified" version="1.0.1"
 	id="Archetype.xsd">
@@ -159,7 +159,6 @@
 				<xs:sequence>
 					<xs:element name="item" type="xs:anyType"/>
 					<xs:element name="reference_type" type="xs:string"/>
-					<!-- constant, attribute, constraint or function -->
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -279,7 +278,7 @@
 					<xs:element name="day_validity" type="VALIDITY_KIND" minOccurs="0"/>
 					<xs:element name="timezone_validity" type="VALIDITY_KIND" minOccurs="0"/>
 					<xs:element name="range" type="IntervalOfDate" minOccurs="0"/>
-					<xs:element name="assumed_value" type="xs:date" minOccurs="0"/>
+					<xs:element name="assumed_value" type="Iso8601Date" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -296,7 +295,7 @@
 					<xs:element name="millisecond_validity" type="VALIDITY_KIND" minOccurs="0"/>
 					<xs:element name="timezone_validity" type="VALIDITY_KIND" minOccurs="0"/>
 					<xs:element name="range" type="IntervalOfDateTime" minOccurs="0"/>
-					<xs:element name="assumed_value" type="xs:dateTime" minOccurs="0"/>
+					<xs:element name="assumed_value" type="Iso8601DateTime" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -310,7 +309,7 @@
 					<xs:element name="millisecond_validity" type="VALIDITY_KIND" minOccurs="0"/>
 					<xs:element name="timezone_validity" type="VALIDITY_KIND" minOccurs="0"/>
 					<xs:element name="range" type="IntervalOfTime" minOccurs="0"/>
-					<xs:element name="assumed_value" type="xs:time" minOccurs="0"/>
+					<xs:element name="assumed_value" type="Iso8601Time" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -332,7 +331,7 @@
 					<xs:element name="fractional_seconds_allowed" type="xs:boolean" default="false"
 						minOccurs="0"/>
 					<xs:element name="range" type="IntervalOfDuration" minOccurs="0"/>
-					<xs:element name="assumed_value" type="xs:duration" minOccurs="0"/>
+					<xs:element name="assumed_value" type="Iso8601Duration" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>

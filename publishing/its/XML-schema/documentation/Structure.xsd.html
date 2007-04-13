@@ -3,7 +3,7 @@
   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
-      <title>openEHR Release 1.0.1 Structure XML Schema - Structure.xsd</title>
+      <title>openEHR Release 1.0.1 Structure XML schema - Structure.xsd</title>
       <meta http-equiv="Content-Type" content="text/xml; charset=UTF-8"/>
       <style type="text/css">
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -725,7 +725,7 @@ function viewDocumentation(compDesc, compName, docTextArray) {
    </head>
    <body>
       <h1>
-         <a name="top">openEHR Release 1.0.1 Structure XML Schema</a>
+         <a name="top">openEHR Release 1.0.1 Structure XML schema</a>
       </h1>
       <div style="float: right;">
          <div id="printerControls" style="display:none;">
@@ -896,16 +896,6 @@ if (gc != null) {
                   </li>
                </ul>
             </td>
-         </tr>
-         <tr>
-            <th>Documentation</th>
-            <td class="documentation">
-			The locatable class here does not contain the Archetyped class in the reference model; it will probably do so in future
-			as a minor version of this schema, which will be backwardly compatible. This is to allow the development of suitable access
-			control measures to become represented in this class in the future. The archetype id is copied (in the reference model specs)
-			to the archetype_node_id and so is present in the data in this attribute of locatable. This maximises the match between
-			Xpath and the archetype paths.
-		</td>
          </tr>
       </table>
       <h3>Declared Namespaces</h3>
@@ -1671,8 +1661,7 @@ if (gc != null) {
                         <span class="type">
                            <a title="Jump to &#34;LOCATABLE&#34; type definition." href="#h911858792">LOCATABLE</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div class="comment" style="margin-left: 1.5em">&lt;-- As an ISO 8601string yyyy-MM-ddTHH:mm:ss, allows for all dates, times and partials--&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">time</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;DV_DATE_TIME&#34; type definition(located in external schema documentation)."
@@ -1686,13 +1675,6 @@ if (gc != null) {
                                  <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition." href="#h-1739558196">ITEM_STRUCTURE</a>
                               </span>
                            </span>"/&gt;</div>
-                        <div class="comment" style="margin-left: 1.5em">&lt;-- State data should be collected at the time of each event - on occassions
-						where state data is collected independently than the data itself
-						the state attribute of observation class allows the event model
-						to be used for state data. It is not possible to have event state
-						(this element) and history state in OBSERVATION in the same
-						Observation class.
-					--&gt;</div>
                         <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">state</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
@@ -3371,8 +3353,7 @@ if (gc != null) {
                            href="BaseTypes.xsd.html#h288119713"
                            class="externalLink">archetypeNodeId</a>
                      </span>
-                  </span>" <span class="scTag">use</span>="<span class="scContent">required</span>"/&gt;</div>
-               <div class="comment" style="margin-left: 1.5em">&lt;-- Either an atXXXX code or an archetype id --&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+                  </span>" <span class="scTag">use</span>="<span class="scContent">required</span>"/&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--

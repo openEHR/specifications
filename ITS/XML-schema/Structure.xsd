@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- openEHR Release 1.0.1 Structure XML schema -->
-<!-- Authored by Ocean Informatics 2007.04.02  -->
+<!-- Authored by Ocean Informatics 2007.04.13  -->
 <xs:schema version="v1.0.1" targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified"	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 xmlns="http://schemas.openehr.org/v1" id="Structure.xsd">
 	<xs:include schemaLocation="BaseTypes.xsd" />
 	
 	<xs:element name="items" type="LOCATABLE" /> 	
-	<xs:annotation>
-		<xs:documentation>
-			The locatable class here does not contain the Archetyped class in the reference model; it will probably do so in future
-			as a minor version of this schema, which will be backwardly compatible. This is to allow the development of suitable access
-			control measures to become represented in this class in the future. The archetype id is copied (in the reference model specs)
-			to the archetype_node_id and so is present in the data in this attribute of locatable. This maximises the match between
-			Xpath and the archetype paths.
-		</xs:documentation>
-	</xs:annotation>
 	<xs:complexType name="LOCATABLE" abstract="true">
 		<xs:sequence>
 			<xs:element name="name" type="DV_TEXT" />
@@ -23,7 +14,7 @@ xmlns="http://schemas.openehr.org/v1" id="Structure.xsd">
 			<xs:element name="archetype_details" type="ARCHETYPED" minOccurs="0" maxOccurs="1" />
 			<xs:element name="feeder_audit" type="FEEDER_AUDIT" minOccurs="0" />			
 		</xs:sequence>
-		<xs:attribute name="archetype_node_id" type="archetypeNodeId" use="required" /> <!-- Either an atXXXX code or an archetype id -->
+		<xs:attribute name="archetype_node_id" type="archetypeNodeId" use="required" /> 
 	</xs:complexType>
 	<xs:complexType name="ARCHETYPED">
 		<xs:sequence>
@@ -66,16 +57,8 @@ xmlns="http://schemas.openehr.org/v1" id="Structure.xsd">
 		<xs:complexContent>
 			<xs:extension base="LOCATABLE">
 				<xs:sequence>
-					<!-- As an ISO 8601string yyyy-MM-ddTHH:mm:ss, allows for all dates, times and partials-->
 					<xs:element name="time" type="DV_DATE_TIME" />
 					<xs:element name="data" type="ITEM_STRUCTURE" />
-					<!-- State data should be collected at the time of each event - on occassions
-						where state data is collected independently than the data itself
-						the state attribute of observation class allows the event model
-						to be used for state data. It is not possible to have event state
-						(this element) and history state in OBSERVATION in the same
-						Observation class.
-					-->
 					<xs:element name="state" type="ITEM_STRUCTURE" minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>

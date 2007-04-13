@@ -3,7 +3,7 @@
   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
-      <title>openEHR Release 1.0.1 BaseTypes XML Schema - BaseTypes.xsd</title>
+      <title>openEHR Release 1.0.1 BaseTypes  XML schema - BaseTypes.xsd</title>
       <meta http-equiv="Content-Type" content="text/xml; charset=UTF-8"/>
       <style type="text/css">
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -725,7 +725,7 @@ function viewDocumentation(compDesc, compName, docTextArray) {
    </head>
    <body>
       <h1>
-         <a name="top">openEHR Release 1.0.1 BaseTypes XML Schema</a>
+         <a name="top">openEHR Release 1.0.1 BaseTypes  XML schema</a>
       </h1>
       <div style="float: right;">
          <div id="printerControls" style="display:none;">
@@ -1085,29 +1085,6 @@ if (gc != null) {
                   <li>By default, local attribute declarations have no namespace.</li>
                </ul>
             </td>
-         </tr>
-         <tr>
-            <th>Documentation</th>
-            <td class="documentation">
-			The 'normal range' and 'is normal' functions in the reference model are implemented
-			as attributes to enable storing this information explicitly rather than in a functional manner.
-		<br/>
-               <br/>
-			The precedence of the attributes in DV_INTERVAL are:
-			1. lower or upper_unbounded take precedence over presence of
-			the lower or upper value
-			2. lower or upper_included only has meaning when the appropriate
-			value exists
-		<br/>
-               <br/>
-			matchString limits the values of the match attribute in the Term mapping class
-		<br/>
-               <br/>
-			archetypeNodeId pattern matches allowable atCodes and archetypeIds, for use in locatable
-		<br/>
-               <br/>
-			atCode pattern matches allowable atCodes for use in Activity ID on ISM_Transitions in ACTION
-		</td>
          </tr>
       </table>
       <h3>Declared Namespaces</h3>
@@ -2547,8 +2524,7 @@ if (gc != null) {
                         <span class="type">
                            <a title="Jump to &#34;DV_TEMPORAL&#34; type definition." href="#h-148444502">DV_TEMPORAL</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div class="comment" style="margin-left: 1.5em">&lt;-- As an ISO 8601string yyyy-MM-dd allows for all dates--&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">value</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;Iso8601Date&#34; type definition." href="#h652387245">Iso8601Date</a>
@@ -2676,8 +2652,7 @@ if (gc != null) {
                         <span class="type">
                            <a title="Jump to &#34;DV_TEMPORAL&#34; type definition." href="#h-148444502">DV_TEMPORAL</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div class="comment" style="margin-left: 1.5em">&lt;-- As an ISO 8601string yyyy-MM-ddTHH:mm:ss, allows for all dates, times and partials--&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">value</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;Iso8601DateTime&#34; type definition." href="#h-393819110">Iso8601DateTime</a>
@@ -2803,8 +2778,7 @@ if (gc != null) {
                         <span class="type">
                            <a title="Jump to &#34;DV_AMOUNT&#34; type definition." href="#h875633120">DV_AMOUNT</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div class="comment" style="margin-left: 1.5em">&lt;-- As an ISO 8601 string starting with P for Period --&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">value</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;Iso8601Duration&#34; type definition." href="#h116386323">Iso8601Duration</a>
@@ -2948,6 +2922,13 @@ if (gc != null) {
          <tr>
             <th>Name</th>
             <td>DV_ENCAPSULATED</td>
+         </tr>
+         <tr>
+            <th>Used by (from the same schema document)</th>
+            <td>Complex Type <b>
+                  <a href="#h662790700">FEEDER_AUDIT</a>
+               </b>
+            </td>
          </tr>
          <tr>
             <th>Abstract</th>
@@ -3521,15 +3502,6 @@ if (gc != null) {
                            <span class="scTag">name</span>="<span class="scContent">data</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">base64Binary</span>
                            </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div class="comment" style="margin-left: 1.5em">&lt;--&lt;xs:element name="data"&gt;
-					&lt;xs:complexType&gt;
-						&lt;xs:simpleContent&gt;
-							&lt;xs:extension base="xs:base64Binary"&gt;
-							&lt;xs:attribute ref="xmime:contentType" use="required"/&gt;
-							&lt;/xs:extension&gt;
-						&lt;/xs:simpleContent&gt;
-					&lt;/xs:complexType&gt;
-					&lt;/xs:element&gt;--&gt;</div>
                         <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">media_type</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
@@ -5068,8 +5040,7 @@ if (gc != null) {
                         <span class="type">
                            <a title="Jump to &#34;DV_TEMPORAL&#34; type definition." href="#h-148444502">DV_TEMPORAL</a>
                         </span>
-                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div class="comment" style="margin-left: 1.5em">&lt;-- As an ISO 8601string HH:mm:ss, allows for all times and partials--&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">value</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">
                                  <a title="Jump to &#34;Iso8601Time&#34; type definition." href="#h652871372">Iso8601Time</a>
@@ -5340,6 +5311,10 @@ if (gc != null) {
                      <a title="Jump to &#34;DV_IDENTIFIER&#34; type definition." href="#h350251569">DV_IDENTIFIER</a>
                   </span> &lt;/feeder_system_item_ids&gt; <span class="occurs">[0..*]</span>
                </div>
+               <div style="margin-left: 1.5em">&lt;original_content&gt; <span class="type">
+                     <a title="Jump to &#34;DV_ENCAPSULATED&#34; type definition." href="#h734352955">DV_ENCAPSULATED</a>
+                  </span> &lt;/original_content&gt; <span class="occurs">[0..1]</span>
+               </div>
                <div style="margin-left: 1.5em">&lt;originating_system_audit&gt; <span class="type">
                      <a title="Jump to &#34;FEEDER_AUDIT_DETAILS&#34; type definition." href="#h-654927089">FEEDER_AUDIT_DETAILS</a>
                   </span> &lt;/originating_system_audit&gt; <span class="occurs">[1]</span>
@@ -5372,10 +5347,13 @@ if (gc != null) {
                <area shape="rect" alt="h350251569" coords="241,48,414,86"
                      href="BaseTypes.xsd.html#h350251569"/>
 
-               <area shape="rect" alt="h-654927089" coords="241,96,417,120"
+               <area shape="rect" alt="h734352955" coords="241,96,374,134"
+                     href="BaseTypes.xsd.html#h734352955"/>
+
+               <area shape="rect" alt="h-654927089" coords="241,144,417,168"
                      href="BaseTypes.xsd.html#h-654927089"/>
 
-               <area shape="rect" alt="h-654927089" coords="241,130,399,168"
+               <area shape="rect" alt="h-654927089" coords="241,178,399,216"
                      href="BaseTypes.xsd.html#h-654927089"/>
 
             </map>
@@ -5407,6 +5385,12 @@ if (gc != null) {
                            <a title="Jump to &#34;DV_IDENTIFIER&#34; type definition." href="#h350251569">DV_IDENTIFIER</a>
                         </span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                     <span class="scTag">name</span>="<span class="scContent">original_content</span>" <span class="scTag">type</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;DV_ENCAPSULATED&#34; type definition." href="#h734352955">DV_ENCAPSULATED</a>
+                        </span>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">originating_system_audit</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- openEHR Release 1.0.1 Content  XML schema -->
-<!-- Authored by Ocean Informatics 2007.04.02  -->
+<!-- Authored by Ocean Informatics 2007.04.13  -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.openehr.org/v1" targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified" version="v1.0.1" id="Content.xsd">
 	<xs:include schemaLocation="Structure.xsd"/>
 	<xs:complexType name="CONTENT_ITEM" abstract="true">
@@ -73,11 +73,6 @@
 			<xs:extension base="CARE_ENTRY">
 				<xs:sequence>
 					<xs:element name="data" type="HISTORY"/>
-					<!-- It is recommended that state data is recorded for each event (see EVENT class)
-						On occasions where it is necessary to have a detailed event model for
-						state separately than the data itself, then use this state History. It is not possible 
-						to use this element and the state element of events contained in the data history.
-					-->
 					<xs:element name="state" type="HISTORY" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
