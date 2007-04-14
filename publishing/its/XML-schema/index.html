@@ -10,6 +10,8 @@
 
 
 
+
+  
   
   
   
@@ -27,6 +29,8 @@
 
 
 
+
+  
   
   
   
@@ -49,8 +53,10 @@
 
 
 
+
 <h1><span style="font-style: italic;">open</span>EHR
 XML-schemas - Release 1.0.1</h1>
+
 
 
 
@@ -71,13 +77,16 @@ XML-schemas - Release 1.0.1</h1>
 
 
 
+
 This page provides access to the W3C XML schemas for the <span style="font-style: italic;">open</span>EHR Reference Model (RM) and Archetype Model (AM).<br>
 
 
 
 
 
+
 <h3>Stable Schemas</h3>
+
 
 
 
@@ -94,7 +103,9 @@ For the RM, separate schemas have been created, as follows:<br>
 
 
 
+
 <ul>
+
 
 
 
@@ -115,6 +126,7 @@ types</a> - types from rm.data_types and rm.support.identification packages. (<a
 
 
 
+
   <li><a href="documentation/Structure.xsd.html">Structure</a>
 - types from rm.data_structures and rm.common.generic packages. (<a href="../../../ITS/XML-schema/Structure.xsd">xsd</a>
 file)</li>
@@ -123,7 +135,9 @@ file)</li>
 
 
 
+
   <li><a href="documentation/resource.xsd.html">Resource</a> - types from the rm.common.resource package (<a href="../../../ITS/XML-schema/Resource.xsd">xsd</a> file)</li>
+
 
 
 
@@ -145,9 +159,11 @@ file)</li>
 
 
 
+
   <li><a href="documentation/Composition.xsd.html">Composition</a>
 - rm.composition. (<a href="../../../ITS/XML-schema/Composition.xsd">xsd</a>
 file)</li>
+
 
 
 
@@ -164,7 +180,9 @@ file)</li>
 
 
 
+
 </ul>
+
 
 
 
@@ -178,7 +196,9 @@ For the AM, two schemas are provided:<br>
 
 
 
+
 <ul>
+
 
 
 
@@ -191,6 +211,7 @@ For the AM, two schemas are provided:<br>
 
 
 
+
   <li><a href="documentation/OpenehrProfile.xsd.html">OpenehrProfile</a> - types from the <span style="font-style: italic;">open</span>EHR  Archetype Profile package (<a href="../../../ITS/XML-schema/OpenehrProfile.xsd">xsd</a> file)</li>
 
 
@@ -198,7 +219,9 @@ For the AM, two schemas are provided:<br>
 
 
 
+
 </ul>
+
 
 
 
@@ -210,7 +233,9 @@ For the AM, two schemas are provided:<br>
 
 
 
+
 Two further schemas are in the draft stage, and are under active development:<br>
+
 
 
 
@@ -222,13 +247,16 @@ Two further schemas are in the draft stage, and are under active development:<br
 
 
 
+
   <li>Extract - types from rm.extract package (<a href="../../../ITS/XML-schema/Extract.xsd">xsd</a> file)</li>
 
 
 
 
 
+
   <li>Template - (coming soon)</li>
+
 
 
 
@@ -244,7 +272,9 @@ Two further schemas are in the draft stage, and are under active development:<br
 
 
 
-<h2>Rules</h2>
+
+<h2>Transformation Rules</h2>
+
 
 
 
@@ -265,7 +295,9 @@ from the reference model.<span style="color: rgb(204, 0, 0);"></span><br>
 
 
 
+
 <h3>Basic type mappings</h3>
+
 
 
 
@@ -289,7 +321,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
   <tbody>
+
 
 
 
@@ -309,7 +343,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       <td style="background-color: rgb(153, 255, 255);">
+      
       
       
       
@@ -328,7 +364,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       </td>
+
 
 
 
@@ -347,6 +385,7 @@ been made to the reference model to accommodate these standards.
       
       
       
+      
       <h4>XML Schema complexType</h4>
 
 
@@ -357,7 +396,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       </td>
+
 
 
 
@@ -377,6 +418,7 @@ been made to the reference model to accommodate these standards.
 
 
 
+
     <tr>
 
 
@@ -387,7 +429,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       <td style="background-color: rgb(204, 255, 255);">DV_DATE_TIME</td>
+
 
 
 
@@ -409,6 +453,7 @@ been made to the reference model to accommodate these standards.
 
 
 
+
     </tr>
 
 
@@ -419,7 +464,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
     <tr>
+
 
 
 
@@ -431,9 +478,12 @@ been made to the reference model to accommodate these standards.
 
       <td style="background-color: rgb(204, 255, 255);">DV_DATE</td>
 
+
       <td rowspan="1">value is of type Iso8601Date, a restriction of xs:string, matching regular expression <br>
 
+
 \d{4}((((0[1-9])|(1[0-2]))((0[1-9])|([12]\d)|(3[01]))?)?<br>
+
 
 |(\-(((0[1-9])|(1[0-2]))(\-((0[1-9])|([12]\d)|(3[01])))?)?)?)</td>
 
@@ -445,6 +495,7 @@ been made to the reference model to accommodate these standards.
 
 
 
+
     </tr>
 
 
@@ -455,7 +506,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
     <tr>
+
 
 
 
@@ -467,9 +520,12 @@ been made to the reference model to accommodate these standards.
 
       <td style="background-color: rgb(204, 255, 255);">DV_TIME</td>
 
+
       <td rowspan="1">value is of type Iso8601Time, a restriction of xs:string, matching regular expression<br>
 
+
 ([01]\d|2[0-3])([0-5]\d([0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-2]))(00|30)?))?|<br>
+
 
 ([01]\d|2[0-3])(:[0-5]\d(:[0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-2]))(:(00|30))?))? </td>
 
@@ -481,7 +537,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
     </tr>
+
 
 
 
@@ -516,6 +574,7 @@ been made to the reference model to accommodate these standards.
 
 
     <tr>
+
 
 
 
@@ -535,9 +594,12 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       <td>value is of type DV_Iso8601Duration, a restriction of xs:string, matching regular expression<br>
 
+
 P(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(\d+H)?(\d+M)?(\d+(\.\d+)?S)?)?</td>
+
 
 
 
@@ -557,6 +619,8 @@ P(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(\d+H)?(\d+M)?(\d+(\.\d+)?S)?)?</td>
 
 
 
+
+  
   
   
   
@@ -576,7 +640,9 @@ P(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(\d+H)?(\d+M)?(\d+(\.\d+)?S)?)?</td>
 
 
 
+
 <h3>Generic types</h3>
+
 
 
 
@@ -604,7 +670,9 @@ constraints.<br>
 
 
 
+
 <table style="text-align: left;" cellpadding="2" cellspacing="2">
+
 
 
 
@@ -624,6 +692,7 @@ constraints.<br>
 
 
 
+
     <tr>
 
 
@@ -634,7 +703,9 @@ constraints.<br>
 
 
 
+
       <td style="background-color: rgb(153, 255, 255);">
+      
       
       
       
@@ -653,7 +724,9 @@ constraints.<br>
 
 
 
+
       </td>
+
 
 
 
@@ -672,7 +745,9 @@ constraints.<br>
       
       
       
+      
       <h4>XML Schema complexType</h4>
+
 
 
 
@@ -692,6 +767,7 @@ constraints.<br>
 
 
 
+
     </tr>
 
 
@@ -702,31 +778,57 @@ constraints.<br>
 
 
 
+
     <tr>
+
       <td style="background-color: rgb(204, 255, 255);">Interval&lt;Integer&gt;</td>
+
       <td>IntervalOfInteger (BaseTypes.xsd)</td>
+
     </tr>
+
     <tr>
+
       <td style="background-color: rgb(204, 255, 255);">Interval&lt;Real&gt;</td>
+
       <td>IntervalOfReal (BaseTypes.xsd)</td>
+
     </tr>
+
     <tr>
+
       <td style="background-color: rgb(204, 255, 255);">Interval&lt;Date&gt;</td>
+
       <td>IntervalOfDate (BaseTypes.xsd)</td>
+
     </tr>
+
     <tr>
+
       <td style="background-color: rgb(204, 255, 255);">Interval&lt;Time&gt;<span style="font-style: italic;"></span></td>
+
       <td>IntervalOfTime (BaseTypes.xsd)</td>
+
     </tr>
+
     <tr>
+
       <td style="background-color: rgb(204, 255, 255);">Interval&lt;DateTime&gt;<span style="font-style: italic;"></span></td>
+
       <td>IntervalOfDateTime (BaseTypes.xsd)</td>
+
     </tr>
+
     <tr>
+
       <td style="background-color: rgb(204, 255, 255);">Interval&lt;Duration&gt;<span style="font-style: italic;"></span></td>
+
       <td>IntervalOfDuration (BaseTypes.xsd)</td>
+
     </tr>
+
     <tr>
+
 
 
 
@@ -746,9 +848,12 @@ constraints.<br>
 
 
 
+
       <td>only one type is used, namely DV_INTERVAL, with lower and upper of type DV_ORDERED. Software implementations <br>
 
+
 of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&nbsp;implement further typing sensibly.<br>
+
  (BaseTypes.xsd)</td>
 
 
@@ -759,7 +864,9 @@ of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&n
 
 
 
+
     </tr>
+
 
 
 
@@ -779,6 +886,7 @@ of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&n
 
 
 
+
       <td style="background-color: rgb(204, 255, 255);">VERSION&lt;T&gt;</td>
 
 
@@ -789,8 +897,11 @@ of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&n
 
 
 
+
       <td>only one type is used, namely VERSION. The subtype ORIGINAL_VERSION has its data attribute of type LOCATABLE<br>
+
 (Version.xsd)</td>
+
 
 
 
@@ -810,13 +921,6 @@ of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&n
 
 
 
-    
-
-
-
-
-
-
 
     
 
@@ -826,6 +930,15 @@ of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&n
 
 
 
+    
+
+
+
+
+
+
+
+  
   
   
   
@@ -845,6 +958,7 @@ of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&n
 
 
 
+
 <br>
 
 
@@ -855,10 +969,24 @@ of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&n
 
 
 
+
+<h3>Multiple Inheritance</h3>
+There are a couple of places where multiple inheritance occurs in the <span style="font-style: italic;">open</span>EHR
+reference model. In all cases, only one inheritance branch corresponds
+to subtyping in the substitutability (i.e. 'is-a') sense; the other
+branches are always 'facility' &nbsp;or 'mix-in' inheritance. In the
+RM, classes inheriting in this way include <big><span style="font-family: monospace;">rm.data_types.quantity.DV_INTERVAL</span></big> and the <big><span style="font-family: monospace;">rm.data_types.quantity.date_time</span></big>
+classes. The latter inherit only interface, which has no visibility in
+XML-schema. For the former, the inheritance of Interval&lt;T&gt; by
+DV_INTERVAL&lt;T&gt; is done in the schema simply by direct inclusion,
+since the other branch of inheritance (of DATA_VALUE) is the one which
+must be visible to schema processing.
 <h3>Non-included classes and attributes</h3>
+
 
 The following RM classes are not included in the schema, as they are not needed in the data view: UID, UUID, 
 INTERNET_ID, ISO_OID, and VERSION_TREE_ID.&nbsp;<br>
+
 UID and its subtypes are not needed because OBJECT_ID has a <span style="font-style: italic;">value</span> attribute of type string and its subtypes have a function that return a UID.
 
 
@@ -878,14 +1006,23 @@ UID and its subtypes are not needed because OBJECT_ID has a <span style="font-st
 
 
 
+
 None in the current release.<br>
+
 <h3>Conditional Rules</h3>
+
 In instance data, LOCATABLE.archetype_details (of type ARCHETYPED) is
 only included when template_id exists, since the archetype_id attribute
 from ARCHETYPED is included by default as the value of
 LOCATABLE.archetype_node_id on archetype root-point LOCATABLE instances
-(top of a SECTION structure, OBSERVATION structure etc).
+(top of a SECTION structure, OBSERVATION structure etc).<br>
+<h3>XML Attributes and Elements</h3>
+XML attributes are not used with the exception of the
+LOCATABLE.archetype_node_id RM attribute, which is, from the point of
+view of RM classes, true meta-data. Making it an attribute allows
+archetype paths to be easily mapped to Xpaths.
 <h2>Acknowledgements</h2>
+
 
 
 
@@ -902,6 +1039,7 @@ them
 (Wed, 15 Feb 2006) $&nbsp;&nbsp;
 $LastChangedRevision$
 </span><br>
+
 
 
 
