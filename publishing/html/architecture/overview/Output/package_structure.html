@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
+<meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
+<meta name="LASTUPDATED" content="04/13/07 15:04:38">
+<link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
+<title>5 openEHR Package Structure  </title>
+</head>
+
+<body background="images/backgrnd.gif">
+
+<table width="331" border="0" align="right" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23"
+    border="0" alt="TOC"> </a></td>
+    <td><a href="design_principles.html"><img src="images/navprev.gif" width="81" height="23"
+    border="0" alt="PREV"> </a></td>
+    <td><a href="design_of_ehr.html"><img src="images/navnext.gif" width="81" height="23"
+    border="0" alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23"
+    border="0" alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+<p><img src="images/openehr_logo.gif" width="109" height="23" alt="openEHR logo"></p>
+<hr align="left">
+
+<blockquote>
+<h2 class="Heading1">
+  <a name="1118746"> </a>5	 openEHR Package Structure
+</h2>
+<h3 class="Heading2">
+  <a name="1118750"> </a>5.1	 Overview
+</h3>
+<p class="Body">
+  <a name="1125935"> </a><a href="package_structure.html#1125935">FIGURE 8</a> illustrates the package structure of the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR formal specifications. Three major packages are defined: <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">rm</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">am</span> and <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">sm</span>. All packages defining detailed models appear inside one of these outer packages, which may also be thought of as namespaces. They are conceptually defined within the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">org.openehr</span> namespace, which can be represented in UML as further packages. In some implementation technologies (e.g. Java), the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">org.openehr</span> namespace may actually be used within program texts. <br clear="all" /><table align="center"><tr><td><img src="images/package_structurea.gif" height="244" width="647" align="center" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<p class="Body">
+  <a name="1139209"> </a>One of the important design aims of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is to provide a coherent, consistent and re-usable type system for scientific and health computing. Accordingly, the `core' of the RM (bottom-most layers) provides identifiers, data types, data structures and various common design patterns that can be re-used ubiquitously in the upper layers of the RM, and equally in the AM and SM packages. <a href="package_structure.html#1139209">FIGURE 9</a> illustrates the relationships between the packages. Dependencies only exist from higher packages to lower packages.<br clear="all" /><table align="left"><tr><td><img src="images/package_structure5.gif" height="347" width="648" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<h3 class="Heading2">
+  <a name="1118777"> </a>5.2	 Reference Model (RM)
+</h3>
+<p class="Body">
+  <a name="1118780"> </a>Each package defines a local context for definition of classes. <a href="package_structure.html#1118788">FIGURE 10</a> illustrates the RM package structure. An informal division into "domain", "patterns" and "core" is shown. The packages in the latter group are generic, and are used by all <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR models, in all the outer packages. Together, they provide identification, access to knowledge resources, data types and structures, versioning semantics, and support for archetyping. The packages in the former group define the semantics of enterprise level health information types, including the EHR and demographics.
+</p>
+<p class="Body">
+  <a name="1118788"> </a>Each outer package in <a href="package_structure.html#1118788">FIGURE 10</a> corresponds to one <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR specification document<a href="#1118787"><sup>1</sup></a>, documenting an "information model" (IM). The package structure will normally be replicated in all ITS expressions, e.g. XML schema, programming languages like Java, C# and Eiffel, and interoperability definitions like WSDL, IDL and .Net.<br clear="all" /><table align="center"><tr><td><img src="images/package_structure2.gif" height="681" width="485" align="center" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<h4 class="Heading3">
+  <a name="1119133"> </a>5.2.1	 Package Overview
+</h4>
+<p class="Body">
+  <a name="1118943"> </a>The following sub-sections provide a brief overview of the RM packages.
+</p>
+<h5 class="Heading4">
+  <a name="1118944"> </a>Support Information Model
+</h5>
+<p class="Body">
+  <a name="1118945"> </a>This package describes the most basic concepts, required by all other packages, and is comprised of   the Definitions, Identification, Terminology and Measurement packages. The semantics defined in these packages allow all other models to use identifiers and to have access to knowledge services like terminology and other reference data. The support package includes the special package <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">assumed_types</span>, describing what basic types are assumed by <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR in external type systems; this package is a guide for integrating <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR models proper into the type systems of implementation technologies.
+</p>
+<h5 class="Heading4">
+  <a name="1118946"> </a>Data Types Information Model
+</h5>
+<p class="Body">
+  <a name="1118947"> </a>A set of clearly defined data types underlies all other models, and provides a number of general and clinically specific types required for all kinds of health information. The following categories of data types are defined in the data types reference model.
+</p>
+<ul>
+  <li class="SmartList1"><a name="1118948"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Text</span>: plain text, coded text, paragraphs.
+  <li class="SmartList1"><a name="1118949"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Quantities</span>: any ordered type including ordinal values (used for representing symbolic ordered values such as "+", "++", "+++"), measured quantities with values and units, and so on.
+  <li class="SmartList1"><a name="1118950"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Date/times</span>: date, time, date-time types, and partial date/time types.
+  <li class="SmartList1"><a name="1118951"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Encapsulated data</span>: multimedia, parsable content.
+  <li class="SmartList1"><a name="1118952"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Basic types</span>: boolean, state variable.
+</ul>
+<h5 class="Heading4">
+  <a name="1118953"> </a>Data Structures Information Model
+</h5>
+<p class="Body">
+  <a name="1118954"> </a>In most <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR information models, generic data structures are used for expressing content whose particular structure will be defined by archetypes. The generic structures are as follows.
+</p>
+<ul>
+  <li class="SmartList1"><a name="1118955"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Single</span>: single items, used to contain any single value, such as a height or weight.
+  <li class="SmartList1"><a name="1118956"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">List</span>: linear lists of named items, such as many pathology test results.
+  <li class="SmartList1"><a name="1118957"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Table</span>: tabular data, including unlimited and limited length tables with named and ordered columns, and potentially named rows.
+  <li class="SmartList1"><a name="1118958"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Tree</span>: tree-shaped data, which may be conceptually a list of lists, or other deep structure.
+  <li class="SmartList1"><a name="1118959"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">History</span>: time-series structures, where each time-point can be an entire data structure of any complexity, described by one of the above structure types. Point and interval samples are supported.
+</ul>
+<h5 class="Heading4">
+  <a name="1118960"> </a>Common Information Model
+</h5>
+<p class="Body">
+  <a name="1118961"> </a>Several concepts recur in higher level packages. The classes <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LOCATABLE</span> and <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ARCHETYPED</span> provide the link between information and archetype models. The classes <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ATTESTATION</span> and <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTICIPATION</span> are generic domain concepts that appear in various reference models. The <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">change_control</span> package defines a formal model of change management and versioning which applies to any service that needs to be able to supply previous states of its information, in particular the demographic and EHR services. The key semantics of versioning in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR are described in <a href="versioning.html#1142419">section 8 on page 45</a>.
+</p>
+<h5 class="Heading4">
+  <a name="1162746"> </a>Security Information Model
+</h5>
+<p class="Body">
+  <a name="1162750"> </a>The Security Information Model defines the semantics of access control and privacy setting for information in the EHR.
+</p>
+<h5 class="Heading4">
+  <a name="1119129"> </a>EHR Information Model
+</h5>
+<p class="Body">
+  <a name="1119130"> </a>The EHR IM defines the containment and context semantics of the concepts <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">EHR</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">COMPOSITION</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">SECTION</span>, and <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ENTRY</span>. These classes are the major coarse-grained components of the EHR, and correspond directly to the classes of the same names in CEN EN13606:2005 and fairly closely to the "levels" of the same names in the HL7 Clinical Document Architecture (CDA) release 2.0.
+</p>
+<h5 class="Heading4">
+  <a name="1118964"> </a>EHR Extract Information Model
+</h5>
+<p class="Body">
+  <a name="1118965"> </a>The EHR Extract IM defines how an EHR extract is built from <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">COMPOSITIONs</span>, demographic, and access control information from the EHR. A number of Extract variations are supported, including "full <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR", a simplified form for integration with CEN EN13606, and an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR/<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR synchronisation Extract.
+</p>
+<h5 class="Heading4">
+  <a name="1172773"> </a>Integration Information Model
+</h5>
+<p class="Body">
+  <a name="1172779"> </a>The Integration model defines the class <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">GENERIC_ENTRY</span>, a subtype of <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ENTRY</span> used to represent free-form legacy or external data as a tree. This Entry type has its own archetypes, known as "integration archetypes", which can be used in concert with clinical archetypes as the basis for a tool-based data integration system. See <a href="integration.html#1160800">section 14 on page 79</a> for more details.
+</p>
+<h5 class="Heading4">
+  <a name="1118966"> </a>Demographics Information Model
+</h5>
+<p class="Body">
+  <a name="1118967"> </a>The demographic model defines generic concepts of <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTY</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ROLE</span> and related details such as contact addresses. The archetype model defines the semantics of constraint on <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTYs</span>, allowing archetypes for any type of person, organisation, role and role relationship to be described. This approach provides a flexible way of including the arbitrary demographic attributes allowed in the OMG HDTF PIDS standard.
+</p>
+<h5 class="Heading4">
+  <a name="1118968"> </a>Workflow Information Model (future)
+</h5>
+<p class="Body">
+  <a name="1118969"> </a>Workflow is the dynamic side of clinical care, and consists of models to describe the semantics of processes, such as recalls, as well as any care process resulting from execution of guidelines.
+</p>
+<h3 class="Heading2">
+  <a name="1118970"> </a>5.3	 Archetype Model (AM)
+</h3>
+<p class="Body">
+  <a name="1118971"> </a>The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">am</span> package contains the models necessary to describe the semantics of archetypes and templates, and their use within <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR. These include ADL, the Archetype Definition Language (expressed in the form of a syntax specification), the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype</span> and <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">template</span> packages, defining the object-oriented semantics of archetypes and templates, and the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">openehr_profile</span> package, which defines a profile of the generic archetype model defined in the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype</span> package, for use in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR (and other health computing endeavours). The internal structure of the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">am</span> package is shown in <a href="package_structure.html#1118971">FIGURE 11</a>.<br clear="all" /><table align="center"><tr><td><img src="images/package_structure4.gif" height="224" width="485" align="center" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<h3 class="Heading2">
+  <a name="1119023"> </a>5.4	 Service Model (SM)
+</h3>
+<p class="Body">
+  <a name="1119024"> </a>The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR service model includes definitions of basic services in the health information environment, centred around the EHR. It is illustrated in <a href="package_structure.html#1119063">FIGURE 12</a>. The set of services actually included will undoubtedly evolve over time, so this diagram should not be seen as definitive.
+</p>
+<h5 class="Heading4">
+  <a name="1119059"> </a>Virtual EHR API
+</h5>
+<p class="Body">
+  <a name="1119060"> </a>The virtual EHR API defines the fine-grained interface to EHR data, at the level of Compositions and below. It allows an application to create new EHR information, and to request parts of an existing EHR and modify them. This API enables fine-grained archetype-mediated data manipulation. Changes to the EHR are committed via the EHR service.
+</p>
+<h5 class="Heading4">
+  <a name="1119061"> </a>EHR Service Model
+</h5>
+<p class="Body">
+  <a name="1119062"> </a>The EHR service model defines the coarse-grained interface to electronic health record service. The level of granularity is <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR Contributions and Compositions, i.e. a version-control / change-set interface.
+</p>
+<p class="Body">
+  <a name="1119063"> </a>Part of the model defines the semantics of server-side querying, i.e. queries which cause large amounts of data to be processed, generally returning small aggregated answers, such as averages, or sets of ids of patients matching a particular criterion.<br clear="all" /><table align="center"><tr><td><img src="images/package_structure3.gif" height="208" width="647" align="center" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<h5 class="Heading4">
+  <a name="1119064"> </a>Archetype Service Model
+</h5>
+<p class="Body">
+  <a name="1119065"> </a>The archetype service model defines the interface to online repositories of archetypes, and can be used both by GUI applications designed for human browsing as well as access by other software services such as the EHR.
+</p>
+<h5 class="Heading4">
+  <a name="1119066"> </a>Terminology Interface Model
+</h5>
+<p class="Body">
+  <a name="1140952"> </a>The terminology interface service provides the means for all other services to access any terminology available in the health information environment, including basic classification vocabularies such as ICDx and ICPC, as well as more advanced ontology-based terminologies. Following the concept of division of responsibilities in a system-of-systems context, the terminology interface abstracts the different underlying architectures of each terminology, allowing other services in the environment to access terms in a standard way. The terminology service is thus the gateway to all ontology- and terminology-based knowledge services in the environment, which along with services for accessing guidelines, drug data and other "reference data" enables inferencing and decision support to be carried out in the environment.
+</p>
+
+  <div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="1118787"> </a><a href="#1118788"><sup>1</sup></a>with the exception of the EHR and Composition packages, which are both described in the EHR Reference Model document.<br>
+</div>
+</blockquote>
+
+<hr>
+
+<table align="right" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="right"><font size="1">
+    <a href="http://www.openEHR.org"><img src="images/openehr_logo.gif" width="109" height="23" border="0"></a><br>
+    openEHR Foundation<br>
+    http://www.openEHR.org<br>
+    </font></td>
+  </tr>
+</table>
+
+<table width="331" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23" border="0"
+    alt="TOC"> </a></td>
+    <td><a href="design_principles.html"><img src="images/navprev.gif" width="81" height="23" border="0"
+    alt="PREV"> </a></td>
+    <td><a href="design_of_ehr.html"><img src="images/navnext.gif" width="81" height="23" border="0"
+    alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23" border="0"
+    alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
+<meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
+<meta name="LASTUPDATED" content="04/13/07 15:06:02">
+<link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
+<title>12 Terminology in openEHR  </title>
+</head>
+
+<body background="images/backgrnd.gif">
+
+<table width="331" border="0" align="right" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23"
+    border="0" alt="TOC"> </a></td>
+    <td><a href="paths_and_locators.html"><img src="images/navprev.gif" width="81" height="23"
+    border="0" alt="PREV"> </a></td>
+    <td><a href="deployment.html"><img src="images/navnext.gif" width="81" height="23"
+    border="0" alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23"
+    border="0" alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+<p><img src="images/openehr_logo.gif" width="109" height="23" alt="openEHR logo"></p>
+<hr align="left">
+
+<blockquote>
+<h2 class="Heading1">
+  <a name="1166619"> </a>12	 Terminology in openEHR
+</h2>
+<h3 class="Heading2">
+  <a name="1166620"> </a>12.1	 Overview
+</h3>
+<p class="Body">
+  <a name="1171881"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR archetypes provide a powerful way to define the meaning of clinical and related data, and to connect, or "bind", data to recognised terminologies such as LOINC, ICDx, ICPC, SNOMED-CT and the many other terminologies and vocabularies used in healthcare. Terminology is used in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR in the following ways:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1171861"> </a>The values of coded attributes in the reference model are defined by an "<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR" terminology. 
+  <li class="SmartList1"><a name="1171886"> </a>Each archetype contains its own internal terminology, defining the meaning of each element.
+  <li class="SmartList1"><a name="1171851"> </a>Bindings to external terminologies can be included in an archetype, allowing direct mappings to terms, or mappings to queries that return specific value sets. 
+  <li class="SmartList1"><a name="1171903"> </a>Querying the EHR using external terminologies is supported by archetype bindings. 
+</ul>
+<p class="Body">
+  <a name="1171905"> </a>The following sections describe these features.
+</p>
+<h3 class="Heading2">
+  <a name="1170206"> </a>12.2	 Terminology to Support the Reference Model
+</h3>
+<p class="Body">
+  <a name="1170200"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR has its own small terminology and code sets, which are used to provide the value sets of a number of attributes in the reference model. Code sets are used to express well-known internationally standardised lists of codes where the codes themselves have meaningful values e.g. the ISO 3166 country codes ("au", "cn", "pl" etc). Six such code sets are used by various attributes in the reference model, each of type <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">CODE_PHRASE</span> (the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR type used to represent a term code).
+</p>
+<p class="Body">
+  <a name="1166622"> </a>For other coded attributes, such as <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTICIPATION</span>.<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">function</span> in the reference model, the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR terminology takes the more orthodox route in terminology design, and defines value sets in groups using meaningless codes and rubrics. These attributes are always of type <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DV_CODED_TEXT</span>; the code itself is contained within the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">defining_code</span> attribute.
+</p>
+<p class="Body">
+  <a name="1166627"> </a>The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR terminology is described in the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR Terminology document<a href="#1166626"><sup>1</sup></a>, with computable expressions available at the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR terminology page<a href="#1166631"><sup>2</sup></a>.
+</p>
+<h3 class="Heading2">
+  <a name="1167339"> </a>12.3	 Archetype Internal Terminology
+</h3>
+<p class="Body">
+  <a name="1170313"> </a>Archetypes contain their own local terminology (found in the `ontology' section of an archetype). The use of internal term sets is appropriate when there is no structure to the terms (ie no relationships) and when synonyms are not important. Thus, the use is limited to small flat lists of terms. The advantages of the terms being internal to the archetype, apart from computational efficiency mentioned above, are:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1170318"> </a>Queries can be based on archetypes alone and do not require interacting with a terminology server;
+  <li class="SmartList1"><a name="1170319"> </a>Translation of the terms is made within an explicit thematic context (since every archetype is about a specific topic) and is therefore far more likely to be accurate;
+  <li class="SmartList1"><a name="1170320"> </a>Many terms required in archetypes are not available even in very large terminologies;
+  <li class="SmartList1"><a name="1170321"> </a>People can share data based on archetypes even if they do not share terminologies.
+</ul>
+<p class="Body">
+  <a name="1167340"> </a>It is clear, however, that many archetypes require a connection to external terminologies to provide the full benefits of automatic processing; this is described in the next section.
+</p>
+<p class="Body">
+  <a name="1170308"> </a>The internal terminology takes the form of a set of {code, text, description} semantic definitions for each node of the archetype structure. Each such term is identified by an "at" (archetype term) code, e.g. [at0012]. Each code defined locally in an archetype is used for one of two purposes:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1167449"> </a>either to semantically identify the data nodes of the archetype (i.e. to "name" the data), or
+  <li class="SmartList1"><a name="1167456"> </a>to provide value-sets for leaf attributes.
+</ul>
+<p class="Body">
+  <a name="1170357"> </a>For example, the local codes in an "Apgar result"<a href="#1170356"><sup>3</sup></a> archetype could contain terms for "1 minute event" and "2 minute event". These codes are associated with the reference model nodes within the `definition' part of the archetype. In the Apgar example, the two codes (say [at0003] and [at0026]) will be mapped to nodes of reference model type <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">EVENT</span> (<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">rm.data_structures.history</span> package), as shown in <a href="terminology.html#1170357">FIGURE 34</a>. It is this mapping that is the basis for archetype paths: an archetype path is simply the alternating pattern of reference model attribute names and node codes.<br clear="all" /><table align="left"><tr><td><img src="images/terminology2.gif" height="510" width="645" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<p class="Body">
+  <a name="1170411"> </a>The second use of local codes is as values. In <a href="terminology.html#1170357">FIGURE 34</a>, the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ELEMENT</span> node identified by code [at0005] has as its value constraint an <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ORDINAL</span> type whose values can be 0, 1, or 2. Each of these values is coded by the codes [at0006], [at0007], and [at0008]. An extract of the archetype ontology showing these terms is shown in <a href="terminology.html#1170411">FIGURE 35</a>.<br clear="all" /><table align="left"><tr><td><img src="images/terminology3.gif" height="724" width="647" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<h3 class="Heading2">
+  <a name="1170237"> </a>12.4	 Binding to External Terminologies
+</h3>
+<h5 class="Heading4">
+  <a name="1172012"> </a>Binding External Terminology Codes to Archetype Codes
+</h5>
+<p class="Body">
+  <a name="1172013"> </a>The first kind of binding is the ability within an archetype to map an internal code to a code from an external terminology. The bindings are grouped on the basis of external terminology, allowing any given internal code in an archetype to be bound to codes in multiple terminologies. Usually, coverage provided by external terminologies is incomplete, and the mappings may be approximate, so care must be taken in creating the mappings in the first place. In the example shown in <a href="terminology.html#1170411">FIGURE 35</a>, two paths are shown respectively as being bound to LOINC codes for 1-minute and 2-minute Apgar total. In this example, the whole path is bound, meaning that the mapping only holds between [at0025] and [LNC205::9272-6] when [at0025] occurs in the first path; when it occurs in the second path, the mapping is to a different LOINC code. This is how so-called "pre-coordinated" codes from external terminologies can be mapped to an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR archetype concept.
+</p>
+<p class="Body">
+  <a name="1172017"> </a>Bindings can also be made between atomic internal codes and external codes, in which case the meaning is that the mapping always holds, no matter how many times the internal code is used within the archetype.
+</p>
+<h5 class="Heading4">
+  <a name="1171922"> </a>Binding Terminology Value-sets to Archetypes
+</h5>
+<p class="Body">
+  <a name="1171923"> </a>An important requirement with respect to terminology is that of specifying value sets for attributes defined in archetypes. Sometimes value sets are defined locally within the archetype, because the terms are not available in published terminologies, and in any case may be too hard to define therein, due to the lack of encapsulation. The terms "no effort", "moderate effort" and "crying" for example are recognised values for the "breathing" attribute of an Apgar result<a href="#1171927"><sup>4</sup></a>. In the context of Apgar / breathing, the meanings are clear; clearly however a term with this rubric within a terminology like SNOMED-CT would need to be pre-coordinated. More importantly, there seems to be little business value in mapping a SNOMED term for "no effort", since a query for items containing "no effort" is unlikely to be useful in a clinical context.
+</p>
+<p class="Body">
+  <a name="1171928"> </a>For many other kinds of attributes however, terminologies are an appropriate source of values. Often such attributes define kinds of real world phenomena, such as kinds of disease and blood groups, rather than qualities of a phenomenon such as "no effort", or "blue". For these attributes a different kind of connection to external terminology is required. This is achieved in a similar way as for single code bindings: an internal code is defined, in this case an "ac" code ("ac" = archetype constraint), and this is bound to queries to one or more external terminologies, whose result would be a (possibly structured) value set from that terminology. The logical scheme is illustrated in <a href="terminology.html#1171928">FIGURE 36</a>, where he attribute value to be coded is "blood group phenotype".<br clear="all" /><table align="left"><tr><td><img src="images/terminologya.gif" height="565" width="648" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<p class="Body">
+  <a name="1171988"> </a>Currently there is no standard for such queries. This does not affect archetypes directly, since they simply hold an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">identifier</span> for a query; the query itself is defined within a "terminology query server". The result of this query is a list of blood group phenotypes, which might appear as shown at the bottom of <a href="terminology.html#1171928">FIGURE 36</a>.
+</p>
+<h3 class="Heading2">
+  <a name="1166714"> </a>12.5	 Querying using External Terminologies
+</h3>
+<p class="Body">
+  <a name="1172134"> </a>Querying through EHR data is frequently cited to be the major utility of terminology with respect to health information. With the mappings defined in archetypes, a number of approaches are possible, however the semantics of the intended query need to be understood first. Consider a query for "adenocarcinoma" on a patient record. SNOMED-CT includes 63 terms beginning with "adenocarcinoma" (and 171 terms which include the word as a secondary part of the phrase), some as children of a common parent. Nevertheless, the terms do not <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">all</span> have a single common parent; a choice has to be made of which terms correspond to the intent of the query. If it is to find any previous diagnosis of "adenocarcinoma", then at least the terms of the form "adenocarcinoma of lung" [snomed-ct::254626006], "... of liver" have to be included. These are within the "clinical finding" hierarchy, so the use of these latter terms should ensure that matches are not made with other uses of the same terms in the record, e.g. "fear of adenocarcinoma" or "minimal risk of adenocarcinoma". Such correct matching is completely dependent upon the correct use of SNOMED-CT terms in the first place by the software application and/or user creating the data. It is easy to imagine an application that saves data (including <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR data) in the form of two name/value pairs: {"principal diagnosis", [snomed-ct::35917007] ("adenocarcinoma")} and {"site", "lung"}. Querying using "adenocarcinoma of lung" [snomed-ct::254626006] will fail, even though this is exactly the meaning of the data. The data are not wrong as such, but the lesson is clear: <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: underline; text-transform: none; vertical-align: baseline">coding of data and code use in queries must be governed by common models</span>, otherwise there is no hope of reliably processing the data.
+</p>
+<p class="Body">
+  <a name="1170136"> </a>Under the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR aproach, path-based querying can be used to specify (for example):
+</p>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 3pt; margin-left: 45pt; margin-right: 0pt; margin-top: 3pt; text-align: justify; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="1172186"> </a>"<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">EVALUATIONs</span> based on a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">problem-diagnosis-histological_staging</span> archetype" with a value at the path <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">/data/items[at0002.1.1]/value/code</span> (histological diagnosis) equal-to-or-subsumed-by "clinical finding" and equal-to-or-subsumed-by "adenocarcinoma".<br>
+</div>
+<p class="Body">
+  <a name="1172187"> </a>The assumption here is that the value at this path was <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">originally</span> restricted by the archetype from which the path is taken, to conforming to the relation {is-a "clinical finding" and is-a "abnormal morphological mass"}. Any finding of adenocarcinoma of the lung is then forced to be from the resulting subsumption hierarchy; other "adenocarcinoma" terms cannot be wrongly used in this position.
+</p>
+<p class="Body">
+  <a name="1172224"> </a>However, even if the archetype had not restricted the value in this way, the same query which searched for any "adenocarcinoma" term at the same path could reasonably be used to locate "previous diagnoses of adenocarcinoma", since this is the only use of the archetype. In a similar way, archetype path-based querying can be used to distinguish the other potential ambiguities described in <a href="design_of_ehr.html#1148435">section 6.4 on page 29</a>.
+</p>
+
+  <div style="color: #0000ff;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: underline; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="1166626"> </a><a href="#1166627"><sup>1</sup></a><span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: underline; text-transform: none; vertical-align: baseline"><a href="http://svn.openehr.org/specification/TRUNK/publishing/architecture/terminology.pdf">http://svn.openehr.org/specification/TRUNK/publishing/architecture/terminology.pdf</a></span><br>
+</div>
+<div style="color: #0000ff;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: underline; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="1166631"> </a><a href="#1166627"><sup>2</sup></a><span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: underline; text-transform: none; vertical-align: baseline"><a href="http://svn.openehr.org/specification/TRUNK/publishing/architecture/computable/terminology/terminology.html">http://svn.openehr.org/specification/TRUNK/publishing/architecture/computable/terminology/terminology.html</a></span><br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="1170356"> </a><a href="#1170357"><sup>3</sup></a>Apgar is a basic measure of health of a newborn, taken 2 or 3 times after delivery, in the form of a 0-10 score.<br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="1171927"> </a><a href="#1171923"><sup>4</sup></a>See Apgar archetype - <span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: underline; text-transform: none; vertical-align: baseline"><a href="http://svn.openehr.org/knowledge/archetypes/dev/html/en/openEHR-EHR-OBSERVATION.apgar.v1.html">http://svn.openehr.org/knowledge/archetypes/dev/html/en/openEHR-EHR-OBSERVATION.apgar.v1.html</a></span><br>
+</div>
+</blockquote>
+
+<hr>
+
+<table align="right" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="right"><font size="1">
+    <a href="http://www.openEHR.org"><img src="images/openehr_logo.gif" width="109" height="23" border="0"></a><br>
+    openEHR Foundation<br>
+    http://www.openEHR.org<br>
+    </font></td>
+  </tr>
+</table>
+
+<table width="331" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23" border="0"
+    alt="TOC"> </a></td>
+    <td><a href="paths_and_locators.html"><img src="images/navprev.gif" width="81" height="23" border="0"
+    alt="PREV"> </a></td>
+    <td><a href="deployment.html"><img src="images/navnext.gif" width="81" height="23" border="0"
+    alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23" border="0"
+    alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+</body>
+</html>

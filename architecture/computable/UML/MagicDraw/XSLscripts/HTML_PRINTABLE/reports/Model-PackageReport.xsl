@@ -6,6 +6,7 @@ Template for Model or Package report creation
 	<xsl:template name="CREATE_MODEL-PACKAGE_REPORT">
 		<xsl:param name="reportType">PACKAGE</xsl:param>
 		<xsl:param name="fullParentName"/>
+	
 		<!-- Full element name  -->
 		<xsl:variable name="full_name">
 			<xsl:if test="$fullParentName">
@@ -41,6 +42,23 @@ Template for Model or Package report creation
 		<p/>
 		<hr noshade="" size="1"/>
 		<p/>
+
+<!-- Show Parent package -->		
+		<xsl:if test="../../@xmi.id != $rootModelID">
+			<xsl:if test="../../Foundation.Core.Namespace.ownedElement = ..">
+				<xsl:text>Parent Package: </xsl:text>
+				<a href="{../../@xmi.id}Report.html" target="_self">
+					<xsl:call-template name="SHOW_NAME">
+						<xsl:with-param name="name"
+							select="../../Foundation.Core.ModelElement.name"/>
+					</xsl:call-template>
+				</a>
+				<br/>
+			</xsl:if>
+		</xsl:if>		
+		
+		
+		
 		<a name="{@xmi.id}">
 			<font size="+2">
 				<xsl:choose>
@@ -53,7 +71,7 @@ Template for Model or Package report creation
 					<xsl:otherwise>
 						<xsl:choose>
 							<xsl:when test="$reportType = 'MODEL'">Model</xsl:when>
-							<xsl:otherwise>Package</xsl:otherwise>
+							<xsl:otherwise>Package ::</xsl:otherwise>
 						</xsl:choose>
 						<xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
 						<b>

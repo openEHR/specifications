@@ -18,7 +18,7 @@ Template for Class report
 		<xsl:variable name="hasStereotypes" select="$showStereotypesSection and Foundation.Core.ModelElement.stereotype"/>
 		<xsl:variable name="showAnyInnerElement">
 			<xsl:call-template name="SHOW_ANY_INNER_ELEMENTS"/>
-		</xsl:variable>
+		</xsl:variable>                      
 		<xsl:variable name="hasInnerElements" select="string-length($showAnyInnerElement)>0"/>
 		<xsl:variable name="checkAttributes">
 			<xsl:call-template name="HAS_VISIBLE_ATTRIBUTES"/>
@@ -63,7 +63,7 @@ Template for Class report
 		<!--            =================================             -->
 		<!--         Element type and name             -->
 		<xsl:if test="../../Foundation.Core.Namespace.ownedElement = ..">
-			<xsl:text>Package: </xsl:text>
+			<xsl:text>Parent Package: </xsl:text>
 			<xsl:if test="../../@xmi.id != $rootModelID">
 				<a href="#{../../@xmi.id}" target="_self">
 					<xsl:call-template name="SHOW_NAME">

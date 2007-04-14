@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
+<meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
+<meta name="LASTUPDATED" content="04/13/07 15:05:18">
+<link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
+<title>10 Archetypes and Templates  </title>
+</head>
+
+<body background="images/backgrnd.gif">
+
+<table width="331" border="0" align="right" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23"
+    border="0" alt="TOC"> </a></td>
+    <td><a href="identification.html"><img src="images/navprev.gif" width="81" height="23"
+    border="0" alt="PREV"> </a></td>
+    <td><a href="paths_and_locators.html"><img src="images/navnext.gif" width="81" height="23"
+    border="0" alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23"
+    border="0" alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+<p><img src="images/openehr_logo.gif" width="109" height="23" alt="openEHR logo"></p>
+<hr align="left">
+
+<blockquote>
+<h2 class="Heading1">
+  <a name="1135484"> </a>10	 Archetypes and Templates
+</h2>
+<h3 class="Heading2">
+  <a name="1135485"> </a>10.1	 Overview
+</h3>
+<p class="Body">
+  <a name="1135486"> </a>Under the two-level modelling approach, the formal definition of information structuring occurs at two levels. The lower level is that of the reference model, a stable object model from which software and data can be built. Concepts in the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR reference model are invariant, and include things like Composition, Section, Observation, and various data types such as Quantity and Coded text. The upper level consists of domain-level definitions in the form of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetypes</span> and <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">templates</span>. Concepts defined at this level include things such as "blood pressure measurement", "SOAP headings", and "HbA1c Result".
+</p>
+<p class="Body">
+  <a name="1176619"> </a>All information conforming to the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR Reference Model (RM) - i.e. the collection of Information Models (IMs) - is "archetypable", meaning that the creation and modification of the content, and subsequent querying of data is controllable by archetypes. Archetypes are themselves separate from the data, and are stored in their own repository. The archetype repository at any particular location will usually include archetypes from well-known online archetype libraries. Archetypes are deployed at runtime via templates that specify particular groups of archetypes to use for a particular purpose, often corresponding to a screen form.
+</p>
+<p class="Body">
+  <a name="1135487"> </a>Archetypes are themselves instances of an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype model</span>, which defines a language in which to write archetypes; the syntax equivalent of the model is the Archetype Definition Language, ADL. These formalisms are specified in the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR Archetype Object Model (AOM) and ADL documents respectively. Each archetype is a set of constraints on the reference model, defining a subset of instances that are considered to conform to the subject of the archetype, e.g. "laboratory result". An archetype can thus be thought of as being similar to a LEGO<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: super">®</span> instruction sheet (e.g. for a tractor) that defines the configuration of LEGO<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: super">®</span> bricks making up a tractor. Archetypes are flexible; one archetype includes many variations, in the same way that a LEGO<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: super">®</span> instruction might include a number of options for the same basic object. Mathematically, an archetype is equivalent to a query in F-logic <a href="references.html#997211">[5]</a>. In terms of scope, archetypes are general-purpose, re-usable, and composable. For data capture and validation purposes, they are usually used at runtime by <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">templates</span>. 
+</p>
+<p class="Body">
+  <a name="1158594"> </a>An <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR Template is a specification that defines a tree of of one or more archetypes, each constraining instances of various reference model types, such as Composition, Section, Entry subtypes and so on. Thus, while there are likely to be archetypes for such things as "biochemistry results" (an Observation archetype) and "SOAP headings" (a Section archetype), templates are used to put archetypes together to form whole Compositions in the EHR, e.g. for "discharge summary", "antenatal exam" and so on. Templates usually correspond closely to screen forms, printed reports, and in general, complete application-level lumps of information to be captured or sent; they may therefore be used to define message content. They are generally developed and used locally, while archetypes are usually widely used.
+</p>
+<p class="Body">
+  <a name="1135488"> </a>A template is used at runtime to create default data structures and to validate data input, ensuring that all data in the EHR conform to the constraints defined in the archetypes referenced by the template. In particular, it conforms to the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">path</span> structure of the archetypes, as well as their terminological constraints. Which archetypes were used at data creation time is written into the data, in the form of both archetype identifiers at the relevant root nodes, and archetype node identifiers (the [atnnnn] codes), which act as normative node names, and which are in turn the basis for paths. When it comes time to modify the same data, these archetype node identifiers enable applications to retrieve and use the original archetypes, ensuring modifications respect the original constraints.
+</p>
+<p class="Body">
+  <a name="1176626"> </a>Archetypes also form the basis of semantic querying. Queries are expressed in a language which is a synthesis of SQL (SELECT/FROM/WHERE) and W3C XPaths, extracted from the archetypes.
+</p>
+<h3 class="Heading2">
+  <a name="1135490"> </a>10.2	 Archetype Formalisms and Models
+</h3>
+<h4 class="Heading3">
+  <a name="1172113"> </a>10.2.1	 Overview
+</h4>
+<p class="Body">
+  <a name="1172338"> </a>In <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR, archetypes are formalised by the Archetype Object Model (AOM). This is an object model of the semantics of archetypes. When an archetype is represented in memory (for example in an archetype-enabled EHR "kernel"), the archetype will exist as instances of the classes of this model. The AOM is thus the definitive statement of the semantics of archetypes.
+</p>
+<p class="Body">
+  <a name="1172119"> </a>In serialised form, archetypes can be represented in various ways. The normative, abstract serialisation in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is Archetype Definition Language (ADL). This is an abstract language based on Frame Logic queries (also known as F-logic <a href="references.html#997211">[5]</a>) with the addition of terminology. An ADL archetype is a guaranteed 100% lossless rendering of the semantics of any archetype, and is designed to be a syntactic analogue of the AOM. Nevertheless, other lossless and lossy serialisations are possible and some already exist. For practical purposes, XML-based serialisations are used in some situations. A serialisation purely expressed in dADL, the ADL object serialisation syntax will be available in the future. Various HTML, RTF and other formats are used for screen rendering and human review.
+</p>
+<p class="Body">
+  <a name="1172300"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR Templates are represented as dADL documents whose object model conforms to the Template Object Model (TOM).
+</p>
+<h4 class="Heading3">
+  <a name="1172334"> </a>10.2.2	 Design-time Relationships between Archetypes
+</h4>
+<p class="Body">
+  <a name="1172401"> </a>Archetypes are extensible formal constraint definitions of object structures. In common with object model classes, they can be <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">specialised</span>, as well as <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">composed</span> (i.e. aggregated). Specialised archetypes are created when an archetype is already available for the content that needs to be modelled, but it lacks detail or is too general. For example, the archetype <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">openEHR-EHR-OBSERVATION.laboratory.v1</span> contains generic concepts of `specimen', `diagnostic service', a single result of any type, and a two-level result battery for grouped results. This archetype could be (and has been) used to represent nearly any kind of laboratory result data. However, specialisations such as <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">openEHR-EHR-OBSERVATION.laboratory-glucose.v1</span> are extremely useful, and can be easily defined based on the predecessor; in this case, the single result node is redefined to be `blood glucose'. The formal rule for specialisation is that:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1172369"> </a>a specialised archetype can only further narrow existing constraints in the parent (but it may add its own).
+</ul>
+<p class="Body">
+  <a name="1172373"> </a>This has the effect that the data created with any specialised archetype will always be matched by queries based on the parent archetype - in other words, a query for `laboratory' Observations will correctly retrieve `glucose' Observations as well. This accords with the basic ontological principle of subsumption, which says that instances of a type B are also instances of type A, where type B is related to type A by the semantic relationship `IS-A'. Specialised archetypes are indicated by the use of an identifier derived from the parent archetype, with a new sub-element of the semantic part of the identifier, separated by a `-' character.
+</p>
+<p class="Body">
+  <a name="1172435"> </a>The second relationship possible between archetypes is composition, allowing large data structures to be flexibly constrained via the hierarchical re-use of smaller archetypes. Composition is defined in terms of `slots' within an archetype. A slot is a point in an archetype structure where, instead of specifying an object type inline, a special <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">allow_archetype</span> constraint is used to specify other archetypes constraining that same type, that may be used at that point. For example, the archetype <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">openEHR-EHR-SECTION.vital_signs.v1</span> defines a heading structure for headings to do with vital signs. It also defines as its <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">items</span> attribute value (i.e. what comes under the heading) a number of possible Observations; however, rather than defining these inline, it specifies an archetype slot in the form of constraints on Observation archetypes that are allowed at that point. The simplest kind of constraint is in terms of regular expressions on archetype identifiers. More complex constraints can be stated in terms of paths in other archetypes (for example <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">exists(/some/path[at0005])</span>). A slot thus defines a `chaining point' in terms of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">possible</span> archetypes allowed or excluded at that point; limiting this to a single archetype is of course possible. Templates are used to choose which particular archetypes allowed at a slot will actually be used in a given circumstance.
+</p>
+<h3 class="Heading2">
+  <a name="1172436"> </a>10.3	 Relationship of Archetypes and Templates to Data
+</h3>
+<p class="Body">
+  <a name="1135492"> </a>All nodes within the top-level information structures in the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR RM are "archetypable", with certain nodes within those structures being archetype "root points". Each top-level type is always guaranteed to be an archetype root point. Although it is theoretically possible to use a single archetype for an entire top-level structure, in most cases, particularly for <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">COMPOSITION</span> and <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTY</span>, a hierarchical structure of multiple archetypes will be used, via the slot mechanism described above. This allows for componentisation and reusability of archetypes. When hierarchies of archetypes are used for a top-level structure, there will also be archetype root points in the interior of the structure. For example, within a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">COMPOSITION</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ENTRY</span> instances (i.e. <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBSERVATIONs</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">EVALUATIONs</span> etc.) are almost always root points. <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">SECTION</span> instances are root points if they are the top instance in a Section structure; similarly for <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">FOLDER</span> instances within a directory structure. Other nodes (e.g. interior <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">SECTIONs</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ITEM_STRUCTURE</span> instances) might also be archetype root points, depending on how archetypes are applied at runtime to data. <a href="archetyping.html#1135492">FIGURE 30</a> illustrates the application of archetypes and templates to data. <br clear="all" /><table align="left"><tr><td><img src="images/archetypinga.gif" height="348" width="648" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<h3 class="Heading2">
+  <a name="1135619"> </a>10.4	 Archetype-enabling of Reference Model Data
+</h3>
+<p class="Body">
+  <a name="1135620"> </a>Archetype-enabling of Reference Model classes is achieved via inheritance of the class <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LOCATABLE</span> from the package <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">common.archetyped</span> (see Common IM). The <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LOCATABLE</span> class includes the attributes <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> and <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_details</span>. In the data, the former carries an identifier from the archetype. If the node in the data is a root point, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">it</span> carries the multipart identifier of the generating archetype, and <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_details</span> carries an <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ARCHETYPED</span> object, containing information pertinent to archetype root points. If it is a non-root node, the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> attribute carries the identifier (known as an "at", or "archetype term" code) of the archetype interior node that generated the data node, and the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_details</span> attribute is void.
+</p>
+<p class="Body">
+  <a name="1135621"> </a>Sibling nodes in data can carry the same <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetype_node_id</span> in some cases, since archetypes provide a pattern for data, rather than an exact template. In other words, depending on the archetype design, a single archetype node may be replicated in the data.
+</p>
+<p class="Body">
+  <a name="1135625"> </a>In this way, each <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetyped data composition<a href="#1135624"><sup>1</sup></a></span> in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR data has a generating archetype which defines the particular configuration of instances to create the desired composition. An archetype for "biochemistry results" is an <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBSERVATION</span> archetype, and constrains the particular arrangement of instances beneath an <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBSERVATION</span> object; a "problem/SOAP headings" archetype constrains <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">SECTION</span> objects forming a SOAP headings structure. In general, an archetyped data composition is any composition of data starting at a root node and continuing to its leaf nodes, at which point lower-level compositions, if they exist, begin. Each of the archetyped areas and its subordinate archetyped areas in <a href="archetyping.html#1135492">FIGURE 30</a> is an archetyped data composition. 
+</p>
+<p class="Body">
+  <a name="1135629"> </a>The result of the use of archetypes to create data in the EHR (and other systems) is that the structure of data in any top-level object conforms to the constraints defined in a composition of archetypes chosen by a template, including all optionality, value, and terminology constraints.
+</p>
+<h3 class="Heading2">
+  <a name="1138145"> </a>10.5	 Archetypes, Templates and Paths
+</h3>
+<p class="Body">
+  <a name="1138137"> </a>The use of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR archetypes and templates enables paths to be used ubiquitously in the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR architecture. Paths are extracted from Archetypes and templates, and are constructed from attribute names and archetype node identifiers, in an Xpath-compatible syntax, as shown in <a href="archetyping.html#1138137">FIGURE 31</a>.<br clear="all" /><table align="left"><tr><td><img src="images/archetypingb.gif" height="362" width="648" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<p class="Body">
+  <a name="1172173"> </a>These paths serve to identify any node in a template or archetype, such as the "diastolic blood pressure" <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ELEMENT</span> node, deep within a "blood pressure measurement" archetype. Since archetype node identifiers are embedded into data at runtime, archetype paths can be used to extract data nodes conforming to particular parts of archetypes, providing a very powerful basis for querying. Paths can also be constructed into data, using more complex predicates (still in the Xpath style). Paths in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR are explained in detail under <a href="paths_and_locators.html#1123502">Paths and Locators on page 63</a>.
+</p>
+<h3 class="Heading2">
+  <a name="1172233"> </a>10.6	 Archetypes and Templates at Runtime
+</h3>
+<h4 class="Heading3">
+  <a name="1172263"> </a>10.6.1	 Overview
+</h4>
+<p class="Body">
+  <a name="1172244"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR archetypes and templates were designed as formal artefacts, so as to be computable at runtime. They perform two key functions. The first is to facilitate data validation at data capture or import time, i.e. to guarantee that data conform to not just the reference model, but also to the archetypes themselves. Data validation with archetypes is mediated by the use of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR Templates. The second function is as a design basis for queries. Since data are captured based on archetypes, all <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR data are guaranteed to conform to the "semantic paths" that are created by the composition of archetypes within a template. The paths (such as those shown in <a href="archetyping.html#1138137">FIGURE 31</a> above) are incorporated within a familiar SQL-style syntax, to form queries that can be evaluated to retrieve items on a semantic basis.
+</p>
+<h4 class="Heading3">
+  <a name="1172234"> </a>10.6.2	 Deploying Archetypes and Templates
+</h4>
+<p class="Body">
+  <a name="1172502"> </a>Archetypes are mostly designed by clinical or other domain experts, and often require significant study of a subject area, for example, obstetrics. The development process may occur at a national or international level, and requires peer review and testing in real systems. This accords with the semantic value of archetypes, namely as <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">reusable</span> models of content. Consequently, from the point of view of any given site of deployment, archetypes are most likely to have been developed elsewhere, and to reside in a recognised, quality assured repository.
+</p>
+<p class="Body">
+  <a name="1172508"> </a>Such a repository may contain hundreds or even thousands of archetypes. However, most EHR sites will only require a relatively small number. Clinical experts estimate that 100 archetypes would take care of 80% of routine general practice and acute care, including laboratory, with many of these being specialisations of a much smaller number of key archetypes. However, which 100 archetypes are useful for a given site may well vary based on the kind of health care provided, e.g. diabetic clinic, cancer, orthopedic hospital ward, aged care home. In general, it can be expected that nearly all archetype deployment sites will use only a small percentage of published archetypes. Some sites may also develop a small number of their own archetypes; invariably these will be specialisations of existing archetypes.
+</p>
+<p class="Body">
+  <a name="1172318"> </a>While archetypes constitute the main shared and carefully quality-assured design activity in the second layer of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR's two-level structure, templates are a more local affair, and are likely to be the point of contact of many system designers with archetypes. A template will typically be designed based on three things:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1172323"> </a>what is desired to be in a screen form or report;
+  <li class="SmartList1"><a name="1172327"> </a>what archetypes are already available;
+  <li class="SmartList1"><a name="1172511"> </a>local usage of terminology.
+</ul>
+<p class="Body">
+  <a name="1172328"> </a>Templates will generally be created locally by tools conforming to the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR Template Object Model.
+</p>
+<p class="Body">
+  <a name="1172515"> </a>In the case of GUI applications, the final step in the chain is GUI screen forms. These are created in a multitude of ways and technologies. In some cases, they will be partially or completely generated from templates. Regardless of the details, the connection between a screen form and a template will be established in the tooling environment, so that when the form is requested by a user, the relevant template will be activated, in turn activating the relevant archetypes.
+</p>
+<p class="Body">
+  <a name="1172516"> </a>A further technical detail may come into play in many deployment situations: since the archetypes and templates required by the environment will be known in advance, they may well be compiled into a near-runtime form from the sharable <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR form (i.e. ADL, TOM files) in which they are received from a repository or local tool. This form will usually differ from site to site, and both improves performance and ensures that only validated archetypes and templates will actually be accessed by applications. In such systems, runtime form of templates is most likely to incorporate copies of the relevant archetypes. 
+</p>
+<p class="Body">
+  <a name="1173590"> </a>The deployment of archetypes, templates, and screen forms is shown in <a href="archetyping.html#1173590">FIGURE 32</a>.<br clear="all" /><table align="left"><tr><td><img src="images/archetyping4.gif" height="292" width="648" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<h4 class="Heading3">
+  <a name="1172283"> </a>10.6.3	 Validation during Data Capture
+</h4>
+<p class="Body">
+  <a name="1172242"> </a>Validation is the primary runtime function of archetypes - it is how "archetype-based" data are created in the first place, and modified thereafter. Archetype-based validation can be used in a GUI application or in a data import service. Although the source of the data (keystrokes or received XML or other messages) is different, the logical process is the same: create archetype-based <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR data according to the input stream.
+</p>
+<p class="Body">
+  <a name="1176431"> </a>The process at runtime may vary in some details according to implementations and other aspects of the care setting, but the main thrust will be the same. The archetypes used at a particular site will always be mediated at runtime by <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR templates developed for that site or system; these will usually be linked to screen forms or other formal artefacts that enable the connection between archetypes and the user or application. It will not be uncommon for a template to be constructed partially at runtime, due to user choices of archetypes being made on the screen, although of course the user will not be directly aware of this. Regardless, by the time data are created and validated against the relevant archetypes, the template that does the job will be completely specified.
+</p>
+<p class="Body">
+  <a name="1176438"> </a>The actual process of data creation and committal is illustrated in <a href="archetyping.html#1176438">FIGURE 33</a>. The essence of the process is that a "kernel" component performs the task of data creation and validation by maintaining a "template space" and a "data space". The former contains the template and archetypes retrieved due to a screen form being displayed; the latter contains the data structures (instances of the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR reference model) that are constructed due to user activity on the screen. When data are finally committed, they are guaranteed to conform to the template/archetype definitions, due to the checks that are made each time the user tries to change the data structure. The committed data contain a "semantic imprint" of the generating archetypes, in the form of archetype node identifiers on every node of the data. This simple inclusion in the data model ensures that all archetypes data are queryable by the use of archetype paths. In XML representations, the archetype node ids are represented as XML attributes (i.e. inside the tag), thus enabling XPaths to be conveniently navigated through the data based on these identifiers (more details on this are in the next section).<br clear="all" /><table align="left"><tr><td><img src="images/archetyping3.gif" height="463" width="648" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<p class="Body">
+  <a name="1176544"> </a>If data are later modified, they are brought into the kernel along with the relevant template and archetypes, and the embedded node identifiers allow the kernel to continue to perform appropriate checking of changes to the data.
+</p>
+<h4 class="Heading3">
+  <a name="1172212"> </a>10.6.4	 Querying
+</h4>
+<p class="Body">
+  <a name="1176589"> </a>The second major computational function of archetypes is to support querying. As described above, and in the next section, the paths extracted from archetypes are the basis for queries into the data. Queries are defined in AQL (Archetype Query Language), which is essentially a synthesis of SQL and XPath style paths extracted from archetypes. The following is an example AQL query meaning "Get the BMI values which are more than 30 kg/m2 for a specific patient":
+</p>
+<pre  class="PreformattedRelative">
+SELECT o/[at0000]/data[at0001]/events[at0002]/data[at0003]/item[0004]/value
+<a name="1176551"> </a>
+FROM EHR [uid=@ehrUid] 
+<a name="1176552"> </a>
+	CONTAINS COMPOSITION c [openEHR-EHR-COMPOSITION.report.v1] 
+<a name="1176565"> </a>
+	CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.body_mass_index.v1]
+<a name="1176553"> </a>
+WHERE o/[at0000]/data[at0001]/events[at0002]/data[at0003]/item[0004]/value &gt; 30
+<a name="1176546"> </a>
+</pre>
+<h3 class="Heading2">
+  <a name="1172462"> </a>10.7	 The openEHR Archteypes
+</h3>
+<p class="Body">
+  <a name="1172463"> </a>A set of heavily reviewed archetypes is available on the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR website at <span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: underline; text-transform: none; vertical-align: baseline"><a href="http://svn.openehr.org/knowledge/archetypes/dev/index.html">http://svn.openehr.org/knowledge/archetypes/dev/index.html</a></span>. This collection is being added to all the time, and includes archetypes developed for specific countries or other "realms" as well as globally applicable ones.
+</p>
+
+  <div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="1135624"> </a><a href="#1135625"><sup>1</sup></a>Note: care must be taken not to confuse the general term "composition" with the specific use of this word in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR and CEN EN 13606, defined by the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">COMPOSITION</span> class; the specific use is always indicated by using the term "Composition".<br>
+</div>
+</blockquote>
+
+<hr>
+
+<table align="right" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="right"><font size="1">
+    <a href="http://www.openEHR.org"><img src="images/openehr_logo.gif" width="109" height="23" border="0"></a><br>
+    openEHR Foundation<br>
+    http://www.openEHR.org<br>
+    </font></td>
+  </tr>
+</table>
+
+<table width="331" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23" border="0"
+    alt="TOC"> </a></td>
+    <td><a href="identification.html"><img src="images/navprev.gif" width="81" height="23" border="0"
+    alt="PREV"> </a></td>
+    <td><a href="paths_and_locators.html"><img src="images/navnext.gif" width="81" height="23" border="0"
+    alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23" border="0"
+    alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+</body>
+</html>

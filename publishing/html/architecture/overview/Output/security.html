@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
+<meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
+<meta name="LASTUPDATED" content="04/13/07 15:04:49">
+<link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
+<title>7 Security and Confidentiality  </title>
+</head>
+
+<body background="images/backgrnd.gif">
+
+<table width="331" border="0" align="right" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23"
+    border="0" alt="TOC"> </a></td>
+    <td><a href="design_of_ehr.html"><img src="images/navprev.gif" width="81" height="23"
+    border="0" alt="PREV"> </a></td>
+    <td><a href="versioning.html"><img src="images/navnext.gif" width="81" height="23"
+    border="0" alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23"
+    border="0" alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+<p><img src="images/openehr_logo.gif" width="109" height="23" alt="openEHR logo"></p>
+<hr align="left">
+
+<blockquote>
+<h2 class="Heading1">
+  <a name="1121809"> </a>7	 Security and Confidentiality
+</h2>
+<h3 class="Heading2">
+  <a name="1156733"> </a>7.1	 Requirements
+</h3>
+<h5 class="Heading4">
+  <a name="1142626"> </a>Privacy, Confidentiality and Consent
+</h5>
+<p class="Body">
+  <a name="1142427"> </a>Privacy (the right to limit who sees the personal data) and confidentiality (the obligation of others to respect the privacy of disclosed data) are primary concerns of many consumers with respect to e-Health systems. A widely accepted principle is that information provided (either directly or due to observation or testing of specimens etc.) in confidence by a patient to health professionals during an episode of care should only be passed on or otherwise become available to other parties if the patient agrees; put more simply: <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">data sharing must be controlled by patient consent</span>. A more complex sub-requirement for some patients is allowing differential access to <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">parts</span> of their health record, for example, relatively open access rights to most of the health record, but limited access to sexual or mental health items. The interrelatedness of health information can make this difficult. For example the medication list will often give away sensitive conditions even if the diagnosis is hidden, yet is needed for any safe treatment, and many health professionals would see the unavailability of current medications (and allergies) information as highly problematic for giving even basic care.
+</p>
+<h5 class="Heading4">
+  <a name="1142630"> </a>Requirements of Healthcare Providers
+</h5>
+<p class="Body">
+  <a name="1142603"> </a>On the other hand, clinical professionals delivering care want fast access to relevant data, and to be sure that what they see on the screen is a faithful representation of what has been said about the patient. Emergency access to health records is sometimes needed by carers otherwise unrelated to the normal care of a patient; such accesses can only be consented to in a general way, since the specific providers involved will not usually be known.
+</p>
+<p class="Body">
+  <a name="1142789"> </a>Researchers in healthcare generally want access to the data of large numbers of patients in order to evaluate current care and improve it (clinical knowledge discovery), and for educational purposes. Both of these latter needs are also ultimately patient and societal priorities. Providing effective care and supporting ongoing medical research therefore have to function in a system that implements the concept of patient consent.
+</p>
+<h5 class="Heading4">
+  <a name="1154762"> </a>Specifying Access Control
+</h5>
+<p class="Body">
+  <a name="1156723"> </a>In theory, it should be easy for the patient or some clinical professional to specify who can see the patient record. In some cases it is can be done by direct identification, e.g. the patient might nominate their long-term GP by provider id. Some exclusions could potentially be made this way as well, for example a previous doctor with whom the patient has a problematic personal relationship.
+</p>
+<p class="Body">
+  <a name="1156726"> </a>However it soon becomes difficult to identify provider parties individually when the patient moves into parts of the healthcare system where there are many staff, and/or where there is no previously established relationship. The advent of e-prescribing and e-pharmacy will bring even larger numbers of health and allied health workers into the e-Health matrix, making the problem of individual identification of who should see the patient's data infeasible. Further, there is a large and growing category of "very mobile" people (the military, entertainers, NGO workers, international business and tourism professionals, athletes....) who cannot predict even in which country they may require care. As a consequence, the need for some access control to be specified in terms of categories or role types appears inescapable.
+</p>
+<h5 class="Heading4">
+  <a name="1156719"> </a>The Problem of Roles
+</h5>
+<p class="Body">
+  <a name="1154766"> </a>One of the difficult challenges to implementing access control to health information is that of defining "roles", i.e. the status of users of the record at the time when right of access is being determined. In principle, roles ought to be knowable in advance. For example, the labels "nurse", "GP" and "psychiatrist" can be relatively easily assigned to individuals. However, the kinds of labels that are of more importance are those that differentiate among (for example) personal carers (e.g. primary GP), other care delivery staff (e.g. nurses, aged carers) and support staff (e.g. pathologists, radiographers). In a patient care delivery-oriented view of the world, the professional level of a health care professional is probably less important than his or her relationship to the current care process for the patient.
+</p>
+<p class="Body">
+  <a name="1156650"> </a>It will not always be clear which individuals fall into any of these categories at any time, or how such terms are even defined in different sites and jurisdictions. Realistically, the evaluation of a role category such as "care deliverer" into particular identities such as those of nurses on the ward on a particular day must be done in each care delivery environment, not in the EHR. Access decisions for information in the EHR therefore will have some dependence on provider site knowledge of which staff are actively involved in the care process of a given patient.
+</p>
+<p class="Body">
+  <a name="1156651"> </a>Role-based access control is further complicated by the common fact of temporary replacements due to illness or holiday and role changes due to staff shortages. Further, if a physician employing a medical secretary requires her to access and update sensitive parts (relating to his own treatment of the patient) of the record, access at the highest level is effectively given to someone not medically trained or related directly to the patient's care, even if only for 10 minutes. Any role-based system therefore has to take into account the messy reality of clinical care in the real world rather than being based solely on theoretical principles.
+</p>
+<h5 class="Heading4">
+  <a name="1156697"> </a>Usability
+</h5>
+<p class="Body">
+  <a name="1156698"> </a>Usability of security and privacy mechanisms is a key requirement of a health record architecture. Some very elegant solutions to fine-grained access control designed by security experts would be simply unusable in practice because they would take too long for patients and doctors to learn, or are too time-consuming to actually use on the screen; they could also be too complex to safely implement in software.
+</p>
+<p class="Body">
+  <a name="1142672"> </a>The following sections describe support in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR for the main security and privacy requirements of EHRs.
+</p>
+<h3 class="Heading2">
+  <a name="1156794"> </a>7.2	 Threats to Security and Privacy
+</h3>
+<p class="Body">
+  <a name="1156795"> </a>Any model of how security and privacy are supported in the health record must be based on some notion of assumed threats. Without going into great detail, security threats assumed by <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR include the following (here "inappropriate" means anything that is not or would not be consented to by the patient):
+</p>
+<ul>
+  <li class="SmartList1"><a name="1156796"> </a>human error in patient identification, leading to incorrect association of health data of one patient with another. Mis-identification of patients can cause personal data for one patient to go into the record of another patient (leading to privacy violations and possibly clinical errors), or into a new record rather than the existing one for the same patient (leading to two or more clinically incomplete records);
+  <li class="SmartList1"><a name="1156895"> </a>inappropriate access by health professionals or others in the physical care delivery environment (including e.g. any worker in a hospital) not involved in the current care of the patient;
+  <li class="SmartList1"><a name="1156797"> </a>inappropriate access by other persons known to the patient, e.g. a by family member;
+  <li class="SmartList1"><a name="1156798"> </a>inappropriate access of health data by corporate or other organisations e.g. for purposes of insurance discrimination;
+  <li class="SmartList1"><a name="1156799"> </a>malicious theft of or access to health data (e.g. of a celebrity or politician) for profit or other personal motives;
+  <li class="SmartList1"><a name="1156800"> </a>generic threats to data integrity and availability, such as viruses, worms, denial of service attacks etc.;
+  <li class="SmartList1"><a name="1156801"> </a>failures in software (due to bugs, incorrect configuration, interoperability failures etc.) causing corruption to data, or incorrect display or computation, resulting in clinical errors.
+</ul>
+<p class="Body">
+  <a name="1156802"> </a>A key principle with respect to the design of mechanisms supporting security, confidentiality and integrity has to be kept in mind: the likelihood of any given mode of targeted inappropriate access is proportional to the perceived value of the information and inversely proportional to the cost of access. To paraphrase Ross Anderson's BMA paper<a href="#1156805"><sup>1</sup></a> on health data security, for a given access, the perpretrator will try to find the simplest, cheapest and quickest method, which is more likely to be bribery or burglary than James Bond-inspired technology. <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR makes use of this principle by providing some relatively simple mechanisms that are cheap to implement but can make misuse quite difficult, without compromising availability.
+</p>
+<h3 class="Heading2">
+  <a name="1156664"> </a>7.3	 Solutions Provided by openEHR
+</h3>
+<h4 class="Heading3">
+  <a name="1157863"> </a>7.3.1	 Overview
+</h4>
+<p class="Body">
+  <a name="1157864"> </a>Many of the concrete mechanisms relating to security and privacy are found in system deployments rather than in models such as <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR, particularly the implementation of authentication, access control, and encryption. The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR specifications and core component implementations do not explicitly define many concrete mechanisms since there is great variability in the requirements of different sites - secure LAN deployments many require minimal security inside, whereas web-accessible health record servers are likely to have quite different requirements. What <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR does is to support some of the key requirements in a flexible enough way that deployments with substantially different requirements and configurations can nevertheless implement the basic principles in a standard way.
+</p>
+<p class="Body">
+  <a name="1160264"> </a><a href="security.html#1160264">FIGURE 21</a> illustrates the main security measures directly specified by the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR architecture. These include EHR/demographic separation and an EHR-wide access control object. At the level of versioned objects, commit audits (mandatory), digital signatures and hashes are available. The following subsections describe these features in more detail.<br clear="all" /><table align="left"><tr><td><img src="images/security2.gif" height="338" width="648" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<h4 class="Heading3">
+  <a name="1156687"> </a>7.3.2	 Security Policy
+</h4>
+<p class="Body">
+  <a name="1156665"> </a>In and of itself, the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR imposes only a minimal security policy profile which could be regarded as necessary, but generally not sufficient for a deployed system (i.e. other aspects would still need to be implemented in layers whose semantics are not defined in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR). The following policy principles are embodied in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR.
+</p>
+<h5 class="Heading4">
+  <a name="1161806"> </a>General
+</h5>
+<ul>
+  <li class="SmartList1"><a name="1156666"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Indelibility</span>: health record information cannot be deleted; logical deletion is achieved by marking the data in such a way as to make it appear deleted (implemented in version control).
+  <li class="SmartList1"><a name="1161712"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Audit trailing</span>: All changes made to the EHR including content objects as well as the EHR status and access control objects are audit-trailed with user identity, time-stamp, reason, optionally digital signature and relevant version information; one exception is where the modifier is the patient, in which case, a symbolic identifier can be used (known as <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTY_SELF</span> in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR; see next point).
+  <li class="SmartList1"><a name="1156667"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Anonymity</span>: the content of the health record is separate from identifying demographic information. This can be configured such that theft of the EHR provides no direct clue to the identity of the owning patient (indirect clues are of course harder to control). Stealing an identified EHR involves theft of data from two servers, or even theft of two physical computers, depending on deployment configuration.
+</ul>
+<h5 class="Heading4">
+  <a name="1161810"> </a>Access Control
+</h5>
+<ul>
+  <li class="SmartList1"><a name="1156668"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Access list</span>: the overriding principle of access control must be "relevance" both in terms of user identity (who is delivering care to the patient) and time (during the current episode of care, and for some reasonable, limited time afterward). An access control list can be defined for the EHR, indicating both identified individuals and categories, the latter of which might be role types, or particular staff groups. 
+  <li class="SmartList1"><a name="1161822"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Access control of access settings</span>: a <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">gate-keeper</span> controls access to the EHR access control settings. The gate-keeper is established at the time of EHR creation as being one of the identities known in the EHR, usually the patient for mentally competent adults, otherwise a parent, legal guardian, advocate or other responsible person. The gate-keeper determines who can make changes to the access control list. All changes to the list are audit-trailed as for normal data (achieved due to normal versioning).
+  <li class="SmartList1"><a name="1161833"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Privacy</span>: patients can mark Compositions in the EHR as having one of a number of levels of privacy. The definition of the privacy levels is not hard-wired in the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR models but rather is defined by standards or agreements within jurisdictions of use.
+  <li class="SmartList1"><a name="1161849"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Usability</span>: The general mentality of access control setting is one of "sensible defaults" that work for most of the information in the EHR, most of the time. The defaults for the EHR can be set by the patient, defining access control behaviour for the majority of access decisions. Exceptions to the default policy are then added. This approach minimises the need to think about the security of every item in the EHR individually.
+</ul>
+<p class="Body">
+  <a name="1156671"> </a>Other security policy principles that should be implemented in even a minimal EHR deployment but are not directly specified by <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR include the following.
+</p>
+<ul>
+  <li class="SmartList1"><a name="1156672"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Access logging</span>: read accesses by application users to EHR data should be logged in the EHR system. Currently <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR does not specify models of such logs, but might do so in the future. Studies have shown that making users aware of the fact of access logging is an effective deterrent to inappropriate access (especially where other controls are not implemented). There are some proponents of the argument that even read-access logs should be made part of the content of the EHR proper; currently <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR does not support this approach.
+  <li class="SmartList1"><a name="1156673"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Record demerging</span>: when data for a patient is found to be in another patient's EHR, the access logs for that EHR should be used to determine who has accessed that data, primarily to determine if subsequent clinical thinking (e.g. diagnoses, medication decisions) have been made based on wrong information.
+  <li class="SmartList1"><a name="1156909"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Record merging</span>: when more than one EHR is discovered for the same patient, and have to be merged into a single record, the access control lists have to be re-evaluated and merged by the patient and potentially relevant carers.
+  <li class="SmartList1"><a name="1156840"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Time-limitation of access</span>: mechanisms should be implemented that limit the time during which given health professionals can see the patient record. Usually, the outer limits are defined by the interval of the episode of care in an institution plus some further time to cover follow-up or outpatient care. Episode start and end are recorded in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR as instances of the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ADMIN_ENTRY</span> class, containing admission and discharge details.
+  <li class="SmartList1"><a name="1156841"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Non-repudiation</span>: if digital signing of changes to the record is made mandatory, non-repudiation of content can be supported by an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR system. The digital signing of communications (EHR Extracts) is also supported in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR; coupled with logging of communication of Extracts, this can be used to guarantee non-repudiation of information passed between systems (cf. information passed between back-end and front-end applications of the same system).
+  <li class="SmartList1"><a name="1161929"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Certification</span>: a mechanism should be provided to allow a level of trust to be formally associated with user signing keys.
+</ul>
+<p class="Body">
+  <a name="1158157"> </a>A key feature of the policy is that it must scale to distributed environments in which health record information is maintained at multiple provider sites visited by the patient.
+</p>
+<p class="Body">
+  <a name="1157875"> </a>As Anderson points out in the BMA study, policy elements are also needed for guarding against users gaining access to massive numbers of EHRs, and inferencing attacks. Currently these are outside the scope of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR, and realistically, of most EHR implementations of any kind today.
+</p>
+<p class="Body">
+  <a name="1158177"> </a>The following sections describe how <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR supports the first list of policy objectives.
+</p>
+<h4 class="Heading3">
+  <a name="1156842"> </a>7.3.3	 Integrity
+</h4>
+<h5 class="Heading4">
+  <a name="1142729"> </a>Versioning
+</h5>
+<p class="Body">
+  <a name="1142686"> </a>The most basic security-related feature of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is its support for data integrity. This is mainly provided by the versioning model, specified in the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">change_control</span> package in the Common Information Model, and in the Extract Information Model. Change-set based versioning of all information in the EHR and demographic services constitutes a basic integrity measure for information, since no content is ever physically modified, only new versions are created. All logical changes and deletions as well as additions are therefore physically implemented as new Versions rather than changes to existing information items. Clearly the integrity of the information will depend on the quality of the implementation; however, the simplest possible implementations (1 Version = 1 copy) can provide very good safety due to being write-once systems.
+</p>
+<p class="Body">
+  <a name="1142721"> </a>The use of change-sets, known as Contributions in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR, provides a further unit of integrity corresponding to all items modified, created or deleted in a single unit of work by a user. 
+</p>
+<p class="Body">
+  <a name="1142728"> </a>The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR versioning model defines audit records for all changed items, which can be basic audits and/or any number of additional digitally signed attestations (e.g. by senior staff). This means that every write access of any kind to any part of an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR record is logged with the user identification, time, reason, and potentially other meta-data. Versioning is described in detail in <a href="versioning.html#1142419">section 8 on page 45</a>.
+</p>
+<h5 class="Heading4">
+  <a name="1142735"> </a>Digital Signature
+</h5>
+<p class="Body">
+  <a name="1142753"> </a>The possibility exists within an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR to digitally sign each Version in a Versioned object (i.e. for each Version of any logical item, such as medications list, encounter note etc.). The signature is created as a private-key encryption (e.g. RSA-1) of a hash (e.g. MD5) of a canonical representation (such as in schema-based XML) of the Version being committed. A likely candidate for defining the signature and digest strings in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is the openPGP message format (IETF RFC2440<a href="#1155380"><sup>2</sup></a>), due to being an open specification and self-describing. The use of RFC2440 for the format does not imply the use of the PGP distributed certificate infrastructure, or indeed any certification infrastructure; <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is agnostic on this point. If no public key or equivalent infrastructure is available, the encryption step might be omitted, resulting in a digest only of the content. The signature is stored within the Version object, allowing it to be conveniently carried within EHR Extracts. The process is shown in <a href="security.html#1142753">FIGURE 22</a>.<br clear="all" /><table align="left"><tr><td><img src="images/securitya.gif" usemap="#securitya_gif" height="285" width="648" align="left" border="0" hspace="0" vspace="0">
+<map name="securitya_gif">
+
+<area href="http://www.cl.cam.ac.uk/users/rja14/policy11/policy11.html" shape=rect coords="71,258,598,283">
+<area href="http://www.ietf.org/internet-drafts/draft-ietf-openpgp-rfc2440bis-18.txt" shape=rect coords="71,258,598,283">
+</map>
+</td></tr></table><br clear="all">
+</p>
+<p class="Body">
+  <a name="1150346"> </a>The signing of data in a versioning system acts as an integrity check (the digest performs this function), an authentication measure (the signature performs this function), and also a non-repudiation measure. To guard against hacking of the versioned persistence layer itself, signatures can be forwarded to a trusted notarisation service. A fully secure system based on digital signing also requires certified public keys, which may or may not be available in any given environment.
+</p>
+<p class="Body">
+  <a name="1150978"> </a>One of the benefits of digitally signing relatively small pieces of the EHR (single Versions) rather than the whole EHR or large sections of it is that the integrity of items is more immune to localised repository corruptions.
+</p>
+<h4 class="Heading3">
+  <a name="1142797"> </a>7.3.4	 Anonymity
+</h4>
+<p class="Body">
+  <a name="1142863"> </a>As described above in <a href="design_of_ehr.html#1148048">section 6.1</a>, one of the features of the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR is a separation of EHR (clinical and administrative) information and demographic information. This mainly relates to references to the patient rather than to provider entities, since the latter are usually publicly known. A special kind of object known as <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTY_SELF</span> in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is used to refer to the subject in the EHR. The only information contained in a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTY_SELF</span> instance is an optional external reference. The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR can be configured to provide 3 levels of separation by controlling whether and where this external identifier is actually set in <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTY_SELF</span> instances, as follows:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1149323"> </a>Nowhere in the EHR (i.e. every <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTY_SELF</span> instance is a blank placeholder). This is the most secure approach, and means that the link between the EHR and the patient has to be done outside the EHR, by associating EHR.<span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ehr_id</span> and the subject identifier. This approach is more likely for more open environments.
+  <li class="SmartList1"><a name="1149324"> </a>Once only in the EHR Status object (subject attribute), and nowhere else. This is also relatively secure, if the EHR Status object is protected in some way.
+  <li class="SmartList1"><a name="1149325"> </a>In every instance of <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTY_SELF</span>; this solution is reasonable in a secure environment, and convenient for copying parts of the record around locally.
+</ul>
+<p class="Body">
+  <a name="1149370"> </a>This simple mechanism provides a basic protection against certain kinds of information theft or hacking if used properly. In the most secure situation, a hacker has to steal not just EHR data but also separate demographic records and an identity cross reference database, both of which can be located on different machines (making burglary harder). The identity cross-reference database would be easy to encrypt or protect by other security mechanisms.
+</p>
+<h3 class="Heading2">
+  <a name="1158042"> </a>7.4	 Access Control
+</h3>
+<h5 class="Heading4">
+  <a name="1158071"> </a>Overview
+</h5>
+<p class="Body">
+  <a name="1158227"> </a>Access control is completely specified in an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR in the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">EHR_ACCESS</span> object for the EHR. This object acts as a gateway for all information access, and any access decision must be made based on the policies and rules it contains.
+</p>
+<p class="Body">
+  <a name="1162296"> </a>One of the problems with defining the semantics of the EHR Access object is that there is currently no published formal, proven model of access control for shared health information. Various efforts underway include the CEN EN13606 part 4 work, the ISO PMAC (Privilege Management and Access Control) work being done in TC/215 based on the generic security standard ISO/IEC 17799. Undoubtedly experimental and even some limited production health information security implementations exist. In reality however, no large-scale shared EHR deployments exist, and so security solutions to date are still developmental.
+</p>
+<p class="Body">
+  <a name="1162281"> </a>The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR architecture is therefore designed to accommodate alternative models of access control, each defined by a subtype of the class <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ACCESS_CONTROL_SETTING</span> (Security IM). This approach means that a simplistic access control model can be defined and implemented initially, with more sophisticated models being used later. The "scheme" in use at any given time is always indicated in the EHR Access object.
+</p>
+
+  <div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="1156805"> </a><a href="#1156802"><sup>1</sup></a>see e.g. Ross Anderson - "Security in Clinical Information Systems" available at <span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: underline; text-transform: none; vertical-align: baseline">http://www.cl.cam.ac.uk/users/rja14/policy11/policy11.html</span>.<br>
+</div>
+<div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="1155380"> </a><a href="#1142753"><sup>2</sup></a>IETF RFC 2440 - <span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: underline; text-transform: none; vertical-align: baseline">http://www.ietf.org/internet-drafts/draft-ietf-openpgp-rfc2440bis-18.txt</span><br>
+</div>
+</blockquote>
+
+<hr>
+
+<table align="right" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="right"><font size="1">
+    <a href="http://www.openEHR.org"><img src="images/openehr_logo.gif" width="109" height="23" border="0"></a><br>
+    openEHR Foundation<br>
+    http://www.openEHR.org<br>
+    </font></td>
+  </tr>
+</table>
+
+<table width="331" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23" border="0"
+    alt="TOC"> </a></td>
+    <td><a href="design_of_ehr.html"><img src="images/navprev.gif" width="81" height="23" border="0"
+    alt="PREV"> </a></td>
+    <td><a href="versioning.html"><img src="images/navnext.gif" width="81" height="23" border="0"
+    alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23" border="0"
+    alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+</body>
+</html>

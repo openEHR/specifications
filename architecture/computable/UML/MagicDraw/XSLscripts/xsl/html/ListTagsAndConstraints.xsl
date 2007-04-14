@@ -161,11 +161,11 @@ Template for constraints table
 				<td>
 					<b>Expression</b>
 				</td>
-				<!--<xsl:if test="$showDocumentation">
+				<xsl:if test="$showDocumentation">
 					<td>
 						<b>Documentation</b>
 					</td>
-				</xsl:if>-->
+				</xsl:if>
 			</tr>
 			<xsl:for-each select="Foundation.Core.ModelElement.constraint/Foundation.Core.Constraint">
 				<xsl:variable name="constraintNode" select="key('ConstraintByID', @xmi.idref)"/>
@@ -188,14 +188,14 @@ Template for constraints table
 						<xsl:value-of select="$constraintNode/Foundation.Core.Constraint.body/Foundation.Data_Types.BooleanExpression/Foundation.Data_Types.Expression.body"/>
 						<xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
 					</td>
-					<!--<xsl:if test="$showDocumentation">
+					<xsl:if test="$showDocumentation">
 						<td>
 							<xsl:for-each select="$constraintNode">
 								<xsl:call-template name="SHOW_DOCUMENTATION"/>
 							</xsl:for-each>
 							<xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
 						</td>
-					</xsl:if>-->
+					</xsl:if>
 				</tr>
 			</xsl:for-each>
 		</table>

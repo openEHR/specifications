@@ -101,6 +101,24 @@ Template for Model or Package report creation
 					</table>
 					<hr noshade="" size="1"/>
 					<p/>
+
+<!-- First show parent package -->
+					<xsl:if test="../../@xmi.id != $rootModelID">
+						<xsl:if test="../../Foundation.Core.Namespace.ownedElement = ..">
+							<xsl:text>Parent Package: </xsl:text>
+							<a href="{../../@xmi.id}Report.html" target="_self">
+								<xsl:call-template name="SHOW_NAME">
+									<xsl:with-param name="name"
+										select="../../Foundation.Core.ModelElement.name"/>
+								</xsl:call-template>
+							</a>
+							<br/>
+						</xsl:if>
+					</xsl:if>
+					
+					
+					
+					
 					<font size="+2">
 						<xsl:choose>
 							<xsl:when test="@xmi.id = $rootModelID">Project <xsl:value-of select="$projectName"/>

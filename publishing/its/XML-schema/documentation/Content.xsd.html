@@ -1,17 +1,16 @@
 
-
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml">
    <head>
-      <title>openEHR XML Schema Release 1.0 candidate</title>
+      <title>openEHR Release 1.0.1 Content  XML schema - Content.xsd</title>
       <meta http-equiv="Content-Type" content="text/xml; charset=UTF-8"/>
       <style type="text/css">
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* More-configurable styles */
 
 /******** General ********/
-
+         
 /* Document body */
 body {
    color: Black;
@@ -19,6 +18,7 @@ body {
    font-family: Arial, sans-serif;
    font-size: 10pt;
 }
+                  
 /* Horizontal rules */
 hr {
    color: black;
@@ -52,7 +52,22 @@ table.properties td {
    background-color: #eee; /* Gray */
 }
 
+img{
+ border: 0;
+}         
 
+/********* Documentation style *************/
+p.documentation {
+   color:black;
+   font-style:italic;
+         background-color: #EEEEFF;
+         border: 1px solid #DDDDFF;
+         padding-top: 1px;
+         margin-right: 30px;
+         margin-top: 1px;
+}
+
+         
 /******** Table of Contents Section ********/
 
 /* Controls for switching between printing and viewing modes */
@@ -379,7 +394,278 @@ div#legend div.hint {
 </style>
       <script type="text/javascript">
 <!--
+          /* IDs of XML Instance Representation boxes */
+var xiBoxes = new Array('h-679828450_xibox', 'h1753441984_xibox', 'h825677701_xibox', 'h-1123668211_xibox', 'h570820029_xibox', 'h-547589175_xibox', 'h1822282081_xibox', 'h-65908089_xibox', 'h113272553_xibox', 'h-598660389_xibox', 'h213190260_xibox', 'h-1854434612_xibox', 'h-1080145322_xibox');
+/* IDs of diagram boxes */
+var diagramBoxes = new Array('h-679828450_diagram', 'h1753441984_diagram', 'h825677701_diagram', 'h-1123668211_diagram', 'h570820029_diagram', 'h-547589175_diagram', 'h1822282081_diagram', 'h-65908089_diagram', 'h113272553_diagram', 'h-598660389_diagram', 'h213190260_diagram', 'h-1854434612_diagram', 'h-1080145322_diagram');
+/* IDs of logical diagram boxes */
+var logicalDiagramBoxes = new Array();
+/* IDs of Schema Component Representation boxes */
+var scBoxes = new Array('schema_scbox', 'h-679828450_scbox', 'h1753441984_scbox', 'h825677701_scbox', 'h-1123668211_scbox', 'h570820029_scbox', 'h-547589175_scbox', 'h1822282081_scbox', 'h-65908089_scbox', 'h113272553_scbox', 'h-598660389_scbox', 'h213190260_scbox', 'h-1854434612_scbox', 'h-1080145322_scbox');
 
+/**
+ * Can get the ID of the button controlling
+ * a collapseable box by concatenating
+ * this string onto the ID of the box itself.
+ */
+var B_SFIX = "_button";
+
+
+/**
+ * Returns an element in the current HTML document.
+ * 
+ * @param elementID Identifier of HTML element
+ * @return               HTML element object
+ */
+function getElementObject(elementID) {
+    var elemObj = null;
+    if (document.getElementById) {
+        elemObj = document.getElementById(elementID);
+    }
+    return elemObj;
+}             
+
+/**
+ * Closes a collapseable box.
+ * 
+ * @param boxObj       Collapseable box
+ * @param buttonObj Button controlling box
+ */
+function closeBox(boxObj, buttonObj) {
+  if (boxObj == null || buttonObj == null) {
+     // Box or button not found
+  } else {
+     // Change 'display' CSS property of box
+     boxObj.style.display="none";
+
+     // Change text of button 
+     if (boxObj.style.display=="none") {
+        buttonObj.value=" + ";
+     }
+  }
+}
+
+/**
+ * Opens a collapseable box.
+ * 
+ * @param boxObj       Collapseable box
+ * @param buttonObj Button controlling box
+ */
+function openBox(boxObj, buttonObj) {
+  if (boxObj == null || buttonObj == null) {
+     // Box or button not found
+  } else {
+     // Change 'display' CSS property of box
+     boxObj.style.display="block";
+
+     // Change text of button
+     if (boxObj.style.display=="block") {
+        buttonObj.value=" - ";
+     }
+  }
+}
+
+/**
+ * Sets the state of a collapseable box.
+ * 
+ * @param boxID Identifier of box
+ * @param open If true, box is "opened",
+ *             Otherwise, box is "closed".
+ */
+function setState(boxID, open) {
+  var boxObj = getElementObject(boxID);
+  var buttonObj = getElementObject(boxID+B_SFIX);
+  if (boxObj == null || buttonObj == null) {
+     // Box or button not found
+  } else if (open) {
+     openBox(boxObj, buttonObj);
+     // Make button visible
+     buttonObj.style.display="inline";
+  } else {
+     closeBox(boxObj, buttonObj);
+     // Make button visible
+     buttonObj.style.display="inline";
+  }
+}
+
+/**
+ * Switches the state of a collapseable box, e.g.
+ * if it's opened, it'll be closed, and vice versa.
+ * 
+ * @param boxID Identifier of box
+ */
+function switchState(boxID) {
+  var boxObj = getElementObject(boxID);
+  var buttonObj = getElementObject(boxID+B_SFIX);
+  if (boxObj == null || buttonObj == null) {
+     // Box or button not found
+  } else if (boxObj.style.display=="none") {
+     // Box is closed, so open it
+     openBox(boxObj, buttonObj);
+  } else if (boxObj.style.display=="block") {
+     // Box is opened, so close it
+     closeBox(boxObj, buttonObj);
+  }
+}
+
+/**
+ * Closes all boxes in a given list.
+ * 
+ * @param boxList Array of box IDs
+ */
+function collapseAll(boxList) {
+  var idx;
+  for (idx = 0; idx < boxList.length; idx++) {
+     var boxObj = getElementObject(boxList[idx]);
+     var buttonObj = getElementObject(boxList[idx]+B_SFIX);
+     closeBox(boxObj, buttonObj);
+  }
+}
+
+/**
+ * Open all boxes in a given list.
+ * 
+ * @param boxList Array of box IDs
+ */
+function expandAll(boxList) {
+  var idx;
+  for (idx = 0; idx < boxList.length; idx++) {
+     var boxObj = getElementObject(boxList[idx]);
+     var buttonObj = getElementObject(boxList[idx]+B_SFIX);
+     openBox(boxObj, buttonObj);
+  }
+}
+
+/**
+ * Makes all the control buttons of boxes appear.
+ * 
+ * @param boxList Array of box IDs
+ */
+function viewControlButtons(boxList) {
+    var idx;
+    for (idx = 0; idx < boxList.length; idx++) {
+        buttonObj = getElementObject(boxList[idx]+B_SFIX);
+        if (buttonObj != null) {
+            buttonObj.style.display = "inline";
+        }
+    }
+}
+
+/**
+ * Makes all the control buttons of boxes disappear.
+ * 
+ * @param boxList Array of box IDs
+ */
+function hideControlButtons(boxList) {
+    var idx;
+    for (idx = 0; idx < boxList.length; idx++) {
+        buttonObj = getElementObject(boxList[idx]+B_SFIX);
+        if (buttonObj != null) {
+            buttonObj.style.display = "none";
+        }
+    }
+}
+
+/**
+ * Sets the page for either printing mode
+ * or viewing mode. In printing mode, the page
+ * is made to be more readable when printing it out.
+ * In viewing mode, the page is more browsable.
+ *
+ * @param isPrinterVersion If true, display in
+ *                                 printing mode; otherwise, 
+ *                                 in viewing mode
+ */
+function displayMode(isPrinterVersion) {
+    var obj;
+    if (isPrinterVersion) {
+        // Hide global control buttons
+        obj = getElementObject("globalControls");
+        if (obj != null) {
+            obj.style.visibility = "hidden";
+        }
+        // Hide Legend
+        obj = getElementObject("legend");
+        if (obj != null) {
+            obj.style.display = "none";
+        }
+        obj = getElementObject("legendTOC");
+        if (obj != null) {
+            obj.style.display = "none";
+        }
+        // Hide Glossary
+        obj = getElementObject("glossary");
+        if (obj != null) {
+            obj.style.display = "none";
+        }
+        obj = getElementObject("glossaryTOC");
+        if (obj != null) {
+            obj.style.display = "none";
+        }
+
+        // Expand all diagrams
+        expandAll(diagramBoxes);
+        // Expand all logical diagrams
+        expandAll(logicalDiagramBoxes);        
+        // Expand all XML Instance Representation tables
+        expandAll(xiBoxes);
+        // Expand all Schema Component Representation tables
+        expandAll(scBoxes);
+
+        // Hide Control buttons
+        hideControlButtons(diagramBoxes);
+        hideControlButtons(logicalDiagramBoxes);
+        hideControlButtons(xiBoxes);
+        hideControlButtons(scBoxes);
+    } else {
+        // View global control buttons
+        obj = getElementObject("globalControls");
+        if (obj != null) {
+            obj.style.visibility = "visible";
+        }
+        // View Legend
+        obj = getElementObject("legend");
+        if (obj != null) {
+            obj.style.display = "block";
+        }
+        obj = getElementObject("legendTOC");
+        if (obj != null) {
+            obj.style.display = "block";
+        }
+        // View Glossary
+        obj = getElementObject("glossary");
+        if (obj != null) {
+            obj.style.display = "block";
+        }
+        obj = getElementObject("glossaryTOC");
+        if (obj != null) {
+            obj.style.display = "block";
+        }
+
+        // Expand all diagram boxes
+        expandAll(diagramBoxes);
+        // Collapse all logical diagram boxes.
+        collapseAll(logicalDiagramBoxes);
+        // Expand all XML Instance Representation tables
+        expandAll(xiBoxes);
+        // Collapse all Schema Component Representation tables
+        collapseAll(scBoxes);
+
+        // View Control buttons
+        viewControlButtons(diagramBoxes);
+        viewControlButtons(logicalDiagramBoxes);
+        viewControlButtons(xiBoxes);
+        viewControlButtons(scBoxes);
+    }
+}
+
+
+
+// -->
+</script>
+      <script type="text/javascript">
+<!--
+          
          
 /**
  * Counter of documentation windows
@@ -439,75 +725,113 @@ function viewDocumentation(compDesc, compName, docTextArray) {
    </head>
    <body>
       <h1>
-         <a name="top">openEHR XML Schema Release 1.0 candidate</a>
+         <a name="top">openEHR Release 1.0.1 Content  XML schema</a>
       </h1>
+      <div style="float: right;">
+         <div id="printerControls" style="display:none;">
+            <input type="checkbox" onclick="displayMode(this.checked)"/>Printer-friendly Version</div>
+         <script type="text/javascript">
+<!--
+          
+var pc = getElementObject("printerControls");
+if (pc != null) {
+   pc.style.display="block";
+}
+               
+// -->
+</script>
+         <div id="globalControls" style="display:none">
+            <strong>Logical Diagram:</strong>
+            <br/>
+            <span style="margin-left: 1em; white-space: nowrap">[ <a href="javascript:void(0)" onclick="expandAll(logicalDiagramBoxes)">Expand All</a> | <a href="javascript:void(0)" onclick="collapseAll(logicalDiagramBoxes)">Collapse All</a> ]</span>
+            <br/>
+            <br/>
+            <strong>XML Instance Representation:</strong>
+            <br/>
+            <span style="margin-left: 1em; white-space: nowrap">[ <a href="javascript:void(0)" onclick="expandAll(xiBoxes)">Expand All</a> | <a href="javascript:void(0)" onclick="collapseAll(xiBoxes)">Collapse All</a> ]</span>
+            <br/>
+            <br/>
+            <strong>Diagram:</strong>
+            <br/>
+            <span style="margin-left: 1em; white-space: nowrap">[ <a href="javascript:void(0)" onclick="expandAll(diagramBoxes)">Expand All</a> | <a href="javascript:void(0)" onclick="collapseAll(diagramBoxes)">Collapse All</a> ]</span>
+            <br/>
+            <br/>
+            <strong>Schema Component Representation:</strong>
+            <br/>
+            <span style="margin-left: 1em; white-space: nowrap">[ <a href="javascript:void(0)" onclick="expandAll(scBoxes)">Expand All</a> | <a href="javascript:void(0)" onclick="collapseAll(scBoxes)">Collapse All</a> ]</span>
+         </div>
+         <script type="text/javascript">
+<!--
+          
+var gc = getElementObject("globalControls");
+if (gc != null) {
+   gc.style.display="block";
+}
+               
+// -->
+</script>
+      </div>
       <h2>Table of Contents</h2>
       <ul>
          <li>
             <a href="#SchemaProperties">Schema Document Properties</a>
          </li>
          <li>
-                           Global Definitions
-                        <ul>
+            <a href="#SchemaDefinitions">Global Definitions</a>
+            <ul>
                <li>
-                  <a href="Content.xsd.html_h-598660389.html">Complex Type: <strong>ACTION</strong>
+                  <a href="#h-598660389">Complex Type: <strong>ACTION</strong>
                   </a>
                </li>
                <li>
-                  <a href="Content.xsd.html_h213190260.html">Complex Type: <strong>ACTIVITY</strong>
+                  <a href="#h213190260">Complex Type: <strong>ACTIVITY</strong>
                   </a>
                </li>
                <li>
-                  <a href="Content.xsd.html_h570820029.html">Complex Type: <strong>ADMIN_ENTRY</strong>
+                  <a href="#h570820029">Complex Type: <strong>ADMIN_ENTRY</strong>
                   </a>
                </li>
                <li>
-                  <a href="Content.xsd.html_h-547589175.html">Complex Type: <strong>CARE_ENTRY</strong>
+                  <a href="#h-547589175">Complex Type: <strong>CARE_ENTRY</strong>
                   </a>
                </li>
                <li>
-                  <a href="Content.xsd.html_h-679828450.html">Complex Type: <strong>CONTENT_ITEM</strong>
+                  <a href="#h-679828450">Complex Type: <strong>CONTENT_ITEM</strong>
                   </a>
                </li>
                <li>
-                  <a href="Content.xsd.html_h-1123668211.html">Complex Type: <strong>ENTRY</strong>
+                  <a href="#h-1123668211">Complex Type: <strong>ENTRY</strong>
                   </a>
                </li>
                <li>
-                  <a href="Content.xsd.html_h1822282081.html">Complex Type: <strong>EVALUATION</strong>
+                  <a href="#h1822282081">Complex Type: <strong>EVALUATION</strong>
                   </a>
                </li>
                <li>
-                  <a href="Content.xsd.html_h113272553.html">Complex Type: <strong>INSTRUCTION</strong>
+                  <a href="#h825677701">Complex Type: <strong>GENERIC_ENTRY</strong>
                   </a>
                </li>
                <li>
-                  <a href="Content.xsd.html_h-1854434612.html">Complex Type: <strong>INSTRUCTION_DETAILS</strong>
+                  <a href="#h113272553">Complex Type: <strong>INSTRUCTION</strong>
                   </a>
                </li>
                <li>
-                  <a href="Content.xsd.html_h-1080145322.html">Complex Type: <strong>ISM_TRANSITION</strong>
+                  <a href="#h-1854434612">Complex Type: <strong>INSTRUCTION_DETAILS</strong>
                   </a>
                </li>
                <li>
-                  <a href="Content.xsd.html_h-65908089.html">Complex Type: <strong>OBSERVATION</strong>
+                  <a href="#h-1080145322">Complex Type: <strong>ISM_TRANSITION</strong>
                   </a>
                </li>
                <li>
-                  <a href="Content.xsd.html_h1753441984.html">Complex Type: <strong>SECTION</strong>
+                  <a href="#h-65908089">Complex Type: <strong>OBSERVATION</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="#h1753441984">Complex Type: <strong>SECTION</strong>
                   </a>
                </li>
             </ul>
-         </li>
-      </ul>
-      <ul id="legendTOC" style="margin-top: 0em">
-         <li>
-            <a href="#Legend">Legend</a>
-         </li>
-      </ul>
-      <ul id="glossaryTOC" style="margin-top: 0em">
-         <li>
-            <a href="#Glossary">Glossary</a>
          </li>
       </ul>
       <div style="text-align: right; clear: both;">
@@ -519,19 +843,21 @@ function viewDocumentation(compDesc, compName, docTextArray) {
       </h2>
       <table class="properties">
          <tr>
-            <th>
-               <a title="Look up 'Target Namespace' in glossary" href="Content.xsd.html#term_TargetNS">Target Namespace</a>
-            </th>
+            <th>Target Namespace</th>
             <td>
-               <span class="targetNS">openEHR/v1/Content</span>
+               <span class="targetNS">http://schemas.openehr.org/v1</span>
             </td>
+         </tr>
+         <tr>
+            <th>Version</th>
+            <td>v1.0.1</td>
          </tr>
          <tr>
             <th>Element and Attribute Namespaces</th>
             <td>
                <ul>
                   <li>Global element and attribute declarations belong to this schema's target namespace.</li>
-                  <li>By default, local element declarations have no namespace.</li>
+                  <li>By default, local element declarations belong to this schema's target namespace.</li>
                   <li>By default, local attribute declarations have no namespace.</li>
                </ul>
             </td>
@@ -540,11 +866,11 @@ function viewDocumentation(compDesc, compName, docTextArray) {
             <th>Schema Composition</th>
             <td>
                <ul>
-                  <li>This schema imports schema(s) from the following namespace(s):<ul>
+                  <li>This schema includes components from the following schema document(s):<ul>
                         <li>
-                           <em>openEHR/v1/BaseTypes</em> (at <a title="Jump to schema documentation for 'BaseTypes.xsd'." href="BaseTypes.xsd.html">BaseTypes.xsd</a>)</li>
-                        <li>
-                           <em>openEHR/v1/Structure</em> (at <a title="Jump to schema documentation for 'Structure.xsd'." href="Structure.xsd.html">Structure.xsd</a>)</li>
+                           <a title="Jump to schema documentation for 'Structure.xsd'."
+                              href="Structure.xsd.html">Structure.xsd</a>
+                        </li>
                      </ul>
                   </li>
                </ul>
@@ -562,7 +888,7 @@ function viewDocumentation(compDesc, compName, docTextArray) {
                <a name="ns_">Default namespace</a>
             </td>
             <td>
-               <span class="targetNS">openEHR/v1/Content</span>
+               <span class="targetNS">http://schemas.openehr.org/v1</span>
             </td>
          </tr>
          <tr>
@@ -573,26 +899,6 @@ function viewDocumentation(compDesc, compName, docTextArray) {
          </tr>
          <tr>
             <td>
-               <a name="ns_mstns">mstns</a>
-            </td>
-            <td>
-               <span class="targetNS">openEHR/v1/Content</span>
-            </td>
-         </tr>
-         <tr>
-            <td>
-               <a name="ns_bt">bt</a>
-            </td>
-            <td>openEHR/v1/BaseTypes</td>
-         </tr>
-         <tr>
-            <td>
-               <a name="ns_st">st</a>
-            </td>
-            <td>openEHR/v1/Structure</td>
-         </tr>
-         <tr>
-            <td>
                <a name="ns_xs">xs</a>
             </td>
             <td>http://www.w3.org/2001/XMLSchema</td>
@@ -600,20 +906,20 @@ function viewDocumentation(compDesc, compName, docTextArray) {
       </table>
       <div class="schemaComponent box">
          <div>
-            <input type="button" id="schema_scbox_button" class="control" onclick="switchState('schema_scbox'); return false;" style="display: none"/> 
+            <input type="button" id="schema_scbox_button" class="control"
+                   onclick="switchState('schema_scbox'); return false;"
+                   style="display: none"/> 
             <span class="caption">Schema Component Representation</span>
          </div>
          <div id="schema_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">xs:schema</span> 
-               <span class="scTag">id</span>="<span class="scContent">Content</span>" <span class="scTag">targetNamespace</span>="<span class="scContent">openEHR/v1/Content</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">unqualified</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:import</span> 
-                  <span class="scTag">namespace</span>="<span class="scContent">openEHR/v1/BaseTypes</span>" <span class="scTag">schemaLocation</span>="<span class="scContent">BaseTypes.xsd</span>"/&gt;</div>
-               <div style="margin-left: 1.5em">&lt;<span class="scTag">xs:import</span> 
-                  <span class="scTag">namespace</span>="<span class="scContent">openEHR/v1/Structure</span>" <span class="scTag">schemaLocation</span>="<span class="scContent">Structure.xsd</span>"/&gt;</div>
-               <div class="scContent" style="margin-left: 1.5em">...</div>&lt;/<span class="scTag">xs:schema</span>&gt;</div>
+            <div style="margin-left: 0em">&lt;<span class="scTag">schema</span> 
+               <span class="scTag">targetNamespace</span>="<span class="scContent">http://schemas.openehr.org/v1</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">qualified</span>" <span class="scTag">version</span>="<span class="scContent">v1.0.1</span>" <span class="scTag">id</span>="<span class="scContent">Content.xsd</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">include</span> 
+                  <span class="scTag">schemaLocation</span>="<span class="scContent">Structure.xsd</span>"/&gt;</div>
+               <div class="scContent" style="margin-left: 1.5em">...</div>&lt;/<span class="scTag">schema</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
-setState('schema_scbox', false);
+          setState('schema_scbox', false);
 // -->
 </script>
       </div>
@@ -621,260 +927,2376 @@ setState('schema_scbox', false);
          <a href="#top">top</a>
       </div>
       <hr/>
-      <div id="legend">
-         <h2>
-            <a name="Legend">Legend</a>
-         </h2>
-         <div style="float: left; width: 15em;">
-            <h3 style="margin-bottom: 0px;">Complex Type:</h3>
-            <div class="hint" style="margin-left: 0em;">Schema Component Type</div>
+      <h2>
+         <a name="SchemaDefinitions">Global Definitions</a>
+      </h2>
+      <h3>Complex Type: <a name="h-598660389" class="name">ACTION</a>
+      </h3>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>
+               <span class="type">
+                  <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
+                     href="Structure.xsd.html#h911858792"
+                     class="externalLink">LOCATABLE</a>
+               </span> &lt; <span class="type">
+                  <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+               </span> (by extension) &lt; <span class="type">
+                  <a title="Jump to &#34;ENTRY&#34; type definition." href="#h-1123668211">ENTRY</a>
+               </span> (by extension) &lt; <span class="type">
+                  <a title="Jump to &#34;CARE_ENTRY&#34; type definition." href="#h-547589175">CARE_ENTRY</a>
+               </span> (by extension) &lt; <strong>ACTION</strong> (by extension)</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>None</td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>ACTION</td>
+         </tr>
+         <tr>
+            <th>Abstract</th>
+            <td>no</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-598660389_xibox_button" class="control"
+                   onclick="switchState('h-598660389_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
          </div>
-         <div style="float: left; width: 15em;">
-            <h3 style="margin-bottom: 0px;">
-               <span class="name">AusAddress</span>
-            </h3>
-            <div class="hint" style="margin-left: 0em;">Schema Component Name</div>
+         <div id="h-598660389_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...<br/>
+               <span style="margin-left: 0.5em" class="inherited"> archetype_node_id="<span class="type">
+                     <a title="Jump to &#34;archetypeNodeId&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h288119713"
+                        class="externalLink">archetypeNodeId</a>
+                  </span> 
+                  <span class="occurs">[1]</span>"</span>&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;name&gt; <span class="type">
+                     <a title="Jump to &#34;DV_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1838339253"
+                        class="externalLink">DV_TEXT</a>
+                  </span> &lt;/name&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;uid&gt; <span class="type">
+                     <a title="Jump to &#34;UID_BASED_ID&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-835416741"
+                        class="externalLink">UID_BASED_ID</a>
+                  </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
+                     <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h743461152"
+                        class="externalLink">ARCHETYPED</a>
+                  </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;language&gt; <span class="type">
+                     <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1592245190"
+                        class="externalLink">CODE_PHRASE</a>
+                  </span> &lt;/language&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;encoding&gt; <span class="type">
+                     <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1592245190"
+                        class="externalLink">CODE_PHRASE</a>
+                  </span> &lt;/encoding&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;subject&gt; <span class="type">
+                     <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1592487408"
+                        class="externalLink">PARTY_PROXY</a>
+                  </span> &lt;/subject&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;provider&gt; <span class="type">
+                     <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1592487408"
+                        class="externalLink">PARTY_PROXY</a>
+                  </span> &lt;/provider&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;other_participations&gt; <span class="type">
+                     <a title="Jump to &#34;PARTICIPATION&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1764501284"
+                        class="externalLink">PARTICIPATION</a>
+                  </span> &lt;/other_participations&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;work_flow_id&gt; <span class="type">
+                     <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h2031888792"
+                        class="externalLink">OBJECT_REF</a>
+                  </span> &lt;/work_flow_id&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;protocol&gt; <span class="type">
+                     <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h-1739558196"
+                        class="externalLink">ITEM_STRUCTURE</a>
+                  </span> &lt;/protocol&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;guideline_id&gt; <span class="type">
+                     <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h2031888792"
+                        class="externalLink">OBJECT_REF</a>
+                  </span> &lt;/guideline_id&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;time&gt; <span class="type">
+                     <a title="Jump to &#34;DV_DATE_TIME&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1783862838"
+                        class="externalLink">DV_DATE_TIME</a>
+                  </span> &lt;/time&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;description&gt; <span class="type">
+                     <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h-1739558196"
+                        class="externalLink">ITEM_STRUCTURE</a>
+                  </span> &lt;/description&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;ism_transition&gt; <span class="type">
+                     <a title="Jump to &#34;ISM_TRANSITION&#34; type definition." href="#h-1080145322">ISM_TRANSITION</a>
+                  </span> &lt;/ism_transition&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;instruction_details&gt; <span class="type">
+                     <a title="Jump to &#34;INSTRUCTION_DETAILS&#34; type definition." href="#h-1854434612">INSTRUCTION_DETAILS</a>
+                  </span> &lt;/instruction_details&gt; <span class="occurs">[0..1]</span>
+               </div>&lt;/...&gt;</div>
          </div>
-         <table class="hierarchy" style="clear : both">
-            <tr>
-               <th>Super-types:</th>
-               <td>
-                  <span class="type" style="color: #0000FF; text-decoration:underline;">Address</span> &lt; <span class="current">AusAddress</span> (by extension)</td>
-            </tr>
-            <tr>
-               <th>Sub-types:</th>
-               <td>
-                  <ul>
-                     <li>
-                        <span class="type" style="color: #0000FF; text-decoration:underline;">QLDAddress</span> (by restriction)</li>
-                  </ul>
-               </td>
-            </tr>
-         </table>
-         <div class="hint">If this schema component is a type definition, its type hierarchy is shown in a gray-bordered box.</div>
-         <table class="properties">
-            <tr>
-               <th>Name</th>
-               <td>AusAddress</td>
-            </tr>
-            <tr>
-               <th>
-                  <a title="Look up 'Abstract' in glossary" href="Content.xsd.html#term_Abstract">Abstract</a>
-               </th>
-               <td>no</td>
-            </tr>
-         </table>
-         <div class="hint">The table above displays the properties of this schema component.</div>
-         <div class="sample box">
-            <div>
-               <span class="caption">XML Instance Representation</span>
-            </div>
-            <div class="contents">
-               <span style="margin-left: 0em">&lt;...</span>
-               <span class="newFields">
-                  <span> country="<span class="fixed">Australia</span>"</span>
-               </span>&gt; <br/>
-               <span style="margin-left: 1.5em" class="inherited">&lt;unitNo&gt; <span class="type">string</span> &lt;/unitNo&gt; <span class="occurs">[0..1]</span>
-               </span>
-               <br/>
-               <span style="margin-left: 1.5em" class="inherited">&lt;houseNo&gt; <span class="type">string</span> &lt;/houseNo&gt; <span class="occurs">[1]</span>
-               </span>
-               <br/>
-               <span style="margin-left: 1.5em" class="inherited">&lt;street&gt; <span class="type">string</span> &lt;/street&gt; <span class="occurs">[1]</span>
-               </span>
-               <br/>
-               <span class="group" style="margin-left: 1.5em">Start <a title="Look up 'Choice' in glossary" href="#term_Choice">Choice</a>
-                  <span class="occurs">[1]</span>
-               </span>
-               <br/>
-               <span style="margin-left: 3em" class="inherited">&lt;city&gt; <span class="type">string</span> &lt;/city&gt; <span class="occurs">[1]</span>
-               </span>
-               <br/>
-               <span style="margin-left: 3em" class="inherited">&lt;town&gt; <span class="type">string</span> &lt;/town&gt; <span class="occurs">[1]</span>
-               </span>
-               <br/>
-               <span class="group" style="margin-left: 1.5em">End Choice</span>
-               <br/>
-               <span class="newFields">
-                  <span style="margin-left: 1.5em">&lt;state&gt; <span class="type" style="text-decoration:underline;">AusStates</span> &lt;/state&gt; <span class="occurs">[1]</span>
-                  </span>
-                  <br/>
-                  <span style="margin-left: 1.5em">&lt;postcode&gt; <span class="constraint">string &lt;&lt;<em>pattern</em> = [1-9][0-9]{3}&gt;&gt;</span> &lt;/postcode&gt; <span class="occurs">[1]</span>
-                     <a href="javascript:void(0)" title="View Documentation" class="documentation" onclick="docArray = new Array('Post code must be a four-digit number.'); viewDocumentation('Element', 'postcode', docArray);">?</a>
-                  </span>
-                  <br/>
-               </span>
-               <span style="margin-left: 0em">&lt;/...&gt;</span>
-               <br/>
-            </div>
-         </div>
-         <div class="hint">
-            <p>The XML Instance Representation table above shows the schema component's content as an XML instance.</p>
-            <ul>
-               <li>The minimum and maximum occurrence of elements and attributes are provided in square brackets, e.g. [0..1].</li>
-               <li>Model group information are shown in gray, e.g. Start Choice ... End Choice.</li>
-               <li>For type derivations, the elements and attributes that have been added to or changed from the base type's content are shown in <span style="font-weight: bold">bold</span>.</li>
-               <li>If an element/attribute has a fixed value, the fixed value is shown in green, e.g. country="Australia".</li>
-               <li>Otherwise, the type of the element/attribute is displayed.
-               <ul>
-                     <li>If the element/attribute's type is in the schema, a link is provided to it.</li>
-                     <li>For local simple type definitions, the constraints are displayed in angle brackets, e.g. &lt;&lt;<em>pattern</em> = [1-9][0-9]{3}&gt;&gt;.</li>
-                  </ul>
-               </li>
-               <li>If a local element/attribute has documentation, it will be displayed in a window that pops up when the question mark inside the attribute or next to the element is clicked, e.g. &lt;postcode&gt;.</li>
-            </ul>
-         </div>
-         <div class="schemaComponent box">
-            <div>
-               <span class="caption">Schema Component Representation</span>
-            </div>
-            <div class="contents">
-               <span style="margin-left: 0em">&lt;<span class="scTag">complexType</span>
-                  <span class="scTag">name</span>="<span class="scContent">AusAddress</span>"&gt;</span>
-               <br/>
-               <span style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;</span>
-               <br/>
-               <span style="margin-left: 3em">&lt;<span class="scTag">extension</span>
-                  <span class="scTag">base</span>="<span class="scContent">
-                     <span class="type" style="text-decoration:underline;">Address</span>
-                  </span>"&gt;</span>
-               <br/>
-               <span style="margin-left: 4.5em">&lt;<span class="scTag">sequence</span>&gt;</span>
-               <br/>
-               <span style="margin-left: 6em">&lt;<span class="scTag">element</span>
-                  <span class="scTag">name</span>="<span class="scContent">state</span>" <span class="scTag">type</span>="<span class="scContent">
-                     <span class="type" style="text-decoration:underline;">AusStates</span>
-                  </span>"/&gt;</span>
-               <br/>
-               <span style="margin-left: 6em">&lt;<span class="scTag">element</span>
-                  <span class="scTag">name</span>="<span class="scContent">postcode</span>"&gt;</span>
-               <br/>
-               <span style="margin-left: 7.5em">&lt;<span class="scTag">simpleType</span>&gt;</span>
-               <br/>
-               <span style="margin-left: 9em">&lt;<span class="scTag">restriction</span>
-                  <span class="scTag">base</span>="<span class="scContent">
-                     <span class="type">string</span>
-                  </span>"&gt;</span>
-               <br/>
-               <span style="margin-left: 10.5em">&lt;<span class="scTag">pattern</span>
-                  <span class="scTag">value</span>="<span class="scContent">[1-9][0-9]{3}</span>"/&gt;</span>
-               <br/>
-               <span style="margin-left: 9em">&lt;/<span class="scTag">restriction</span>&gt;</span>
-               <br/>
-               <span style="margin-left: 7.5em">&lt;/<span class="scTag">simpleType</span>&gt;</span>
-               <br/>
-               <span style="margin-left: 6em">&lt;/<span class="scTag">element</span>&gt;</span>
-               <br/>
-               <span style="margin-left: 4.5em">&lt;/<span class="scTag">sequence</span>&gt;</span>
-               <br/>
-               <span style="margin-left: 4.5em">&lt;<span class="scTag">attribute</span>
-                  <span class="scTag">name</span>="<span class="scContent">country</span>" <span class="scTag">type</span>="<span class="scContent">
-                     <span class="type">string</span>
-                  </span>" <span class="scTag">fixed</span>="<span class="scContent">Australia</span>"/&gt;</span>
-               <br/>
-               <span style="margin-left: 3em">&lt;/<span class="scTag">extension</span>&gt;</span>
-               <br/>
-               <span style="margin-left: 1.5em">&lt;/<span class="scTag">complexContent</span>&gt;</span>
-               <br/>
-               <span style="margin-left: 0em">&lt;/<span class="scTag">complexType</span>&gt;</span>
-               <br/>
-            </div>
-         </div>
-         <div class="hint">The Schema Component Representation table above displays the underlying XML representation of the schema component. (Annotations are not shown.)</div>
-         <div style="text-align: right; clear: both;">
-            <a href="#top">top</a>
-         </div>
-         <hr/>
-      </div>
-      <div id="glossary">
-         <h2>
-            <a name="Glossary">Glossary</a>
-         </h2>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_Abstract">Abstract</a> 
-            </span>(Applies to complex type definitions and element declarations). An abstract element or complex type cannot used to validate an element instance. If there is a reference to an abstract element, only element declarations that can substitute the abstract element can be used to validate the instance. For references to abstract type definitions, only derived types can be used.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_All">All Model Group</a> 
-            </span>Child elements can be provided <em>in any order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-all" href="http://www.w3.org/TR/xmlschema-1/#element-all">http://www.w3.org/TR/xmlschema-1/#element-all</a>.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_Choice">Choice Model Group</a> 
-            </span>
-            <em>Only one</em> from the list of child elements and model groups can be provided in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-choice" href="http://www.w3.org/TR/xmlschema-1/#element-choice">http://www.w3.org/TR/xmlschema-1/#element-choice</a>.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_CollapseWS">Collapse Whitespace Policy</a> 
-            </span>Replace tab, line feed, and carriage return characters with space character (Unicode character 32). Then, collapse contiguous sequences of space characters into single space character, and remove leading and trailing space characters.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_ElemBlock">Disallowed Substitutions</a> 
-            </span>(Applies to element declarations). If <em>substitution</em> is specified, then <a title="Look up 'substitution group' in glossary" href="Content.xsd.html#term_SubGroup">substitution group</a> members cannot be used in place of the given element declaration to validate element instances. If <em>derivation methods</em>, e.g. extension, restriction, are specified, then the given element declaration will not validate element instances that have types derived from the element declaration's type using the specified derivation methods. Normally, element instances can override their declaration's type by specifying an <code>xsi:type</code> attribute.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_Key">Key Constraint</a> 
-            </span>Like <a title="Look up 'Uniqueness Constraint' in glossary" href="Content.xsd.html#term_Unique">Uniqueness Constraint</a>, but additionally requires that the specified value(s) must be provided. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions" href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_KeyRef">Key Reference Constraint</a> 
-            </span>Ensures that the specified value(s) must match value(s) from a <a title="Look up 'Key Constraint' in glossary" href="Content.xsd.html#term_Key">Key Constraint</a> or <a title="Look up 'Uniqueness Constraint' in glossary" href="Content.xsd.html#term_Unique">Uniqueness Constraint</a>. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions" href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_ModelGroup">Model Group</a> 
-            </span>Groups together element content, specifying the order in which the element content can occur and the number of times the group of element content may be repeated. See: <a title="http://www.w3.org/TR/xmlschema-1/#Model_Groups" href="http://www.w3.org/TR/xmlschema-1/#Model_Groups">http://www.w3.org/TR/xmlschema-1/#Model_Groups</a>.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_Nillable">Nillable</a> 
-            </span>(Applies to element declarations). If an element declaration is nillable, instances can use the <code>xsi:nil</code> attribute. The <code>xsi:nil</code> attribute is the boolean attribute, <em>nil</em>, from the <em>http://www.w3.org/2001/XMLSchema-instance</em> namespace. If an element instance has an <code>xsi:nil</code> attribute set to true, it can be left empty, even though its element declaration may have required content.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_Notation">Notation</a> 
-            </span>A notation is used to identify the format of a piece of data. Values of elements and attributes that are of type, NOTATION, must come from the names of declared notations. See: <a title="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations" href="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations">http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations</a>.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_PreserveWS">Preserve Whitespace Policy</a> 
-            </span>Preserve whitespaces exactly as they appear in instances.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_TypeFinal">Prohibited Derivations</a> 
-            </span>(Applies to type definitions). Derivation methods that cannot be used to create sub-types from a given type definition.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_TypeBlock">Prohibited Substitutions</a> 
-            </span>(Applies to complex type definitions). Prevents sub-types that have been derived using the specified derivation methods from validating element instances in place of the given type definition.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_ReplaceWS">Replace Whitespace Policy</a> 
-            </span>Replace tab, line feed, and carriage return characters with space character (Unicode character 32).</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_Sequence">Sequence Model Group</a> 
-            </span>Child elements and model groups must be provided <em>in the specified order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-sequence" href="http://www.w3.org/TR/xmlschema-1/#element-sequence">http://www.w3.org/TR/xmlschema-1/#element-sequence</a>.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_SubGroup">Substitution Group</a> 
-            </span>Elements that are <em>members</em> of a substitution group can be used wherever the <em>head</em> element of the substitution group is referenced.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_ElemFinal">Substitution Group Exclusions</a> 
-            </span>(Applies to element declarations). Prohibits element declarations from nominating themselves as being able to substitute a given element declaration, if they have types that are derived from the original element's type using the specified derivation methods.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_TargetNS">Target Namespace</a> 
-            </span>The target namespace identifies the namespace that components in this schema belongs to. If no target namespace is provided, then the schema components do not belong to any namespace.</p>
-         <p>
-            <span class="glossaryTerm">
-               <a name="term_Unique">Uniqueness Constraint</a> 
-            </span>Ensures uniqueness of an element/attribute value, or a combination of values, within a specified scope. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions" href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
-         <div style="text-align: right; clear: both;">
-            <a href="#top">top</a>
-         </div>
-         <hr/>
-      </div>
-      <p class="footer">Generated by <a href="http://www.oxygenxml.com">&lt;oXygen/&gt; XML Editor</a> using a modified version of <a href="http://titanium.dstc.edu.au/xml/xs3p">xs3p</a> that adds schema diagrams and chunking support. Last modified: <script type="text/javascript">
+         <script type="text/javascript">
 <!--
-document.write(document.lastModified);
+          setState('h-598660389_xibox', true);
+// -->
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-598660389_diagram_button" class="control"
+                   onclick="switchState('h-598660389_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h-598660389_diagram" class="contents">
+            <img usemap="#h-1168714514" src="schemaDiagrams/h-1168714514.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h-1168714514.map--><map name="h-1168714514">
+</map>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-598660389_diagram', true);
+// -->
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h-598660389_scbox_button" class="control"
+                   onclick="switchState('h-598660389_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h-598660389_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">ACTION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
+                     <span class="scTag">base</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;CARE_ENTRY&#34; type definition." href="#h-547589175">CARE_ENTRY</a>
+                        </span>
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">time</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;DV_DATE_TIME&#34; type definition(located in external schema documentation)."
+                                    href="BaseTypes.xsd.html#h1783862838"
+                                    class="externalLink">DV_DATE_TIME</a>
+                              </span>
+                           </span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">description</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                                    href="Structure.xsd.html#h-1739558196"
+                                    class="externalLink">ITEM_STRUCTURE</a>
+                              </span>
+                           </span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">ism_transition</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;ISM_TRANSITION&#34; type definition." href="#h-1080145322">ISM_TRANSITION</a>
+                              </span>
+                           </span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">instruction_details</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;INSTRUCTION_DETAILS&#34; type definition." href="#h-1854434612">INSTRUCTION_DETAILS</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-598660389_scbox', false);
+// -->
+</script>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <h3>Complex Type: <a name="h213190260" class="name">ACTIVITY</a>
+      </h3>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>
+               <span class="type">
+                  <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
+                     href="Structure.xsd.html#h911858792"
+                     class="externalLink">LOCATABLE</a>
+               </span> &lt; <strong>ACTIVITY</strong> (by extension)</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>None</td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>ACTIVITY</td>
+         </tr>
+         <tr>
+            <th>Used by (from the same schema document)</th>
+            <td>Complex Type <b>
+                  <a href="#h113272553">INSTRUCTION</a>
+               </b>
+            </td>
+         </tr>
+         <tr>
+            <th>Abstract</th>
+            <td>no</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h213190260_xibox_button" class="control"
+                   onclick="switchState('h213190260_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="h213190260_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...<br/>
+               <span style="margin-left: 0.5em" class="inherited"> archetype_node_id="<span class="type">
+                     <a title="Jump to &#34;archetypeNodeId&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h288119713"
+                        class="externalLink">archetypeNodeId</a>
+                  </span> 
+                  <span class="occurs">[1]</span>"</span>&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;name&gt; <span class="type">
+                     <a title="Jump to &#34;DV_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1838339253"
+                        class="externalLink">DV_TEXT</a>
+                  </span> &lt;/name&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;uid&gt; <span class="type">
+                     <a title="Jump to &#34;UID_BASED_ID&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-835416741"
+                        class="externalLink">UID_BASED_ID</a>
+                  </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
+                     <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h743461152"
+                        class="externalLink">ARCHETYPED</a>
+                  </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;description&gt; <span class="type">
+                     <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h-1739558196"
+                        class="externalLink">ITEM_STRUCTURE</a>
+                  </span> &lt;/description&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;timing&gt; <span class="type">
+                     <a title="Jump to &#34;DV_PARSABLE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1934281772"
+                        class="externalLink">DV_PARSABLE</a>
+                  </span> &lt;/timing&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;action_archetype_id&gt; <span class="type">string</span> &lt;/action_archetype_id&gt; <span class="occurs">[1]</span>
+               </div>&lt;/...&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h213190260_xibox', true);
+// -->
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h213190260_diagram_button" class="control"
+                   onclick="switchState('h213190260_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h213190260_diagram" class="contents">
+            <img usemap="#h-4066489" src="schemaDiagrams/h-4066489.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h-4066489.map--><map name="h-4066489">
+</map>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h213190260_diagram', true);
+// -->
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h213190260_scbox_button" class="control"
+                   onclick="switchState('h213190260_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h213190260_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">ACTIVITY</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
+                     <span class="scTag">base</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
+                              href="Structure.xsd.html#h911858792"
+                              class="externalLink">LOCATABLE</a>
+                        </span>
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">description</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                                    href="Structure.xsd.html#h-1739558196"
+                                    class="externalLink">ITEM_STRUCTURE</a>
+                              </span>
+                           </span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">timing</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;DV_PARSABLE&#34; type definition(located in external schema documentation)."
+                                    href="BaseTypes.xsd.html#h-1934281772"
+                                    class="externalLink">DV_PARSABLE</a>
+                              </span>
+                           </span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">action_archetype_id</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">string</span>
+                           </span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h213190260_scbox', false);
+// -->
+</script>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <h3>Complex Type: <a name="h570820029" class="name">ADMIN_ENTRY</a>
+      </h3>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>
+               <span class="type">
+                  <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
+                     href="Structure.xsd.html#h911858792"
+                     class="externalLink">LOCATABLE</a>
+               </span> &lt; <span class="type">
+                  <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+               </span> (by extension) &lt; <span class="type">
+                  <a title="Jump to &#34;ENTRY&#34; type definition." href="#h-1123668211">ENTRY</a>
+               </span> (by extension) &lt; <strong>ADMIN_ENTRY</strong> (by extension)</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>None</td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>ADMIN_ENTRY</td>
+         </tr>
+         <tr>
+            <th>Abstract</th>
+            <td>no</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h570820029_xibox_button" class="control"
+                   onclick="switchState('h570820029_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="h570820029_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...<br/>
+               <span style="margin-left: 0.5em" class="inherited"> archetype_node_id="<span class="type">
+                     <a title="Jump to &#34;archetypeNodeId&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h288119713"
+                        class="externalLink">archetypeNodeId</a>
+                  </span> 
+                  <span class="occurs">[1]</span>"</span>&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;name&gt; <span class="type">
+                     <a title="Jump to &#34;DV_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1838339253"
+                        class="externalLink">DV_TEXT</a>
+                  </span> &lt;/name&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;uid&gt; <span class="type">
+                     <a title="Jump to &#34;UID_BASED_ID&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-835416741"
+                        class="externalLink">UID_BASED_ID</a>
+                  </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
+                     <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h743461152"
+                        class="externalLink">ARCHETYPED</a>
+                  </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;language&gt; <span class="type">
+                     <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1592245190"
+                        class="externalLink">CODE_PHRASE</a>
+                  </span> &lt;/language&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;encoding&gt; <span class="type">
+                     <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1592245190"
+                        class="externalLink">CODE_PHRASE</a>
+                  </span> &lt;/encoding&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;subject&gt; <span class="type">
+                     <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1592487408"
+                        class="externalLink">PARTY_PROXY</a>
+                  </span> &lt;/subject&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;provider&gt; <span class="type">
+                     <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1592487408"
+                        class="externalLink">PARTY_PROXY</a>
+                  </span> &lt;/provider&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;other_participations&gt; <span class="type">
+                     <a title="Jump to &#34;PARTICIPATION&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1764501284"
+                        class="externalLink">PARTICIPATION</a>
+                  </span> &lt;/other_participations&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;work_flow_id&gt; <span class="type">
+                     <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h2031888792"
+                        class="externalLink">OBJECT_REF</a>
+                  </span> &lt;/work_flow_id&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;data&gt; <span class="type">
+                     <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h-1739558196"
+                        class="externalLink">ITEM_STRUCTURE</a>
+                  </span> &lt;/data&gt; <span class="occurs">[1]</span>
+               </div>&lt;/...&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h570820029_xibox', true);
+// -->
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h570820029_diagram_button" class="control"
+                   onclick="switchState('h570820029_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h570820029_diagram" class="contents">
+            <img usemap="#h685766992" src="schemaDiagrams/h685766992.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h685766992.map--><map name="h685766992">
+</map>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h570820029_diagram', true);
+// -->
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h570820029_scbox_button" class="control"
+                   onclick="switchState('h570820029_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h570820029_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">ADMIN_ENTRY</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
+                     <span class="scTag">base</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;ENTRY&#34; type definition." href="#h-1123668211">ENTRY</a>
+                        </span>
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">data</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                                    href="Structure.xsd.html#h-1739558196"
+                                    class="externalLink">ITEM_STRUCTURE</a>
+                              </span>
+                           </span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h570820029_scbox', false);
+// -->
+</script>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <h3>Complex Type: <a name="h-547589175" class="name">CARE_ENTRY</a>
+      </h3>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>
+               <span class="type">
+                  <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
+                     href="Structure.xsd.html#h911858792"
+                     class="externalLink">LOCATABLE</a>
+               </span> &lt; <span class="type">
+                  <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+               </span> (by extension) &lt; <span class="type">
+                  <a title="Jump to &#34;ENTRY&#34; type definition." href="#h-1123668211">ENTRY</a>
+               </span> (by extension) &lt; <strong>CARE_ENTRY</strong> (by extension)</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>
+               <ul>
+                  <li>
+                     <span class="type">
+                        <a title="Jump to &#34;EVALUATION&#34; type definition." href="#h1822282081">EVALUATION</a>
+                     </span> (by extension)</li>
+                  <li>
+                     <span class="type">
+                        <a title="Jump to &#34;OBSERVATION&#34; type definition." href="#h-65908089">OBSERVATION</a>
+                     </span> (by extension)</li>
+                  <li>
+                     <span class="type">
+                        <a title="Jump to &#34;INSTRUCTION&#34; type definition." href="#h113272553">INSTRUCTION</a>
+                     </span> (by extension)</li>
+                  <li>
+                     <span class="type">
+                        <a title="Jump to &#34;ACTION&#34; type definition." href="#h-598660389">ACTION</a>
+                     </span> (by extension)</li>
+               </ul>
+            </td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>CARE_ENTRY</td>
+         </tr>
+         <tr>
+            <th>Abstract</th>
+            <td>yes</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-547589175_xibox_button" class="control"
+                   onclick="switchState('h-547589175_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="h-547589175_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...<br/>
+               <span style="margin-left: 0.5em" class="inherited"> archetype_node_id="<span class="type">
+                     <a title="Jump to &#34;archetypeNodeId&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h288119713"
+                        class="externalLink">archetypeNodeId</a>
+                  </span> 
+                  <span class="occurs">[1]</span>"</span>&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;name&gt; <span class="type">
+                     <a title="Jump to &#34;DV_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1838339253"
+                        class="externalLink">DV_TEXT</a>
+                  </span> &lt;/name&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;uid&gt; <span class="type">
+                     <a title="Jump to &#34;UID_BASED_ID&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-835416741"
+                        class="externalLink">UID_BASED_ID</a>
+                  </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
+                     <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h743461152"
+                        class="externalLink">ARCHETYPED</a>
+                  </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;language&gt; <span class="type">
+                     <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1592245190"
+                        class="externalLink">CODE_PHRASE</a>
+                  </span> &lt;/language&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;encoding&gt; <span class="type">
+                     <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1592245190"
+                        class="externalLink">CODE_PHRASE</a>
+                  </span> &lt;/encoding&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;subject&gt; <span class="type">
+                     <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1592487408"
+                        class="externalLink">PARTY_PROXY</a>
+                  </span> &lt;/subject&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;provider&gt; <span class="type">
+                     <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1592487408"
+                        class="externalLink">PARTY_PROXY</a>
+                  </span> &lt;/provider&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;other_participations&gt; <span class="type">
+                     <a title="Jump to &#34;PARTICIPATION&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1764501284"
+                        class="externalLink">PARTICIPATION</a>
+                  </span> &lt;/other_participations&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;work_flow_id&gt; <span class="type">
+                     <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h2031888792"
+                        class="externalLink">OBJECT_REF</a>
+                  </span> &lt;/work_flow_id&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;protocol&gt; <span class="type">
+                     <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h-1739558196"
+                        class="externalLink">ITEM_STRUCTURE</a>
+                  </span> &lt;/protocol&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;guideline_id&gt; <span class="type">
+                     <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h2031888792"
+                        class="externalLink">OBJECT_REF</a>
+                  </span> &lt;/guideline_id&gt; <span class="occurs">[0..1]</span>
+               </div>&lt;/...&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-547589175_xibox', true);
+// -->
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-547589175_diagram_button" class="control"
+                   onclick="switchState('h-547589175_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h-547589175_diagram" class="contents">
+            <img usemap="#h-877285284" src="schemaDiagrams/h-877285284.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h-877285284.map--><map name="h-877285284">
+</map>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-547589175_diagram', true);
+// -->
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h-547589175_scbox_button" class="control"
+                   onclick="switchState('h-547589175_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h-547589175_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">CARE_ENTRY</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
+                     <span class="scTag">base</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;ENTRY&#34; type definition." href="#h-1123668211">ENTRY</a>
+                        </span>
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">protocol</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                                    href="Structure.xsd.html#h-1739558196"
+                                    class="externalLink">ITEM_STRUCTURE</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">guideline_id</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
+                                    href="BaseTypes.xsd.html#h2031888792"
+                                    class="externalLink">OBJECT_REF</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-547589175_scbox', false);
+// -->
+</script>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <h3>Complex Type: <a name="h-679828450" class="name">CONTENT_ITEM</a>
+      </h3>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>
+               <span class="type">
+                  <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
+                     href="Structure.xsd.html#h911858792"
+                     class="externalLink">LOCATABLE</a>
+               </span> &lt; <strong>CONTENT_ITEM</strong> (by extension)</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>
+               <ul>
+                  <li>
+                     <span class="type">
+                        <a title="Jump to &#34;SECTION&#34; type definition." href="#h1753441984">SECTION</a>
+                     </span> (by extension)</li>
+                  <li>
+                     <span class="type">
+                        <a title="Jump to &#34;GENERIC_ENTRY&#34; type definition." href="#h825677701">GENERIC_ENTRY</a>
+                     </span> (by extension)</li>
+                  <li>
+                     <span class="type">
+                        <a title="Jump to &#34;ENTRY&#34; type definition." href="#h-1123668211">ENTRY</a>
+                     </span> (by extension)<ul>
+                        <li>
+                           <span class="type">
+                              <a title="Jump to &#34;ADMIN_ENTRY&#34; type definition." href="#h570820029">ADMIN_ENTRY</a>
+                           </span> (by extension)</li>
+                        <li>
+                           <span class="type">
+                              <a title="Jump to &#34;CARE_ENTRY&#34; type definition." href="#h-547589175">CARE_ENTRY</a>
+                           </span> (by extension)<ul>
+                              <li>
+                                 <span class="type">
+                                    <a title="Jump to &#34;EVALUATION&#34; type definition." href="#h1822282081">EVALUATION</a>
+                                 </span> (by extension)</li>
+                              <li>
+                                 <span class="type">
+                                    <a title="Jump to &#34;OBSERVATION&#34; type definition." href="#h-65908089">OBSERVATION</a>
+                                 </span> (by extension)</li>
+                              <li>
+                                 <span class="type">
+                                    <a title="Jump to &#34;INSTRUCTION&#34; type definition." href="#h113272553">INSTRUCTION</a>
+                                 </span> (by extension)</li>
+                              <li>
+                                 <span class="type">
+                                    <a title="Jump to &#34;ACTION&#34; type definition." href="#h-598660389">ACTION</a>
+                                 </span> (by extension)</li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>CONTENT_ITEM</td>
+         </tr>
+         <tr>
+            <th>Used by (from the same schema document)</th>
+            <td>Complex Type <b>
+                  <a href="#h1753441984">SECTION</a>
+               </b>
+            </td>
+         </tr>
+         <tr>
+            <th>Abstract</th>
+            <td>yes</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-679828450_xibox_button" class="control"
+                   onclick="switchState('h-679828450_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="h-679828450_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...<br/>
+               <span style="margin-left: 0.5em" class="inherited"> archetype_node_id="<span class="type">
+                     <a title="Jump to &#34;archetypeNodeId&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h288119713"
+                        class="externalLink">archetypeNodeId</a>
+                  </span> 
+                  <span class="occurs">[1]</span>"</span>&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;name&gt; <span class="type">
+                     <a title="Jump to &#34;DV_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1838339253"
+                        class="externalLink">DV_TEXT</a>
+                  </span> &lt;/name&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;uid&gt; <span class="type">
+                     <a title="Jump to &#34;UID_BASED_ID&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-835416741"
+                        class="externalLink">UID_BASED_ID</a>
+                  </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
+                     <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h743461152"
+                        class="externalLink">ARCHETYPED</a>
+                  </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               </div>&lt;/...&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-679828450_xibox', true);
+// -->
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-679828450_diagram_button" class="control"
+                   onclick="switchState('h-679828450_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h-679828450_diagram" class="contents">
+            <img usemap="#h-178098063" src="schemaDiagrams/h-178098063.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h-178098063.map--><map name="h-178098063">
+               <area shape="rect" alt="h911858792" coords="237,0,420,26"
+                     href="Structure.xsd.html#h911858792"/>
+
+            </map>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-679828450_diagram', true);
+// -->
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h-679828450_scbox_button" class="control"
+                   onclick="switchState('h-679828450_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h-679828450_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">CONTENT_ITEM</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
+                     <span class="scTag">base</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
+                              href="Structure.xsd.html#h911858792"
+                              class="externalLink">LOCATABLE</a>
+                        </span>
+                     </span>"/&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-679828450_scbox', false);
+// -->
+</script>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <h3>Complex Type: <a name="h-1123668211" class="name">ENTRY</a>
+      </h3>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>
+               <span class="type">
+                  <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
+                     href="Structure.xsd.html#h911858792"
+                     class="externalLink">LOCATABLE</a>
+               </span> &lt; <span class="type">
+                  <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+               </span> (by extension) &lt; <strong>ENTRY</strong> (by extension)</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>
+               <ul>
+                  <li>
+                     <span class="type">
+                        <a title="Jump to &#34;ADMIN_ENTRY&#34; type definition." href="#h570820029">ADMIN_ENTRY</a>
+                     </span> (by extension)</li>
+                  <li>
+                     <span class="type">
+                        <a title="Jump to &#34;CARE_ENTRY&#34; type definition." href="#h-547589175">CARE_ENTRY</a>
+                     </span> (by extension)<ul>
+                        <li>
+                           <span class="type">
+                              <a title="Jump to &#34;EVALUATION&#34; type definition." href="#h1822282081">EVALUATION</a>
+                           </span> (by extension)</li>
+                        <li>
+                           <span class="type">
+                              <a title="Jump to &#34;OBSERVATION&#34; type definition." href="#h-65908089">OBSERVATION</a>
+                           </span> (by extension)</li>
+                        <li>
+                           <span class="type">
+                              <a title="Jump to &#34;INSTRUCTION&#34; type definition." href="#h113272553">INSTRUCTION</a>
+                           </span> (by extension)</li>
+                        <li>
+                           <span class="type">
+                              <a title="Jump to &#34;ACTION&#34; type definition." href="#h-598660389">ACTION</a>
+                           </span> (by extension)</li>
+                     </ul>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>ENTRY</td>
+         </tr>
+         <tr>
+            <th>Abstract</th>
+            <td>yes</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-1123668211_xibox_button" class="control"
+                   onclick="switchState('h-1123668211_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="h-1123668211_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...<br/>
+               <span style="margin-left: 0.5em" class="inherited"> archetype_node_id="<span class="type">
+                     <a title="Jump to &#34;archetypeNodeId&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h288119713"
+                        class="externalLink">archetypeNodeId</a>
+                  </span> 
+                  <span class="occurs">[1]</span>"</span>&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;name&gt; <span class="type">
+                     <a title="Jump to &#34;DV_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1838339253"
+                        class="externalLink">DV_TEXT</a>
+                  </span> &lt;/name&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;uid&gt; <span class="type">
+                     <a title="Jump to &#34;UID_BASED_ID&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-835416741"
+                        class="externalLink">UID_BASED_ID</a>
+                  </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
+                     <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h743461152"
+                        class="externalLink">ARCHETYPED</a>
+                  </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;language&gt; <span class="type">
+                     <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1592245190"
+                        class="externalLink">CODE_PHRASE</a>
+                  </span> &lt;/language&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;encoding&gt; <span class="type">
+                     <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1592245190"
+                        class="externalLink">CODE_PHRASE</a>
+                  </span> &lt;/encoding&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;subject&gt; <span class="type">
+                     <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1592487408"
+                        class="externalLink">PARTY_PROXY</a>
+                  </span> &lt;/subject&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;provider&gt; <span class="type">
+                     <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1592487408"
+                        class="externalLink">PARTY_PROXY</a>
+                  </span> &lt;/provider&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;other_participations&gt; <span class="type">
+                     <a title="Jump to &#34;PARTICIPATION&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1764501284"
+                        class="externalLink">PARTICIPATION</a>
+                  </span> &lt;/other_participations&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;work_flow_id&gt; <span class="type">
+                     <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h2031888792"
+                        class="externalLink">OBJECT_REF</a>
+                  </span> &lt;/work_flow_id&gt; <span class="occurs">[0..1]</span>
+               </div>&lt;/...&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-1123668211_xibox', true);
+// -->
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-1123668211_diagram_button" class="control"
+                   onclick="switchState('h-1123668211_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h-1123668211_diagram" class="contents">
+            <img usemap="#h-387703136" src="schemaDiagrams/h-387703136.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h-387703136.map--><map name="h-387703136">
+</map>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-1123668211_diagram', true);
+// -->
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h-1123668211_scbox_button" class="control"
+                   onclick="switchState('h-1123668211_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h-1123668211_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">ENTRY</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
+                     <span class="scTag">base</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+                        </span>
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">language</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                                    href="BaseTypes.xsd.html#h1592245190"
+                                    class="externalLink">CODE_PHRASE</a>
+                              </span>
+                           </span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">encoding</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                                    href="BaseTypes.xsd.html#h1592245190"
+                                    class="externalLink">CODE_PHRASE</a>
+                              </span>
+                           </span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">subject</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                                    href="BaseTypes.xsd.html#h-1592487408"
+                                    class="externalLink">PARTY_PROXY</a>
+                              </span>
+                           </span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">provider</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                                    href="BaseTypes.xsd.html#h-1592487408"
+                                    class="externalLink">PARTY_PROXY</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">other_participations</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;PARTICIPATION&#34; type definition(located in external schema documentation)."
+                                    href="BaseTypes.xsd.html#h-1764501284"
+                                    class="externalLink">PARTICIPATION</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">work_flow_id</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
+                                    href="BaseTypes.xsd.html#h2031888792"
+                                    class="externalLink">OBJECT_REF</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-1123668211_scbox', false);
+// -->
+</script>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <h3>Complex Type: <a name="h1822282081" class="name">EVALUATION</a>
+      </h3>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>
+               <span class="type">
+                  <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
+                     href="Structure.xsd.html#h911858792"
+                     class="externalLink">LOCATABLE</a>
+               </span> &lt; <span class="type">
+                  <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+               </span> (by extension) &lt; <span class="type">
+                  <a title="Jump to &#34;ENTRY&#34; type definition." href="#h-1123668211">ENTRY</a>
+               </span> (by extension) &lt; <span class="type">
+                  <a title="Jump to &#34;CARE_ENTRY&#34; type definition." href="#h-547589175">CARE_ENTRY</a>
+               </span> (by extension) &lt; <strong>EVALUATION</strong> (by extension)</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>None</td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>EVALUATION</td>
+         </tr>
+         <tr>
+            <th>Abstract</th>
+            <td>no</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h1822282081_xibox_button" class="control"
+                   onclick="switchState('h1822282081_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="h1822282081_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...<br/>
+               <span style="margin-left: 0.5em" class="inherited"> archetype_node_id="<span class="type">
+                     <a title="Jump to &#34;archetypeNodeId&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h288119713"
+                        class="externalLink">archetypeNodeId</a>
+                  </span> 
+                  <span class="occurs">[1]</span>"</span>&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;name&gt; <span class="type">
+                     <a title="Jump to &#34;DV_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1838339253"
+                        class="externalLink">DV_TEXT</a>
+                  </span> &lt;/name&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;uid&gt; <span class="type">
+                     <a title="Jump to &#34;UID_BASED_ID&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-835416741"
+                        class="externalLink">UID_BASED_ID</a>
+                  </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
+                     <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h743461152"
+                        class="externalLink">ARCHETYPED</a>
+                  </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;language&gt; <span class="type">
+                     <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1592245190"
+                        class="externalLink">CODE_PHRASE</a>
+                  </span> &lt;/language&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;encoding&gt; <span class="type">
+                     <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1592245190"
+                        class="externalLink">CODE_PHRASE</a>
+                  </span> &lt;/encoding&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;subject&gt; <span class="type">
+                     <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1592487408"
+                        class="externalLink">PARTY_PROXY</a>
+                  </span> &lt;/subject&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;provider&gt; <span class="type">
+                     <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1592487408"
+                        class="externalLink">PARTY_PROXY</a>
+                  </span> &lt;/provider&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;other_participations&gt; <span class="type">
+                     <a title="Jump to &#34;PARTICIPATION&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1764501284"
+                        class="externalLink">PARTICIPATION</a>
+                  </span> &lt;/other_participations&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;work_flow_id&gt; <span class="type">
+                     <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h2031888792"
+                        class="externalLink">OBJECT_REF</a>
+                  </span> &lt;/work_flow_id&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;protocol&gt; <span class="type">
+                     <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h-1739558196"
+                        class="externalLink">ITEM_STRUCTURE</a>
+                  </span> &lt;/protocol&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;guideline_id&gt; <span class="type">
+                     <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h2031888792"
+                        class="externalLink">OBJECT_REF</a>
+                  </span> &lt;/guideline_id&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;data&gt; <span class="type">
+                     <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h-1739558196"
+                        class="externalLink">ITEM_STRUCTURE</a>
+                  </span> &lt;/data&gt; <span class="occurs">[1]</span>
+               </div>&lt;/...&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h1822282081_xibox', true);
+// -->
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h1822282081_diagram_button" class="control"
+                   onclick="switchState('h1822282081_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h1822282081_diagram" class="contents">
+            <img usemap="#h-722550796" src="schemaDiagrams/h-722550796.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h-722550796.map--><map name="h-722550796">
+</map>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h1822282081_diagram', true);
+// -->
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h1822282081_scbox_button" class="control"
+                   onclick="switchState('h1822282081_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h1822282081_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">EVALUATION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
+                     <span class="scTag">base</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;CARE_ENTRY&#34; type definition." href="#h-547589175">CARE_ENTRY</a>
+                        </span>
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">data</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                                    href="Structure.xsd.html#h-1739558196"
+                                    class="externalLink">ITEM_STRUCTURE</a>
+                              </span>
+                           </span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h1822282081_scbox', false);
+// -->
+</script>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <h3>Complex Type: <a name="h825677701" class="name">GENERIC_ENTRY</a>
+      </h3>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>
+               <span class="type">
+                  <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
+                     href="Structure.xsd.html#h911858792"
+                     class="externalLink">LOCATABLE</a>
+               </span> &lt; <span class="type">
+                  <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+               </span> (by extension) &lt; <strong>GENERIC_ENTRY</strong> (by extension)</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>None</td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>GENERIC_ENTRY</td>
+         </tr>
+         <tr>
+            <th>Abstract</th>
+            <td>no</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h825677701_xibox_button" class="control"
+                   onclick="switchState('h825677701_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="h825677701_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...<br/>
+               <span style="margin-left: 0.5em" class="inherited"> archetype_node_id="<span class="type">
+                     <a title="Jump to &#34;archetypeNodeId&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h288119713"
+                        class="externalLink">archetypeNodeId</a>
+                  </span> 
+                  <span class="occurs">[1]</span>"</span>&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;name&gt; <span class="type">
+                     <a title="Jump to &#34;DV_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1838339253"
+                        class="externalLink">DV_TEXT</a>
+                  </span> &lt;/name&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;uid&gt; <span class="type">
+                     <a title="Jump to &#34;UID_BASED_ID&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-835416741"
+                        class="externalLink">UID_BASED_ID</a>
+                  </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
+                     <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h743461152"
+                        class="externalLink">ARCHETYPED</a>
+                  </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;data&gt; <span class="type">
+                     <a title="Jump to &#34;ITEM_TREE&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h-2298235"
+                        class="externalLink">ITEM_TREE</a>
+                  </span> &lt;/data&gt; <span class="occurs">[1]</span>
+               </div>&lt;/...&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h825677701_xibox', true);
+// -->
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h825677701_diagram_button" class="control"
+                   onclick="switchState('h825677701_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h825677701_diagram" class="contents">
+            <img usemap="#h-1844272872" src="schemaDiagrams/h-1844272872.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h-1844272872.map--><map name="h-1844272872">
+</map>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h825677701_diagram', true);
+// -->
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h825677701_scbox_button" class="control"
+                   onclick="switchState('h825677701_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h825677701_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">GENERIC_ENTRY</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
+                     <span class="scTag">base</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+                        </span>
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">data</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;ITEM_TREE&#34; type definition(located in external schema documentation)."
+                                    href="Structure.xsd.html#h-2298235"
+                                    class="externalLink">ITEM_TREE</a>
+                              </span>
+                           </span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h825677701_scbox', false);
+// -->
+</script>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <h3>Complex Type: <a name="h113272553" class="name">INSTRUCTION</a>
+      </h3>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>
+               <span class="type">
+                  <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
+                     href="Structure.xsd.html#h911858792"
+                     class="externalLink">LOCATABLE</a>
+               </span> &lt; <span class="type">
+                  <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+               </span> (by extension) &lt; <span class="type">
+                  <a title="Jump to &#34;ENTRY&#34; type definition." href="#h-1123668211">ENTRY</a>
+               </span> (by extension) &lt; <span class="type">
+                  <a title="Jump to &#34;CARE_ENTRY&#34; type definition." href="#h-547589175">CARE_ENTRY</a>
+               </span> (by extension) &lt; <strong>INSTRUCTION</strong> (by extension)</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>None</td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>INSTRUCTION</td>
+         </tr>
+         <tr>
+            <th>Abstract</th>
+            <td>no</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h113272553_xibox_button" class="control"
+                   onclick="switchState('h113272553_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="h113272553_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...<br/>
+               <span style="margin-left: 0.5em" class="inherited"> archetype_node_id="<span class="type">
+                     <a title="Jump to &#34;archetypeNodeId&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h288119713"
+                        class="externalLink">archetypeNodeId</a>
+                  </span> 
+                  <span class="occurs">[1]</span>"</span>&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;name&gt; <span class="type">
+                     <a title="Jump to &#34;DV_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1838339253"
+                        class="externalLink">DV_TEXT</a>
+                  </span> &lt;/name&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;uid&gt; <span class="type">
+                     <a title="Jump to &#34;UID_BASED_ID&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-835416741"
+                        class="externalLink">UID_BASED_ID</a>
+                  </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
+                     <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h743461152"
+                        class="externalLink">ARCHETYPED</a>
+                  </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;language&gt; <span class="type">
+                     <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1592245190"
+                        class="externalLink">CODE_PHRASE</a>
+                  </span> &lt;/language&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;encoding&gt; <span class="type">
+                     <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1592245190"
+                        class="externalLink">CODE_PHRASE</a>
+                  </span> &lt;/encoding&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;subject&gt; <span class="type">
+                     <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1592487408"
+                        class="externalLink">PARTY_PROXY</a>
+                  </span> &lt;/subject&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;provider&gt; <span class="type">
+                     <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1592487408"
+                        class="externalLink">PARTY_PROXY</a>
+                  </span> &lt;/provider&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;other_participations&gt; <span class="type">
+                     <a title="Jump to &#34;PARTICIPATION&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1764501284"
+                        class="externalLink">PARTICIPATION</a>
+                  </span> &lt;/other_participations&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;work_flow_id&gt; <span class="type">
+                     <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h2031888792"
+                        class="externalLink">OBJECT_REF</a>
+                  </span> &lt;/work_flow_id&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;protocol&gt; <span class="type">
+                     <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h-1739558196"
+                        class="externalLink">ITEM_STRUCTURE</a>
+                  </span> &lt;/protocol&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;guideline_id&gt; <span class="type">
+                     <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h2031888792"
+                        class="externalLink">OBJECT_REF</a>
+                  </span> &lt;/guideline_id&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;narrative&gt; <span class="type">
+                     <a title="Jump to &#34;DV_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1838339253"
+                        class="externalLink">DV_TEXT</a>
+                  </span> &lt;/narrative&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;expiry_time&gt; <span class="type">
+                     <a title="Jump to &#34;DV_DATE_TIME&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1783862838"
+                        class="externalLink">DV_DATE_TIME</a>
+                  </span> &lt;/expiry_time&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;wf_definition&gt; <span class="type">
+                     <a title="Jump to &#34;DV_PARSABLE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1934281772"
+                        class="externalLink">DV_PARSABLE</a>
+                  </span> &lt;/wf_definition&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;activities&gt; <span class="type">
+                     <a title="Jump to &#34;ACTIVITY&#34; type definition." href="#h213190260">ACTIVITY</a>
+                  </span> &lt;/activities&gt; <span class="occurs">[0..*]</span>
+               </div>&lt;/...&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h113272553_xibox', true);
+// -->
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h113272553_diagram_button" class="control"
+                   onclick="switchState('h113272553_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h113272553_diagram" class="contents">
+            <img usemap="#h-899548292" src="schemaDiagrams/h-899548292.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h-899548292.map--><map name="h-899548292">
+</map>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h113272553_diagram', true);
+// -->
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h113272553_scbox_button" class="control"
+                   onclick="switchState('h113272553_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h113272553_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">INSTRUCTION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
+                     <span class="scTag">base</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;CARE_ENTRY&#34; type definition." href="#h-547589175">CARE_ENTRY</a>
+                        </span>
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">narrative</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;DV_TEXT&#34; type definition(located in external schema documentation)."
+                                    href="BaseTypes.xsd.html#h1838339253"
+                                    class="externalLink">DV_TEXT</a>
+                              </span>
+                           </span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">expiry_time</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;DV_DATE_TIME&#34; type definition(located in external schema documentation)."
+                                    href="BaseTypes.xsd.html#h1783862838"
+                                    class="externalLink">DV_DATE_TIME</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">wf_definition</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;DV_PARSABLE&#34; type definition(located in external schema documentation)."
+                                    href="BaseTypes.xsd.html#h-1934281772"
+                                    class="externalLink">DV_PARSABLE</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">activities</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;ACTIVITY&#34; type definition." href="#h213190260">ACTIVITY</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h113272553_scbox', false);
+// -->
+</script>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <h3>Complex Type: <a name="h-1854434612" class="name">INSTRUCTION_DETAILS</a>
+      </h3>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>None</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>None</td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>INSTRUCTION_DETAILS</td>
+         </tr>
+         <tr>
+            <th>Used by (from the same schema document)</th>
+            <td>Complex Type <b>
+                  <a href="#h-598660389">ACTION</a>
+               </b>
+            </td>
+         </tr>
+         <tr>
+            <th>Abstract</th>
+            <td>no</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-1854434612_xibox_button" class="control"
+                   onclick="switchState('h-1854434612_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="h-1854434612_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...&gt; <br/>
+               <div style="margin-left: 1.5em">&lt;instruction_id&gt; <span class="type">
+                     <a title="Jump to &#34;LOCATABLE_REF&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-2081303524"
+                        class="externalLink">LOCATABLE_REF</a>
+                  </span> &lt;/instruction_id&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;activity_id&gt; <span class="type">
+                     <a title="Jump to &#34;atCode&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h362255717"
+                        class="externalLink">atCode</a>
+                  </span> &lt;/activity_id&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;wf_details&gt; <span class="type">
+                     <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h-1739558196"
+                        class="externalLink">ITEM_STRUCTURE</a>
+                  </span> &lt;/wf_details&gt; <span class="occurs">[0..1]</span>
+               </div>&lt;/...&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-1854434612_xibox', true);
+// -->
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-1854434612_diagram_button" class="control"
+                   onclick="switchState('h-1854434612_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h-1854434612_diagram" class="contents">
+            <img usemap="#h1057702303" src="schemaDiagrams/h1057702303.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h1057702303.map--><map name="h1057702303">
+               <area shape="rect" alt="h-2081303524" coords="282,0,402,24"
+                     href="BaseTypes.xsd.html#h-2081303524"/>
+
+               <area shape="rect" alt="h362255717" coords="282,34,387,58"
+                     href="BaseTypes.xsd.html#h362255717"/>
+
+               <area shape="rect" alt="h-1739558196" coords="282,68,387,106"
+                     href="Structure.xsd.html#h-1739558196"/>
+
+            </map>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-1854434612_diagram', true);
+// -->
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h-1854434612_scbox_button" class="control"
+                   onclick="switchState('h-1854434612_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h-1854434612_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">INSTRUCTION_DETAILS</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                     <span class="scTag">name</span>="<span class="scContent">instruction_id</span>" <span class="scTag">type</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;LOCATABLE_REF&#34; type definition(located in external schema documentation)."
+                              href="BaseTypes.xsd.html#h-2081303524"
+                              class="externalLink">LOCATABLE_REF</a>
+                        </span>
+                     </span>"/&gt;</div>
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                     <span class="scTag">name</span>="<span class="scContent">activity_id</span>" <span class="scTag">type</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;atCode&#34; type definition(located in external schema documentation)."
+                              href="BaseTypes.xsd.html#h362255717"
+                              class="externalLink">atCode</a>
+                        </span>
+                     </span>"/&gt;</div>
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                     <span class="scTag">name</span>="<span class="scContent">wf_details</span>" <span class="scTag">type</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                              href="Structure.xsd.html#h-1739558196"
+                              class="externalLink">ITEM_STRUCTURE</a>
+                        </span>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-1854434612_scbox', false);
+// -->
+</script>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <h3>Complex Type: <a name="h-1080145322" class="name">ISM_TRANSITION</a>
+      </h3>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>None</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>None</td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>ISM_TRANSITION</td>
+         </tr>
+         <tr>
+            <th>Used by (from the same schema document)</th>
+            <td>Complex Type <b>
+                  <a href="#h-598660389">ACTION</a>
+               </b>
+            </td>
+         </tr>
+         <tr>
+            <th>Abstract</th>
+            <td>no</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-1080145322_xibox_button" class="control"
+                   onclick="switchState('h-1080145322_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="h-1080145322_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...&gt; <br/>
+               <div style="margin-left: 1.5em">&lt;current_state&gt; <span class="type">
+                     <a title="Jump to &#34;DV_CODED_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1544425981"
+                        class="externalLink">DV_CODED_TEXT</a>
+                  </span> &lt;/current_state&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;transition&gt; <span class="type">
+                     <a title="Jump to &#34;DV_CODED_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1544425981"
+                        class="externalLink">DV_CODED_TEXT</a>
+                  </span> &lt;/transition&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;careflow_step&gt; <span class="type">
+                     <a title="Jump to &#34;DV_CODED_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1544425981"
+                        class="externalLink">DV_CODED_TEXT</a>
+                  </span> &lt;/careflow_step&gt; <span class="occurs">[0..1]</span>
+               </div>&lt;/...&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-1080145322_xibox', true);
+// -->
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-1080145322_diagram_button" class="control"
+                   onclick="switchState('h-1080145322_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h-1080145322_diagram" class="contents">
+            <img usemap="#h1113473193" src="schemaDiagrams/h1113473193.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h1113473193.map--><map name="h1113473193">
+               <area shape="rect" alt="h1544425981" coords="252,0,374,24"
+                     href="BaseTypes.xsd.html#h1544425981"/>
+
+               <area shape="rect" alt="h1544425981" coords="252,34,353,72"
+                     href="BaseTypes.xsd.html#h1544425981"/>
+
+               <area shape="rect" alt="h1544425981" coords="252,82,376,120"
+                     href="BaseTypes.xsd.html#h1544425981"/>
+
+            </map>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-1080145322_diagram', true);
+// -->
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h-1080145322_scbox_button" class="control"
+                   onclick="switchState('h-1080145322_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h-1080145322_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">ISM_TRANSITION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                     <span class="scTag">name</span>="<span class="scContent">current_state</span>" <span class="scTag">type</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;DV_CODED_TEXT&#34; type definition(located in external schema documentation)."
+                              href="BaseTypes.xsd.html#h1544425981"
+                              class="externalLink">DV_CODED_TEXT</a>
+                        </span>
+                     </span>"/&gt;</div>
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                     <span class="scTag">name</span>="<span class="scContent">transition</span>" <span class="scTag">type</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;DV_CODED_TEXT&#34; type definition(located in external schema documentation)."
+                              href="BaseTypes.xsd.html#h1544425981"
+                              class="externalLink">DV_CODED_TEXT</a>
+                        </span>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                     <span class="scTag">name</span>="<span class="scContent">careflow_step</span>" <span class="scTag">type</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;DV_CODED_TEXT&#34; type definition(located in external schema documentation)."
+                              href="BaseTypes.xsd.html#h1544425981"
+                              class="externalLink">DV_CODED_TEXT</a>
+                        </span>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-1080145322_scbox', false);
+// -->
+</script>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <h3>Complex Type: <a name="h-65908089" class="name">OBSERVATION</a>
+      </h3>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>
+               <span class="type">
+                  <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
+                     href="Structure.xsd.html#h911858792"
+                     class="externalLink">LOCATABLE</a>
+               </span> &lt; <span class="type">
+                  <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+               </span> (by extension) &lt; <span class="type">
+                  <a title="Jump to &#34;ENTRY&#34; type definition." href="#h-1123668211">ENTRY</a>
+               </span> (by extension) &lt; <span class="type">
+                  <a title="Jump to &#34;CARE_ENTRY&#34; type definition." href="#h-547589175">CARE_ENTRY</a>
+               </span> (by extension) &lt; <strong>OBSERVATION</strong> (by extension)</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>None</td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>OBSERVATION</td>
+         </tr>
+         <tr>
+            <th>Abstract</th>
+            <td>no</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-65908089_xibox_button" class="control"
+                   onclick="switchState('h-65908089_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="h-65908089_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...<br/>
+               <span style="margin-left: 0.5em" class="inherited"> archetype_node_id="<span class="type">
+                     <a title="Jump to &#34;archetypeNodeId&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h288119713"
+                        class="externalLink">archetypeNodeId</a>
+                  </span> 
+                  <span class="occurs">[1]</span>"</span>&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;name&gt; <span class="type">
+                     <a title="Jump to &#34;DV_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1838339253"
+                        class="externalLink">DV_TEXT</a>
+                  </span> &lt;/name&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;uid&gt; <span class="type">
+                     <a title="Jump to &#34;UID_BASED_ID&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-835416741"
+                        class="externalLink">UID_BASED_ID</a>
+                  </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
+                     <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h743461152"
+                        class="externalLink">ARCHETYPED</a>
+                  </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;language&gt; <span class="type">
+                     <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1592245190"
+                        class="externalLink">CODE_PHRASE</a>
+                  </span> &lt;/language&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;encoding&gt; <span class="type">
+                     <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1592245190"
+                        class="externalLink">CODE_PHRASE</a>
+                  </span> &lt;/encoding&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;subject&gt; <span class="type">
+                     <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1592487408"
+                        class="externalLink">PARTY_PROXY</a>
+                  </span> &lt;/subject&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;provider&gt; <span class="type">
+                     <a title="Jump to &#34;PARTY_PROXY&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1592487408"
+                        class="externalLink">PARTY_PROXY</a>
+                  </span> &lt;/provider&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;other_participations&gt; <span class="type">
+                     <a title="Jump to &#34;PARTICIPATION&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-1764501284"
+                        class="externalLink">PARTICIPATION</a>
+                  </span> &lt;/other_participations&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;work_flow_id&gt; <span class="type">
+                     <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h2031888792"
+                        class="externalLink">OBJECT_REF</a>
+                  </span> &lt;/work_flow_id&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;protocol&gt; <span class="type">
+                     <a title="Jump to &#34;ITEM_STRUCTURE&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h-1739558196"
+                        class="externalLink">ITEM_STRUCTURE</a>
+                  </span> &lt;/protocol&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;guideline_id&gt; <span class="type">
+                     <a title="Jump to &#34;OBJECT_REF&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h2031888792"
+                        class="externalLink">OBJECT_REF</a>
+                  </span> &lt;/guideline_id&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;data&gt; <span class="type">
+                     <a title="Jump to &#34;HISTORY&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h710134895"
+                        class="externalLink">HISTORY</a>
+                  </span> &lt;/data&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;state&gt; <span class="type">
+                     <a title="Jump to &#34;HISTORY&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h710134895"
+                        class="externalLink">HISTORY</a>
+                  </span> &lt;/state&gt; <span class="occurs">[0..1]</span>
+               </div>&lt;/...&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-65908089_xibox', true);
+// -->
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h-65908089_diagram_button" class="control"
+                   onclick="switchState('h-65908089_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h-65908089_diagram" class="contents">
+            <img usemap="#h-1763934822" src="schemaDiagrams/h-1763934822.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h-1763934822.map--><map name="h-1763934822">
+</map>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-65908089_diagram', true);
+// -->
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h-65908089_scbox_button" class="control"
+                   onclick="switchState('h-65908089_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h-65908089_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">OBSERVATION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
+                     <span class="scTag">base</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;CARE_ENTRY&#34; type definition." href="#h-547589175">CARE_ENTRY</a>
+                        </span>
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">data</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;HISTORY&#34; type definition(located in external schema documentation)."
+                                    href="Structure.xsd.html#h710134895"
+                                    class="externalLink">HISTORY</a>
+                              </span>
+                           </span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">state</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;HISTORY&#34; type definition(located in external schema documentation)."
+                                    href="Structure.xsd.html#h710134895"
+                                    class="externalLink">HISTORY</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h-65908089_scbox', false);
+// -->
+</script>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <h3>Complex Type: <a name="h1753441984" class="name">SECTION</a>
+      </h3>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>
+               <span class="type">
+                  <a title="Jump to &#34;LOCATABLE&#34; type definition(located in external schema documentation)."
+                     href="Structure.xsd.html#h911858792"
+                     class="externalLink">LOCATABLE</a>
+               </span> &lt; <span class="type">
+                  <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+               </span> (by extension) &lt; <strong>SECTION</strong> (by extension)</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>None</td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>SECTION</td>
+         </tr>
+         <tr>
+            <th>Abstract</th>
+            <td>no</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h1753441984_xibox_button" class="control"
+                   onclick="switchState('h1753441984_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="h1753441984_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...<br/>
+               <span style="margin-left: 0.5em" class="inherited"> archetype_node_id="<span class="type">
+                     <a title="Jump to &#34;archetypeNodeId&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h288119713"
+                        class="externalLink">archetypeNodeId</a>
+                  </span> 
+                  <span class="occurs">[1]</span>"</span>&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;name&gt; <span class="type">
+                     <a title="Jump to &#34;DV_TEXT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h1838339253"
+                        class="externalLink">DV_TEXT</a>
+                  </span> &lt;/name&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;uid&gt; <span class="type">
+                     <a title="Jump to &#34;UID_BASED_ID&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h-835416741"
+                        class="externalLink">UID_BASED_ID</a>
+                  </span> &lt;/uid&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;links&gt; <span class="type">
+                     <a title="Jump to &#34;LINK&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h518145503"
+                        class="externalLink">LINK</a>
+                  </span> &lt;/links&gt; <span class="occurs">[0..*]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;archetype_details&gt; <span class="type">
+                     <a title="Jump to &#34;ARCHETYPED&#34; type definition(located in external schema documentation)."
+                        href="Structure.xsd.html#h743461152"
+                        class="externalLink">ARCHETYPED</a>
+                  </span> &lt;/archetype_details&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;feeder_audit&gt; <span class="type">
+                     <a title="Jump to &#34;FEEDER_AUDIT&#34; type definition(located in external schema documentation)."
+                        href="BaseTypes.xsd.html#h662790700"
+                        class="externalLink">FEEDER_AUDIT</a>
+                  </span> &lt;/feeder_audit&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;items&gt; <span class="type">
+                     <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+                  </span> &lt;/items&gt; <span class="occurs">[0..*]</span>
+               </div>&lt;/...&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h1753441984_xibox', true);
+// -->
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h1753441984_diagram_button" class="control"
+                   onclick="switchState('h1753441984_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h1753441984_diagram" class="contents">
+            <img usemap="#h-2140582765" src="schemaDiagrams/h-2140582765.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h-2140582765.map--><map name="h-2140582765">
+</map>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h1753441984_diagram', true);
+// -->
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h1753441984_scbox_button" class="control"
+                   onclick="switchState('h1753441984_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h1753441984_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">SECTION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
+                     <span class="scTag">base</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+                        </span>
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">items</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;CONTENT_ITEM&#34; type definition." href="#h-679828450">CONTENT_ITEM</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h1753441984_scbox', false);
+// -->
+</script>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <p class="footer">Authored by <a href="http://www.oceaninformatics.biz">Ocean Informatics</a>. Last modified: <script type="text/javascript">
+<!--
+          document.write(document.lastModified);
 // -->
 </script>
       </p>

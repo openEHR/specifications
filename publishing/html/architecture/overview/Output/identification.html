@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
+<meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
+<meta name="LASTUPDATED" content="04/13/07 15:04:55">
+<link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
+<title>9 Identification  </title>
+</head>
+
+<body background="images/backgrnd.gif">
+
+<table width="331" border="0" align="right" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23"
+    border="0" alt="TOC"> </a></td>
+    <td><a href="versioning.html"><img src="images/navprev.gif" width="81" height="23"
+    border="0" alt="PREV"> </a></td>
+    <td><a href="archetyping.html"><img src="images/navnext.gif" width="81" height="23"
+    border="0" alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23"
+    border="0" alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+<p><img src="images/openehr_logo.gif" width="109" height="23" alt="openEHR logo"></p>
+<hr align="left">
+
+<blockquote>
+<h2 class="Heading1">
+  <a name="1111834"> </a>9	 Identification
+</h2>
+<h3 class="Heading2">
+  <a name="1123908"> </a>9.1	 Identification of the EHR
+</h3>
+<p class="Body">
+  <a name="1172113"> </a>In an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR system, each EHR has a unique identifier, known as the EHR id, found in the root EHR object of each EHR. EHR ids should be "strong" globally unique identifiers such as reliably created Oids or Guids. <span style="color: #000000;  font-style: normal; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">No single system should contain two EHRs for the same subject</span>. If this is not the case, it means that the EHR system has failed to detect the existence of an EHR for a subject, or failed to match provided demographic attributes to the subject.
+</p>
+<p class="Body">
+  <a name="1172125"> </a>In a distributed environment, the correspondence of EHR ids to subjects (i.e. patients) is variable, and depends on the level of integration of the environment. In non-integrated or sporadically connected environments, the same patient is likely to have a separate EHR at each institution, each with its own unique EHR id, but the same subject id. If copies of parts of the patient EHR at one location is requested by another provider, the received items will be merged into the local EHR for that patient. Merges of persistent Compositions in such circumstances are likely to require human intervention. Multiple EHR ids per patient in a distributed context are evidence of a lack of systematic connectivity or identification service.
+</p>
+<p class="Body">
+  <a name="1172138"> </a>In a fully integrated distributed environment, the typical patient will still have local EHRs in multiple locations, but each carrying the same EHR id. When a patient presents in a new location, a request to the environment's identification service could be made to determine if there is already an EHR for this patient. If there is, a clone of all or part of the existing EHR could be made, or a new empty EHR could be created, but in all cases, the EHR id would be the same as that used in other locations for the same patient.
+</p>
+<p class="Body">
+  <a name="1172144"> </a>Note that the above logic only holds where the EHR in each location is an <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR EHR.
+</p>
+<h3 class="Heading2">
+  <a name="1172109"> </a>9.2	 Identification of Items within the EHR
+</h3>
+<h4 class="Heading3">
+  <a name="1172151"> </a>9.2.1	 General Scheme
+</h4>
+<p class="Body">
+  <a name="1119855"> </a>While identification of EHRs is not completely definable by <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR, the identification of items with an EHR is fully defined. The scheme described here requires two kinds of "identifier": identifiers proper and references, or locators. An <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">identifier</span> is a unique (within some context) symbol or number given to an object, and usually written into the object, whereas a <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">reference</span> is the use of an identifier by an exterior object, to refer to the object containing the identifier in question. This distinction is the same as that between primary and foreign keys in a relational database system. 
+</p>
+<p class="Body">
+  <a name="1125642"> </a>In the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR RM, identifiers and references are implemented with two groups of classes defined in the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">support.identification</span> package. Identifiers of various kinds are defined by descendant classes of <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_ID</span>, while references are defined by the classes inheriting from <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_REF</span>. The distinction is illustrated in <a href="identification.html#1125642">FIGURE 28</a>. Here we see two container objects with <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_IDs</span> (since <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_ID</span> is an abstract type, the actual type will be another <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">XXX_ID</span> class), and various <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_REFs</span> as references. <br clear="all" /><table align="left"><tr><td><img src="images/identificationa.gif" height="197" width="648" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<h4 class="Heading3">
+  <a name="1125708"> </a>9.2.2	 Levels of Identification
+</h4>
+<p class="Body">
+  <a name="1125634"> </a>In order to make data items locatable from the outside, identification is supported at 3 levels in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR, as follows:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1162783"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version containers</span>: <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_OBJECTs</span> (Common IM) are identified uniquely;
+  <li class="SmartList1"><a name="1119876"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">top-level content structures</span>: content structures such as <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">COMPOSITION</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">EHR_STATUS</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">EHR_ACCESS</span>, <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">PARTY</span> etc. are uniquely identified by the association of the identifier of their containing <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_OBJECT</span> and the identifier of their containing <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSION</span> within the container;
+  <li class="SmartList1"><a name="1119875"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">internal nodes</span>: nodes within top-level structures are identified using paths.
+</ul>
+<p class="Body">
+  <a name="1119893"> </a>Three kinds of identification are used respectively. For version containers, meaningless unique identifiers ("uids") are used. In most cases, the type <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">HIER_OBJECT_ID</span> will be used, which contains an instance of a subtype of the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">UID</span> class, i.e. either an ISO OID or a IETF UUID (see <span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: underline; text-transform: none; vertical-align: baseline"><a href="http://www.ietf.org/rfc/rfc4122.txt">http://www.ietf.org/rfc/rfc4122.txt</a></span>; also known as a GUID). In general UUIDs are favoured since they require no central assignment and can be generated on the spot. A versioned container can be then <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">referenced</span> with an <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_REF</span> containing its identifier. 
+</p>
+<p class="Body">
+  <a name="1119959"> </a>Versions of top-level structures are identified in a way that is guaranteed to work even in distributed environments where copying, merging and subsequent modification occur. The full identification of a version of a top-level structure is the globally unique tuple consisting of the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">uid</span> of the owning <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSIONED_OBJECT</span>, and the two <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSION</span> attributes <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version_tree_id</span> and <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">creating_system_id</span>. The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">version_tree_id</span> is a 1 or 3-part number string, such as "1" or for a branch, "1.2.1". The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">creating_system_id</span> attribute carries a unique identifier for the system where the content was first created; this may be a GUID, Oid or reverse internet identifier. A typical version identification tuple is as follows:
+</p>
+<pre  class="PreformattedRelative">
+F7C5C7B7-75DB-4b39-9A1E-C0BA9BFDBDEC											-- id of VERSIONED_COMPOSITION
+<a name="1120016"> </a>
+au.gov.health.rdh.ehr1											-- id of creating system
+<a name="1120033"> </a>
+2											-- current version
+<a name="1120034"> </a>
+</pre>
+<p class="Body">
+  <a name="1120046"> </a>This 3-part tuple is known as a "Version locator" and is defined by the class <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_VERSION_ID</span> in the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">support.identification</span> package. A <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">VERSION</span> can be <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">referred to</span> using a normal <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_REF</span> that contains a copy of the version's <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_VERSION_ID</span>. The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR version identification scheme is described in detail in the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">change_control</span> package section of the Common IM.
+</p>
+<p class="Body">
+  <a name="1123457"> </a>The last component of identification is the path, used to refer to an interior node of a top-level structure identified by its Version locator. Paths in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR follow an Xpath style syntax, with slight abbreviations to shorten paths in the most common cases. Paths are described in detail below.
+</p>
+<p class="Body">
+  <a name="1123500"> </a>To refer to an interior data node from outside a top-level structure, a combination of a Version locator and a path is required. This is formalised in the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LOCATABLE_REF</span> class in the <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">change_control</span> package section of the Common IM. A Universal Resource Identifier (URI) form can also be used, defined by the data type <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DV_EHR_URI</span> (Data types IM). This type provides a single string expression in the scheme-space "ehr://" which can be used to refer to an interior data node from anywhere (it can also be used to represent queries; see below). Any <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LOCATABLE_REF</span> can be converted to a <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DV_EHR_URI</span>, although not all <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">DV_EHR_URIs</span> are <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">LOCATABLE_REFs</span>.
+</p>
+<p class="Body">
+  <a name="1135667"> </a><a href="identification.html#1135667">FIGURE 29</a> summarises how various types of <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_ID</span> and <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">OBJECT_REF</span> are used to identify objects, and to reference them from the outside, respectively.<br clear="all" /><table align="left"><tr><td><img src="images/identification2.gif" height="280" width="648" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<p class="Body">
+  <a name="1120385"> </a>
+</p>
+</blockquote>
+
+<hr>
+
+<table align="right" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="right"><font size="1">
+    <a href="http://www.openEHR.org"><img src="images/openehr_logo.gif" width="109" height="23" border="0"></a><br>
+    openEHR Foundation<br>
+    http://www.openEHR.org<br>
+    </font></td>
+  </tr>
+</table>
+
+<table width="331" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23" border="0"
+    alt="TOC"> </a></td>
+    <td><a href="versioning.html"><img src="images/navprev.gif" width="81" height="23" border="0"
+    alt="PREV"> </a></td>
+    <td><a href="archetyping.html"><img src="images/navnext.gif" width="81" height="23" border="0"
+    alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23" border="0"
+    alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+</body>
+</html>

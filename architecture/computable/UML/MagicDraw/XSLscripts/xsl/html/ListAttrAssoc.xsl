@@ -14,56 +14,15 @@
 			<!--<xsl:for-each select="$elementAssociations">
 				<xsl:sort data-type="text" order="ascending" case-order="upper-first"
 					select="Foundation.Core.Association.connection/Foundation.Core.AssociationEnd"/>-->
-
-<!--remember the whole assoc documentation here-->	
-			
-			<!-- get the documentation -->
-			<xsl:variable name="assocdoc">
-				<xsl:call-template name="SHOW_DOCUMENTATION"/>
-			<!--	<xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>-->
-			</xsl:variable>		
-			
-			
-			<xsl:call-template name="SET_VARIABLE">
-				<xsl:with-param name="name" select="'assocdoc'"/>
-				<xsl:with-param name="value" select="$assocdoc"/>
-			</xsl:call-template>						
-			
 			<xsl:for-each
 				select="Foundation.Core.Association.connection/Foundation.Core.AssociationEnd">
 				<xsl:if test="position() = 1">
 					<xsl:variable name="name1">
-						
-						<!--<xsl:variable name="linkToReport">
-							<xsl:call-template name="HREF_TO_REPORT">
-								<xsl:with-param name="elementID" select="$relationEndElementID"/>
-							</xsl:call-template>
-						</xsl:variable>
-						<xsl:variable name="linkToReport" select="normalize-space($linkToReport)"/>
-						
-						
-						
-						
-						
-						
-						
-						
-						<a href="{$linkToReport}" target="_self">-->
-							<xsl:call-template name="SHOW_NAME">
-								<xsl:with-param name="name" select="key('ElementByID',@xmi.idref)/Foundation.Core.ModelElement.name"/>
-							</xsl:call-template>
-						<!--</a>-->
-						
-						
-						
-						
-						
-						
-						<!--<xsl:call-template name="SHOW_NAME">
+						<xsl:call-template name="SHOW_NAME">
 							<xsl:with-param name="name" select="key('ElementByID',
 								Foundation.Core.AssociationEnd.type/*/@xmi.idref)/Foundation.Core.ModelElement.name"
 							/>
-						</xsl:call-template>-->
+						</xsl:call-template>
 					</xsl:variable>
 					<!-- Save the near end classname (into file name1) -->
 					<xsl:call-template name="SET_VARIABLE">
@@ -77,30 +36,7 @@
 							<xsl:with-param name="name" select="key('ElementByID',
 								Foundation.Core.AssociationEnd.type/*/@xmi.idref)/Foundation.Core.ModelElement.name"
 							/>
-							</xsl:call-template>
-						
-						
-						
-						<!--<xsl:variable name="linkToReport">
-							<xsl:call-template name="HREF_TO_REPORT">
-								<xsl:with-param name="elementID" select="@xmi.idref"/>
-							</xsl:call-template>
-						</xsl:variable>-->
-						
-						
-						<!--<xsl:variable name="linkToReport" select="normalize-space($linkToReport)"/>-->
-						
-							<!--<a href="{$linkToReport}" target="_self">-->
-								<!--<xsl:call-template name="SHOW_NAME">
-									<xsl:with-param name="name" select="key('ElementByID',@xmi.idref)/Foundation.Core.ModelElement.name"/>
-								</xsl:call-template>-->
-							<!--</a>-->
-						
-						
-						
-						
-						
-						
+						</xsl:call-template>
 					</xsl:variable>
 					<!-- Save the far end classname (into file name2) -->
 					<xsl:call-template name="SET_VARIABLE">
@@ -228,7 +164,7 @@
 						</xsl:for-each>
 					</td>
 					<!-- NOW RECALCULATE THE EFFECTIVE MULTIPLICITY FOR THE NEXT COLUMN. -->
-					<td align="center">
+					<td>
 						<xsl:for-each select="Foundation.Core.AssociationEnd.multiplicity">
 							<xsl:choose>
 								<xsl:when
@@ -294,7 +230,7 @@
 						<xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
 					</td>
 					<!-- Show the original assocaition Multiplicity -->
-					<td align="center">
+					<td>
 						<xsl:variable name="high">
 							<xsl:call-template name="GET_VARIABLE">
 								<xsl:with-param name="name" select="'high'"/>
@@ -302,7 +238,7 @@
 						</xsl:variable>
 						<xsl:choose>
 							<xsl:when test="$high != -1">
-								<xsl:text>  --  </xsl:text>
+								<xsl:text>N/A</xsl:text>
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:variable name="multiplicity">
@@ -336,18 +272,9 @@
 										<xsl:value-of select="Foundation.Core.StructuralFeature.ordering/@xmi.value"/>
 									</xsl:if>
 								</xsl:for-each>-->
-					<!-- Documentation remembered-->
-					<xsl:variable name="assocdocumentation">
-						<xsl:call-template name="GET_VARIABLE">
-							<xsl:with-param name="name" select="'assocdoc'"/>
-						</xsl:call-template>
-					</xsl:variable>
-					
-
+					<!-- Documentation -->
 					<td>
-						<xsl:value-of select="$assocdocumentation"/>
-						
-						<!--all-template name="SHOW_DOCUMENTATION"/>-->
+						<xsl:call-template name="SHOW_DOCUMENTATION"/>
 						<xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
 					</td>
 					<!--</tr>-->

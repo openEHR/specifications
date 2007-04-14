@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Quadralay WebWorks Publisher Standard Edition 7.0.1">
+<meta name="TEMPLATEBASE" content="Dynamic HTML Standard Edition">
+<meta name="LASTUPDATED" content="04/13/07 15:04:35">
+<link rel="StyleSheet" href="standard.css" type="text/css" media="screen">
+<title>4 Design Principles  </title>
+</head>
+
+<body background="images/backgrnd.gif">
+
+<table width="331" border="0" align="right" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23"
+    border="0" alt="TOC"> </a></td>
+    <td><a href="aims.html"><img src="images/navprev.gif" width="81" height="23"
+    border="0" alt="PREV"> </a></td>
+    <td><a href="package_structure.html"><img src="images/navnext.gif" width="81" height="23"
+    border="0" alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23"
+    border="0" alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+<p><img src="images/openehr_logo.gif" width="109" height="23" alt="openEHR logo"></p>
+<hr align="left">
+
+<blockquote>
+<h2 class="Heading1">
+  <a name="1128199"> </a>4	 Design Principles
+</h2>
+<p class="Body">
+  <a name="1128200"> </a>The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR approach to modelling information, services and domain knowledge is based on a number of design principles, described below. The application of these principles lead to a separation of the models of the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR architecture, and consequently, a high level of componentisation. This leads to better maintainability, extensibility, and flexible deployment.
+</p>
+<h3 class="Heading2">
+  <a name="1128574"> </a>4.1	 Ontological Separation
+</h3>
+<p class="Body">
+  <a name="1128575"> </a>The most basic kind of distinction in any system of models is ontological, i.e. in the levels of abstraction of description of the real world. All models carry some kind of semantic content, but not all semantics are the same, or even of the same category. For example, some part of the SNOMED-CT<a href="#1153444"><sup>1</sup></a> terminology describes types of bacterial infection, sites in the body, and symptoms. An <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">information</span> model might specify a logical type Quantity. A <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">content</span> model might define the model of information collected in an ante-natal examination by a physician. These types of "information" are qualitatively different, and need to be developed and maintained separately within the overall model eco-system. <a href="design_principles.html#1128575">FIGURE 4</a> illustrates these distinctions, and indicates what parts are built directly into software and databases.<br clear="all" /><table align="left"><tr><td><img src="images/design_principles4.gif" height="397" width="647" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<p class="Body">
+  <a name="1131262"> </a>This figure shows a primary separation between "ontologies of information" i.e. models of information content, and "ontologies of reality" i.e. descriptions and classifications of real phenomena. These two categories have to be separated because the type of authors, the representation and the purposes are completely different. In health informatics, this separation already exists by and large, due to the development of terminologies and classifications.
+</p>
+<p class="Body">
+  <a name="1131669"> </a>A secondary ontological separation within the information side is shown between information models and domain content models. The former category corresponds to semantics that are <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">invariant</span> across the domain (e.g. basic data types like coded terms, data structures like lists, identifiers), while the latter corresponds to <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">variable</span> domain level content descriptions - descriptions of information structures such as "microbiology result" rather than descriptions of actual phenomena in the real world (such as infection by a microbe). This separation is not generally well understood, and historically, a great deal of domain-level semantics has been hard-wired into the software and databases, leading to relatively unmaintainable systems. 
+</p>
+<p class="Body">
+  <a name="1140674"> </a>By clearly separating the three categories - information models, domain content models, and terminologies - the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR architecture enables each to have a well-defined, limited scope and clear interfaces. This limits the dependence of each on the other, leading to more maintainable and adaptable systems. 
+</p>
+<h5 class="Heading4">
+  <a name="1140641"> </a>Two-level Modelling and Archetypes
+</h5>
+<p class="Body">
+  <a name="1140642"> </a>One of the key paradigms on which <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is based is known as "two-level" modelling, described in <a href="references.html#995522">[2]</a>. Under the two-level approach, a stable reference information model constitutes the first level of modelling, while formal definitions of clinical content in the form of <span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">archetypes</span> and templates constitute the second. <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Only the first level</span> (the Reference Model) <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">is implemented in software</span>, significantly reducing the dependency of deployed systems and data on variable content definitions. The only other parts of the model universe implemented in software are highly stable languages/models of representation (shown at the bottom of <a href="design_principles.html#1128575">FIGURE 4</a>). As a consequence, systems have the possibility of being far smaller and more maintainable than single-level systems. They are also inherently self-adapting, since they are built to consume archetypes and templates as they are developed into the future.
+</p>
+<p class="Body">
+  <a name="1140655"> </a>Archetypes and templates also act as a well-defined semantic gateway to terminologies, classifications and computerised clinical guidelines. The alternative in the past has been to try to make systems function solely with a combination of hard-wired software and terminology. This approach is flawed, since terminologies don't contain definitions of domain content (e.g. "microbiology result"), but rather facts about the real world (e.g. kinds of microbes and the effects of infection in humans).
+</p>
+<p class="Body">
+  <a name="1140677"> </a>The use of archetyping in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR engenders new relationships between information and models, as shown in <a href="design_principles.html#1140677">FIGURE 5</a>. <br clear="all" /><table align="center"><tr><td><img src="images/design_principles3.gif" height="327" width="650" align="center" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<p class="Body">
+  <a name="1153994"> </a>In this figure, "data" as we know it in normal information systems (shown on the bottom left) conforms in the usual way to an object model (top left). Systems engineered in the "classic" way (i.e. all domain semantics are encoded somewhere in the software or database) are limited to this kind of architecture. With the use of two-level modelling, runtime data now conform semantically to archetypes as well as concretely to the reference model. All archetypes are expressed in a generic Archetype Definition Language (ADL).
+</p>
+<p class="Body">
+  <a name="1140670"> </a>The details of how archetypes and templates work in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR are described in <a href="archetyping.html#1135484">Archetypes and Templates on page 55</a>.
+</p>
+<h5 class="Heading4">
+  <a name="1155495"> </a>Consequences for Software Engineering
+</h5>
+<p class="Body">
+  <a name="1155499"> </a>Two-level modelling significantly changes the dynamics of the systems development process. In the usual IT-intensive process, requirements are gathered via <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ad hoc</span> discussions with users (typically via the well-known "use case" methodology), designs and models built from the requirements, implementation proceeds from the design, followed by testing and deployment and ultimately the maintenance part of the lifecycle. This is usually characterised by ongoing high costs of implementation change and/or a widening gap between system capabilities and the requirements at any moment. The approach also suffers from the fact that <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">ad hoc</span> conversations with systems users nearly always fails to reveal underlying content and workflow. Under the two-level paradigm, the core part of the system is based on the reference and archetype models (includes generic logic for storage, querying, caching etc.), both of which are extremely stable, while domain semantics are mostly delegated to domain specialists who work building archetypes (reusable), templates (local use) and terminology (general use). The process is illustrated in <a href="design_principles.html#1155499">FIGURE 6</a>. Within this process, IT developers concentrate on generic components such as data management and interoperability, while groups of domain experts work outside the software development process, generating definitions that are used by systems at runtime.<br clear="all" /><table align="left"><tr><td><img src="images/design_principles2.gif" height="332" width="648" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</p>
+<p class="Body">
+  <a name="1155857"> </a>Clearly applications cannot always be totally generic (although many data capture and viewing applications are); decision support, administrative, scheduling and many other applications still require custom engineering. However, all such applications can now rely on an archetype- and template-driven computing platform. A key result of this approach is that archetypes now constitute a technology-independent, single-source expression of domain semantics, used to drive database schemas, software logic, GUI screen definitions, message schemas and all other technical expressions of the semantics.
+</p>
+<h3 class="Heading2">
+  <a name="1140660"> </a>4.2	 Separation of Responsibilities
+</h3>
+<p class="Body">
+  <a name="1140661"> </a>A second key design paradigm used in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is that of separation of responsibilities within the computing environment. Complex domains are only tractable if the functionality is first partitioned into broad areas of interest, i.e. into a "system of systems" <a href="references.html#997213">[6]</a>. This principle has been understood in computer science for a long time under the rubrics "low coupling", "encapsulation" and "componentisation", and has resulted in highly successful frameworks and standards, including the OMG's CORBA specifications and the explosion of object-oriented languages, libraries and frameworks. Each area of functionality forms a focal point for a set of models formally describing that area, which, taken together usually correspond to a distinct information system or service.
+</p>
+<p class="Body">
+  <a name="1128212"> </a><a href="design_principles.html#1128453">FIGURE 7</a> illustrates a notional health information environment containing numerous services, each denoted by a bubble. Typical connections are indicated by lines, and bubbles closer to the centre correspond to services closer to the core needs of clinical care delivery, such as the EHR, terminology, demographics/identification and medical reference data. Of the services shown on the diagram, <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR currently provides specifications only for the more central ones, including EHR and Demographics. 
+</p>
+<p class="Body">
+  <a name="1128443"> </a>Since there are standards available for some aspects of many services, such as terminology, image formats, messages, EHR Extracts, service-based interoperation, and numerous standards for details such as date/time formats and string encoding, the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR specifications often act as a mechanism to integrate existing standards.
+</p>
+<h3 class="Heading2">
+  <a name="1128444"> </a>4.3	 Separation of Viewpoints
+</h3>
+<p class="Body">
+  <a name="1128445"> </a>The third computing paradigm used in <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR is a natural consequence of the separation of responsibilities, namely the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">separation of viewpoints</span>. When responsibilities are divided up among distinct components, it becomes necessary to define a) the information that each processes, and b) how they will communicate. These two aspects of models constitute the two central "viewpoints" of the ISO RM/ODP model <a href="references.html#997210">[4]</a>, marked in bold in the following:
+</p>
+<ul>
+  <li class="SmartList1"><a name="1128449"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Enterprise</span>: concerned with the business activities, i.e. purpose, scope and policies of the specified system.
+  <li class="SmartList1"><a name="1128450"> </a><span style="color: #000000;  font-style: italic; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">Information</span>: concerned with the semantics of information that needs to be stored and processed in the system<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">.</span>
+  <li class="SmartList1"><a name="1128451"> </a><span style="color: #000000;  font-style: italic; font-weight: bold; text-decoration: none; text-transform: none; vertical-align: baseline">Computational</span>: concerned with the description of the system as a set of objects that interact at interfaces - enabling system distribution<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">.</span>
+  <li class="SmartList1"><a name="1128452"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Engineering</span>: concerned with the mechanisms supporting system distribution<span style="color: #000000;  font-style: normal; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">.</span>
+  <li class="SmartList1"><a name="1128453"> </a><span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">Technological</span>: concerned with the detail of the components from which the distributed system is constructed.<br clear="all" /><table align="left"><tr><td><img src="images/design_principlesa.gif" height="713" width="968" align="left" border="0" hspace="0" vspace="0">
+</td></tr></table><br clear="all">
+</ul>
+<p class="Body">
+  <a name="1128454"> </a>The <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR specifications accordingly include an information viewpoint - the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR Reference Model - and a computational viewpoint - the <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR Service Model. The Engineering viewpoint corresponds to the Implementation Technology Specification (ITS) models of <span style="color: #000000;  font-style: italic; font-weight: normal; text-decoration: none; text-transform: none; vertical-align: baseline">open</span>EHR (see <a href="its.html#1120369">Implementation Technology Specifications on page 83</a>), while the Technological viewpoint corresponds to the technologies and components used in an actual deployment. An important aspect of the division into viewpoints is that there is generally not a 1:1 relationship between model specifications in each viewpoint. For example, there might be a concept of "health mandate" (a CEN ENV13940 Continuity of Care concept) in the enterprise viewpoint. In the information viewpoint, this might have become a model containing many classes. In the computational viewpoint, the information structures defined in the information viewpoint are likely to recur in multiple services, and there may or may not be a "health mandate" service. The granularity of services defined in the computational viewpoint corresponds most strongly to divisions of function in an enterprise or region, while the granularity of components in the information view points corresponds to the granularity of mental concepts in the problem space, the latter almost always being more fine-grained.
+</p>
+
+  <div style="color: #000000;  font-style: normal; font-weight: normal; margin-bottom: 0pt; margin-left: 72pt; margin-right: 0pt; margin-top: 3pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none; vertical-align: baseline">
+<a name="1153444"> </a><a href="#1128575"><sup>1</sup></a>See <span style="color: #0000ff;  font-style: normal; font-weight: normal; text-decoration: underline; text-transform: none; vertical-align: baseline"><a href=" http://www.snomed.org">http://www.snomed.org</a></span><br>
+</div>
+</blockquote>
+
+<hr>
+
+<table align="right" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="right"><font size="1">
+    <a href="http://www.openEHR.org"><img src="images/openehr_logo.gif" width="109" height="23" border="0"></a><br>
+    openEHR Foundation<br>
+    http://www.openEHR.org<br>
+    </font></td>
+  </tr>
+</table>
+
+<table width="331" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><a href="front.html"><img src="images/navtoc.gif" width="84" height="23" border="0"
+    alt="TOC"> </a></td>
+    <td><a href="aims.html"><img src="images/navprev.gif" width="81" height="23" border="0"
+    alt="PREV"> </a></td>
+    <td><a href="package_structure.html"><img src="images/navnext.gif" width="81" height="23" border="0"
+    alt="NEXT"> </a></td>
+    <td><a href="end.html"><img src="images/navidx.gif" width="85" height="23" border="0"
+    alt="INDEX"> </a></td>
+  </tr>
+</table>
+
+</body>
+</html>
