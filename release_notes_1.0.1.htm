@@ -17,6 +17,8 @@
 
 
 
+
+  
   
   
   
@@ -64,6 +66,9 @@
 
 
 
+
+  
+  
   
   
   
@@ -159,33 +164,12 @@
 
 
 
+
 <h1><span style="font-style: italic;">open</span>EHR
-Specification Project<br />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Release 1.0.1 Release Notes
+Specification Project - Release 1.0.1&nbsp;<br />
+Release Notes
 </h1>
+
 
 
 
@@ -229,6 +213,7 @@ Release 1.0.1 Release Notes
 
 
 
+
 Release 1.0.1 is the corrective release to Release 1.0. It fixes
 the typographical errors from Release 1.0,&nbsp;includes significant
 improvements in the explanatory text of the documents, and includes around 50 CRs (see <a href="history.htm">History</a>). The majority of these have been raised by members of the <span style="font-style: italic;">open</span>EHR
@@ -236,36 +221,66 @@ community either due to detailed review, or due to working with
 implementations. The release now appears to be extremely stable. We
 believe this release is a true milestone in health computing.<br />
 
+
 <br />
+
 
 Functional changes to the models include the following:<br />
 
+
 <ul>
 
-  <li>original documents can now be linked to or carried inline COMPOSITIONs, in a flexible way;</li>
-  <li>improvements in the
-rm.common.change_control model of versioning;</li>
 
-  <li>improved modelling in Quantity data types;</li>
-  <li>corrections&nbsp;to the date/time data types, which have now been
+  <li>numerous improvements to the Architecture Overview document, including new section on terminology and improved path syntax;</li>
+  <li>original documents can now be linked to or carried inline COMPOSITIONs, in a flexible way (using <span style="font-family: monospace;">rm.common.archetyped.FEEDER_AUDIT</span>);</li>
+
+  <li>improvements in the
+    <span style="font-family: monospace;">rm.common.change_control</span> model of versioning, ready for use in <span style="font-style: italic;">open</span>EHR EHR Extract specification;</li>
+  <li>numerous corrections to the <span style="font-style: italic;">open</span>EHR Support Terminology;</li>
+  <li>improved model of identifiers (<span style="font-family: monospace;">rm.support.identification</span>);</li>
+
+
+  <li>improved modelling in Quantity data types (<span style="font-family: monospace;">rm.data_types.quantity</span>) including:</li>
+  <ul>
+    <li>replacement of <span style="font-family: monospace;">DV_QUANTITY_RATIO</span> by <span style="font-family: monospace;">DV_PROPORTION</span>;</li>
+    <li>addition of <span style="font-family: monospace;">normal_status</span> attribute to <span style="font-family: monospace;">DV_ORDERED</span> (provides HHH, HH, H, N, L, LL, LLL markers);</li>
+    <li>addition of <span style="font-family: monospace;">magnitude_status</span> attribute to <span style="font-family: monospace;">DV_QUANTIFIED</span> (provides =, &lt;, &lt;=, &gt;, ?=, ~ markers);</li>
+    <li>simplifed model of amounts and absolute quantities (added abstract classes <span style="font-family: monospace;">DV_AMOUNT</span>, <span style="font-family: monospace;">DV_ABSOLUTE_QUANITTY</span>, <span style="font-family: monospace;">DV_TEMPORAL</span>)</li>
+  </ul>
+
+  <li>corrections&nbsp;to the date/time data types (<span style="font-family: monospace;">rm.support.assumed_types</span>, <span style="font-family: monospace;">rm.data_types.quantity.date_time</span>), which have now been
 aligned with the ISO 8601 standard;</li>
 
+
   <li>an EHR access control object has
-been added, along with an overall description of how security works;</li>
+been added (<span style="font-family: monospace;">rm.ehr.ACCESS_CONTROL</span>), along with an overall description of how security works;</li>
+
 
   <li>the definition of
 various
 identifiers in support.identification was tightened up, and the use of
 identifiers made more precise;</li>
 
-  <li>corrected inheritance errors in LOCATABLE;</li>
+
+  <li>corrected inheritance errors in use of <span style="font-family: monospace;">rm.common.archetyped.LOCATABLE</span>;</li>
+
 
   
-  <li>improvements to resource_description package (rm.common.resource) for use in archetypes;</li>
+  <li>improvements to <span style="font-family: monospace;">rm.common.resource</span> package for use in archetypes;</li>
+  <li>improved model of <span style="font-family: monospace;">am.archetype.constraint_model</span>;</li>
 
-  <li>numerous improvements to <span style="font-style: italic;">open</span>EHR Archetype profile, details of ADL, quoting and unicode.</li>
+
+  <li>numerous improvements to <span style="font-style: italic;">open</span>EHR Archetype profile (<span style="font-family: monospace;">am.openehr_profile</span>)</li>
+  <li>improvements to ADL including:</li>
+  <ul>
+    <li>proper definition of quoting and unicode;</li>
+    <li>addition of generic typenames to ADL;</li>
+    <li>better alignment of data/time constraint expressions with ISO 8601.</li>
+  </ul>
+
 
 </ul>
+
 
 <h2>Obtaining the Release Materials</h2>
 
@@ -280,7 +295,9 @@ identifiers made more precise;</li>
 
 
 
+
 You can access all deliverables in the release from the <a href="publishing/roadmap.html">roadmap</a> page, just by clicking on links. To get the entire release as a web tree, follow the <a href="project_page.htm#How_To">instructions</a> on how to use Subversion to do this.<br />
+
 
 
 
@@ -306,9 +323,11 @@ You can access all deliverables in the release from the <a href="publishing/road
 
 
 
+
 Many people helped bring this release to fruition, including implementers and reviewers. Thanks to all the people on the <a href="project_team.htm">project team</a>
 page. Special thanks to David Lloyd, previously of UCL, now claiming to
-be retired (we know otherwise) for his tireless work on the UML models.<br />
+be retired (we know otherwise) for his tireless work on the online UML models.<br />
+
 
 
 
@@ -349,38 +368,41 @@ $LastChangedRevision$</span><br />
 
 
 
-<br />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br />
+
 
 
 
