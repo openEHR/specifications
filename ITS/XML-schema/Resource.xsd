@@ -18,48 +18,46 @@
 	<xs:complexType name="TRANSLATION_DETAILS">
 		<xs:sequence>
 			<xs:element name="language" type="CODE_PHRASE"/>
-			<xs:element name="author" type="hashTableStringString" minOccurs="0"/>
+			<xs:element name="author" type="StringDictionaryItem" minOccurs="1"
+				maxOccurs="unbounded"/>
 			<xs:element name="accreditation" type="xs:string" minOccurs="0"/>
-			<xs:element name="other_details" type="hashTableStringString" minOccurs="0"/>
+			<xs:element name="other_details" type="StringDictionaryItem" minOccurs="0"
+				maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="RESOURCE_DESCRIPTION">
 		<xs:sequence>
-			<xs:element name="original_author" type="hashTableStringString"/>
-			<xs:element name="other_contributors" type="list_of_string" minOccurs="0"/>
+			<xs:element name="original_author" type="StringDictionaryItem" maxOccurs="unbounded"/>
+			<xs:element name="other_contributors" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded"/>
 			<xs:element name="lifecycle_state" type="xs:string"/>
+			<xs:element name="resource_package_uri" type="xs:string" minOccurs="0"/>
+			<xs:element name="other_details" type="StringDictionaryItem" minOccurs="0"
+				maxOccurs="unbounded"/>
 			<xs:element name="details" type="RESOURCE_DESCRIPTION_ITEM" minOccurs="0"
 				maxOccurs="unbounded"/>
-			<xs:element name="resource_package_uri" type="xs:string" minOccurs="0"/>
-			<xs:element name="other_details" type="hashTableStringString" minOccurs="0"/>
+			<xs:element name="parent_resource" type="AUTHORED_RESOURCE" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="RESOURCE_DESCRIPTION_ITEM">
 		<xs:sequence>
 			<xs:element name="language" type="CODE_PHRASE"/>
 			<xs:element name="purpose" type="xs:string"/>
-			<xs:element name="keywords" type="list_of_string" minOccurs="0"/>
-			<xs:element name="use" type="xs:string"/>
-			<xs:element name="misuse" type="xs:string"/>
+			<xs:element name="keywords" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="use" type="xs:string" minOccurs="0"/>
+			<xs:element name="misuse" type="xs:string" minOccurs="0"/>
 			<xs:element name="copyright" type="xs:string" minOccurs="0"/>
-			<xs:element name="original_resource_uri" type="xs:string" minOccurs="0"/>
-			<xs:element name="other_details" type="hashTableStringString" minOccurs="0"/>
+			<xs:element name="original_resource_uri" type="StringDictionaryItem" minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xs:element name="other_details" type="StringDictionaryItem" minOccurs="0"
+				maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="list_of_string">
-		<xs:sequence>
-			<xs:element name="item" type="xs:string" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="hashTableStringString">
-		<xs:sequence>
-			<xs:element name="item" type="dictionaryItem" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="dictionaryItem">
-		<xs:sequence>
-			<xs:element name="key" type="xs:string"/>
-			<xs:element name="value" type="xs:string"/>
-		</xs:sequence>
+	<xs:complexType name="StringDictionaryItem">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="id" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
 	</xs:complexType>
 </xs:schema>
