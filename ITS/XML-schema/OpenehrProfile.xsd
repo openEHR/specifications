@@ -9,6 +9,7 @@
 		<xs:complexContent>
 			<xs:extension base="C_DOMAIN_TYPE">
 				<xs:sequence>
+					<xs:element name="assumed_value" type="CODE_PHRASE" minOccurs="0"/>
 					<xs:element name="terminology_id" type="TERMINOLOGY_ID" minOccurs="0"/>
 					<xs:element name="code_list" type="xs:string" minOccurs="0"
 						maxOccurs="unbounded"/>
@@ -20,8 +21,9 @@
 	<xs:complexType name="C_DV_ORDINAL">
 		<xs:complexContent>
 			<xs:extension base="C_DOMAIN_TYPE">
-				<xs:sequence>					
-					<xs:element name="list" type="DV_ORDINAL" minOccurs="0" maxOccurs="unbounded"/>					
+				<xs:sequence>
+					<xs:element name="assumed_value" type="DV_ORDINAL" minOccurs="0"/>
+					<xs:element name="list" type="DV_ORDINAL" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -30,6 +32,7 @@
 		<xs:complexContent>
 			<xs:extension base="C_DOMAIN_TYPE">
 				<xs:sequence>
+					<xs:element name="assumed_value" type="DV_QUANTITY" minOccurs="0"/>
 					<xs:element name="property" type="CODE_PHRASE" minOccurs="0"/>
 					<xs:element name="list" type="C_QUANTITY_ITEM" minOccurs="0"
 						maxOccurs="unbounded"/>
@@ -48,6 +51,7 @@
 		<xs:complexContent>
 			<xs:extension base="C_DOMAIN_TYPE">
 				<xs:sequence>
+					<xs:element name="assumed_value" type="DV_STATE" minOccurs="0"/>
 					<xs:element name="value" type="STATE_MACHINE"/>
 				</xs:sequence>
 			</xs:extension>
@@ -84,6 +88,7 @@
 			<xs:element name="event" type="xs:string"/>
 			<xs:element name="action" type="xs:string" minOccurs="0"/>
 			<xs:element name="guard" type="xs:string" minOccurs="0"/>
+			<xs:element name="next_state" type="STATE" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

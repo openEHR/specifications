@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -395,13 +395,13 @@ div#legend div.hint {
       <script type="text/javascript">
 <!--
           /* IDs of XML Instance Representation boxes */
-var xiBoxes = new Array('h-282029186_xibox', 'h280872431_xibox', 'h-2133083888_xibox', 'h-1589994270_xibox', 'h-2045140803_xibox', 'h-1403900995_xibox', 'h776235118_xibox');
+var xiBoxes = new Array('h-282029186_xibox', 'h280872431_xibox', 'h-2133083888_xibox', 'h-1589994270_xibox', 'h1815463743_xibox');
 /* IDs of diagram boxes */
-var diagramBoxes = new Array('h-282029186_diagram', 'h280872431_diagram', 'h-2133083888_diagram', 'h-1589994270_diagram', 'h-2045140803_diagram', 'h-1403900995_diagram', 'h776235118_diagram');
+var diagramBoxes = new Array('h-282029186_diagram', 'h280872431_diagram', 'h-2133083888_diagram', 'h-1589994270_diagram', 'h1815463743_diagram');
 /* IDs of logical diagram boxes */
 var logicalDiagramBoxes = new Array();
 /* IDs of Schema Component Representation boxes */
-var scBoxes = new Array('schema_scbox', 'h-282029186_scbox', 'h280872431_scbox', 'h-2133083888_scbox', 'h-1589994270_scbox', 'h-2045140803_scbox', 'h-1403900995_scbox', 'h776235118_scbox');
+var scBoxes = new Array('schema_scbox', 'h-282029186_scbox', 'h280872431_scbox', 'h-2133083888_scbox', 'h-1589994270_scbox', 'h1815463743_scbox');
 
 /**
  * Can get the ID of the button controlling
@@ -792,19 +792,11 @@ if (gc != null) {
                   </a>
                </li>
                <li>
+                  <a href="#h1815463743">Complex Type: <strong>StringDictionaryItem</strong>
+                  </a>
+               </li>
+               <li>
                   <a href="#h280872431">Complex Type: <strong>TRANSLATION_DETAILS</strong>
-                  </a>
-               </li>
-               <li>
-                  <a href="#h776235118">Complex Type: <strong>dictionaryItem</strong>
-                  </a>
-               </li>
-               <li>
-                  <a href="#h-1403900995">Complex Type: <strong>hashTableStringString</strong>
-                  </a>
-               </li>
-               <li>
-                  <a href="#h-2045140803">Complex Type: <strong>list_of_string</strong>
                   </a>
                </li>
             </ul>
@@ -922,6 +914,13 @@ if (gc != null) {
          <tr>
             <th>Name</th>
             <td>AUTHORED_RESOURCE</td>
+         </tr>
+         <tr>
+            <th>Used by (from the same schema document)</th>
+            <td>Complex Type <b>
+                  <a href="#h-2133083888">RESOURCE_DESCRIPTION</a>
+               </b>
+            </td>
          </tr>
          <tr>
             <th>Abstract</th>
@@ -1088,25 +1087,27 @@ if (gc != null) {
          <div id="h-2133083888_xibox" class="contents">
             <div style="margin-left: 0em">&lt;...&gt; <br/>
                <div style="margin-left: 1.5em">&lt;original_author&gt; <span class="type">
-                     <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
-                  </span> &lt;/original_author&gt; <span class="occurs">[1]</span>
+                     <a title="Jump to &#34;StringDictionaryItem&#34; type definition." href="#h1815463743">StringDictionaryItem</a>
+                  </span> &lt;/original_author&gt; <span class="occurs">[1..*]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;other_contributors&gt; <span class="type">
-                     <a title="Jump to &#34;list_of_string&#34; type definition." href="#h-2045140803">list_of_string</a>
-                  </span> &lt;/other_contributors&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em">&lt;other_contributors&gt; <span class="type">string</span> &lt;/other_contributors&gt; <span class="occurs">[0..*]</span>
                </div>
                <div style="margin-left: 1.5em">&lt;lifecycle_state&gt; <span class="type">string</span> &lt;/lifecycle_state&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;resource_package_uri&gt; <span class="type">string</span> &lt;/resource_package_uri&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em">&lt;other_details&gt; <span class="type">
+                     <a title="Jump to &#34;StringDictionaryItem&#34; type definition." href="#h1815463743">StringDictionaryItem</a>
+                  </span> &lt;/other_details&gt; <span class="occurs">[0..*]</span>
                </div>
                <div style="margin-left: 1.5em">&lt;details&gt; <span class="type">
                      <a title="Jump to &#34;RESOURCE_DESCRIPTION_ITEM&#34; type definition."
                         href="#h-1589994270">RESOURCE_DESCRIPTION_ITEM</a>
                   </span> &lt;/details&gt; <span class="occurs">[0..*]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;resource_package_uri&gt; <span class="type">string</span> &lt;/resource_package_uri&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em">&lt;other_details&gt; <span class="type">
-                     <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
-                  </span> &lt;/other_details&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em">&lt;parent_resource&gt; <span class="type">
+                     <a title="Jump to &#34;AUTHORED_RESOURCE&#34; type definition." href="#h-282029186">AUTHORED_RESOURCE</a>
+                  </span> &lt;/parent_resource&gt; <span class="occurs">[0..1]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -1126,17 +1127,17 @@ if (gc != null) {
             <img usemap="#h997481187" src="schemaDiagrams/h997481187.png"/>
             <!--
             Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h997481187.map--><map name="h997481187">
-               <area shape="rect" alt="h-1403900995" coords="294,0,422,24"
-                     href="Resource.xsd.html#h-1403900995"/>
+               <area shape="rect" alt="h1815463743" coords="294,0,422,38"
+                     href="Resource.xsd.html#h1815463743"/>
 
-               <area shape="rect" alt="h-2045140803" coords="294,34,440,72"
-                     href="Resource.xsd.html#h-2045140803"/>
+               <area shape="rect" alt="h1815463743" coords="294,178,413,216"
+                     href="Resource.xsd.html#h1815463743"/>
 
-               <area shape="rect" alt="h-1589994270" coords="294,116,381,154"
+               <area shape="rect" alt="h-1589994270" coords="294,226,381,264"
                      href="Resource.xsd.html#h-1589994270"/>
 
-               <area shape="rect" alt="h-1403900995" coords="294,212,413,250"
-                     href="Resource.xsd.html#h-1403900995"/>
+               <area shape="rect" alt="h-282029186" coords="294,274,430,312"
+                     href="Resource.xsd.html#h-282029186"/>
 
             </map>
          </div>
@@ -1158,19 +1159,27 @@ if (gc != null) {
                <span class="scTag">name</span>="<span class="scContent">RESOURCE_DESCRIPTION</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">original_author</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
-                           <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
+                           <a title="Jump to &#34;StringDictionaryItem&#34; type definition." href="#h1815463743">StringDictionaryItem</a>
                         </span>
-                     </span>"/&gt;</div>
+                     </span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">other_contributors</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a title="Jump to &#34;list_of_string&#34; type definition." href="#h-2045140803">list_of_string</a>
-                        </span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                        <span class="type">string</span>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">lifecycle_state</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">string</span>
                      </span>"/&gt;</div>
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                     <span class="scTag">name</span>="<span class="scContent">resource_package_uri</span>" <span class="scTag">type</span>="<span class="scContent">
+                        <span class="type">string</span>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+                     <span class="scTag">name</span>="<span class="scContent">other_details</span>" <span class="scTag">type</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;StringDictionaryItem&#34; type definition." href="#h1815463743">StringDictionaryItem</a>
+                        </span>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">details</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
@@ -1179,13 +1188,9 @@ if (gc != null) {
                         </span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                     <span class="scTag">name</span>="<span class="scContent">resource_package_uri</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">string</span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                     <span class="scTag">name</span>="<span class="scContent">other_details</span>" <span class="scTag">type</span>="<span class="scContent">
+                     <span class="scTag">name</span>="<span class="scContent">parent_resource</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
-                           <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
+                           <a title="Jump to &#34;AUTHORED_RESOURCE&#34; type definition." href="#h-282029186">AUTHORED_RESOURCE</a>
                         </span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
@@ -1245,21 +1250,21 @@ if (gc != null) {
                </div>
                <div style="margin-left: 1.5em">&lt;purpose&gt; <span class="type">string</span> &lt;/purpose&gt; <span class="occurs">[1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;keywords&gt; <span class="type">
-                     <a title="Jump to &#34;list_of_string&#34; type definition." href="#h-2045140803">list_of_string</a>
-                  </span> &lt;/keywords&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em">&lt;keywords&gt; <span class="type">string</span> &lt;/keywords&gt; <span class="occurs">[0..*]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;use&gt; <span class="type">string</span> &lt;/use&gt; <span class="occurs">[1]</span>
+               <div style="margin-left: 1.5em">&lt;use&gt; <span class="type">string</span> &lt;/use&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;misuse&gt; <span class="type">string</span> &lt;/misuse&gt; <span class="occurs">[1]</span>
+               <div style="margin-left: 1.5em">&lt;misuse&gt; <span class="type">string</span> &lt;/misuse&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em">&lt;copyright&gt; <span class="type">string</span> &lt;/copyright&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;original_resource_uri&gt; <span class="type">string</span> &lt;/original_resource_uri&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em">&lt;original_resource_uri&gt; <span class="type">
+                     <a title="Jump to &#34;StringDictionaryItem&#34; type definition." href="#h1815463743">StringDictionaryItem</a>
+                  </span> &lt;/original_resource_uri&gt; <span class="occurs">[0..*]</span>
                </div>
                <div style="margin-left: 1.5em">&lt;other_details&gt; <span class="type">
-                     <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
-                  </span> &lt;/other_details&gt; <span class="occurs">[0..1]</span>
+                     <a title="Jump to &#34;StringDictionaryItem&#34; type definition." href="#h1815463743">StringDictionaryItem</a>
+                  </span> &lt;/other_details&gt; <span class="occurs">[0..*]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -1282,11 +1287,11 @@ if (gc != null) {
                <area shape="rect" alt="h1592245190" coords="324,0,424,24"
                      href="basetypes.xsd.html#h1592245190"/>
 
-               <area shape="rect" alt="h-2045140803" coords="324,68,426,106"
-                     href="Resource.xsd.html#h-2045140803"/>
+               <area shape="rect" alt="h1815463743" coords="324,260,480,298"
+                     href="Resource.xsd.html#h1815463743"/>
 
-               <area shape="rect" alt="h-1403900995" coords="324,280,443,318"
-                     href="Resource.xsd.html#h-1403900995"/>
+               <area shape="rect" alt="h1815463743" coords="324,308,443,346"
+                     href="Resource.xsd.html#h1815463743"/>
 
             </map>
          </div>
@@ -1319,36 +1324,144 @@ if (gc != null) {
                      </span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">keywords</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a title="Jump to &#34;list_of_string&#34; type definition." href="#h-2045140803">list_of_string</a>
-                        </span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                        <span class="type">string</span>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">use</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">string</span>
-                     </span>"/&gt;</div>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">misuse</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">string</span>
-                     </span>"/&gt;</div>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">copyright</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">string</span>
                      </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">original_resource_uri</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">string</span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                        <span class="type">
+                           <a title="Jump to &#34;StringDictionaryItem&#34; type definition." href="#h1815463743">StringDictionaryItem</a>
+                        </span>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">other_details</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
-                           <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
+                           <a title="Jump to &#34;StringDictionaryItem&#34; type definition." href="#h1815463743">StringDictionaryItem</a>
                         </span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
           setState('h-1589994270_scbox', false);
+// -->
+</script>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <h3>Complex Type: <a name="h1815463743" class="name">StringDictionaryItem</a>
+      </h3>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>
+               <span class="type">string</span> &lt; <strong>StringDictionaryItem</strong> (by extension)</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>None</td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>StringDictionaryItem</td>
+         </tr>
+         <tr>
+            <th>Used by (from the same schema document)</th>
+            <td>Complex Type <b>
+                  <a href="#h280872431">TRANSLATION_DETAILS</a>
+               </b>, Complex Type <b>
+                  <a href="#h280872431">TRANSLATION_DETAILS</a>
+               </b>, Complex Type <b>
+                  <a href="#h-2133083888">RESOURCE_DESCRIPTION</a>
+               </b>, Complex Type <b>
+                  <a href="#h-2133083888">RESOURCE_DESCRIPTION</a>
+               </b>, Complex Type <b>
+                  <a href="#h-1589994270">RESOURCE_DESCRIPTION_ITEM</a>
+               </b>, Complex Type <b>
+                  <a href="#h-1589994270">RESOURCE_DESCRIPTION_ITEM</a>
+               </b>
+            </td>
+         </tr>
+         <tr>
+            <th>Abstract</th>
+            <td>no</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h1815463743_xibox_button" class="control"
+                   onclick="switchState('h1815463743_xibox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="h1815463743_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...<br/>
+               <span style="margin-left: 0.5em" class="newFields"> id="<span class="type">string</span> 
+                  <span class="occurs">[1]</span>"</span>&gt; <br/>
+               <span style="margin-left: 1.5em"> 
+                  <span class="type">string</span> 
+               </span>
+               <br/>&lt;/...&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h1815463743_xibox', true);
+// -->
+</script>
+      </div>
+      <div class="sample box">
+         <div>
+            <input type="button" id="h1815463743_diagram_button" class="control"
+                   onclick="switchState('h1815463743_diagram'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="h1815463743_diagram" class="contents">
+            <img usemap="#h1058733138" src="schemaDiagrams/h1058733138.png"/>
+            <!--
+            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h1058733138.map--><map name="h1058733138">
+</map>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h1815463743_diagram', true);
+// -->
+</script>
+      </div>
+      <div class="schemaComponent box">
+         <div>
+            <input type="button" id="h1815463743_scbox_button" class="control"
+                   onclick="switchState('h1815463743_scbox'); return false;"
+                   style="display: none"/> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="h1815463743_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">StringDictionaryItem</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">simpleContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
+                     <span class="scTag">base</span>="<span class="scContent">
+                        <span class="type">string</span>
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">attribute</span> 
+                        <span class="scTag">name</span>="<span class="scContent">id</span>" <span class="scTag">type</span>="<span class="scContent">
+                           <span class="type">string</span>
+                        </span>" <span class="scTag">use</span>="<span class="scContent">required</span>"/&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">simpleContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+         </div>
+         <script type="text/javascript">
+<!--
+          setState('h1815463743_scbox', false);
 // -->
 </script>
       </div>
@@ -1401,14 +1514,14 @@ if (gc != null) {
                   </span> &lt;/language&gt; <span class="occurs">[1]</span>
                </div>
                <div style="margin-left: 1.5em">&lt;author&gt; <span class="type">
-                     <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
-                  </span> &lt;/author&gt; <span class="occurs">[0..1]</span>
+                     <a title="Jump to &#34;StringDictionaryItem&#34; type definition." href="#h1815463743">StringDictionaryItem</a>
+                  </span> &lt;/author&gt; <span class="occurs">[1..*]</span>
                </div>
                <div style="margin-left: 1.5em">&lt;accreditation&gt; <span class="type">string</span> &lt;/accreditation&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em">&lt;other_details&gt; <span class="type">
-                     <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
-                  </span> &lt;/other_details&gt; <span class="occurs">[0..1]</span>
+                     <a title="Jump to &#34;StringDictionaryItem&#34; type definition." href="#h1815463743">StringDictionaryItem</a>
+                  </span> &lt;/other_details&gt; <span class="occurs">[0..*]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -1431,11 +1544,11 @@ if (gc != null) {
                <area shape="rect" alt="h1592245190" coords="283,0,383,24"
                      href="basetypes.xsd.html#h1592245190"/>
 
-               <area shape="rect" alt="h-1403900995" coords="283,34,371,72"
-                     href="Resource.xsd.html#h-1403900995"/>
+               <area shape="rect" alt="h1815463743" coords="283,34,371,72"
+                     href="Resource.xsd.html#h1815463743"/>
 
-               <area shape="rect" alt="h-1403900995" coords="283,130,402,168"
-                     href="Resource.xsd.html#h-1403900995"/>
+               <area shape="rect" alt="h1815463743" coords="283,130,402,168"
+                     href="Resource.xsd.html#h1815463743"/>
 
             </map>
          </div>
@@ -1465,9 +1578,9 @@ if (gc != null) {
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">author</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
-                           <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
+                           <a title="Jump to &#34;StringDictionaryItem&#34; type definition." href="#h1815463743">StringDictionaryItem</a>
                         </span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">1</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">accreditation</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">string</span>
@@ -1475,306 +1588,13 @@ if (gc != null) {
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">other_details</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
-                           <a title="Jump to &#34;hashTableStringString&#34; type definition." href="#h-1403900995">hashTableStringString</a>
+                           <a title="Jump to &#34;StringDictionaryItem&#34; type definition." href="#h1815463743">StringDictionaryItem</a>
                         </span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
           setState('h280872431_scbox', false);
-// -->
-</script>
-      </div>
-      <div style="text-align: right; clear: both;">
-         <a href="#top">top</a>
-      </div>
-      <hr/>
-      <h3>Complex Type: <a name="h776235118" class="name">dictionaryItem</a>
-      </h3>
-      <table class="hierarchy">
-         <tr>
-            <th>Super-types:</th>
-            <td>None</td>
-         </tr>
-         <tr>
-            <th>Sub-types:</th>
-            <td>None</td>
-         </tr>
-      </table>
-      <table class="properties">
-         <tr>
-            <th>Name</th>
-            <td>dictionaryItem</td>
-         </tr>
-         <tr>
-            <th>Used by (from the same schema document)</th>
-            <td>Complex Type <b>
-                  <a href="#h-1403900995">hashTableStringString</a>
-               </b>
-            </td>
-         </tr>
-         <tr>
-            <th>Abstract</th>
-            <td>no</td>
-         </tr>
-      </table>
-      <div class="sample box">
-         <div>
-            <input type="button" id="h776235118_xibox_button" class="control"
-                   onclick="switchState('h776235118_xibox'); return false;"
-                   style="display: none"/> 
-            <span class="caption">XML Instance Representation</span>
-         </div>
-         <div id="h776235118_xibox" class="contents">
-            <div style="margin-left: 0em">&lt;...&gt; <br/>
-               <div style="margin-left: 1.5em">&lt;key&gt; <span class="type">string</span> &lt;/key&gt; <span class="occurs">[1]</span>
-               </div>
-               <div style="margin-left: 1.5em">&lt;value&gt; <span class="type">string</span> &lt;/value&gt; <span class="occurs">[1]</span>
-               </div>&lt;/...&gt;</div>
-         </div>
-         <script type="text/javascript">
-<!--
-          setState('h776235118_xibox', true);
-// -->
-</script>
-      </div>
-      <div class="sample box">
-         <div>
-            <input type="button" id="h776235118_diagram_button" class="control"
-                   onclick="switchState('h776235118_diagram'); return false;"
-                   style="display: none"/> 
-            <span class="caption">Diagram</span>
-         </div>
-         <div id="h776235118_diagram" class="contents">
-            <img usemap="#h-317427519" src="schemaDiagrams/h-317427519.png"/>
-            <!--
-            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h-317427519.map--><map name="h-317427519">
-</map>
-         </div>
-         <script type="text/javascript">
-<!--
-          setState('h776235118_diagram', true);
-// -->
-</script>
-      </div>
-      <div class="schemaComponent box">
-         <div>
-            <input type="button" id="h776235118_scbox_button" class="control"
-                   onclick="switchState('h776235118_scbox'); return false;"
-                   style="display: none"/> 
-            <span class="caption">Schema Component Representation</span>
-         </div>
-         <div id="h776235118_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">dictionaryItem</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                     <span class="scTag">name</span>="<span class="scContent">key</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">string</span>
-                     </span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                     <span class="scTag">name</span>="<span class="scContent">value</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">string</span>
-                     </span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
-         </div>
-         <script type="text/javascript">
-<!--
-          setState('h776235118_scbox', false);
-// -->
-</script>
-      </div>
-      <div style="text-align: right; clear: both;">
-         <a href="#top">top</a>
-      </div>
-      <hr/>
-      <h3>Complex Type: <a name="h-1403900995" class="name">hashTableStringString</a>
-      </h3>
-      <table class="hierarchy">
-         <tr>
-            <th>Super-types:</th>
-            <td>None</td>
-         </tr>
-         <tr>
-            <th>Sub-types:</th>
-            <td>None</td>
-         </tr>
-      </table>
-      <table class="properties">
-         <tr>
-            <th>Name</th>
-            <td>hashTableStringString</td>
-         </tr>
-         <tr>
-            <th>Used by (from the same schema document)</th>
-            <td>Complex Type <b>
-                  <a href="#h280872431">TRANSLATION_DETAILS</a>
-               </b>, Complex Type <b>
-                  <a href="#h280872431">TRANSLATION_DETAILS</a>
-               </b>, Complex Type <b>
-                  <a href="#h-2133083888">RESOURCE_DESCRIPTION</a>
-               </b>, Complex Type <b>
-                  <a href="#h-2133083888">RESOURCE_DESCRIPTION</a>
-               </b>, Complex Type <b>
-                  <a href="#h-1589994270">RESOURCE_DESCRIPTION_ITEM</a>
-               </b>
-            </td>
-         </tr>
-         <tr>
-            <th>Abstract</th>
-            <td>no</td>
-         </tr>
-      </table>
-      <div class="sample box">
-         <div>
-            <input type="button" id="h-1403900995_xibox_button" class="control"
-                   onclick="switchState('h-1403900995_xibox'); return false;"
-                   style="display: none"/> 
-            <span class="caption">XML Instance Representation</span>
-         </div>
-         <div id="h-1403900995_xibox" class="contents">
-            <div style="margin-left: 0em">&lt;...&gt; <br/>
-               <div style="margin-left: 1.5em">&lt;item&gt; <span class="type">
-                     <a title="Jump to &#34;dictionaryItem&#34; type definition." href="#h776235118">dictionaryItem</a>
-                  </span> &lt;/item&gt; <span class="occurs">[1..*]</span>
-               </div>&lt;/...&gt;</div>
-         </div>
-         <script type="text/javascript">
-<!--
-          setState('h-1403900995_xibox', true);
-// -->
-</script>
-      </div>
-      <div class="sample box">
-         <div>
-            <input type="button" id="h-1403900995_diagram_button" class="control"
-                   onclick="switchState('h-1403900995_diagram'); return false;"
-                   style="display: none"/> 
-            <span class="caption">Diagram</span>
-         </div>
-         <div id="h-1403900995_diagram" class="contents">
-            <img usemap="#h883466064" src="schemaDiagrams/h883466064.png"/>
-            <!--
-            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h883466064.map--><map name="h883466064">
-               <area shape="rect" alt="h776235118" coords="271,0,347,38"
-                     href="Resource.xsd.html#h776235118"/>
-
-            </map>
-         </div>
-         <script type="text/javascript">
-<!--
-          setState('h-1403900995_diagram', true);
-// -->
-</script>
-      </div>
-      <div class="schemaComponent box">
-         <div>
-            <input type="button" id="h-1403900995_scbox_button" class="control"
-                   onclick="switchState('h-1403900995_scbox'); return false;"
-                   style="display: none"/> 
-            <span class="caption">Schema Component Representation</span>
-         </div>
-         <div id="h-1403900995_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">hashTableStringString</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                     <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">
-                           <a title="Jump to &#34;dictionaryItem&#34; type definition." href="#h776235118">dictionaryItem</a>
-                        </span>
-                     </span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
-         </div>
-         <script type="text/javascript">
-<!--
-          setState('h-1403900995_scbox', false);
-// -->
-</script>
-      </div>
-      <div style="text-align: right; clear: both;">
-         <a href="#top">top</a>
-      </div>
-      <hr/>
-      <h3>Complex Type: <a name="h-2045140803" class="name">list_of_string</a>
-      </h3>
-      <table class="hierarchy">
-         <tr>
-            <th>Super-types:</th>
-            <td>None</td>
-         </tr>
-         <tr>
-            <th>Sub-types:</th>
-            <td>None</td>
-         </tr>
-      </table>
-      <table class="properties">
-         <tr>
-            <th>Name</th>
-            <td>list_of_string</td>
-         </tr>
-         <tr>
-            <th>Used by (from the same schema document)</th>
-            <td>Complex Type <b>
-                  <a href="#h-2133083888">RESOURCE_DESCRIPTION</a>
-               </b>, Complex Type <b>
-                  <a href="#h-1589994270">RESOURCE_DESCRIPTION_ITEM</a>
-               </b>
-            </td>
-         </tr>
-         <tr>
-            <th>Abstract</th>
-            <td>no</td>
-         </tr>
-      </table>
-      <div class="sample box">
-         <div>
-            <input type="button" id="h-2045140803_xibox_button" class="control"
-                   onclick="switchState('h-2045140803_xibox'); return false;"
-                   style="display: none"/> 
-            <span class="caption">XML Instance Representation</span>
-         </div>
-         <div id="h-2045140803_xibox" class="contents">
-            <div style="margin-left: 0em">&lt;...&gt; <br/>
-               <div style="margin-left: 1.5em">&lt;item&gt; <span class="type">string</span> &lt;/item&gt; <span class="occurs">[1..*]</span>
-               </div>&lt;/...&gt;</div>
-         </div>
-         <script type="text/javascript">
-<!--
-          setState('h-2045140803_xibox', true);
-// -->
-</script>
-      </div>
-      <div class="sample box">
-         <div>
-            <input type="button" id="h-2045140803_diagram_button" class="control"
-                   onclick="switchState('h-2045140803_diagram'); return false;"
-                   style="display: none"/> 
-            <span class="caption">Diagram</span>
-         </div>
-         <div id="h-2045140803_diagram" class="contents">
-            <img usemap="#h-531114928" src="schemaDiagrams/h-531114928.png"/>
-            <!--
-            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h-531114928.map--><map name="h-531114928">
-</map>
-         </div>
-         <script type="text/javascript">
-<!--
-          setState('h-2045140803_diagram', true);
-// -->
-</script>
-      </div>
-      <div class="schemaComponent box">
-         <div>
-            <input type="button" id="h-2045140803_scbox_button" class="control"
-                   onclick="switchState('h-2045140803_scbox'); return false;"
-                   style="display: none"/> 
-            <span class="caption">Schema Component Representation</span>
-         </div>
-         <div id="h-2045140803_scbox" class="contents">
-            <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">list_of_string</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                     <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">string</span>
-                     </span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
-         </div>
-         <script type="text/javascript">
-<!--
-          setState('h-2045140803_scbox', false);
 // -->
 </script>
       </div>

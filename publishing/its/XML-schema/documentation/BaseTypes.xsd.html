@@ -1,9 +1,9 @@
-
+﻿
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
-      <title>openEHR Release 1.0.1 BaseTypes  XML schema - BaseTypes.xsd</title>
+      <title>openEHR Release 1.0.1 BaseTypes XML schema - BaseTypes.xsd</title>
       <meta http-equiv="Content-Type" content="text/xml; charset=UTF-8"/>
       <style type="text/css">
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -725,7 +725,7 @@ function viewDocumentation(compDesc, compName, docTextArray) {
    </head>
    <body>
       <h1>
-         <a name="top">openEHR Release 1.0.1 BaseTypes  XML schema</a>
+         <a name="top">openEHR Release 1.0.1 BaseTypes XML schema</a>
       </h1>
       <div style="float: right;">
          <div id="printerControls" style="display:none;">
@@ -3343,11 +3343,11 @@ if (gc != null) {
                         <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">lower_included</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
                         <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">upper_included</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
                         <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">lower_unbounded</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">boolean</span>
@@ -5764,27 +5764,27 @@ if (gc != null) {
                   <li>
                      <span class="type">
                         <a title="Jump to &#34;IntervalOfInteger&#34; type definition." href="#h1337655869">IntervalOfInteger</a>
-                     </span> (by restriction)</li>
+                     </span> (by extension)</li>
                   <li>
                      <span class="type">
                         <a title="Jump to &#34;IntervalOfReal&#34; type definition." href="#h888967423">IntervalOfReal</a>
-                     </span> (by restriction)</li>
+                     </span> (by extension)</li>
                   <li>
                      <span class="type">
                         <a title="Jump to &#34;IntervalOfDate&#34; type definition." href="#h888547087">IntervalOfDate</a>
-                     </span> (by restriction)</li>
+                     </span> (by extension)</li>
                   <li>
                      <span class="type">
                         <a title="Jump to &#34;IntervalOfDateTime&#34; type definition." href="#h-259666308">IntervalOfDateTime</a>
-                     </span> (by restriction)</li>
+                     </span> (by extension)</li>
                   <li>
                      <span class="type">
                         <a title="Jump to &#34;IntervalOfTime&#34; type definition." href="#h889031214">IntervalOfTime</a>
-                     </span> (by restriction)</li>
+                     </span> (by extension)</li>
                   <li>
                      <span class="type">
                         <a title="Jump to &#34;IntervalOfDuration&#34; type definition." href="#h250539125">IntervalOfDuration</a>
-                     </span> (by restriction)</li>
+                     </span> (by extension)</li>
                </ul>
             </td>
          </tr>
@@ -5808,17 +5808,13 @@ if (gc != null) {
          </div>
          <div id="h1721592906_xibox" class="contents">
             <div style="margin-left: 0em">&lt;...&gt; <br/>
-               <div style="margin-left: 1.5em">&lt;lower&gt; <span class="type">anyType</span> &lt;/lower&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em">&lt;upper&gt; <span class="type">anyType</span> &lt;/upper&gt; <span class="occurs">[0..1]</span>
-               </div>
                <div style="margin-left: 1.5em">&lt;lower_included&gt; <span class="type">boolean</span> &lt;/lower_included&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em">&lt;upper_included&gt; <span class="type">boolean</span> &lt;/upper_included&gt; <span class="occurs">[0..1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;lower_unbounded&gt; <span class="type">boolean</span> &lt;/lower_unbounded&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em">&lt;lower_unbounded&gt; <span class="type">boolean</span> &lt;/lower_unbounded&gt; <span class="occurs">[1]</span>
                </div>
-               <div style="margin-left: 1.5em">&lt;upper_unbounded&gt; <span class="type">boolean</span> &lt;/upper_unbounded&gt; <span class="occurs">[0..1]</span>
+               <div style="margin-left: 1.5em">&lt;upper_unbounded&gt; <span class="type">boolean</span> &lt;/upper_unbounded&gt; <span class="occurs">[1]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -5856,29 +5852,21 @@ if (gc != null) {
          <div id="h1721592906_scbox" class="contents">
             <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
                <span class="scTag">name</span>="<span class="scContent">Interval</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                     <span class="scTag">name</span>="<span class="scContent">lower</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">anyType</span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                     <span class="scTag">name</span>="<span class="scContent">upper</span>" <span class="scTag">type</span>="<span class="scContent">
-                        <span class="type">anyType</span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                  <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">lower_included</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">boolean</span>
-                     </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">upper_included</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">boolean</span>
-                     </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">lower_unbounded</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">boolean</span>
-                     </span>" <span class="scTag">default</span>="<span class="scContent">false</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                     </span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">upper_unbounded</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">boolean</span>
-                     </span>" <span class="scTag">default</span>="<span class="scContent">false</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+                     </span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -5898,7 +5886,7 @@ if (gc != null) {
             <td>
                <span class="type">
                   <a title="Jump to &#34;Interval&#34; type definition." href="#h1721592906">Interval</a>
-               </span> &lt; <strong>IntervalOfDate</strong> (by restriction)</td>
+               </span> &lt; <strong>IntervalOfDate</strong> (by extension)</td>
          </tr>
          <tr>
             <th>Sub-types:</th>
@@ -5924,6 +5912,14 @@ if (gc != null) {
          </div>
          <div id="h888547087_xibox" class="contents">
             <div style="margin-left: 0em">&lt;...&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;lower_included&gt; <span class="type">boolean</span> &lt;/lower_included&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;upper_included&gt; <span class="type">boolean</span> &lt;/upper_included&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;lower_unbounded&gt; <span class="type">boolean</span> &lt;/lower_unbounded&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;upper_unbounded&gt; <span class="type">boolean</span> &lt;/upper_unbounded&gt; <span class="occurs">[1]</span>
+               </div>
                <div style="margin-left: 1.5em" class="newFields">&lt;lower&gt; <span class="type">
                      <a title="Jump to &#34;Iso8601Date&#34; type definition." href="#h652387245">Iso8601Date</a>
                   </span> &lt;/lower&gt; <span class="occurs">[0..1]</span>
@@ -5931,14 +5927,6 @@ if (gc != null) {
                <div style="margin-left: 1.5em" class="newFields">&lt;upper&gt; <span class="type">
                      <a title="Jump to &#34;Iso8601Date&#34; type definition." href="#h652387245">Iso8601Date</a>
                   </span> &lt;/upper&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;lower_included&gt; <span class="type">boolean</span> &lt;/lower_included&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;upper_included&gt; <span class="type">boolean</span> &lt;/upper_included&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;lower_unbounded&gt; <span class="type">boolean</span> &lt;/lower_unbounded&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;upper_unbounded&gt; <span class="type">boolean</span> &lt;/upper_unbounded&gt; <span class="occurs">[0..1]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -5975,7 +5963,7 @@ if (gc != null) {
          </div>
          <div id="h888547087_scbox" class="contents">
             <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">IntervalOfDate</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">restriction</span> 
+               <span class="scTag">name</span>="<span class="scContent">IntervalOfDate</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;Interval&#34; type definition." href="#h1721592906">Interval</a>
@@ -5991,23 +5979,7 @@ if (gc != null) {
                               <span class="type">
                                  <a title="Jump to &#34;Iso8601Date&#34; type definition." href="#h652387245">Iso8601Date</a>
                               </span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">lower_included</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">upper_included</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">lower_unbounded</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">false</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">upper_unbounded</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">false</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">restriction</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -6027,7 +5999,7 @@ if (gc != null) {
             <td>
                <span class="type">
                   <a title="Jump to &#34;Interval&#34; type definition." href="#h1721592906">Interval</a>
-               </span> &lt; <strong>IntervalOfDateTime</strong> (by restriction)</td>
+               </span> &lt; <strong>IntervalOfDateTime</strong> (by extension)</td>
          </tr>
          <tr>
             <th>Sub-types:</th>
@@ -6053,6 +6025,14 @@ if (gc != null) {
          </div>
          <div id="h-259666308_xibox" class="contents">
             <div style="margin-left: 0em">&lt;...&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;lower_included&gt; <span class="type">boolean</span> &lt;/lower_included&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;upper_included&gt; <span class="type">boolean</span> &lt;/upper_included&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;lower_unbounded&gt; <span class="type">boolean</span> &lt;/lower_unbounded&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;upper_unbounded&gt; <span class="type">boolean</span> &lt;/upper_unbounded&gt; <span class="occurs">[1]</span>
+               </div>
                <div style="margin-left: 1.5em" class="newFields">&lt;lower&gt; <span class="type">
                      <a title="Jump to &#34;Iso8601DateTime&#34; type definition." href="#h-393819110">Iso8601DateTime</a>
                   </span> &lt;/lower&gt; <span class="occurs">[0..1]</span>
@@ -6060,14 +6040,6 @@ if (gc != null) {
                <div style="margin-left: 1.5em" class="newFields">&lt;upper&gt; <span class="type">
                      <a title="Jump to &#34;Iso8601DateTime&#34; type definition." href="#h-393819110">Iso8601DateTime</a>
                   </span> &lt;/upper&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;lower_included&gt; <span class="type">boolean</span> &lt;/lower_included&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;upper_included&gt; <span class="type">boolean</span> &lt;/upper_included&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;lower_unbounded&gt; <span class="type">boolean</span> &lt;/lower_unbounded&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;upper_unbounded&gt; <span class="type">boolean</span> &lt;/upper_unbounded&gt; <span class="occurs">[0..1]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -6104,7 +6076,7 @@ if (gc != null) {
          </div>
          <div id="h-259666308_scbox" class="contents">
             <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">IntervalOfDateTime</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">restriction</span> 
+               <span class="scTag">name</span>="<span class="scContent">IntervalOfDateTime</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;Interval&#34; type definition." href="#h1721592906">Interval</a>
@@ -6120,23 +6092,7 @@ if (gc != null) {
                               <span class="type">
                                  <a title="Jump to &#34;Iso8601DateTime&#34; type definition." href="#h-393819110">Iso8601DateTime</a>
                               </span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">lower_included</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">upper_included</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">lower_unbounded</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">false</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">upper_unbounded</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">false</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">restriction</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -6156,7 +6112,7 @@ if (gc != null) {
             <td>
                <span class="type">
                   <a title="Jump to &#34;Interval&#34; type definition." href="#h1721592906">Interval</a>
-               </span> &lt; <strong>IntervalOfDuration</strong> (by restriction)</td>
+               </span> &lt; <strong>IntervalOfDuration</strong> (by extension)</td>
          </tr>
          <tr>
             <th>Sub-types:</th>
@@ -6182,6 +6138,14 @@ if (gc != null) {
          </div>
          <div id="h250539125_xibox" class="contents">
             <div style="margin-left: 0em">&lt;...&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;lower_included&gt; <span class="type">boolean</span> &lt;/lower_included&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;upper_included&gt; <span class="type">boolean</span> &lt;/upper_included&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;lower_unbounded&gt; <span class="type">boolean</span> &lt;/lower_unbounded&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;upper_unbounded&gt; <span class="type">boolean</span> &lt;/upper_unbounded&gt; <span class="occurs">[1]</span>
+               </div>
                <div style="margin-left: 1.5em" class="newFields">&lt;lower&gt; <span class="type">
                      <a title="Jump to &#34;Iso8601Duration&#34; type definition." href="#h116386323">Iso8601Duration</a>
                   </span> &lt;/lower&gt; <span class="occurs">[0..1]</span>
@@ -6189,14 +6153,6 @@ if (gc != null) {
                <div style="margin-left: 1.5em" class="newFields">&lt;upper&gt; <span class="type">
                      <a title="Jump to &#34;Iso8601Duration&#34; type definition." href="#h116386323">Iso8601Duration</a>
                   </span> &lt;/upper&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;lower_included&gt; <span class="type">boolean</span> &lt;/lower_included&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;upper_included&gt; <span class="type">boolean</span> &lt;/upper_included&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;lower_unbounded&gt; <span class="type">boolean</span> &lt;/lower_unbounded&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;upper_unbounded&gt; <span class="type">boolean</span> &lt;/upper_unbounded&gt; <span class="occurs">[0..1]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -6233,7 +6189,7 @@ if (gc != null) {
          </div>
          <div id="h250539125_scbox" class="contents">
             <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">IntervalOfDuration</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">restriction</span> 
+               <span class="scTag">name</span>="<span class="scContent">IntervalOfDuration</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;Interval&#34; type definition." href="#h1721592906">Interval</a>
@@ -6249,23 +6205,7 @@ if (gc != null) {
                               <span class="type">
                                  <a title="Jump to &#34;Iso8601Duration&#34; type definition." href="#h116386323">Iso8601Duration</a>
                               </span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">lower_included</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">upper_included</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">lower_unbounded</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">false</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">upper_unbounded</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">false</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">restriction</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -6285,7 +6225,7 @@ if (gc != null) {
             <td>
                <span class="type">
                   <a title="Jump to &#34;Interval&#34; type definition." href="#h1721592906">Interval</a>
-               </span> &lt; <strong>IntervalOfInteger</strong> (by restriction)</td>
+               </span> &lt; <strong>IntervalOfInteger</strong> (by extension)</td>
          </tr>
          <tr>
             <th>Sub-types:</th>
@@ -6311,17 +6251,17 @@ if (gc != null) {
          </div>
          <div id="h1337655869_xibox" class="contents">
             <div style="margin-left: 0em">&lt;...&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;lower_included&gt; <span class="type">boolean</span> &lt;/lower_included&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;upper_included&gt; <span class="type">boolean</span> &lt;/upper_included&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;lower_unbounded&gt; <span class="type">boolean</span> &lt;/lower_unbounded&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;upper_unbounded&gt; <span class="type">boolean</span> &lt;/upper_unbounded&gt; <span class="occurs">[1]</span>
+               </div>
                <div style="margin-left: 1.5em" class="newFields">&lt;lower&gt; <span class="type">int</span> &lt;/lower&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em" class="newFields">&lt;upper&gt; <span class="type">int</span> &lt;/upper&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;lower_included&gt; <span class="type">boolean</span> &lt;/lower_included&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;upper_included&gt; <span class="type">boolean</span> &lt;/upper_included&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;lower_unbounded&gt; <span class="type">boolean</span> &lt;/lower_unbounded&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;upper_unbounded&gt; <span class="type">boolean</span> &lt;/upper_unbounded&gt; <span class="occurs">[0..1]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -6358,7 +6298,7 @@ if (gc != null) {
          </div>
          <div id="h1337655869_scbox" class="contents">
             <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">IntervalOfInteger</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">restriction</span> 
+               <span class="scTag">name</span>="<span class="scContent">IntervalOfInteger</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;Interval&#34; type definition." href="#h1721592906">Interval</a>
@@ -6370,23 +6310,7 @@ if (gc != null) {
                         <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">upper</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">int</span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">lower_included</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">upper_included</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">lower_unbounded</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">false</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">upper_unbounded</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">false</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">restriction</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -6406,7 +6330,7 @@ if (gc != null) {
             <td>
                <span class="type">
                   <a title="Jump to &#34;Interval&#34; type definition." href="#h1721592906">Interval</a>
-               </span> &lt; <strong>IntervalOfReal</strong> (by restriction)</td>
+               </span> &lt; <strong>IntervalOfReal</strong> (by extension)</td>
          </tr>
          <tr>
             <th>Sub-types:</th>
@@ -6432,17 +6356,17 @@ if (gc != null) {
          </div>
          <div id="h888967423_xibox" class="contents">
             <div style="margin-left: 0em">&lt;...&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;lower_included&gt; <span class="type">boolean</span> &lt;/lower_included&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;upper_included&gt; <span class="type">boolean</span> &lt;/upper_included&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;lower_unbounded&gt; <span class="type">boolean</span> &lt;/lower_unbounded&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;upper_unbounded&gt; <span class="type">boolean</span> &lt;/upper_unbounded&gt; <span class="occurs">[1]</span>
+               </div>
                <div style="margin-left: 1.5em" class="newFields">&lt;lower&gt; <span class="type">float</span> &lt;/lower&gt; <span class="occurs">[0..1]</span>
                </div>
                <div style="margin-left: 1.5em" class="newFields">&lt;upper&gt; <span class="type">float</span> &lt;/upper&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;lower_included&gt; <span class="type">boolean</span> &lt;/lower_included&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;upper_included&gt; <span class="type">boolean</span> &lt;/upper_included&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;lower_unbounded&gt; <span class="type">boolean</span> &lt;/lower_unbounded&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;upper_unbounded&gt; <span class="type">boolean</span> &lt;/upper_unbounded&gt; <span class="occurs">[0..1]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -6479,7 +6403,7 @@ if (gc != null) {
          </div>
          <div id="h888967423_scbox" class="contents">
             <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">IntervalOfReal</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">restriction</span> 
+               <span class="scTag">name</span>="<span class="scContent">IntervalOfReal</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;Interval&#34; type definition." href="#h1721592906">Interval</a>
@@ -6491,23 +6415,7 @@ if (gc != null) {
                         <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                            <span class="scTag">name</span>="<span class="scContent">upper</span>" <span class="scTag">type</span>="<span class="scContent">
                               <span class="type">float</span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">lower_included</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">upper_included</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">lower_unbounded</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">false</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">upper_unbounded</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">false</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">restriction</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--
@@ -6527,7 +6435,7 @@ if (gc != null) {
             <td>
                <span class="type">
                   <a title="Jump to &#34;Interval&#34; type definition." href="#h1721592906">Interval</a>
-               </span> &lt; <strong>IntervalOfTime</strong> (by restriction)</td>
+               </span> &lt; <strong>IntervalOfTime</strong> (by extension)</td>
          </tr>
          <tr>
             <th>Sub-types:</th>
@@ -6553,6 +6461,14 @@ if (gc != null) {
          </div>
          <div id="h889031214_xibox" class="contents">
             <div style="margin-left: 0em">&lt;...&gt; <br/>
+               <div style="margin-left: 1.5em" class="inherited">&lt;lower_included&gt; <span class="type">boolean</span> &lt;/lower_included&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;upper_included&gt; <span class="type">boolean</span> &lt;/upper_included&gt; <span class="occurs">[0..1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;lower_unbounded&gt; <span class="type">boolean</span> &lt;/lower_unbounded&gt; <span class="occurs">[1]</span>
+               </div>
+               <div style="margin-left: 1.5em" class="inherited">&lt;upper_unbounded&gt; <span class="type">boolean</span> &lt;/upper_unbounded&gt; <span class="occurs">[1]</span>
+               </div>
                <div style="margin-left: 1.5em" class="newFields">&lt;lower&gt; <span class="type">
                      <a title="Jump to &#34;Iso8601Time&#34; type definition." href="#h652871372">Iso8601Time</a>
                   </span> &lt;/lower&gt; <span class="occurs">[0..1]</span>
@@ -6560,14 +6476,6 @@ if (gc != null) {
                <div style="margin-left: 1.5em" class="newFields">&lt;upper&gt; <span class="type">
                      <a title="Jump to &#34;Iso8601Time&#34; type definition." href="#h652871372">Iso8601Time</a>
                   </span> &lt;/upper&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;lower_included&gt; <span class="type">boolean</span> &lt;/lower_included&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;upper_included&gt; <span class="type">boolean</span> &lt;/upper_included&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;lower_unbounded&gt; <span class="type">boolean</span> &lt;/lower_unbounded&gt; <span class="occurs">[0..1]</span>
-               </div>
-               <div style="margin-left: 1.5em" class="newFields">&lt;upper_unbounded&gt; <span class="type">boolean</span> &lt;/upper_unbounded&gt; <span class="occurs">[0..1]</span>
                </div>&lt;/...&gt;</div>
          </div>
          <script type="text/javascript">
@@ -6604,7 +6512,7 @@ if (gc != null) {
          </div>
          <div id="h889031214_scbox" class="contents">
             <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">IntervalOfTime</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">restriction</span> 
+               <span class="scTag">name</span>="<span class="scContent">IntervalOfTime</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">extension</span> 
                      <span class="scTag">base</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;Interval&#34; type definition." href="#h1721592906">Interval</a>
@@ -6620,23 +6528,7 @@ if (gc != null) {
                               <span class="type">
                                  <a title="Jump to &#34;Iso8601Time&#34; type definition." href="#h652871372">Iso8601Time</a>
                               </span>
-                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">lower_included</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">upper_included</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">true</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">lower_unbounded</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">false</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
-                        <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
-                           <span class="scTag">name</span>="<span class="scContent">upper_unbounded</span>" <span class="scTag">type</span>="<span class="scContent">
-                              <span class="type">boolean</span>
-                           </span>" <span class="scTag">default</span>="<span class="scContent">false</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">restriction</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">sequence</span>&gt;</div>&lt;/<span class="scTag">extension</span>&gt;</div>&lt;/<span class="scTag">complexContent</span>&gt;</div>&lt;/<span class="scTag">complexType</span>&gt;</div>
          </div>
          <script type="text/javascript">
 <!--

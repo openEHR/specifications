@@ -21,7 +21,8 @@
 					<xs:element name="ontology" type="ARCHETYPE_ONTOLOGY"/>
 				</xs:sequence>
 			</xs:extension>
-		</xs:complexContent>	</xs:complexType>
+		</xs:complexContent>
+	</xs:complexType>
 	<xs:complexType name="ARCHETYPE_CONSTRAINT" abstract="true">
 		<xs:sequence/>
 	</xs:complexType>
@@ -40,9 +41,10 @@
 		<xs:complexContent>
 			<xs:extension base="ARCHETYPE_CONSTRAINT">
 				<xs:sequence>
-					<xs:element name="rm_attribute_name" type="xs:string"/>					
+					<xs:element name="rm_attribute_name" type="xs:string"/>
 					<xs:element name="existence" type="IntervalOfInteger"/>
-					<xs:element name="children" type="C_OBJECT" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="children" type="C_OBJECT" minOccurs="0" maxOccurs="unbounded"
+					/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -65,8 +67,8 @@
 	</xs:complexType>
 	<xs:complexType name="CARDINALITY">
 		<xs:sequence>
-			<xs:element name="is_ordered" type="xs:boolean" default="false"/>
-			<xs:element name="is_unique" type="xs:boolean" default="false"/>
+			<xs:element name="is_ordered" type="xs:boolean"/>
+			<xs:element name="is_unique" type="xs:boolean"/>
 			<xs:element name="interval" type="IntervalOfInteger"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -85,7 +87,8 @@
 			<xs:extension base="C_OBJECT">
 				<xs:sequence>
 					<xs:element name="includes" type="ASSERTION" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element name="excludes" type="ASSERTION" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="excludes" type="ASSERTION" minOccurs="0" maxOccurs="unbounded"
+					/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -102,9 +105,7 @@
 	<xs:complexType name="C_DEFINED_OBJECT">
 		<xs:complexContent>
 			<xs:extension base="C_OBJECT">
-				<xs:sequence>
-					<xs:element name="assumed_value" type="xs:anyType" minOccurs="0"/>
-				</xs:sequence>
+				<xs:sequence/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -222,6 +223,7 @@
 			<xs:enumeration value="1003" id="disallowed"/>
 		</xs:restriction>
 	</xs:simpleType>
+
 	<xs:complexType name="C_PRIMITIVE" abstract="true">
 		<xs:sequence/>
 	</xs:complexType>
@@ -274,8 +276,7 @@
 		<xs:complexContent>
 			<xs:extension base="C_PRIMITIVE">
 				<xs:sequence>
-					<xs:element name="month_validity" type="VALIDITY_KIND" minOccurs="0"/>
-					<xs:element name="day_validity" type="VALIDITY_KIND" minOccurs="0"/>
+					<xs:element name="pattern" type="DateConstraintPattern" minOccurs="0"/>
 					<xs:element name="timezone_validity" type="VALIDITY_KIND" minOccurs="0"/>
 					<xs:element name="range" type="IntervalOfDate" minOccurs="0"/>
 					<xs:element name="assumed_value" type="Iso8601Date" minOccurs="0"/>
@@ -283,16 +284,17 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:simpleType name="DateConstraintPattern">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[yY][yY][yY][yY]-[mM?X][mM?X]-[dD?X][dD?X]"/>
+		</xs:restriction>
+	</xs:simpleType>
+
 	<xs:complexType name="C_DATE_TIME">
 		<xs:complexContent>
 			<xs:extension base="C_PRIMITIVE">
 				<xs:sequence>
-					<xs:element name="month_validity" type="VALIDITY_KIND" minOccurs="0"/>
-					<xs:element name="day_validity" type="VALIDITY_KIND" minOccurs="0"/>
-					<xs:element name="hour_validity" type="VALIDITY_KIND" minOccurs="0"/>
-					<xs:element name="minute_validity" type="VALIDITY_KIND" minOccurs="0"/>
-					<xs:element name="second_validity" type="VALIDITY_KIND" minOccurs="0"/>
-					<xs:element name="millisecond_validity" type="VALIDITY_KIND" minOccurs="0"/>
+					<xs:element name="pattern" type="DateTimeConstraintPattern" minOccurs="0"/>
 					<xs:element name="timezone_validity" type="VALIDITY_KIND" minOccurs="0"/>
 					<xs:element name="range" type="IntervalOfDateTime" minOccurs="0"/>
 					<xs:element name="assumed_value" type="Iso8601DateTime" minOccurs="0"/>
@@ -300,13 +302,19 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:simpleType name="DateTimeConstraintPattern">
+		<xs:restriction base="xs:string">
+			<xs:pattern
+				value="[yY][yY][yY][yY]-[mM?][mM?]-[dD?X][dD?X][T][hH?X][hH?X]:[mM?X][mM?X]:[sS?X][sS?X]"
+			/>
+		</xs:restriction>
+	</xs:simpleType>
+
 	<xs:complexType name="C_TIME">
 		<xs:complexContent>
 			<xs:extension base="C_PRIMITIVE">
 				<xs:sequence>
-					<xs:element name="minute_validity" type="VALIDITY_KIND" minOccurs="0"/>
-					<xs:element name="second_validity" type="VALIDITY_KIND" minOccurs="0"/>
-					<xs:element name="millisecond_validity" type="VALIDITY_KIND" minOccurs="0"/>
+					<xs:element name="pattern" type="TimeConstraintPattern" minOccurs="0"/>
 					<xs:element name="timezone_validity" type="VALIDITY_KIND" minOccurs="0"/>
 					<xs:element name="range" type="IntervalOfTime" minOccurs="0"/>
 					<xs:element name="assumed_value" type="Iso8601Time" minOccurs="0"/>
@@ -314,42 +322,73 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:simpleType name="TimeConstraintPattern">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[hH][hH]:[mM?X][mM?X]:[sS?X][sS?X]"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:complexType name="C_DURATION">
 		<xs:complexContent>
 			<xs:extension base="C_PRIMITIVE">
 				<xs:sequence>
-					<xs:element name="years_allowed" type="xs:boolean" default="false" minOccurs="0"/>
-					<xs:element name="months_allowed" type="xs:boolean" default="false"
-						minOccurs="0"/>
-					<xs:element name="weeks_allowed" type="xs:boolean" default="false" minOccurs="0"/>
-					<xs:element name="days_allowed" type="xs:boolean" default="false" minOccurs="0"/>
-					<xs:element name="hours_allowed" type="xs:boolean" default="false" minOccurs="0"/>
-					<xs:element name="minutes_allowed" type="xs:boolean" default="false"
-						minOccurs="0"/>
-					<xs:element name="seconds_allowed" type="xs:boolean" default="false"
-						minOccurs="0"/>
-					<xs:element name="fractional_seconds_allowed" type="xs:boolean" default="false"
-						minOccurs="0"/>
+					<xs:element name="pattern" type="DurationConstraintPattern" minOccurs="0"/>
 					<xs:element name="range" type="IntervalOfDuration" minOccurs="0"/>
 					<xs:element name="assumed_value" type="Iso8601Duration" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-
+	<xs:simpleType name="DurationConstraintPattern">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(P[yY]?[mM]?[wW]?[dD]?T[hH]?[mM]?[sS]?)|(P[yY]?[mM]?[wW]?[dD]?)"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:complexType name="ARCHETYPE_ONTOLOGY">
 		<xs:sequence>
-			<xs:element name="terminologies_available" type="list_of_string"/>
-			<xs:element name="specialisation_depth" type="xs:int" default="0"/>
-			<xs:element name="term_codes" type="list_of_string"/>
-			<xs:element name="constraint_codes" type="list_of_string"/>
-			<xs:element name="term_attribute_names" type="list_of_string"/>
+			<xs:element name="term_definitions" type="CodeDefinitionSet" maxOccurs="unbounded"/>
+			<xs:element name="constraint_definitions" type="CodeDefinitionSet" minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xs:element name="term_bindings" type="TermBindingSet" minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xs:element name="constraint_bindings" type="ConstraintBindingSet" minOccurs="0"
+				maxOccurs="unbounded"/>
 		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CodeDefinitionSet">
+		<xs:sequence>
+			<xs:element name="items" type="ARCHETYPE_TERM" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="language" type="xs:string" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="ARCHETYPE_TERM">
 		<xs:sequence>
-			<xs:element name="code" type="xs:string"/>
-			<xs:element name="items" type="hashTableStringString"/>
+			<xs:element name="items" type="StringDictionaryItem" maxOccurs="unbounded"/>
 		</xs:sequence>
+		<xs:attribute name="code" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="TermBindingSet">
+		<xs:sequence>
+			<xs:element name="items" type="TERM_BINDING_ITEM" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="terminology" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="TERM_BINDING_ITEM">
+		<xs:sequence>
+			<xs:element name="value" type="CODE_PHRASE"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ConstraintBindingSet">
+		<xs:sequence>
+			<xs:element name="items" type="CONSTRAINT_BINDING_ITEM" minOccurs="0"
+				maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="terminology" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="CONSTRAINT_BINDING_ITEM">
+		<xs:sequence>
+			<xs:element name="value" type="xs:anyURI"/>
+		</xs:sequence>
+		<xs:attribute name="code" type="xs:string" use="required"/>
 	</xs:complexType>
 </xs:schema>
