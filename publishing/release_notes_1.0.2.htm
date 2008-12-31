@@ -24,6 +24,8 @@
 
 
 
+
+  
   
   
   
@@ -85,6 +87,7 @@
 
 
 
+
   
   
   
@@ -158,12 +161,15 @@
   
   
   
-  <title>Release 1.0.1 - Release notes</title>
+  
+  
+  <title>Release 1.0.2 - Release notes</title>
   <link rel="stylesheet" href="http://www.openehr.org/styles/oe.css" type="text/css" />
 </head>
 
 
 <body>
+
 
 
 
@@ -209,8 +215,10 @@ Specifications Release 1.0.2 <br />
 
 
 
+
 Release Notes
 </h1>
+
 
 
 
@@ -268,7 +276,9 @@ Release Notes
 
 
 
-Release 1.0.2 of the <span style="font-style: italic;">open</span>EHR specifications includes 15 effective Change Requests (CRs) from a total of 19 (see <a href="http://www.openehr.org/issues/browse/SPEC?report=com.atlassian.jira.plugin.system.project:changelog-panel">History</a>), and 3 resolved Problem Reports (PRs). The CRs&nbsp;have the following breakdown:<br />
+
+Release 1.0.2 of the <span style="font-style: italic;">open</span>EHR specifications includes 15 executed Change Requests (CRs) from a total of 19 proposed (see <a href="http://www.openehr.org/issues/browse/SPEC?report=com.atlassian.jira.plugin.system.project:changelog-panel">History</a>), and 3 resolved Problem Reports (PRs). The CRs&nbsp;have the following breakdown:<br />
+
 
 
 
@@ -280,7 +290,9 @@ Release 1.0.2 of the <span style="font-style: italic;">open</span>EHR specificat
 
 
 
+
   <li>Correct typographical errors: SPEC-249, 255, 257, 258, 274, 284</li>
+
 
 
 
@@ -292,7 +304,9 @@ Release 1.0.2 of the <span style="font-style: italic;">open</span>EHR specificat
 
 
 
+
   <li>Minor errors in formal specifications: SPEC-256,&nbsp;&nbsp;260, 268, 271, 283</li>
+
 
 
 
@@ -303,13 +317,116 @@ Release 1.0.2 of the <span style="font-style: italic;">open</span>EHR specificat
 
 
 
+
   <li>Rejected/superseded: SPEC-250, 252,&nbsp;269, 272</li>
 
 
 
 
 
+
 </ul>
+The CRs causing changes to the formal specifications are summarised as follows:<br />
+<br />
+<table style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td><a href="http://www.openehr.org/issues/browse/SPEC-251">SPEC-251</a></td>
+      <td><span style="font-weight: bold;">Allow both pattern and interval constraint on Duration in Archetypes</span><br />
+      <span style="font-style: italic;">Affects</span>: ADL, AOM specifications<br />
+ADL now supports a constraint on durations allowing both ranges and unit types (weeks, days etc) to be expressed together, e.g.:
+some_duration matches {PWD/|P0W..P50W|}<br />
+This is typically used for pregnancy duration constraints.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.openehr.org/issues/browse/SPEC-256">SPEC-256</a></td>
+      <td><span style="font-weight: bold;">Correct extension_validity in UID_BASED_ID class</span><br />
+      <span style="font-style: italic;">Affects</span>: Support IM specification<br />
+The text for the has_extension function is changed to indicate that the
+Result is True if extension is not empty (rather than not Void).</td>
+    </tr>
+    <tr>
+      <td><a href="http://www.openehr.org/issues/browse/SPEC-260">SPEC-260</a></td>
+      <td><span style="font-weight: bold;">Correct the regex published for the ARCHETYPE_ID type</span><br />
+      <span style="font-style: italic;">Affects</span>: Support IM specification<br />
+The proposed solution is as below, and has the following features:
+      <br />
+
+- the characters #, ( and ) are not allowed
+      <br />
+
+- no part (i.e. any section between '-' or '.' delimiters) can be only 1 character long
+      <br />
+
+- no name part can start with a digit
+      <br />
+
+- allows upper case in the alphabetic parts of the id
+      <br />
+
+- limiting the version part of the id to numbers (i.e. no letters)
+      <br />
+
+- not allowing a leading '0' in the version identifier</td>
+    </tr>
+    <tr>
+      <td><a href="http://www.openehr.org/issues/browse/SPEC-261">SPEC-261</a></td>
+      <td><span style="font-weight: bold;">Indicate how accuracy is treated over add/subtract operations in DV_QUANTIFIED types</span><br />
+      <span style="font-style: italic;">Affects</span>: Data Types IM specification<br />
+1. in the class DV_AMOUNT, accuracy_unknown: Boolean is added as a
+function, and a constant called Unknown_accuracy_value of type Integer,
+with value = -1 is added. The documentation is changed to indicate that
+a value of -1, i.e. accuracy = Unknown_accuracy means no accuracy
+recorded, and the accuracy_unknown function returns True.
+      <br />
+2. The class DV_ABSOLUTE_QUANTITY also has accuracy, but defined as
+a reference value. The accuracy_unknown function is also implemented in
+this class, but returns True if accuracy = Void (i.e. null).
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.openehr.org/issues/browse/SPEC-268">SPEC-268</a></td>
+      <td><span style="font-weight: bold;">Correct missing parentheses in dADL type identifiers</span><br />
+      <span style="font-style: italic;">Affects</span>: ADL specification<br />
+The dADL grammar is corrected to allow parentheses around type names, as in the following example from the ADL specification:<br />
+destinations = &lt;
+      <br />
+
+&nbsp;&nbsp;&nbsp;&nbsp;["seville"] = (TOURIST_DESTINATION) &lt;
+      <br />
+
+&nbsp;&nbsp;&nbsp;&nbsp;....
+      <br />
+
+&gt;</td>
+    </tr>
+    <tr>
+      <td><a href="http://www.openehr.org/issues/browse/SPEC-271">SPEC-271</a></td>
+      <td><span style="font-weight: bold;">Correct minor inconsistencies in ITEM_TABLE specification and example</span><br />
+      <span style="font-style: italic;">Affects</span>: Data Structures IM<br />
+The ITEM_TABLE.ith_row() function is updated to the following:
+      <br />
+      <div style="margin-left: 40px;">
+ith_row (i:Integer): CLUSTER
+      <br />
+
+require
+      <br />
+
+&nbsp;&nbsp;i &gt;= 1 and i &lt;= row_count
+      </div>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://www.openehr.org/issues/browse/SPEC-283">SPEC-283</a></td>
+      <td><span style="font-weight: bold;">Correct spelling of ELEMENT.null_flavor attribute to null_flavour</span><br />
+      <span style="font-style: italic;">Affects</span>: Data Structures IM<br />
+The null_flavor attribute in the reference model class ELEMENT is
+renamed to null_flavour to match the published XML-schema.</td>
+    </tr>
+  </tbody>
+</table>
 
 
 
@@ -318,7 +435,9 @@ Release 1.0.2 of the <span style="font-style: italic;">open</span>EHR specificat
 
 
 
-<h2>Impact</h2>
+
+<h2>Impact Analysis</h2>
+
 
 
 
@@ -333,7 +452,9 @@ Software implementations:</h3>
 
 
 
+
 <ul>
+
 
 
 
@@ -345,6 +466,8 @@ Software implementations:</h3>
 
 
 
+
+  
   
   
   
@@ -356,10 +479,12 @@ Software implementations:</h3>
 
 
 
+
     <li><a href="http://www.openehr.org/issues/browse/SPEC-251">SPEC-251</a>.
 Parsers other than the EIffel reference parser and the java reference
 project parser will need to be updated to take account of the added
 syntax for pattern/interval duration constraints.</li>
+
 
 
 
@@ -376,6 +501,8 @@ made in environments where it is safe to do so.See  <a href="http://www.openehr.
 
 
 
+
+  
   
   
   
@@ -387,12 +514,15 @@ made in environments where it is safe to do so.See  <a href="http://www.openehr.
 
 
 
+
   <li>Rerence Model implementations:&nbsp;</li>
 
 
 
 
 
+
+  
   
   
   
@@ -404,7 +534,9 @@ made in environments where it is safe to do so.See  <a href="http://www.openehr.
 
 
 
+
     <li>the regular expression pattern for legal ARCHETYPE_IDs has been corrected. See <a href="http://www.openehr.org/issues/browse/SPEC-260">SPEC-260</a> and the Support IM specification.</li>
+
 
 
 
@@ -418,12 +550,15 @@ international English spelling. See <a href="http://www.openehr.org/issues/brows
 
 
 
+
     <li>Implementations of the DV_QUANTIFIED types will need to be augmented to include the improved semantics for accuracy. See <a href="http://www.openehr.org/issues/browse/SPEC-261">SPEC-261</a>.</li>
 
 
 
 
 
+
+  
   
   
   
@@ -435,7 +570,9 @@ international English spelling. See <a href="http://www.openehr.org/issues/brows
 
 
 
+
 </ul>
+
 
 
 
@@ -447,33 +584,50 @@ international English spelling. See <a href="http://www.openehr.org/issues/brows
 
 
 
+
 <ul>
+
 
 
 
   <li>BaseTypes.xsd</li>
 
+
+  
   
   <ul>
 
+
     <li>technical correction to make UID_BASED_ID an abstract class; this has no effect on any system or data.</li>
+
 
     <li>DV_AMOUNT class, a default value is added to accuracy element.
 The default value will be used when the accuracy is empty. However,
 when accuracy is not provided, then there will no default value for
 accuracy.</li>
 
+
+  
   
   </ul>
+
   <li>Resource.xsd</li>
+
+  
   <ul>
+
     <li>make AUTHORED_RESOURCE abstract</li>
+
     <li>make RESOURCE_DESCRIPTION.details element mandatory, i.e. change minOccurs="0" to minOccurs="1"</li>
+
+  
   </ul>
+
 
 
 
 </ul>
+
 
 
 
@@ -485,7 +639,9 @@ accuracy.</li>
 
 
 
+
 <ul>
+
 
 
 
@@ -494,8 +650,9 @@ accuracy.</li>
   <li>The identifiers and filenames of some existing archetypes violate
 the rules published in the Support IM specification, due to the use of
 the ".v1draft" pattern. For the moment, tools should continue to
-support the old form, converting to the new form where practical. See
+support this form, converting to the new form where practical. See
 the <a href="http://www.openehr.org/wiki/display/dev/TOOLING+COMPATIBILITY+GUIDE">wiki page</a> on this issue. A new draft of the rules for archetype and template identification and referencing will soon be published.</li>
+
 
 
 
@@ -512,11 +669,13 @@ automatically convert to the new spelling where safe to do so on saving.</li>
 
 
 
+
   <li>Due to  <a href="http://www.openehr.org/issues/browse/SPEC-268">SPEC-268</a>,
 many existing archetypes contain an illegal form of dADL block,
 introduced by a type name (most often C_DV_QUANTITY) that should be
 enclosed in parentheses but is not. Tools should perform conversions in
 environments where it is safe to do so. See <a href="http://www.openehr.org/wiki/display/dev/TOOLING+COMPATIBILITY+GUIDE">wiki page</a> on tooling issues.</li>
+
 
 
 
@@ -528,8 +687,10 @@ environments where it is safe to do so. See <a href="http://www.openehr.org/wiki
 
 
 
+
  
 <h3>Existing Data</h3>
+
 
 
 
@@ -544,13 +705,15 @@ NONE
 
 
 
+
 </ul>
 
 
 
 
 
-<br />
+
+
 
 
 
@@ -565,33 +728,23 @@ NONE
 
 
 <h2>Acknowledgements</h2>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Many people helped bring this release to fruition, including implementers and reviewers. Thanks to all the people on the <a href="project_team.htm">project team</a>
-page, and to the Architecture Review Board members (http://www.openehr.org/about/arb.html).<br />
+Many people helped bring this release to fruition, including
+implementers and reviewers. Thanks to everyone in the community who
+contributed feedback, asked questions, and found errors. If you caused
+a CR to be raised, you are recognised in the revision history of all
+affected specifications! Thanks to the <a href="http://www.openehr.org/about/arb.html">Architecture Review Board</a> members for processing the Change Requests (even 15 CRs took a lot of discussion):<br />
+<ul>
+  <li>John Arnett (Interoperability Architect, Connecting for Health, NHS, UK)</li>
+  <li>Thomas Beale (CTO, Ocean Informatics, UK) [chair, ARB]</li>
+  <li>Eric Browne (independent consultant, former head of clinical information, Nehta, Australia)</li>
+  <li>Rong Chen, MD (openEHR Java project lead, chief medical informatics officer, Cambio Health, Sweden)</li>
+  <li>Tim Cook (independent consultant,&nbsp;openEHR&nbsp;Python project lead, Brazil)</li>
+  <li>Sam Heard, MD (CEO Ocean Informatics, Australia)</li>
+  <li>Dipak Kalra, MD (Senior lecturer, CHIME, University College London, UK)</li>
+</ul>
+Thanks to Chunlan Ma, MD of Ocean Informatics, for producing the XML-schemas and regenerating the documentation.<br />
+Thanks as ever to Anthony Peacock, system adminstrator at CHIME, UCL for his support of the <span style="font-style: italic;">open</span>EHR server, website, Jira, mailing lists and other infrastructure during the year.<br />
+Finally thanks to Professor David Ingram, head of CHIME and founding chair of the <span style="font-style: italic;">open</span>EHR Foundation for continued moral and financial support.
 
 
 
@@ -646,45 +799,48 @@ $LastChangedRevision$</span><br />
 
 
 
-<br />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br />
+
 
 
 
