@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- openEHR Release 1.0.1 Resource XML schema -->
-<!-- Authored by Ocean Informatics 2007.04.13  -->
+<!-- openEHR Release 1.0.2 Resource XML schema -->
+<!-- Authored by Ocean Informatics 2008.12.22  -->
 <xs:schema xmlns="http://schemas.openehr.org/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified" version="1.0.1"
+	targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified" version="1.0.2"
 	id="Resource.xsd">
 	<xs:include schemaLocation="basetypes.xsd"/>
-	<xs:complexType name="AUTHORED_RESOURCE">
+	<xs:complexType name="AUTHORED_RESOURCE" abstract="true">
 		<xs:sequence>
 			<xs:element name="original_language" type="CODE_PHRASE"/>
 			<xs:element name="is_controlled" type="xs:boolean" minOccurs="0"/>
@@ -34,7 +34,7 @@
 			<xs:element name="resource_package_uri" type="xs:string" minOccurs="0"/>
 			<xs:element name="other_details" type="StringDictionaryItem" minOccurs="0"
 				maxOccurs="unbounded"/>
-			<xs:element name="details" type="RESOURCE_DESCRIPTION_ITEM" minOccurs="0"
+			<xs:element name="details" type="RESOURCE_DESCRIPTION_ITEM"
 				maxOccurs="unbounded"/>
 			<xs:element name="parent_resource" type="AUTHORED_RESOURCE" minOccurs="0"/>
 		</xs:sequence>

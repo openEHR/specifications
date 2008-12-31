@@ -3,7 +3,7 @@
   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
-      <title>openEHR Release 1.0.1 Resource XML schema - Resource.xsd</title>
+      <title>openEHR Release 1.0.2 Resource XML schema - Resource.xsd</title>
       <meta http-equiv="Content-Type" content="text/xml; charset=UTF-8"/>
       <style type="text/css">
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -725,7 +725,7 @@ function viewDocumentation(compDesc, compName, docTextArray) {
    </head>
    <body>
       <h1>
-         <a name="top">openEHR Release 1.0.1 Resource XML schema</a>
+         <a name="top">openEHR Release 1.0.2 Resource XML schema</a>
       </h1>
       <div style="float: right;">
          <div id="printerControls" style="display:none;">
@@ -818,7 +818,7 @@ if (gc != null) {
          </tr>
          <tr>
             <th>Version</th>
-            <td>1.0.1</td>
+            <td>1.0.2</td>
          </tr>
          <tr>
             <th>Element and Attribute Namespaces</th>
@@ -881,7 +881,7 @@ if (gc != null) {
          </div>
          <div id="schema_scbox" class="contents">
             <div style="margin-left: 0em">&lt;<span class="scTag">schema</span> 
-               <span class="scTag">targetNamespace</span>="<span class="scContent">http://schemas.openehr.org/v1</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">qualified</span>" <span class="scTag">version</span>="<span class="scContent">1.0.1</span>" <span class="scTag">id</span>="<span class="scContent">Resource.xsd</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">include</span> 
+               <span class="scTag">targetNamespace</span>="<span class="scContent">http://schemas.openehr.org/v1</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">qualified</span>" <span class="scTag">version</span>="<span class="scContent">1.0.2</span>" <span class="scTag">id</span>="<span class="scContent">Resource.xsd</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">include</span> 
                   <span class="scTag">schemaLocation</span>="<span class="scContent">basetypes.xsd</span>"/&gt;</div>
                <div class="scContent" style="margin-left: 1.5em">...</div>&lt;/<span class="scTag">schema</span>&gt;</div>
          </div>
@@ -924,7 +924,7 @@ if (gc != null) {
          </tr>
          <tr>
             <th>Abstract</th>
-            <td>no</td>
+            <td>yes</td>
          </tr>
       </table>
       <div class="sample box">
@@ -975,7 +975,7 @@ if (gc != null) {
          <div id="h-282029186_diagram" class="contents">
             <img usemap="#h1373759441" src="schemaDiagrams/h1373759441.png"/>
             <!--
-            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h1373759441.map--><map name="h1373759441">
+            Map ref: file:/C:/Documents and Settings/Chunlan Ma/Desktop/openEHR-schema-1.0.2/documentation//schemaDiagrams/h1373759441.map--><map name="h1373759441">
                <area shape="rect" alt="h1592245190" coords="281,0,421,24"
                      href="basetypes.xsd.html#h1592245190"/>
 
@@ -1005,7 +1005,7 @@ if (gc != null) {
          </div>
          <div id="h-282029186_scbox" class="contents">
             <div style="margin-left: 0em">&lt;<span class="scTag">complexType</span> 
-               <span class="scTag">name</span>="<span class="scContent">AUTHORED_RESOURCE</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
+               <span class="scTag">name</span>="<span class="scContent">AUTHORED_RESOURCE</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">original_language</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
                            <a title="Jump to &#34;CODE_PHRASE&#34; type definition(located in external schema documentation)."
@@ -1103,7 +1103,7 @@ if (gc != null) {
                <div style="margin-left: 1.5em">&lt;details&gt; <span class="type">
                      <a title="Jump to &#34;RESOURCE_DESCRIPTION_ITEM&#34; type definition."
                         href="#h-1589994270">RESOURCE_DESCRIPTION_ITEM</a>
-                  </span> &lt;/details&gt; <span class="occurs">[0..*]</span>
+                  </span> &lt;/details&gt; <span class="occurs">[1..*]</span>
                </div>
                <div style="margin-left: 1.5em">&lt;parent_resource&gt; <span class="type">
                      <a title="Jump to &#34;AUTHORED_RESOURCE&#34; type definition." href="#h-282029186">AUTHORED_RESOURCE</a>
@@ -1126,7 +1126,7 @@ if (gc != null) {
          <div id="h-2133083888_diagram" class="contents">
             <img usemap="#h997481187" src="schemaDiagrams/h997481187.png"/>
             <!--
-            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h997481187.map--><map name="h997481187">
+            Map ref: file:/C:/Documents and Settings/Chunlan Ma/Desktop/openEHR-schema-1.0.2/documentation//schemaDiagrams/h997481187.map--><map name="h997481187">
                <area shape="rect" alt="h1815463743" coords="294,0,422,38"
                      href="Resource.xsd.html#h1815463743"/>
 
@@ -1186,7 +1186,7 @@ if (gc != null) {
                            <a title="Jump to &#34;RESOURCE_DESCRIPTION_ITEM&#34; type definition."
                               href="#h-1589994270">RESOURCE_DESCRIPTION_ITEM</a>
                         </span>
-                     </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
+                     </span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
                   <div style="margin-left: 1.5em">&lt;<span class="scTag">element</span> 
                      <span class="scTag">name</span>="<span class="scContent">parent_resource</span>" <span class="scTag">type</span>="<span class="scContent">
                         <span class="type">
@@ -1283,7 +1283,7 @@ if (gc != null) {
          <div id="h-1589994270_diagram" class="contents">
             <img usemap="#h1756183605" src="schemaDiagrams/h1756183605.png"/>
             <!--
-            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h1756183605.map--><map name="h1756183605">
+            Map ref: file:/C:/Documents and Settings/Chunlan Ma/Desktop/openEHR-schema-1.0.2/documentation//schemaDiagrams/h1756183605.map--><map name="h1756183605">
                <area shape="rect" alt="h1592245190" coords="324,0,424,24"
                      href="basetypes.xsd.html#h1592245190"/>
 
@@ -1433,7 +1433,7 @@ if (gc != null) {
          <div id="h1815463743_diagram" class="contents">
             <img usemap="#h1058733138" src="schemaDiagrams/h1058733138.png"/>
             <!--
-            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h1058733138.map--><map name="h1058733138">
+            Map ref: file:/C:/Documents and Settings/Chunlan Ma/Desktop/openEHR-schema-1.0.2/documentation//schemaDiagrams/h1058733138.map--><map name="h1058733138">
 </map>
          </div>
          <script type="text/javascript">
@@ -1540,7 +1540,7 @@ if (gc != null) {
          <div id="h280872431_diagram" class="contents">
             <img usemap="#h-1891827966" src="schemaDiagrams/h-1891827966.png"/>
             <!--
-            Map ref: file:/C:/chunLan/OceanInfo/EHR-1.0.1_Repository2/EhrBankClient/src/Composer/XML/NewSchemas/openEhr1.0.1SchemaDoc//schemaDiagrams/h-1891827966.map--><map name="h-1891827966">
+            Map ref: file:/C:/Documents and Settings/Chunlan Ma/Desktop/openEHR-schema-1.0.2/documentation//schemaDiagrams/h-1891827966.map--><map name="h-1891827966">
                <area shape="rect" alt="h1592245190" coords="283,0,383,24"
                      href="basetypes.xsd.html#h1592245190"/>
 
@@ -1602,7 +1602,7 @@ if (gc != null) {
          <a href="#top">top</a>
       </div>
       <hr/>
-      <p class="footer">Authored by <a href="http://www.oceaninformatics.biz">Ocean Informatics</a>. Last modified: <script type="text/javascript">
+       <p class="footer">Authored by <a href="http://www.oceaninformatics.com">Ocean Informatics</a>. Last modified: <script type="text/javascript">
 <!--
           document.write(document.lastModified);
 // -->
