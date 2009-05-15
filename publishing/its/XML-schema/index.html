@@ -14,6 +14,8 @@
 
 
 
+
+  
   
   
   
@@ -39,6 +41,8 @@
 
 
 
+
+  
   
   
   
@@ -69,8 +73,10 @@
 
 
 
+
 <h1><span style="font-style: italic;">open</span>EHR
 XML-schemas - Release 1.0.2</h1>
+
 
 
 
@@ -99,19 +105,25 @@ XML-schemas - Release 1.0.2</h1>
 
 
 
+
 This page provides access to the W3C XML schemas for the <span style="font-style: italic;">open</span>EHR Reference Model (RM) and Archetype Model (AM).<br>
+
 
 
 <h3>Changes from previous release (1.0.1)</h3>
 
 
+
 Basic_types.xsd:<br>
+
 
 
 <ol>
 
 
+
   <li>UID_BASED_ID is changed to abstract</li>
+
 
 
   <li>DV_AMOUNT class, a default value is added to accuracy element.
@@ -120,16 +132,22 @@ when accuracy is not provided, then there will no default value for
 accuracy. Based on the spec, the DV_AMOUNT.accuracy is optional.</li>
 
 
+
 </ol>
+
 
 Resource.xsd:
 <ol>
 
+
   <li>make AUTHORED_RESOURCE abstract</li>
+
 
   <li>make RESOURCE_DESCRIPTION.details element mandatory, i.e. change minOccurs="0" to minOccurs="1"</li>
 
+
 </ol>
+
 
 
 No other schemas are changed in this release.
@@ -140,6 +158,7 @@ No other schemas are changed in this release.
 
 
 <h3>Stable Schemas</h3>
+
 
 
 
@@ -164,7 +183,9 @@ For the RM, separate schemas have been created, as follows:<br>
 
 
 
+
 <ul>
+
 
 
 
@@ -193,6 +214,7 @@ types</a> - types from rm.data_types and rm.support.identification packages. (<a
 
 
 
+
   <li><a href="documentation/Structure.xsd.html">Structure</a>
 - types from rm.data_structures and rm.common.generic packages. (<a href="Structure.xsd">xsd</a>
 file)</li>
@@ -205,7 +227,9 @@ file)</li>
 
 
 
+
   <li><a href="documentation/Resource.xsd.html">Resource</a> - types from the rm.common.resource package (<a href="Resource.xsd">xsd</a> file)</li>
+
 
 
 
@@ -235,9 +259,11 @@ file)</li>
 
 
 
+
   <li><a href="documentation/Composition.xsd.html">Composition</a>
 - rm.composition. (<a href="Composition.xsd">xsd</a>
 file)</li>
+
 
 
 
@@ -262,7 +288,9 @@ file)</li>
 
 
 
+
 </ul>
+
 
 
 
@@ -284,7 +312,9 @@ For the AM, two schemas are provided:<br>
 
 
 
+
 <ul>
+
 
 
 
@@ -305,6 +335,7 @@ For the AM, two schemas are provided:<br>
 
 
 
+
   <li><a href="documentation/OpenehrProfile.xsd.html">OpenehrProfile</a> - types from the <span style="font-style: italic;">open</span>EHR  Archetype Profile package (<a href="OpenehrProfile.xsd">xsd</a> file)</li>
 
 
@@ -316,7 +347,9 @@ For the AM, two schemas are provided:<br>
 
 
 
+
 </ul>
+
 
 
 
@@ -336,7 +369,9 @@ For the AM, two schemas are provided:<br>
 
 
 
+
 Two further schemas are in the draft stage, and are under active development:<br>
+
 
 
 
@@ -356,6 +391,7 @@ Two further schemas are in the draft stage, and are under active development:<br
 
 
 
+
   <li>Extract - types from rm.extract package (<a href="Extract.xsd">xsd</a> file)</li>
 
 
@@ -366,7 +402,12 @@ Two further schemas are in the draft stage, and are under active development:<br
 
 
 
-  <li>Template - (coming soon)</li>
+
+  <li><span style="font-style: italic;">open</span>EHR Template - (coming soon)</li>
+  <ul>
+    <li>an&nbsp;interim&nbsp;'.oet' Template schema (<a href="Template.xsd">xsd</a> file) - this file is used for templates created with Ocean tools, and is based on the official <span style="font-style: italic;">open</span>EHR schemas published above. It will be replaced when the <span style="font-style: italic;">open</span>EHR template specification is finalised.</li>
+  </ul>
+
 
 
 
@@ -390,7 +431,9 @@ Two further schemas are in the draft stage, and are under active development:<br
 
 
 
+
 <h2>Transformation Rules</h2>
+
 
 
 
@@ -419,7 +462,9 @@ from the reference model.<span style="color: rgb(204, 0, 0);"></span><br>
 
 
 
+
 <h3>Basic type mappings</h3>
+
 
 
 
@@ -451,7 +496,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
   <tbody>
+
 
 
 
@@ -479,7 +526,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       <td style="background-color: rgb(153, 255, 255);">
+      
       
       
       
@@ -506,7 +555,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       </td>
+
 
 
 
@@ -533,6 +584,7 @@ been made to the reference model to accommodate these standards.
       
       
       
+      
       <h4>XML Schema complexType</h4>
 
 
@@ -547,7 +599,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       </td>
+
 
 
 
@@ -575,6 +629,7 @@ been made to the reference model to accommodate these standards.
 
 
 
+
     <tr>
 
 
@@ -589,7 +644,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       <td style="background-color: rgb(204, 255, 255);">DV_DATE_TIME</td>
+
 
 
 
@@ -619,6 +676,7 @@ been made to the reference model to accommodate these standards.
 
 
 
+
     </tr>
 
 
@@ -633,7 +691,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
     <tr>
+
 
 
 
@@ -653,13 +713,16 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       <td rowspan="1">value is of type Iso8601Date, a restriction of xs:string, matching regular expression <br>
 
 
 
 
 
+
 \d{4}((((0[1-9])|(1[0-2]))((0[1-9])|([12]\d)|(3[01]))?)?<br>
+
 
 
 
@@ -679,6 +742,7 @@ been made to the reference model to accommodate these standards.
 
 
 
+
     </tr>
 
 
@@ -693,7 +757,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
     <tr>
+
 
 
 
@@ -713,13 +779,16 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       <td rowspan="1">value is of type Iso8601Time, a restriction of xs:string, matching regular expression<br>
 
 
 
 
 
+
 ([01]\d|2[0-3])([0-5]\d([0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-2]))(00|30)?))?|<br>
+
 
 
 
@@ -739,7 +808,9 @@ been made to the reference model to accommodate these standards.
 
 
 
+
     </tr>
+
 
 
 
@@ -778,6 +849,7 @@ been made to the reference model to accommodate these standards.
 
 
     <tr>
+
 
 
 
@@ -805,13 +877,16 @@ been made to the reference model to accommodate these standards.
 
 
 
+
       <td>value is of type DV_Iso8601Duration, a restriction of xs:string, matching regular expression<br>
 
 
 
 
 
+
 P(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(\d+H)?(\d+M)?(\d+(\.\d+)?S)?)?</td>
+
 
 
 
@@ -839,6 +914,8 @@ P(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(\d+H)?(\d+M)?(\d+(\.\d+)?S)?)?</td>
 
 
 
+
+  
   
   
   
@@ -866,7 +943,9 @@ P(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(\d+H)?(\d+M)?(\d+(\.\d+)?S)?)?</td>
 
 
 
+
 <h3>Generic types</h3>
+
 
 
 
@@ -902,7 +981,9 @@ constraints.<br>
 
 
 
+
 <table style="text-align: left;" cellpadding="2" cellspacing="2">
+
 
 
 
@@ -930,6 +1011,7 @@ constraints.<br>
 
 
 
+
     <tr>
 
 
@@ -944,7 +1026,9 @@ constraints.<br>
 
 
 
+
       <td style="background-color: rgb(153, 255, 255);">
+      
       
       
       
@@ -971,7 +1055,9 @@ constraints.<br>
 
 
 
+
       </td>
+
 
 
 
@@ -998,7 +1084,9 @@ constraints.<br>
       
       
       
+      
       <h4>XML Schema complexType</h4>
+
 
 
 
@@ -1026,6 +1114,7 @@ constraints.<br>
 
 
 
+
     </tr>
 
 
@@ -1040,7 +1129,9 @@ constraints.<br>
 
 
 
+
     <tr>
+
 
 
 
@@ -1050,7 +1141,9 @@ constraints.<br>
 
 
 
+
       <td>IntervalOfInteger (BaseTypes.xsd)</td>
+
 
 
 
@@ -1060,7 +1153,9 @@ constraints.<br>
 
 
 
+
     <tr>
+
 
 
 
@@ -1070,7 +1165,9 @@ constraints.<br>
 
 
 
+
       <td>IntervalOfReal (BaseTypes.xsd)</td>
+
 
 
 
@@ -1080,7 +1177,9 @@ constraints.<br>
 
 
 
+
     <tr>
+
 
 
 
@@ -1090,7 +1189,9 @@ constraints.<br>
 
 
 
+
       <td>IntervalOfDate (BaseTypes.xsd)</td>
+
 
 
 
@@ -1100,7 +1201,9 @@ constraints.<br>
 
 
 
+
     <tr>
+
 
 
 
@@ -1110,7 +1213,9 @@ constraints.<br>
 
 
 
+
       <td>IntervalOfTime (BaseTypes.xsd)</td>
+
 
 
 
@@ -1120,7 +1225,9 @@ constraints.<br>
 
 
 
+
     <tr>
+
 
 
 
@@ -1130,7 +1237,9 @@ constraints.<br>
 
 
 
+
       <td>IntervalOfDateTime (BaseTypes.xsd)</td>
+
 
 
 
@@ -1140,7 +1249,9 @@ constraints.<br>
 
 
 
+
     <tr>
+
 
 
 
@@ -1150,7 +1261,9 @@ constraints.<br>
 
 
 
+
       <td>IntervalOfDuration (BaseTypes.xsd)</td>
+
 
 
 
@@ -1160,7 +1273,9 @@ constraints.<br>
 
 
 
+
     <tr>
+
 
 
 
@@ -1188,13 +1303,16 @@ constraints.<br>
 
 
 
+
       <td>only one type is used, namely DV_INTERVAL, with lower and upper of type DV_ORDERED. Software implementations <br>
 
 
 
 
 
+
 of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&nbsp;implement further typing sensibly.<br>
+
 
 
 
@@ -1213,7 +1331,9 @@ of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&n
 
 
 
+
     </tr>
+
 
 
 
@@ -1241,7 +1361,9 @@ of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&n
 
 
 
+
       <td style="background-color: rgb(204, 255, 255);">VERSION&lt;T&gt;</td>
+
 
 
 
@@ -1260,7 +1382,9 @@ of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&n
 
 
 
+
 (Version.xsd)</td>
+
 
 
 
@@ -1288,13 +1412,6 @@ of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&n
 
 
 
-    
-
-
-
-
-
-
 
     
 
@@ -1304,6 +1421,15 @@ of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&n
 
 
 
+    
+
+
+
+
+
+
+
+  
   
   
   
@@ -1331,6 +1457,7 @@ of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&n
 
 
 
+
 <br>
 
 
@@ -1345,7 +1472,9 @@ of the relevant generic types (DV_INTERVAL&lt;DV_DATE&gt; etc) are expected to&n
 
 
 
+
 <h3>Multiple Inheritance</h3>
+
 
 
 
@@ -1365,8 +1494,10 @@ must be visible to schema processing.
 
 
 
+
 The following RM classes are not included in the schema, as they are not needed in the data view: UID, UUID, 
 INTERNET_ID, ISO_OID, and VERSION_TREE_ID.&nbsp;<br>
+
 
 
 
@@ -1394,12 +1525,15 @@ UID and its subtypes are not needed because OBJECT_ID has a <span style="font-st
 
 
 
+
 None in the current release.<br>
 
 
 
 
+
 <h3>Conditional Rules</h3>
+
 
 
 
@@ -1412,7 +1546,9 @@ LOCATABLE.archetype_node_id on archetype root-point LOCATABLE instances
 
 
 
+
 <h3>XML Attributes and Elements</h3>
+
 
 
 
@@ -1421,6 +1557,7 @@ LOCATABLE.archetype_node_id RM attribute, which is, from the point of
 view of RM classes, true meta-data. Making it an attribute allows
 archetype paths to be easily mapped to Xpaths.
 <h2>Acknowledgements</h2>
+
 
 
 
@@ -1441,6 +1578,7 @@ them
 (Wed, 15 Feb 2006) $&nbsp;&nbsp;
 $LastChangedRevision$
 </span><br>
+
 
 
 
