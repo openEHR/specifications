@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- openEHR Release 1.0.1 BaseTypes  XML schema -->
-<!-- Authored by Ocean Informatics 2007.04.13  -->
+<!-- openEHR Release 1.0.2 BaseTypes  XML schema -->
+<!-- Authored by Ocean Informatics 2008.03.19  -->
+<!-- Corrected by Ocean Informatics 2009.03.11: Iso8601DateTime and Iso8601Time types restriction pattern -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.openehr.org/v1"
-	targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified" version="v1.0.1"
+	targetNamespace="http://schemas.openehr.org/v1" elementFormDefault="qualified" version="v1.0.2"
 	id="BaseTypes.xsd">
 	<xs:complexType name="DATA_VALUE" abstract="true">
 		<xs:sequence/>
@@ -197,9 +198,11 @@
 	</xs:complexType>
 	<xs:simpleType name="Iso8601DateTime">
 		<xs:restriction base="xs:string">
-			<xs:pattern
+			<!--<xs:pattern
 				value="\d{4}((0[1-9]|1[0-2])((0[1-9]|[12]\d|3[01])(T?([01]\d|2[0-3])([0-5]\d([0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-2]))(00|30)?))?)?)?)?|\d{4}(\-(0[1-9]|1[0-2])(\-(0[1-9]|[12]\d|3[01])(T([01]\d|2[0-3])(:[0-5]\d(:[0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-2]))(:(00|30))?))?)?)?)?"
-			/>
+			/>-->
+			<!-- support +13:00 timezone (e.g. Auckland summer time) -->
+			<xs:pattern value="\d{4}((0[1-9]|1[0-2])((0[1-9]|[12]\d|3[01])(T?([01]\d|2[0-3])([0-5]\d([0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-3]))(00|30)?))?)?)?)?|\d{4}(\-(0[1-9]|1[0-2])(\-(0[1-9]|[12]\d|3[01])(T([01]\d|2[0-3])(:[0-5]\d(:[0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-3]))(:(00|30))?))?)?)?)?"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Iso8601Date">
@@ -211,9 +214,11 @@
 	</xs:simpleType>
 	<xs:simpleType name="Iso8601Time">
 		<xs:restriction base="xs:string">
-			<xs:pattern
+			<!--<xs:pattern
 				value="([01]\d|2[0-3])([0-5]\d([0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-2]))(00|30)?))?|([01]\d|2[0-3])(:[0-5]\d(:[0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-2]))(:(00|30))?))?"
-			/>
+			/>-->
+			<!-- support +13:00 timezone (e.g. Auckland summer time) -->
+			<xs:pattern value="([01]\d|2[0-3])([0-5]\d([0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-3]))(00|30)?))?|([01]\d|2[0-3])(:[0-5]\d(:[0-5]\d([,.]\d+)?)?)?(Z|([+\-]((0\d)|(1[0-3]))(:(00|30))?))?"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Iso8601Duration">
@@ -519,76 +524,5 @@
 			<xs:element name="time" type="DV_DATE_TIME" minOccurs="0"/>
 			<xs:element name="version_id" type="xs:string" minOccurs="0"/>
 		</xs:sequence>
-	</xs:complexType>
-
-	<xs:complexType name="Interval" abstract="true">
-		<xs:sequence>
-			<xs:element name="lower_included" type="xs:boolean" minOccurs="0"/>
-			<xs:element name="upper_included" type="xs:boolean" minOccurs="0"/>
-			<xs:element name="lower_unbounded" type="xs:boolean"/>
-			<xs:element name="upper_unbounded" type="xs:boolean"/>
-		</xs:sequence>
-	</xs:complexType>
-
-	<xs:complexType name="IntervalOfInteger">
-		<xs:complexContent>
-			<xs:extension base="Interval">
-				<xs:sequence>
-					<xs:element name="lower" type="xs:int" minOccurs="0"/>
-					<xs:element name="upper" type="xs:int" minOccurs="0"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:complexType name="IntervalOfReal">
-		<xs:complexContent>
-			<xs:extension base="Interval">
-				<xs:sequence>
-					<xs:element name="lower" type="xs:float" minOccurs="0"/>
-					<xs:element name="upper" type="xs:float" minOccurs="0"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="IntervalOfDate">
-		<xs:complexContent>
-			<xs:extension base="Interval">
-				<xs:sequence>
-					<xs:element name="lower" type="Iso8601Date" minOccurs="0"/>
-					<xs:element name="upper" type="Iso8601Date" minOccurs="0"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="IntervalOfDateTime">
-		<xs:complexContent>
-			<xs:extension base="Interval">
-				<xs:sequence>
-					<xs:element name="lower" type="Iso8601DateTime" minOccurs="0"/>
-					<xs:element name="upper" type="Iso8601DateTime" minOccurs="0"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="IntervalOfTime">
-		<xs:complexContent>
-			<xs:extension base="Interval">
-				<xs:sequence>
-					<xs:element name="lower" type="Iso8601Time" minOccurs="0"/>
-					<xs:element name="upper" type="Iso8601Time" minOccurs="0"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="IntervalOfDuration">
-		<xs:complexContent>
-			<xs:extension base="Interval">
-				<xs:sequence>
-					<xs:element name="lower" type="Iso8601Duration" minOccurs="0"/>
-					<xs:element name="upper" type="Iso8601Duration" minOccurs="0"/>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
 	</xs:complexType>
 </xs:schema>
