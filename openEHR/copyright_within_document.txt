@@ -1,5 +1,5 @@
 
-© Copyright openEHR Foundation 2001 - 2010
+© Copyright openEHR Foundation 2001 - 2011
 All Rights Reserved
 
 	1.	This document is protected by copyright and/or database right throughout the 
