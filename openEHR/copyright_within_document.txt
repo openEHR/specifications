@@ -1,5 +1,5 @@
 
-© Copyright openEHR Foundation 2001 - 2012
+© Copyright openEHR Foundation 2001 - 2013
 All Rights Reserved
 
 	1.	This document is protected by copyright and/or database right throughout the 
@@ -12,7 +12,7 @@ All Rights Reserved
 	4.	You must not alter, modify, add to or delete anything from the document you 
 		use (except as is permitted in paragraphs 2 and 3 above). 
 	5.	You shall, in any use of this document, include an acknowledgement in the form: 
-		"© Copyright openEHR Foundation 2001-2012. All rights reserved. www.openEHR.org" 
+		"© Copyright openEHR Foundation 2001-2013. All rights reserved. www.openEHR.org" 
 	6.	This document is being provided as a service to the academic community and on 
 		a non-commercial basis. Accordingly, to the fullest extent permitted under 
 		applicable law, the openEHR Foundation accepts no liability and offers no 
