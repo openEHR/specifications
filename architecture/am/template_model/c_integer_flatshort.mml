@@ -1,0 +1,600 @@
+<MML - MML filter from ISE EiffelStudio version 13.11.9.3542 GPL Edition - windows>
+<TabStops
+ <TabStop .5">
+ <TabStop 1">
+ <TabStop 1.5">
+ <TabStop 2">
+ <TabStop 2.5">
+ <TabStop 3">
+ <TabStop 3.5">
+ <TabStop 4">
+ <TabStop 4.5">
+ <TabStop 5">
+ <TabStop 5.5">
+>
+			Automatic generation produced by ISE Eiffel
+<italic><noitalic><bold>note<nobold><italic><HardSpace><par>
+<Tab><italic>component<noitalic>:<italic> "openEHR ADL Tools"<HardSpace><par>
+<Tab><italic>description<noitalic>:<italic> "Constrainer type for instances of INTEGER"<HardSpace><par>
+<Tab><italic>keywords<noitalic>:<italic> "archetype, integer"<HardSpace><par>
+<Tab><italic>author<noitalic>:<italic> "Thomas Beale \<thomas.beale@oceaninformatics.com\>"<HardSpace><par>
+<Tab><italic>support<noitalic>:<italic> "http://www.openehr.org/issues/browse/AWB"<HardSpace><par>
+<Tab><italic>copyright<noitalic>:<italic> "Copyright (c) 2000- Ocean Informatics Pty Ltd \<http://www.oceaninfomatics.com\>"<HardSpace><par>
+<Tab><italic>license<noitalic>:<italic> "Apache 2.0 License \<http://www.apache.org/licenses/LICENSE-2.0.html\>"<HardSpace><par>
+<HardSpace><par>
+<noitalic><bold>class<nobold><italic> <noitalic><bold>interface<nobold><italic><HardSpace><par>
+<Tab><italic>C_INTEGER<HardSpace><par>
+<HardSpace><par>
+<noitalic><bold>create<nobold><italic> <HardSpace><par>
+<Tab><italic>make <noitalic>(<italic>a_constraint<noitalic>:<italic> <noitalic><bold>like<nobold><italic> constraint<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_PRIMITIVE_OBJECT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>make_interval <noitalic>(<italic>an_interval<noitalic>:<italic> INTERVAL <noitalic>[<italic>INTEGER_32<noitalic>]<italic><noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> make single constraint with <italic>`an_interval'<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>C_ORDERED<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>constraint<bold>.<nobold>has<noitalic> <italic><noitalic>(<italic>an_interval<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>make_value <noitalic>(<italic>v<noitalic>:<italic> INTEGER_32<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>make_value_list <noitalic>(<italic>a_values<noitalic>:<italic> LIST <noitalic>[<italic>INTEGER_32<noitalic>]<italic><noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> make from a list of values<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>C_ORDERED<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>values_valid<noitalic>:<italic> <noitalic><bold>not<nobold><italic> a_values<bold>.<nobold>is_empty<HardSpace><par>
+<HardSpace><par>
+<Tab><italic>default_create<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> set <italic>rm_type_name<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> the same as the C_XX clas name with the "C_" removed, but for some types e.g. Date/time types<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> it is not true.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic> ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic><bold>True<nobold><italic><HardSpace><par>
+<HardSpace><par>
+<noitalic><bold>feature<nobold><italic> <noitalic>--<italic><noitalic> Access<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>aom_builtin_type<noitalic>:<italic> STRING_8<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> the same as the C_XX clas name with the "C_" removed, but for some types e.g. Date/time types<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> it is not true.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_PRIMITIVE_OBJECT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>assumed_value<noitalic>:<italic> <noitalic><bold>detachable<nobold><italic> INTEGER_32_REF<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> value to be assumed if none sent in data<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>constraint<noitalic>:<italic> ARRAYED_LIST <noitalic>[<italic>INTERVAL <noitalic>[<italic>INTEGER_32<noitalic>]<italic><noitalic>]<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> single constraint represented by this object; accommodates<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> single interval, multiple interval, list of single values, mixed values / intervals<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>generating_type<noitalic>:<italic> TYPE <noitalic>[<italic><noitalic><bold>detachable<nobold><italic> C_INTEGER<noitalic>]<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Type of current object<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> (type of which it is a direct instance)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>generating_type_not_void<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>generator<noitalic>:<italic> STRING_8<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Name of current object's generating class<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> (base class of the type of which it is a direct instance)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>generator_not_void<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>generator_not_empty<noitalic>:<italic> <noitalic><bold>not<nobold><italic> <noitalic><bold>Result<nobold><italic><bold>.<nobold>is_empty<HardSpace><par>
+<HardSpace><par>
+<Tab><italic>hash_code<noitalic>:<italic> INTEGER_32<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Hash code value<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>HASHABLE<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>good_hash_value<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic>\>=<italic> 0<HardSpace><par>
+<HardSpace><par>
+<Tab><italic>match_path<noitalic>:<italic> STRING_8<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> same as path but with final object_id removed<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_PRIMITIVE_OBJECT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>node_id<noitalic>:<italic> STRING_8<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>occurrences<noitalic>:<italic> <noitalic><bold>detachable<nobold><italic> MULTIPLICITY_INTERVAL<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>occurrences_key_string<noitalic>:<italic> STRING_8<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> generate a string of the form "_multiple", "_multiple_optional" or "_optional" or ""<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> representing the occurrences, useful as a key to variant pixmaps, files etc.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>parent<noitalic>:<italic> <noitalic><bold>detachable<nobold><italic> C_ATTRIBUTE<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>note<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>option: transient<HardSpace><par>
+<HardSpace><par>
+<Tab><italic>path<noitalic>:<italic> STRING_8<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> path to this object in the tree with respect to root<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>path_to_node <noitalic>(<italic>a_node<noitalic>:<italic> C_OBJECT<noitalic>)<italic><noitalic>:<italic> STRING_8<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> path from this node to <italic>`a_node'<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>prototype_value<noitalic>:<italic> INTEGER_32<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> 	generate a default value from this constraint object<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>rm_type_name<noitalic>:<italic> STRING_8<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> type name from reference model, of object to instantiate<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>sibling_order<noitalic>:<italic> <noitalic><bold>detachable<nobold><italic> SIBLING_ORDER<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> set if this node should be ordered with respect to an inherited sibling; only settable<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> on specialised nodes<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>soc_parent<noitalic>:<italic> <noitalic><bold>detachable<nobold><italic> C_2ND_ORDER<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>note<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>option: transient<HardSpace><par>
+<Tab><italic><HardSpace><par>
+<noitalic><bold>feature<nobold><italic> <noitalic>--<italic><noitalic> Comparison<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>c_conforms_to <noitalic>(<italic>other<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<noitalic>;<italic> rm_type_conformance_checker<noitalic>:<italic> FUNCTION <noitalic>[<italic>ANY<noitalic>,<italic> TUPLE <noitalic>[<italic>STRING_8<noitalic>,<italic> STRING_8<noitalic>]<italic><noitalic>,<italic> BOOLEAN<noitalic>]<italic><noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> True if this node is a strict subset of <italic>`other'<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic> ARCHETYPE_CONSTRAINT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic><bold>True<nobold><italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>c_congruent_to <noitalic>(<italic>other<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> True if this node is the same as <italic>`other'<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic> ARCHETYPE_CONSTRAINT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic><bold>True<nobold><italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><noitalic><bold>frozen<nobold><italic> deep_equal <noitalic>(<italic>a<noitalic>:<italic> <noitalic><bold>detachable<nobold><italic> ANY<noitalic>;<italic> b<noitalic>:<italic> <noitalic><bold>like<nobold><italic> arg #1<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Are <italic>`a'<noitalic> and <italic>`b'<noitalic> either both void<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> or attached to isomorphic object structures?<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>shallow_implies_deep<noitalic>:<italic> standard_equal<noitalic> <italic><noitalic>(<italic>a<noitalic>,<italic> b<noitalic>)<italic> <noitalic><bold>implies<nobold><italic> <noitalic><bold>Result<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>both_or_none_void<noitalic>:<italic> <noitalic>(<italic>a <noitalic>=<italic> <noitalic><bold>Void<nobold><italic><noitalic>)<italic> <noitalic><bold>implies<nobold><italic> <noitalic>(<italic><noitalic><bold>Result<nobold><italic> <noitalic>=<italic> <noitalic>(<italic>b <noitalic>=<italic> <noitalic><bold>Void<nobold><italic><noitalic>)<italic><noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>same_type<noitalic>:<italic> <noitalic>(<italic><noitalic><bold>Result<nobold><italic> <noitalic><bold>and<nobold><italic> <noitalic>(<italic>a <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><noitalic>)<italic><noitalic>)<italic> <noitalic><bold>implies<nobold><italic> <noitalic>(<italic>b <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic> <noitalic><bold>and then<nobold><italic> a<bold>.<nobold>same_type<noitalic> <italic><noitalic>(<italic>b<noitalic>)<italic><noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>symmetric<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic><bold>implies<nobold><italic> deep_equal<noitalic> <italic><noitalic>(<italic>b<noitalic>,<italic> a<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><noitalic><bold>frozen<nobold><italic> equal <noitalic>(<italic>a<noitalic>:<italic> <noitalic><bold>detachable<nobold><italic> ANY<noitalic>;<italic> b<noitalic>:<italic> <noitalic><bold>like<nobold><italic> arg #1<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Are <italic>`a'<noitalic> and <italic>`b'<noitalic> either both void or attached<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> to objects considered equal?<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>definition<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic>=<italic> <noitalic>(<italic>a <noitalic>=<italic> <noitalic><bold>Void<nobold><italic> <noitalic><bold>and<nobold><italic> b <noitalic>=<italic> <noitalic><bold>Void<nobold><italic><noitalic>)<italic> <noitalic><bold>or else<nobold><italic> <noitalic>(<italic><noitalic>(<italic>a <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic> <noitalic><bold>and<nobold><italic> b <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><noitalic>)<italic> <noitalic><bold>and then<nobold><italic> a<bold>.<nobold>is_equal<noitalic> <italic><noitalic>(<italic>b<noitalic>)<italic><noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><noitalic><bold>frozen<nobold><italic> is_deep_equal <noitalic>(<italic>other<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Are <italic>`Current'<noitalic> and <italic>`other'<noitalic> attached to isomorphic object structures?<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>other_not_void<noitalic>:<italic> other <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>shallow_implies_deep<noitalic>:<italic> standard_is_equal<noitalic> <italic><noitalic>(<italic>other<noitalic>)<italic> <noitalic><bold>implies<nobold><italic> <noitalic><bold>Result<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>same_type<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic><bold>implies<nobold><italic> same_type<noitalic> <italic><noitalic>(<italic>other<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>symmetric<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic><bold>implies<nobold><italic> other<bold>.<nobold>is_deep_equal<noitalic> <italic><noitalic>(<italic><noitalic><bold>Current<nobold><italic><noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>is_equal <noitalic>(<italic>other<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Is <italic>`other'<noitalic> attached to an object considered<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> equal to current object?<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>other_not_void<noitalic>:<italic> other <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>symmetric<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic><bold>implies<nobold><italic> other <noitalic>~<italic> <noitalic><bold>Current<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>consistent<noitalic>:<italic> standard_is_equal<noitalic> <italic><noitalic>(<italic>other<noitalic>)<italic> <noitalic><bold>implies<nobold><italic> <noitalic><bold>Result<nobold><italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>is_valid_constraint_code <noitalic>(<italic>a_code<noitalic>:<italic> STRING_8<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Is <italic>`a_code'<noitalic> a valid "ac" code?<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ADL_15_TERM_CODE_TOOLS<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>is_valid_id_code <noitalic>(<italic>a_code<noitalic>:<italic> STRING_8<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Is <italic>`a_code'<noitalic> a valid "id" code?<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ADL_15_TERM_CODE_TOOLS<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>is_valid_value_code <noitalic>(<italic>a_code<noitalic>:<italic> STRING_8<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Is <italic>`a_code'<noitalic> a valid "at" code?<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ADL_15_TERM_CODE_TOOLS<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>node_id_conforms_to <noitalic>(<italic>other<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> True if this node id conforms to other.node_id, which includes the ids being identical<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> <italic>`other'<noitalic> is assumed to be in a flat archetype<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>node_reuse_congruent <noitalic>(<italic>other<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> True if this node is the sole re-using node of the corresponding node in the flat<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>occurrences_conforms_to <noitalic>(<italic>other<noitalic>:<italic> C_OBJECT<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> True if this node occurrences conforms to other.occurrences; <italic>`other'<noitalic> is assumed to be in a flat archetype<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><noitalic><bold>frozen<nobold><italic> standard_equal <noitalic>(<italic>a<noitalic>:<italic> <noitalic><bold>detachable<nobold><italic> ANY<noitalic>;<italic> b<noitalic>:<italic> <noitalic><bold>like<nobold><italic> arg #1<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Are <italic>`a'<noitalic> and <italic>`b'<noitalic> either both void or attached to<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> field-by-field identical objects of the same type?<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Always uses default object comparison criterion.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>definition<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic>=<italic> <noitalic>(<italic>a <noitalic>=<italic> <noitalic><bold>Void<nobold><italic> <noitalic><bold>and<nobold><italic> b <noitalic>=<italic> <noitalic><bold>Void<nobold><italic><noitalic>)<italic> <noitalic><bold>or else<nobold><italic> <noitalic>(<italic><noitalic>(<italic>a <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic> <noitalic><bold>and<nobold><italic> b <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><noitalic>)<italic> <noitalic><bold>and then<nobold><italic> a<bold>.<nobold>standard_is_equal<noitalic> <italic><noitalic>(<italic>b<noitalic>)<italic><noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><noitalic><bold>frozen<nobold><italic> standard_is_equal <noitalic>(<italic>other<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Is <italic>`other'<noitalic> attached to an object of the same type<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> as current object, and field-by-field identical to it?<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>other_not_void<noitalic>:<italic> other <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>same_type<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic><bold>implies<nobold><italic> same_type<noitalic> <italic><noitalic>(<italic>other<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>symmetric<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic><bold>implies<nobold><italic> other<bold>.<nobold>standard_is_equal<noitalic> <italic><noitalic>(<italic><noitalic><bold>Current<nobold><italic><noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>valid_occurrences <noitalic>(<italic>occ<noitalic>:<italic> MULTIPLICITY_INTERVAL<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> check if <italic>`occ'<noitalic> is valid to be set as occurrences on this object<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><HardSpace><par>
+<noitalic><bold>feature<nobold><italic> <noitalic>--<italic><noitalic> Status report<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>conforms_to <noitalic>(<italic>other<noitalic>:<italic> ANY<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Does type of current object conform to type<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> of <italic>`other'<noitalic> (as per Eiffel: The Language, chapter 13)?<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>other_not_void<noitalic>:<italic> other <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>is_hashable<noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> May current object be hashed?<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> (True by default.)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>HASHABLE<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>is_leaf<noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> True if this node is a terminal node<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>is_path_compressible<noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> flag to indicate this node is in a specialised archetype and makes no structural changes<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> to the corresponding node in the flat parent, and therefore, this node can be compressed.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Note that congruent node_id definition is allowed, since node ids are not lost in paths.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>is_prohibited<noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> True if occurrences set to {0} i.e. prohibited<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>is_root<noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> True if this node is a top node<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>is_second_order_constrained<noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>same_type <noitalic>(<italic>other<noitalic>:<italic> ANY<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Is type of current object identical to type of <italic>`other'<noitalic>?<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>other_not_void<noitalic>:<italic> other <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>definition<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic>=<italic> <noitalic>(<italic>conforms_to<noitalic> <italic><noitalic>(<italic>other<noitalic>)<italic> <noitalic><bold>and<nobold><italic> other<bold>.<nobold>conforms_to<noitalic> <italic><noitalic>(<italic><noitalic><bold>Current<nobold><italic><noitalic>)<italic><noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>valid_archetype_id <noitalic>(<italic>an_id<noitalic>:<italic> STRING_8<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><HardSpace><par>
+<noitalic><bold>feature<nobold><italic> <noitalic>--<italic><noitalic> Duplication<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>copy <noitalic>(<italic>other<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Update current object using fields of object attached<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> to <italic>`other'<noitalic>, so as to yield equal objects.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>other_not_void<noitalic>:<italic> other <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>type_identity<noitalic>:<italic> same_type<noitalic> <italic><noitalic>(<italic>other<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>is_equal<noitalic>:<italic> <noitalic><bold>Current<nobold><italic> <noitalic>~<italic> other<HardSpace><par>
+<HardSpace><par>
+<Tab><italic><noitalic><bold>frozen<nobold><italic> deep_copy <noitalic>(<italic>other<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Effect equivalent to that of:<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic>		<italic>copy<noitalic> (<italic>`other'<noitalic> . <italic>deep_twin<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>other_not_void<noitalic>:<italic> other <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>deep_equal<noitalic>:<italic> deep_equal<noitalic> <italic><noitalic>(<italic><noitalic><bold>Current<nobold><italic><noitalic>,<italic> other<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><noitalic><bold>frozen<nobold><italic> deep_twin<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> New object structure recursively duplicated from Current.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>deep_twin_not_void<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>deep_equal<noitalic>:<italic> deep_equal<noitalic> <italic><noitalic>(<italic><noitalic><bold>Current<nobold><italic><noitalic>,<italic> <noitalic><bold>Result<nobold><italic><noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>safe_deep_twin<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> safe version of deep_twin that Voids <italic>parent<noitalic> first so as not to clone backwards up tree<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ARCHETYPE_CONSTRAINT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic><bold>Result<nobold><italic><bold>.<nobold>parent <noitalic>=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><noitalic><bold>frozen<nobold><italic> standard_copy <noitalic>(<italic>other<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Copy every field of <italic>`other'<noitalic> onto corresponding field<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> of current object.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>other_not_void<noitalic>:<italic> other <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>type_identity<noitalic>:<italic> same_type<noitalic> <italic><noitalic>(<italic>other<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>is_standard_equal<noitalic>:<italic> standard_is_equal<noitalic> <italic><noitalic>(<italic>other<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><noitalic><bold>frozen<nobold><italic> standard_twin<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> New object field-by-field identical to <italic>`other'<noitalic>.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Always uses default copying semantics.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>standard_twin_not_void<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>equal<noitalic>:<italic> standard_equal<noitalic> <italic><noitalic>(<italic><noitalic><bold>Result<nobold><italic><noitalic>,<italic> <noitalic><bold>Current<nobold><italic><noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><noitalic><bold>frozen<nobold><italic> twin<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> New object equal to <italic>`Current'<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> <italic>twin<noitalic> calls <italic>copy<noitalic>; to change copying/twinning semantics, redefine <italic>copy<noitalic>.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>twin_not_void<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>is_equal<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic>~<italic> <noitalic><bold>Current<nobold><italic><HardSpace><par>
+<Tab><italic><HardSpace><par>
+<noitalic><bold>feature<nobold><italic> <noitalic>--<italic><noitalic> Basic operations<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><noitalic><bold>frozen<nobold><italic> as_attached<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Attached version of Current<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> (Can be used during transitional period to convert<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> non-void-safe classes to void-safe ones.)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><noitalic><bold>frozen<nobold><italic> default<noitalic>:<italic> <noitalic><bold>detachable<nobold><italic> C_INTEGER<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Default value of object's type<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><noitalic><bold>frozen<nobold><italic> default_pointer<noitalic>:<italic> POINTER<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Default value of type <italic>`POINTER'<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> (Avoid the need to write <italic>`p'<noitalic>.<italic>default<noitalic> for<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> some <italic>`p'<noitalic> of type <italic>`POINTER'<noitalic>.)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>default_rescue<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Process exception for routines with no Rescue clause.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> (Default: do nothing.)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><noitalic><bold>frozen<nobold><italic> do_nothing<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Execute a null action.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><HardSpace><par>
+<noitalic><bold>feature<nobold><italic> <noitalic>--<italic><noitalic> Initialisaiton<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>make <noitalic>(<italic>a_constraint<noitalic>:<italic> <noitalic><bold>like<nobold><italic> constraint<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_PRIMITIVE_OBJECT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><HardSpace><par>
+<noitalic><bold>feature<nobold><italic> <noitalic>--<italic><noitalic> Initialisation<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>default_create<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> set <italic>rm_type_name<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> the same as the C_XX clas name with the "C_" removed, but for some types e.g. Date/time types<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> it is not true.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic> ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic><bold>True<nobold><italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>make_interval <noitalic>(<italic>an_interval<noitalic>:<italic> INTERVAL <noitalic>[<italic>INTEGER_32<noitalic>]<italic><noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> make single constraint with <italic>`an_interval'<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>C_ORDERED<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>constraint<bold>.<nobold>has<noitalic> <italic><noitalic>(<italic>an_interval<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>make_value <noitalic>(<italic>v<noitalic>:<italic> INTEGER_32<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>make_value_list <noitalic>(<italic>a_values<noitalic>:<italic> LIST <noitalic>[<italic>INTEGER_32<noitalic>]<italic><noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> make from a list of values<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>C_ORDERED<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>values_valid<noitalic>:<italic> <noitalic><bold>not<nobold><italic> a_values<bold>.<nobold>is_empty<HardSpace><par>
+<Tab><italic><HardSpace><par>
+<noitalic><bold>feature<nobold><italic> <noitalic>--<italic><noitalic> Modification<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>add_interval <noitalic>(<italic>an_interval<noitalic>:<italic> INTERVAL <noitalic>[<italic>INTEGER_32<noitalic>]<italic><noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>add_value <noitalic>(<italic>a_val<noitalic>:<italic> INTEGER_32<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>overlay_differential <noitalic>(<italic>other<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> C_INTEGER<noitalic>;<italic> rm_type_conformance_checker<noitalic>:<italic> FUNCTION <noitalic>[<italic>ANY<noitalic>,<italic> TUPLE <noitalic>[<italic>STRING_8<noitalic>,<italic> STRING_8<noitalic>]<italic><noitalic>,<italic> BOOLEAN<noitalic>]<italic><noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> apply any differences from <italic>`other'<noitalic> to this object node including:<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> 	node_id<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> 	overridden rm_type_name<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> 	occurrences<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Current is assumed to be in a flat archetype<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>C_OBJECT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>other_valid<noitalic>:<italic> other<bold>.<nobold>c_conforms_to<noitalic> <italic><noitalic>(<italic><noitalic><bold>Current<nobold><italic><noitalic>,<italic> rm_type_conformance_checker<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>remove_occurrences<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>C_OBJECT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>occurrences <noitalic>=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>set_assumed_value <noitalic>(<italic>a_value<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> <noitalic><bold>like<nobold><italic> assumed_value<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> set <italic>assumed_value<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_PRIMITIVE_OBJECT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>C_PRIMITIVE_OBJECT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>valid_assumed_value<noitalic> <italic><noitalic>(<italic>a_value<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>C_PRIMITIVE_OBJECT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>assumed_value_set<noitalic>:<italic> assumed_value <noitalic>=<italic> a_value<HardSpace><par>
+<HardSpace><par>
+<Tab><italic>set_is_path_compressible<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> set <italic>is_path_compressible<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>set_node_id <noitalic>(<italic>an_object_id<noitalic>:<italic> STRING_8<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>C_OBJECT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>object_id_valid<noitalic>:<italic> <noitalic><bold>not<nobold><italic> an_object_id<bold>.<nobold>is_empty<HardSpace><par>
+<HardSpace><par>
+<Tab><italic>set_occurrences <noitalic>(<italic>occ<noitalic>:<italic> MULTIPLICITY_INTERVAL<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>C_OBJECT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>occurrences_valid<noitalic>:<italic> valid_occurrences<noitalic> <italic><noitalic>(<italic>occ<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>C_OBJECT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>occurrences <noitalic>=<italic> occ<HardSpace><par>
+<HardSpace><par>
+<Tab><italic>set_rm_type_name <noitalic>(<italic>a_name<noitalic>:<italic> STRING_8<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>set_sibling_order <noitalic>(<italic>a_sibling_order<noitalic>:<italic> SIBLING_ORDER<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> set sibling order<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>C_OBJECT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>sibling_order_set<noitalic>:<italic> sibling_order <noitalic>=<italic> a_sibling_order<HardSpace><par>
+<HardSpace><par>
+<Tab><italic>set_sibling_order_after <noitalic>(<italic>a_node_id<noitalic>:<italic> STRING_8<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> set sibling order of this node to be after the inherited sibling node with id a_node_id<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>C_OBJECT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>sibling_order_set<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> sibling_order <noitalic><bold>as<nobold><italic> sib_ord <noitalic><bold>and then<nobold><italic> <noitalic>(<italic>sib_ord<bold>.<nobold>is_after <noitalic><bold>and<nobold><italic> sib_ord<bold>.<nobold>sibling_node_id<bold>.<nobold>is_equal<noitalic> <italic><noitalic>(<italic>a_node_id<noitalic>)<italic><noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>set_sibling_order_before <noitalic>(<italic>a_node_id<noitalic>:<italic> STRING_8<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> set sibling order of this node to be before the inherited sibling node with id a_node_id<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>C_OBJECT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic><bold>not<nobold><italic> a_node_id<bold>.<nobold>is_empty<HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>C_OBJECT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>sibling_order_set<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> sibling_order <noitalic><bold>as<nobold><italic> sib_ord <noitalic><bold>and then<nobold><italic> <noitalic>(<italic>sib_ord<bold>.<nobold>is_before <noitalic><bold>and<nobold><italic> sib_ord<bold>.<nobold>sibling_node_id<bold>.<nobold>is_equal<noitalic> <italic><noitalic>(<italic>a_node_id<noitalic>)<italic><noitalic>)<italic><HardSpace><par>
+<Tab><italic><HardSpace><par>
+<noitalic><bold>feature<nobold><italic> <noitalic>--<italic><noitalic> Output<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>as_string<noitalic>:<italic> STRING_8<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> generate <italic>constraint<noitalic> as string<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>Io<noitalic>:<italic> STD_FILES<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Handle to standard file setup<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>io_not_void<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>occurrences_as_string<noitalic>:<italic> STRING_8<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> output string representing <italic>occurrences<noitalic>, even if occurrences is Void<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_OBJECT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>out<noitalic>:<italic> STRING_8<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> New string containing terse printable representation<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> of current object<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_PRIMITIVE_OBJECT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>out_not_void<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>print <noitalic>(<italic>o<noitalic>:<italic> <noitalic><bold>detachable<nobold><italic> ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Write terse external representation of <italic>`o'<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> on standard output.<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><noitalic><bold>frozen<nobold><italic> tagged_out<noitalic>:<italic> STRING_8<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> New string containing terse printable representation<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> of current object<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>tagged_out_not_void<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<Tab><italic><HardSpace><par>
+<noitalic><bold>feature<nobold><italic> <noitalic>--<italic><noitalic> Platform<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>Operating_environment<noitalic>:<italic> OPERATING_ENVIRONMENT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> Objects available from the operating system<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ANY<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>ensure<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>operating_environment_not_void<noitalic>:<italic> <noitalic><bold>Result<nobold><italic> <noitalic>/=<italic> <noitalic><bold>Void<nobold><italic><HardSpace><par>
+<Tab><italic><HardSpace><par>
+<noitalic><bold>feature<nobold><italic> <noitalic>--<italic><noitalic> Representation<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>representation<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> <noitalic><bold>like<nobold><italic> representation_cache<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><HardSpace><par>
+<noitalic><bold>feature<nobold><italic> <noitalic>--<italic><noitalic> Source Control<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>rolled_up_specialisation_status<noitalic>:<italic> INTEGER_32<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> status of this node taking into consideration effective_specialisation_status of<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> all sub-nodes. Used to roll up nodes on visualisation, and also to decide which<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> subtree to remove to convert an archetype to differential form<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>note<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>option: transient<HardSpace><par>
+<HardSpace><par>
+<Tab><italic>set_rolled_up_specialisation_status <noitalic>(<italic>a_status<noitalic>:<italic> INTEGER_32<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> USED ONLY FOR DIFFing legacy flat form into differential form<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ARCHETYPE_CONSTRAINT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>valid_specialisation_status<noitalic>:<italic> valid_specialisation_status<noitalic> <italic><noitalic>(<italic>a_status<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>set_specialisation_status <noitalic>(<italic>a_spec_status<noitalic>:<italic> INTEGER_32<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>ARCHETYPE_CONSTRAINT<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>valid_specialisation_status<noitalic> <italic><noitalic>(<italic>a_spec_status<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>set_specialisation_status_added<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>set_specialisation_status_inherited<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>set_specialisation_status_redefined<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>specialisation_status<noitalic>:<italic> INTEGER_32<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> status of this node in the source text of this archetype with respect to the<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> specialisation hierarchy. Determined from initial parse, and subsequent editing on structure<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>ARCHETYPE_CONSTRAINT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>note<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>option: transient<HardSpace><par>
+<Tab><italic><HardSpace><par>
+<noitalic><bold>feature<nobold><italic> <noitalic>--<italic><noitalic> Status Report<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>has_assumed_value<noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> True if there is an assumed value<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_PRIMITIVE_OBJECT<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>valid_assumed_value <noitalic>(<italic>a_value<noitalic>:<italic> INTEGER_32_REF<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<HardSpace><par>
+<Tab><italic>valid_specialisation_status <noitalic>(<italic>a_status<noitalic>:<italic> INTEGER_32<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> True if a_status is a valid source status<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>SPECIALISATION_STATUSES<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>valid_value <noitalic>(<italic>a_value<noitalic>:<italic> INTEGER_32<noitalic>)<italic><noitalic>:<italic> BOOLEAN<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_ORDERED<noitalic>)<italic><HardSpace><par>
+<Tab><italic><HardSpace><par>
+<noitalic><bold>feature<nobold><italic> <noitalic>--<italic><noitalic> Visitor<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic>enter_subtree <noitalic>(<italic>visitor<noitalic>:<italic> C_VISITOR<noitalic>;<italic> depth<noitalic>:<italic> INTEGER_32<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> perform action at start of block for this node<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_PRIMITIVE_OBJECT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>VISITABLE<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>depth_valid<noitalic>:<italic> depth <noitalic>\>=<italic> 0<HardSpace><par>
+<HardSpace><par>
+<Tab><italic>exit_subtree <noitalic>(<italic>visitor<noitalic>:<italic> C_VISITOR<noitalic>;<italic> depth<noitalic>:<italic> INTEGER_32<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic><noitalic> perform action at end of block for this node<italic><HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>(from <italic>C_PRIMITIVE_OBJECT<noitalic>)<italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic><bold>require<nobold><italic> <noitalic>--<italic> <noitalic>from <italic>VISITABLE<HardSpace><par>
+<Tab><italic><Tab><italic><Tab><italic>depth_valid<noitalic>:<italic> depth <noitalic>\>=<italic> 0<HardSpace><par>
+<Tab><italic><HardSpace><par>
+<noitalic><bold>invariant<nobold><italic><HardSpace><par>
+<Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>from <italic>C_PRIMITIVE_OBJECT<HardSpace><par>
+<Tab><italic>assumed_value_valid<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> assumed_value <noitalic><bold>as<nobold><italic> av <noitalic><bold>implies<nobold><italic> valid_value<noitalic> <italic><noitalic>(<italic>av<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>from <italic>C_OBJECT<HardSpace><par>
+<Tab><italic>rm_type_name_valid<noitalic>:<italic> <noitalic><bold>not<nobold><italic> rm_type_name<bold>.<nobold>is_empty<HardSpace><par>
+<Tab><italic>occurrences_validity<noitalic>:<italic> <noitalic><bold>attached<nobold><italic> occurrences <noitalic><bold>as<nobold><italic> occ <noitalic><bold>implies<nobold><italic> valid_occurrences<noitalic> <italic><noitalic>(<italic>occ<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>from <italic>ARCHETYPE_CONSTRAINT<HardSpace><par>
+<Tab><italic>specialisation_status_validity<noitalic>:<italic> valid_specialisation_status<noitalic> <italic><noitalic>(<italic>specialisation_status<noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<Tab><italic><Tab><italic><noitalic>--<italic> <noitalic>from <italic>ANY<HardSpace><par>
+<Tab><italic>reflexive_equality<noitalic>:<italic> standard_is_equal<noitalic> <italic><noitalic>(<italic><noitalic><bold>Current<nobold><italic><noitalic>)<italic><HardSpace><par>
+<Tab><italic>reflexive_conformance<noitalic>:<italic> conforms_to<noitalic> <italic><noitalic>(<italic><noitalic><bold>Current<nobold><italic><noitalic>)<italic><HardSpace><par>
+<HardSpace><par>
+<noitalic><bold>end<nobold><italic> <noitalic>--<italic> <noitalic>class <italic>C_INTEGER<HardSpace><par>
+<Tab><Tab><Tab>-- Generated by ISE Eiffel --<noitalic><HardSpace><par>
+<Tab><Tab><Tab>For more details: http://www.eiffel.com
+<HardSpace><par>
