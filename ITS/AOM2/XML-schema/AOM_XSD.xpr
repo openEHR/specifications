@@ -5,6 +5,7 @@
         <options/>
     </meta>
     <projectTree name="AOM_XSD.xpr">
+        <folder path="examples/"/>
         <file name="Archetype.xsd"/>
         <file name="ArchetypeCommon.xsd"/>
         <file name="BaseTypes.xsd"/>

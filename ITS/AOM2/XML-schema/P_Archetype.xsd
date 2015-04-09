@@ -15,9 +15,9 @@
 	<!-- elements and attributes needed in P_ARCHETYPE and P_AUTHORED_ARCHETYPE -->
 	<xs:group name="pArchetypeElements">
 		<xs:sequence>
+			<xs:element name="artefact_type" type="xs:string"/>
 			<xs:element name="archetype_id" type="P_ARCHETYPE_HRID"/>
 			<xs:element name="parent_archetype_id" type="xs:string" minOccurs="0"/>
-			<xs:element name="artefact_type" type="xs:string"/>
 			<xs:element name="definition" type="P_C_COMPLEX_OBJECT"/>
 			<xs:element name="rules" type="RULE_STATEMENT" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="terminology" type="P_ARCHETYPE_TERMINOLOGY"/>
@@ -28,7 +28,7 @@
 	</xs:attributeGroup>
 
 	<!-- Root type -->
-	<xs:complexType name="P_ARCHETYPE" abstract="true">
+	<xs:complexType name="P_ARCHETYPE">
 		<xs:sequence>
 			<xs:group ref="pArchetypeElements"/>
 		</xs:sequence>
@@ -101,7 +101,7 @@
 		</xs:complexContent>
 	</xs:complexType>
 
-	<xs:complexType name="P_C_ATTRIBUTE" abstract="true">
+	<xs:complexType name="P_C_ATTRIBUTE">
 		<xs:complexContent>
 			<xs:extension base="P_ARCHETYPE_CONSTRAINT">
 				<xs:sequence>
@@ -160,8 +160,7 @@
 	<xs:complexType name="P_C_PRIMITIVE_OBJECT">
 		<xs:complexContent>
 			<xs:extension base="P_C_DEFINED_OBJECT">
-				<xs:attribute name="is_enumerated_type_constraint" type="xs:boolean" use="optional"
-				/>
+				<xs:attribute name="is_enumerated_type_constraint" type="xs:boolean" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
