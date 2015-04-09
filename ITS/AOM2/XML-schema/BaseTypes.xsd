@@ -72,12 +72,10 @@
 	</xs:simpleType>
 
 	<xs:complexType name="Interval" abstract="true">
-		<xs:sequence>
-			<xs:element name="lower_included" type="xs:boolean" minOccurs="0"/>
-			<xs:element name="upper_included" type="xs:boolean" minOccurs="0"/>
-			<xs:element name="lower_unbounded" type="xs:boolean"/>
-			<xs:element name="upper_unbounded" type="xs:boolean"/>
-		</xs:sequence>
+		<xs:attribute name="lower_included" type="xs:boolean" use="optional"/>
+		<xs:attribute name="upper_included" type="xs:boolean" use="optional"/>
+		<xs:attribute name="lower_unbounded" type="xs:boolean" use="optional"/>
+		<xs:attribute name="upper_unbounded" type="xs:boolean" use="optional"/>
 	</xs:complexType>
 	
 	<xs:complexType name="IntervalOfInteger">

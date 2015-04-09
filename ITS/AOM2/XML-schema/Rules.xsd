@@ -15,43 +15,39 @@
 	<xs:complexType name="ASSERTION">
 		<xs:complexContent>
 			<xs:extension base="RULE_STATEMENT">
-			<xs:sequence>
-				<xs:element name="tag" type="xs:string" minOccurs="0"/>
-				<xs:element name="string_expression" type="xs:string" minOccurs="0"/>
-				<xs:element name="expression" type="EXPR_ITEM"/>
-				<xs:element name="variables" type="ASSERTION_VARIABLE" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-		</xs:extension>
+				<xs:sequence>
+					<xs:element name="string_expression" type="xs:string" minOccurs="0"/>
+					<xs:element name="expression" type="EXPR_ITEM"/>
+					<xs:element name="variables" type="ASSERTION_VARIABLE" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="tag" type="xs:string" use="optional"/>
+			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="EXPR_ITEM" abstract="true">
-		<xs:sequence>
-			<xs:element name="type" type="xs:string"/>
-		</xs:sequence>
+		<xs:attribute name="type" type="xs:string"/>
 	</xs:complexType>
 	<xs:complexType name="ASSERTION_VARIABLE">
 		<xs:sequence>
-			<xs:element name="name" type="xs:string"/>
 			<xs:element name="definition" type="xs:string"/>
 		</xs:sequence>
+		<xs:attribute name="name" type="xs:string"/>
 	</xs:complexType>
 	<xs:complexType name="EXPR_LEAF">
 		<xs:complexContent>
 			<xs:extension base="EXPR_ITEM">
 				<xs:sequence>
 					<xs:element name="item" type="xs:anyType"/>
-					<xs:element name="reference_type" type="xs:string"/>
 				</xs:sequence>
+				<xs:attribute name="reference_type" type="xs:string"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="EXPR_OPERATOR" abstract="true">
 		<xs:complexContent>
 			<xs:extension base="EXPR_ITEM">
-				<xs:sequence>
-					<xs:element name="operator" type="OPERATOR_KIND"/>
-					<xs:element name="precedence_overridden" type="xs:boolean"/>
-				</xs:sequence>
+				<xs:attribute name="operator" type="OPERATOR_KIND"/>
+				<xs:attribute name="precedence_overridden" type="xs:boolean"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
