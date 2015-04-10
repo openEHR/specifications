@@ -70,17 +70,11 @@
 	
 	<xs:complexType name="TermBindingSet">
 		<xs:sequence>
-			<xs:element name="items" type="TermBindingItem" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="items" type="StringDictionaryItem" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:string" use="required"/>
 	</xs:complexType>
-	
-	<xs:complexType name="TermBindingItem">
-		<xs:sequence>
-			<xs:element name="value" type="xs:string"/>
-		</xs:sequence>
-		<xs:attribute name="id" type="xs:string" use="required"/>
-	</xs:complexType>
+
 	
 	<xs:complexType name="VALUE_SET">
 		<xs:sequence>

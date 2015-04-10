@@ -146,6 +146,7 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	
 	<xs:complexType name="StringDictionaryItem">
 		<xs:simpleContent>
 			<xs:extension base="xs:string">
@@ -153,7 +154,7 @@
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
-
+	
 	<xs:simpleType name="VALIDITY_KIND">
 		<xs:restriction base="xs:integer">
 			<xs:enumeration value="1001" id="mandatory"/>

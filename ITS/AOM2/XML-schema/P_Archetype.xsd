@@ -10,18 +10,18 @@
 	<xs:include schemaLocation="ArchetypeCommon.xsd"/>
 
 	<!-- Entry point -->
-	<xs:element name="archetype" type="P_ARCHETYPE"/>
+	<xs:element name="archetype" type="P_AUTHORED_ARCHETYPE"/>
 
 	<!-- elements and attributes needed in P_ARCHETYPE and P_AUTHORED_ARCHETYPE -->
 	<xs:group name="pArchetypeElements">
-		<xs:sequence>
+		<xs:all>
 			<xs:element name="artefact_type" type="xs:string"/>
 			<xs:element name="archetype_id" type="P_ARCHETYPE_HRID"/>
 			<xs:element name="parent_archetype_id" type="xs:string" minOccurs="0"/>
 			<xs:element name="definition" type="P_C_COMPLEX_OBJECT"/>
 			<xs:element name="rules" type="RULE_STATEMENT" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="terminology" type="P_ARCHETYPE_TERMINOLOGY"/>
-		</xs:sequence>
+		</xs:all>
 	</xs:group>
 	<xs:attributeGroup name="pArchetypeAttributes">
 		<xs:attribute name="is_generated" type="xs:boolean" use="optional"/>
@@ -29,9 +29,9 @@
 
 	<!-- Root type -->
 	<xs:complexType name="P_ARCHETYPE">
-		<xs:sequence>
+		<xs:all>
 			<xs:group ref="pArchetypeElements"/>
-		</xs:sequence>
+		</xs:all>
 		<xs:attributeGroup ref="pArchetypeAttributes"/>
 	</xs:complexType>
 
@@ -50,23 +50,23 @@
 	</xs:complexType>
 
 	<xs:complexType name="P_AUTHORED_RESOURCE" abstract="true">
-		<xs:sequence>
+		<xs:all>
 			<xs:element name="uid" type="xs:string" minOccurs="0"/>
 			<xs:element name="original_language" type="xs:string"/>
 			<xs:element name="is_controlled" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="description" type="RESOURCE_DESCRIPTION" minOccurs="0"/>
 			<xs:element name="translations" type="TRANSLATION_DETAILS" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="annotations" type="AnnotationSet" minOccurs="0" maxOccurs="unbounded"/>
-		</xs:sequence>
+		</xs:all>
 	</xs:complexType>
 
 	<xs:complexType name="P_AUTHORED_ARCHETYPE">
 		<xs:complexContent>
 			<xs:extension base="P_AUTHORED_RESOURCE">
-				<xs:sequence>
+				<xs:all>
 					<xs:group ref="pArchetypeElements"/>
 					<xs:element name="other_metadata" type="StringDictionaryItem" minOccurs="0" maxOccurs="unbounded"/>
-				</xs:sequence>
+				</xs:all>
 				<xs:attributeGroup ref="pArchetypeAttributes"/>
 				<xs:attribute name="rm_release" type="xs:string"/>
 				<xs:attribute name="adl_version" type="xs:string"/>

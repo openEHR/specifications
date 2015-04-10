@@ -2,7 +2,7 @@
 <archetype xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://schemas.openehr.org/v1 ../P_Archetype.xsd"
  xmlns="http://schemas.openehr.org/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
- xmlns:im="http://www.openehr.org/1.0.2">
+ xmlns:im="http://www.openehr.org/1.0.2" is_generated="true" adl_version="2.0.5" rm_release="1.0.2">
  <artefact_type>archetype</artefact_type>
  <archetype_id rm_publisher="openEHR" rm_package="EHR" rm_class="OBSERVATION" release_version="1.0.0" version_status="0" build_count="0" physical_id="openEHR-EHR-OBSERVATION.apgar.v1.0.0">
   <concept_id>apgar</concept_id>
@@ -1782,8 +1782,6 @@
    <members>at25</members>
   </value_sets>
  </terminology>
- <adl_version>2.0.5</adl_version>
- <rm_release>1.0.2</rm_release>
  <original_language>ISO_639-1::en</original_language>
  <translations id="de">
   <language>ISO_639-1::de</language>
@@ -2060,6 +2058,5 @@ Whaley LF, Wong DL (1979).  Nursing Care of Infants and Children.  St. Louis, To
 http://en.wikipedia.org/wiki/Apgar_score</other_details>
   <other_details id="MD5-CAM-1.0.1">64776EEFF6F38F5C3799A0DA31545453</other_details>
  </description>
- <is_generated>true</is_generated>
  <is_controlled>false</is_controlled>
 </archetype>
