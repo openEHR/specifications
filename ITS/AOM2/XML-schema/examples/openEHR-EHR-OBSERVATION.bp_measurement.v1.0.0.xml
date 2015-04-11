@@ -170,10 +170,9 @@
           </attributes>
          </children>
          <children xsi:type="P_ARCHETYPE_SLOT" node_id="id1031" rm_type_name="CLUSTER" occurrences="0..1" is_deprecated="false" is_closed="false">
-          <includes xsi:type="ASSERTION" type="Boolean">
+          <includes type="Boolean">
            <expression xsi:type="EXPR_BINARY_OPERATOR" type="Boolean" precedence_overridden="false">
-            <operator>
-             <value>2007</value>
+            <operator value="2007">
             </operator>
             <left_operand xsi:type="EXPR_LEAF" type="String" reference_type="attribute">
              <item>archetype_id/value</item>
@@ -337,10 +336,9 @@
       </attributes>
      </children>
      <children xsi:type="P_ARCHETYPE_SLOT" node_id="id1026" rm_type_name="CLUSTER" occurrences="0..1" is_deprecated="false" is_closed="false">
-      <includes xsi:type="ASSERTION" type="Boolean">
+      <includes type="Boolean">
        <expression xsi:type="EXPR_BINARY_OPERATOR" type="Boolean" precedence_overridden="false">
-        <operator>
-         <value>2007</value>
+        <operator value="2007">
         </operator>
         <left_operand xsi:type="EXPR_LEAF" type="String" reference_type="attribute">
          <item>archetype_id/value</item>

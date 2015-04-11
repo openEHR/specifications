@@ -9,14 +9,14 @@
 	<xs:include schemaLocation="BaseTypes.xsd"/>
 	
 	<xs:complexType name="AUTHORED_RESOURCE" abstract="true">
-		<xs:all>
+		<xs:choice maxOccurs="unbounded">
 			<xs:element name="original_language" type="TERMINOLOGY_CODE"/>
 			<xs:element name="is_controlled" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="description" type="RESOURCE_DESCRIPTION" minOccurs="0"/>
 			<xs:element name="translations" type="TRANSLATION_DETAILS" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="uid" type="Uid" minOccurs="0"/>
 			<xs:element name="annotations" type="AnnotationSet" minOccurs="0" maxOccurs="unbounded"/>
-		</xs:all>
+		</xs:choice>
 	</xs:complexType>
 	<xs:complexType name="AnnotationSet">
 		<xs:sequence>
@@ -24,17 +24,17 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="TRANSLATION_DETAILS">
-		<xs:all>
+		<xs:choice maxOccurs="unbounded">
 			<xs:element name="language" type="xs:string"/>
 			<xs:element name="author" type="StringDictionaryItem" minOccurs="1"	maxOccurs="unbounded"/>
 			<xs:element name="accreditation" type="xs:string" minOccurs="0"/>
 			<xs:element name="other_details" type="StringDictionaryItem" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="version_last_translated" type="xs:string" minOccurs="0"/>
-		</xs:all>
+		</xs:choice>
 		<xs:attribute name="id" type="xs:string" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="RESOURCE_DESCRIPTION">
-		<xs:all>
+		<xs:choice maxOccurs="unbounded">
 			<xs:element name="lifecycle_state" type="xs:string"/>
 			<xs:element name="custodian_namespace" type="xs:string" minOccurs="0"/>
 			<xs:element name="custodian_organisation" type="xs:string" minOccurs="0"/>
@@ -49,10 +49,10 @@
 			<xs:element name="references" type="StringDictionaryItem" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="other_details" type="StringDictionaryItem" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="details" type="RESOURCE_DESCRIPTION_ITEM" maxOccurs="unbounded"/>
-		</xs:all>
+		</xs:choice>
 	</xs:complexType>
 	<xs:complexType name="RESOURCE_DESCRIPTION_ITEM">
-		<xs:all>
+		<xs:choice  maxOccurs="unbounded">
 			<xs:element name="language" type="xs:string"/>
 			<xs:element name="purpose" type="xs:string"/>
 			<xs:element name="use" type="xs:string" minOccurs="0"/>
@@ -60,7 +60,7 @@
 			<xs:element name="keywords" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="original_resource_uri" type="StringDictionaryItem" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="other_details" type="StringDictionaryItem" minOccurs="0" maxOccurs="unbounded"/>
-		</xs:all>
+		</xs:choice>
 		<xs:attribute name="id" type="xs:string"/>
 	</xs:complexType>
 </xs:schema>

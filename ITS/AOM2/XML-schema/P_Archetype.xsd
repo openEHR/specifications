@@ -14,14 +14,14 @@
 
 	<!-- elements and attributes needed in P_ARCHETYPE and P_AUTHORED_ARCHETYPE -->
 	<xs:group name="pArchetypeElements">
-		<xs:all>
+		<xs:choice>
 			<xs:element name="artefact_type" type="xs:string"/>
 			<xs:element name="archetype_id" type="P_ARCHETYPE_HRID"/>
 			<xs:element name="parent_archetype_id" type="xs:string" minOccurs="0"/>
 			<xs:element name="definition" type="P_C_COMPLEX_OBJECT"/>
 			<xs:element name="rules" type="RULE_STATEMENT" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="terminology" type="P_ARCHETYPE_TERMINOLOGY"/>
-		</xs:all>
+		</xs:choice>
 	</xs:group>
 	<xs:attributeGroup name="pArchetypeAttributes">
 		<xs:attribute name="is_generated" type="xs:boolean" use="optional"/>
@@ -29,9 +29,9 @@
 
 	<!-- Root type -->
 	<xs:complexType name="P_ARCHETYPE">
-		<xs:all>
+		<xs:choice maxOccurs="unbounded">
 			<xs:group ref="pArchetypeElements"/>
-		</xs:all>
+		</xs:choice>
 		<xs:attributeGroup ref="pArchetypeAttributes"/>
 	</xs:complexType>
 
@@ -49,29 +49,26 @@
 		<xs:attribute name="physical_id" type="xs:string"/>
 	</xs:complexType>
 
-	<xs:complexType name="P_AUTHORED_RESOURCE" abstract="true">
-		<xs:all>
+	<xs:group name="P_AUTHORED_RESOURCE">
+		<xs:choice>
 			<xs:element name="uid" type="xs:string" minOccurs="0"/>
 			<xs:element name="original_language" type="xs:string"/>
 			<xs:element name="is_controlled" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="description" type="RESOURCE_DESCRIPTION" minOccurs="0"/>
 			<xs:element name="translations" type="TRANSLATION_DETAILS" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="annotations" type="AnnotationSet" minOccurs="0" maxOccurs="unbounded"/>
-		</xs:all>
-	</xs:complexType>
+		</xs:choice>
+	</xs:group>
 
 	<xs:complexType name="P_AUTHORED_ARCHETYPE">
-		<xs:complexContent>
-			<xs:extension base="P_AUTHORED_RESOURCE">
-				<xs:all>
-					<xs:group ref="pArchetypeElements"/>
-					<xs:element name="other_metadata" type="StringDictionaryItem" minOccurs="0" maxOccurs="unbounded"/>
-				</xs:all>
-				<xs:attributeGroup ref="pArchetypeAttributes"/>
-				<xs:attribute name="rm_release" type="xs:string"/>
-				<xs:attribute name="adl_version" type="xs:string"/>
-			</xs:extension>
-		</xs:complexContent>
+		<xs:choice maxOccurs="unbounded">
+			<xs:group ref="P_AUTHORED_RESOURCE"/>
+			<xs:group ref="pArchetypeElements"/>
+			<xs:element name="other_metadata" type="StringDictionaryItem" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+		<xs:attributeGroup ref="pArchetypeAttributes"/>
+		<xs:attribute name="rm_release" type="xs:string"/>
+		<xs:attribute name="adl_version" type="xs:string"/>
 	</xs:complexType>
 
 	<xs:complexType name="P_ARCHETYPE_CONSTRAINT" abstract="true">
@@ -149,8 +146,7 @@
 			<xs:extension base="P_C_OBJECT">
 				<xs:sequence>
 					<xs:element name="includes" type="ASSERTION" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element name="excludes" type="ASSERTION" minOccurs="0" maxOccurs="unbounded"
-					/>
+					<xs:element name="excludes" type="ASSERTION" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 				<xs:attribute name="is_closed" type="xs:boolean" use="optional"/>
 			</xs:extension>
