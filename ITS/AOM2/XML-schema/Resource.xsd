@@ -18,11 +18,14 @@
 			<xs:element name="annotations" type="AnnotationSet" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:choice>
 	</xs:complexType>
+	
 	<xs:complexType name="AnnotationSet">
 		<xs:sequence>
 			<xs:element name="items" type="StringDictionaryItem" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
 	</xs:complexType>
+	
 	<xs:complexType name="TRANSLATION_DETAILS">
 		<xs:choice maxOccurs="unbounded">
 			<xs:element name="language" type="xs:string"/>

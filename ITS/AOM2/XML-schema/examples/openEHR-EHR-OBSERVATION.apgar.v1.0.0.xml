@@ -7,15 +7,15 @@
  <archetype_id rm_publisher="openEHR" rm_package="EHR" rm_class="OBSERVATION" release_version="1.0.0" version_status="0" build_count="0" physical_id="openEHR-EHR-OBSERVATION.apgar.v1.0.0">
   <concept_id>apgar</concept_id>
  </archetype_id>
- <definition xsi:type="P_C_COMPLEX_OBJECT" node_id="id1" rm_type_name="OBSERVATION" is_deprecated="false" is_frozen="false">
-  <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="data" is_multiple="false">
-   <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id3" rm_type_name="HISTORY" is_deprecated="false" is_frozen="false">
+ <definition xsi:type="P_C_COMPLEX_OBJECT" node_id="id1" rm_type_name="OBSERVATION">
+  <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="data">
+   <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id3" rm_type_name="HISTORY">
     <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="events" cardinality="1..*; unordered" is_multiple="true">
-     <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id4" rm_type_name="POINT_EVENT" occurrences="0..1" is_deprecated="false" is_frozen="false">
-      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="offset" is_multiple="false">
-       <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id39" rm_type_name="DV_DURATION" is_deprecated="false" is_frozen="false">
-        <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-         <children xsi:type="P_C_DURATION" node_id="id9999" rm_type_name="String" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+     <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id4" rm_type_name="POINT_EVENT" occurrences="0..1">
+      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="offset">
+       <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id39" rm_type_name="DV_DURATION">
+        <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+         <children xsi:type="P_C_DURATION" node_id="id9999" rm_type_name="String">
           <constraint>
            <lower>PT1M</lower>
           </constraint>
@@ -23,37 +23,37 @@
         </attributes>
        </children>
       </attributes>
-      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="data" is_multiple="false">
-       <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id2" rm_type_name="ITEM_LIST" is_deprecated="false" is_frozen="false">
+      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="data">
+       <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id2" rm_type_name="ITEM_LIST">
         <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="items" cardinality="1..6; ordered" is_multiple="true">
-         <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id10" rm_type_name="ELEMENT" occurrences="0..1" is_deprecated="false" is_frozen="false">
-          <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-           <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id40" rm_type_name="DV_ORDINAL" is_deprecated="false" is_frozen="false">
-            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-             <children xsi:type="P_C_INTEGER" node_id="id9999" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+         <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id10" rm_type_name="ELEMENT" occurrences="0..1">
+          <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+           <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id40" rm_type_name="DV_ORDINAL">
+            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+             <children xsi:type="P_C_INTEGER" node_id="id9999" rm_type_name="INTEGER">
               <constraint>
                <lower>0</lower>
               </constraint>
              </children>
-             <children xsi:type="P_C_INTEGER" node_id="id99992" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_INTEGER" node_id="id99992" rm_type_name="INTEGER">
               <constraint>
                <lower>1</lower>
               </constraint>
              </children>
-             <children xsi:type="P_C_INTEGER" node_id="id99993" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_INTEGER" node_id="id99993" rm_type_name="INTEGER">
               <constraint>
                <lower>2</lower>
               </constraint>
              </children>
             </attributes>
-            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="symbol" is_multiple="false">
-             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id9999" rm_type_name="DV_CODED_TEXT" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="symbol">
+             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id9999" rm_type_name="DV_CODED_TEXT">
               <constraint>at11</constraint>
              </children>
-             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99992" rm_type_name="DV_CODED_TEXT" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99992" rm_type_name="DV_CODED_TEXT">
               <constraint>at12</constraint>
              </children>
-             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99993" rm_type_name="DV_CODED_TEXT" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99993" rm_type_name="DV_CODED_TEXT">
               <constraint>at13</constraint>
              </children>
             </attributes>
@@ -64,34 +64,34 @@
            </children>
           </attributes>
          </children>
-         <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id6" rm_type_name="ELEMENT" occurrences="0..1" is_deprecated="false" is_frozen="false">
-          <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-           <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id41" rm_type_name="DV_ORDINAL" is_deprecated="false" is_frozen="false">
-            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-             <children xsi:type="P_C_INTEGER" node_id="id9999" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+         <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id6" rm_type_name="ELEMENT" occurrences="0..1">
+          <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+           <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id41" rm_type_name="DV_ORDINAL">
+            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+             <children xsi:type="P_C_INTEGER" node_id="id9999" rm_type_name="INTEGER">
               <constraint>
                <lower>0</lower>
               </constraint>
              </children>
-             <children xsi:type="P_C_INTEGER" node_id="id99992" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_INTEGER" node_id="id99992" rm_type_name="INTEGER">
               <constraint>
                <lower>1</lower>
               </constraint>
              </children>
-             <children xsi:type="P_C_INTEGER" node_id="id99993" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_INTEGER" node_id="id99993" rm_type_name="INTEGER">
               <constraint>
                <lower>2</lower>
               </constraint>
              </children>
             </attributes>
-            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="symbol" is_multiple="false">
-             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id9999" rm_type_name="DV_CODED_TEXT" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="symbol">
+             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id9999" rm_type_name="DV_CODED_TEXT">
               <constraint>at7</constraint>
              </children>
-             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99992" rm_type_name="DV_CODED_TEXT" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99992" rm_type_name="DV_CODED_TEXT">
               <constraint>at8</constraint>
              </children>
-             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99993" rm_type_name="DV_CODED_TEXT" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99993" rm_type_name="DV_CODED_TEXT">
               <constraint>at9</constraint>
              </children>
             </attributes>
@@ -102,34 +102,34 @@
            </children>
           </attributes>
          </children>
-         <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id14" rm_type_name="ELEMENT" occurrences="0..1" is_deprecated="false" is_frozen="false">
-          <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-           <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id42" rm_type_name="DV_ORDINAL" is_deprecated="false" is_frozen="false">
-            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-             <children xsi:type="P_C_INTEGER" node_id="id9999" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+         <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id14" rm_type_name="ELEMENT" occurrences="0..1">
+          <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+           <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id42" rm_type_name="DV_ORDINAL">
+            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+             <children xsi:type="P_C_INTEGER" node_id="id9999" rm_type_name="INTEGER">
               <constraint>
                <lower>0</lower>
               </constraint>
              </children>
-             <children xsi:type="P_C_INTEGER" node_id="id99992" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_INTEGER" node_id="id99992" rm_type_name="INTEGER">
               <constraint>
                <lower>1</lower>
               </constraint>
              </children>
-             <children xsi:type="P_C_INTEGER" node_id="id99993" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_INTEGER" node_id="id99993" rm_type_name="INTEGER">
               <constraint>
                <lower>2</lower>
               </constraint>
              </children>
             </attributes>
-            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="symbol" is_multiple="false">
-             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id9999" rm_type_name="DV_CODED_TEXT" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="symbol">
+             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id9999" rm_type_name="DV_CODED_TEXT">
               <constraint>at15</constraint>
              </children>
-             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99992" rm_type_name="DV_CODED_TEXT" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99992" rm_type_name="DV_CODED_TEXT">
               <constraint>at16</constraint>
              </children>
-             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99993" rm_type_name="DV_CODED_TEXT" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99993" rm_type_name="DV_CODED_TEXT">
               <constraint>at17</constraint>
              </children>
             </attributes>
@@ -140,34 +140,34 @@
            </children>
           </attributes>
          </children>
-         <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id18" rm_type_name="ELEMENT" occurrences="0..1" is_deprecated="false" is_frozen="false">
-          <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-           <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id43" rm_type_name="DV_ORDINAL" is_deprecated="false" is_frozen="false">
-            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-             <children xsi:type="P_C_INTEGER" node_id="id9999" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+         <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id18" rm_type_name="ELEMENT" occurrences="0..1">
+          <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+           <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id43" rm_type_name="DV_ORDINAL">
+            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+             <children xsi:type="P_C_INTEGER" node_id="id9999" rm_type_name="INTEGER">
               <constraint>
                <lower>0</lower>
               </constraint>
              </children>
-             <children xsi:type="P_C_INTEGER" node_id="id99992" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_INTEGER" node_id="id99992" rm_type_name="INTEGER">
               <constraint>
                <lower>1</lower>
               </constraint>
              </children>
-             <children xsi:type="P_C_INTEGER" node_id="id99993" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_INTEGER" node_id="id99993" rm_type_name="INTEGER">
               <constraint>
                <lower>2</lower>
               </constraint>
              </children>
             </attributes>
-            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="symbol" is_multiple="false">
-             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id9999" rm_type_name="DV_CODED_TEXT" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="symbol">
+             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id9999" rm_type_name="DV_CODED_TEXT">
               <constraint>at19</constraint>
              </children>
-             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99992" rm_type_name="DV_CODED_TEXT" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99992" rm_type_name="DV_CODED_TEXT">
               <constraint>at20</constraint>
              </children>
-             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99993" rm_type_name="DV_CODED_TEXT" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99993" rm_type_name="DV_CODED_TEXT">
               <constraint>at21</constraint>
              </children>
             </attributes>
@@ -178,34 +178,34 @@
            </children>
           </attributes>
          </children>
-         <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id22" rm_type_name="ELEMENT" occurrences="0..1" is_deprecated="false" is_frozen="false">
-          <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-           <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id44" rm_type_name="DV_ORDINAL" is_deprecated="false" is_frozen="false">
-            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-             <children xsi:type="P_C_INTEGER" node_id="id9999" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+         <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id22" rm_type_name="ELEMENT" occurrences="0..1">
+          <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+           <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id44" rm_type_name="DV_ORDINAL">
+            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+             <children xsi:type="P_C_INTEGER" node_id="id9999" rm_type_name="INTEGER">
               <constraint>
                <lower>0</lower>
               </constraint>
              </children>
-             <children xsi:type="P_C_INTEGER" node_id="id99992" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_INTEGER" node_id="id99992" rm_type_name="INTEGER">
               <constraint>
                <lower>1</lower>
               </constraint>
              </children>
-             <children xsi:type="P_C_INTEGER" node_id="id99993" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_INTEGER" node_id="id99993" rm_type_name="INTEGER">
               <constraint>
                <lower>2</lower>
               </constraint>
              </children>
             </attributes>
-            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="symbol" is_multiple="false">
-             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id9999" rm_type_name="DV_CODED_TEXT" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="symbol">
+             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id9999" rm_type_name="DV_CODED_TEXT">
               <constraint>at23</constraint>
              </children>
-             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99992" rm_type_name="DV_CODED_TEXT" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99992" rm_type_name="DV_CODED_TEXT">
               <constraint>at24</constraint>
              </children>
-             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99993" rm_type_name="DV_CODED_TEXT" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+             <children xsi:type="P_C_TERMINOLOGY_CODE" node_id="id99993" rm_type_name="DV_CODED_TEXT">
               <constraint>at25</constraint>
              </children>
             </attributes>
@@ -216,11 +216,11 @@
            </children>
           </attributes>
          </children>
-         <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id26" rm_type_name="ELEMENT" occurrences="0..1" is_deprecated="false" is_frozen="false">
-          <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-           <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id45" rm_type_name="DV_COUNT" is_deprecated="false" is_frozen="false">
-            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="magnitude" is_multiple="false">
-             <children xsi:type="P_C_INTEGER" node_id="id9999" rm_type_name="INTEGER" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+         <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id26" rm_type_name="ELEMENT" occurrences="0..1">
+          <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+           <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id45" rm_type_name="DV_COUNT">
+            <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="magnitude">
+             <children xsi:type="P_C_INTEGER" node_id="id9999" rm_type_name="INTEGER">
               <constraint>
                <lower>0</lower>
                <upper>10</upper>
@@ -234,11 +234,11 @@
        </children>
       </attributes>
      </children>
-     <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id27" rm_type_name="POINT_EVENT" occurrences="0..1" is_deprecated="false" is_frozen="false">
-      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="offset" is_multiple="false">
-       <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id46" rm_type_name="DV_DURATION" is_deprecated="false" is_frozen="false">
-        <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-         <children xsi:type="P_C_DURATION" node_id="id9999" rm_type_name="String" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+     <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id27" rm_type_name="POINT_EVENT" occurrences="0..1">
+      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="offset">
+       <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id46" rm_type_name="DV_DURATION">
+        <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+         <children xsi:type="P_C_DURATION" node_id="id9999" rm_type_name="String">
           <constraint>
            <lower>PT2M</lower>
           </constraint>
@@ -246,17 +246,17 @@
         </attributes>
        </children>
       </attributes>
-      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="data" is_multiple="false">
-       <children xsi:type="P_C_COMPLEX_OBJECT_PROXY" node_id="id47" rm_type_name="ITEM_LIST" is_deprecated="false">
+      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="data">
+       <children xsi:type="P_C_COMPLEX_OBJECT_PROXY" node_id="id47" rm_type_name="ITEM_LIST">
         <target_path>/data[id3]/events[id4]/data[id2]</target_path>
        </children>
       </attributes>
      </children>
-     <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id28" rm_type_name="POINT_EVENT" occurrences="0..1" is_deprecated="false" is_frozen="false">
-      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="offset" is_multiple="false">
-       <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id48" rm_type_name="DV_DURATION" is_deprecated="false" is_frozen="false">
-        <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-         <children xsi:type="P_C_DURATION" node_id="id9999" rm_type_name="String" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+     <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id28" rm_type_name="POINT_EVENT" occurrences="0..1">
+      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="offset">
+       <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id48" rm_type_name="DV_DURATION">
+        <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+         <children xsi:type="P_C_DURATION" node_id="id9999" rm_type_name="String">
           <constraint>
            <lower>PT3M</lower>
           </constraint>
@@ -264,17 +264,17 @@
         </attributes>
        </children>
       </attributes>
-      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="data" is_multiple="false">
-       <children xsi:type="P_C_COMPLEX_OBJECT_PROXY" node_id="id49" rm_type_name="ITEM_LIST" is_deprecated="false">
+      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="data">
+       <children xsi:type="P_C_COMPLEX_OBJECT_PROXY" node_id="id49" rm_type_name="ITEM_LIST">
         <target_path>/data[id3]/events[id4]/data[id2]</target_path>
        </children>
       </attributes>
      </children>
-     <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id29" rm_type_name="POINT_EVENT" occurrences="0..1" is_deprecated="false" is_frozen="false">
-      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="offset" is_multiple="false">
-       <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id50" rm_type_name="DV_DURATION" is_deprecated="false" is_frozen="false">
-        <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-         <children xsi:type="P_C_DURATION" node_id="id9999" rm_type_name="String" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+     <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id29" rm_type_name="POINT_EVENT" occurrences="0..1">
+      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="offset">
+       <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id50" rm_type_name="DV_DURATION">
+        <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+         <children xsi:type="P_C_DURATION" node_id="id9999" rm_type_name="String">
           <constraint>
            <lower>PT5M</lower>
           </constraint>
@@ -282,17 +282,17 @@
         </attributes>
        </children>
       </attributes>
-      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="data" is_multiple="false">
-       <children xsi:type="P_C_COMPLEX_OBJECT_PROXY" node_id="id51" rm_type_name="ITEM_LIST" is_deprecated="false">
+      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="data">
+       <children xsi:type="P_C_COMPLEX_OBJECT_PROXY" node_id="id51" rm_type_name="ITEM_LIST">
         <target_path>/data[id3]/events[id4]/data[id2]</target_path>
        </children>
       </attributes>
      </children>
-     <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id32" rm_type_name="POINT_EVENT" occurrences="0..1" is_deprecated="false" is_frozen="false">
-      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="offset" is_multiple="false">
-       <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id52" rm_type_name="DV_DURATION" is_deprecated="false" is_frozen="false">
-        <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-         <children xsi:type="P_C_DURATION" node_id="id9999" rm_type_name="String" is_deprecated="false" is_frozen="false" is_enumerated_type_constraint="false">
+     <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id32" rm_type_name="POINT_EVENT" occurrences="0..1">
+      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="offset">
+       <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id52" rm_type_name="DV_DURATION">
+        <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+         <children xsi:type="P_C_DURATION" node_id="id9999" rm_type_name="String">
           <constraint>
            <lower>PT10M</lower>
           </constraint>
@@ -300,15 +300,15 @@
         </attributes>
        </children>
       </attributes>
-      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="data" is_multiple="false">
-       <children xsi:type="P_C_COMPLEX_OBJECT_PROXY" node_id="id53" rm_type_name="ITEM_LIST" is_deprecated="false">
+      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="data">
+       <children xsi:type="P_C_COMPLEX_OBJECT_PROXY" node_id="id53" rm_type_name="ITEM_LIST">
         <target_path>/data[id3]/events[id4]/data[id2]</target_path>
        </children>
       </attributes>
      </children>
-     <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id38" rm_type_name="EVENT" is_deprecated="false" is_frozen="false">
-      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="data" is_multiple="false">
-       <children xsi:type="P_C_COMPLEX_OBJECT_PROXY" node_id="id54" rm_type_name="ITEM_LIST" is_deprecated="false">
+     <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id38" rm_type_name="EVENT">
+      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="data">
+       <children xsi:type="P_C_COMPLEX_OBJECT_PROXY" node_id="id54" rm_type_name="ITEM_LIST">
         <target_path>/data[id3]/events[id4]/data[id2]</target_path>
        </children>
       </attributes>
@@ -316,12 +316,12 @@
     </attributes>
    </children>
   </attributes>
-  <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="protocol" is_multiple="false">
-   <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id30" rm_type_name="ITEM_LIST" is_deprecated="false" is_frozen="false">
+  <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="protocol">
+   <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id30" rm_type_name="ITEM_LIST">
     <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="items" is_multiple="true">
-     <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id31" rm_type_name="ELEMENT" occurrences="0..1" is_deprecated="false" is_frozen="false">
-      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value" is_multiple="false">
-       <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id55" rm_type_name="DV_TEXT" is_deprecated="false" is_frozen="false">
+     <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id31" rm_type_name="ELEMENT" occurrences="0..1">
+      <attributes xsi:type="P_C_ATTRIBUTE" rm_attribute_name="value">
+       <children xsi:type="P_C_COMPLEX_OBJECT" node_id="id55" rm_type_name="DV_TEXT">
        </children>
       </attributes>
      </children>
