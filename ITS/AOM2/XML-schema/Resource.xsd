@@ -15,13 +15,13 @@
 			<xs:element name="description" type="RESOURCE_DESCRIPTION" minOccurs="0"/>
 			<xs:element name="translations" type="TRANSLATION_DETAILS" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="uid" type="Uid" minOccurs="0"/>
-			<xs:element name="annotations" type="AnnotationSet" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="annotations" type="RESOURCE_ANNOTATIONS" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:choice>
 	</xs:complexType>
 	
-	<xs:complexType name="AnnotationSet">
+	<xs:complexType name="RESOURCE_ANNOTATIONS">
 		<xs:sequence>
-			<xs:element name="items" type="AnnotationLangSet" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="documentation" type="AnnotationLangSet" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	

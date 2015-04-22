@@ -56,7 +56,7 @@
 			<xs:element name="is_controlled" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="description" type="RESOURCE_DESCRIPTION" minOccurs="0"/>
 			<xs:element name="translations" type="TRANSLATION_DETAILS" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="annotations" type="AnnotationSet" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="annotations" type="RESOURCE_ANNOTATIONS" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:choice>
 	</xs:group>
 

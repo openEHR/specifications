@@ -157,7 +157,7 @@
         <other_details id="regression">PASS</other_details>
     </description>
     <annotations>
-        <items id="en">
+        <documentation id="en">
             <items id="/data[id2]">
                 <items id="ui">passthrough</items>
             </items>
@@ -177,7 +177,7 @@
                 <items id="requirements note">this is a requirements note on intolerance</items>
                 <items id="national data dictionary">NDD ref for intolerance</items>
             </items>
-        </items>
+        </documentation>
     </annotations>
     <is_controlled>false</is_controlled>
 </archetype>
