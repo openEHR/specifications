@@ -19,7 +19,7 @@
 			<xs:element name="archetype_id" type="P_ARCHETYPE_HRID"/>
 			<xs:element name="parent_archetype_id" type="xs:string" minOccurs="0"/>
 			<xs:element name="definition" type="P_C_COMPLEX_OBJECT"/>
-			<xs:element name="rules" type="RULE_STATEMENT" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="rules" type="ASSERTION" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="terminology" type="P_ARCHETYPE_TERMINOLOGY"/>
 		</xs:choice>
 	</xs:group>

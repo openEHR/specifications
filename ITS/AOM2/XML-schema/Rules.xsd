@@ -21,7 +21,6 @@
 			<xs:extension base="RULE_STATEMENT">
 				<xs:sequence>
 					<xs:element name="expression" type="EXPR_ITEM"/>
-					<xs:element name="variables" type="ASSERTION_VARIABLE" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 				<xs:attribute name="tag" type="xs:string" use="optional"/>
 			</xs:extension>
@@ -40,6 +39,7 @@
 		</xs:sequence>
 		<xs:attribute name="name" type="xs:string"/>
 	</xs:complexType>
+	
 	<xs:complexType name="EXPR_LEAF">
 		<xs:complexContent>
 			<xs:extension base="EXPR_ITEM">
@@ -50,6 +50,7 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	
 	<xs:complexType name="EXPR_OPERATOR" abstract="true">
 		<xs:complexContent>
 			<xs:extension base="EXPR_ITEM">
@@ -60,6 +61,7 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	
 	<xs:complexType name="EXPR_UNARY_OPERATOR">
 		<xs:complexContent>
 			<xs:extension base="EXPR_OPERATOR">
