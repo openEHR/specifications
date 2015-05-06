@@ -23,6 +23,7 @@
 			<xs:element name="terminology" type="P_ARCHETYPE_TERMINOLOGY"/>
 		</xs:choice>
 	</xs:group>
+	
 	<xs:attributeGroup name="pArchetypeAttributes">
 		<xs:attribute name="is_generated" type="xs:boolean" use="optional"/>
 	</xs:attributeGroup>
@@ -79,8 +80,7 @@
 		<xs:complexContent>
 			<xs:extension base="P_ARCHETYPE_CONSTRAINT">
 				<xs:sequence>
-					<xs:element name="sibling_order" type="SIBLING_ORDER" minOccurs="0"
-						maxOccurs="unbounded"/>
+					<xs:element name="sibling_order" type="SIBLING_ORDER" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 				<xs:attribute name="occurrences" type="xs:string" use="optional"/>
 				<xs:attribute name="is_deprecated" type="xs:boolean" use="optional"/>
@@ -103,8 +103,7 @@
 			<xs:extension base="P_ARCHETYPE_CONSTRAINT">
 				<xs:sequence>
 					<xs:element name="differential_path" type="xs:string" minOccurs="0"/>
-					<xs:element name="children" type="P_C_OBJECT" minOccurs="0"
-						maxOccurs="unbounded"/>
+					<xs:element name="children" type="P_C_OBJECT" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 				<xs:attribute name="rm_attribute_name" type="xs:string"/>
 				<xs:attribute name="existence" type="xs:string" use="optional"/>
