@@ -1,0 +1,2780 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 7.0/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="CDL.css" CHARSET="UTF-8" TYPE="text/css">
+<TITLE> 4	cADL - Constraint ADL</TITLE></HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<H4 CLASS="Hdr1">
+<A NAME="pgfId-1153221"></A><A NAME="66428"></A>cADL - Constraint ADL<DIV>
+<IMG SRC="CDL-1.png">
+</DIV>
+</H4>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1153222"></A>Overview</H5>
+<P CLASS="Body">
+<A NAME="pgfId-1153223"></A>cADL is a block-structured syntax which enables constraints on data defined by object-oriented information models to be expressed in archetypes or other knowledge definition formalisms. It is most useful for defining the specific allowable configurations of data whose instances conform to very general object models. cADL is used both at design time, by authors and/or tools, and at runtime, by computational systems which validate data by comparing it to the appropriate sections of cADL in an archetype. The general appearance of cADL is illustrated by the following example:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1147724"></A>PERSON[id1] matches {  	 										-- constraint on a PERSON instance</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147725"></A>	name matches { 										-- constraint on PERSON.name</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147726"></A>		TEXT[id2] matches {/.+/}									-- any non-empty string</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147727"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147728"></A>	addresses cardinality matches {1..*} matches { 	-- constraint on</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147729"></A>		ADDRESS[id3] matches {									-- PERSON.addresses</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147730"></A>			-- etc --</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147731"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147732"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147733"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1147734"></A>Some of the textual keywords in this example can be more efficiently rendered using common mathematical logic symbols. In the following example, the <CODE CLASS="Code">
+matches</CODE>
+ keyword have been replaced by an equivalent symbol:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1147735"></A>PERSON[id1] ∈ {  	 										-- constraint on a PERSON instance</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147736"></A>	name ∈ { 										-- constraint on PERSON.name</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147737"></A>		TEXT[id2] ∈ {/..*/}									-- any non-empty string</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147738"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147739"></A>	addresses cardinality ∈ {1..*} ∈ { 	-- constraint on</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147740"></A>		ADDRESS[id3] ∈ {									-- PERSON.addresses</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147741"></A>			-- etc --</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147742"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147743"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147744"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1147745"></A>The full set of equivalences appears below. Raw cADL is persisted in the text-based form, to remove any difficulties when authoring cADL text in normal text editors, and to aid reading in English. However, the symbolic form might be more widely used for display purposes and in more sophisticated tools, as it is more succinct and less language-dependent. The use of symbols or text is completely a matter of taste, and no meaning whatsoever is lost by completely ignoring one or other format according to one’s personal preference. This document uses both conventions.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1147746"></A>In the standard cADL documented in this section, literal leaf values (such as the regular expression <CODE CLASS="Code">
+/.+/</CODE>
+ in the above example) are always constraints on a set of ‘standard’ widely-accepted primitive types, as described in the openEHR ODIN syntax specification.</P>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1147750"></A>Basics</H5>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1147751"></A>4.2.1	Keywords</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1147752"></A>The following keywords are recognised in cADL:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1147753"></A><EM CLASS="Keyword">
+matches, ~matches, is_in, ~is_in</EM>
+</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1147754"></A><EM CLASS="Keyword">
+occurrences, existence, cardinality</EM>
+</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1147755"></A><EM CLASS="Keyword">
+ordered, unordered, unique</EM>
+</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1147760"></A><EM CLASS="Keyword">
+use_node, allow_archetype</EM>
+</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1147761"></A><EM CLASS="Keyword">
+include, exclude</EM>
+</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1153121"></A><EM CLASS="Keyword">
+before</EM>
+, <EM CLASS="Keyword">
+after</EM>
+</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1147781"></A>Symbol equivalents for some of the above are given in the following table.</P>
+<TABLE BORDER="1">
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1147764"></A>Textual <BR>
+Rendering</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1147766"></A>Symbolic<BR>
+Rendering</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1147768"></A>Meaning</P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1147770"></A><EM CLASS="Keyword">
+matches</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1147772"></A>∈</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1147774"></A>Set membership, “p is in P”</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1155472"></A>not, ~</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1155474"></A>∼</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1155476"></A>Negation, “not p”</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1147776"></A>*</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1147778"></A>∗</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1147780"></A>Infinity, ‘any number of...’</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="Body">
+<A NAME="pgfId-1147782"></A>Keywords are shown in blue in this document.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1153313"></A>4.2.2	Block / Node Structure</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1154018"></A>cADL constraints are written in a block-structured style, similar to block-structured programming languages like C. A typical block resembles the following (the recurring pattern <CODE CLASS="Code">
+/.+/</CODE>
+ is a regular expression meaning “non-empty string”):</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1154019"></A>PERSON[id1] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154020"></A>	name ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154021"></A>		PERSON_NAME[id2] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154022"></A>			forenames cardinality ∈ {1..*} ∈ {/.+/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154023"></A>			family_name ∈ {/.+/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154024"></A>			title ∈ {“Dr”, “Miss”, “Mrs”, “Mr”}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154025"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154026"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154027"></A>	addresses cardinality ∈ {1..*} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154028"></A>		LOCATION_ADDRESS[id3] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154029"></A>			street_number existence ∈ {0..1} ∈ {/.+/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154030"></A>			street_name ∈ {/.+/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154031"></A>			locality ∈ {/.+/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154032"></A>			post_code ∈ {/.+/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154033"></A>			state ∈ {/.+/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154034"></A>			country ∈ {/.+/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154035"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154036"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154037"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1154038"></A>	In the above, an identifier (shown in green in this document) followed by the ∈ operator (equivalent text keyword: <CODE CLASS="Code">
+matches</CODE>
+ or <CODE CLASS="Code">
+is_in</CODE>
+) followed by an open brace, is the start of a ‘block’, which continues until the closing matching brace (normally visually indented to match the line at the beginning of the block).</P>
+<P CLASS="Body">
+<A NAME="pgfId-1155495"></A>Two kinds of identifiers from the underlying information model are used, in alternation: type names (shown in upper case in this document) and attribute names (shown in lower case).</P>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1154056"></A>Blocks introduced by a type name are known as object blocks or object nodes, while those introduced by an attribute name are attribute blocks or attribute nodes as illustrated below.</P>
+<DIV>
+<MAP NAME="CDL-2">
+</MAP>
+<IMG SRC="CDL-2.png" USEMAP="#CDL-2">
+</DIV>
+<P CLASS="Body">
+<A NAME="pgfId-1154078"></A>An object block or node can be thought of as a constraint matching a set of instances of the type which introduces the block.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1154039"></A>The example above expresses a constraint on an instance of the type <CODE CLASS="Code">
+PERSON</CODE>
+; the constraint is expressed by everything inside the <CODE CLASS="Code">
+PERSON</CODE>
+ block. The two blocks at the next level define constraints on properties of <CODE CLASS="Code">
+PERSON</CODE>
+, in this case <EM CLASS="Emphasis">
+name</EM>
+ and <EM CLASS="Emphasis">
+addresses</EM>
+. Each of these constraints is expressed in turn by the next level containing constraints on further types, and so on. The general structure is therefore a recursive nesting of constraints on types, followed by constraints on attributes (of that type), followed by types (being the types of the attribute under which it appears) until leaf nodes are reached.</P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1155501"></A>A cADL text is a structure of alternating object and attribute blocks each introduced respectively by type names and attribute names from an underlying information model.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1147801"></A>4.2.3	Comments</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1147802"></A>In a cADL text, comments are defined as follows:</P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1147803"></A>Comments are indicated by the characters “--”. Multi-line comments are achieved using the “--” leader on each line where the comment continues. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1155562"></A>In this document, comments are shown in brown.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1154198"></A>4.2.4	<A NAME="81343"></A>The Underlying Information Model</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1154199"></A>Identifiers in cADL texts correspond to entities - types and attributes - in an information model. The latter is typically an object-oriented model, but may just as easily be an entity-relationship model or any other typed model of information. A UML model compatible with the example above is shown in <A HREF="CDL.htm#11444" CLASS="XRef">See UML Model of PERSON</A>. Note that there can be more than one model compatible with a given fragment of cADL syntax, and in particular, there are usually more properties and classes in the reference model than are mentioned in the cADL constraints. In other words, a cADL text includes constraints only for those parts of a model that are useful or meaningful to constrain.</P>
+<DIV>
+<MAP NAME="CDL-3">
+</MAP>
+<IMG SRC="CDL-3.png" USEMAP="#CDL-3">
+</DIV>
+<P CLASS="Body">
+<A NAME="pgfId-1154273"></A>Constraints expressed in cADL cannot be stronger than those from the information model. For example, the <CODE CLASS="Code">
+PERSON</CODE>
+.<EM CLASS="Emphasis">
+family_name</EM>
+ attribute is mandatory in the model in <A HREF="CDL.htm#11444" CLASS="XRef">See UML Model of PERSON</A>, so it is not valid to express a constraint allowing the attribute to be optional. In general, a cADL archetype can only further constrain an existing information model. However, it must be remembered that for very generic models consisting of only a few classes and a lot of optionality, this rule is not so much a limitation as a way of adding meaning to information. Thus, for a demographic information model which has only the types <CODE CLASS="Code">
+PARTY</CODE>
+ and <CODE CLASS="Code">
+PERSON</CODE>
+, one can write cADL which defines the concepts of entities such as <CODE CLASS="Code">
+COMPANY</CODE>
+, <CODE CLASS="Code">
+EMPLOYEE</CODE>
+, <CODE CLASS="Code">
+PROFESSIONAL</CODE>
+, and so on, in terms of constraints on the types available in the information model.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1154277"></A>This general approach can be used to express constraints for instances of any information model. The following example shows how to express a constraint on the <EM CLASS="Emphasis">
+value</EM>
+ property of an <CODE CLASS="Code">
+ELEMENT</CODE>
+ class to be a <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ with a suitable range for expressing blood pressure.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1154278"></A>ELEMENT[id10] matches {									-- diastolic blood pressure</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154279"></A>	value matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154280"></A>		DV_QUANTITY[id11] matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154281"></A>			magnitude matches {|0..1000|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154282"></A>			property matches {&quot;pressure&quot;}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154283"></A>			units matches {&quot;mm[Hg]&quot;}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154284"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154285"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154286"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1154304"></A>In this specification, the terms underlying information model and <EM CLASS="Emphasis">
+reference model</EM>
+ are equivalent and refer to the information model on which a cADL text is based.</P>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1147804"></A>Information Model Identifiers</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1147805"></A>Identifiers from the underlying information model are used to introduce all cADL nodes. Identifiers obey the same rules as in ODIN: type names commence with an upper case letter, while attribute and function names commence with a lower case letter. In cADL, names of types and the name of any property (i.e. attribute or parameterless function) can be used. </P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1150223"></A>A type name is any identifier with an initial upper case letter, followed by any combination of letters, digits and underscores. A generic type name (including nested forms) additionally may include commas and angle brackets, but no spaces, and must be syntactically correct as per the OMG UML 2.x specification or higher. An attribute name is any identifier with an initial lower case letter, followed by any combination of letters, digits and underscores. Any convention that obeys this rule is allowed.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1147807"></A>Type identifiers are shown in this document in all uppercase, e.g. <CODE CLASS="Code">
+PERSON</CODE>
+, while attribute identifiers are shown in all lowercase, e.g. <CODE CLASS="Code">
+home_address</CODE>
+. In both cases, underscores are used to represent word breaks. This convention is used to improve the readability of this document, and other conventions may be used, such as the common programmer’s mixed-case convention exemplified by <CODE CLASS="Code">
+Person</CODE>
+ and <CODE CLASS="Code">
+homeAddress</CODE>
+. The convention chosen for any particular cADL document should be based on that used in the underlying information model.</P>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1167758"></A>4.2.5	Node Identifiers</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1167771"></A>Node identifier codes appear after all type identifiers in a cADL text. They take the form of an ‘id-code’ in brackets, e.g. [id3]. The id-code of a root object in a structure is always ‘id1’, or for specialised archetypes, ‘id1.1’, id1.1.1’ etc. The rules and use of node identifiers is described in more detail below.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1155329"></A>4.2.6	The matches Operator</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1155330"></A>The <CODE CLASS="Code">
+matches</CODE>
+ or <CODE CLASS="Code">
+is_in</CODE>
+ operator deserves special mention, since it is the key operator in cADL. This operator can be understood mathematically as set membership. When it occurs between an identifier and a block delimited by braces, the meaning is: the set of values allowed for the entity referred to by the name (either an object, or parts of an object - attributes) is specified between the braces. What appears between any matching pair of braces can be thought of as a specification for a set of values. Since blocks can be nested, this approach to specifying values can be understood in terms of nested sets, or in terms of a value space for instances of a type. Thus, in the following example, the <CODE CLASS="Code">
+matches</CODE>
+ operator links the name of an entity to a linear value space (i.e. a list), consisting of all words ending in “ion”.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1153916"></A>aaa <CODE CLASS="Code">matches</CODE>
+ {/[^\s\n\t	]+ion[\s\n\t	]/}							-- the set of words ending in ‘ion’</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153917"></A>&nbsp;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1153918"></A>The following example links the name of a type <CODE CLASS="Code">
+XXX</CODE>
+ with a hierarchical value space.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1153919"></A>XXX[id2] <CODE CLASS="Code">matches</CODE>
+ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153920"></A>	xxx_attr1 <CODE CLASS="Code">matches</CODE>
+ {					</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153921"></A>		YYY[id3] <CODE CLASS="Code">matches {</CODE>
+</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1170834"></A>			yyy_attr1 <CODE CLASS="Code">matches </CODE>
+{		0..3}					</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153922"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1170863"></A>	}										</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153923"></A>	xxx_attr2 <CODE CLASS="Code">matches</CODE>
+ {				</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153924"></A>		ZZZ[id4] <CODE CLASS="Code">matches </CODE>
+{</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1170870"></A>			zzz_attr1 <CODE CLASS="Code">matches </CODE>
+{		&gt;1992-12-01		}						</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1170892"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153925"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153926"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1153927"></A>The meaning of the syntax above is: data matching the constraints conssists of an instance of type <CODE CLASS="Code">
+XXX</CODE>
+, or any subtype allowed by the underlying information model, for which the value of attribute <EM CLASS="Emphasis">
+aaa</EM>
+ is of type <CODE CLASS="Code">
+YYY</CODE>
+, or any subtype allowed by the underlying information model, and so on, recursively until leaf level constraints are reached.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1153928"></A>Occasionally the <CODE CLASS="Code">
+matches</CODE>
+ operator needs to be used in the negative, usually at a leaf block. Any of the following can be used to constrain the value space of the attribute <CODE CLASS="Code">
+aaa</CODE>
+ to any number except 5:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1153929"></A>aaa <CODE CLASS="Code">~matches</CODE>
+ {5}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153930"></A>aaa <CODE CLASS="Code">~is_in</CODE>
+ {5}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153931"></A>aaa ∉{5}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1154191"></A>The choice of whether to use <CODE CLASS="Code">
+matches</CODE>
+ or <CODE CLASS="Code">
+is_in</CODE>
+ is a matter of taste and background; those with a mathematical background will probably prefer <CODE CLASS="Code">
+is_in</CODE>
+, while those with a data processing background may prefer <CODE CLASS="Code">
+matches</CODE>
+.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1154192"></A>4.2.7	Natural Language</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1154193"></A>cADL is completely independent of all natural languages. The only potential exception is where constraints include literal values from some language, and this is easily and routinely avoided by the use of separate language and terminology definitions, as used in ADL archetypes. However, for the purposes of readability, comments in English have been included in this document to aid the reader. In real cADL documents, comments are generated from the archetype terminology in the language of the locale.</P>
+</DIV>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1147812"></A>Constraints on Complex types</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1154318"></A>This section describes the semantics for constraining objects of complex, i.e. non-primitive types. The semantics apply recursively through a constraint structure until leaf nodes constraining primitive types are reached.</P>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1147947"></A>4.3.1	Attribute Constraints</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1147948"></A>In any information model, attributes are either single-valued or multiply-valued, i.e. of a generic container type such as <CODE CLASS="Code">
+List&lt;Contact&gt;</CODE>
+. Both have <EM CLASS="Emphasis">
+existence</EM>
+, while multiply-valued attributes also have <EM CLASS="Emphasis">
+cardinality</EM>
+.</P>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1147949"></A>Existence</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1156099"></A>The existence constraint may be used with any attribute to further constrain the existence defined by the underlying reference model. An existence constraint indicates whether an attribute value is mandatory or optional, and is indicated by “0..1” or “1” markers at line ends in UML diagrams (and often mistakenly referred to as a “cardinality of 1..1”). Attributes defined in the reference model have an effective existence constraint, defined by the invariants (or lack thereof) of the relevant class. For example, the <EM CLASS="Emphasis">
+protocol</EM>
+ attribute in the openEHR <CODE CLASS="Code">
+OBSERVATION</CODE>
+ class<A HREF="#pgfId-1156103" CLASS="footnote">1</A> is defined in the reference model as being optional, i.e. 0..1. An archetype may redefine this to {1..1}, making the attribute mandatory. Existence constraints are expressed in cADL as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1147951"></A>OBSERVATION matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147952"></A>	protocol existence matches {1..1} matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1156127"></A>		-- details</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1156128"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147953"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1147954"></A>The meaning of an existence constraint is to indicate whether a value - i.e. an object - is mandatory or optional (i.e. obligatory or not) in runtime data for the attribute in question. The same logic applies whether the attribute is of single or multiple cardinality, i.e. whether it is a container type or not. For container attributes, the existence constraint indicates whether the whole container (usually a list or set) is mandatory or not; a further cardinality constraint (described below) indicates how many members in the container are allowed.</P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1147955"></A>An existence constraint may be used directly after any attribute identifier, and indicates whether the object to which the attribute refers is mandatory or optional in the data.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1147956"></A>Existence is shown using the same constraint language as the rest of the archetype definition. Existence constraints can take the values <CODE CLASS="Code">
+{0}</CODE>
+, <CODE CLASS="Code">
+{0..0}</CODE>
+, <CODE CLASS="Code">
+{0..1}</CODE>
+, <CODE CLASS="Code">
+{1}</CODE>
+, or <CODE CLASS="Code">
+{1..1}</CODE>
+. The first two of these constraints may not seem initially obvious, but can be used to indicate that an attribute must not be present in the particular situation modelled by the archetype. This may be reasonable in some cases.</P>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1147957"></A>4.3.2	<A NAME="25284"></A>Single-valued Attributes</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1153134"></A>A single-valued attribute is an attribute whose type as declared in the underlying class model is of a single object type rather than a container type such as a list or set. Single-valued attributes can be constrained with a single object constraint as shown in the following example.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1153152"></A>value matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153153"></A>	DV_QUANTITY[id22] matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153154"></A>		magnitude matches {|0..55|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153155"></A>		property matches {&quot;velocity&quot;}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153156"></A>		units matches {&quot;mph&quot;}							</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153157"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1160597"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1160600"></A>Multiple alternative object constraints can also be defined, using a number of sibling blocks, as shown in the following example. Each block defines an alternative constraint, only one of which needs to be matched by the data.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1147960"></A>value matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147961"></A>	DV_QUANTITY[id22] matches {									-- miles per hour</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147962"></A>		magnitude matches {|0..55|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147963"></A>		property matches {&quot;velocity&quot;}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147964"></A>		units matches {&quot;mph&quot;}							</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147965"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147966"></A>	DV_QUANTITY[id23] matches {									-- km per hour</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147967"></A>		magnitude matches {|0..100|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147968"></A>		property matches {&quot;velocity&quot;}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147969"></A>		units matches {&quot;km/h&quot;}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147970"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153711"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1147973"></A>Here the occurrences of both <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ constraints is not stated, leading to the result that only one <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ instance can appear in runtime data, matching either one of the constraints. </P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1153246"></A>Two or more object constraints introduced by type names appearing after a single-valued attribute (i.e. one for which there is no cardinality constraint) are taken to be alternative constraints, only one of which is matched by the data.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1147979"></A>4.3.3	<A NAME="47914"></A>Container Attributes</H6>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1147980"></A>Cardinality</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1147981"></A>The cardinality of container attributes may be constrained in cADL with the <EM CLASS="Emphasis">
+cardinality</EM>
+ constraint. Cardinality indicates limits on the number of instance members of a container types such as lists and sets. Consider the following example:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1147982"></A>HISTORY[id2] occurrences ∈ {1} ∈ {			</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147983"></A>	periodic ∈ {False}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147984"></A>	events cardinality ∈ {*} ∈ { 	</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147985"></A>		EVENT[id3] occurrences ∈ {0..1} ∈ {	}										-- 1 min sample</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147986"></A>		EVENT[id4] occurrences ∈ {0..1} ∈ {	} 										-- 2 min sample</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147987"></A>		EVENT[id5] occurrences ∈ {0..1} ∈ {	}										-- 3 min sample</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147988"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147989"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1161236"></A>The <CODE CLASS="Code">
+cardinality </CODE>
+keyword implies firstly that the property events must be of a container type, such as <CODE CLASS="Code">
+List&lt;T&gt;</CODE>
+, <CODE CLASS="Code">
+Set&lt;T&gt;</CODE>
+, <CODE CLASS="Code">
+Bag&lt;T&gt;</CODE>
+. The integer range indicates the valid membership of the container; a single ‘*’ means the range 0..*, i.e. ‘0 to many’. The type of the container is not explicitly indicated, since it is usually defined by the information model. However, the semantics of a logical set (unique membership, ordering not significant), a logical list (ordered, non-unique membership) or a bag (unordered, non-unique membership) can be constrained using the additional keywords <CODE CLASS="Code">
+ordered</CODE>
+, <CODE CLASS="Code">
+unordered</CODE>
+, <CODE CLASS="Code">
+unique</CODE>
+ and <CODE CLASS="Code">
+non-unique</CODE>
+ within the cardinality constraint, as per the following examples:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1147991"></A>	events cardinality ∈ {*; ordered} ∈ {													-- logical list</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147992"></A>	events cardinality ∈ {*; unordered; unique} ∈ {													-- logical set</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1147993"></A>	events cardinality ∈ {*; unordered} ∈ {													-- logical bag</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1147994"></A>If no numeric or ordering constraint on the cardinality of a container attribute is required, the keyword is used on its own, and simply indicates that the attribute is a container, as in the following example:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1161249"></A>	events cardinality ∈ {									-- indicates ‘events’ is a container</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1161241"></A>Although this is not strictly ncessary for the purpose of expressing valid archetypes if the Reference Model can usually be referred to, it enables early stage parsing to generate the correct type of attributes without referring to a Reference Model schema, which in any case may not always be available. This in turn enables more faithful visualisation at an earlier point in the archetype compilation process.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1161265"></A>In theory, no cardinality constraint can be stronger than the semantics of the corresponding container in the relevant part of the reference model. However, in practice, developers often use lists to facilitate data integration, when the actual semantics are intended to be of a set; in such cases, they typically ensure set-like semantics in their own code rather than by using an <CODE CLASS="Code">
+Set&lt;T&gt;</CODE>
+ type. How such constraints are evaluated in practice may depend somewhat on knowledge of the software system.</P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1147995"></A>A cardinality constraint must be used after any Reference Model container attribute name (or after its existence constraint, if there is one) in order to designate it as a container attribute. Additionally, it may constrain the number of member items it may have in the data, and whether it has “list”, “set”, or “bag” semantics, via the use of the keywords ‘ordered’, ‘unordered’, ‘unique’ and ‘non-unique’.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1150599"></A>The numeric part of the cardinality contraint can take the values <CODE CLASS="Code">
+{0}</CODE>
+, <CODE CLASS="Code">
+{0..0}</CODE>
+, <CODE CLASS="Code">
+{0..n}</CODE>
+, <CODE CLASS="Code">
+{m..n}</CODE>
+, <CODE CLASS="Code">
+{0..*}</CODE>
+, or <CODE CLASS="Code">
+{*}</CODE>
+, or a syntactic equivalent. The first two of these constraints are unlikely to be useful, but there is no reason to prevent them. There is no default cardinality, since if none is shown, the relevant attribute is assumed to be single-valued (in the interests of uniformity in archetypes, this holds even for smarter parsers that can access the reference model and determine that the attribute is in fact a container.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1147996"></A>Cardinality and existence constraints can co-occur, in order to indicate various combinations on a container type property, e.g. that it is optional, but if present, is a container that may be empty, as in the following:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1166726"></A>	events existence ∈ {0..1} cardinality ∈ {0..*} ∈ {-- etc --}</PRE>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1166728"></A>4.3.4	Object Constraints</H6>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1166753"></A><A NAME="27946"></A><A NAME="31038"></A>Node Identifiers</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1166754"></A>In cADL, an entity in brackets of the form <CODE CLASS="Code">
+[idN]</CODE>
+ following a type name is used to identify an object node, i.e. a node constraint delimiting a set of instances of the type as defined by the reference model. Object nodes always commence with a type name. Although any node identifier format could be supported, the current version of ADL assumes that node identifiers are of the form of an archetype term identifier, i.e. <CODE CLASS="Code">
+[idN]</CODE>
+, e.g. <CODE CLASS="Code">
+[id42]</CODE>
+. Node identifiers are shown in magenta in this document.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1166758"></A>The structural function of node identifiers is to allow the formation of paths:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1166759"></A>enable cADL nodes in an archetype definition to be unambiguously referred to within the same archetype;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1166760"></A>enable data created using a given archetype to be matched at runtime;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1166761"></A>to enable cADL nodes in a parent archetype to be unambiguously referred to from a specialised child archetype;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1166971"></A>to enable unique paths to be formed.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1166764"></A>All object nodes require a node identifier, guaranteeing the ability to generate unique paths, and to process specialised archetypes with respect to inheritance parents.</P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1166766"></A>A Node identifier is required for every object node in an archetype.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1166767"></A>The node identifier can also perform a semantic function, that of giving a design-time meaning to the node, by equating the node identifier to some description. The use of node identifiers in archetypes is the main source of their expressive power. Each node identifier acts as a ‘semantic marker’ or ‘override’ on the node. Thus, in the example shown in <A HREF="CDL.htm#81343" CLASS="XRef">See The Underlying Information Model</A>, the <CODE CLASS="Code">
+ELEMENT</CODE>
+ node is identified by the code <CODE CLASS="Code">
+[id10]</CODE>
+, which can be designated elsewhere in an archetype as meaning “diastolic blood pressure”. In this way rich meaning is given to data constructed from a limited number of object types.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1166991"></A>Not every node identifier needs to be defined in the archetype terminology: it is only mandatory for nodes defined under container attributes. Nodes defined under single-valued attributes may have terminology definitions, but don’t typically need them, since the meaning is obvious from the attribute.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1166737"></A>Occurrences</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1166729"></A>A constraint on occurrences is used only with cADL object nodes, to indicate how many times in data an instance conforming to the constraint can occur. It is usually only defined on objects that are children of a container attribute, since by definition, the occurrences of an object that is the value of a single-valued attribute can only be 0..1 or 1..1, and this is already defined by the attribute’s <CODE CLASS="Code">
+existence</CODE>
+. However, it may be used in specialised archetypes to exclude a possibility defined in a parent archetype (see <A HREF="specialisation.htm#97568" CLASS="XRef">See Attribute Redefinition</A>).</P>
+<P CLASS="Body">
+<A NAME="pgfId-1156146"></A>In the example below, three <CODE CLASS="Code">
+EVENT</CODE>
+ constraints are shown; the first one (“1 minute sample”) is shown as mandatory, while the other two are optional.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148000"></A>events cardinality ∈ {*} ∈ { 	</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148001"></A>	EVENT[id2] occurrences ∈ {1..1} ∈ {	}										 -- 1 min sample</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148002"></A>	EVENT[id3] occurrences ∈ {0..1} ∈ {	} 										-- 2 min sample</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148003"></A>	EVENT[id4] occurrences ∈ {0..1} ∈ {	}										 -- 3 min sample</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148004"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148005"></A>The following example expresses a constraint on instances of <CODE CLASS="Code">
+GROUP</CODE>
+ such that for <CODE CLASS="Code">
+GROUPs</CODE>
+ representing tribes, clubs and families, there can only be one “head”, but there may be many members.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148006"></A>GROUP[id103] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148007"></A>	kind ∈ {/tribe|family|club/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148008"></A>	members cardinality ∈ {*} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148009"></A>		PERSON[id104] occurrences ∈ {1} ∈ {	</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148010"></A>			title ∈ {“head”}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148011"></A>			-- etc --</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148012"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148013"></A>		PERSON[id105] occurrences ∈ {0..*} ∈ {	</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148014"></A>			title ∈ {“member”}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148015"></A>			-- etc --</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148016"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148017"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148018"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1157356"></A>The first <CODE CLASS="Code">
+occurrences</CODE>
+ constraint indicates that a <CODE CLASS="Code">
+PERSON</CODE>
+ with the title <CODE CLASS="Code">
+“head”</CODE>
+ is mandatory in the <CODE CLASS="Code">
+GROUP</CODE>
+, while the second indicates that at runtime, instances of <CODE CLASS="Code">
+PERSON</CODE>
+ with the title <CODE CLASS="Code">
+“member”</CODE>
+ can number from none to many. Occurrences may take the value of any range including <CODE CLASS="Code">
+{0..*}</CODE>
+, meaning that any number of instances of the given type may appear in data, each conforming to the one constraint block in the archetype. A single positive integer, or the infinity indicator, may also be used on its own, thus: <CODE CLASS="Code">
+{2}</CODE>
+, <CODE CLASS="Code">
+{*}</CODE>
+. A range of <CODE CLASS="Code">
+{0..0}</CODE>
+ or <CODE CLASS="Code">
+{0}</CODE>
+ indicates that no occurrences of this object are allowed in this archetype. If no occurrences constraint is stated, the occurrences of the object is define by the underlying reference model.</P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1157358"></A>An occurrences constraint may appear directly after the type name of any object constraint within a container attribute, in order to indicate how many times data objects conforming to the block may occur in the data.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1148021"></A>Where cardinality constraints are used (remembering that occurrences is always there by default, if not explicitly specified), cardinality and occurrences must always be compatible. The rules for this are formally stated in the Archetype Object Model specification. The key elements of these rules are as follows:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1162151"></A>where a cardinality constraint is stated with a finite upper bound:</LI>
+<LI CLASS="LstU2">
+<A NAME="pgfId-1162169"></A>any child object with either stated occurrences with an open upper bound (typically 0..* or 1..*) or else inferred occurrences (0..*) is legal, since the occurrences open upper bound is interpreted to mean the maximum value allowed by the cardinality upper bound.</LI>
+<LI CLASS="LstU2">
+<A NAME="pgfId-1162179"></A>the sum of all child object occurrences lower bounds must be less than the cardinality upper bound;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1162193"></A>no ‘orphans’: at least instance of one optional child object (occurrences lower bound = 0), and one instance of every mandatory child object (occurrences lower bound &gt; 0) must be includable within the cardinality range.</LI>
+</UL>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1148023"></A>4.3.5	“Any” Constraints</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148024"></A>There are two cases where it is useful to state a completely open, or ‘any’, constraint. The first is when it is desired to override the existence or cardinality of a property, such as in the following:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148025"></A>PERSON[id2] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148026"></A>	name existence ∈ {1}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148027"></A>	-- etc --</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148028"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148029"></A>In the above, no further ‘matches {}’ part is required in the statement, since no more constraints are to be stated.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1148030"></A>The second use of “any” as a constraint value is for types, such as in the following:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148031"></A>ELEMENT[id4] ∈ {									-- speed limit</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148032"></A>	value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148033"></A>		DV_QUANTITY[id5]							-- type was ‘DATA_VALUE’ in RM</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148034"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148035"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148036"></A>The meaning of this constraint is that in the data at runtime, the <EM CLASS="Emphasis">
+value</EM>
+ property of <CODE CLASS="Code">
+ELEMENT</CODE>
+ must be of type <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+, but can have any value internally. This is most useful for constraining objects to be of a certain type, without further constraining value, and is especially useful where the information model contains subtyping, and there is a need to restrict data to be of certain subtypes in certain contexts.</P>
+<UL>
+<LI CLASS="Deprecated">
+<A NAME="pgfId-1166501"></A>In ADL 1.4, ‘any’ constraints were represented with an additional “matches {*}” at the end of the statement. This is deprecated. It is recommended that parsers silently accept this form, but output the modern ADL 1.5 form.</LI>
+</UL>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1154534"></A>4.3.6	Reference Model Type Matching</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1154555"></A>All cADL object constraints state a type from an underlying reference model. This may be an abstract type or a concrete type. The part of the data conforming to the constraint can be of any concrete type from the reference model that conforms to the type mentioned in the constraint, i.e. the same type if it is concrete, or any subtype. Correctly evaluating data/archetype conformance is up to tools to implement, and requires access to a formal description of the reference model.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1154564"></A>One of the consequences of subtype-based type matching is that semantics are needed for when more than one reference model subtype is declared under the same attribute node in cADL. Consider the reference model inheritance structure shown below, in which the abstract <CODE CLASS="Code">
+PARTY</CODE>
+ class has abstract and concrete descendants including <CODE CLASS="Code">
+ACTOR</CODE>
+, <CODE CLASS="Code">
+ROLE</CODE>
+, and so on.</P>
+<DIV>
+<MAP NAME="CDL-4">
+</MAP>
+<IMG SRC="CDL-4.png" USEMAP="#CDL-4">
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1154556"></A>Narrowed Subtype Constraints</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1154993"></A>The following cADL statement defines an instance space that includes instances of any of the concrete subtypes of the <CODE CLASS="Code">
+PARTY</CODE>
+ class within an instance of the class <CODE CLASS="Code">
+XXXX</CODE>
+ in the figure (the ellipsis indicates particular constrraints not shown here).</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1154682"></A>counter_party ∈ {		</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154664"></A>	PARTY[id4] ∈ { 			... }</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154687"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1154676"></A>However, in some circumstances, it may be desirable to define a constraint that will match a particular subtype in a specific way, while other subtypes are matched by the more general rule. Under a single-valued attribute, this can be done as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1154694"></A>counter_party ∈ {		</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154695"></A>	PARTY[id4] ∈ {			 ... }</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154700"></A>	PERSON[id5] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154711"></A>		date_of_birth ∈ { ... }</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154712"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154696"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1154680"></A>This cADL text says that the instance value of the <EM CLASS="Emphasis">
+counter_party</EM>
+ attribute in the data can either be a <CODE CLASS="Code">
+PERSON</CODE>
+ object matching the <CODE CLASS="Code">
+PERSON</CODE>
+ block, with a <EM CLASS="Emphasis">
+date_of_birth</EM>
+ matching the given range, or else any other kind of <CODE CLASS="Code">
+PARTY</CODE>
+ object.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1154727"></A>Under a multiply-valued attribute, the alternative subtypes are included as identified child members. The following example illustrates a constraint on the <EM CLASS="Emphasis">
+counter_parties</EM>
+ attribute of instances of the class <CODE CLASS="Code">
+YYYY</CODE>
+ in <A HREF="CDL.htm#38970" CLASS="XRef">See Reference model with abstract and concrete subtypes</A>.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1154816"></A>counter_parties ∈ {		</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154818"></A>	PERSON[id4] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154819"></A>		date_of_birth ∈ { ... }</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154820"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154860"></A>	ORGANISATION[id5] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154861"></A>		date_of_registration ∈ { ... }</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154862"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154856"></A>	PARTY[id6] ∈ { 			... }</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1154821"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1154873"></A>The above says that <CODE CLASS="Code">
+ORGANISATION</CODE>
+ and <CODE CLASS="Code">
+PERSON</CODE>
+ instances in the data can only match the <CODE CLASS="Code">
+ORGANISATION</CODE>
+ and <CODE CLASS="Code">
+PERSON</CODE>
+ constraints stated above, while an instance any other subtype of <CODE CLASS="Code">
+PARTY</CODE>
+ must match the <CODE CLASS="Code">
+PARTY</CODE>
+ constraint.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1155054"></A>Remove Specified Subtypes</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1155135"></A>In some cases it is required to remove some subtypes altogether. This is achieved by stating a constraint on the specific subtypes with <CODE CLASS="Code">
+occurrences</CODE>
+ limited to zero. The following example matches any <CODE CLASS="Code">
+PARTY</CODE>
+ instance with the exception of instances of <CODE CLASS="Code">
+COMPANY</CODE>
+ or <CODE CLASS="Code">
+GROUP</CODE>
+ subtypes.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1155105"></A>counter_party ∈ {		</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1155106"></A>	PARTY[id4] ∈ {			 ... }</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1155125"></A>	COMPANY[id5] occurrences ∈ {0}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1155126"></A>	GROUP[id6] occurrences ∈ {0}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1155127"></A>}</PRE>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1153479"></A>4.3.7	Paths</H6>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1154530"></A>Archetype Path Formation</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1153474"></A>The use of identified object nodes allows the formation of archetype paths, which can be used to unambiguously reference object nodes within the same archetype or within a specialised child. The syntax of archetype paths is designed to be close to the W3C Xpath syntax, and can be directly converted to it for use in XML. </P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1153997"></A>Archetype paths are paths extracted from the definition section of an archetype, and refer to object nodes within the definition. A path is constructed as a concatenation of ‘/’ characters and attribute names, with the latter including node identifiers as predicates where required for disambiguation.</P>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1153552"></A>In the following example, the <CODE CLASS="Code">
+PERSON</CODE>
+ constraint node is the sole object constraint under the single-valued attribute manager:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148041"></A>	manager ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148042"></A>		PERSON[id104] ∈ {	</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148043"></A>			title ∈ {“head of finance”, “head of engineering”}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148044"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148045"></A>	}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148046"></A>Two valid paths to the object under the <EM CLASS="Emphasis">
+title</EM>
+ attribute are possible:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148047"></A>manager[id104]/title</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167441"></A>manager/title</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167433"></A>&nbsp;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1171004"></A>Where there are more than one sibling node, node identifiers must be used to ensure unique referencing:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1171005"></A>	employees ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171006"></A>		PERSON[id104] ∈ {	</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148051"></A>			title ∈ {“head”}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148052"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148053"></A>		PERSON[id105] matches {	</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148054"></A>			title ∈ {“member”}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148055"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148056"></A>	}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148057"></A>The paths to the respective <EM CLASS="Emphasis">
+title</EM>
+ attributes are now:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148058"></A>	employees[id104]/title</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148059"></A>	employees[id105]/title</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148074"></A>The following gives another example:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148075"></A>HISTORY[id1] occurrences ∈ {1} ∈ {			</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148076"></A>	periodic ∈ {False}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148077"></A>	events cardinality ∈ {*} ∈ { 	</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148078"></A>		EVENT[id2] occurrences ∈ {0..1} ∈ {	}										-- 1 min sample</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148079"></A>		EVENT[id3] occurrences ∈ {0..1} ∈ {	} 										-- 2 min sample</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148080"></A>		EVENT[id4] occurrences ∈ {0..1} ∈ {	}										-- 3 min sample</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148081"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148082"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148083"></A>The following paths can be constructed:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148084"></A>/								-- the HISTORY (root) object</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148085"></A>/periodic								-- the HISTORY.periodic attribute</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148086"></A>/events	[id2]							-- the 1 minute event object</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148087"></A>/events	[id3]							-- the 2 minute event object</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148088"></A>/events	[id4]							-- the 3 minute event object</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148089"></A>The above paths can all be used to reference the relevant nodes within the archetype in which they are defined, or within any specialised child archetype.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1153646"></A>Paths used in cADL are expressed in the ADL path syntax, described in detail in <A HREF="paths.htm#84089" CLASS="XRef">See ADL Paths</A>. ADL paths have the same alternating object/attribute structure implied in the general hierarchical structure of cADL, obeying the pattern <CODE CLASS="Code">
+TYPE/attribute/TYPE/attribute/</CODE>
+... .</P>
+<P CLASS="Body">
+<A NAME="pgfId-1148091"></A>The examples above are <EM CLASS="Emphasis">
+physical</EM>
+ paths because they refer to object nodes using node identifier codes such as “id4”. Physical paths can be converted to <EM CLASS="Emphasis">
+logical</EM>
+ paths by adding the code meanings as annotations for node identifiers, if defined. Thus, the following two paths might be equivalent:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148092"></A>/events	[id4]									-- the 3 minute event object</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148093"></A>/events	[id4|3 minute event|]									-- the 3 minute event object</PRE>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1154500"></A>External Use of Paths</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148094"></A>None of the paths shown above are valid outside the cADL text in which they occur, since they do not include an identifier of the enclosing artefact, normally an archetype. To reference a cADL node in an archetype from elsewhere (e.g. another archetype or a template), the identifier of the containing itself must be prefixed to the path, as in the following example:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148095"></A>[openehr-ehr-entry.apgar-result.v1.0.0]/events	[id2]</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148096"></A>This kind of path expression is necessary to form the paths that occur when archetypes are composed to form larger structures.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1153661"></A>Runtime Paths</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1153667"></A>Paths for use with runtime data can be constructed in the same way as archetype paths, and are the same except for single-valued attributes. Since in data only a single instance can appear as the value of a single-valued attribute, there is never any ambiguity in referencing it, whereas an archetype path to or through the same attribute may require a node identifier due to he possible presence of multiple alternatives. Consider the example from above:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1153677"></A>items cardinality matches {*} matches</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153697"></A>	ELEMENT[id4] matches {											-- speed limit</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153678"></A>		value matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153679"></A>			DV_QUANTITY[id22] matches {									-- miles per hour</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153680"></A>				magnitude matches {|0..55|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153681"></A>				property matches {&quot;velocity&quot;}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153682"></A>				units matches {&quot;mph&quot;}							</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153683"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153684"></A>			DV_QUANTITY[id23] matches {									-- km per hour</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153685"></A>				magnitude matches {|0..100|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153686"></A>				property matches {&quot;velocity&quot;}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153687"></A>				units matches {&quot;km/h&quot;}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153688"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153698"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153689"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153690"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1153675"></A>The following archetype paths can be constructed:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1153714"></A>items[id4]/value[id22]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153742"></A>items[id4]/value[id23]</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1153747"></A>For instance data created according to this archetype, the following runtime path can be used:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1162214"></A>items[id4]/value							-- since there is only one DV_QUANTITY in the data</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153756"></A>&nbsp;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1153761"></A>A query using this path will match the data regardless of which type of <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ object is there. However, in some circumstances, queries may need to be specific, in which case they will use the full archetype path, i.e. items[id4]/value[id22] or items[id4]/value[id23] to select only ‘miles’ or ‘kilometres’ data. This will only work if the node ids (id-codes) are in fact stored in all types of the reference model data. If for example this was not the case with the <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ type, another facet of the <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ objects from the archetype such as ‘units = “km/h”’ would need to be used in the query to correctly locate only metric <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ objects.</P>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1148097"></A>4.3.8	Internal References (Proxy Constraint Objects)</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148098"></A>It is possible to define a constraint structure at a certain point to be the same as a structure defined elsewhere in the archetype, rather than copying the desired structure. This is achieved using a proxy constraint object, using the following syntax: </P>
+<PRE CLASS="CCode"><A NAME="pgfId-1161706"></A>	use_node TYPE[idN] archetype_path</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1167157"></A>This statement defines a node of type <CODE CLASS="Code">
+TYPE</CODE>
+, whose definition is the same as the one found at path <CODE CLASS="Code">
+archetype_path</CODE>
+. The type mentioned in the <CODE CLASS="Code">
+use_node</CODE>
+ reference must always be the same type as the referenced type. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1167264"></A>The path must not be in the parent path of the proxy object itself, but may be a sibling of the proxy object. The sibling case is a special case, and the meaning of the proxy constraint is that the target object’s children should be re-used, but not the target itself (since that would illegally create two siblings with the same identifier). The general case is that the proxy object and target object locations are different, and the meaning is that the proxy object is logically replaced by a deep copy of the target object. (In theory the sibling case could be banned, and proxies defined one level further down with targets of the children of the originally intended target, but this creates inconvenience for the archetype author, and can easily be dealt with in tools).</P>
+<P CLASS="Body">
+<A NAME="pgfId-1167190"></A>Occurrences from the target are also assumed, or may be explicitly overridden:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1161795"></A>	use_node TYPE[id4] occurrences ∈ {occ} archetype_path</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1161802"></A>Proxy objects provide an internal reuse mechanism. Specialised archetypes may redefine structures on such nodes as if they had been defined inline. This is described in more detail in <A HREF="specialisation.htm#14886" CLASS="XRef">See Internal Reference (Proxy Object) Redefinition</A> in the Specialisation section.</P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1161796"></A>A proxy constraint object allows object constraints defined elsewhere to be re-used within the same archetype or a specialised child.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1161797"></A>The following example shows the definitions of the <CODE CLASS="Code">
+ADDRESS</CODE>
+ nodes for phone, fax and email for a home <CODE CLASS="Code">
+CONTACT</CODE>
+ being reused for a work <CODE CLASS="Code">
+CONTACT</CODE>
+.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148102"></A>PERSON[id1] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148103"></A>	identities ∈ {			</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148104"></A>		-- etc --</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148105"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148106"></A>	contacts cardinality ∈ {0..*} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148107"></A>		CONTACT[id2] ∈ {												-- home address</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148108"></A>			purpose ∈ {-- etc --}		</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148109"></A>			addresses ∈ {-- etc --}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148110"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148111"></A>		CONTACT[id3] ∈ {												-- postal address</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148112"></A>			purpose ∈ {-- etc --}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148113"></A>			addresses ∈ {-- etc --}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148114"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148115"></A>		CONTACT[id4] ∈ {												-- home contact</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148116"></A>			purpose ∈ {-- etc --}	</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148117"></A>			addresses cardinality ∈ {0..*} ∈ { </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148118"></A>				ADDRESS[id5] ∈ {										-- phone</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148119"></A>					type ∈ {-- etc --}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148120"></A>					details ∈ {-- etc --}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1150847"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148121"></A>				ADDRESS[id6] ∈ {										-- fax</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148122"></A>					type ∈ {-- etc --}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148123"></A>					details ∈ {-- etc --}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148124"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148125"></A>				ADDRESS[id7] ∈ {										-- email</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148126"></A>					type ∈ {-- etc --}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148127"></A>					details ∈ {-- etc --}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148128"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148129"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148130"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148131"></A>		CONTACT[id8] ∈ {												-- work contact</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148132"></A>			purpose ∈ {-- etc --}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148133"></A>			addresses cardinality ∈ {0..*} ∈ { </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148134"></A>				use_node ADDRESS[id9] /contacts[id4]/addresses[id5] 											-- phone</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148135"></A>				use_node ADDRESS[id10] /contacts[id4]/addresses[id6] 											-- fax </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148136"></A>				use_node ADDRESS[id11] /contacts[id4]/addresses[id7] 											-- email</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148137"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148138"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148139"></A>	}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1161993"></A>The following example shows the occurrences being overridden in the referring node, to enable the specification for ‘phone’ to be re-used, but with a different occurrences constraint.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1150783"></A>PERSON[id1] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1150787"></A>	contacts cardinality ∈ {0..*} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1150796"></A>		CONTACT[id4] ∈ {												-- home contact</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1150798"></A>			addresses cardinality ∈ {0..*} ∈ { </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1150799"></A>				ADDRESS[id5] occurrences ∈ {1} ∈ {	...}									-- phone</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1150844"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1150811"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1150812"></A>		CONTACT[id8] ∈ {												-- work contact</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1150814"></A>			addresses cardinality ∈ {0..*} ∈ { </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1150894"></A>				use_node ADDRESS[id9] occurrences ∈ {0..*} </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1150898"></A>						/contacts[id4]/addresses[id5] 									-- phone</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1150895"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1150819"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1150820"></A>	}</PRE>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1167164"></A>Paths and Proxy Objects</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1167197"></A>In forming paths through the proxy and to nodes below the target, two cases can be identified:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1167228"></A>if the proxy object is a sibling of the target object, the proxy object node identifier is used in paths, and the node id of the target object is not;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1167239"></A>otherwise, paths are formed using the identifier from the proxy target object.</LI>
+</UL>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1159038"></A>4.3.9	<A NAME="59531"></A>External References</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1159104"></A>Another kind of reference in an archetype is to another archetype. There are two ways this can be done: using a direct reference, and using an archetype ‘slot’. The first is used when the need is to refer to one specific archetype (or to a template from another template), while the second is a constraint that allows for various archetypes matching specified criteria to be used. The slot concept is described in the next section.</P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1160783"></A>An external reference defines a fixed compositional connection between two archetypes.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1159122"></A>Direct references, or external references as they will be denoted here occur for two main reasons: re-use and templating. In the first case, an archetype has originally been built using inline constraints when it is discovered that another archetype contains the same or very similar inline constraints at a similar point. As would be normal in software design, a refactoring exercise is conducted that results in the common part being created as its own, new archetype, and both original archetypes ‘referring’ to it. They do this using an external reference, which has syntax of the form:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1159140"></A>use_archetype TYPE[idN, archetype_id] [occurrences constraint] </PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1159201"></A>In the above, the <CODE CLASS="Code">
+archetype_id</CODE>
+ is included with the usual archetype node identifier (id-code). The usual occurrence constraints can be applied at the end.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1159882"></A>The following example shows sections of two parent archetypes both referring to the same child archetype. The first section is from an openEHR <CODE CLASS="Code">
+INSTRUCTION</CODE>
+ archetype to do with a medication order.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1159803"></A>INSTRUCTION[id1] ∈ {	-- Medication order</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1159804"></A>	activities cardinality ∈ {0..*; unordered} matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1159795"></A>		ACTIVITY[id2] ∈ {	-- Medication activity</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1159211"></A>			action_archetype_id ∈ {/openEHR-EHR-ACTION\.medication\.v1/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167544"></A>			description ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171182"></A>				use_archetype ITEM_TREE[							id3, </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171711"></A>											openEHR-EHR-ITEM_TREE.medication.v1]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171184"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1159854"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1159861"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1159264"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1159202"></A>This section is from an openEHR <CODE CLASS="Code">
+ACTION</CODE>
+ archetype defining medication administration actions.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1159297"></A>ACTION[id1] ∈ {	-- Medication action</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1159298"></A>	ism_transition ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1159299"></A>		ISM_TRANSITION[id2] ∈ {...			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1159333"></A>		...</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1159499"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171716"></A>	description ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171717"></A>		use_archetype ITEM_TREE[			id3, openEHR-EHR-ITEM_TREE.medication.v1]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171718"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1159508"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1159739"></A>Each of these archetypes refers to the openEHR <CODE CLASS="Code">
+ITEM_TREE</CODE>
+ archetype <CODE CLASS="Code">
+openEHR-EHR-ITEM_TREE.medication.v1</CODE>
+, which is a normal archetype describing medication. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1160817"></A>Following the standard object-oriented semantics of type substitutability, and also the ontological subsumption notion, specialisations of the referenced archetype (including templates) are also valid substitutions at design or runtime. At design time, this takes the form of a redefinition, e.g.:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1171775"></A>description ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171776"></A>	use_archetype ITEM_TREE[							id3.1, 		openEHR-EHR-ITEM_TREE.vaccine.v1]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171778"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1159871"></A>where the ‘vaccine’ archetype is a specialisation of the ‘medication’ archetype. Redefinitions of this kind are described in more detail in <A HREF="specialisation.htm#43875" CLASS="XRef">See External Reference Redefinition</A>.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1171803"></A>External references can of course also be defined under container attributes.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1159782"></A>The second use of external references is typically in templates, to specify an archetype or sub-template of a template for an attribute where no slot has been defined. This use is described in the openEHR Template specification.</P>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1171734"></A>Paths</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1167489"></A>Paths that terminate in external reference nodes in source-form archetypes will include only the id-codes, as in the following examples:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1171748"></A>/activities[id2]/description[id3]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171749"></A>&nbsp;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171750"></A>/description[id2]</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1171727"></A>Howver, in flattened archetypes, the corresponding paths will include the archetype identifier(s) rather than the id-codes, and may continue down through the structure of the included archetypes, as in the following example.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1167490"></A>/activities[id2]/description[openEHR-EHR-ITEM_TREE.medication.v1]/...</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167491"></A>&nbsp;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1161370"></A>/description[openEHR-EHR-ITEM_TREE.medication.v1]/...</PRE>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1148140"></A>4.3.10	<A NAME="31193"></A>Archetype Slots</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1149337"></A>At any point in a cADL definition, a constraint can be defined that allows other archetypes to be used, rather than defining the desired constraints inline. This is known as an archetype ‘slot’, i.e. a connection point whose allowable ‘fillers’ are constrained by a set of statements, written in the ADL assertion language (defined in <A HREF="assertion.htm#68334" CLASS="XRef">See Assertions</A>). </P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1153826"></A>An archetype slot defines a constrained compositional chaining point in an archetype at which other archetypes can be inserted, if they are in the set defined by the slot constraint.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1149341"></A>An archetype slot is introduced with the keyword <CODE CLASS="Code">
+allow_archetype</CODE>
+ and defined in terms of two lists of assertion statements defining which archetypes are allowed and/or which are excluded from filling that slot, introduced with the keywords <CODE CLASS="Code">
+include</CODE>
+ and <CODE CLASS="Code">
+exclude</CODE>
+, respectively. The following example illustrates the general form of an archetype slot.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1153858"></A>allow_archetype SECTION[id5] occurrences ∈ {0..*} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153859"></A>	include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153860"></A>		-- constraints for inclusion</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153861"></A>	exclude</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153862"></A>		-- constraints for exclusion</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1153863"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1159970"></A>A slot constraint evaluates to a set of archetype identifiers from whatever is considered in the current model environment to be the total available set of archetypes.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1171894"></A>The simplest possible slot has no includes or excludes, and effectively imposes no constraint. However, it is allowed in order to enable authoring tools to create a slot whose actual constraint definition will be defined at a later point in time.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1172444"></A>A slot is designed to be ‘filled’, i.e. to have one of the allowed archetypes chosen for use. This is done in a child archetype, almost always a template. A slot can also be ‘closed’, meaning no further fillers can be added.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1172463"></A>The actual specification of slot fillers, and also the ‘closing’ of slots is done in specialised archetypes, and is described in <A HREF="specialisation.htm#29068" CLASS="XRef">See Slot Filling and Redefinition</A>, in the chapter on specialisation.</P>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1172096"></A><A NAME="69911"></A>Formal Semantics of include and exclude Constraints</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1172097"></A>The semantics of the <CODE CLASS="Code">
+include</CODE>
+ and <CODE CLASS="Code">
+exclude</CODE>
+ lists are somewhat subtle. They are as follows:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1172098"></A>The meaning of the ‘set of all archetypes’ in any given environment is evaluable (and evaluated) to a finite set consisting of all archetypes available within the current archetype Library, not some notional virtual / global set of archetypes, or theoretical possible set.</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1172099"></A>Either the <CODE CLASS="Code">
+include</CODE>
+ or <CODE CLASS="Code">
+exclude</CODE>
+ constraint, but not both, may be ‘substantive’, i.e. define a particular set of archetypes that would be matched within a given slot, or ‘open’, i.e. matching all possible archetypes.</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1172100"></A>A slot constraint may consist of a single <CODE CLASS="Code">
+include</CODE>
+ or <CODE CLASS="Code">
+exclude</CODE>
+ constraint, or of an <CODE CLASS="Code">
+include</CODE>
+ / <CODE CLASS="Code">
+exclude</CODE>
+ pair.</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1172101"></A>If an <CODE CLASS="Code">
+include</CODE>
+ or <CODE CLASS="Code">
+exclude</CODE>
+ constraint is present on its own, it is understood as a recommendation, i.e. it does not constitute a formal constraint for matching or exclusion, but tools and applications may use the recommended match set in an intelligent way. The result set for such an <CODE CLASS="Code">
+include</CODE>
+ or <CODE CLASS="Code">
+exclude </CODE>
+is the whole current archetype set.</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1172102"></A>If a substantive <CODE CLASS="Code">
+include</CODE>
+ or <CODE CLASS="Code">
+exclude</CODE>
+ constraint is present with a corresponding open <CODE CLASS="Code">
+exclude</CODE>
+ or <CODE CLASS="Code">
+include</CODE>
+, respectively, the substantive constraint is considered formally binding.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1172103"></A>The meaning of the slot constraint overall is that only archetypes matching the <CODE CLASS="Code">
+include</CODE>
+ constraint are allowed, and no others. The same logic applies in the reverse sense when the <CODE CLASS="Code">
+exclude</CODE>
+ constraint is substantive.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1171896"></A>Semantic Slot Definition</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1172121"></A>There are various ways to define any other form of slot. The preferred approach is to define the set of allowable archetypes in terms of subsumption hierarchies within the archetype model space of the working Archetype Library. Such a constraint is formed from one or more expressions of the form:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1171906"></A>archetype_id matches {subsumption_expression}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1171920"></A>where subsumption_expression is one of:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1171939"></A>an archetype ontology entity</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1171949"></A>‘&lt;‘ | ‘&lt;&lt;‘ an archetype ontology entity</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1171956"></A>and the unary operators ‘&lt;‘ and ‘&lt;&lt;‘ have the following meanings:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1171980"></A>&lt; : descendant-of</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1171997"></A>&lt;&lt; : descendant-of-or-self</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1172007"></A>An archetype ontology entity is either a Reference Model class name or an Archetype semantic identifier.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1172156"></A>A simple slot definition of this form is as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1172168"></A>allow_archetype ENTRY[id4] occurrences matches {0..*} matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172169"></A>	include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172170"></A>		archetype_id matches {&lt; openEHR-EHR-OBSERVATION}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172173"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1160008"></A>This constrains the archetype that can be used in the slot to being any based on the openEHR <CODE CLASS="Code">
+OBSERVATION</CODE>
+ class.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1172283"></A>The following example shows a more typical slot definition:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1172284"></A>allow_archetype CLUSTER[id26] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172285"></A>	include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172241"></A>		archetype_id ∈ {&lt;&lt; openEHR-EHR-CLUSTER.medical_device.v1}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172242"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1172231"></A>Here, the archetype openEHR-EHR-CLUSTER.medical_device.v1 or any child can be used.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1172351"></A>More complex constraints can be created using Boolean expressions containing subsumption terms, for example:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1172363"></A>allow_archetype CLUSTER[id26] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172364"></A>	include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172405"></A>		archetype_id ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172406"></A>			(&lt;&lt; openEHR-EHR-CLUSTER.medical_device.v1 or </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172407"></A>				&lt;&lt; openEHR-EHR-CLUSTER.method.v1) and</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172419"></A>			not &lt;&lt; openEHR-EHR-CLUSTER.protocol.v1</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172412"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172366"></A>}</PRE>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1151024"></A>Slots based on Lexical Archetype Identifiers</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1150964"></A>Prior to ADL2, slots were defined using regular expressions on the archetype lexical identifier. This form remains legal in ADL2.0.x, but will be deprecated in future.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1172512"></A>In this kind of slot constraint, the core expression type is of the following form:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1151000"></A>archetype_id/value ∈ {/openEHR-EHR-\.SECTION\..*\..*/}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1150997"></A>where archetype_id/value stands for the literal String value of the archetype identifier, and the regular expression is recognised as occurring between two slash delimiters (//).</P>
+<P CLASS="Body">
+<A NAME="pgfId-1149349"></A>The following example shows how the “Objective” <CODE CLASS="Code">
+SECTION</CODE>
+ in a problem/SOAP headings archetype defines two slots, indicating which <CODE CLASS="Code">
+OBSERVATION</CODE>
+ and <CODE CLASS="Code">
+SECTION</CODE>
+ archetypes are allowed and excluded under the <EM CLASS="Emphasis">
+items</EM>
+ property.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1149350"></A>SECTION [at2000] occurrences ∈ {0..1} ∈ {																-- objective</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149351"></A>	items cardinality ∈ {0..*} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149356"></A>		allow_archetype SECTION[at2002] occurrences ∈ {0..*} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149357"></A>			include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149358"></A>				archetype_id/value ∈ {/.*/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1156290"></A>			exclude</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1156291"></A>				archetype_id/value ∈ 							</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1156299"></A>							{/openEHR-EHR-SECTION\.patient_details\..+/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1156292"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149362"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149363"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1149364"></A>Here, every constraint inside the block starting on an <CODE CLASS="Code">
+allow_archetype</CODE>
+ line contains constraints that must be met by archetypes in order to fill the slot. In the examples above, the constraints are in the form of regular expressions on archetype identifiers. In cADL, the PERL regular expression syntax is assumed.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1156307"></A>There are two ways in which <EM CLASS="Emphasis">
+archetype_id</EM>
+ regular expressions patterns can be used:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1156316"></A>as a pattern against which to test a particular archetype identifier being proposed for that slot;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1156320"></A>as a pattern to use against a population of archetypes (e.g. all archetypes in a particular repository) in order to generate a list of all possible archetypes for filling the slot.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1156315"></A>Due to the second use, it is required that the regular expression pattern always cover a full archetype identifier rather than only sub-parts. As a consequence, a ‘meta-pattern’ can be defined to check <EM CLASS="Emphasis">
+archetype_id</EM>
+ regular expressions for validity:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1156327"></A>^.+-.+-.+\..*\..+$</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1156337"></A>Because identifier matching is an inherently lexical operation, subtypes of mentioned types are not matched unless explicitly stated. Consider the following example:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1156345"></A>allow_archetype ENTRY[id2] ∈ {	-- any kind of ENTRY</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1156346"></A>	include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1156347"></A>		archetype_id/value ∈ {			/openEHR-EHR-ENTRY..+\.v1/		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1156354"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1156341"></A>The intention is to allow any kind of <CODE CLASS="Code">
+ENTRY</CODE>
+, but the above constraint won’t have the desired effect, because the pattern <CODE CLASS="Code">
+openEHR-EHR-ENTRY</CODE>
+ is unlikely to match any actual archetypes. Instead the following kind of constraint should be used:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1156385"></A>allow_archetype ENTRY[id2] ∈ {	-- any kind of ENTRY</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1156386"></A>	include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1156387"></A>		archetype_id/value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1156388"></A>			/openEHR-EHR-EVALUATION\..+\.v1|openEHR-EHR-OBSERVATION\..+\.v1/</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1161535"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1156389"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1156379"></A>The above would allow any <CODE CLASS="Code">
+EVALUATION</CODE>
+ and any <CODE CLASS="Code">
+OBSERVATION</CODE>
+ archetypes to be used in the slot. Note that since no exclude clause was used, the above slot definition constitutes a recommendation. To make it a hard constraint, the following would be needed:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1172061"></A>allow_archetype ENTRY[id2] ∈ {	-- any kind of ENTRY</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172062"></A>	include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172063"></A>		archetype_id/value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172064"></A>			/openEHR-EHR-EVALUATION\..+\.v1|openEHR-EHR-OBSERVATION\..+\.v1/</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172065"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172078"></A>	exclude</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172079"></A>		archetype_id/value ∈ {			/.*/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172066"></A>}</PRE>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1151043"></A>Slots based on other Constraints</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1151042"></A>Other constraints are possible as well, including that the allowed archetype must contain a certain keyword, or a certain path. The latter allows archetypes to be linked together on the basis of content. For example, under a “genetic relatives” heading in a Family History Organiser archetype, the following slot constraint might be used:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1149366"></A>allow_archetype EVALUATION[id2] occurrences ∈ {0..*} matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149367"></A>	include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149368"></A>		archetype_id ∈ {openEHR-EHR-EVALUATION.family_history.v1}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149369"></A>			∧ ∃ /subject/relationship/defining_code &#174;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1156205"></A>				 ∼ ( [openehr::0] ∈ /subject/relationship/defining_code) -- self</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1156208"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1151089"></A>This says that the slot allows archetypes on the <CODE CLASS="Code">
+EVALUATION</CODE>
+ class, which either have as their concept ‘family_history’ or, if there is a constraint on the subject relationship, then it may not include the code <CODE CLASS="Code">
+[openehr::0]</CODE>
+ (the openEHR term for “self”) - i.e. it must be an archetype designed for family members rather than the subject of care his/herself.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1171604"></A>Slot-filling</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1171625"></A>Slots are ‘filled’ in specialised archetypes or templates by the use of use_archetype statements, i.e. the same construct as for an external reference described above. The typical form of a filled slot is as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1171640"></A>SECTION[id1] ∈ {	-- Past history</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171641"></A>	/items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171642"></A>		use_archetype EVALUATION[id2, </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171643"></A>							org.openehr::openEHR-EHR-								EVALUATION.problem.v1] </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171646"></A>		use_archetype EVALUATION[id2, </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171647"></A>							org.openehr::openEHR-EHR-								EVALUATION.		clin_synopsis.v1]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171648"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171649"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1171676"></A>In ADL, slot-filling is considered a kind of specialisation of a slot, which enables slots to be filled by the same mechanism as any other kind of specialisation found in a child archetype. Slot-filling and other forms of slot redefinition are described in more detail in <A HREF="specialisation.htm#29068" CLASS="XRef">See Slot Filling and Redefinition</A>.</P>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1150306"></A>4.3.11	Mixed Structures</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148172"></A>Four types of structure representing constraints on complex objects have been presented so far:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1148173"></A>complex object structures: any node introduced by a type name and followed by {} containing constraints on attributes;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1148174"></A>internal references: any node introduced by the keyword <CODE CLASS="Code">
+use_node</CODE>
+, followed by a type name; such nodes indicate re-use of a complex object constraint that has already been expressed elsewhere in the archetype;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1148175"></A>archetype slots: any node introduced by the keyword <CODE CLASS="Code">
+allow_archetype</CODE>
+, followed by a type name; such nodes indicate a complex object constraint which is expressed in some other archetype;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1154456"></A><EM CLASS="Emphasis">
+placeholder constraints</EM>
+: any node whose constraint is of the form <CODE CLASS="Code">
+[acNNNN]</CODE>
+.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1148176"></A>At any given node, any combination of these types can co-exist, as in the following example:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148177"></A>SECTION[id2000] ∈ {						</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148178"></A>	items cardinality ∈ {0..*; ordered} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148179"></A>		ENTRY[id2001] ∈ {-- etc --}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148180"></A>		allow_archetype ENTRY[id2002] ∈ {-- etc --}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148181"></A>		use_node ENTRY[id2003] /some_path[id4]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148182"></A>		ENTRY[id2004] ∈ {-- etc --}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148183"></A>		use_node ENTRY[id2005] /[id1002]/some_path[id1012]/</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148184"></A>		use_node ENTRY[id2006] /[id1005]/some_path[id1052]/</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148185"></A>		ENTRY[id2007] ∈ {-- etc --}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148186"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148187"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148188"></A>Here we have a constraint on an attribute called <EM CLASS="Emphasis">
+items</EM>
+ (of cardinality 0..*), expressed as a series of possible constraints on objects of type <CODE CLASS="Code">
+ENTRY</CODE>
+. The 1st, 4th and 7th are described ‘in place’; the 3rd, 5th and 6th are expressed in terms of internal references to other nodes earlier in the archetype, while the 2nd is an archetype slot, whose constraints are expressed in other archetypes matching the include/exclude constraints appearing between the braces of this node. Note also that the <CODE CLASS="Code">
+ordered</CODE>
+ keyword has been used to indicate that the list order is intended to be significant.</P>
+</DIV>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1163093"></A>Second-order Constraints</H5>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1163116"></A>4.4.1	Tuple Constraints</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163249"></A>In realistic data, it is not uncommon to need to constrain object properties in a covarying way. A simple example is the need to state range constraints on a temperature, represented as a <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ type, for both Centigrade and Fahrenheit scales. The default way to do this in ADL is (assuming a simple <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ class consisting of property, units and magnitude properties):</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163250"></A>value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163251"></A>    DV_QUANTITY [id14] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163252"></A>        property ∈ {[openehr::151|temperature|]}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163253"></A>        units ∈ {“deg F”}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163254"></A>        magnitude ∈ {|32.0..212.0|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163255"></A>    }</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163544"></A>    DV_QUANTITY [id15] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163545"></A>        property ∈ {[openehr::151|temperature|]}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163546"></A>        units ∈ {“deg C”}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163259"></A>        magnitude ∈ {|0.0..100.0|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163260"></A>    }</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163261"></A>}</PRE>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163263"></A>What we logically want to do is to state a single constraint on a <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ that sets the magnitude range constraint dependent on the units constraint.</P>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163264"></A>The covarying requirement could be met using rules of the form:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163265"></A>.../value/units = “deg F” &#174; magnitude ∈ {|32.0..212.0|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163266"></A>.../value/units = “deg C” &#174; magnitude ∈ {|0.0..100.0|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165598"></A>&nbsp;</PRE>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163267"></A>However, this seems obscure for what is logically a very simple kind of constraint. </P>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163271"></A>A generic solution involves treating covarying properties formally as tuples, and providing syntax to express ‘constraints on tuples’. The following syntax achieves this:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163274"></A>value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163275"></A>	DV_QUANTITY[id4] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165560"></A>		property ∈ {[openehr::151]}									-- temperature</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165561"></A>		[units, magnitude] ∈ { </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165562"></A>			[{“deg F”}, {|32.0..212.0|}] ,</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163279"></A>			[{“deg C”}, {|0.0..100.0|}] </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163280"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163281"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163282"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1167849"></A>The {} surrounding each leaf level constraint are needed because although such constraints are typically atomic, as above, they may also take other standard ADL forms such as a list of strings, list of integers etc. In the latter case, the ',' characters from such lists will be conflated with the ',' separator of the distinct constraints in the tuple. Use of {} is also logically justified: each such entity is indeed a 'constraint' in the ADL sense, and all constraints are delimited by {}.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1163283"></A>The above is actually short-hand for the following structure, with the added constraint that only corresponding units and magnitude leaf level constraints can occur together, while other combinations like <CODE CLASS="Code">
+“deg F”</CODE>
+ and <CODE CLASS="Code">
+|0.0..100.0|</CODE>
+ would be illegal:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1165912"></A>value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165913"></A>DV_QUANTITY[id4] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165914"></A>		property ∈ {[openehr::151]} -- temperature</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165915"></A>		units ∈ { </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166027"></A>			String ∈ 			{“deg F”}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166056"></A>			String ∈ 			{“deg C”} </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165918"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165940"></A>		magnitude ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166075"></A>			Integer ∈ 			{|32.0..212.0|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165942"></A>			Integer ∈ 	{|0.0..100.0|} </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165943"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165919"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165920"></A>}</PRE>
+<DIV>
+<H6 CLASS="TBD">
+<A NAME="pgfId-1166157"></A>need to check path semantics to leaf nodes in tuples.</H6>
+<P CLASS="Body">
+<A NAME="pgfId-1163284"></A>The above defines constraints on units and magnitude together, as tuples like <CODE CLASS="Code">
+[{“deg F”}, {|32.0..212.0|}] </CODE>
+. </P>
+<UL>
+<LI CLASS="Deprecated">
+<A NAME="pgfId-1171211"></A>In the openEHR ADL 1.4 Archetype Profile, a custom constrainer type <CODE CLASS="Code">
+C_DV_QUANTITY</CODE>
+ was used to to provide the above constraint. However, this is specific to the Reference Model type, and does not solve similar constraints occurring in other types. This type and also the <CODE CLASS="Code">
+C_DV_ORDINAL</CODE>
+ type have been removed from ADL 1.5 altogether.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1165729"></A>This same syntax will work for tuples of 3 or more co-varying properties, and is mathematically clean. It does involve some extra work for compiler implementers, but this only needs to be performed once to support any use of tuple constraints, regardless of Reference Model type. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1163286"></A>If we look at the <CODE CLASS="Code">
+DV_ORDINAL</CODE>
+ data type constraint in the same light. First, doing a typical ordinal constraint (a scale of +, ++, +++) with just standard ADL:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1167310"></A>ordinal_attr ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167311"></A>	DV_ORDINAL[id3] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167312"></A>		value ∈ {0}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163291"></A>		symbol ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163292"></A>			DV_CODED_TEXT[id4] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163294"></A>				code ∈ {&quot;at1&quot;} 								-- +</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163295"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163296"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163297"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163298"></A>	DV_ORDINAL[id5] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163299"></A>		value ∈ {1}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163300"></A>		symbol ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163301"></A>			DV_CODED_TEXT[id6] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163303"></A>				code ∈ {&quot;at2&quot;} 								-- ++</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163304"></A>					}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163305"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163306"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165865"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165872"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163307"></A>	DV_ORDINAL[id7] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163308"></A>		value ∈ {2}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171037"></A>		symbol ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171038"></A>			DV_CODED_TEXT[id8] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171039"></A>				code ∈ {&quot;at3&quot;} 						-- +++</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164931"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163314"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163315"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163316"></A>}</PRE>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163327"></A>This hides the <CODE CLASS="Code">
+DV_ORDINAL</CODE>
+ type altogether, but as for the <CODE CLASS="Code">
+C_DV_QUANTITY</CODE>
+ example above, it was a custom solution. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1167000"></A>By the use of tuple constraint, almost the same thing can be chieved much more efficiently. We can now write:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163340"></A>ordinal_attr ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163341"></A>	DV_ORDINAL[id3] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163342"></A>		[value ,symbol] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163343"></A>			[{0}, {[at1]}], -- +             </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163344"></A>			[{1}, {[at2]}], -- ++          </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163345"></A>			[{2}, {[at3]}] -- +++           </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163346"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164245"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163347"></A>}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165436"></A>&nbsp;</PRE>
+<UL>
+<LI CLASS="Deprecated">
+<A NAME="pgfId-1167014"></A>in the openEHR profiled version of ADL 1.4, a custom syntax was used, below, which is now replaced by the above generic form:</LI>
+</UL>
+<PRE CLASS="CCode"><A NAME="pgfId-1167015"></A>ordinal_attr ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167016"></A>	0|[local::at1],								-- +</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167017"></A>	1|[local::at2],								-- ++</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167018"></A>	2|[local::at3]				 				-- +++</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167019"></A>}</PRE>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1163230"></A>4.4.2	Group Constraints</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163117"></A>Within a container attribute, any number of object constraints may be defined. The cardinality and occurrences constraints described above show how to control respectively, the overall container contents, and the occurrence of any particular object constraint within data. However, sometimes finer control is needed on repetition and grouping of members within the container. This can be achieved by the <CODE CLASS="Code">
+group</CODE>
+ construct, which provides an interior block where a sub-group of the overall container can be treated as a sub-group. The following example shows a typical used of the group construct.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163118"></A>ITEM_TREE[id1] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163119"></A>	items matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163120"></A>		ELEMENT[id2] occurrences ∈ {1} ∈ {...}												-- Investigation type</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163121"></A>		ELEMENT[id3] occurrences ∈ {0..1} ∈ {...}												-- reason</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163122"></A>&nbsp;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163123"></A>		group cardinality ∈ {1} occurrences ∈ {0..1} ∈ {													</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163124"></A>															-- Methodology</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163125"></A>			ELEMENT[id6] occurrences ∈ {0..1} ∈ {...}												-- as Text</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163126"></A>			ELEMENT[id7] occurrences ∈ {0..1} ∈ {...}												-- Coded</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163127"></A>			CLUSTER[id8] occurrences ∈ {0..1} ∈ {...}												-- structured</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163128"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163129"></A>		ELEMENT[id11] occurrences ∈ {0..1} ∈ {...}												-- (other details)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163130"></A>		CLUSTER[id12] occurrences ∈ {0..1} ∈ {...}												-- (other details)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163131"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163132"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163133"></A>In the above, the group is used to state a logical choice of methodology representations, each defined by one of the three constraints within the group. The group construct includes both cardinality and occurrences qualifier constraints. The former indicates the size and ordering of the group, in the same way as the cardinality constraint does for the overall contents of a container attribute. The latter defines the repeatability of the group. If the group occurrences upper limit is above 1, it means that the sub group may repeat, with each repetition respecting the order and size defined by the group cardinality.</P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1163134"></A>A group constraint may be used to delimit a sub-list of objects within the total list of object constraints defined within a container attribute. A cardinality, defining size, ordering and uniqueness of the sub-list must be defined. An occurrences defining the repeatbility of the sub-list must also be defined. Group constraints can be nested.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1163135"></A>The use of group cardinality and occurrences constraints, coupled with the occurrences constraints on each group member provide a means of specifying a number of logical constraint types found in other formalisms, including XML, as follows.</P>
+<TABLE BORDER="1">
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-1163138"></A>Logical constraint</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-1163140"></A>Group<BR>
+cardinality</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-1163142"></A>Group<BR>
+occurrences</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-1163144"></A>Item</P>
+<P CLASS="CellHeading">
+<A NAME="pgfId-1163145"></A>occurrences</P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163147"></A>1 of N choice</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163149"></A>1..1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163151"></A>upper = 1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163153"></A>0..1</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163155"></A>1 of N choice, repeating</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163157"></A>1..1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163159"></A>upper &gt; 1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163161"></A>0..1</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163163"></A>N of M choice</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163165"></A>N..N</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163167"></A>upper = 1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163169"></A>0..1</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163171"></A>N of M choice, repeating</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163173"></A>N..N</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163175"></A>upper &gt; 1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163177"></A>0..1</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163179"></A>sequence, repeating</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163181"></A>upper &gt; 1, ordered</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163183"></A>upper &gt; 1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163185"></A>any</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163187"></A>sub-group, repeating</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163189"></A>upper &gt; 1, unordered</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163191"></A>upper &gt; 1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1163193"></A>any</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="Body">
+<A NAME="pgfId-1163194"></A>Group blocks can be nested, enabling sub-lists of sub-lists to be defined, as illustrated below.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163195"></A>items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163196"></A>	ELEMENT[id2] occurrences ∈ {1} ∈ {...}												-- Investigation type</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163197"></A>	ELEMENT[id3] occurrences ∈ {0..1} ∈ {...}												-- Investigation reason</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163198"></A>&nbsp;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163199"></A>	group cardinality ∈ {2} occurrences ∈ {*} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163200"></A>													-- pick any 2 &amp; repeat</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163201"></A>		ELEMENT[id6] occurrences matches {0..1} ∈ {...}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163202"></A>		ELEMENT[id7] occurrences matches {0..1} ∈ {...}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163203"></A>		CLUSTER[id8] occurrences matches {0..1} ∈ {...}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163204"></A>&nbsp;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163205"></A>		group cardinality ∈ {1} occurrences ∈ {0..1} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163206"></A>													-- at least one</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163207"></A>			ELEMENT[id9] occurrences ∈ {0..1} ∈ {...}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163208"></A>			CLUSTER[id10] occurrences ∈ {0..1} ∈ {...}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163209"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163210"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163211"></A>&nbsp;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163212"></A>	ELEMENT[id11] occurrences ∈ {0..1} ∈ {...}    -- (other details)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163213"></A>	CLUSTER[id12] occurrences ∈ {0..1} ∈ {...}    -- (other details)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163214"></A>}</PRE>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1166231"></A><A NAME="16182"></A>Slots and Grouping</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1166232"></A>The group constraint is often useful with a slot definition, in order to control the ordering and occurrences of items defined by other archetypes, within an overall container. Consider the example of data of the general structure: 'any number of problem and diagnosis Entries, followed by one or more plan &amp; treatment Entries'. An example of data following this structure would be:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1166233"></A><CODE CLASS="Code">
+EVALUATION</CODE>
+: problem #1</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1166234"></A><CODE CLASS="Code">
+EVALUATION</CODE>
+: diagnosis #1</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1166235"></A><CODE CLASS="Code">
+EVALUATION</CODE>
+: problem #2</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1166236"></A><CODE CLASS="Code">
+EVALUATION</CODE>
+: problem #3</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1166237"></A><CODE CLASS="Code">
+EVALUATION</CODE>
+: plan</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1166238"></A><CODE CLASS="Code">
+INSTRUCTION</CODE>
+: medication #1</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1166239"></A><CODE CLASS="Code">
+INSTRUCTION</CODE>
+: therapy #1</LI>
+</UL>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1166240"></A>It might be expected that the slot constraints needed to define this are as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1166241"></A>SECTION[id2] occurrences ∈ {0..1} ∈ {    -- Subjective</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166242"></A>	items cardinality ∈ {0..*; ordered} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166243"></A>		allow_archetype EVALUATION[id6] occurrences ∈ {*} ∈ { -- Problem</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166244"></A>			include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166245"></A>				archetype_id/value ∈ {/openEHR-EHR-EVALUATION\.problem\.v*/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166246"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166247"></A>		allow_archetype EVALUATION[id7] occurrences ∈ {*} ∈ { -- Diagnosis</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166248"></A>			include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166249"></A>				archetype_id/value ∈ {/openEHR-EHR-EVALUATION\.problem-diagnosis\.v*/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166250"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166251"></A>		allow_archetype EVALUATION[id8] occurrences ∈ {1} ∈ { -- Plan</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166252"></A>			include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166253"></A>				archetype_id/value ∈ {/openEHR-EHR-EVALUATION\.plan\.v*/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166254"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166255"></A>		allow_archetype INSTRUCTION[id9] occurrences ∈ {*} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166256"></A>															-- Intervention</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166257"></A>			include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166258"></A>				archetype_id/value ∈ {/openEHR-EHR-INSTRUCTION\.plan\.v*/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166259"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166260"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166261"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1166262"></A>The above says that the <CODE CLASS="Code">
+SECTION</CODE>
+.<EM CLASS="Emphasis">
+items</EM>
+ attribute is an ordered list, and that its contents include multiple <CODE CLASS="Code">
+EVALUATION</CODE>
+ objects representing problem, diagnosis and plan, and also multiple <CODE CLASS="Code">
+INSTRUCTION</CODE>
+ objects representing interventions. The problem is now apparent. Each slot definition is set of possibilities, but we do not necessarily want to follow the slot ordering for the ordering of the archetypes chosen to fill the slots. To impose the required ordering and occurrences, we can use the group construct as follows.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1166263"></A>SECTION[id2] occurrences ∈ {0..1} ∈ {    -- Subjective</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166264"></A>	items cardinality ∈ {0..*; ordered} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166265"></A>		group cardinality ∈ {0..1} occurrences ∈ {0..*} ∈ {                                   </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166266"></A>								-- sub-group of any number of problems &amp; diagnoses</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166267"></A>			allow_archetype EVALUATION[id6] occurrences ∈ {1} ∈ {--Problem</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166268"></A>				include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166269"></A>				  archetype_id/value ∈ {/openEHR-EHR-EVALUATION\.problem\.v*/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166270"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166271"></A>			allow_archetype EVALUATION[id7] occurrences ∈ {1} ∈ {--Diagnosi</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166272"></A>				include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166273"></A>				  archetype_id/value ∈ </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166274"></A>										{/openEHR-EHR-EVALUATION\.diagnosis\.v*/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166275"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166276"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166277"></A>		allow_archetype EVALUATION[id8] occurrences ∈ {1} ∈ { -- Plan</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166278"></A>			include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166279"></A>				archetype_id/value ∈ {/openEHR-EHR-EVALUATION\.plan\.v*/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166280"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166281"></A>		allow_archetype INSTRUCTION[id9] occurrences ∈ {*} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166282"></A>															-- Intervention</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166283"></A>			include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166284"></A>				archetype_id/value ∈ {/openEHR-EHR-INSTRUCTION\.plan\.v*/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166285"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166286"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166287"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1166288"></A>The above has the desired result in data: a group of any number of problems and diagnoses, followed by a plan, followed by one or more Interventions.</P>
+</DIV>
+</DIV>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1163099"></A>Constraints on Primitive Types</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163094"></A>At the leaf nodes in a cADL text, constraints can be expressed on the following primitive types:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1156076"></A>Boolean;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1156081"></A>Character, String;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1156084"></A>Integer, Real;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1156085"></A>Date, Time, Date_time, Duration;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1167886"></A>Terminology_code;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1156089"></A>lists and intervals of some of the above.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1156073"></A>While constraints on complex types follow the rules described so far, constraints on attributes of primitive types in cADL are expressed without type names, and omitting one level of braces, as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148192"></A>some_attr matches {some_pattern}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148193"></A>rather than:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148194"></A>some_attr matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148195"></A>	PRIMITIVE_TYPE[id3] matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148196"></A>		some_pattern</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148197"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148198"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148199"></A>This is made possible because the syntax patterns of all primitive type constraints are mutually distinguishable, i.e. the type can always be inferred from the syntax alone. Since all leaf attributes of all object models are of primitive types, or lists or sets of them, cADL archetypes using the brief form for primitive types are significantly less verbose overall, as well as being more directly comprehensible to human readers. Currently the cADL grammar only supports the brief form used in this specification since no practical reason has been identified for supporting the more verbose version. Theoretically however, there is nothing to prevent it being used in the future, or in some specialist application.</P>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1168415"></A>4.5.1	Assumed Values</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1168416"></A>In an archetype containing optional data elements, an ability to define ‘assumed’ values is useful. For example, an archetype for ‘blood pressure measurement’ might include an optional data element describing the patient position, with choices ‘lying’, ‘sitting’ and ‘standing’. Since this element is optional, data could be created according to the archetype that does not contain it. However, a blood pressure cannot be taken without the patient in some position, so clearly there is an implied value.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1168448"></A>The archetype allows this to be explicitly stated so that all users/systems know what value to assume when optional items are not included in the data. Assumed values are definable on any primitive type, and are expressed after the constraint expression, by a semi-colon (‘;’) followed by a value of the same type as that implied by the preceding part of the constraint. Example constraints containing assumed values are shown in the sections below.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1168453"></A>If no assumed value is stated, no reliable assumption can be made by the receiver of the archetyped data about what the values of removed optional parts might be, from inspecting the archetype. However, this usually corresponds to a situation where the assumed value does not even need to be stated - the same value will be assumed by all users of this data, if its value is not transmitted. In most cases, if an element specified as optional in the archetype, data users only care about the value if it is actually present. The ‘assumed value’ concept is therefore not likely to be needed in most cases.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1148200"></A>4.5.2	Constraints on String</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148201"></A>Strings can be constrained in two ways: using a list of fixed strings, and using using a regular expression. All constraints on strings are case-sensitive. </P>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1148202"></A>List of Strings</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148203"></A>A String-valued attribute can be constrained by a list of strings (using the ODIN syntax for string lists), including the simple case of a single string. Examples are as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148204"></A>species ∈ {“platypus”}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148205"></A>species ∈ {“platypus”, “kangaroo”}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148206"></A>species ∈ {“platypus”, “kangaroo”, “wombat”}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148207"></A>The first example constraints the runtime value of the <EM CLASS="Emphasis">
+species</EM>
+ attribute of some object to take the value “platypus”; the second constrains it be either “platypus” or “kangaroo”, and so on. In almost all cases, this kind of string constraint should be avoided, since it usually renders the body of the archetype language-dependent. Exceptions are proper names (e.g. “NHS”, “Apgar”), product tradenames (but note even these are typically different in different language locales, even if the different names are not literally translations of each other). The preferred way of constraining string attributes in a language independent way is with value sets of terminology codes. See <A HREF="CDL.htm#99912" CLASS="XRef">See Terminology Constraints</A>.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1148211"></A>Regular Expression</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148212"></A>The second way of constraining strings is with regular expressions, a widely used syntax for expressing patterns for matching strings. The regular expression syntax used in cADL is a proper subset of that used in the Perl language (see <A HREF="references.htm#51150" CLASS="XRef">[19]</A> for a full specification of the regular expression language of Perl). Two uses of it are accepted in cADL:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148216"></A>string_attr matches {/regular expression/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148218"></A>string_attr matches {!~ /regular expression/}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148219"></A>The first indicates that the attribute value must match the supplied regular expression. The last indicates that the value must not match the expression. If the delimiter character is required in the pattern, it must be quoted with the backslash (‘\’) character, or else alternative delimiters can be used, enabling more comprehensible patterns. A typical example is regular expressions including units. The following two patterns are equivalent:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148220"></A>units ∈ {/km\/h|mi\/h/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148221"></A>units ∈ {^km/h|mi/h^}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148222"></A>The rules for including special characters within strings are described in <A HREF="file_encoding.htm#13178" CLASS="XRef">See File Encoding and Character Quoting</A>.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1148223"></A>The regular expression patterns supported in cADL are as follows.</P>
+<P CLASS="Hdr4U">
+<A NAME="pgfId-1148225"></A><A NAME="88236"></A>Character Class</P>
+<UL>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1148226"></A><CODE CLASS="Code">
+. </CODE>
+	match any single character. E.g. <CODE CLASS="Code">
+...</CODE>
+ matches any 3 characters;</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1148227"></A><CODE CLASS="Code">
+[xyz] </CODE>
+	match any of the characters in the set <CODE CLASS="Code">
+xyz</CODE>
+ (case sensitive). E.g. <CODE CLASS="Code">
+[0-9]</CODE>
+ matches any string containing a single decimal digit;</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1148228"></A><CODE CLASS="Code">
+[a-m] </CODE>
+	match any of the characters in the set of characters formed by the continuous range from <CODE CLASS="Code">
+a</CODE>
+ to <CODE CLASS="Code">
+m</CODE>
+ (case sensitive). E.g. <CODE CLASS="Code">
+[0-9]</CODE>
+ matches any single character string containing a single decimal digit, <CODE CLASS="Code">
+[S-Z]</CODE>
+ matches any single character in the range <CODE CLASS="Code">
+S</CODE>
+ - <CODE CLASS="Code">
+Z</CODE>
+;</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1148229"></A><CODE CLASS="Code">
+[^a-m] </CODE>
+	match any character except those in the set of characters formed by the continuous range from <CODE CLASS="Code">
+a</CODE>
+ to <CODE CLASS="Code">
+m</CODE>
+. E.g. <CODE CLASS="Code">
+[^0-9]</CODE>
+ matches any single character string as long as it does not contain a single decimal digit;</LI>
+</UL>
+<P CLASS="Hdr4U">
+<A NAME="pgfId-1148230"></A>Grouping</P>
+<UL>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1148231"></A><CODE CLASS="Code">
+(pattern)	</CODE>
+	parentheses are used to group items; any pattern appearing within parentheses is treated as an atomic item for the purposes of the occurrences operators. E.g. <CODE CLASS="Code">
+([1-9][0-9])</CODE>
+ matches any 2-digit number.</LI>
+</UL>
+<P CLASS="Hdr4U">
+<A NAME="pgfId-1148232"></A>Occurrences</P>
+<UL>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1148233"></A><CODE CLASS="Code">
+* </CODE>
+	match 0 or more of the preceding atomic item. E.g. <CODE CLASS="Code">
+.*</CODE>
+ matches any string; <CODE CLASS="Code">
+[a-z][a-z0-9]*</CODE>
+ matches any alphanumeric string starting with a letter;</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1148234"></A><CODE CLASS="Code">
++ </CODE>
+	match 1 or more occurrences of the preceding atomic item. E.g. <CODE CLASS="Code">
+a[^\s]+</CODE>
+ matches any string starting with ‘a’, followed by at least one further non-whitespace character;</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1148235"></A><CODE CLASS="Code">
+? </CODE>
+	match 0 or 1 occurrences of the preceding atomic item. E.g. <CODE CLASS="Code">
+ab?</CODE>
+ matches the strings <CODE CLASS="Code">
+“a”</CODE>
+ and <CODE CLASS="Code">
+“ab”</CODE>
+;</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1148236"></A><CODE CLASS="Code">
+{m,n} </CODE>
+	match m to n occurrences of the preceding atomic item. E.g. <CODE CLASS="Code">
+ab{1,3}</CODE>
+ matches the strings <CODE CLASS="Code">
+“ab”</CODE>
+ and <CODE CLASS="Code">
+“abb”</CODE>
+ and <CODE CLASS="Code">
+“abbb”</CODE>
+; <CODE CLASS="Code">
+[a-z]{1,3}</CODE>
+ matches all lower-case alphabetic strings of one to three characters in length;</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1148237"></A><CODE CLASS="Code">
+{m,} </CODE>
+	match at least m occurrences of the preceding atomic item;</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1148238"></A><CODE CLASS="Code">
+{,n} </CODE>
+	match at most n occurrences of the preceding atomic item;</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1148239"></A><CODE CLASS="Code">
+{m} </CODE>
+	match exactly m occurrences of the preceding atomic item;</LI>
+</UL>
+<P CLASS="Hdr4U">
+<A NAME="pgfId-1148241"></A><A NAME="75085"></A>Special Character Classes</P>
+<UL>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1148242"></A><CODE CLASS="Code">
+\d</CODE>
+, <CODE CLASS="Code">
+\D</CODE>
+ 	match a decimal digit character; match a non-digit character;</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1148243"></A><CODE CLASS="Code">
+\s</CODE>
+, <CODE CLASS="Code">
+\S</CODE>
+ 	match a whitespace character; match a non-whitespace character;</LI>
+</UL>
+<P CLASS="Hdr4U">
+<A NAME="pgfId-1148244"></A>Alternatives</P>
+<UL>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1148245"></A><CODE CLASS="Code">
+pattern1|pattern2	</CODE>
+			match either pattern1 or pattern2. E.g. <CODE CLASS="Code">
+lying|sitting|standing</CODE>
+ matches any of the words <CODE CLASS="Code">
+“lying”</CODE>
+, <CODE CLASS="Code">
+“sitting”</CODE>
+ and <CODE CLASS="Code">
+“standing”</CODE>
+.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1148246"></A>A similar warning should be noted for the use of regular expressions to constrain strings: they should be limited to non-linguistically dependent patterns, such as proper and scientific names. The use of regular expressions for constraints on normal words will render an archetype linguistically dependent, and potentially unusable by others.</P>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1148247"></A>4.5.3	Constraints on Integer</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148248"></A>Integers can be constrained using a list of integer values, and using an integer interval.</P>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1148249"></A>List of Integers</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148253"></A>Lists of integers expressed in the syntax from ODIN can be used as a constraint, e.g.:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148254"></A>length matches {1000}										-- fixed value of 1000</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148255"></A>magnitude matches {0, 5, 8}										-- any of 0, 5 or 8</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148256"></A>The first constraint requires the attribute length to be 1000, while the second limits the value of magnitude to be 0, 5, or 8 only. A list may contain a single integer only:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1156229"></A>magnitude matches {0}										-- matches 0</PRE>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1148257"></A>Interval of Integer</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148260"></A>Integer intervals are expressed using the interval syntax from ODIN (described in the ODIN specification). Examples of 2-sided intervals include:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148262"></A>length matches {|1000|}										-- point interval of 1000 (=fixed value)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148263"></A>length matches {|950..1050|}										-- allow 950 - 1050</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1152493"></A>length matches {|0..1000|}										-- allow 0 - 1000</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148264"></A>length matches {|0..&lt;1000|}										-- allow 0&gt;= x &lt;1000</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1152547"></A>length matches {|0&gt;..&lt;1000|}										-- allow 0&gt; x &lt;1000</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1152478"></A>length matches {|100+/-5|}										-- allow 100 +/- 5, i.e. 95 - 105</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1152486"></A>Examples of one-sided intervals include:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148265"></A>length matches {|&lt;10|}										-- allow up to 9</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148266"></A>length matches {|&gt;10|}										-- allow 11 or more</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148267"></A>length matches {|&lt;=10|}										-- allow up to 10</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148268"></A>length matches {|&gt;=10|}										-- allow 10 or more</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168496"></A>length matches {|&gt;=10|;5}										-- allow 10 or more; assumed value = 5</PRE>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1152470"></A>4.5.4	Constraints on Real</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1152461"></A>Constraints on Real values follow exactly the same syntax as for Integers, in both list and interval forms. The only difference is that the real number values used in the constraints are indicated by the use of the decimal point and at least one succeeding digit, which may be 0. Typical examples are:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148275"></A>magnitude ∈ {5.5}												-- list of one (fixed value)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148276"></A>magnitude ∈ {|5.5|}												-- point interval (=fixed value)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148277"></A>magnitude ∈ {|5.5..6.0|}												-- interval</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148278"></A>magnitude ∈ {5.5, 6.0, 6.5}												-- list</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1152497"></A>magnitude ∈ {|0.0..&lt;1000.0|}												-- allow 0&gt;= x &lt;1000.0</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148279"></A>magnitude ∈ {|&lt;10.0|}												-- allow anything less than 10.0</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148280"></A>magnitude ∈ {|&gt;10.0|}												-- allow greater than 10.0</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148281"></A>magnitude ∈ {|&lt;=10.0|}												-- allow up to 10.0</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148282"></A>magnitude ∈ {|&gt;=10.0|}												-- allow 10.0 or more</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148283"></A>magnitude ∈ {|80.0+/-12.0|}												-- allow 80 +/- 12</PRE>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1148284"></A>4.5.5	Constraints on Boolean</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148285"></A>Boolean runtime values can be constrained to be True, False, or either, as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148286"></A>some_flag matches {True}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148287"></A>some_flag matches {False}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148288"></A>some_flag matches {True, False}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168468"></A>some_flag matches {True, False; False}												-- with assumed value</PRE>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1148289"></A>4.5.6	Constraints on Character</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148290"></A>Characters can be constrained in two ways: using a list of characters, and using a regular expression.</P>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1148291"></A>List of Characters</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148292"></A>The following examples show how a character value may be constrained using a list of fixed character values. Each character is enclosed in single quotes.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148293"></A>color_name matches {‘r’}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148294"></A>color_name matches {‘r’, ‘g’, ‘b’}</PRE>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1148295"></A>Regular Expression</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148296"></A>Character values can also be constrained using a single-character regular expression character class, also enclosed in single quotes, as per the following examples:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148297"></A>color_name matches {‘[rgbcmyk]’}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148298"></A>color_name matches {‘[^\s\t\n]’}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148299"></A>The only allowed elements of the regular expression syntax in character expressions are the following:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1148303"></A>any item from the <A HREF="CDL.htm#88236" CLASS="XRef">See Character Class</A> list above;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1148307"></A>any item from the <A HREF="CDL.htm#75085" CLASS="XRef">See Special Character Classes</A> list above;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1148309"></A>an alternative expression whose parts are any item types, e.g. <CODE CLASS="Code">
+‘a’|‘b’|[m-z]</CODE>
+</LI>
+</UL>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1148311"></A>4.5.7	<A NAME="44171"></A>Constraints on Dates, Times and Durations</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148313"></A>Dates, times, date/times and durations may all be constrained in three ways: using a list of values, using intervals, and using patterns. The first two ways allow values to be constrained to actual date, time etc values, while the last allows values to be constrained on the basis of which parts of the date, time etc are present or missing, regardless of value. The pattern method is described first, since patterns can also be used in lists and intervals.</P>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1148315"></A>Date, Time and Date/Time</H6>
+<P CLASS="Hdr4U">
+<A NAME="pgfId-1149606"></A>Patterns</P>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148316"></A>Dates, times, and date/times (i.e. timestamps), can be constrained using patterns based on the ISO 8601 date/time syntax, which indicate which parts of the date or time must be supplied. A constraint pattern is formed from the abstract pattern <CODE CLASS="Code">
+yyyy-mm-ddThh:mm:ss</CODE>
+ (itself formed by translating each field of an ISO 8601 date/time into a letter representing its type), with either <CODE CLASS="Code">
+‘?’</CODE>
+ (meaning optional) or <CODE CLASS="Code">
+‘X’</CODE>
+ (not allowed) characters substituted in appropriate places. The syntax of legal patterns is shown by the following regular expressions:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1167984"></A>date_pattern: 								yyyy-(mm|??|XX)-(dd|??|XX)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167985"></A>time_pattern: 								hh:(mm|??|XX):(ss|??|XX)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167986"></A>time_in_date_pattern: 								T(hh|??|XX):(mm|??|XX):(ss|??|XX)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149536"></A>date_time_pattern: 								date_constraint time_in_date_pattern</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1149545"></A>All expressions generated by these patterns must also satisfy the validity rules:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1149556"></A>where ‘??’ appears in a field, only ‘??’ or ‘XX’ can appear in fields to the right</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1149561"></A>where ‘XX’ appears in a field, only ‘XX’ can appear in fields to the right</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1149581"></A>The following table shows the valid patterns that can be used, and the types implied by each pattern.</P>
+<TABLE BORDER="1">
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-1148319"></A>Implied Type</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-1148321"></A>Pattern</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-1148323"></A>Explanation</P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1148325"></A>Date</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148327"></A>yyyy-mm-dd</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148329"></A>full date must be specified</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1148331"></A>Date</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148333"></A>yyyy-mm-??			</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148335"></A>optional day;<BR>
+e.g. day in month forgotten</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1148337"></A>Date</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148339"></A>yyyy-??-??</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148341"></A>optional month, optional day;<BR>
+i.e. any date allowed; e.g. mental health questionnaires which include well known historical dates</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1150184"></A>Date</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1150186"></A>yyyy-mm-XX			</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1150188"></A>mandatory month, no day</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1148343"></A>Date</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148345"></A>yyyy-??-XX			</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148347"></A>optional month, no day</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1148349"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148351"></A>		</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148353"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1148355"></A>Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148357"></A>hh:mm:ss</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148359"></A>full time must be specified</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1148361"></A>Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148363"></A>hh:mm:XX</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148365"></A>no seconds;<BR>
+e.g. appointment time</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1148367"></A>Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148369"></A>hh:??:XX</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148371"></A>optional minutes, no seconds;<BR>
+e.g. normal clock times</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1148373"></A>Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148375"></A>hh:??:??</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148377"></A>optional minutes, seconds;<BR>
+i.e. any time allowed</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1148379"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148381"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148383"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1148385"></A>Date/Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148387"></A>yyyy-mm-ddThh:mm:ss</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148389"></A>full date/time must be specified</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1148391"></A>Date/Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148393"></A>yyyy-mm-ddThh:mm:??</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148395"></A>optional seconds;<BR>
+e.g. appointment date/time</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1148397"></A>Date/Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148399"></A>yyyy-mm-ddThh:mm:XX</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148401"></A>no seconds;<BR>
+e.g. appointment date/time</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1148403"></A>Date/Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148405"></A>yyyy-mm-ddThh:??:XX</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148407"></A>no seconds, minutes optional;<BR>
+e.g. in patient-recollected date/times</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1148409"></A>Date/Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148412"></A>yyyy-??-??T??:??:??</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1148414"></A>minimum valid date/time constraint</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="Body">
+<A NAME="pgfId-1149619"></A>An assumed value can be used with any of the above as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1168525"></A>yyyy-??-??; 1970-01-01</PRE>
+<P CLASS="Hdr4U">
+<A NAME="pgfId-1168511"></A>Intervals</P>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1149620"></A>Dates, times and date/times can also be constrained using intervals. Each date, time etc in an interval may be a literal date, time etc value, or a value based on a pattern. In the latter case, the limit values are specified using the patterns from the above table, but with numbers in the positions where <CODE CLASS="Code">
+‘X’</CODE>
+ and <CODE CLASS="Code">
+‘?’</CODE>
+ do not appear. For example, the pattern <CODE CLASS="Code">
+yyyy-??-XX</CODE>
+ could be transformed into <CODE CLASS="Code">
+1995-??-XX</CODE>
+ to mean any partial date in 1995. Examples of such constraints:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1149621"></A>|1995-??-XX|											-- any partial date in 1995</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149622"></A>|09:30:00|											-- exactly 9:30 am</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149623"></A>|&lt; 09:30:00|											-- any time before 9:30 am</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149624"></A>|&lt;= 09:30:00			|								-- any time at or before 9:30 am</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149625"></A>|&gt; 09:30:00|											-- any time after 9:30 am</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149626"></A>|&gt;= 09:30:00			|								-- any time at or after 9:30 am</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149627"></A>|2004-05-20..2004-06-02							|				-- a date range</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149628"></A>|2004-05-20T00:00:00..2005-05-19T23:59:59|												-- a date/time range</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168602"></A>|&gt;= 09:30:00			|	;09:30:00							-- any time at or after 9:30 am											-- assume 9:30 am</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168603"></A>&nbsp;</PRE>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1148415"></A>Duration Constraints</H6>
+<P CLASS="Hdr4U">
+<A NAME="pgfId-1149635"></A>Patterns</P>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1149405"></A>Patterns based on ISO 8601 can be used to constraint durations in the same way as for Date/time types. The general form of a pattern is (EBNF; all tokens are literals):</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1149766"></A>P[Y|y][M|m][W|w][D|d][T[H|h][M|m][S|s]]</PRE>
+<UL>
+<LI CLASS="NotaBene">
+<A NAME="pgfId-1150125"></A>Note that allowing the ‘W’ designator to be used with the other designators corresponds to a deviation from the published ISO 8601 standard used in openEHR, namely:</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1150126"></A>durations are supposed to take the form of PnnW or PnnYnnMnnDTnnHnnMnnS, but in openEHR, the W (week) designator can be used with the other designators, since it is very common to state durations of pregnancy as some combination of weeks and days.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1150123"></A>The use of this pattern indicates which “slots” in an ISO duration string may be filled. Where multiple letters are supplied in a given pattern, the meaning is “or”, i.e. any one or more of the slots may be supplied in the data. This syntax allows specifications like the following to be made:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1149419"></A>Pd			-- a duration containing days only, e.g. P5d</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149420"></A>Pm			-- a duration containing months only, e.g. P5m</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149441"></A>PTm			-- a duration containing minutes only, e.g. PT5m</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149452"></A>Pwd			-- a duration containing weeks and/or days only, e.g. P4w</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149465"></A>PThm			-- a duration containing hours and/or minutes only, e.g. PT2h30m</PRE>
+<P CLASS="Hdr4U">
+<A NAME="pgfId-1149650"></A>List and Intervals</P>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1149656"></A>Durations can also be constrained by using absolute ISO 8601 duration values, or ranges of the same, e.g.:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1149651"></A>PT1m						-- 1 minute</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149652"></A>P1dT8h						-- 1 day 8 hrs</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149653"></A>|PT0m..PT1m30s|						-- Reasonable time offset of first apgar sample</PRE>
+<P CLASS="Hdr4U">
+<A NAME="pgfId-1154900"></A>Mixed Pattern and Interval</P>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1154904"></A>In some cases there is a need to be able to limit the allowed units as well as state a duration interval. This is common in obstetrics, where physicians want to be able to set an interval from say 0-50 weeks and limit the units to only weeks and days. This can be done as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1154905"></A>PWD/|P0W..P50W|						-- 0-50 weeks, expressed only using weeks and days</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1154923"></A>The general form is a pattern followed by a slash (‘/’) followed by an interval, as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1154935"></A>duration_pattern ‘/’ duration_interval</PRE>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1166800"></A>4.5.8	<A NAME="99912"></A>Terminology Constraints</H6>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1169383"></A>Overview</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1166801"></A>Terminology constraints deal with a special category of data values typically known as ‘coded terms’ or ‘terminology’. Coded data values are both textual (e.g. “diastolic blood pressure”) and semantic (may have relationships to each other). The idea is that instead of using text, the possible values are represented in structured vocabularies, terminologies or ontologies that define both the possible text (including translations) and also the relationships, if any, between the terms (sometimes known as ‘concepts’). In health, typical examples include ‘terminology’ resources such as WHO ICDx<A HREF="#pgfId-1169404" CLASS="footnote">2</A> and SNOMED terminologies and drug databases. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1169331"></A>Coded terms are treated as a primitive type in ADL in order to enable the formalism and tools to work with terminology constraints<A HREF="#pgfId-1169358" CLASS="footnote">3</A>. Unlike other primitive constraints, terminology constraints may be complex, because they refer to external resources, either directly or via ‘bindings’ defined elsewhere in the archeype. This section describes the syntactical representations and relationships between these. The full semantics, including binding and resolution are described in <A HREF="main.htm#33142" CLASS="XRef">See Terminology Integration</A>.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1169430"></A>Requirement</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1169419"></A>There are two general categories of terminology constraint:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1169443"></A>‘inline’ terminology value or value set;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1169453"></A>external terminology value set.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1169460"></A>In the first, it is the constraint locally in the archetype that establishes the term or set of possible terms to be used for a given purpose, e.g. ‘position of patient when measuring blood pressure’. This is true even if each term in the value set is mapped individually to a term in an external terminology. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1169506"></A>In the second, the value set is defined and maintained by an external party, and the archetype references it via a reliable URI.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1169308"></A>The general form of a terminology constraint in cADL is shown below:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1169313"></A>ENTRY[id1] ∈ {   											-- blood pressure measurement</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169314"></A>	name ∈ { 										-- any synonym of BP</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169315"></A>		DV_CODED_TEXT[id2] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169316"></A>			defining_code ∈ {[ac1]} -- terminology constraint</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169317"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169318"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169319"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1169320"></A>In the above, the constraint on <CODE CLASS="Code">
+DV_CODED_TEXT</CODE>
+.<EM CLASS="Emphasis">
+defining_code</EM>
+ is defined as a terminology constraint containing an ‘ac’ code <CODE CLASS="Code">
+[acN]</CODE>
+, which acts as an internal identifier of a value set. The various types of terminology constraint are described below.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1169290"></A>Design Basis</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1168092"></A>A fully qualified coded term primitive data item is assumed by ADL to consist of:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1166845"></A>a terminology identifier</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1166871"></A>optionally, a terminology version identifier</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1166855"></A>a code or ‘code string’ (an expression made from codes, permitted in some terminologies).</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1168307"></A>The special terminology identifier “local” is understood as meaning ‘this archetype’. The qualified form of the term ‘at4’ from within the same archetype is “local::at4”. An archetype term referenced from an external context where the archetype identifier is not otherwise known uses the archetype identifier as the terminology identifier. Thus the term <CODE CLASS="Code">
+at4</CODE>
+ can be referenced externally as:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1168319"></A>org.openehr::openEHR-EHR-OBSERVATION.bp_measurement.v1::at4</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1168747"></A>Terminology constraints in an archetype can be in three ‘forms’: ‘source’, ‘expanded’, ‘substituted’and ‘resolved’. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1168781"></A>Currently an archetype may contain terminology constraints in more than one form.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1168162"></A>Source Form</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1169189"></A>A ‘source form’ terminology constraint is the form used to define value sets in source archetypes, i.e. it is the authored form of constraint, prior to any further tool processing. The lexical form is a single ac-code, optionally with an at-code denoting an assumed value, i.e.:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1169190"></A><CODE CLASS="Code">
+[acN]</CODE>
+</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1169191"></A>[acN; atN]		-- with assumed value</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1168225"></A>The ac-code is defined in the archetype terminology. Associated with the ac-code must be a local value set, and/or a binding to an external value set. If both a local value set and a binding exist, tooling and configuration parameters are used to decide how to generate the resolved form (below). </P>
+<P CLASS="Body">
+<A NAME="pgfId-1169216"></A>This type of constraint is used when there is a proproper value set, i.e. a set of coded values with more than one member. For the degenerate case of a constraint consisting of a single term, the first expanded form below is used, i.e. there is no ac-coded source form.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1168163"></A>Expanded Form</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1169200"></A>The expanded form of a terminology constraint is a form in which archetype-local terms or sets of terms forming the constraint are inlined in the constraint definition. In this form, all source form ac-coded constraints are replaced by the archetype-local value set they define. This can be thought of as converting a source form value set constraint to an ‘inline’ value set constraint. Single-value constraints are also represented this way, and in fact don’t have a source form (since it would serve no useful purpose to define an ac-code and value set containing a single at-code).</P>
+<P CLASS="Body">
+<A NAME="pgfId-1169201"></A>The syntax for the expanded form is as follows:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1169202"></A>[local::atN]				-- single term</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1169196"></A><CODE CLASS="Code">
+[local::atN, atN, ... , atN]				-- value set</CODE>
+</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1169197"></A><CODE CLASS="Code">
+[local::atN, atN, ... , atN; atN]				-- with assumed value</CODE>
+</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1168829"></A>The first variant is the single value case. This type is used when the constraint is intended to fix single coded value only, e.g. the code for a physical property like ‘mass’ in a constraint that defines possible mass values.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1168382"></A>The second variant represents an expanded value set, and the third is the same with an assumed value. For purely practical purposes, a multi-line form with interpolated comments is often used (e.g. by ADL serialisers, documentation), to make the constraint more comprehensible:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1168393"></A>defining_code matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168394"></A>	[local::</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168395"></A>		at31, 	-- Naked</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168396"></A>		at32, 	-- Reduced clothing/bedding</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168397"></A>		at33, 	-- Appropriate clothing/bedding</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168398"></A>		at34] 	-- Increased clothing/bedding</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168400"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1168625"></A>or with assumed value:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1168647"></A>defining_code matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168648"></A>	[local::</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168649"></A>		at31, 	-- Naked</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168650"></A>		at32, 	-- Reduced clothing/bedding</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168651"></A>		at33, 	-- Appropriate clothing/bedding</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168652"></A>		at34; -- Increased clothing/bedding</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168682"></A>		at33] 	-- assumed value</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168653"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1168705"></A>An archetype whose terminology constraints are all in expanded form will contain only at-codes in those constraints.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1168384"></A>Substituted Form</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1168169"></A>The next form is ‘substituted’ form, which is used to represent terminology constraints in the final concrete form intended at point of use. The substituted form is create by replacing each terminology constraint in its expanded form with the appropriate one of:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1168915"></A>the single external term bound to an internal at-code, e.g. an ISO term for the property ‘mass’;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1168927"></A>the set of terms from the intended external resource (e.g. a terminology like SNOMED CT or LOINC) - typically for small value sets;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1168940"></A>an external reference to which the value set ac-code is bound in the archetype terminology - typically for large and changing value sets. This includes the logical constraint ‘any term in terminology X’.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1168902"></A>The concrete form for all substituted form terms is one or more URIs. The URI syntax is normally an http reference to a real resource. The lexical form for the single code case is as follows:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1169012"></A><CODE CLASS="Code">
+[http://terminology_publisher_domain/terminology_specifier/code_string]					</CODE>
+</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1169036"></A><CODE CLASS="Code">
+[http://terminology_publisher_domain/terminology_specifier/teminology_version_specifier/code_string]			</CODE>
+</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1168994"></A>For the inline value set case, it will be a comma-separated list of these within [], optionally with a final URI representing an assumed value, i.e.:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1169067"></A><CODE CLASS="Code">
+[uri, uri, ... , uri]		</CODE>
+</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1169080"></A><CODE CLASS="Code">
+[uri, uri, ... , uri]	; uri	</CODE>
+</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1169052"></A>In the external value set reference case, a single URI will be used that denotes the external value set, rather than individual terminology codes, i.e.:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1169116"></A><CODE CLASS="Code">
+[uri]		</CODE>
+</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1169101"></A>The exact form of the URIs will value across industries, and will eventually be standardised by appropriate standards organisations or industry groups. In the health domain, this is done by the IHTSDO<A HREF="#pgfId-1169233" CLASS="footnote">4</A> organisation.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1170486"></A>Resolved Form</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1169129"></A>A final ‘resolved’ form of a terminology constraint specified by a binding reference to an externally defined value set, can be generated by attempting to resolve the reference against the target terminology and returning the actual terms in the value set according to the terminology. This form would be used in flattened archetypes, operational templates and documentation for local use. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1170525"></A>Since an archetype might not contain external terminology bindings for all (or even any) of its terminological constraints, a ‘resolved’ archetype might still contain at-codes in its cADL definition. These at-codes would be treated as real coded terms in any implementation that was creating data, and as a consequence, archetype at-codes could occur in real data.</P>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1148430"></A>4.5.9	Constraints on Lists of Primitive types</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148431"></A>In many cases, the type in the information model of an attribute to be constrained is a list or set of primitive types, e.g. List&lt;Integer&gt;, Set&lt;String&gt; etc. As for complex types, this is indicated in cADL using the <CODE CLASS="Code">
+cardinality</CODE>
+ keyword, as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148432"></A>some_attr cardinality ∈ {0..*} ∈ {some_constraint}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148433"></A>The pattern to match in the final braces will then have the meaning of a list or set of value constraints, rather than a single value constraint. Any constraint described above for single-valued attributes, which is commensurate with the type of the attribute in question, may be used. However, as with complex objects, the meaning is now that every item in the list is constrained to be any one of the values implied by the constraint expression. For example, </P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148434"></A>speed_limits cardinality ∈ {0..*; ordered} ∈ {50, 60, 70, 80, 100, 130}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148435"></A>constrains each value in the list corresponding to the value of the attribute <EM CLASS="Emphasis">
+speed_limits</EM>
+ (of type <CODE CLASS="Code">
+List&lt;Integer&gt;</CODE>
+), to be any one of the values 50, 60, 70 etc.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1171240"></A>4.5.10	Constraints on Enumerated Types</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1171262"></A>Enumeration types in the reference model are assumed to have the semantics defined in UML and mainstream programming languages, i.e. to be a distinct type based on a primitive type, normally Integer or String. Each such type consists of a set of values from the domain of its underlying type, thus, a set of Integer, String or other primitive values. Each of these values is assumed to be named in the manner of a symbolic constant. Although stricly speaking UML doesn’t require an enumerated type to be based on an underlying primitive type, programming languages do, hence the assumption here that values from the domain of such a type are involved.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1171276"></A>In ADL, constraints on enumerated types are represented by constraints on the underlying primitive values. The following example shows 2 constraints on an attribute of the type <CODE CLASS="Code">
+PROPORTION_KIND</CODE>
+ from the openEHR Reference Model.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1171296"></A>ITEM_TREE[id4] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171297"></A>	items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171298"></A>		ELEMENT[id5] occurrences ∈ {0..1} matches {	-- test enum 1</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171299"></A>			value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171300"></A>				DV_PROPORTION[id6] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171301"></A>					numerator ∈ {|0.0..1.0|; 0.0}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171303"></A>					type ∈ {1} -- pk_unitary</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171304"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171305"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171306"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171307"></A>		ELEMENT[id7] ∈ {	-- test enum 2</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171308"></A>			value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171309"></A>				DV_PROPORTION[id8] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171310"></A>					numerator ∈ {|0.0..1.0|; 0.0}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171312"></A>					type ∈ {2, 3} -- pk_percent, pk_fraction</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171313"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171314"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171315"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171285"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171333"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1171565"></A><CODE CLASS="Code">
+PROPORTION_KIND</CODE>
+ is defined as <CODE CLASS="Code">
+{pk_ratio = 0; pk_unitary = 1; pk_percent = 2; pk_fraction = 3; pk_integer_fraction = 4}</CODE>
+. Modelling tools are relied on to visualise enumeration constraints in a suitable way, by inferring the type based on inspection of the reference model on which the archetype is based.</P>
+</DIV>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1160629"></A>Syntax Validity Rules</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1160643"></A>Various coded syntax rules have been defined for the cADL syntax, for use by parser and compiler authors. These can be found on at the GitHub location <A HREF="https://github.com/openEHR/adl-resources/blob/master/messages/ADL/adl_syntax_errors.txt" CLASS="URL">https://github.com/openEHR/adl-resources/blob/master/messages/ADL/adl_syntax_errors.txt</A>.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1169648"></A>The state of this file at the issue of this document is as follows.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1169659"></A>[&quot;SUNK&quot;] = &lt;&quot;Syntax error (unknown cause)&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169660"></A>[&quot;SARID&quot;] = &lt;&quot;Syntax error in artefact identification clause; expecting archetype id (format = model_issuer-package-class.concept.version)&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1170425"></A>&nbsp;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169661"></A>[&quot;SASID&quot;] = &lt;&quot;Syntax error in 'specialise' clause; expecting parent archetype id (model_issuer-ref_model-model_class.concept.version)&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1170418"></A>&nbsp;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169776"></A>[&quot;SACO&quot;] = &lt;&quot;Syntax error in 'concept' clause; expecting TERM_CODE reference&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169777"></A>[&quot;SALA&quot;] = &lt;&quot;Syntax error in language section&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169664"></A>[&quot;SALAN&quot;] = &lt;&quot;Syntax error no language section found&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169665"></A>[&quot;SADS&quot;] = &lt;&quot;Syntax error in description section&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169666"></A>[&quot;SADF&quot;] = &lt;&quot;Syntax error in definition section&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169667"></A>[&quot;SAIV&quot;] = &lt;&quot;Syntax error in invariant section&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169668"></A>[&quot;SAON&quot;] = &lt;&quot;Syntax error in terminology section&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169669"></A>[&quot;SAAN&quot;] = &lt;&quot;Syntax error in annotations section&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169670"></A>&nbsp;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169671"></A>[&quot;SDSF&quot;] = &lt;&quot;Syntax error: differential syntax not allowed in top-level archetype&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169672"></A>[&quot;SDINV&quot;] = &lt;&quot;Syntax error: invalid ODIN section; error: $1&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169673"></A>[&quot;SCCOG&quot;] = &lt;&quot;Syntax error: expecting a new node definition, primitive node definition, 'use' path, or 'archetype' reference&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169674"></A>[&quot;SUAID&quot;] = &lt;&quot;Syntax error: expecting [archetype_id] in use_archetype statement&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169675"></A>[&quot;SUAIDI&quot;] = &lt;&quot;Syntax error: invalid archetype id $1&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169676"></A>[&quot;SOCCF&quot;] = &lt;&quot;Syntax error: expecting an 'occurrences expression', e.g. 'occurrences matches {n..m}'&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169677"></A>[&quot;SUNPA&quot;] = &lt;&quot;Syntax error: expecting absolute path in use_node statement&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169678"></A>[&quot;SCOAT&quot;] = &lt;&quot;Syntax error: expecting attribute definition(s)&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169679"></A>[&quot;SUAS&quot;] = &lt;&quot;Syntax error: error after 'use_archetype' keyword; expecting Object node definition&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169680"></A>[&quot;SCAS&quot;] = &lt;&quot;Syntax error: expecting a 'any' node, 'leaf' node, or new node definition&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169681"></A>[&quot;SINVS&quot;] = &lt;&quot;Syntax error: illegal invariant expression at identifier $1&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169682"></A>[&quot;SEXPT&quot;] = &lt;&quot;Syntax error: expecting absolute path after exists keyword&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169683"></A>[&quot;SEXLSG&quot;] = &lt;&quot;Syntax error: existence single value must be 0 or 1&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169684"></A>[&quot;SEXLU1&quot;] = &lt;&quot;Syntax error: existence upper limit must be 0 or 1 when lower limit is 0&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169685"></A>[&quot;SEXLU2&quot;] = &lt;&quot;Syntax error: existence upper limit must be 1 when lower limit is 1&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169686"></A>[&quot;SEXLMG&quot;] = &lt;&quot;Syntax error: existence must be one of 0..0, 0..1, or 1..1&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169687"></A>&nbsp;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169688"></A>[&quot;SCIAV&quot;] = &lt;&quot;Syntax error: invalid assumed value; must be an integer&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169689"></A>[&quot;SCRAV&quot;] = &lt;&quot;Syntax error: invalid assumed value; must be a real number&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169690"></A>[&quot;SCDAV&quot;] = &lt;&quot;Syntax error: invalid assumed value; must be an ISO8601 date&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169691"></A>[&quot;SCTAV&quot;] = &lt;&quot;Syntax error: invalid assumed value; must be an ISO8601 time&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169692"></A>[&quot;SCDTAV&quot;] = &lt;&quot;Syntax error: invalid assumed value; must be an ISO8601 date/time&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169693"></A>[&quot;SCDUAV&quot;] = &lt;&quot;Syntax error: invalid assumed value; must be an ISO8601 duration&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169694"></A>[&quot;SCSAV&quot;] = &lt;&quot;Syntax error: invalid assumed value; must be a string&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169695"></A>[&quot;SCBAV&quot;] = &lt;&quot;Syntax error: invalid assumed value; must be a 'True' or 'False'&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169696"></A>[&quot;SCOAV&quot;] = &lt;&quot;Syntax error: invalid assumed value; must be an ordinal integer value&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169697"></A>&nbsp;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169698"></A>[&quot;SCDPT&quot;] = &lt;&quot;Syntax error: invalid date constraint pattern '$1'; allowed patterns: $2&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169699"></A>[&quot;SCTPT&quot;] = &lt;&quot;Syntax error: invalid time constraint pattern '$1'; allowed patterns: $2&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169700"></A>[&quot;SCDTPT&quot;] = &lt;&quot;Syntax error: invalid date/time constraint pattern '$1'; allowed patterns: $2&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169701"></A>[&quot;SCDUPT&quot;] = &lt;&quot;Syntax error: invalid duration constraint pattern '$1'; legal pattern: P[Y|y][M|m][W|w][D|d][T[H|h][M|m][S|s]] or P[W|w] [/duration_interval]&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1170407"></A>&nbsp;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169702"></A>[&quot;SCSRE&quot;] = &lt;&quot;Syntax error: regular expression compile error '$1' is not a valid regular expression&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169703"></A>[&quot;STCCP&quot;] = &lt;&quot;Syntax error: invalid term code constraint pattern '$1': $2&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169704"></A>[&quot;STCDC&quot;] = &lt;&quot;Syntax error: duplicate code(s) found in code list&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169705"></A>[&quot;STCAC&quot;] = &lt;&quot;Syntax error: assumed value code $1 not found in code list&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169649"></A>[&quot;STCNT&quot;] = &lt;&quot;Syntax error: terminology not specified&quot;&gt;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1160650"></A>&nbsp;</P>
+</DIV>
+</DIV>
+<HR>
+<DIV CLASS="footnotes">
+<DIV CLASS="footnote">
+<P CLASS="Footnote">
+<SPAN CLASS="footnoteNumber">
+1.</SPAN>
+<A NAME="pgfId-1156103"></A>See <A HREF="http://www.openehr.org/releases/1.0.1/architecture/rm/ehr_im.pdf" CLASS="URL">http://www.openehr.org/releases/1.0.1/architecture/rm/ehr_im.pdf</A></P>
+</DIV>
+<DIV CLASS="footnote">
+<P CLASS="Footnote">
+<SPAN CLASS="footnoteNumber">
+2.</SPAN>
+<A NAME="pgfId-1169404"></A><A HREF="http://www.who.int/classifications/icd/en/" CLASS="URL">http://www.who.int/classifications/icd/en/</A></P>
+</DIV>
+<DIV CLASS="footnote">
+<P CLASS="Footnote">
+<SPAN CLASS="footnoteNumber">
+3.</SPAN>
+<A NAME="pgfId-1169358"></A>The alternative would be that ADL and its tooling was agnostic, and that tools would implement multiple private models of terminology constraining.</P>
+</DIV>
+<DIV CLASS="footnote">
+<P CLASS="Footnote">
+<SPAN CLASS="footnoteNumber">
+4.</SPAN>
+<A NAME="pgfId-1169233"></A><A HREF="http://www.ihtsdo.org/" CLASS="URL">http://www.ihtsdo.org/</A></P>
+</DIV>
+</DIV>
+</BODY>
+</HTML>

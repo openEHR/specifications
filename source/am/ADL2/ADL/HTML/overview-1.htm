@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 7.0/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="overview.css" CHARSET="UTF-8" TYPE="text/css">
+<TITLE> 2	Overview</TITLE></HEAD>
+<BODY BGCOLOR="#ffffff">
+<H4 CLASS="Hdr1">
+<A NAME="pgfId-1140301"></A>Overview<DIV>
+<IMG SRC="overview-1.png">
+</DIV>
+</H4>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1137912"></A>ADL uses three syntaxes, cADL (constraint form of ADL), ODIN (Object Data Instance Notation), and a version of first-order predicate logic (FOPL), to express constraints on data which are instances of an underlying information model, which may be expressed in UML, relational form, or in a programming language. ADL itself is a very simple ‘glue’ syntax, which uses two other syntaxes for expressing structured constraints and data, respectively. The cADL syntax is used to express the archetype <EM CLASS="Code">
+definition</EM>
+, while the ODIN syntax is used to express data which appears in the <EM CLASS="Code">
+language</EM>
+, <EM CLASS="Code">
+description</EM>
+, <EM CLASS="Code">
+terminology</EM>
+, and <EM CLASS="Code">
+revision_history</EM>
+ sections of an ADL archetype. The top-level structure of an ADL archetype is shown in <A HREF="overview.htm#74291" CLASS="XRef">See ADL Archetype Structure</A>.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1147958"></A>This main part of this document describes cADL and ADL path syntax, before going on to describe the combined ADL syntax, archetypes and domain-specific type libraries.</P>
+<DIV>
+<MAP NAME="overview-2">
+</MAP>
+<IMG SRC="overview-2.png" USEMAP="#overview-2">
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1141492"></A>An Example</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1141493"></A>The following is an example of a very simple archetype, giving a feel for the syntax. The main point to glean from the following is that the notion of ‘guitar’ is defined in terms of constraints on a generic model of the concept <EM CLASS="Code">
+INSTRUMENT</EM>
+. The names mentioned down the left-hand side of the definition section (“INSTRUMENT”, “size” etc) are alternately class and attribute names from an object model. Each block of braces encloses a specification for some particular set of instances that conform to a specific concept, such as ‘guitar’ or ‘neck’, defined in terms of constraints on types from a generic class model. The leaf pairs of braces enclose constraints on primitive types such as Integer, String, Boolean and so on.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1141494"></A>archetype (adl_version=2.0.5)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141495"></A>	adl-test-instrument.guitar.v1.0.4</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141498"></A>language</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1143775"></A>	original_language = &lt;[iso_639-1::en]&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1143792"></A>definition</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1143777"></A>	INSTRUMENT[id1] matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141503"></A>		size matches {|60..120|		}									-- size in cm</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141504"></A>		date_of_manufacture matches {yyyy-mm-??}											-- year &amp; month ok</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141505"></A>		parts cardinality matches {0..*} matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141506"></A>			PART[id2] matches {										-- neck</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141507"></A>				material matches {[ac1]}									-- timber or nickel alloy								</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141508"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141509"></A>			PART[id3] matches {										-- body</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141510"></A>				material matches {[at3]}									-- timber								</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141512"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141513"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141514"></A>	}				</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141515"></A>terminology </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141516"></A>	term_definitions = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141517"></A>		[&quot;en&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141519"></A>			[&quot;id1&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141520"></A>				text = &lt;&quot;guitar&quot;&gt;; </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141521"></A>				description = &lt;&quot;stringed instrument&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141522"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141523"></A>			[&quot;id2&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141524"></A>				text = &lt;&quot;neck&quot;&gt;; </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141525"></A>				description = &lt;&quot;neck of guitar&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141526"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141732"></A>			[&quot;id3&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141733"></A>				text = &lt;&quot;body&quot;&gt;; </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141734"></A>				description = &lt;&quot;body of guitar&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141735"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141527"></A>			[&quot;at3&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141528"></A>				text = &lt;&quot;timber&quot;&gt;; </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141529"></A>				description = &lt;&quot;straight, seasoned timber&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141530"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141531"></A>			[&quot;at4&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141532"></A>				text = &lt;&quot;nickel alloy&quot;&gt;; </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141533"></A>				description = &lt;&quot;frets&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141534"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141540"></A>		&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141541"></A>	&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1152004"></A>	value_sets = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1152005"></A>		[&quot;ac1&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1152052"></A>			id = &lt;&quot;ac1&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1152034"></A>			members = &lt;&quot;at3&quot;, &quot;at4&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1152045"></A>		&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1152020"></A>	&gt;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148048"></A>&nbsp;</P>
+</DIV>
+</BODY>
+</HTML>

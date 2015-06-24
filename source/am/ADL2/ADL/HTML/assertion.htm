@@ -1,0 +1,538 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 7.0/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="assertion.css" CHARSET="UTF-8" TYPE="text/css">
+<TITLE> 5	Assertions</TITLE></HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<H4 CLASS="Hdr1">
+<A NAME="pgfId-1117914"></A><A NAME="68334"></A>Assertions<DIV>
+<IMG SRC="assertion-1.png">
+</DIV>
+</H4>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1142140"></A>Overview</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1136000"></A>This section describes the assertion sub-language of archetypes. Assertions are used in archetype “slot” clauses in the cADL <CODE CLASS="Code">
+definition</CODE>
+ section, and in the <CODE CLASS="Code">
+rules</CODE>
+ section. The following simple assertion in the <CODE CLASS="Code">
+rules</CODE>
+ section of an archetype says that the speed in kilometres of some node is related to the speed-in-miles by a factor of 1.6:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1141912"></A>validity: /speed[id2]/kilometres[id14]/magnitude = 			</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1141934"></A>			/speed[id4]/miles[id14]/magnitude * 1.6</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1142274"></A>&nbsp;</PRE>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1142255"></A>5.1.1	Requirements</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1145282"></A>Assertions are needed in archetypes to express rules in two locations in an archetype. In an archetype slot, assertions can be stated to control what archetypes are allowed in the slot, as shown in the following example:</P>
+<P CLASS="Body">
+<A NAME="pgfId-1145285"></A>&nbsp;</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1145286"></A>CLUSTER[id3] occurrences matches {0..1} matches {	-- Detail</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1145287"></A>	items cardinality matches {0..*; unordered} matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1145288"></A>		allow_archetype CLUSTER[id9] occurrences matches {0..1} matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1145289"></A>			include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1145290"></A>				archetype_id/value matches {/openEHR-EHR-CLUSTER.														exam-.+\.v1/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1145291"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1145292"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1145283"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1145397"></A>In the above, the statement following the <CODE CLASS="Code">
+include</CODE>
+ keyword expresses a condition on the value found at the path <CODE CLASS="Code">
+archetype_id/value</CODE>
+, using the familiar ADL <CODE CLASS="Code">
+matches</CODE>
+ operator, and a regular expression on archetype identifiers. Most slot statements are of this kind, with some requiring slightly more complex expressions. See <A HREF="CDL.htm#31193" CLASS="XRef">See Archetype Slots</A> for more details.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1145434"></A>The main requirement for assertions in archetypes is for expressing rules that cannot be expressed uding the standard cADL syntax. Types of rules include:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145437"></A>constraints involving more than one node in an archetype, such as a rule stating that the sum of the five 0-2 value scores in an Apgar test (heartrate, breathing, muscle tone, reflex, colour) correspond to the Apgar total, recorded in a sixth node;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145447"></A>rules involving predefined variables such as ‘current date’;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145496"></A>rules involving query results from a data or knowledge context, allowing values such as ‘patient date of birth’ to be referenced.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1145489"></A>The semantic requirements are for expressions including arithmetic, boolean, and relational operators, some functions, quantifier operators, a notion of operator precedence, parentheses, constant values, and certain kinds of variables. However, there is no requirement for procedural semantics, type declarations or many of the other complexities of full-blown programming languages.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1145274"></A>5.1.2	Design Basis</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1145270"></A>The archetype assertion language is a small language of its own. Formally it is a reduced first-order predicate logic language with various operators. It has similarities with OMG’s OCL (Object Constraint Language) syntax, and is also similar to the assertion syntax which has been used in the Object-Z <A HREF="references.htm#52983" CLASS="XRef">[14]</A> and Eiffel <A HREF="references.htm#84281" CLASS="XRef">[12]</A> languages and tools for over a decade (see Sowa <A HREF="references.htm#10824" CLASS="XRef">[15]</A>, Hein <A HREF="references.htm#65257" CLASS="XRef">[8]</A>, Kilov &amp; Ross <A HREF="references.htm#90275" CLASS="XRef">[9]</A> for an explanation of predicate logic in information modelling). None of these languages has been used directly, for reasons including:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145245"></A>OCL has a complex type system, and includes some undecidable procedural semantics;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145263"></A>none have adequate variable referencing mechanisms, such as to paths and external queries;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145252"></A>they are too powerful, and would introduce unnecessary complexity into archetypes and templates.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1145234"></A>There are also similarities with other languages developed in the health arena for expressing ‘medical logic’ (Arden), guidelines (GLIF and many others) and decision support (GELLO and many others). These languages were not directly used either, for reasons including:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145255"></A>none have a path referencing mechanism;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145259"></A>some are too procedural (Arden, GLIF);</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145260"></A>current versions of some of these languages have been made specific to the HL7v3 RIM, a particular model of health information designed for message representation (GLIF 3.x, GELLO);</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145281"></A>all in their published form are too powerful for the needs identified here.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1145513"></A>The design approach used here was to create a small concrete syntax allowing for a core subset of first-order predicate logic, which could easily be parsed into a typical parse-tree form, defined in the openEHR Archetype Object Model. Many different variations on syntax elements are possible (as evidenced by the many formal logic syntaxes used in mathematics and computing theory); the elements used here were chosen for ease of expression using normal kebyoard characters and intuitiveness.</P>
+</DIV>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1141805"></A>Keywords</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1141756"></A>The syntax of the invariant section is a subset of first-order predicate logic. In it, the following keywords can be used:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1141687"></A><CODE CLASS="Code">
+exists</CODE>
+, <CODE CLASS="Code">
+for_all</CODE>
+, </LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1141688"></A><CODE CLASS="Code">
+and</CODE>
+, <CODE CLASS="Code">
+or</CODE>
+, <CODE CLASS="Code">
+xor</CODE>
+, <CODE CLASS="Code">
+not</CODE>
+, <CODE CLASS="Code">
+implies</CODE>
+</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1142303"></A><CODE CLASS="Code">
+true</CODE>
+, <CODE CLASS="Code">
+false</CODE>
+</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1141744"></A>Symbol equivalents for some of the above are given in the following table.</P>
+<TABLE BORDER="1">
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141691"></A>Textual <BR>
+Rendering</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141693"></A>Symbolic<BR>
+Rendering</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141695"></A>Meaning</P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1142148"></A>matches, is_in</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1142150"></A>∈</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1142152"></A>Set membership, “p is in P”</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141703"></A>exists</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141705"></A>∃</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141707"></A>Existential quantifier, “there exists ...”</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141709"></A>for_all</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141711"></A>∀</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141713"></A>Universal quantifier, “for all x...”</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141715"></A>implies</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141717"></A>&#174;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141719"></A>Material implication, “p implies q”, or “if p then q”</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141721"></A>and</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141723"></A>∧</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141725"></A>Logical conjunction, “p and q”</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141727"></A>or</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141729"></A>∨</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141731"></A>Logical disjunction, “p or q”</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141733"></A>xor</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141735"></A>∨</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141737"></A>Exclusive or, “only one of p or q”</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141739"></A>not, ~</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141741"></A>∼, ¬</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<A NAME="pgfId-1141743"></A>Negation, “not p”</P>
+</TD>
+</TR>
+</TABLE>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1142211"></A>Typing</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1145526"></A>The assertion language is fully typed. All operators, variables and constants have either assumed or declared type signatures.</P>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1145525"></A>Operators</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1142212"></A>Assertion expressions can include arithmetic, relational and boolean operators, plus the existential and universal quantifiers.</P>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1142328"></A>5.4.1	Arithmetic Operators</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1142392"></A>The supported arithmetic operators are as follows:</P>
+<UL>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142395"></A>addition: +</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142403"></A>subtraction: -</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142404"></A>multiplication: *</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142405"></A>division: /</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142407"></A>exponent: ^</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142418"></A>modulo division: % -- remainder after integer division</LI>
+</UL>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1142378"></A>5.4.2	Equality Operators</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1142434"></A>The supported equality operators are as follows:</P>
+<UL>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142446"></A>equality: =</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142450"></A>inequality: !=</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1142693"></A>The semantics of these operators are of value comparison.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1142684"></A>5.4.3	Relational Operators</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1142674"></A>The supported relational operators are as follows:</P>
+<UL>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142454"></A>less than: &lt;</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142458"></A>less than or equal: &lt;=</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142474"></A>greater than: &gt;</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142436"></A>greater than or equal: &gt;=</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1142699"></A>The semantics of these operators are of value comparison on entities of Comparable types (see openEHR Support IM, Assumed Types section). All generate a Boolean result.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1142385"></A>5.4.4	Boolean Operators</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1142480"></A>The supported boolean operators are as follows:</P>
+<UL>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142481"></A>not: not</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142482"></A>and: and</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142483"></A>xor: xor</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142484"></A>implies: implies</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142503"></A>set membership: matches, is_in</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1145480"></A>The boolean operators also have symbolic equivalents shown earlier. All boolean operators take Boolean operands and generate a Boolean result. The <CODE CLASS="Code">
+not</CODE>
+ operator can be applied as a prefix operator to all operators returning a boolean result.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1142365"></A>5.4.5	Quantifiers</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1142605"></A>The two standard logical quantifier operators are supported:</P>
+<UL>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142621"></A>existential quantifier: exists</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1142366"></A>universal quantifier: for_all</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1142633"></A>These operators also have the usual symbolic equivalents shown earlier. The <CODE CLASS="Code">
+exists</CODE>
+ operator can be used on an variable, including paths referring to a node or value within an archetype. The <CODE CLASS="Code">
+for_all</CODE>
+ operator can be applied to sets and lists, such as referred to by a path to a multiply-valued attribute.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1144864"></A>5.4.6	Functions</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1144875"></A>The following functions are supported:</P>
+<UL>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1144876"></A>sum (x, y, ....): equivalent to x + y + ....</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1144883"></A>mean (x, y, ...): the mean (average) value of x, y, ...</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1144884"></A>max (x, y, ...): the maximum value among x, y, ...</LI>
+<LI CLASS="LstV1">
+<A NAME="pgfId-1144885"></A>min (x, y, ...): the minimum value among x, y, ...</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1145455"></A>All of the above functions have the signature <CODE CLASS="Code">
+func(Real, ...):Real</CODE>
+, but will also perform as though having the signature <CODE CLASS="Code">
+func(Integer, ...):Integer</CODE>
+, due to automatic numeric type promotion/demotion rules.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1145534"></A>Other functions may be added in the future. </P>
+</DIV>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1142220"></A>Operands</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1142221"></A>Operands in an assertion expression are typed and are of four kinds, as described in the following sub-sections.</P>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1144927"></A>5.5.1	Constants</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1142222"></A>Constant values are of any primitive type defined in the openEHR Support IM Assumed Types, and expressed according in the ODIN syntax (see the ODIN specification), i.e.:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145554"></A>Character, e.g. <CODE CLASS="Code">
+‘x’</CODE>
+;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145561"></A>String, e.g. <CODE CLASS="Code">
+“this is a string”</CODE>
+;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145621"></A>Boolean, e.g. <CODE CLASS="Code">
+True</CODE>
+, <CODE CLASS="Code">
+False</CODE>
+;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145562"></A>Integer, e.g. <CODE CLASS="Code">
+5</CODE>
+;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145568"></A>Real, e.g. <CODE CLASS="Code">
+5.2</CODE>
+;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145598"></A>ISO8601_DATE, e.g. <CODE CLASS="Code">
+2004-08-12</CODE>
+;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145606"></A>ISO8601_TIME, e.g. <CODE CLASS="Code">
+12:00:59</CODE>
+;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145610"></A>ISO8601_DATE_TIME, e.g. <CODE CLASS="Code">
+2004-08-12T12:00:59</CODE>
+;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145569"></A>ISO8601_DURATION, e.g. <CODE CLASS="Code">
+P39W</CODE>
+;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145663"></A>URI, e.g. <CODE CLASS="Code">
+http://en.wikipedia.org/wiki/Everest</CODE>
+;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145664"></A>coded term, e.g. [snomed_ct::2004950];</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145722"></A>Intervals of any numeric type, according to ODIN syntax e.g. <CODE CLASS="Code">
+|70..130|</CODE>
+;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1145734"></A>List of any primitive type, e.g. <CODE CLASS="Code">
+“string1”, “string2”, “string3”</CODE>
+;</LI>
+</UL>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1144951"></A>5.5.2	Object References</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1144955"></A>A reference to an object in data, including a leaf value, is expressed using an archetype path. All such paths are absolute (i.e. contain a leading ‘/’) and are understood to be with respect to the root of the current archetype. References to archetype nodes have the type defined at the relevant point in the underlying reference model. Examples include:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1145765"></A>/data[id2]/items[id3]/value[id35]/value -- Date of initial onset; type ISO8601_DATE</PRE>
+</DIV>
+</DIV>
+</DIV>
+<DIV>
+<H2 CLASS="To-be-Continued">
+<A NAME="pgfId-1144960"></A>&nbsp;</H2>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1145064"></A>5.5.3	Built-in Variables</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1144970"></A>A small number of built-in variables are available for use in assertions, and are referred to using a ‘$’ symbol, for example <CODE CLASS="Code">
+$current_date</CODE>
+. Built-in variables defined include:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1144971"></A>$current_date: ISO8601_DATE</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1144975"></A>$current_time: ISO8601_TIME</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1144976"></A>$current_date_time: ISO8601_DATE_TIME</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1144977"></A>$current_year: Integer</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1144978"></A>$current_month: Integer</PRE>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1144923"></A>5.5.4	Archetype-defined Variables</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1144981"></A>Variables may be declared within the rules section of an archetype. This is done using the following syntax:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1145087"></A>$var_name:Type ::= expression</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1145086"></A>This facility can be used to equate a variable name to a path, e.g. the following equates the variable <CODE CLASS="Code">
+$diagnosis</CODE>
+ to the code at the path contianing the diagnosis (e.g. in the <CODE CLASS="Code">
+openEHR-EHR-EVALUATION.problem-diagnosis.v1</CODE>
+ archetype):</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1145097"></A>$diagnosis:CODE_PHRASE ::= /data/items[id2.1]/value/defining_code</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1145098"></A>The variable can then be used instead of the path in subsequent expressions.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1145099"></A>5.5.5	External Queries</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1145091"></A>An expression referring to an externally defined query, possibly including arguments, may be defined using the variable declaration syntax. The general pattern is as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1144999"></A>$varname:Type ::= query(context, query_name, arg1, arg2, ...)</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1145003"></A>Examples include:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1145006"></A>$date_of_birth:ISO8601_DATE ::= 											query(“ehr”, “date_of_birth”)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1145005"></A>$has_diabetes:Boolean ::= 											query(“ehr”, “has_diagnosis”, </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1145155"></A>												“snomed_ct::1234567”)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1145212"></A>$is_female:Boolean ::= 											query(“ehr”, “is_female”)</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1145792"></A>Any number of arguments can be included.</P>
+<P CLASS="Hdr4U">
+<A NAME="pgfId-1145007"></A>Query Contexts</P>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1145803"></A>&nbsp;</P>
+<P CLASS="Hdr4U">
+<A NAME="pgfId-1145163"></A>Query Names</P>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1145804"></A>&nbsp;</P>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1142135"></A>Precedence and Parentheses</H5>
+</DIV>
+</DIV>
+<DIV>
+<H2 CLASS="To-be-Continued">
+<A NAME="pgfId-1142600"></A>&nbsp;</H2>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1142742"></A>Conditions</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1145183"></A>Example....</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1145184"></A>$is_female implies exists /path/to/xxx</PRE>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1145798"></A>Natural Language Issues</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1145802"></A>xx</P>
+</DIV>
+</DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 7.0/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="paths.css" CHARSET="UTF-8" TYPE="text/css">
+<TITLE> 6	ADL Paths</TITLE></HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<H4 CLASS="Hdr1">
+<A NAME="pgfId-1148965"></A><A NAME="84089"></A>ADL Paths<DIV>
+<IMG SRC="paths-1.png">
+</DIV>
+</H4>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1148966"></A>Overview</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1149431"></A>The notion of paths is integral to ADL, and a common path syntax is used to reference nodes in both ODIN and cADL sections of an archetype. The same path syntax works for both, because both ODIN and cADL have an alternating object/attribute structure. However, the interpretation of path expressions in ODIN and cADL differs slightly; the differences are explained in the ODIN and cADL sections of this document. This section describes only the common syntax and semantics.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1149432"></A>The general form of the path syntax is as follows (see syntax section below for full specification):</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1149433"></A>path: [‘/’] path_segment { ‘/’ path_segment }+</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149434"></A>path_segment: attr_name [ ‘[’ object_id ‘]’ ] </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1149412"></A>&nbsp;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148970"></A>Essentially, ADL paths consist of segments separated by slashes (‘/’), where each segment is an attribute name with optional object identifier predicate, indicated by brackets (‘[]’). </P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1148971"></A>ADL Paths are formed from an alternation of segments made up of an attribute name and optional object node identifier predicate, separated by slash (‘/’) characters. Node identifiers are delimited by brackets (i.e. []).</P>
+<P CLASS="Body">
+<A NAME="pgfId-1149708"></A>Similarly to paths used in file systems, ADL paths are either absolute or relative, with the former being indicated by a leading slash.</P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1149709"></A>Paths are <EM CLASS="Emphasis">
+absolute</EM>
+ or relative with respect to the document in which they are mentioned. Absolute paths commence with an initial slash (‘/’) character.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1148974"></A>The ADL path syntax also supports the concept of “movable” path patterns, i.e. paths that can be used to find a section anywhere in a hierarchy that matches the path pattern. Path patterns are indicated with a leading double slash (“//”) as in Xpath.</P>
+<P CLASS="LangRule">
+<A NAME="pgfId-1148975"></A>Path patterns are <EM CLASS="Emphasis">
+absolute</EM>
+ or relative with respect to the document in which they are mentioned. Absolute paths commence with an initial slash (‘/’) character.</P>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1148976"></A>Relationship with W3C Xpath</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1148977"></A>The ADL path syntax is semantically a subset of the Xpath query language, with a few syntactic shortcuts to reduce the verbosity of the most common cases. Xpath differentiates between “children” and “attributes” sub-items of an object due to the difference in XML between Elements (true sub-objects) and Attributes (tag-embedded primitive values). In ADL, as with any pure object formalism, there is no such distinction, and all subparts of any object are referenced in the manner of Xpath children; in particular, in the Xpath abbreviated syntax, the key <CODE CLASS="Code">
+child::</CODE>
+ does not need to be used.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1148978"></A>ADL does not distinguish attributes from children, and also assumes the <CODE CLASS="Code">
+node_id</CODE>
+ attribute. Thus, the following expressions are legal for cADL structures:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148979"></A>items[1]					-- the first member of ‘items’</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148980"></A>items[systolic]					-- the member of ‘items’ with meaning ‘systolic’</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148981"></A>items[id1]					-- the member of ‘items’ with node id ‘id1’</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148982"></A>The Xpath equivalents are:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1148983"></A>items[1]					-- the first member of ‘items’</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148984"></A>items[meaning() = ‘systolic’]					-- the member of ‘items’ for which the meaning() function evaluates to “systolic”</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148985"></A>items[@archetype_node_id = ‘id1’]					-- the member of ‘items’ with key ‘id1’</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1148986"></A>&nbsp;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148987"></A>In the above, <CODE CLASS="Code">
+meaning()</CODE>
+ is a notional function is defined for Xpath in openEHR, which returns the rubric for the <CODE CLASS="Code">
+node_id</CODE>
+ of the current node. Such paths are only for display purposes, and paths used for computing always use the ‘at’ codes, e.g. <CODE CLASS="Code">
+items[id1]</CODE>
+, for which the Xpath equivalent is items[@node_id = ‘id1’].</P>
+<P CLASS="Body">
+<A NAME="pgfId-1148988"></A>The ADL movable path pattern is a direct analogue of the Xpath syntax abbreviation for the ‘descendant’ axis. </P>
+</DIV>
+</DIV>
+</BODY>
+</HTML>

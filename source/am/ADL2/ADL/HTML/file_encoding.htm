@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 7.0/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="file_encoding.css" CHARSET="UTF-8" TYPE="text/css">
+<TITLE> 3	File Encoding and Character Quoting</TITLE></HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<H4 CLASS="Hdr1">
+<A NAME="pgfId-1142324"></A><A NAME="13178"></A>File Encoding and Character Quoting<DIV>
+<IMG SRC="file_encoding-1.png">
+</DIV>
+</H4>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1142395"></A>File Encoding</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1142325"></A>Because ADL files are inherently likely to contain multiple languages due to internationalised authoring and translation, they must be capable of accommodating characters from any language. ADL files do not explicitly indicate an encoding because they are assumed to be in UTF-8 encoding of unicode. For ideographic and script-oriented languuages, this is a necessity. </P>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1142484"></A>There are three places in ADL files where non-ASCII characters can occur:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1142485"></A>in string values, demarcated by double quotes, e.g. “xxxx”;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1142486"></A>in regular expression patterns, demarcated by either // or ^^;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1142487"></A>in character values, demarcated by single quotes, e.g. ‘x’;</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1142488"></A>URIs (a data type in ODIN) are assumed to be ‘percent-encoded’ according to RFC 3986<A HREF="#pgfId-1148496" CLASS="footnote">1</A>, which applies to all characters outside the ‘unreserved set’. The unreserved set is:</P>
+<P CLASS="CCode">
+<A NAME="pgfId-1142493"></A>unreserved  = ALPHA / DIGIT / &quot;-&quot; / &quot;.&quot; / &quot;_&quot; / &quot;~&quot;</P>
+<P CLASS="Body">
+<A NAME="pgfId-1142407"></A>In actual fact, ADL files encoded in latin 1 (ISO-8859-1) or another variant of ISO-8859 - both containing accented characters with unicode codes outside the ASCII 0-127 range - may work perfectly well, for various reasons:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1142326"></A>the contain nothing but ASCII, i.e. unicode code-points 0 - 127; this will be the case in English-language authored archetypes containing no foreign words;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1142327"></A>some layer of the operating system is smart enough to do an on-the-fly conversion of characters above 127 into UTF-8, even if the archetype tool being used is designed for pure UTF-8 only;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1142328"></A>the archetype tool (or the string-processing libraries it uses) might support UTF-8 and ISO-8859 variants.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1142442"></A>For situations where binary UTF-8 (and presumably other UTF-* encodings) cannot be supported, ASCII encoding of unicode characters above code-point 127 should only be done using the system supported by many programming languages today, namely \u escaped UTF-16. In this system, unicode codepoints are mapped to either:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1142446"></A>\uHHHH - 4 hex digits which will be the same (possibly 0-filled on the left) as the unicode code-point number expressed in hexadecimal; this applies to unicode codepoints in the range U+0000 - U+FFFF (the ‘base multi-lingual plane’, BMP);</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1142450"></A>\uHHHHHHHH - 8 hex digits to encode unicode code-points in the range U+10000 through U+10FFFF (non-BMP planes); the algorithm is described in IETF RFC 2781<A HREF="#pgfId-1142460" CLASS="footnote">2</A>.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1142477"></A>It is not expected that the above approach will be commonly needed, and it may not be needed at all; it is preferable to find ways to ensure that native UTF-8 can be supported, since this reduces the burden for ADL parser and tool implementers. The above guidance is therefore provided only to ensure a standard approach is used for ASCII-encoded unicode, if it becomes unavoidable.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1142329"></A>Thus, while the only officially designated encoding for ADL and its constituent syntaxes is UTF-8, real software systems may be more tolerant. This document therefore specifies that any tool designed to process ADL files need only support UTF-8; supporting other encodings is an optional extra. This could change in the future, if required by the ADL or openEHR user community.</P>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1142340"></A>Special Character Sequences</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1142388"></A>In strings and characters, characters not in the lower ASCII (0-127) range should be UTF-8 encoded, with the exception of quoted single- and double quotes, and some non-printing characters, for which the following customary quoted forms are allowed (but not required):</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1142341"></A>\r - carriage return</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1142342"></A>\n - linefeed</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1142343"></A>\t - tab</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1142344"></A>\\ - backslash</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1142345"></A>\” - literal double quote</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1142346"></A>\’ - literal single quote</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1142347"></A>Any other character combination starting with a backslash is illiegal; to get the effect of a literal backslash, the \\ sequence should always be used.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1142387"></A>Typically in a normal string, including multi-line paragraphs as used in ODIN, only \\ and \” are likely to be necessary, since all of the others can be accommodated in their literal forms; the same goes for single characters - only \\ and \’ are likely to commonly occur. However, some authors may prefer to use \n and \t to make intended formatting clearer, or to allow for text editors that do not react properly to such characters. Parsers should therefore support the above list.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1142348"></A>In regular expressions (only used in cADL string constraints), there will typically be backslash-escaped characters from the above list as well as other patterns like \s (whitspace) and \d (decimal digit), according to the PERL regular expression specification<A HREF="#pgfId-1142352" CLASS="footnote">3</A>. These should not be treated as anything other than literal strings, since they are processed by a regular expression parser.</P>
+</DIV>
+</DIV>
+<HR>
+<DIV CLASS="footnotes">
+<DIV CLASS="footnote">
+<P CLASS="Footnote">
+<SPAN CLASS="footnoteNumber">
+1.</SPAN>
+<A NAME="pgfId-1148496"></A>Uniform Resource Identifier (URI): Generic Syntax, Internet proposed standard, January 2005; see <EM CLASS="Hypertext">
+<A HREF="http://www.ietf.org/rfc/rfc3986.txt" CLASS="URL">http://www.ietf.org/rfc/rfc3986.txt</A></EM>
+</P>
+</DIV>
+<DIV CLASS="footnote">
+<P CLASS="Footnote">
+<SPAN CLASS="footnoteNumber">
+2.</SPAN>
+<A NAME="pgfId-1142460"></A>see <EM CLASS="Hypertext">
+<A HREF="http://tools.ietf.org/html/rfc2781" CLASS="URL">http://tools.ietf.org/html/rfc2781</A></EM>
+.</P>
+</DIV>
+<DIV CLASS="footnote">
+<P CLASS="Footnote">
+<SPAN CLASS="footnoteNumber">
+3.</SPAN>
+<A NAME="pgfId-1142352"></A><A HREF="http://www.perldoc.com/perl5.6/pod/perlre.html" CLASS="URL"> </A><EM CLASS="Hypertext">
+http://www.perldoc.com/perl5.6/pod/perlre.html</EM>
+</P>
+</DIV>
+</DIV>
+</BODY>
+</HTML>

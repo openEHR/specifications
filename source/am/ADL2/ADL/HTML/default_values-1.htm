@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 7.0/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="default_values.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> 7	Default Values</TITLE></HEAD>
+<BODY BGCOLOR="#ffffff">
+<H4 CLASS="Hdr1">
+<A NAME="pgfId-1148965"></A>Default Values<DIV>
+<IMG SRC="default_values-1.jpg">
+</DIV>
+</H4>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1148966"></A>Overview</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1149431"></A>In ADL 2, it is possible to specify a default value for any object node. This almost always limited to use in templates, since default values are usually specific to local contexts or use cases. However they may validly be used in any archetype.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1151143"></A>Within a template, a default value can be defined to support the situation where only one value is possible for a data item due to the specific nature of the template. For example, a blood pressure archetype may allow a number of possible values for &#8216;patient position&#8217;, such as &#8216;lying&#8217;, and &#8216;sitting&#8217;, &#8216;standing&#8217;. When used in a hospital, the patient will usually be lying so a default value for this can be set, as shown in the following example:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1151100"></A>/data[id2]/events[id6]/state[id7]/items[id8]/value &#8712; {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151418"></A>	DV_CODED_TEXT &#8712; {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151102"></A>		_default &#8712; {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151445"></A>			(DV_CODED_TEXT) &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151103"></A>				defining_code = &lt;[snomedct::163033001]&gt; -- lying BP</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151104"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151453"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151434"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151105"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1151106"></A>Default values are expressed in ODIN syntax, since they are instances of objects, rather than being constraints. They are introduced using a pseudo-attribute &#8216;_default&#8217;, which is detected by the compiler as being a meta-attribute. The example above only sets the default value, but it could have also modified the constraint on the value object as well, as in the following version (where the standing blood pressure possibility from the archetype has been removed):</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1151107"></A>/data[id2]/events[id6]/state[id7]/items[id8]/value &#8712; {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151108"></A>	DV_CODED_TEXT &#8712; {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151109"></A>		defining_code &#8712; {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151110"></A>			[snomedct::</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1152534"></A>			163033001, -- lying blood pressure</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151111"></A>			163035008] -- sitting blood pressure</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151112"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151508"></A>		_default &#8712; {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151509"></A>			(DV_CODED_TEXT) &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151510"></A>				defining_code = &lt;[snomed::163033001]&gt; -- lying BP</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151511"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151512"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151113"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1151117"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1151118"></A>Default values can be set in the same way on container objects, such that one or more container objects distinguished by node identifier or name (if renaming has been used in the template) within the same container can have a default value assigned to them.</P>
+</DIV>
+</BODY>
+</HTML>

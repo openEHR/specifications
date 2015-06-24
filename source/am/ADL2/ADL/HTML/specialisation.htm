@@ -1,0 +1,1697 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 7.0/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="specialisation.css" CHARSET="UTF-8" TYPE="text/css">
+<TITLE> 10	Specialisation</TITLE></HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<H4 CLASS="Hdr1">
+<A NAME="pgfId-1154241"></A><A NAME="31040"></A>Specialisation<DIV>
+<IMG SRC="specialisation-1.png">
+</DIV>
+</H4>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1154242"></A>Overview</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1154238"></A>Archetypes can be specialised in a similar way to classes in object-oriented programming languages. Common to both situations is the use of a differential style of declaration, i.e. the contents of a specialised entity are expressed as differences with respect to the parent - previously defined elements from the parent that are not changed are not repeated in the descendant. Two extra constructs are included in the ADL syntax to support redefinition in specialised archetypes or templates.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1154783"></A>The basic test that must be satisfied by a specialised archetype is as follows:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1154787"></A>All possible data instance arrangements that conform to the specialised archetype must also conform to all of its parents, recursively to the ultimate parent.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1154806"></A>This condition ensures that data created by a specialised archetype that is not itself shared by two systems can be processed by the use of a more general parent that is shared.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1159935"></A>The semantics that allow this are similar to the ‘covariant redefinition’<A HREF="#pgfId-1160027" CLASS="footnote">1</A> notion used in some object-oriented programming languages, and can be summarised as follows.</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1157507"></A>A non-specialised (i.e. top-level) archetype defines an instance space that is a subset of the space defined by the class in the reference information model on which the archetype is based.</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1157734"></A>A specialised archetype can specialise only one parent archetype, i.e. single inheritance.</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1157739"></A>A specialised archetype specifies an instance space defined by the following elements:</LI>
+<LI CLASS="LstU2">
+<A NAME="pgfId-1157678"></A>unchanged object and attribute constraints inherited from the parent archetype;</LI>
+<LI CLASS="LstU2">
+<A NAME="pgfId-1159939"></A>and one or more redefinitions, additions and removals.</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1157504"></A>All elements defined in a parent archetype are either inherited unchanged or redefined in a specialised child.</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1157740"></A>Specialised archetypes are expressed differentially with respect to the parent, i.e. they do not mention purely inherited elements, only redefinitions and extensions.</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1162764"></A>Extensions always define an additional subset of the instance space defined by the reference model element being extended (i.e. to which the ‘new’ objects belong). The extension capability allows archetypes to remain extensible without having to know in advance how or if they will be extended.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1157718"></A>To understand specialisation properly, the object-oriented notion of flattening is required. This term refers to the operation of overlaying the (differential) definition of a specialised archetype on its ‘flat parent’, which is a flattened archetype obtained by a previous invocation of this process. The first invocation creates a flat archetype from overlaying a specialised archetype on a ‘top-level’ non-specialised archetype.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1172068"></A>The contents of the definition of any specialised archetype are therefore understood as differences with respect to the flat parent, not the differential parent. This is exactly how object-oriented programming languages work.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1172054"></A>The following sections describe the details of specialisation. The term ‘object’ is used synonymously with ‘object constraint’ since all elements in ADL are constraints unless otherwise indicated.</P>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1156545"></A>Examples</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1160020"></A>The examples below provide a basis for understanding most of the semantics discussed in the subsequent sections.</P>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1171823"></A>10.2.1	Redefinition for Refinement</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1171831"></A>The example shown in <A HREF="specialisation.htm#59139" CLASS="XRef">See Specialised archetype showing redefinition and extension</A> is from an older version of the openEHR ‘Problem’ archetype lineage and illustrates the use of redefinition and extension. The first text is the the definition section of the top-level ‘Problem’ archetype, and shows one <CODE CLASS="Code">
+ELEMENT</CODE>
+ node in expanded form, with the remaining nodes in an elided form. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1171832"></A>The second text is from the ‘problem-diagnosis’ archetype, i.e. a ‘diagnosis’ specialisation of the general notion of ‘problem’. In this situation, the node <CODE CLASS="Code">
+[id2]</CODE>
+, with occurrences of 1, i.e. mandatory non-multiple, has its meaning narrowed to <CODE CLASS="Code">
+[id2.1]</CODE>
+ ‘diagnosis’ (diagnosed problems are seen as a subset of all problems in medicine), while new sibling nodes are added to the items attribute to define details particular to recording a diagnosis. The extension nodes are identified by the codes <CODE CLASS="Code">
+[at0.32]</CODE>
+, <CODE CLASS="Code">
+[at0.35]</CODE>
+ and <CODE CLASS="Code">
+[at0.37]</CODE>
+, with the latter two shown in elided form.</P>
+<DIV>
+<MAP NAME="specialisation-2">
+</MAP>
+<IMG SRC="specialisation-2.png" USEMAP="#specialisation-2">
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1159135"></A>10.2.2	Redefinition for Specialisation</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1155884"></A>The example shown in <A HREF="specialisation.htm#53297" CLASS="XRef">See Specialised archetype showing redefinition to multiple children</A> illustrates redefinition in a specialised archetype. The first text is taken from the definition section of the ‘laboratory result’ <CODE CLASS="Code">
+OBSERVATION</CODE>
+ archetype on openEHR.org<A HREF="#pgfId-1171935" CLASS="footnote">2</A>, and contains an <CODE CLASS="Code">
+ELEMENT</CODE>
+ node whose identifier is <CODE CLASS="Code">
+[id79]</CODE>
+, defined as ‘panel item’ in the archetype terminology (sibling nodes are not shown here). The intention is that the <CODE CLASS="Code">
+id79</CODE>
+ node be specialised into particular ‘panel items’ or analytes according to particular types of test result. Accordingly, the <CODE CLASS="Code">
+id79</CODE>
+ node has occurrences of <CODE CLASS="Code">
+0..*</CODE>
+ and its value is not constrained with respect to the reference model, meaning that the type of the <EM CLASS="Emphasis">
+value</EM>
+ attirbute can be any descendant of <CODE CLASS="Code">
+DATA_VALUE</CODE>
+.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1153030"></A>The second text is a specialised version of the laboratory result archetype, defining ‘thyroid function test result’. The redefinitions include:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1155964"></A>a redefinition of the top-level object node identifier <CODE CLASS="Code">
+[id1]</CODE>
+, with the specialised node identifier <CODE CLASS="Code">
+[id1.1]</CODE>
+;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1155969"></A>eight nodes redefining the <CODE CLASS="Code">
+[id79]</CODE>
+ node are shown, with overridden node identifiers <CODE CLASS="Code">
+[id79.2]</CODE>
+ - <CODE CLASS="Code">
+[id79.9]</CODE>
+;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1155968"></A>reduced occurrences (<CODE CLASS="Code">
+0..1</CODE>
+ in each case);</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1155970"></A>redefinition of the <EM CLASS="Emphasis">
+value</EM>
+ attribute of each <CODE CLASS="Code">
+ELEMENT</CODE>
+ type to <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+, shown in expanded form for node <CODE CLASS="Code">
+[id79.2]</CODE>
+.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1157765"></A>This archetype is typical of a class of specialisations that use only redefinition, due to the fact that all objects in the redefined part of the specialised version are semantically specific kinds of a general object, in this case, ‘panel item’.</P>
+<DIV>
+<MAP NAME="specialisation-3">
+</MAP>
+<IMG SRC="specialisation-3.png" USEMAP="#specialisation-3">
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1171907"></A>10.2.3	Specialisation with Cloning</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1172156"></A>In the previous example, each of the nodes with identifiers of the form <CODE CLASS="Code">
+id79.N</CODE>
+ would be effectively copied to the flat output, since the node being redefined (<CODE CLASS="Code">
+id79</CODE>
+) has no sub-structure, i.e. it is a ‘matches any’ node. However, the general case is that the node in the parent has its own structure, typically some boilerplate nodes that would be used by any specialisation. In that case, an archetype containing nodes that specialise a node with existing structure cause a ‘clone and overlay’ operation. That is, to generate the flat output of the specialised archetype, the parent node is first cloned from the flat parent to the new flat output, and then the specialised node is overlaid on the cloned structure. The following example shows a parent archetype that defines a ‘laboratory result’ structure as a <CODE CLASS="Code">
+CLUSTER</CODE>
+ containing a number of <CODE CLASS="Code">
+ELEMENT</CODE>
+ objects, defining things like Result value, Reference range guidance and so on. The <CODE CLASS="Code">
+id2</CODE>
+ Result value node is intended to be specialised.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1172784"></A>Parent archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1172167"></A>CLUSTER[id1] ∈ {													-- Laboratory test panel</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172168"></A>	items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172169"></A>		CLUSTER[id3] ∈ {											-- Laboratory Result</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172170"></A>			items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172171"></A>				ELEMENT[id2] occurrences ∈ {0..1} 									-- Result Value</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172172"></A>				ELEMENT[id4] ∈ {									 -- Result Comment</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172173"></A>					value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172174"></A>						DV_TEXT[id15] </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172175"></A>					}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172176"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172177"></A>				ELEMENT[id5] occurrences ∈ {0..1} ∈ {	-- Ref. Range Guidance</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172178"></A>					value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172179"></A>						DV_TEXT[id16] </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172180"></A>					}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172181"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172182"></A>				ELEMENT[id6] occurrences ∈ {0..1} ∈ {	-- Result Value Status</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172183"></A>					value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172184"></A>						DV_CODED_TEXT[id17] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172185"></A>							defining_code ∈ {[ac1]}					</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172186"></A>						}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172187"></A>					}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172188"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172189"></A>				ELEMENT[id7] occurrences ∈ {0..1} ∈ {	-- D/T Result Val Status</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172190"></A>					value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172191"></A>						DV_DATE_TIME[id18] </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172192"></A>					}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172193"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172194"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172195"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172196"></A>		allow_archetype CLUSTER[id14] ∈ {											-- Other Detail</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172197"></A>			include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172198"></A>				archetype_id/value ∈ {/.*/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172199"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172200"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172201"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1172157"></A>&nbsp;</P>
+<P CLASS="Body">
+<A NAME="pgfId-1172908"></A>Specialised child archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1172916"></A>CLUSTER[id1.1] ∈ {	-- Lipid studies panel</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172917"></A>	/items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172918"></A>		CLUSTER[id3.1] ∈ {	-- LDL</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172919"></A>			items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172920"></A>				ELEMENT[id2.2] ∈ {	</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172921"></A>					value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172922"></A>						DV_QUANTITY[id0.1] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172923"></A>							property ∈ {[at0.1]}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172924"></A>							magnitude ∈ {|&gt;=0.0|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172925"></A>							units ∈ {&quot;mmol/l&quot;}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172926"></A>						}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172927"></A>					}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172928"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172929"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172930"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172931"></A>		CLUSTER[id3.2] ∈ {										-- HDL</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172932"></A>			items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172933"></A>				ELEMENT[id2.3] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172934"></A>					value matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172935"></A>						DV_QUANTITY[id0.2] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172936"></A>							property ∈ {[at0.1]}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172937"></A>							magnitude ∈ {|&gt;=0.0|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172938"></A>							units ∈ {&quot;mmol/l&quot;}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172939"></A>						}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172940"></A>					}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172941"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172942"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172995"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173029"></A>...</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173022"></A>		CLUSTER[id3.5] ∈ {	-- Cholesterol Result</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172971"></A>			items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172972"></A>				ELEMENT[id2.4] ∈ {	</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172973"></A>					value matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172974"></A>						DV_QUANTITY[id0.5] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172975"></A>							property ∈ {[at0.1]}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172976"></A>							magnitude ∈ {|&gt;=0.0|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172977"></A>							units ∈ {&quot;mosmol/l&quot;}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172978"></A>						}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172979"></A>					}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172980"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172981"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172982"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172984"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172985"></A>}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1172909"></A>&nbsp;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1173464"></A>The flattened result consists of a number of repetitions of the entire <CODE CLASS="Code">
+CLUSTER[id3]</CODE>
+ structure from the parent, corresponding to the specialisations in the child. The ADL source form is tool large to show here, but the ADL Workbench provides a visualisation in <A HREF="specialisation.htm#13975" CLASS="XRef">See Redefinition with cloning</A>. In this figure we can see that the <CODE CLASS="Code">
+CLUSTER / ELEMENT</CODE>
+ overlays from the child archetype have been overlaid on clones of the <CODE CLASS="Code">
+CLUSTER[id3]</CODE>
+ structure from the parent, preserving the <CODE CLASS="Code">
+id4</CODE>
+, <CODE CLASS="Code">
+id5</CODE>
+ etc nodes.</P>
+<DIV>
+<MAP NAME="specialisation-4">
+</MAP>
+<IMG SRC="specialisation-4.png" USEMAP="#specialisation-4">
+</DIV>
+</DIV>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1172910"></A>Specialisation Concepts</H5>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1164511"></A>10.3.1	Differential and Flat Forms</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1164512"></A>Specialised archetypes in their authored form are represented in ‘differential’ form. The syntax is the same as for non-specialised archetypes, with two additions: specialisation paths (see <A HREF="specialisation.htm#74045" CLASS="XRef">See Specialisation Paths</A>) and ordering indicators (see <A HREF="specialisation.htm#44961" CLASS="XRef">See Ordering of Sibling Nodes</A>). For a specialised archetype therefore, the lineage of archetypes back to the ultimate parent must be taken into account in order to obtain its complete semantics.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1164519"></A>Differential form means that the only attributes or objects mentioned are those that redefine corresponding elements in the parent and those that introduce new elements. The differential approach to representation of specialised archetypes give rise to the need for a flat <EM CLASS="Emphasis">
+form</EM>
+ of a specialised archetype: the equivalent archetype defined by the sum of the (differential) child and its parent, as if the child archetype had been defined standalone. The flat form of archetypes is used for building templates, and subsequently at runtime. It is generated by ‘compressing’ the effects of inheritance of the parent to the specialised child into a single archetype, and applies recursively all the way up an archetype lineage to the ultimate parent, which must be a top-level (non-specialised) archetype. For a top-level archetype, the flat-form is the same as its differential form (i.e. in a top-level archetype, every node is considered to be an extension node).</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1162967"></A>10.3.2	Specialisation Levels</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1162968"></A>In order to talk about archetypes at different levels of specialisation, a standard way of identifying the levels of specialisation is used, as follows:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1162969"></A>level 0: top-level, non-specialised archetypes</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1162970"></A>level 1: specialisations of level 0 archetypes</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1162971"></A>level 2: specialisations of level 1 archetypes</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1162972"></A>etc.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1162973"></A>For nodes carrying a node identifier, the specialisation level is always equal to the number of ‘.’ characters found in the identifier.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1163697"></A>10.3.3	<A NAME="74045"></A>Specialisation Paths</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163698"></A>Because ADL is a block-structured language, the redefinition of nodes deep in the parent structure normally requires descending into the structure. Since it is common to want to further constrain only nodes deep within a structure in specialised archetype, a more convenient way is provided in ADL to do this using a specialisation path, illustrated by the following example:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163699"></A>OBSERVATION[id1.1] ∈ {	-- Thyroid function tests</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163700"></A>	/data[id2]/events[id3]/data[id4]/items ∈ 	{</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163701"></A>			ELEMENT[id79.2] occurrences ∈ {0..1} ∈ {	-- TSH</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163702"></A>				value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163703"></A>					DV_QUANTITY[id0.7] ∈ {	 ... }</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163704"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163705"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163706"></A>			ELEMENT[id79.7] occurrences ∈ {0..1} ∈ {..}	-- Free T3</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163707"></A>			....</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163708"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163709"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163710"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163711"></A>In this fragment, a path is used rather than an attribute name. A path can be used in this manner only if no further constraints are required ‘on the way’ into the deep structure. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1163712"></A>The rules for specialisation paths are as follows.</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163713"></A>A specialisation path is constructed down to the first attribute having any child objects to be further constrained in the present archetype.</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1169627"></A>All path segments must carry an id-code predicate.</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163714"></A>The shortest useful path that can be used is ‘/’ followed by an attribute name from the top level class being constrained by the archetype.</LI>
+</UL>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1163167"></A>10.3.4	Path Congruence</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163171"></A>Any node in an archetype can unambiguously be located by its archetype path. For example, the text value of the ‘problem’ node of the <CODE CLASS="Code">
+openEHR-EHR-EVALUATION.problem.v1</CODE>
+ archetype shown at the top of <A HREF="specialisation.htm#59139" CLASS="XRef">See Specialised archetype showing redefinition and extension</A> is:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163172"></A>/data[id2]/items[id3]/value</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163193"></A>Similarly the path to the redefined version of the same node in the <CODE CLASS="Code">
+openEHR-EHR-EVALUATION.problem-diagnosis.v1</CODE>
+ archetype at the bottom of the same figure is:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163208"></A>/data[id2]/items[id3.1]/value</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163214"></A>By inspection, it can be seen that this path is a variant of the corresponding path in the parent archetype, where a particular object node identifier has been specialised. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1163236"></A>In general, the path of every redefined node in a specialised archetype will have a direct equivalent in the parent archetype, which can be determined by removing one level of specialisation from any node identifiers within the specialised path that are at the level of specialisation of the specialised archetype (i.e. node identifiers corresponding to higher specialisation levels are not changed). In this way, the nodes in a specialised archetype source can be connected to their counterparts in parent archetypes, for purposes of validation and flattening.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1163240"></A>Conversely, any given path in an archetype that has children will have congruent paths in the children wherever nodes have been specialised.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1154615"></A>10.3.5	Redefinition Concepts</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1170665"></A>A specialised archetype definition at any level consists of a set of changes with respect to its flat parent. The technically available changes are categorised as follows.</P>
+<TABLE BORDER="1">
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-1170918"></A>Logical Intention</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-1170920"></A>Physical Redefinition</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-1170922"></A>Criteria</P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="3">
+<P CLASS="CellHeading">
+<A NAME="pgfId-1171139"></A>Attibute node constraints</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171145"></A>MANDATE an existing node.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171147"></A>Differential attribute node refines existence to 1.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171149"></A>Differential node has same attribute name as a node at the same path location in the flat parent.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171151"></A>EXCLUDE an existing node.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171153"></A>Differential attribute node refines existence to 0.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171155"></A>Differential node has same attribute name as a node at the same path location in the flat parent.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171157"></A>REFINE an existing node.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171159"></A>Differential attribute node refines cardinality of attribute at corresponding location in flat parent.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171161"></A>Differential node has same attribute name as a node at the same path location in the flat parent.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171163"></A>ADD a new node.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171165"></A>Differential attribute node will be added to parent object node at corresponding location in flat parent.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171167"></A>Differential node does not exist in the flat parent, only in the Reference Model.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="3">
+<P CLASS="CellHeading">
+<A NAME="pgfId-1170924"></A>Object node constraints</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1170930"></A>REFINE an existing node.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1170932"></A>Differential object node and sub-elements will OVERRIDE corresponding node, and some / all of its sub-elements from the flat parent</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1170934"></A>Differential node has a specialised node identifier, and corresponding node in flat parent has max occurrences = 1 or else differential node is sole replacement and has max occurrences = 1.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1170936"></A>SPECIALISE an existing node.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1170938"></A>Differential object node(s) and sub-elements will OVERRIDE a CLONE of the corresponding node, and some / all of its sub-elements from the flat parent</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1170940"></A>Differential node has a specialised node identifier, and corresponding node in flat parent has max occurrences &gt; 1.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1170942"></A>ADD a new node.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1170944"></A>Differential object node(s) and sub-elements will be ADDed to container or single-valued attribute. In the case of a container, ordering can be controlled with the before/after constraint.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1170946"></A>Differential node has a specialised node identifier, and corresponding node in flat parent has max occurrences &gt; 1.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1170948"></A>EXCLUDE an existing node.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1170977"></A>Differential object node DELETEs existing node which has min occurrences = 0 (i.e. can’t delete a mandatory node).</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1170952"></A>Differential node has same node identifier as corresponding node in parent, and occurrences = 0..0.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171004"></A>FILL a slot.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171006"></A>External reference node will be added as slot filler next to corresponding slot from flat parent.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171008"></A>Differential node is an external reference node, has specialised node identifier of a slot in the flat parent.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171019"></A>CLOSE a slot.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171021"></A>Archetype slot node causes corresponding slot from flat parent to be closed to further filling.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-1171023"></A>Differential node is an archetype slot node, with same node identifier as a slot in the flat parent, and has the ‘closed’ flag set.</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="Body">
+<A NAME="pgfId-1160741"></A>In the ADL syntax, objects can be specified in two places: under single-value attributes and under multiply-valued (container) attributes. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1160779"></A>Each object under a single-valued attribute defines an alternative that may be used to constrain data at that attribute position. An example is the <CODE CLASS="Code">
+OBSERVATION</CODE>
+.<EM CLASS="Emphasis">
+protocol</EM>
+ attribute from the openEHR reference model: if multiple objects appear under this attribute, only one can be used at runtime to constrain data.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1154616"></A>Within a container attribute, the meaning of multiple objects is that each child object defines constraints on one or more members of the container in the data. The <EM CLASS="Emphasis">
+occurrences</EM>
+ constraint on each one determines how many objects in the data match a given object constraint in the attribute.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1160610"></A>Object constraints can be specialised in both places by redefinition, refinement and exclusion. Addition can also be used under either kind of attribute: in both cases, it corresponds to an alternative. The actual semantics are described in terms of object node identification, type redefinition, and structural constraints (existence, cardinality and occurrences), and are the same for objects under single- and multiply-valued attributes. The following sections describe the details.</P>
+</DIV>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1163244"></A><A NAME="97568"></A>Attribute Redefinition</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1164469"></A>A small number of things can be redefined on attributes, including existence and cardinality. A basic rule of redefinition is that a specialised archetype cannot change the multiplicity type of an attribute.</P>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1163727"></A>10.4.1	<A NAME="53469"></A>Existence Redefinition: Mandation and Exclusion</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163728"></A>All attributes mentioned in an archetype have an <EM CLASS="Emphasis">
+existence</EM>
+ constraint, indicating whether a value is required or not. The constraint is either stated explicitly - typically done for single-valued attirbutes - or it is the value from the reference model - typical for multiply-valued attributes. In both cases, the existence of an attribute in a parent archetype can be redefined in a specialised archetype using the standard cADL syntax. In the following example, an implicit existence constraint picked up from the reference model of <CODE CLASS="Code">
+{0..1}</CODE>
+ is redefined in a child archetype to <CODE CLASS="Code">
+{1}</CODE>
+, i.e. mandatory.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1163786"></A>Parent archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163787"></A>OBSERVATION[id1] ∈ { -- blood pressure measurement</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163788"></A>	protocol ∈ { -- existence not changed from reference model</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163771"></A>		-- etc</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163836"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163800"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163767"></A>Child archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1170221"></A>OBSERVATION[id1.1] ∈ { -- paediatric blood pressure measurement</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1170222"></A>	/protocol existence ∈ {1} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1170223"></A>		-- etc</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163840"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163832"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1170242"></A>Redefinition of existence to <CODE CLASS="Code">
+{0}</CODE>
+ by this method denotes exclusion, i.e. removal of the entire attribute (including all sub-structure) from the resulting structure. In an archetype, it is likely to indicate poor design, given that the decision to remove optional attributes is much more likely to be local, and therefore more appropriate in templates rather than archetypes; within a template it would be perfectly normal. The following example shows the protocol attribute in the above <CODE CLASS="Code">
+OBSERVATION</CODE>
+ archetype being excluded in this way:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1170226"></A>OBSERVATION[id1] ∈ { -- paediatric blood pressure measurement</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1170227"></A>	/protocol existence ∈ {0}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1170228"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163246"></A>&nbsp;</P>
+<P CLASS="Body">
+<A NAME="pgfId-1170257"></A>Note that in the above, the ‘/’ is used to denote ‘/protocol’ as a differential path. Without the slash, the ‘protocol’ attribute would be considered to be trying to constrain a hitherto unconstrained attribute called ‘protocol’, rather than redefine a constraint already present in a parent archetype.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1163271"></A>10.4.2	Multiply-valued (Container) Attributes</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163272"></A>The following sub-sections describe specialisation semantics specific to container attributes.</P>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1163273"></A>Cardinality</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163274"></A>The <EM CLASS="Emphasis">
+cardinality</EM>
+ constraint defines how many object instances can be in the container within the data (not the archetype). In a specialised archetype, cardinality can be redefined to be a narrower range than in the parent, further limiting the valid ranges of items in the data that may occur within the container. This would normally only make sense if refinements were made to the occurrences of the contained items, i.e.:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163279"></A>narrowing the occurrences range of an object;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163280"></A>excluding an object by setting its occurrences to {0};</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163281"></A>adding new objects, which themselves will have occurrences constraints;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163898"></A>setting some object occurrences to mandatory, and the enclosing cardinality lower limit to some non-zero value.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1163282"></A>As long as the relationship between the enclosing attribute’s cardinality constraint and the occurrences constraints defined on all the contained items (including those inherited unchanged, and therefore not mentioned in the specialised archetype) is respected (see VCOC validity rule, AOM specification), any of the above specialisations can occur.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1163918"></A>The following provides an example of cardinality redefinition.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1163900"></A>Parent archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163901"></A>ITEM_LIST[id3] ∈ { -- general check list</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163902"></A>	items cardinality ∈ {0..*} ∈ { -- any number of items</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163903"></A>		ELEMENT[id12] occurrences ∈ {0..*} ∈ {} -- generic checklist item</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163947"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163905"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163906"></A>Child archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163969"></A>ITEM_LIST[id3] ∈ { -- pre-operative check list</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163970"></A>	/items cardinality ∈ {3..10} ∈ { -- at least 3 mandatory items</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163971"></A>		ELEMENT[id12.1] occurrences ∈ {1} ∈ {} -- item #1</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163990"></A>		ELEMENT[id12.2] occurrences ∈ {1} ∈ {} -- item #2</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164000"></A>		ELEMENT[id12.3] occurrences ∈ {1} ∈ {} -- item #3</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164017"></A>		ELEMENT[id12.4] occurrences ∈ {0..1} ∈ {} -- item #4</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164022"></A>		...</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164009"></A>		ELEMENT[id12.10] occurrences ∈ {0..1} ∈ {} -- item #10</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163972"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163973"></A>}</PRE>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1163289"></A><A NAME="44961"></A>Ordering of Sibling Nodes</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163290"></A>Within container attributes, the order of objects may be significant from the point of view of domain users, i.e. the container may be considered as an ordered list. This is easy to achieve in top-level archetype, using the ‘ordered’ qualifier on a cardinality constraint. However when particular node(s) are redefined into multiple specialised nodes, or new nodes added by extension, the desired order of the new nodes may be such that they should occur interspersed at particular locations among nodes defined in the parent archetype. The following text is a slightly summarised view of the items attribute from the problem archetype shown in <A HREF="specialisation.htm#59139" CLASS="XRef">See Specialised archetype showing redefinition and extension</A>:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163294"></A>items cardinality ∈ {0..*; ordered} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163295"></A>	ELEMENT[id2] occurrences ∈ {1} ∈ {..} 												-- Problem</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163296"></A>	ELEMENT[id3] occurrences ∈ {0..1} ∈ {..}												-- Date of initial onset</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163297"></A>	ELEMENT[id4] occurrences ∈ {0..1} ∈ {..}												-- Age at initial onset</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163298"></A>	ELEMENT[id5] occurrences ∈ {0..1} ∈ {..}												-- Severity</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163299"></A>	ELEMENT[id9] occurrences ∈ {0..1} ∈ {..}												-- Clinical description</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163300"></A>	ELEMENT[id10] occurrences ∈ {0..1} ∈ {..}												-- Date clinically received</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163301"></A>	CLUSTER[id11] occurrences ∈ {0..*} ∈ {..}												-- Location</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163302"></A>	CLUSTER[id14] occurrences ∈ {0..1} ∈ {..}												-- Aetiology</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163303"></A>	CLUSTER[id18] occurrences ∈ {0..1} ∈ {..}												-- Occurrences or exacerb’ns</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163304"></A>	CLUSTER[id26] occurrences ∈ {0..1} ∈ {..}												-- Related problems</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163305"></A>	ELEMENT[id30] occurrences ∈ {0..1} ∈ {..}												-- Date of resolution</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163306"></A>	ELEMENT[id31] occurrences ∈ {0..1} ∈ {..}												-- Age at resolution</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163307"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163308"></A>To indicate significant ordering in the specialised problem-diagnosis archetype, the keywords <CODE CLASS="Code">
+before</CODE>
+ and <CODE CLASS="Code">
+after</CODE>
+ can be used, as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163309"></A>/data[id3]/items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163310"></A>	before [id3] </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163311"></A>	ELEMENT[id2.1] ∈ {..}												-- Diagnosis</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163312"></A>	ELEMENT[id0.32] occurrences ∈ {0..1} ∈ {..}												-- Status</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163313"></A>	after [id26]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163314"></A>	CLUSTER[id0.35] occurrences ∈ {0..1} ∈ {..}	 -- Diagnostic criteria</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163315"></A>	CLUSTER[id0.37] occurrences ∈ {0..1} ∈ {..}	 -- Clinical Staging</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163316"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163317"></A>These keywords are followed by a node identifier reference, and act to modify the node definition immediately following. Technically the following visual rendition would be more faithful, but it is less readable, and makes no difference to a parser:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163318"></A>	after [id26] 	CLUSTER[id0.35] occurrences ∈ {0..1} ∈ {..}	 -- etc</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163319"></A>The rules for specifying ordering are as follows.</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163320"></A>Ordering is only applicable to object nodes defined within a multiply-valued (i.e. container) attribute whose cardinality includes the <CODE CLASS="Code">
+ordered</CODE>
+ constraint;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163321"></A>Any <CODE CLASS="Code">
+before</CODE>
+ or <CODE CLASS="Code">
+after</CODE>
+ statement can refer to the node identifier of any sibling node known in the flat form of the archetype, i.e.:</LI>
+<LI CLASS="LstU2">
+<A NAME="pgfId-1163322"></A>the identifier of any redefined node;</LI>
+<LI CLASS="LstU2">
+<A NAME="pgfId-1163323"></A>the identifier of any new node;</LI>
+<LI CLASS="LstU2">
+<A NAME="pgfId-1163324"></A>the identifier of any inherited node that is not redefined amongst the sibling nodes.</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163325"></A>If no ordering indications are given, redefined nodes should appear in the same position as the nodes they replace, while extension nodes should appear at the end.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1163326"></A>If ordering indicators are used in an archetype that is itself further specialised, the following rules apply:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163327"></A>If the referenced identifier becomes unavailable due to being redefined in the new archetype, it must be redefined to refer to an available sibling identifier as per the rules above.</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163328"></A>If this does not occur, a <CODE CLASS="Code">
+before</CODE>
+ reference will default to the first sibling node identifier currently available conforming to the original identifier, while an after reference will default to the <EM CLASS="Emphasis">
+last</EM>
+ such identifier available in the current flat archetype.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1163330"></A>If, due to multiple levels of redefinition, there is more than one candidate to go before (or after) a given node, the compiler should output a warning. The problem would be resolved by the choice of one of the candidates being changed to indicate that it is to be ordered before (after) another of the candidates rather than the originally stated node.</P>
+</DIV>
+</DIV>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1163372"></A>Object Redefinition</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163373"></A>Object redefinition can occur for any object constraint in the parent archeype, and can include redefinition of node identifier, occurrences, reference model type. For certain kinds of object constraints, specific kinds of redefinition are possible. </P>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1163661"></A>10.5.1	Node Identifiers</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163662"></A>In an archetype, node identifiers (‘id-codes’) are mandatory on all object constraint nodes. The identifiers of those object nodes defined as children of a multiply-valued attribute and multiple alternative children of single-valued attributes (see <A HREF="CDL.htm#31038" CLASS="XRef">See Node Identifiers</A>) require definitions in the archetype terminology. Definitions are optional on other single child constraints of single-valued attributes. This rule applies in specialised as well as top-level archetypes.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1169964"></A>A key question is: when does a node identifier need to be redefined? There are three possible situations:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1164269"></A>when the node is the root node of an archetype, the meaning is always considered to be redefined;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1170002"></A>it can be redefined for purely semantic purposes on other nodes, e.g. to redefine ‘heart rate’ to ‘fetal heart rate’;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1169980"></A>a node identifier must be redefined if the node is being redefined into multiple child nodes, either under a multiply-valued attribute, or as alternatives under a single-valued attribute.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1166658"></A>Redefinition of an object node identifier for purely semantic purposes, unaccompanied by any other kind of constraint change is done as shown in the following example.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1166726"></A>Parent archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1166737"></A>EVALUATION[id1] ∈ {								-- Medical Certificate</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166738"></A>	data ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166739"></A>		ITEM_TREE[id2] ∈ {	</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166740"></A>			items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166746"></A>				ELEMENT[id5] occurrences ∈ {0..1} ∈ {	-- Description</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166932"></A>					value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166933"></A>						DV_TEXT[id7] ∈ {*}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166750"></A>					}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166761"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166762"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166876"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166883"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166890"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1166897"></A>Child archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1166977"></A>EVALUATION[id1.1] ∈ {										-- Singapore Medical Certificate</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166978"></A>	/data[id2]/items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166981"></A>		ELEMENT[id5.1]								-- Summary</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166988"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166989"></A>}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167046"></A>&nbsp;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1167047"></A>Here the <CODE CLASS="Code">
+id5</CODE>
+ (‘Description’) node is refined in meaning to <CODE CLASS="Code">
+id5.1</CODE>
+ (‘Summary’). Since there is no other constraint to be stated, no further ‘matches’ block is required.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1170136"></A>An example of the 3rd case above of redefinition is shown in the first archetype in <A HREF="specialisation.htm#59139" CLASS="XRef">See Specialised archetype showing redefinition and extension</A>, where the node <CODE CLASS="Code">
+[id79]</CODE>
+ is redefined into a number of more specialised nodes <CODE CLASS="Code">
+[id79.2]</CODE>
+ - <CODE CLASS="Code">
+[id79.9]</CODE>
+, while in the second, the identifier <CODE CLASS="Code">
+[id2]</CODE>
+ is redefined to a single node <CODE CLASS="Code">
+[id2.1]</CODE>
+.</P>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1167048"></A>Node Redefinition Semantics</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1167564"></A>The syntactic form of the identifier of a redefined node is a copy of the original followed by a dot (‘.’), optionally intervening instances of the pattern ‘0.’ and then a further non-zero number, i.e.:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1167565"></A><CODE CLASS="Code">
+idN {.0}* .N</CODE>
+</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1167566"></A>This permits node identifiers from a given level to be redefined not just at the next level, but at multiple levels below.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1167567"></A>Examples of redefined node identifiers:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1167568"></A><CODE CLASS="Code">
+id2.1</CODE>
+ -- redefinition of <CODE CLASS="Code">
+id1</CODE>
+ at level 1 specialisation</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1167569"></A><CODE CLASS="Code">
+id2.0.1</CODE>
+ -- redefinition of <CODE CLASS="Code">
+id1</CODE>
+ node in level 2 specialisation archetype</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1167570"></A><CODE CLASS="Code">
+id2.1.1 </CODE>
+-- redefinition of <CODE CLASS="Code">
+id2.1</CODE>
+ in level 2 specialisation archetype.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1167571"></A>Redefined versions of nodes with no node id in the parent archetype do not require a node identifier in the child archetype.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1164926"></A>In both cases, there is a question of whether the original node being redefined (id79 and id2 respectively in the examples) remains available for further redefinition in subsequent child archetypes, or do the redefinition children exhaustively define the instance space for the given parent node? </P>
+<UL>
+<P CLASS="Discussion">
+<A NAME="pgfId-1167442"></A>This question can be considered in terms of ontological design. A full discussion is outside the scope of this document, but a couple of points can be made here. Firstly, the question of whether an exhaustive set of children can be defined will always be on a case-by-case basis, because the choice of children can be made to be exhaustive by a) definitional or b) perfect knowledge. To understand the first case, consider an ontology with a category ‘hepatitis’ with children ‘hepatitis A’, ‘hepatitis B’ and ‘hepatitis non-A non-B’. The first two of these designate distinct phenomona in the real world (specific viruses which can be tested for) while the third is a classification that could be attached to anyone with another kind of hepatitis. The last category is a typical catch-all category designed to cover all cases not covered by the specifically known subtypes of the parent category. </P>
+</UL>
+<P CLASS="DiscussionCont">
+<A NAME="pgfId-1170096"></A>Should these children be considered exhaustive? One point of view says so, since all subsequently discovered varieties of hepratitis (C, D, E, etc) would now become children of ‘hepatitis non-A non-B’. However this is likely to be sub-optimal, since now the category ‘hepatitis non-A non-B’ probably exists solely because of the order in which the various hepatitis virus tests were perfected. Therefore an alternative argument would say that the categories ‘hepatitis C’, ‘hepatitis D’ etc should be defined directly below ‘hepatitis’, as if ‘hepatitis non-A non-B’ had never existed. Under this argument, the children would not be declared, even when they are theoretically exhaustive. </P>
+<P CLASS="DiscussionCont">
+<A NAME="pgfId-1171176"></A>This kind of argument comes up time and again, and the need for catch-all categories (archetype nodes) and the possibility of future discoveries cannot be predicted. Even in situations such as a lab result (e.g. cholesterol), where the list of analytes seem to be known and fixed, experience of clinical modellers has shown that there is nevertheless no guarantee of not needing another data point, perhaps for something other than an analyte.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1171177"></A>The default situation is that they do , unless explicitly stated otherwise, by excluding the parent node in the normal way (i.e. using occurrences matches {0}).The first example would then become:</P>
+<P CLASS="Body">
+<A NAME="pgfId-1164993"></A>Parent archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1164959"></A>items cardinality ∈ {0..*; unordered} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164960"></A>	CLUSTER[id4] occurrences ∈ {1} ∈ {..} 												-- Specimen</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164962"></A>	CLUSTER[id11] occurrences ∈ {0..*} ∈ {..} 												-- level 1</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164963"></A>	ELEMENT[id79] occurrences ∈ {0..*} ∈ { 												-- panel item</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164964"></A>		value ∈ {*}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164965"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164966"></A>	ELEMENT[id17] occurrences ∈ {0..1} ∈ {..}	 											-- Overall Comment</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164968"></A>	ELEMENT[id37] occurrences ∈ {0..1} ∈ {..} 												-- Multimedia rep.</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164969"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164970"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1164946"></A>Child archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1165008"></A>/data/events[id2]/data/items ∈ {												</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165009"></A>	ELEMENT[id79.2] occurrences ∈ {0..1} ∈ {	..}											-- TSH</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165018"></A>	ELEMENT[id79.7] occurrences ∈ {0..1} ∈ {..}												-- Free Triiodothyronine</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165019"></A>	ELEMENT[id79.8] occurrences ∈ {0..1} ∈ {..}	 											-- Total Triiodothyronine</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165020"></A>	ELEMENT[id79.3] occurrences ∈ {0..1} ∈ {..}												-- Free thyroxine (Free T4)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165021"></A>	ELEMENT[id79.4] occurrences ∈ {0..1} ∈ {..}												-- Total Thyroxine (Total T4)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165022"></A>	ELEMENT[id79.5] occurrences ∈ {0..1} ∈ {..}												-- T4 loaded uptake</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165023"></A>	ELEMENT[id79.9] occurrences ∈ {0..1} ∈ {..}												-- Free Triiodothyronine index</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165024"></A>	ELEMENT[id79.6] occurrences ∈ {0..1} ∈ {..}												-- Free thyroxine index (FTI)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165050"></A>	ELEMENT[id79] occurrences ∈ {0}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165025"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1170069"></A>Without the above specification, a further child archetype could then redefine both the original <CODE CLASS="Code">
+id79</CODE>
+ node (e.g. into <CODE CLASS="Code">
+id79.0.1</CODE>
+, <CODE CLASS="Code">
+id79.0.2</CODE>
+), and any of the <CODE CLASS="Code">
+id79</CODE>
+ nodes (e.g. <CODE CLASS="Code">
+id79.1.1</CODE>
+, <CODE CLASS="Code">
+id79.1.2</CODE>
+); with it, only the latter is possible.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr4">
+<A NAME="pgfId-1163677"></A>Adding Nodes</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163678"></A>Added object constraint nodes carry identifiers according to the rule mentioned above. The second example includes the new node identifiers <CODE CLASS="Code">
+id0.32</CODE>
+, <CODE CLASS="Code">
+id0.35</CODE>
+ and <CODE CLASS="Code">
+id0.37</CODE>
+, whose codes start with a ‘0’. indicating that they have no equivalent code in the parent archetype.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1163679"></A>The node identifier syntax of an extension node commences with at least one instance of the pattern ‘0.’. The structure of node identifiers for both kinds of node thus always indicates at what level the identifier was introduced, given by the number of dots.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1163680"></A>Examples of redefined node identifiers:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163681"></A><CODE CLASS="Code">
+id0.1</CODE>
+ -- identifier of extension node introduced at level 1</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163682"></A><CODE CLASS="Code">
+id0.0.1</CODE>
+ -- identifier of extension node introduced at level 2</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1163683"></A>When a flat form is created, the level at which any given node was introduced or redefined is clear due to the identifier coding system.</P>
+</DIV>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1163646"></A>10.5.2	Occurrences Redefinition and Exclusion</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163636"></A>The <CODE CLASS="Code">
+occurrences</CODE>
+ constraint on an object node indicates how many instances within the data may conform to that constraint (see <A HREF="CDL.htm#47914" CLASS="XRef">See Container Attributes</A>). If occurrences is redefined on an identified node, the node identifier must be specialised. Within container attributes, <CODE CLASS="Code">
+occurrences</CODE>
+ is usually redefined in order to make a given object mandatory rather than optional; it can also be used to exclude an object constraint. In the following example, the occurrences of the <CODE CLASS="Code">
+id3</CODE>
+ node is redefined from <CODE CLASS="Code">
+{0..1}</CODE>
+ i.e. optional, to <CODE CLASS="Code">
+{1}</CODE>
+, i.e. mandatory.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1164164"></A>Parent (<CODE CLASS="Code">
+openEHR-EHR-EVALUATION.problem.v1.0.3</CODE>
+):</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1164095"></A>EVALUATION[id1] ∈ {	-- Problem</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164096"></A>	data ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164097"></A>		ITEM_TREE[id2] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164098"></A>			items cardinality ∈ {0..*; ordered} ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164099"></A>				ELEMENT[id3] occurrences ∈ {1} ∈ {..}	-- Problem</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164104"></A>				ELEMENT[id4] occurrences ∈ {0..1} ∈ {..}	-- Date of initial onset</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164111"></A>				-- etc</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164112"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166619"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166626"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166651"></A>}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164113"></A>&nbsp;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1164114"></A>Child (<CODE CLASS="Code">
+openEHR-EHR-EVALUATION.problem-diagnosis.v1</CODE>
+):</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1164204"></A>/data[id2]/items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164208"></A>	ELEMENT[id4] occurrences ∈ {1} 	-- Date of initial onset</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164210"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1164085"></A>In the above we can see that if the only change in the redefinition is to occurrences, the remainder of the block from the parent is not repeated in the child. Occurrences is normally only constrained on child objects of container attributes, but can be set on objects of any attribute to effect exclusion of part of the instance space. This can be useful in archetypes where a number of alternatives for a single-valued attribute have been stated, and the need is to remove some alternatives in a specialised child archetype. For example, an archetype might have the following constraint:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1164032"></A>ELEMENT[id3] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164033"></A>	value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164034"></A>		DV_QUANTITY[id4] ∈ {*}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164035"></A>		DV_INTERVAL&lt;DV_QUANTITY&gt;[id5] ∈ {*}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164036"></A>		DV_COUNT[id6] ∈ {*}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164037"></A>		DV_INTERVAL&lt;DV_COUNT&gt;[id7] ∈ {*}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164038"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164039"></A>}</PRE>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1164040"></A>and the intention is to remove the <CODE CLASS="Code">
+DV_INTERVAL&lt;*&gt;</CODE>
+ alternatives. This is achieved by redefining the enclosing object to removed the relevant types:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1164041"></A>ELEMENT[id3] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164042"></A>	value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164043"></A>		DV_INTERVAL&lt;DV_QUANTITY&gt;[id4] occurrences ∈ {0}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164044"></A>		DV_INTERVAL&lt;DV_COUNT&gt;[id7] occurrences ∈ {0}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164045"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164046"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1165394"></A>Exclusion by setting occurrences to {0} is also common in templates, and is used to remove specific child objects of container attributes, as in the following example:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1165913"></A>/data[id2]/items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165914"></A>	CLUSTER[id26] occurrences ∈ {0} 	-- remove ‘Related problems’</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165915"></A>	ELEMENT[id31] occurrences ∈ {0} 	-- remove ‘Age at resolution’</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165916"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1165887"></A>If the whole attribute is to be removed, this can be done by redefining existence to {0}, as described in <A HREF="specialisation.htm#53469" CLASS="XRef">See Existence Redefinition: Mandation and Exclusion</A>.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1163379"></A>10.5.3	Reference Model Type Refinement</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163380"></A>The type of an object may be redefined to one of its subtypes as defined by the reference model. A typical example of where this occurs in archetypes based on the openEHR reference model is when <CODE CLASS="Code">
+ELEMENT</CODE>
+.<EM CLASS="Emphasis">
+value</EM>
+ is constrained to ‘*’ in a parent archetype, meaning ‘no further constraint on its RM type of <CODE CLASS="Code">
+DATA_VALUE</CODE>
+’, but is then constrained in a specialised archetype to subtypes of <CODE CLASS="Code">
+DATA_VALUE</CODE>
+, e.g. <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ or <CODE CLASS="Code">
+DV_PROPORTION</CODE>
+<A HREF="#pgfId-1163384" CLASS="footnote">3</A>. The following figure containts a simplified extract of the data values part of the openEHR reference model, and is the basis for the examples below. </P>
+<DIV>
+<MAP NAME="specialisation-5">
+</MAP>
+<IMG SRC="specialisation-5.png" USEMAP="#specialisation-5">
+</DIV>
+<P CLASS="Body">
+<A NAME="pgfId-1163435"></A>The most basic form of type refinement is shown in the following example:</P>
+<P CLASS="Body">
+<A NAME="pgfId-1163436"></A>Parent archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163437"></A>value ∈ {*} -- any subtype of DATA_VALUE, from the ref model</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163438"></A>Specialised archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163439"></A>.../value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163440"></A>	DV_QUANTITY[id8] ∈ {*} -- now limit to the DV_QUANTITY subtype</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163441"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163442"></A>The meaning of the above is that instance data constrained by the specialised archetype at the value node must match the <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ constraint only - no other subtype of <CODE CLASS="Code">
+DATA_VALUE</CODE>
+ is allowed.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1163443"></A>When a type in an archetype is redefined into one of its subtypes, any existing constraints on the original type in the parent archetype are respected. In the following example, a <CODE CLASS="Code">
+DV_AMOUNT</CODE>
+ constraint that required <EM CLASS="Emphasis">
+accuracy</EM>
+ to be present and in the range +/-5% is refined into a <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ in which two attributes of the subtype are constrained. The original <EM CLASS="Emphasis">
+accuracy</EM>
+ attribute is inherited without change.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1163444"></A>Parent archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163445"></A>value ∈ {	</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163446"></A>	DV_AMOUNT[id4] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163447"></A>		accuracy ∈ {|-0.05..0.05|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163448"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163449"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163450"></A>Specialised archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163451"></A>.../value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163452"></A>	DV_QUANTITY[id4] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163453"></A>		magnitude ∈ {|2.0..10.0|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163454"></A>		units ∈ {“mmol/ml”}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163455"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163456"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163457"></A>In the same manner, an object node can be specialised into more than one subtype, where each such constraint selects a mutually exclusive subset of the instance space. The following example shows a specialisation of the <CODE CLASS="Code">
+DV_AMOUNT</CODE>
+ constraint above into two subtyped constraints.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163458"></A>.../value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163459"></A>	DV_QUANTITY[id4] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163460"></A>		magnitude ∈ {|2.0..10.0|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163461"></A>		units ∈ {“mmol/ml”}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163462"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163463"></A>	DV_PROPORTION[id5] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163464"></A>		numerator ∈ {|2.0..10.0|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163465"></A>		type ∈ {pk_unitary}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163466"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163467"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163468"></A>Here, instance data may only be of type <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ or <CODE CLASS="Code">
+DV_PROPORTION</CODE>
+, and must satisfy the respective constraints for those types.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1163469"></A>A final variant of subtyping is when the intention is to constraint the data to a supertype with exceptions for particular subtypes. In this case, constraints based on subtypes are matched first, with the constraint based on the parent type being used to constrain all other subtypes. The following example constrains data at the <EM CLASS="Emphasis">
+value</EM>
+ node to be:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163470"></A>an instance of <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ with <EM CLASS="Emphasis">
+magnitude</EM>
+ within the given range etc;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163471"></A>an instance of <CODE CLASS="Code">
+DV_PROPORTION</CODE>
+ with <EM CLASS="Emphasis">
+numerator</EM>
+ in the given range etc;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163472"></A>an instance of any other subtype of <CODE CLASS="Code">
+DV_AMOUNT</CODE>
+, with <EM CLASS="Emphasis">
+accuracy</EM>
+ in the given range.</LI>
+</UL>
+<PRE CLASS="CCode"><A NAME="pgfId-1163473"></A>.../value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163474"></A>	DV_QUANTITY[id4] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163475"></A>		magnitude ∈ {|2.0..10.0|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163476"></A>		units ∈ {“mmol/ml”}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163477"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163478"></A>	DV_PROPORTION[id5] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163479"></A>		numerator ∈ {|2.0..10.0|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163480"></A>		type ∈ {pk_unitary}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163481"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163482"></A>	DV_AMOUNT[id6] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163483"></A>		accuracy ∈ {|-0.05..0.05|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163484"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163485"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163486"></A>A typical use of this kind of refinement in openEHR would be to add an alternative for a <CODE CLASS="Code">
+DV_CODED_TEXT</CODE>
+ constraint for a specific terminology to an existing <CODE CLASS="Code">
+DV_TEXT</CODE>
+ constraint in a <EM CLASS="Emphasis">
+name</EM>
+ attribute, as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163487"></A>name ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163488"></A>	DV_CODED_TEXT[id79] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163489"></A>		defining_code ∈ {[Snomed_ct::]}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163490"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163491"></A>	DV_TEXT[id14] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163492"></A>		value ∈ {/.+/} -- non-empty string</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163493"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163494"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1165240"></A>All of the above specialisation based on reference model subtypes can be applied in the same way to identified object constraints.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1165241"></A>10.5.4	Terminology External Subset Redefinition</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1165233"></A>A terminology external subset constraint is used to set the value set of a coded term to be one defined externally in a terminology, specified in the <CODE CLASS="Code">
+constraint_definitions</CODE>
+ sub-section of the <CODE CLASS="Code">
+terminology</CODE>
+ section, as shown in the following example.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1164336"></A>definition</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165102"></A>	ELEMENT [id79]	 ∈ { -- cuff size</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164339"></A>		value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164348"></A>			DV_CODED_TEXT[id4] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166263"></A>				defining_code ∈ {[local::ac1]}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164356"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164355"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164354"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165124"></A>terminology</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165153"></A>	term_bindings = &lt; </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165154"></A>		[“snomed_ct”]	 = &lt;			</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165155"></A>			items = &lt;			</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165156"></A>				[“ac1”] = &lt;			http://terminology.org?query_id=12345			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165158"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165159"></A>		&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165160"></A>	&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165145"></A>&nbsp;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1164306"></A>In a specialisation of the archetype, the placeholder constraint can be redefined in two different ways. The first is by redefinition of the placeholder constraint to a narrower one. This is a achieved by redefining the constraint code, and adding a new definition in the ontology of the specialised archetype, as follows.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1165250"></A>definition</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165251"></A>	ELEMENT [id79]	 ∈ { -- cuff size</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165252"></A>		value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165253"></A>			DV_CODED_TEXT[id14] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165254"></A>				defining_code ∈ {[local::ac1.1]}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165257"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165258"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165259"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165260"></A>terminology</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165261"></A>	term_bindings = &lt; </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165262"></A>		[“snomed_ct”]	 = &lt;			</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165263"></A>			items = &lt;			</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165264"></A>				[“ac1.1”] = &lt;				http://terminology.org?query_id=12345-1			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165265"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165266"></A>		&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165267"></A>	&gt;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1165179"></A>The second kind of redefinition is by an inline constraint of the same primitive ADL type <CODE CLASS="Code">
+TERMINOLOGY_CODE</CODE>
+. </P>
+<PRE CLASS="CCode"><A NAME="pgfId-1164366"></A>ELEMENT [id79]	 ∈ { -- cuff size</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164367"></A>	value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164368"></A>		DV_CODED_TEXT[id14] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164369"></A>			defining_code ∈ { </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164385"></A>				[local::</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164386"></A>				at22, 	-- child cuff</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164393"></A>				at23]	 -- infant cuff</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164371"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164372"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164373"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1164374"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1164364"></A>These redefinitions are assumed to be valid, although it is not directly validatable unless the terminology subset is available to the tooling.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1165292"></A>A third variation on the same semantics is when a term constraint is used as a redefinition of a previously unconstrained term code, e.g. as illustrated by the following fragment.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1165311"></A>	ELEMENT[id79]	 ∈ { -- cuff size</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165312"></A>		value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165313"></A>			DV_CODED_TEXT[id14] ∈ {*}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165318"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165319"></A>	}</PRE>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1163602"></A>10.5.5	<A NAME="14886"></A>Internal Reference (Proxy Object) Redefinition</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1164529"></A>An archetype proxy object, or <CODE CLASS="Code">
+use_node</CODE>
+ constraint is used to refer to an object constraint from a point elsewhere in the archetype. These references can be redefined in two ways, as follows.</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163502"></A>Target redefinition: the target constraint of reference may be itself redefined. The meaning for this is that all internal references now assume the redefined form.</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163503"></A>Reference redefinition: specialised archetypes can redefine a use_node object into a normal inline concrete constraint that a) replaces the reference, and b) must be completely conformant to the structure which is the target of the original reference.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1167679"></A>Note that if the intention is to redefine a structure referred to by <CODE CLASS="Code">
+use_node</CODE>
+ constraints, but to leave the constraints at the reference source points in form to which the reference points in the parent level, each <CODE CLASS="Code">
+use_node</CODE>
+ reference needs to be manually redefined as a copy of the target structure originally pointed to.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1167774"></A>The second type of redefinition above is the most common, and is shown in the following example.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1167811"></A>Parent archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1167793"></A>ENTRY[id1]∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167794"></A>	data ∈ {			</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167795"></A>		CLUSTER[id2] ∈ {							</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167881"></A>			items ∈ {			</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167796"></A>				-- etc --</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167797"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167912"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167798"></A>		use_node CLUSTER[id3] /data[id2]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167799"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167800"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1167819"></A>Child archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1167820"></A>ENTRY [id1.1]∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167821"></A>	/data[id3]/items ∈ {			</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167977"></A>		ELEMENT [id0.1] ∈ {							</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167823"></A>			-- etc --</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167990"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167826"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167827"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1167785"></A>Remembering that the parent archetype is essentially just definition two sibling object structures with the identifiers id1 and id2 (defined by the use_node reference), the child is redefining the id2 node (it could also have redefined the id1 node as well). The result of this in the flattened output is as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1167934"></A>ENTRY [id1.1]∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167935"></A>	data ∈ {			</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167936"></A>		CLUSTER[id2] ∈ {							</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167937"></A>			items ∈ {			</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167938"></A>				-- etc --</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167939"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167940"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167959"></A>		CLUSTER[id3] ∈ {							</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167960"></A>			items ∈ {			</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167998"></A>				ELEMENT[id0.1] ∈ {							</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167999"></A>					-- etc --</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1168000"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167962"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167963"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167942"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167943"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1167722"></A>There is one subtlety to do with redefinition of occurrences of a use_node target: if it is redefined to have occurrences matches {0} (normally only in a template), then the effect of this is the same on any use_node reference definitions, unless they define occurrences locally at the reference point. The chance of this actually occurring appears vaninshingly small, since by the time ‘exclusion’ occurrence redefinition is being done in templates, use_node object definitions are most likely to have been locally overridden anyway.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1167667"></A>Lastly, one further type of redefinition appears technically possible, but seems of no utility, and is therefore not part of ADL:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1164593"></A>Reference re-targetting: an internal reference could potentially be redefined into a reference to a different target whose structure conforms to the original target.</LI>
+</UL>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1163594"></A>10.5.6	<A NAME="43875"></A>External Reference Redefinition</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1170279"></A>External reference nodes can be redefined by another external reference node, in the following ways:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1171250"></A>exclusion - using the occurrences matches {0} method;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1171264"></A>semantic refinement of the node identifier in the normal way;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1171271"></A>redefinition of the reference to another archetype which is a specialisation of the one from the corresponding reference node in the flat parent.</LI>
+</UL>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1170268"></A>10.5.7	<A NAME="29068"></A>Slot Filling and Redefinition</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1165445"></A>Slots and slot-filling is a special kind of ‘redefinition’ in ADL. Logically, an archetype slot constraint is understood to consist of a) its definition (what archetypes are allowed to fill it) and b) current filler list. At the point of definition, the current fillers is invariably empty. More specialised descendants can progressively add or replace fillers for a slot. Thus, the appearance of an object node whose identifier is the specialisation of a slot node in the flat parent is always understood as a partial specialisation for it.</P>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1171278"></A>In other words, a slot within an archetype can be specialised by any combination of the following:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1165446"></A>one or more slot-fillers;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1165447"></A>a redefinition of the slot itself, either to narrow the set of archetypes it matches, or to close it to filling in either further specialisations, or at runtime, or to remove it.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1165501"></A>Both types of redefinition are generally used by templates rather than published archetypes, since the business of filling slots is mostly related to local use-case specific uses of archetypes rather than part of the initial design.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1165525"></A>The following example shows a slot from a <CODE CLASS="Code">
+SECTION</CODE>
+ archetype for the concept ‘history_medical_surgical’ archetype.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1165526"></A>SECTION[id1] ∈ {	-- Past history</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165527"></A>	items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165528"></A>		allow_archetype EVALUATION[id2] ∈ {	-- Past problems</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165529"></A>			include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165530"></A>				archetype_id/value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165531"></A>					/openEHR-EHR-EVALUATION\.clinical_synopsis\.v1</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165532"></A>						|openEHR-EHR-EVALUATION\.excluded(-[a-z0-9_]+)*\.v1</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165533"></A>						|openEHR-EHR-EVALUATION\.injury\.v1</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165534"></A>						|openEHR-EHR-EVALUATION\.problem(-[a-z0-9_]+)*\.v1/}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165537"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165538"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165539"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1165540"></A>This slot specification allows <CODE CLASS="Code">
+EVALUATION</CODE>
+ archetypes for the concepts ‘clinical synopsis’, various kinds of ‘exclusions’ and ‘problems’, and ‘injury’ to be used, and no others. The following fragment of ADL shows how the slot is filled in a template, using the keywords <CODE CLASS="Code">
+use_archetype</CODE>
+ and <CODE CLASS="Code">
+use_template</CODE>
+. In this syntax, the node identification is a variation on the normal archetype id-codes. Within the template, the identifier of the used archetype is also the identifier of that node. However, the original at-code (if defined) must also be mentioned, so as to indicate which slot the used archetype is filling. Templates may also be used to fill slots in the same way. Thus, in the following example, two archetypes and a template are designated to fill the id2 slot defined in the above fragment of ADL. The slot definition is not mentioned, so it remains unchanged, i.e. ‘open’.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1167082"></A>SECTION[id1] ∈ {	-- Past history</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165542"></A>	/items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165543"></A>		use_archetype EVALUATION[id2, </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169042"></A>							org.openehr::openEHR-EHR-								EVALUATION.problem.v1] </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165544"></A>		use_template EVALUATION[id2,</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169079"></A>							uk.nhs.cfh::openEHR-EHR-					EVALUATION.t_ed_diagnosis.v1]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169080"></A>		use_archetype EVALUATION[id2, </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169081"></A>							org.openehr::openEHR-EHR-								EVALUATION.		clin_synopsis.v1]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165646"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1167098"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1165548"></A>Since node identifiers are only required to disambiguate multiple sibling nodes, they may not exist on all nodes in a typical archetype. It is therefore possible to have a slot that carries no node identifier (e.g. due to being under a single-valued attribute). A <CODE CLASS="Code">
+use_archetype</CODE>
+ specification within a template will accordingly only mention the archetype identifier, with no node id, as per the following example (archetype followed by a template).</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1165554"></A>ACTIVITY[id1] ∈ {	-- Medication activity</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165555"></A>	description ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165556"></A>		allow_archetype ITEM_TREE[id4] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165557"></A>			include</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165558"></A>				archetype_id/value ∈ {...}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165559"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165560"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165561"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1165564"></A>A template containing a filler for this slot would be as follows:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1165565"></A>use_archetype INSTRUCTION[openEHR-EHR-INSTRUCTION.medication.v1] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165566"></A>	/activities[id1]/description ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165567"></A>		use_archetype ITEM_TREE[id4, </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169116"></A>							org.openehr::openEHR-EHR-								ITEM_TREE.medication.v1]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165568"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165569"></A>}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165570"></A>&nbsp;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1165824"></A>Slots can be recursively filled in the above fashion, according to the possibilities offered by the chosen archetypes or templates. The following ADL fragment shows two levels of slot-filling:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1165825"></A>use_archetype COMPOSITION[openEHR-EHR-COMPOSITION.xxx.v1] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165826"></A>	/content ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165827"></A>		use_archetype SECTION[id1, </PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1169246"></A>								org.openehr::openEHR-EHR-SECTION.yyy.v1 											∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165828"></A>			/items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165829"></A>				use_template EVALUATION</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166435"></A>						[id2, uk.nhs.cfh::						openEHR-EHR-				EVALUATION.t_xx.v1]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165831"></A>				use_archetype EVALUATION</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166444"></A>						[id2, org.openehr::openEHR-EHR-										EVALUATION.xx.v1]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165833"></A>				use_archetype EVALUATION</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166459"></A>						[id3, org.openehr::openEHR-EHR-										EVALUATION.xx.v1]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165835"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165836"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165837"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165838"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1165839"></A>&nbsp;</P>
+<P CLASS="Body">
+<A NAME="pgfId-1165571"></A>Note that in the above the archetype fillers are specified as published archetypes, but in reality, it is far more likely that template-specific specialisations of these archetypes would be used. The identification and organisation of such archetypes is described in the openEHR Templates document.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1165850"></A>In addition to or instead of specifying slot fillers, it is possible in a slot specialisation to narrow the slot definition, or to close it. If fillers are specified, closing the slot as well is typical. The latter is done by including an overridden version of the archetype slot object itself, with the ‘closed’ constraint set, as in the following example:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1165572"></A>use_archetype SECTION[org.openehr::openEHR-EHR-</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165730"></A>											SECTION.history_medical_surgical.v1] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165573"></A>	/items ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165574"></A>		use_archetype EVALUATION[id2] openEHR-EHR-EVALUATION.problem.v1</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165575"></A>		allow_archetype EVALUATION[id2] closed</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165576"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1165577"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1165870"></A>Narrowing the slot is done with a replacement <CODE CLASS="Code">
+allow_archetype</CODE>
+ statement containing a narrowed set of match criteria.</P>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1166292"></A>10.5.8	Unconstrained Attributes</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1166309"></A>The <CODE CLASS="Code">
+use_archetype</CODE>
+ keyword can be used to specify child object constraints under any attribute in the reference model that is so far unconstrained by the flat parent of an archetype or template. Technically this could occur in any kind of archetype but would normally be in a specialised archetype or template. This is no more than the standard use of an ‘external reference’ (see <A HREF="CDL.htm#59531" CLASS="XRef">See External References</A>).</P>
+<P CLASS="Body">
+<A NAME="pgfId-1166342"></A>Any reference specified will have no slot, and is instead validity-checked against the appropriate part of the underlying reference model.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1166343"></A>The following example from the openEHR reference model is typical.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1166344"></A>COMPOSITION[id1] matches {													-- Referral document</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166345"></A>	category matches {...}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166346"></A>	context matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166347"></A>		EVENT_CONTEXT[id2] matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166348"></A>			participations matches {...}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166349"></A>			other_context matches {...						}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166350"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166351"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166352"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1166353"></A>The above cADL block partially specifies a <CODE CLASS="Code">
+COMPOSITION</CODE>
+ object, via constraints (often including slot definitions) on the <EM CLASS="Emphasis">
+category</EM>
+ and <EM CLASS="Emphasis">
+context</EM>
+ attributes defined on that class in the reference model. However, the attribute of most interest in a <CODE CLASS="Code">
+COMPOSITION</CODE>
+ object is usually the <EM CLASS="Emphasis">
+content</EM>
+ attribute, which is not constrained at all here. The reference model defines it to be of type <CODE CLASS="Code">
+List&lt;CONTENT_ITEM&gt;</CODE>
+. </P>
+<P CLASS="Body">
+<A NAME="pgfId-1171311"></A>This kind of constraint is similar to ‘slot-filling’, except there is no slot providing any constraint, and typically occurs . Using an external reference for in an unarchetyped part of the RM structure is almost always done in specialised archetypes or templates, but is technically valid in a top-level archetype.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1169157"></A>The following example shows the use of <CODE CLASS="Code">
+use_archetype</CODE>
+ within a specialised archetype.</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1166361"></A>COMPOSITION[id1.1] matches {	-- Referral document (specialisation)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166362"></A>	content matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166363"></A>		use_archetype SECTION[id2,</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166364"></A>								openEHR-EHR-SECTION.history_medical_surgical.v1]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166365"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1166366"></A>}</PRE>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1163507"></A>10.5.9	Primitive Object Redefinition</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1163508"></A>For terminal objects (i.e. elements of the type <CODE CLASS="Code">
+C_PRIMITIVE_OBJECT</CODE>
+) redefinition consists of:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163509"></A>redefined value ranges or sets using a narrower value range or set;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1163510"></A>exclusions on the previously defined value ranges or sets which have the effect of narrowing the original range or set.</LI>
+</UL>
+<P CLASS="Body">
+<A NAME="pgfId-1163511"></A>The following example shows a redefined real value range.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1163512"></A>Parent archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163513"></A>value ∈ {	</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163514"></A>	DV_QUANTITY[id3] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163515"></A>		magnitude ∈ {|2.0..10.0|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163516"></A>		units ∈ {“mmol/ml”}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163517"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163518"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163519"></A>Specialised archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163520"></A>.../value ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163521"></A>	DV_QUANTITY[id3] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163522"></A>		magnitude ∈ {|4.0..6.5|}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163523"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163524"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163525"></A>The following example shows a redefined <CODE CLASS="Code">
+CODE_PHRASE</CODE>
+ value set.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1163526"></A>Parent archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163527"></A>ELEMENT[id7] occurrences ∈ {0..*} ∈ {	-- System</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163528"></A>	name ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163529"></A>		DV_CODED_TEXT[id14] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163530"></A>			defining_code ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163531"></A>				[local::</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163532"></A>				at8, 	-- Cardiovascular system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163533"></A>				at9, 	-- Respiratory system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163534"></A>				at10, 	-- Gastro-intestinal system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163535"></A>				at11, 	-- Reticulo-Endothelial system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163536"></A>				at12, 	-- Genito-urinary system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163537"></A>				at13, 	-- Endocrine System</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163538"></A>				at14, 	-- Central nervous system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163539"></A>				at15]	 -- Musculoskeletal system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163540"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163541"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163542"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163543"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163544"></A>Specialised archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163545"></A>.../name[id14]/defining_code ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163546"></A>	[local::</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163547"></A>	at10, 	-- Gastro-intestinal system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163548"></A>	at11, 	-- Reticulo-Endothelial system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163549"></A>	at12, 	-- Genito-urinary system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163550"></A>	at13, 	-- Endocrine System</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163551"></A>	at15]	 -- Musculoskeletal system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163552"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163553"></A>In the following example, the exclusion operator ∉ (text form: ‘not matches’) is used to remove particular values from a value set.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1163554"></A>Parent archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163555"></A>ELEMENT[id7] occurrences ∈ {0..*} ∈ {	-- System</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163556"></A>	name ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163557"></A>		DV_CODED_TEXT[id14] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163558"></A>			defining_code ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163559"></A>				[local::</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163560"></A>				at8, 	-- Cardiovascular system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163561"></A>				at9, 	-- Respiratory system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163562"></A>				at10, 	-- Gastro-intestinal system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163563"></A>				at11, 	-- Reticulo-Endothelial system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163564"></A>				at12, 	-- Genito-urinary system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163565"></A>				at13, 	-- Endocrine System</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163566"></A>				at14, 	-- Central nervous system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163567"></A>				at15]	 -- Musculoskeletal system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163568"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163569"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163570"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163571"></A>}</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1163572"></A>Specialised archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1163573"></A>.../name[id14]/defining_code ∉ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163574"></A>	[local::</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163575"></A>	at12, 	-- Genito-urinary system</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163576"></A>	at13] 	-- Endocrine System</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1163577"></A>}</PRE>
+</DIV>
+<DIV>
+<H6 CLASS="Hdr3">
+<A NAME="pgfId-1164682"></A>10.5.10	Tuple Redefinition</H6>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1171332"></A>Tuple constraints can be redefined by narrowing, as for other primitive constraints. A typical example is as follows.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1171392"></A>Parent archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1171356"></A>DV_QUANTITY[id42] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171357"></A>	property ∈ {[at29]}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171358"></A>	[magnitude, units] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171449"></A>		[{|&gt;=50.0|}, {&quot;mm[Hg]&quot;}]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171450"></A>		[{|&gt;=68.0|}, {&quot;cm[H20]&quot;}]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171451"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171452"></A>}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171345"></A>&nbsp;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1171424"></A>Child archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1171425"></A>DV_QUANTITY[id42] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171426"></A>	property ∈ {[at29]}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171427"></A>	[magnitude, units] ∈ {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171428"></A>		[{|&gt;=50.0|}, {&quot;mm[Hg]&quot;}]</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171431"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1171432"></A>}</PRE>
+</DIV>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1171552"></A>Rules</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1171553"></A>The <CODE CLASS="Code">
+rules</CODE>
+ section in an archetype consists of definitions and assertion statements. Assertions in archetypes have the effect of further reducing the instance space that conforms to an archetype by specifying relationships between values that must hold. For example the main part of an archetype may specify that the existence of a subtree, containing data points related to ‘tobacco use’ for example, is dependent on the value of another data point representing ‘smoker?’ being True.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1155625"></A>In specialised archetypes, further invariants can be added, but existing ones cannot be changed. New invariants cannot logically contradict existing invariants and are considered to be logically related to invariants from the flat parent by the logical semi-strict operator ‘and then’.</P>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1164869"></A>Languages</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1171602"></A>A specialised archetype or template is only required to have one language in common with its flat precursor, enabling a flat output containing this language. This supports the common situation in which an international standard archetype with numerous translations is used as a basis for further specialisation in a particular country or project. Clearly, the latter has no need of, and quite probably no capability for including all the original translations in the specialisation.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1171624"></A>However, if the specialised archetype language is not present at all in the parent flat, it will need to be added to the archetypes in the specialisation lineage first.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1171613"></A>The languages present in the flat output will therefore be those languages available in both the flat parent (implying all previous archetypes / templates in the specialisation lineage) and the new specialisation. Any new languages introduced in the latter not available in the flat parent will be discarded.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1171645"></A>Locale-specific overrides can be introduced for any linguistic element in an archetype, including the terminology. Such an override has a language code conforming to a subset of the IETF RFC 5646 language tag standard 				 (see <A HREF="http://tools.ietf.org/html/rfc5646" CLASS="URL">http://tools.ietf.org/html/rfc5646</A>), namely the common 2-part language-region tag exemplified by ‘en-GB’ (British English), ‘pt-BR’ (Brazilian Portuguese), and so on. The tags are case-insensitive, but tools that create tags should follow the recommendation from the standard, which is that:</P>
+<UL>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1171680"></A>language tag is lowercase;</LI>
+<LI CLASS="LstU1">
+<A NAME="pgfId-1171699"></A>region tags are uppercase.</LI>
+</UL>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1165350"></A>Description Section</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1171562"></A>The <CODE CLASS="Code">
+description</CODE>
+ section of a specialised archetype or template always replaces that of the parent in the flattened result. Tools could of course provide views of each part of the description back up the specialisation hierarchy if required.</P>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1171577"></A>Terminology</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1171590"></A>Specialisation in the <CODE CLASS="Code">
+terminology</CODE>
+ section manifests in terms of specialised and added terms in the <CODE CLASS="Code">
+term_definitions</CODE>
+ sub-section.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1173553"></A>Value sets can be specialised, which has the effect in the flattened form of replacing the original rather than adding to it, as shown in the following example.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1173562"></A>Parent archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1173880"></A>archetype (adl_version=2.0.0; generated)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173881"></A>	openEHR-EHR-EVALUATION.code_list_parent.v1.0.0</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173883"></A>language</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173884"></A>	original_language = &lt;[ISO_639-1::en]&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173886"></A>description</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173887"></A>	...</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173902"></A>&nbsp;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173903"></A>definition</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173904"></A>	EVALUATION[id1] matches {	-- General statement of exclusions or states</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173905"></A>		data matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173906"></A>			ITEM_TREE[id2] matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173907"></A>				items cardinality matches {1..*; unordered} matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173908"></A>					ELEMENT[id3] occurrences matches {1..*} matches {	-- Statement</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173909"></A>						value matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173910"></A>							DV_CODED_TEXT[id4] matches {</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173911"></A>								defining_code matches {[ac1]}		-- Statement</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173912"></A>							}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173913"></A>						}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173914"></A>					}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173915"></A>				}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173916"></A>			}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173917"></A>		}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173918"></A>	}</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173919"></A>&nbsp;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173920"></A>terminology</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173921"></A>	term_definitions = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173922"></A>		[&quot;en&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173923"></A>			[&quot;id1&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173924"></A>				text = &lt;&quot;General statement of exclusions or states&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173925"></A>				description = &lt;&quot;A category of ... have been excluded&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173926"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173927"></A>			[&quot;id3&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173928"></A>				text = &lt;&quot;Statement&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173929"></A>				description = &lt;&quot;The statement about what is excluded&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173930"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173931"></A>			[&quot;at4&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173932"></A>				text = &lt;&quot;No significant illness&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173933"></A>				description = &lt;&quot;The person ... condition&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173934"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173935"></A>			[&quot;at5&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173936"></A>				text = &lt;&quot;No significant past history&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173937"></A>				description = &lt;&quot;The person has no ... history&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173938"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173939"></A>			...</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173967"></A>			[&quot;at13&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173968"></A>				text = &lt;&quot;No relevant family history&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173969"></A>				description = &lt;&quot;No family history ... situation&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173970"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173971"></A>			[&quot;at14&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173972"></A>				text = &lt;&quot;No known allergies&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173973"></A>				description = &lt;&quot;No allergies known to any ... or substances&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173974"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173975"></A>			[&quot;ac1&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173976"></A>				text = &lt;&quot;Statement&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173977"></A>				description = &lt;&quot;The statement about what is excluded&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173978"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173979"></A>		&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173980"></A>	&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173981"></A>	value_sets = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173982"></A>		[&quot;ac1&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173983"></A>			id = &lt;&quot;ac1&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173984"></A>			members = &lt;&quot;at4&quot;, &quot;at5&quot;, &quot;at6&quot;, &quot;at7&quot;, &quot;at10&quot;, &quot;at13&quot;, &quot;at14&quot;, &quot;at11&quot;, &quot;at12&quot;, &quot;at8&quot;, &quot;at9&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173985"></A>		&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173986"></A>	&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173869"></A>&nbsp;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1173862"></A>Flattened child archetype:</P>
+<PRE CLASS="CCode"><A NAME="pgfId-1173580"></A>archetype (adl_version=2.0.0; generated)</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173581"></A>	openEHR-EHR-EVALUATION.code_list_constrained.v1.0.0</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173622"></A>...</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173623"></A>terminology</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173624"></A>	term_definitions = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173625"></A>		[&quot;en&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173626"></A>			[&quot;id1&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173627"></A>				text = &lt;&quot;General statement of exclusions or states&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173628"></A>				description = &lt;&quot;A category of ...have been excluded&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173629"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173630"></A>			[&quot;id3&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173631"></A>				text = &lt;&quot;Statement&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173632"></A>				description = &lt;&quot;The statement about what is excluded&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173633"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173646"></A>			...</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173828"></A>			[&quot;at13&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173846"></A>				text = &lt;&quot;No relevant family history&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173847"></A>				description = &lt;&quot;No family history relevant .. situation&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173649"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173650"></A>			[&quot;ac1&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173651"></A>				text = &lt;&quot;Statement&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173652"></A>				description = &lt;&quot;The statement about what is excluded&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173653"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173654"></A>			[&quot;ac1.1&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173655"></A>				text = &lt;&quot;(added by post-parse processor)&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173656"></A>				description = &lt;&quot;(added by post-parse processor)&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173657"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173658"></A>			[&quot;id1.1&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173659"></A>				text = &lt;&quot;Adverse reaction exclusions&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173660"></A>				description = &lt;&quot;A category of ... of adverse reaction&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173661"></A>			&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173662"></A>		&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173663"></A>	&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173664"></A>	value_sets = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173665"></A>		[&quot;ac1.1&quot;] = &lt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173666"></A>			id = &lt;&quot;ac1.1&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173667"></A>			members = &lt;&quot;at6&quot;, &quot;at7&quot;, &quot;at10&quot;, &quot;at13&quot;&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173668"></A>		&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173669"></A>	&gt;</PRE>
+<PRE CLASS="CCode"><A NAME="pgfId-1173569"></A>&nbsp;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1173542"></A>The flattened result always includes the sum of term definitions from the parent.</P>
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1167627"></A>Bindings</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1165976"></A>Bindings in a specialised archetype can include a binding to an at-code or ac-code defined in the current archetype or any parent archetype. A binding may be defined that overrides one from the flat parent, in which case the binding target - a term (at-code binding) or value set (ac-code binding) should be a proper specialised concept or subset respectively of the binding they replace. Since the binding target is an external code or subset, authoring tools need a connection to an appropriate terminology service to validate the relationship.</P>
+</DIV>
+</DIV>
+<HR>
+<DIV CLASS="footnotes">
+<DIV CLASS="footnote">
+<P CLASS="Footnote">
+<SPAN CLASS="footnoteNumber">
+1.</SPAN>
+<A NAME="pgfId-1160027"></A>see <A HREF="http://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)" CLASS="URL">http://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)</A></P>
+</DIV>
+<DIV CLASS="footnote">
+<P CLASS="Footnote">
+<SPAN CLASS="footnoteNumber">
+2.</SPAN>
+<A NAME="pgfId-1171935"></A><A HREF="https://github.com/openEHR/adl-archetypes/blob/master/Reference/CKM_2013_12_09/entry/observation/openEHR-EHR-OBSERVATION.lab_test.v1.adls" CLASS="URL">https://github.com/openEHR/adl-archetypes/blob/master/Reference/CKM_2013_12_09/entry/observation/openEHR-EHR-OBSERVATION.lab_test.v1.adls</A></P>
+</DIV>
+<DIV CLASS="footnote">
+<P CLASS="Footnote">
+<SPAN CLASS="footnoteNumber">
+3.</SPAN>
+<A NAME="pgfId-1163384"></A>See the openEHR data types specification at <A HREF="See the openEHR data types specification at http://www.openehr.org/releases/1.0.1/architecture/rm/data_types_im.pdf for details" CLASS="URL">http://www.openehr.org/releases/1.0.1/architecture/rm/data_types_im.pdf</A> for details.</P>
+</DIV>
+</DIV>
+</BODY>
+</HTML>
