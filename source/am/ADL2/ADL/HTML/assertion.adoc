@@ -1,0 +1,251 @@
+==== Assertions
+
+image:assertion-1.png[image]
+
+== Overview
+
+This section describes the assertion sub-language of archetypes. Assertions are used in archetype "slot" clauses in the cADL ` definition` section, and in the ` rules` section. The following simple assertion in the ` rules` section of an archetype says that the speed in kilometres of some node is related to the speed-in-miles by a factor of 1.6:
+
+----------------------------------------------------------------------------------------------
+    validity: /speed[id2]/kilometres[id14]/magnitude = /speed[id4]/miles[id14]/magnitude * 1.6
+----------------------------------------------------------------------------------------------
+
+=== 5.1.1 Requirements
+
+Assertions are needed in archetypes to express rules in two locations in an archetype. In an archetype slot, assertions can be stated to control what archetypes are allowed in the slot, as shown in the following example:
+
+----------------------------------------------------------------------------------
+    CLUSTER[id3] occurrences matches {0..1} matches {   -- Detail
+        items cardinality matches {0..*; unordered} matches {
+            allow_archetype CLUSTER[id9] occurrences matches {0..1} matches {
+                include
+                    archetype_id/value matches {/openEHR-EHR-CLUSTER.exam-.+\.v1/}
+            }
+        }
+    }
+----------------------------------------------------------------------------------
+
+In the above, the statement following the ` include` keyword expresses a condition on the value found at the path ` archetype_id/value` , using the familiar ADL ` matches` operator, and a regular expression on archetype identifiers. Most slot statements are of this kind, with some requiring slightly more complex expressions. See link:CDL.htm#31193[See Archetype Slots] for more details.
+
+The main requirement for assertions in archetypes is for expressing rules that cannot be expressed uding the standard cADL syntax. Types of rules include:
+
+* constraints involving more than one node in an archetype, such as a rule stating that the sum of the five 0-2 value scores in an Apgar test (heartrate, breathing, muscle tone, reflex, colour) correspond to the Apgar total, recorded in a sixth node;
+* rules involving predefined variables such as ‘current date’;
+* rules involving query results from a data or knowledge context, allowing values such as ‘patient date of birth’ to be referenced.
+
+The semantic requirements are for expressions including arithmetic, boolean, and relational operators, some functions, quantifier operators, a notion of operator precedence, parentheses, constant values, and certain kinds of variables. However, there is no requirement for procedural semantics, type declarations or many of the other complexities of full-blown programming languages.
+
+=== Design Basis
+
+The archetype assertion language is a small language of its own. Formally it is a reduced first-order predicate logic language with various operators. It has similarities with OMG’s OCL (Object Constraint Language) syntax, and is also similar to the assertion syntax which has been used in the Object-Z link:references.htm#52983[[14]] and Eiffel link:references.htm#84281[[12]] languages and tools for over a decade (see Sowa link:references.htm#10824[[15]], Hein link:references.htm#65257[[8]], Kilov & Ross link:references.htm#90275[[9]] for an explanation of predicate logic in information modelling). None of these languages has been used directly, for reasons including:
+
+* OCL has a complex type system, and includes some undecidable procedural semantics;
+* none have adequate variable referencing mechanisms, such as to paths and external queries;
+* they are too powerful, and would introduce unnecessary complexity into archetypes and templates.
+
+There are also similarities with other languages developed in the health arena for expressing ‘medical logic’ (Arden), guidelines (GLIF and many others) and decision support (GELLO and many others). These languages were not directly used either, for reasons including:
+
+* none have a path referencing mechanism;
+* some are too procedural (Arden, GLIF);
+* current versions of some of these languages have been made specific to the HL7v3 RIM, a particular model of health information designed for message representation (GLIF 3.x, GELLO);
+* all in their published form are too powerful for the needs identified here.
+
+The design approach used here was to create a small concrete syntax allowing for a core subset of first-order predicate logic, which could easily be parsed into a typical parse-tree form, defined in the openEHR Archetype Object Model. Many different variations on syntax elements are possible (as evidenced by the many formal logic syntaxes used in mathematics and computing theory); the elements used here were chosen for ease of expression using normal kebyoard characters and intuitiveness.
+
+== Keywords
+
+The syntax of the invariant section is a subset of first-order predicate logic. In it, the following keywords can be used:
+
+* ` exists` , ` for_all` ,
+* ` and` , ` or` , ` xor` , ` not` , ` implies`
+* ` true` , ` false`
+
+Symbol equivalents for some of the above are given in the following table.
+
+[width="100%",cols="34%,33%,33%",options="header",]
+|=================================================================
+|Textual +
+ Rendering |Symbolic +
+ Rendering |Meaning
+|matches, is_in |∈ |Set membership, "p is in P"
+|exists |∃ |Existential quantifier, "there exists ..."
+|for_all |∀ |Universal quantifier, "for all x..."
+|implies |® |Material implication, "p implies q", or "if p then q"
+|and |∧ |Logical conjunction, "p and q"
+|or |∨ |Logical disjunction, "p or q"
+|xor |∨ |Exclusive or, "only one of p or q"
+|not, ~ |∼, ¬ |Negation, "not p"
+|=================================================================
+
+== Typing
+
+The assertion language is fully typed. All operators, variables and constants have either assumed or declared type signatures.
+
+== Operators
+
+Assertion expressions can include arithmetic, relational and boolean operators, plus the existential and universal quantifiers.
+
+=== 5.4.1 Arithmetic Operators
+
+The supported arithmetic operators are as follows:
+
+* addition: +
+* subtraction: -
+* multiplication: *
+* division: /
+* exponent: ^
+* modulo division: % -- remainder after integer division
+
+=== 5.4.2 Equality Operators
+
+The supported equality operators are as follows:
+
+* equality: =
+* inequality: !=
+
+The semantics of these operators are of value comparison.
+
+=== 5.4.3 Relational Operators
+
+The supported relational operators are as follows:
+
+* less than: <
+* less than or equal: <=
+* greater than: >
+* greater than or equal: >=
+
+The semantics of these operators are of value comparison on entities of Comparable types (see openEHR Support IM, Assumed Types section). All generate a Boolean result.
+
+=== 5.4.4 Boolean Operators
+
+The supported boolean operators are as follows:
+
+* not: not
+* and: and
+* xor: xor
+* implies: implies
+* set membership: matches, is_in
+
+The boolean operators also have symbolic equivalents shown earlier. All boolean operators take Boolean operands and generate a Boolean result. The ` not` operator can be applied as a prefix operator to all operators returning a boolean result.
+
+=== 5.4.5 Quantifiers
+
+The two standard logical quantifier operators are supported:
+
+* existential quantifier: exists
+* universal quantifier: for_all
+
+These operators also have the usual symbolic equivalents shown earlier. The ` exists` operator can be used on an variable, including paths referring to a node or value within an archetype. The ` for_all` operator can be applied to sets and lists, such as referred to by a path to a multiply-valued attribute.
+
+=== 5.4.6 Functions
+
+The following functions are supported:
+
+* sum (x, y, ....): equivalent to x + y + ....
+* mean (x, y, ...): the mean (average) value of x, y, ...
+* max (x, y, ...): the maximum value among x, y, ...
+* min (x, y, ...): the minimum value among x, y, ...
+
+All of the above functions have the signature ` func(Real, ...):Real` , but will also perform as though having the signature ` func(Integer, ...):Integer` , due to automatic numeric type promotion/demotion rules.
+
+Other functions may be added in the future.
+
+== Operands
+
+Operands in an assertion expression are typed and are of four kinds, as described in the following sub-sections.
+
+=== 5.5.1 Constants
+
+Constant values are of any primitive type defined in the openEHR Support IM Assumed Types, and expressed according in the ODIN syntax (see the ODIN specification), i.e.:
+
+* Character, e.g. ` ‘x’` ;
+* String, e.g. ` "this is a string"` ;
+* Boolean, e.g. ` True` , ` False` ;
+* Integer, e.g. ` 5` ;
+* Real, e.g. ` 5.2` ;
+* ISO8601_DATE, e.g. ` 2004-08-12` ;
+* ISO8601_TIME, e.g. ` 12:00:59` ;
+* ISO8601_DATE_TIME, e.g. ` 2004-08-12T12:00:59` ;
+* ISO8601_DURATION, e.g. ` P39W` ;
+* URI, e.g. ` http://en.wikipedia.org/wiki/Everest` ;
+* coded term, e.g. [snomed_ct::2004950];
+* Intervals of any numeric type, according to ODIN syntax e.g. ` |70..130|` ;
+* List of any primitive type, e.g. ` "string1", "string2", "string3"` ;
+
+=== 5.5.2 Object References
+
+A reference to an object in data, including a leaf value, is expressed using an archetype path. All such paths are absolute (i.e. contain a leading ‘/’) and are understood to be with respect to the root of the current archetype. References to archetype nodes have the type defined at the relevant point in the underlying reference model. Examples include:
+
+---------------------------------------------------------------------------------------
+    /data[id2]/items[id3]/value[id35]/value -- Date of initial onset; type ISO8601_DATE
+---------------------------------------------------------------------------------------
+
+==  
+
+=== 5.5.3 Built-in Variables
+
+A small number of built-in variables are available for use in assertions, and are referred to using a ‘$’ symbol, for example ` $current_date` . Built-in variables defined include:
+
+-----------------------------------------
+    $current_date: ISO8601_DATE
+    $current_time: ISO8601_TIME
+    $current_date_time: ISO8601_DATE_TIME
+    $current_year: Integer
+    $current_month: Integer
+-----------------------------------------
+
+=== 5.5.4 Archetype-defined Variables
+
+Variables may be declared within the rules section of an archetype. This is done using the following syntax:
+
+---------------------------------
+    $var_name:Type ::= expression
+---------------------------------
+
+This facility can be used to equate a variable name to a path, e.g. the following equates the variable ` $diagnosis` to the code at the path contianing the diagnosis (e.g. in the ` openEHR-EHR-EVALUATION.problem-diagnosis.v1` archetype):
+
+---------------------------------------------------------------------
+    $diagnosis:CODE_PHRASE ::= /data/items[id2.1]/value/defining_code
+---------------------------------------------------------------------
+
+The variable can then be used instead of the path in subsequent expressions.
+
+=== 5.5.5 External Queries
+
+An expression referring to an externally defined query, possibly including arguments, may be defined using the variable declaration syntax. The general pattern is as follows:
+
+$varname:Type ::= query(context, query_name, arg1, arg2, ...)
+
+Examples include:
+
+---------------------------------------------------------------------------------
+    $date_of_birth:ISO8601_DATE ::= query("ehr", "date_of_birth")
+    $has_diabetes:Boolean ::= query("ehr", "has_diagnosis", "snomed_ct::1234567")
+    $is_female:Boolean ::= query("ehr", "is_female")
+---------------------------------------------------------------------------------
+
+Any number of arguments can be included.
+
+==== Query Contexts
+
+ 
+
+==== Query Names
+
+ 
+
+== Precedence and Parentheses
+
+==  
+
+== Conditions
+
+Example....
+
+------------------------------------------
+    $is_female implies exists /path/to/xxx
+------------------------------------------
+
+== Natural Language Issues
+
+

@@ -13,34 +13,36 @@
 </DIV>
 </H4>
 <DIV>
-<H5 CLASS="Hdr2">
-<A NAME="pgfId-1142140"></A>Overview</H5>
+<h2 CLASS="Hdr2">
+<A NAME="pgfId-1142140"></A>Overview</h2>
 <P CLASS="BodyFirst">
-<A NAME="pgfId-1136000"></A>This section describes the assertion sub-language of archetypes. Assertions are used in archetype “slot” clauses in the cADL <CODE CLASS="Code">
+<A NAME="pgfId-1136000"></A>This section describes the assertion sub-language of archetypes. Assertions are used in archetype "slot" clauses in the cADL <CODE CLASS="Code">
 definition</CODE>
  section, and in the <CODE CLASS="Code">
 rules</CODE>
  section. The following simple assertion in the <CODE CLASS="Code">
 rules</CODE>
  section of an archetype says that the speed in kilometres of some node is related to the speed-in-miles by a factor of 1.6:</P>
-<PRE CLASS="CCode"><A NAME="pgfId-1141912"></A>validity: /speed[id2]/kilometres[id14]/magnitude = 			</PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1141934"></A>			/speed[id4]/miles[id14]/magnitude * 1.6</PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1142274"></A>&nbsp;</PRE>
+<pre>
+    validity: /speed[id2]/kilometres[id14]/magnitude = /speed[id4]/miles[id14]/magnitude * 1.6
+</pre>
 <DIV>
-<H6 CLASS="Hdr3">
-<A NAME="pgfId-1142255"></A>5.1.1	Requirements</H6>
+<h3 CLASS="Hdr3">
+<A NAME="pgfId-1142255"></A>5.1.1	Requirements</h3>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1145282"></A>Assertions are needed in archetypes to express rules in two locations in an archetype. In an archetype slot, assertions can be stated to control what archetypes are allowed in the slot, as shown in the following example:</P>
 <P CLASS="Body">
 <A NAME="pgfId-1145285"></A>&nbsp;</P>
-<PRE CLASS="CCode"><A NAME="pgfId-1145286"></A>CLUSTER[id3] occurrences matches {0..1} matches {	-- Detail</PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1145287"></A>	items cardinality matches {0..*; unordered} matches {</PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1145288"></A>		allow_archetype CLUSTER[id9] occurrences matches {0..1} matches {</PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1145289"></A>			include</PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1145290"></A>				archetype_id/value matches {/openEHR-EHR-CLUSTER.														exam-.+\.v1/}</PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1145291"></A>		}</PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1145292"></A>	}</PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1145283"></A>}</PRE>
+<pre>    
+    CLUSTER[id3] occurrences matches {0..1} matches {	-- Detail
+    	items cardinality matches {0..*; unordered} matches {
+    		allow_archetype CLUSTER[id9] occurrences matches {0..1} matches {
+    			include
+    				archetype_id/value matches {/openEHR-EHR-CLUSTER.exam-.+\.v1/}
+    		}
+    	}
+    }
+</pre>
 <P CLASS="Body">
 <A NAME="pgfId-1145397"></A>In the above, the statement following the <CODE CLASS="Code">
 include</CODE>
@@ -63,8 +65,7 @@ matches</CODE>
 <A NAME="pgfId-1145489"></A>The semantic requirements are for expressions including arithmetic, boolean, and relational operators, some functions, quantifier operators, a notion of operator precedence, parentheses, constant values, and certain kinds of variables. However, there is no requirement for procedural semantics, type declarations or many of the other complexities of full-blown programming languages.</P>
 </DIV>
 <DIV>
-<H6 CLASS="Hdr3">
-<A NAME="pgfId-1145274"></A>5.1.2	Design Basis</H6>
+<h3>Design Basis</h3>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1145270"></A>The archetype assertion language is a small language of its own. Formally it is a reduced first-order predicate logic language with various operators. It has similarities with OMG’s OCL (Object Constraint Language) syntax, and is also similar to the assertion syntax which has been used in the Object-Z <A HREF="references.htm#52983" CLASS="XRef">[14]</A> and Eiffel <A HREF="references.htm#84281" CLASS="XRef">[12]</A> languages and tools for over a decade (see Sowa <A HREF="references.htm#10824" CLASS="XRef">[15]</A>, Hein <A HREF="references.htm#65257" CLASS="XRef">[8]</A>, Kilov &amp; Ross <A HREF="references.htm#90275" CLASS="XRef">[9]</A> for an explanation of predicate logic in information modelling). None of these languages has been used directly, for reasons including:</P>
 <UL>
@@ -92,8 +93,8 @@ matches</CODE>
 </DIV>
 </DIV>
 <DIV>
-<H5 CLASS="Hdr2">
-<A NAME="pgfId-1141805"></A>Keywords</H5>
+<h2 CLASS="Hdr2">
+<A NAME="pgfId-1141805"></A>Keywords</h2>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1141756"></A>The syntax of the invariant section is a subset of first-order predicate logic. In it, the following keywords can be used:</P>
 <UL>
@@ -152,7 +153,7 @@ Rendering</P>
 </TD>
 <TD ROWSPAN="1" COLSPAN="1">
 <P CLASS="Body">
-<A NAME="pgfId-1142152"></A>Set membership, “p is in P”</P>
+<A NAME="pgfId-1142152"></A>Set membership, "p is in P"</P>
 </TD>
 </TR>
 <TR>
@@ -166,7 +167,7 @@ Rendering</P>
 </TD>
 <TD ROWSPAN="1" COLSPAN="1">
 <P CLASS="Body">
-<A NAME="pgfId-1141707"></A>Existential quantifier, “there exists ...”</P>
+<A NAME="pgfId-1141707"></A>Existential quantifier, "there exists ..."</P>
 </TD>
 </TR>
 <TR>
@@ -180,7 +181,7 @@ Rendering</P>
 </TD>
 <TD ROWSPAN="1" COLSPAN="1">
 <P CLASS="Body">
-<A NAME="pgfId-1141713"></A>Universal quantifier, “for all x...”</P>
+<A NAME="pgfId-1141713"></A>Universal quantifier, "for all x..."</P>
 </TD>
 </TR>
 <TR>
@@ -194,7 +195,7 @@ Rendering</P>
 </TD>
 <TD ROWSPAN="1" COLSPAN="1">
 <P CLASS="Body">
-<A NAME="pgfId-1141719"></A>Material implication, “p implies q”, or “if p then q”</P>
+<A NAME="pgfId-1141719"></A>Material implication, "p implies q", or "if p then q"</P>
 </TD>
 </TR>
 <TR>
@@ -208,7 +209,7 @@ Rendering</P>
 </TD>
 <TD ROWSPAN="1" COLSPAN="1">
 <P CLASS="Body">
-<A NAME="pgfId-1141725"></A>Logical conjunction, “p and q”</P>
+<A NAME="pgfId-1141725"></A>Logical conjunction, "p and q"</P>
 </TD>
 </TR>
 <TR>
@@ -222,7 +223,7 @@ Rendering</P>
 </TD>
 <TD ROWSPAN="1" COLSPAN="1">
 <P CLASS="Body">
-<A NAME="pgfId-1141731"></A>Logical disjunction, “p or q”</P>
+<A NAME="pgfId-1141731"></A>Logical disjunction, "p or q"</P>
 </TD>
 </TR>
 <TR>
@@ -236,7 +237,7 @@ Rendering</P>
 </TD>
 <TD ROWSPAN="1" COLSPAN="1">
 <P CLASS="Body">
-<A NAME="pgfId-1141737"></A>Exclusive or, “only one of p or q”</P>
+<A NAME="pgfId-1141737"></A>Exclusive or, "only one of p or q"</P>
 </TD>
 </TR>
 <TR>
@@ -250,25 +251,25 @@ Rendering</P>
 </TD>
 <TD ROWSPAN="1" COLSPAN="1">
 <P CLASS="Body">
-<A NAME="pgfId-1141743"></A>Negation, “not p”</P>
+<A NAME="pgfId-1141743"></A>Negation, "not p"</P>
 </TD>
 </TR>
 </TABLE>
 </DIV>
 <DIV>
-<H5 CLASS="Hdr2">
-<A NAME="pgfId-1142211"></A>Typing</H5>
+<h2 CLASS="Hdr2">
+<A NAME="pgfId-1142211"></A>Typing</h2>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1145526"></A>The assertion language is fully typed. All operators, variables and constants have either assumed or declared type signatures.</P>
 </DIV>
 <DIV>
-<H5 CLASS="Hdr2">
-<A NAME="pgfId-1145525"></A>Operators</H5>
+<h2 CLASS="Hdr2">
+<A NAME="pgfId-1145525"></A>Operators</h2>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1142212"></A>Assertion expressions can include arithmetic, relational and boolean operators, plus the existential and universal quantifiers.</P>
 <DIV>
-<H6 CLASS="Hdr3">
-<A NAME="pgfId-1142328"></A>5.4.1	Arithmetic Operators</H6>
+<h3 CLASS="Hdr3">
+<A NAME="pgfId-1142328"></A>5.4.1	Arithmetic Operators</h3>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1142392"></A>The supported arithmetic operators are as follows:</P>
 <UL>
@@ -287,8 +288,8 @@ Rendering</P>
 </UL>
 </DIV>
 <DIV>
-<H6 CLASS="Hdr3">
-<A NAME="pgfId-1142378"></A>5.4.2	Equality Operators</H6>
+<h3 CLASS="Hdr3">
+<A NAME="pgfId-1142378"></A>5.4.2	Equality Operators</h3>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1142434"></A>The supported equality operators are as follows:</P>
 <UL>
@@ -301,8 +302,8 @@ Rendering</P>
 <A NAME="pgfId-1142693"></A>The semantics of these operators are of value comparison.</P>
 </DIV>
 <DIV>
-<H6 CLASS="Hdr3">
-<A NAME="pgfId-1142684"></A>5.4.3	Relational Operators</H6>
+<h3 CLASS="Hdr3">
+<A NAME="pgfId-1142684"></A>5.4.3	Relational Operators</h3>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1142674"></A>The supported relational operators are as follows:</P>
 <UL>
@@ -319,8 +320,8 @@ Rendering</P>
 <A NAME="pgfId-1142699"></A>The semantics of these operators are of value comparison on entities of Comparable types (see openEHR Support IM, Assumed Types section). All generate a Boolean result.</P>
 </DIV>
 <DIV>
-<H6 CLASS="Hdr3">
-<A NAME="pgfId-1142385"></A>5.4.4	Boolean Operators</H6>
+<h3 CLASS="Hdr3">
+<A NAME="pgfId-1142385"></A>5.4.4	Boolean Operators</h3>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1142480"></A>The supported boolean operators are as follows:</P>
 <UL>
@@ -341,8 +342,8 @@ not</CODE>
  operator can be applied as a prefix operator to all operators returning a boolean result.</P>
 </DIV>
 <DIV>
-<H6 CLASS="Hdr3">
-<A NAME="pgfId-1142365"></A>5.4.5	Quantifiers</H6>
+<h3 CLASS="Hdr3">
+<A NAME="pgfId-1142365"></A>5.4.5	Quantifiers</h3>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1142605"></A>The two standard logical quantifier operators are supported:</P>
 <UL>
@@ -359,8 +360,8 @@ for_all</CODE>
  operator can be applied to sets and lists, such as referred to by a path to a multiply-valued attribute.</P>
 </DIV>
 <DIV>
-<H6 CLASS="Hdr3">
-<A NAME="pgfId-1144864"></A>5.4.6	Functions</H6>
+<h3 CLASS="Hdr3">
+<A NAME="pgfId-1144864"></A>5.4.6	Functions</h3>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1144875"></A>The following functions are supported:</P>
 <UL>
@@ -384,13 +385,13 @@ func(Integer, ...):Integer</CODE>
 </DIV>
 </DIV>
 <DIV>
-<H5 CLASS="Hdr2">
-<A NAME="pgfId-1142220"></A>Operands</H5>
+<h2 CLASS="Hdr2">
+<A NAME="pgfId-1142220"></A>Operands</h2>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1142221"></A>Operands in an assertion expression are typed and are of four kinds, as described in the following sub-sections.</P>
 <DIV>
-<H6 CLASS="Hdr3">
-<A NAME="pgfId-1144927"></A>5.5.1	Constants</H6>
+<h3 CLASS="Hdr3">
+<A NAME="pgfId-1144927"></A>5.5.1	Constants</h3>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1142222"></A>Constant values are of any primitive type defined in the openEHR Support IM Assumed Types, and expressed according in the ODIN syntax (see the ODIN specification), i.e.:</P>
 <UL>
@@ -400,7 +401,7 @@ func(Integer, ...):Integer</CODE>
 ;</LI>
 <LI CLASS="LstU1">
 <A NAME="pgfId-1145561"></A>String, e.g. <CODE CLASS="Code">
-“this is a string”</CODE>
+"this is a string"</CODE>
 ;</LI>
 <LI CLASS="LstU1">
 <A NAME="pgfId-1145621"></A>Boolean, e.g. <CODE CLASS="Code">
@@ -444,16 +445,18 @@ http://en.wikipedia.org/wiki/Everest</CODE>
 ;</LI>
 <LI CLASS="LstU1">
 <A NAME="pgfId-1145734"></A>List of any primitive type, e.g. <CODE CLASS="Code">
-“string1”, “string2”, “string3”</CODE>
+"string1", "string2", "string3"</CODE>
 ;</LI>
 </UL>
 </DIV>
 <DIV>
-<H6 CLASS="Hdr3">
-<A NAME="pgfId-1144951"></A>5.5.2	Object References</H6>
+<h3 CLASS="Hdr3">
+<A NAME="pgfId-1144951"></A>5.5.2	Object References</h3>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1144955"></A>A reference to an object in data, including a leaf value, is expressed using an archetype path. All such paths are absolute (i.e. contain a leading ‘/’) and are understood to be with respect to the root of the current archetype. References to archetype nodes have the type defined at the relevant point in the underlying reference model. Examples include:</P>
-<PRE CLASS="CCode"><A NAME="pgfId-1145765"></A>/data[id2]/items[id3]/value[id35]/value -- Date of initial onset; type ISO8601_DATE</PRE>
+<pre>    
+    /data[id2]/items[id3]/value[id35]/value -- Date of initial onset; type ISO8601_DATE
+</pre>    
 </DIV>
 </DIV>
 </DIV>
@@ -461,75 +464,84 @@ http://en.wikipedia.org/wiki/Everest</CODE>
 <H2 CLASS="To-be-Continued">
 <A NAME="pgfId-1144960"></A>&nbsp;</H2>
 <DIV>
-<H6 CLASS="Hdr3">
-<A NAME="pgfId-1145064"></A>5.5.3	Built-in Variables</H6>
+<h3 CLASS="Hdr3">
+<A NAME="pgfId-1145064"></A>5.5.3	Built-in Variables</h3>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1144970"></A>A small number of built-in variables are available for use in assertions, and are referred to using a ‘$’ symbol, for example <CODE CLASS="Code">
 $current_date</CODE>
 . Built-in variables defined include:</P>
-<PRE CLASS="CCode"><A NAME="pgfId-1144971"></A>$current_date: ISO8601_DATE</PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1144975"></A>$current_time: ISO8601_TIME</PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1144976"></A>$current_date_time: ISO8601_DATE_TIME</PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1144977"></A>$current_year: Integer</PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1144978"></A>$current_month: Integer</PRE>
+<pre>
+    $current_date: ISO8601_DATE
+    $current_time: ISO8601_TIME
+    $current_date_time: ISO8601_DATE_TIME
+    $current_year: Integer
+    $current_month: Integer
+</pre>
 </DIV>
 <DIV>
-<H6 CLASS="Hdr3">
-<A NAME="pgfId-1144923"></A>5.5.4	Archetype-defined Variables</H6>
+<h3 CLASS="Hdr3">
+<A NAME="pgfId-1144923"></A>5.5.4	Archetype-defined Variables</h3>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1144981"></A>Variables may be declared within the rules section of an archetype. This is done using the following syntax:</P>
-<PRE CLASS="CCode"><A NAME="pgfId-1145087"></A>$var_name:Type ::= expression</PRE>
+<pre>
+    $var_name:Type ::= expression
+</pre>
 <P CLASS="Body">
 <A NAME="pgfId-1145086"></A>This facility can be used to equate a variable name to a path, e.g. the following equates the variable <CODE CLASS="Code">
 $diagnosis</CODE>
  to the code at the path contianing the diagnosis (e.g. in the <CODE CLASS="Code">
 openEHR-EHR-EVALUATION.problem-diagnosis.v1</CODE>
  archetype):</P>
-<PRE CLASS="CCode"><A NAME="pgfId-1145097"></A>$diagnosis:CODE_PHRASE ::= /data/items[id2.1]/value/defining_code</PRE>
+<pre>    
+    $diagnosis:CODE_PHRASE ::= /data/items[id2.1]/value/defining_code
+</pre>    
 <P CLASS="Body">
 <A NAME="pgfId-1145098"></A>The variable can then be used instead of the path in subsequent expressions.</P>
 </DIV>
 <DIV>
-<H6 CLASS="Hdr3">
-<A NAME="pgfId-1145099"></A>5.5.5	External Queries</H6>
+<h3 CLASS="Hdr3">
+<A NAME="pgfId-1145099"></A>5.5.5	External Queries</h3>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1145091"></A>An expression referring to an externally defined query, possibly including arguments, may be defined using the variable declaration syntax. The general pattern is as follows:</P>
-<PRE CLASS="CCode"><A NAME="pgfId-1144999"></A>$varname:Type ::= query(context, query_name, arg1, arg2, ...)</PRE>
+    $varname:Type ::= query(context, query_name, arg1, arg2, ...)
 <P CLASS="Body">
 <A NAME="pgfId-1145003"></A>Examples include:</P>
-<PRE CLASS="CCode"><A NAME="pgfId-1145006"></A>$date_of_birth:ISO8601_DATE ::= 											query(“ehr”, “date_of_birth”)</PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1145005"></A>$has_diabetes:Boolean ::= 											query(“ehr”, “has_diagnosis”, </PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1145155"></A>												“snomed_ct::1234567”)</PRE>
-<PRE CLASS="CCode"><A NAME="pgfId-1145212"></A>$is_female:Boolean ::= 											query(“ehr”, “is_female”)</PRE>
+<pre>
+    $date_of_birth:ISO8601_DATE ::= query("ehr", "date_of_birth")
+    $has_diabetes:Boolean ::= query("ehr", "has_diagnosis", "snomed_ct::1234567")
+    $is_female:Boolean ::= query("ehr", "is_female")
+</pre>
 <P CLASS="Body">
 <A NAME="pgfId-1145792"></A>Any number of arguments can be included.</P>
-<P CLASS="Hdr4U">
-<A NAME="pgfId-1145007"></A>Query Contexts</P>
+<h4 CLASS="Hdr4U">
+<A NAME="pgfId-1145007"></A>Query Contexts</h4>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1145803"></A>&nbsp;</P>
-<P CLASS="Hdr4U">
-<A NAME="pgfId-1145163"></A>Query Names</P>
+<h4 CLASS="Hdr4U">
+<A NAME="pgfId-1145163"></A>Query Names</h4>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1145804"></A>&nbsp;</P>
 </DIV>
 <DIV>
-<H5 CLASS="Hdr2">
-<A NAME="pgfId-1142135"></A>Precedence and Parentheses</H5>
+<h2 CLASS="Hdr2">
+<A NAME="pgfId-1142135"></A>Precedence and Parentheses</h2>
 </DIV>
 </DIV>
 <DIV>
 <H2 CLASS="To-be-Continued">
 <A NAME="pgfId-1142600"></A>&nbsp;</H2>
 <DIV>
-<H5 CLASS="Hdr2">
-<A NAME="pgfId-1142742"></A>Conditions</H5>
+<h2 CLASS="Hdr2">
+<A NAME="pgfId-1142742"></A>Conditions</h2>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1145183"></A>Example....</P>
-<PRE CLASS="CCode"><A NAME="pgfId-1145184"></A>$is_female implies exists /path/to/xxx</PRE>
+<pre>
+    $is_female implies exists /path/to/xxx
+</pre>
 </DIV>
 <DIV>
-<H5 CLASS="Hdr2">
-<A NAME="pgfId-1145798"></A>Natural Language Issues</H5>
+<h2 CLASS="Hdr2">
+<A NAME="pgfId-1145798"></A>Natural Language Issues</h2>
 <P CLASS="BodyFirst">
 <A NAME="pgfId-1145802"></A>xx</P>
 </DIV>

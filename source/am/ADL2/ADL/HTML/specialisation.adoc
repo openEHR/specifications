@@ -1,0 +1,1264 @@
+= Specialisation
+
+== Overview
+
+Archetypes can be specialised in a similar way to classes in object-oriented programming languages. Common to both situations is the use of a differential style of declaration, i.e. the contents of a specialised entity are expressed as differences with respect to the parent - previously defined elements from the parent that are not changed are not repeated in the descendant. Two extra constructs are included in the ADL syntax to support redefinition in specialised archetypes or templates.
+
+The basic test that must be satisfied by a specialised archetype is as follows:
+
+* All possible data instance arrangements that conform to the specialised archetype must also conform to all of its parents, recursively to the ultimate parent.
+
+This condition ensures that data created by a specialised archetype that is not itself shared by two systems can be processed by the use of a more general parent that is shared.
+
+The semantics that allow this are similar to the ‘covariant redefinition’link:#pgfId-1160027[1] notion used in some object-oriented programming languages, and can be summarised as follows.
+
+* A non-specialised (i.e. top-level) archetype defines an instance space that is a subset of the space defined by the class in the reference information model on which the archetype is based.
+* A specialised archetype can specialise only one parent archetype, i.e. single inheritance.
+* A specialised archetype specifies an instance space defined by the following elements:
+* unchanged object and attribute constraints inherited from the parent archetype;
+* and one or more redefinitions, additions and removals.
+* All elements defined in a parent archetype are either inherited unchanged or redefined in a specialised child.
+* Specialised archetypes are expressed differentially with respect to the parent, i.e. they do not mention purely inherited elements, only redefinitions and extensions.
+* Extensions always define an additional subset of the instance space defined by the reference model element being extended (i.e. to which the ‘new’ objects belong). The extension capability allows archetypes to remain extensible without having to know in advance how or if they will be extended.
+
+To understand specialisation properly, the object-oriented notion of flattening is required. This term refers to the operation of overlaying the (differential) definition of a specialised archetype on its ‘flat parent’, which is a flattened archetype obtained by a previous invocation of this process. The first invocation creates a flat archetype from overlaying a specialised archetype on a ‘top-level’ non-specialised archetype.
+
+The contents of the definition of any specialised archetype are therefore understood as differences with respect to the flat parent, not the differential parent. This is exactly how object-oriented programming languages work.
+
+The following sections describe the details of specialisation. The term ‘object’ is used synonymously with ‘object constraint’ since all elements in ADL are constraints unless otherwise indicated.
+
+== Examples
+
+The examples below provide a basis for understanding most of the semantics discussed in the subsequent sections.
+
+=== 10.2.1 Redefinition for Refinement
+
+The example shown in link:specialisation.htm#59139[See Specialised archetype showing redefinition and extension] is from an older version of the openEHR ‘Problem’ archetype lineage and illustrates the use of redefinition and extension. The first text is the the definition section of the top-level ‘Problem’ archetype, and shows one ` ELEMENT` node in expanded form, with the remaining nodes in an elided form.
+
+The second text is from the ‘problem-diagnosis’ archetype, i.e. a ‘diagnosis’ specialisation of the general notion of ‘problem’. In this situation, the node ` [id2]` , with occurrences of 1, i.e. mandatory non-multiple, has its meaning narrowed to ` [id2.1]` ‘diagnosis’ (diagnosed problems are seen as a subset of all problems in medicine), while new sibling nodes are added to the items attribute to define details particular to recording a diagnosis. The extension nodes are identified by the codes ` [at0.32]` , ` [at0.35]` and ` [at0.37]` , with the latter two shown in elided form.
+
+image:specialisation-2.png[image]
+
+=== 10.2.2 Redefinition for Specialisation
+
+The example shown in link:specialisation.htm#53297[See Specialised archetype showing redefinition to multiple children] illustrates redefinition in a specialised archetype. The first text is taken from the definition section of the ‘laboratory result’ ` OBSERVATION` archetype on openEHR.orglink:#pgfId-1171935[2], and contains an ` ELEMENT` node whose identifier is ` [id79]` , defined as ‘panel item’ in the archetype terminology (sibling nodes are not shown here). The intention is that the ` id79` node be specialised into particular ‘panel items’ or analytes according to particular types of test result. Accordingly, the ` id79` node has occurrences of ` 0..*` and its value is not constrained with respect to the reference model, meaning that the type of the _value_ attirbute can be any descendant of ` DATA_VALUE` .
+
+The second text is a specialised version of the laboratory result archetype, defining ‘thyroid function test result’. The redefinitions include:
+
+* a redefinition of the top-level object node identifier ` [id1]` , with the specialised node identifier ` [id1.1]` ;
+* eight nodes redefining the ` [id79]` node are shown, with overridden node identifiers ` [id79.2]` - ` [id79.9]` ;
+* reduced occurrences (` 0..1` in each case);
+* redefinition of the _value_ attribute of each ` ELEMENT` type to ` DV_QUANTITY` , shown in expanded form for node ` [id79.2]` .
+
+This archetype is typical of a class of specialisations that use only redefinition, due to the fact that all objects in the redefined part of the specialised version are semantically specific kinds of a general object, in this case, ‘panel item’.
+
+image:specialisation-3.png[image]
+
+=== 10.2.3 Specialisation with Cloning
+
+In the previous example, each of the nodes with identifiers of the form `id79.N` would be effectively copied to the flat output, since the node being redefined (`id79`) has no sub-structure, i.e. it is a ‘matches any’ node. However, the general case is that the node in the parent has its own structure, typically some boilerplate nodes that would be used by any specialisation. In that case, an archetype containing nodes that specialise a node with existing structure cause a ‘clone and overlay’ operation. That is, to generate the flat output of the specialised archetype, the parent node is first cloned from the flat parent to the new flat output, and then the specialised node is overlaid on the cloned structure. The following example shows a parent archetype that defines a ‘laboratory result’ structure as a `CLUSTER` containing a number of `ELEMENT` objects, defining things like Result value, Reference range guidance and so on. The `id2` Result value node is intended to be specialised.
+
+Parent archetype:
+
+-------------------------------------------------------------------------------------------------------
+    CLUSTER[id1] ∈ {                                                    -- Laboratory test panel
+        items ∈ {
+            CLUSTER[id3] ∈ {                                            -- Laboratory Result
+                items ∈ {
+                    ELEMENT[id2] occurrences ∈ {0..1}                                   -- Result Value
+                    ELEMENT[id4] ∈ {                                     -- Result Comment
+                        value ∈ {
+                            DV_TEXT[id15] 
+                        }
+                    }
+                    ELEMENT[id5] occurrences ∈ {0..1} ∈ {   -- Ref. Range Guidance
+                        value ∈ {
+                            DV_TEXT[id16] 
+                        }
+                    }
+                    ELEMENT[id6] occurrences ∈ {0..1} ∈ {   -- Result Value Status
+                        value ∈ {
+                            DV_CODED_TEXT[id17] ∈ {
+                                defining_code ∈ {[ac1]}                 
+                            }
+                        }
+                    }
+                    ELEMENT[id7] occurrences ∈ {0..1} ∈ {   -- D/T Result Val Status
+                        value ∈ {
+                            DV_DATE_TIME[id18] 
+                        }
+                    }
+                }
+            }
+            allow_archetype CLUSTER[id14] ∈ {                                           -- Other Detail
+                include
+                    archetype_id/value ∈ {/.*/}
+            }
+        }
+    }
+-------------------------------------------------------------------------------------------------------
+
+ Specialised child archetype:
+
+--------------------------------------------------------------------------
+    CLUSTER[id1.1] ∈ {  -- Lipid studies panel
+        /items ∈ {
+            CLUSTER[id3.1] ∈ {                            -- LDL
+                items ∈ {
+                    ELEMENT[id2.2] ∈ {  
+                        value ∈ {
+                            DV_QUANTITY[id0.1] ∈ {
+                                property ∈ {[at0.1]}
+                                magnitude ∈ {|>=0.0|}
+                                units ∈ {"mmol/l"}
+                            }
+                        }
+                    }
+                }
+            }
+            CLUSTER[id3.2] ∈ {                            -- HDL
+                items ∈ {
+                    ELEMENT[id2.3] ∈ {
+                        value matches {
+                            DV_QUANTITY[id0.2] ∈ {
+                                property ∈ {[at0.1]}
+                                magnitude ∈ {|>=0.0|}
+                                units ∈ {"mmol/l"}
+                            }
+                        }
+                    }
+                }
+            }
+    ...
+            CLUSTER[id3.5] ∈ {                     -- Cholesterol Result
+                items ∈ {
+                    ELEMENT[id2.4] ∈ {  
+                        value matches {
+                            DV_QUANTITY[id0.5] ∈ {
+                                property ∈ {[at0.1]}
+                                magnitude ∈ {|>=0.0|}
+                                units ∈ {"mosmol/l"}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+--------------------------------------------------------------------------
+
+The flattened result consists of a number of repetitions of the entire ` CLUSTER[id3]` structure from the parent, corresponding to the specialisations in the child. The ADL source form is tool large to show here, but the ADL Workbench provides a visualisation in link:specialisation.htm#13975[See Redefinition with cloning]. In this figure we can see that the ` CLUSTER / ELEMENT` overlays from the child archetype have been overlaid on clones of the ` CLUSTER[id3]` structure from the parent, preserving the ` id4` , ` id5` etc nodes.
+
+image:specialisation-4.png[image]
+
+== Specialisation Concepts
+
+=== 10.3.1 Differential and Flat Forms
+
+Specialised archetypes in their authored form are represented in ‘differential’ form. The syntax is the same as for non-specialised archetypes, with two additions: specialisation paths (see link:specialisation.htm#74045[See Specialisation Paths]) and ordering indicators (see link:specialisation.htm#44961[See Ordering of Sibling Nodes]). For a specialised archetype therefore, the lineage of archetypes back to the ultimate parent must be taken into account in order to obtain its complete semantics.
+
+Differential form means that the only attributes or objects mentioned are those that redefine corresponding elements in the parent and those that introduce new elements. The differential approach to representation of specialised archetypes give rise to the need for a flat _form_ of a specialised archetype: the equivalent archetype defined by the sum of the (differential) child and its parent, as if the child archetype had been defined standalone. The flat form of archetypes is used for building templates, and subsequently at runtime. It is generated by ‘compressing’ the effects of inheritance of the parent to the specialised child into a single archetype, and applies recursively all the way up an archetype lineage to the ultimate parent, which must be a top-level (non-specialised) archetype. For a top-level archetype, the flat-form is the same as its differential form (i.e. in a top-level archetype, every node is considered to be an extension node).
+
+=== 10.3.2 Specialisation Levels
+
+In order to talk about archetypes at different levels of specialisation, a standard way of identifying the levels of specialisation is used, as follows:
+
+* level 0: top-level, non-specialised archetypes
+* level 1: specialisations of level 0 archetypes
+* level 2: specialisations of level 1 archetypes
+* etc.
+
+For nodes carrying a node identifier, the specialisation level is always equal to the number of ‘.’ characters found in the identifier.
+
+=== 10.3.3 Specialisation Paths
+
+Because ADL is a block-structured language, the redefinition of nodes deep in the parent structure normally requires descending into the structure. Since it is common to want to further constrain only nodes deep within a structure in specialised archetype, a more convenient way is provided in ADL to do this using a specialisation path, illustrated by the following example:
+
+----------------------------------------------------------------------
+    OBSERVATION[id1.1] ∈ {  -- Thyroid function tests
+        /data[id2]/events[id3]/data[id4]/items ∈    {
+                ELEMENT[id79.2] occurrences ∈ {0..1} ∈ {    -- TSH
+                    value ∈ {
+                        DV_QUANTITY[id0.7] ∈ {   ... }
+                    }
+                }
+                ELEMENT[id79.7] occurrences ∈ {0..1} ∈ {..} -- Free T3
+                ....
+            }
+        }
+    }
+----------------------------------------------------------------------
+
+In this fragment, a path is used rather than an attribute name. A path can be used in this manner only if no further constraints are required ‘on the way’ into the deep structure.
+
+The rules for specialisation paths are as follows.
+
+* A specialisation path is constructed down to the first attribute having any child objects to be further constrained in the present archetype.
+* All path segments must carry an id-code predicate.
+* The shortest useful path that can be used is ‘/’ followed by an attribute name from the top level class being constrained by the archetype.
+
+=== 10.3.4 Path Congruence
+
+Any node in an archetype can unambiguously be located by its archetype path. For example, the text value of the ‘problem’ node of the ` openEHR-EHR-EVALUATION.problem.v1` archetype shown at the top of link:specialisation.htm#59139[See Specialised archetype showing redefinition and extension] is:
+
+----
+/data[id2]/items[id3]/value
+----
+
+Similarly the path to the redefined version of the same node in the ` openEHR-EHR-EVALUATION.problem-diagnosis.v1` archetype at the bottom of the same figure is:
+
+----
+/data[id2]/items[id3.1]/value
+----
+
+By inspection, it can be seen that this path is a variant of the corresponding path in the parent archetype, where a particular object node identifier has been specialised.
+
+In general, the path of every redefined node in a specialised archetype will have a direct equivalent in the parent archetype, which can be determined by removing one level of specialisation from any node identifiers within the specialised path that are at the level of specialisation of the specialised archetype (i.e. node identifiers corresponding to higher specialisation levels are not changed). In this way, the nodes in a specialised archetype source can be connected to their counterparts in parent archetypes, for purposes of validation and flattening.
+
+Conversely, any given path in an archetype that has children will have congruent paths in the children wherever nodes have been specialised.
+
+=== 10.3.5 Redefinition Concepts
+
+A specialised archetype definition at any level consists of a set of changes with respect to its flat parent. The technically available changes are categorised as follows.
+
+[cols="1,2,2"]
+|===
+|Logical Intention|Physical Redefinition|Criteria
+
+3+^|*Attibute node constraints*
+
+|MANDATE an existing node.
+|Differential attribute node refines existence to 1.
+|Differential node has same attribute name as a node at the same path location in the flat parent.
+
+|EXCLUDE an existing node.
+|Differential attribute node refines existence to 0.
+|Differential node has same attribute name as a node at the same path location in the flat parent.
+
+|REFINE an existing node.
+|Differential attribute node refines cardinality of attribute at corresponding location in flat parent.
+|Differential node has same attribute name as a node at the same path location in the flat parent.
+
+|ADD a new node.
+|Differential attribute node will be added to parent object node at corresponding location in flat parent.
+|Differential node does not exist in the flat parent, only in the Reference Model.
+
+3+^|*Object node constraints
+
+|REFINE an existing node.
+|Differential object node and sub-elements will OVERRIDE corresponding node, and some / all of its sub-elements from the flat parent
+|Differential node has a specialised node identifier, and corresponding node in flat parent has max occurrences = 1 or else differential node is sole replacement and has max occurrences = 1.
+
+|SPECIALISE an existing node.
+|Differential object node(s) and sub-elements will OVERRIDE a CLONE of the corresponding node, and some / all of its sub-elements from the flat parent
+|Differential node has a specialised node identifier, and corresponding node in flat parent has max occurrences > 1.
+
+|ADD a new node.
+|Differential object node(s) and sub-elements will be ADDed to container or single-valued attribute. In the case of a container, ordering can be controlled with the before/after constraint.
+|Differential node has a specialised node identifier, and corresponding node in flat parent has max occurrences > 1.
+
+|EXCLUDE an existing node.
+|Differential object node DELETEs existing node which has min occurrences = 0 (i.e. can’t delete a mandatory node).
+|Differential node has same node identifier as corresponding node in parent, and occurrences = 0..0.
+
+|FILL a slot.
+|External reference node will be added as slot filler next to corresponding slot from flat parent.
+|Differential node is an external reference node, has specialised node identifier of a slot in the flat parent.
+
+|CLOSE a slot.
+|Archetype slot node causes corresponding slot from flat parent to be closed to further filling.
+|Differential node is an archetype slot node, with same node identifier as a slot in the flat parent, and has the ‘closed’ flag set.
+
+|===
+
+In the ADL syntax, objects can be specified in two places: under single-value attributes and under multiply-valued (container) attributes.
+
+Each object under a single-valued attribute defines an alternative that may be used to constrain data at that attribute position. An example is the ` OBSERVATION` . _protocol_ attribute from the openEHR reference model: if multiple objects appear under this attribute, only one can be used at runtime to constrain data.
+
+Within a container attribute, the meaning of multiple objects is that each child object defines constraints on one or more members of the container in the data. The _occurrences_ constraint on each one determines how many objects in the data match a given object constraint in the attribute.
+
+Object constraints can be specialised in both places by redefinition, refinement and exclusion. Addition can also be used under either kind of attribute: in both cases, it corresponds to an alternative. The actual semantics are described in terms of object node identification, type redefinition, and structural constraints (existence, cardinality and occurrences), and are the same for objects under single- and multiply-valued attributes. The following sections describe the details.
+
+== Attribute Redefinition
+
+A small number of things can be redefined on attributes, including existence and cardinality. A basic rule of redefinition is that a specialised archetype cannot change the multiplicity type of an attribute.
+
+=== 10.4.1 Existence Redefinition: Mandation and Exclusion
+
+All attributes mentioned in an archetype have an _existence_ constraint, indicating whether a value is required or not. The constraint is either stated explicitly - typically done for single-valued attirbutes - or it is the value from the reference model - typical for multiply-valued attributes. In both cases, the existence of an attribute in a parent archetype can be redefined in a specialised archetype using the standard cADL syntax. In the following example, an implicit existence constraint picked up from the reference model of ` {0..1}` is redefined in a child archetype to ` {1}` , i.e. mandatory.
+
+Parent archetype:
+
+------------------------------------------------------------------
+    OBSERVATION[id1] ∈ { -- blood pressure measurement
+        protocol ∈ { -- existence not changed from reference model
+            -- etc
+        }
+    }
+------------------------------------------------------------------
+
+Child archetype:
+
+-------------------------------------------------------------------
+    OBSERVATION[id1.1] ∈ { -- paediatric blood pressure measurement
+        /protocol existence ∈ {1} ∈ {
+            -- etc
+        }
+    }
+-------------------------------------------------------------------
+
+Redefinition of existence to ` {0}` by this method denotes exclusion, i.e. removal of the entire attribute (including all sub-structure) from the resulting structure. In an archetype, it is likely to indicate poor design, given that the decision to remove optional attributes is much more likely to be local, and therefore more appropriate in templates rather than archetypes; within a template it would be perfectly normal. The following example shows the protocol attribute in the above ` OBSERVATION` archetype being excluded in this way:
+
+----------------------------------------------------------------
+   OBSERVATION[id1] ∈ { -- paediatric blood pressure measurement
+        /protocol existence ∈ {0}
+    }
+----------------------------------------------------------------
+ 
+Note that in the above, the ‘/’ is used to denote ‘/protocol’ as a differential path. Without the slash, the ‘protocol’ attribute would be considered to be trying to constrain a hitherto unconstrained attribute called ‘protocol’, rather than redefine a constraint already present in a parent archetype.
+
+=== 10.4.2 Multiply-valued (Container) Attributes
+
+The following sub-sections describe specialisation semantics specific to container attributes.
+
+==== Cardinality
+
+The _cardinality_ constraint defines how many object instances can be in the container within the data (not the archetype). In a specialised archetype, cardinality can be redefined to be a narrower range than in the parent, further limiting the valid ranges of items in the data that may occur within the container. This would normally only make sense if refinements were made to the occurrences of the contained items, i.e.:
+
+* narrowing the occurrences range of an object;
+* excluding an object by setting its occurrences to \{0};
+* adding new objects, which themselves will have occurrences constraints;
+* setting some object occurrences to mandatory, and the enclosing cardinality lower limit to some non-zero value.
+
+As long as the relationship between the enclosing attribute’s cardinality constraint and the occurrences constraints defined on all the contained items (including those inherited unchanged, and therefore not mentioned in the specialised archetype) is respected (see VCOC validity rule, AOM specification), any of the above specialisations can occur.
+
+The following provides an example of cardinality redefinition.
+
+Parent archetype:
+
+-----------------------------------------------------------------------------
+    ITEM_LIST[id3] ∈ { -- general check list
+        items cardinality ∈ {0..*} ∈ { -- any number of items
+            ELEMENT[id12] occurrences ∈ {0..*} ∈ {} -- generic checklist item
+        }
+    }
+-----------------------------------------------------------------------------
+
+Child archetype:
+
+----------------------------------------------------------------------
+    ITEM_LIST[id3] ∈ { -- pre-operative check list
+        /items cardinality ∈ {3..10} ∈ { -- at least 3 mandatory items
+            ELEMENT[id12.1] occurrences ∈ {1} ∈ {} -- item #1
+            ELEMENT[id12.2] occurrences ∈ {1} ∈ {} -- item #2
+            ELEMENT[id12.3] occurrences ∈ {1} ∈ {} -- item #3
+            ELEMENT[id12.4] occurrences ∈ {0..1} ∈ {} -- item #4
+            ...
+            ELEMENT[id12.10] occurrences ∈ {0..1} ∈ {} -- item #10
+        }
+    }
+----------------------------------------------------------------------
+
+==== Ordering of Sibling Nodes
+
+Within container attributes, the order of objects may be significant from the point of view of domain users, i.e. the container may be considered as an ordered list. This is easy to achieve in top-level archetype, using the ‘ordered’ qualifier on a cardinality constraint. However when particular node(s) are redefined into multiple specialised nodes, or new nodes added by extension, the desired order of the new nodes may be such that they should occur interspersed at particular locations among nodes defined in the parent archetype. The following text is a slightly summarised view of the items attribute from the problem archetype shown in link:specialisation.htm#59139[See Specialised archetype showing redefinition and extension]:
+
+----------------------------------------------------------------------------------------------------------------------------
+    items cardinality ∈ {0..*; ordered} ∈ {
+        ELEMENT[id2] occurrences ∈ {1} ∈ {..}                                               -- Problem
+        ELEMENT[id3] occurrences ∈ {0..1} ∈ {..}                                                -- Date of initial onset
+        ELEMENT[id4] occurrences ∈ {0..1} ∈ {..}                                                -- Age at initial onset
+        ELEMENT[id5] occurrences ∈ {0..1} ∈ {..}                                                -- Severity
+        ELEMENT[id9] occurrences ∈ {0..1} ∈ {..}                                                -- Clinical description
+        ELEMENT[id10] occurrences ∈ {0..1} ∈ {..}                                               -- Date clinically received
+        CLUSTER[id11] occurrences ∈ {0..*} ∈ {..}                                               -- Location
+        CLUSTER[id14] occurrences ∈ {0..1} ∈ {..}                                               -- Aetiology
+        CLUSTER[id18] occurrences ∈ {0..1} ∈ {..}                                               -- Occurrences or exacerb’ns
+        CLUSTER[id26] occurrences ∈ {0..1} ∈ {..}                                               -- Related problems
+        ELEMENT[id30] occurrences ∈ {0..1} ∈ {..}                                               -- Date of resolution
+        ELEMENT[id31] occurrences ∈ {0..1} ∈ {..}                                               -- Age at resolution
+    }
+----------------------------------------------------------------------------------------------------------------------------
+
+To indicate significant ordering in the specialised problem-diagnosis archetype, the keywords ` before` and ` after` can be used, as follows:
+
+---------------------------------------------------------------------------------------------------------
+    /data[id3]/items ∈ {
+        before [id3] 
+        ELEMENT[id2.1] ∈ {..}                                               -- Diagnosis
+        ELEMENT[id0.32] occurrences ∈ {0..1} ∈ {..}                                             -- Status
+        after [id26]
+        CLUSTER[id0.35] occurrences ∈ {0..1} ∈ {..}  -- Diagnostic criteria
+        CLUSTER[id0.37] occurrences ∈ {0..1} ∈ {..}  -- Clinical Staging
+    }
+---------------------------------------------------------------------------------------------------------
+
+These keywords are followed by a node identifier reference, and act to modify the node definition immediately following. Technically the following visual rendition would be more faithful, but it is less readable, and makes no difference to a parser:
+
+after [id26] CLUSTER[id0.35] occurrences ∈ \{0..1} ∈ \{..} -- etc
+
+The rules for specifying ordering are as follows.
+
+* Ordering is only applicable to object nodes defined within a multiply-valued (i.e. container) attribute whose cardinality includes the ` ordered` constraint;
+* Any ` before` or ` after` statement can refer to the node identifier of any sibling node known in the flat form of the archetype, i.e.:
+* the identifier of any redefined node;
+* the identifier of any new node;
+* the identifier of any inherited node that is not redefined amongst the sibling nodes.
+* If no ordering indications are given, redefined nodes should appear in the same position as the nodes they replace, while extension nodes should appear at the end.
+
+If ordering indicators are used in an archetype that is itself further specialised, the following rules apply:
+
+* If the referenced identifier becomes unavailable due to being redefined in the new archetype, it must be redefined to refer to an available sibling identifier as per the rules above.
+* If this does not occur, a ` before` reference will default to the first sibling node identifier currently available conforming to the original identifier, while an after reference will default to the _last_ such identifier available in the current flat archetype.
+
+If, due to multiple levels of redefinition, there is more than one candidate to go before (or after) a given node, the compiler should output a warning. The problem would be resolved by the choice of one of the candidates being changed to indicate that it is to be ordered before (after) another of the candidates rather than the originally stated node.
+
+== Object Redefinition
+
+Object redefinition can occur for any object constraint in the parent archeype, and can include redefinition of node identifier, occurrences, reference model type. For certain kinds of object constraints, specific kinds of redefinition are possible.
+
+=== 10.5.1 Node Identifiers
+
+In an archetype, node identifiers (‘id-codes’) are mandatory on all object constraint nodes. The identifiers of those object nodes defined as children of a multiply-valued attribute and multiple alternative children of single-valued attributes (see link:CDL.htm#31038[See Node Identifiers]) require definitions in the archetype terminology. Definitions are optional on other single child constraints of single-valued attributes. This rule applies in specialised as well as top-level archetypes.
+
+A key question is: when does a node identifier need to be redefined? There are three possible situations:
+
+* when the node is the root node of an archetype, the meaning is always considered to be redefined;
+* it can be redefined for purely semantic purposes on other nodes, e.g. to redefine ‘heart rate’ to ‘fetal heart rate’;
+* a node identifier must be redefined if the node is being redefined into multiple child nodes, either under a multiply-valued attribute, or as alternatives under a single-valued attribute.
+
+Redefinition of an object node identifier for purely semantic purposes, unaccompanied by any other kind of constraint change is done as shown in the following example.
+
+Parent archetype:
+
+--------------------------------------------------------------------------
+    EVALUATION[id1] ∈ {                             -- Medical Certificate
+        data ∈ {
+            ITEM_TREE[id2] ∈ {  
+                items ∈ {
+                    ELEMENT[id5] occurrences ∈ {0..1} ∈ {   -- Description
+                        value ∈ {
+                            DV_TEXT[id7] ∈ {*}
+                        }
+                    }
+                }
+            }
+        }
+    }
+--------------------------------------------------------------------------
+
+Child archetype:
+
+------------------------------------------------------------------------------------------------
+    EVALUATION[id1.1] ∈ {                                       -- Singapore Medical Certificate
+        /data[id2]/items ∈ {
+            ELEMENT[id5.1]                              -- Summary
+        }
+    }
+------------------------------------------------------------------------------------------------
+
+Here the ` id5` (‘Description’) node is refined in meaning to ` id5.1` (‘Summary’). Since there is no other constraint to be stated, no further ‘matches’ block is required.
+
+An example of the 3rd case above of redefinition is shown in the first archetype in link:specialisation.htm#59139[See Specialised archetype showing redefinition and extension], where the node ` [id79]` is redefined into a number of more specialised nodes ` [id79.2]` - ` [id79.9]` , while in the second, the identifier ` [id2]` is redefined to a single node ` [id2.1]` .
+
+==== Node Redefinition Semantics
+
+The syntactic form of the identifier of a redefined node is a copy of the original followed by a dot (‘.’), optionally intervening instances of the pattern ‘0.’ and then a further non-zero number, i.e.:
+
+* `idN {.0}* .N`
+
+This permits node identifiers from a given level to be redefined not just at the next level, but at multiple levels below.
+
+Examples of redefined node identifiers:
+
+* `id2.1` -- redefinition of `id1` at level 1 specialisation
+* `id2.0.1` -- redefinition of `id1` node in level 2 specialisation archetype
+* `id2.1.1 ` -- redefinition of `id2.1` in level 2 specialisation archetype.
+
+Redefined versions of nodes with no node id in the parent archetype do not require a node identifier in the child archetype.
+
+In both cases, there is a question of whether the original node being redefined (id79 and id2 respectively in the examples) remains available for further redefinition in subsequent child archetypes, or do the redefinition children exhaustively define the instance space for the given parent node?
+
+Should these children be considered exhaustive? One point of view says so, since all subsequently discovered varieties of hepratitis (C, D, E, etc) would now become children of ‘hepatitis non-A non-B’. However this is likely to be sub-optimal, since now the category ‘hepatitis non-A non-B’ probably exists solely because of the order in which the various hepatitis virus tests were perfected. Therefore an alternative argument would say that the categories ‘hepatitis C’, ‘hepatitis D’ etc should be defined directly below ‘hepatitis’, as if ‘hepatitis non-A non-B’ had never existed. Under this argument, the children would not be declared, even when they are theoretically exhaustive.
+
+This kind of argument comes up time and again, and the need for catch-all categories (archetype nodes) and the possibility of future discoveries cannot be predicted. Even in situations such as a lab result (e.g. cholesterol), where the list of analytes seem to be known and fixed, experience of clinical modellers has shown that there is nevertheless no guarantee of not needing another data point, perhaps for something other than an analyte.
+
+The default situation is that they do , unless explicitly stated otherwise, by excluding the parent node in the normal way (i.e. using occurrences matches \{0}).The first example would then become:
+
+Parent archetype:
+
+------------------------------------------------------------------------------------------------------------------
+    items cardinality ∈ {0..*; unordered} ∈ {
+        CLUSTER[id4] occurrences ∈ {1} ∈ {..}                          -- Specimen
+        CLUSTER[id11] occurrences ∈ {0..*} ∈ {..}                      -- level 1
+        ELEMENT[id79] occurrences ∈ {0..*} ∈ {                         -- panel item
+            value ∈ {*}
+        }
+        ELEMENT[id17] occurrences ∈ {0..1} ∈ {..}                      -- Overall Comment
+        ELEMENT[id37] occurrences ∈ {0..1} ∈ {..}                      -- Multimedia rep.
+        }
+    }
+------------------------------------------------------------------------------------------------------------------
+
+Child archetype:
+
+------------------------------------------------------------------------------------------------------------------------------
+    /data/events[id2]/data/items ∈ {                                                
+        ELEMENT[id79.2] occurrences ∈ {0..1} ∈ {    ..}                -- TSH
+        ELEMENT[id79.7] occurrences ∈ {0..1} ∈ {..}                    -- Free Triiodothyronine
+        ELEMENT[id79.8] occurrences ∈ {0..1} ∈ {..}                    -- Total Triiodothyronine
+        ELEMENT[id79.3] occurrences ∈ {0..1} ∈ {..}                    -- Free thyroxine (Free T4)
+        ELEMENT[id79.4] occurrences ∈ {0..1} ∈ {..}                    -- Total Thyroxine (Total T4)
+        ELEMENT[id79.5] occurrences ∈ {0..1} ∈ {..}                    -- T4 loaded uptake
+        ELEMENT[id79.9] occurrences ∈ {0..1} ∈ {..}                    -- Free Triiodothyronine index
+        ELEMENT[id79.6] occurrences ∈ {0..1} ∈ {..}                    -- Free thyroxine index (FTI)
+        ELEMENT[id79] occurrences ∈ {0}
+    }
+------------------------------------------------------------------------------------------------------------------------------
+
+Without the above specification, a further child archetype could then redefine both the original ` id79` node (e.g. into ` id79.0.1` , ` id79.0.2` ), and any of the ` id79` nodes (e.g. ` id79.1.1` , ` id79.1.2` ); with it, only the latter is possible.
+
+==== Adding Nodes
+
+Added object constraint nodes carry identifiers according to the rule mentioned above. The second example includes the new node identifiers ` id0.32` , ` id0.35` and ` id0.37` , whose codes start with a ‘0’. indicating that they have no equivalent code in the parent archetype.
+
+The node identifier syntax of an extension node commences with at least one instance of the pattern ‘0.’. The structure of node identifiers for both kinds of node thus always indicates at what level the identifier was introduced, given by the number of dots.
+
+Examples of redefined node identifiers:
+
+* ` id0.1` -- identifier of extension node introduced at level 1
+* `id0.0.1` -- identifier of extension node introduced at level 2
+
+When a flat form is created, the level at which any given node was introduced or redefined is clear due to the identifier coding system.
+
+=== 10.5.2 Occurrences Redefinition and Exclusion
+
+The `occurrences` constraint on an object node indicates how many instances within the data may conform to that constraint (see link:CDL.htm#47914[See Container Attributes]). If occurrences is redefined on an identified node, the node identifier must be specialised. Within container attributes, `occurrences` is usually redefined in order to make a given object mandatory rather than optional; it can also be used to exclude an object constraint. In the following example, the occurrences of the `id3` node is redefined from `{0..1}` i.e. optional, to `{1}` , i.e. mandatory.
+
+Parent (`openEHR-EHR-EVALUATION.problem.v1.0.3`):
+
+----------------------------------------------------------------------------------------
+    EVALUATION[id1] ∈ { -- Problem
+        data ∈ {
+            ITEM_TREE[id2] ∈ {
+                items cardinality ∈ {0..*; ordered} ∈ {
+                    ELEMENT[id3] occurrences ∈ {1} ∈ {..}       -- Problem
+                    ELEMENT[id4] occurrences ∈ {0..1} ∈ {..}    -- Date of initial onset
+                    -- etc
+                }
+            }
+        }
+    }
+----------------------------------------------------------------------------------------
+
+Child (`openEHR-EHR-EVALUATION.problem-diagnosis.v1`):
+
+----------------------------------------------------------------
+    /data[id2]/items ∈ {
+        ELEMENT[id4] occurrences ∈ {1}  -- Date of initial onset
+    }
+----------------------------------------------------------------
+
+In the above we can see that if the only change in the redefinition is to occurrences, the remainder of the block from the parent is not repeated in the child. Occurrences is normally only constrained on child objects of container attributes, but can be set on objects of any attribute to effect exclusion of part of the instance space. This can be useful in archetypes where a number of alternatives for a single-valued attribute have been stated, and the need is to remove some alternatives in a specialised child archetype. For example, an archetype might have the following constraint:
+
+-----------------------------------------------
+    ELEMENT[id3] ∈ {
+        value ∈ {
+            DV_QUANTITY[id4] ∈ {*}
+            DV_INTERVAL<DV_QUANTITY>[id5] ∈ {*}
+            DV_COUNT[id6] ∈ {*}
+            DV_INTERVAL<DV_COUNT>[id7] ∈ {*}
+        }
+    }
+-----------------------------------------------
+
+and the intention is to remove the `DV_INTERVAL<*>` alternatives. This is achieved by redefining the enclosing object to removed the relevant types:
+
+-----------------------------------------------------------
+    ELEMENT[id3] ∈ {
+        value ∈ {
+            DV_INTERVAL<DV_QUANTITY>[id4] occurrences ∈ {0}
+            DV_INTERVAL<DV_COUNT>[id7] occurrences ∈ {0}
+        }
+    }
+-----------------------------------------------------------
+
+Exclusion by setting occurrences to \{0} is also common in templates, and is used to remove specific child objects of container attributes, as in the following example:
+
+-------------------------------------------------------------------------
+    /data[id2]/items ∈ {
+        CLUSTER[id26] occurrences ∈ {0}     -- remove ‘Related problems’
+        ELEMENT[id31] occurrences ∈ {0}     -- remove ‘Age at resolution’
+    }
+-------------------------------------------------------------------------
+
+If the whole attribute is to be removed, this can be done by redefining existence to \{0}, as described in link:specialisation.htm#53469[See Existence Redefinition: Mandation and Exclusion].
+
+=== 10.5.3 Reference Model Type Refinement
+
+The type of an object may be redefined to one of its subtypes as defined by the reference model. A typical example of where this occurs in archetypes based on the openEHR reference model is when ` ELEMENT` . _value_ is constrained to ‘*’ in a parent archetype, meaning ‘no further constraint on its RM type of ` DATA_VALUE` ’, but is then constrained in a specialised archetype to subtypes of ` DATA_VALUE` , e.g. ` DV_QUANTITY` or ` DV_PROPORTION` link:#pgfId-1163384[3]. The following figure containts a simplified extract of the data values part of the openEHR reference model, and is the basis for the examples below.
+
+image:specialisation-5.png[image]
+
+The most basic form of type refinement is shown in the following example:
+
+Parent archetype:
+
+-----
+    value ∈ \{*} -- any subtype of DATA_VALUE, from the ref model
+-----
+
+Specialised archetype:
+
+----------------------------------------------------------------------
+    .../value ∈ {
+        DV_QUANTITY[id8] ∈ {*} -- now limit to the DV_QUANTITY subtype
+    }
+----------------------------------------------------------------------
+
+The meaning of the above is that instance data constrained by the specialised archetype at the value node must match the ` DV_QUANTITY` constraint only - no other subtype of ` DATA_VALUE` is allowed.
+
+When a type in an archetype is redefined into one of its subtypes, any existing constraints on the original type in the parent archetype are respected. In the following example, a ` DV_AMOUNT` constraint that required _accuracy_ to be present and in the range +/-5% is refined into a ` DV_QUANTITY` in which two attributes of the subtype are constrained. The original _accuracy_ attribute is inherited without change.
+
+Parent archetype:
+
+--------------------------------------
+    value ∈ {   
+        DV_AMOUNT[id4] ∈ {
+            accuracy ∈ {|-0.05..0.05|}
+        }
+    }
+--------------------------------------
+
+Specialised archetype:
+
+-------------------------------------
+    .../value ∈ {
+        DV_QUANTITY[id4] ∈ {
+            magnitude ∈ {|2.0..10.0|}
+            units ∈ {“mmol/ml”}
+        }
+    }
+-------------------------------------
+
+In the same manner, an object node can be specialised into more than one subtype, where each such constraint selects a mutually exclusive subset of the instance space. The following example shows a specialisation of the ` DV_AMOUNT` constraint above into two subtyped constraints.
+
+-------------------------------------
+    .../value ∈ {
+        DV_QUANTITY[id4] ∈ {
+            magnitude ∈ {|2.0..10.0|}
+            units ∈ {“mmol/ml”}
+        }
+        DV_PROPORTION[id5] ∈ {
+            numerator ∈ {|2.0..10.0|}
+            type ∈ {pk_unitary}
+        }
+    }
+-------------------------------------
+
+Here, instance data may only be of type ` DV_QUANTITY` or ` DV_PROPORTION` , and must satisfy the respective constraints for those types.
+
+A final variant of subtyping is when the intention is to constraint the data to a supertype with exceptions for particular subtypes. In this case, constraints based on subtypes are matched first, with the constraint based on the parent type being used to constrain all other subtypes. The following example constrains data at the _value_ node to be:
+
+* an instance of ` DV_QUANTITY` with _magnitude_ within the given range etc;
+* an instance of ` DV_PROPORTION` with _numerator_ in the given range etc;
+* an instance of any other subtype of ` DV_AMOUNT` , with _accuracy_ in the given range.
+
+--------------------------------------
+    .../value ∈ {
+        DV_QUANTITY[id4] ∈ {
+            magnitude ∈ {|2.0..10.0|}
+            units ∈ {“mmol/ml”}
+        }
+        DV_PROPORTION[id5] ∈ {
+            numerator ∈ {|2.0..10.0|}
+            type ∈ {pk_unitary}
+        }
+        DV_AMOUNT[id6] ∈ {
+            accuracy ∈ {|-0.05..0.05|}
+        }
+    }
+--------------------------------------
+
+A typical use of this kind of refinement in openEHR would be to add an alternative for a ` DV_CODED_TEXT` constraint for a specific terminology to an existing ` DV_TEXT` constraint in a _name_ attribute, as follows:
+
+----------------------------------------------
+    name ∈ {
+        DV_CODED_TEXT[id79] ∈ {
+            defining_code ∈ {[Snomed_ct::]}
+        }
+        DV_TEXT[id14] ∈ {
+            value ∈ {/.+/} -- non-empty string
+        }
+    }
+----------------------------------------------
+
+All of the above specialisation based on reference model subtypes can be applied in the same way to identified object constraints.
+
+=== 10.5.4 Terminology External Subset Redefinition
+
+A terminology external subset constraint is used to set the value set of a coded term to be one defined externally in a terminology, specified in the ` constraint_definitions` sub-section of the ` terminology` section, as shown in the following example.
+
+------------------------------------------------------------------------------------------
+    definition
+        ELEMENT [id79]   ∈ { -- cuff size
+            value ∈ {
+                DV_CODED_TEXT[id4] ∈ {
+                    defining_code ∈ {[local::ac1]}
+                }
+            }
+        }
+    terminology
+        term_bindings = < 
+            [“snomed_ct”]    = <         
+                items = <            
+                    [“ac1”] = <          http://terminology.org?query_id=12345           >
+                >
+            >
+        >     
+------------------------------------------------------------------------------------------
+
+In a specialisation of the archetype, the placeholder constraint can be redefined in two different ways. The first is by redefinition of the placeholder constraint to a narrower one. This is a achieved by redefining the constraint code, and adding a new definition in the ontology of the specialised archetype, as follows.
+
+--------------------------------------------------------------------------------------------------
+    definition
+        ELEMENT [id79]   ∈ { -- cuff size
+            value ∈ {
+                DV_CODED_TEXT[id14] ∈ {
+                    defining_code ∈ {[local::ac1.1]}
+                }
+            }
+        }
+    terminology
+        term_bindings = < 
+            [“snomed_ct”]    = <         
+                items = <            
+                    [“ac1.1”] = <                http://terminology.org?query_id=12345-1         >
+                >
+            >
+        >
+--------------------------------------------------------------------------------------------------
+
+The second kind of redefinition is by an inline constraint of the same primitive ADL type ` TERMINOLOGY_CODE` .
+
+-------------------------------------------
+    ELEMENT [id79]   ∈ { -- cuff size
+        value ∈ {
+            DV_CODED_TEXT[id14] ∈ {
+                defining_code ∈ { 
+                    [local::
+                    at22,   -- child cuff
+                    at23]    -- infant cuff
+                }
+            }
+        }
+    }
+-------------------------------------------
+
+These redefinitions are assumed to be valid, although it is not directly validatable unless the terminology subset is available to the tooling.
+
+A third variation on the same semantics is when a term constraint is used as a redefinition of a previously unconstrained term code, e.g. as illustrated by the following fragment.
+
+-----------------------------------------
+    ELEMENT[id79]    ∈ { -- cuff size
+        value ∈ {
+            DV_CODED_TEXT[id14] ∈ {*}
+        }
+    }
+-----------------------------------------
+
+=== 10.5.5 Internal Reference (Proxy Object) Redefinition
+
+An archetype proxy object, or ` use_node` constraint is used to refer to an object constraint from a point elsewhere in the archetype. These references can be redefined in two ways, as follows.
+
+* Target redefinition: the target constraint of reference may be itself redefined. The meaning for this is that all internal references now assume the redefined form.
+* Reference redefinition: specialised archetypes can redefine a use_node object into a normal inline concrete constraint that a) replaces the reference, and b) must be completely conformant to the structure which is the target of the original reference.
+
+Note that if the intention is to redefine a structure referred to by ` use_node` constraints, but to leave the constraints at the reference source points in form to which the reference points in the parent level, each ` use_node` reference needs to be manually redefined as a copy of the target structure originally pointed to.
+
+The second type of redefinition above is the most common, and is shown in the following example.
+
+Parent archetype:
+
+--------------------------------------------------------
+    ENTRY[id1]∈ {
+        data ∈ {            
+            CLUSTER[id2] ∈ {                            
+                items ∈ {           
+                    -- etc --
+                }
+            }
+            use_node CLUSTER[id3] /data[id2]
+        }
+    }
+--------------------------------------------------------
+
+Child archetype:
+
+--------------------------------------------------------
+    ENTRY [id1.1]∈ {
+        /data[id3]/items ∈ {            
+            ELEMENT [id0.1] ∈ {                         
+                -- etc --
+            }
+        }
+    }
+--------------------------------------------------------
+
+Remembering that the parent archetype is essentially just definition two sibling object structures with the identifiers id1 and id2 (defined by the use_node reference), the child is redefining the id2 node (it could also have redefined the id1 node as well). The result of this in the flattened output is as follows:
+
+----------------------------------------------------------------
+    ENTRY [id1.1]∈ {
+        data ∈ {            
+            CLUSTER[id2] ∈ {                            
+                items ∈ {           
+                    -- etc --
+                }
+            }
+            CLUSTER[id3] ∈ {                            
+                items ∈ {           
+                    ELEMENT[id0.1] ∈ {                          
+                        -- etc --
+                    }
+                }
+            }
+        }
+    }
+----------------------------------------------------------------
+
+There is one subtlety to do with redefinition of occurrences of a use_node target: if it is redefined to have occurrences matches \{0} (normally only in a template), then the effect of this is the same on any use_node reference definitions, unless they define occurrences locally at the reference point. The chance of this actually occurring appears vaninshingly small, since by the time ‘exclusion’ occurrence redefinition is being done in templates, use_node object definitions are most likely to have been locally overridden anyway.
+
+Lastly, one further type of redefinition appears technically possible, but seems of no utility, and is therefore not part of ADL:
+
+* Reference re-targetting: an internal reference could potentially be redefined into a reference to a different target whose structure conforms to the original target.
+
+=== 10.5.6 External Reference Redefinition
+
+External reference nodes can be redefined by another external reference node, in the following ways:
+
+* exclusion - using the occurrences matches \{0} method;
+* semantic refinement of the node identifier in the normal way;
+* redefinition of the reference to another archetype which is a specialisation of the one from the corresponding reference node in the flat parent.
+
+=== 10.5.7 Slot Filling and Redefinition
+
+Slots and slot-filling is a special kind of ‘redefinition’ in ADL. Logically, an archetype slot constraint is understood to consist of a) its definition (what archetypes are allowed to fill it) and b) current filler list. At the point of definition, the current fillers is invariably empty. More specialised descendants can progressively add or replace fillers for a slot. Thus, the appearance of an object node whose identifier is the specialisation of a slot node in the flat parent is always understood as a partial specialisation for it.
+
+In other words, a slot within an archetype can be specialised by any combination of the following:
+
+* one or more slot-fillers;
+* a redefinition of the slot itself, either to narrow the set of archetypes it matches, or to close it to filling in either further specialisations, or at runtime, or to remove it.
+
+Both types of redefinition are generally used by templates rather than published archetypes, since the business of filling slots is mostly related to local use-case specific uses of archetypes rather than part of the initial design.
+
+The following example shows a slot from a ` SECTION` archetype for the concept ‘history_medical_surgical’ archetype.
+
+--------------------------------------------------------------------------------
+    SECTION[id1] ∈ {    -- Past history
+        items ∈ {
+            allow_archetype EVALUATION[id2] ∈ { -- Past problems
+                include
+                    archetype_id/value ∈ {
+                        /openEHR-EHR-EVALUATION\.clinical_synopsis\.v1
+                            |openEHR-EHR-EVALUATION\.excluded(-[a-z0-9_]+)*\.v1
+                            |openEHR-EHR-EVALUATION\.injury\.v1
+                            |openEHR-EHR-EVALUATION\.problem(-[a-z0-9_]+)*\.v1/}
+            }
+        }
+    }
+--------------------------------------------------------------------------------
+
+This slot specification allows ` EVALUATION` archetypes for the concepts ‘clinical synopsis’, various kinds of ‘exclusions’ and ‘problems’, and ‘injury’ to be used, and no others. The following fragment of ADL shows how the slot is filled in a template, using the keywords ` use_archetype` and ` use_template` . In this syntax, the node identification is a variation on the normal archetype id-codes. Within the template, the identifier of the used archetype is also the identifier of that node. However, the original at-code (if defined) must also be mentioned, so as to indicate which slot the used archetype is filling. Templates may also be used to fill slots in the same way. Thus, in the following example, two archetypes and a template are designated to fill the id2 slot defined in the above fragment of ADL. The slot definition is not mentioned, so it remains unchanged, i.e. ‘open’.
+
+-------------------------------------------------------------------------------------------------------------------------
+    SECTION[id1] ∈ {    -- Past history
+        /items ∈ {
+            use_archetype EVALUATION[id2, 
+                                org.openehr::openEHR-EHR-                               EVALUATION.problem.v1] 
+            use_template EVALUATION[id2,
+                                uk.nhs.cfh::openEHR-EHR-                    EVALUATION.t_ed_diagnosis.v1]
+            use_archetype EVALUATION[id2, 
+                                org.openehr::openEHR-EHR-                               EVALUATION.     clin_synopsis.v1]
+        }
+    }
+-------------------------------------------------------------------------------------------------------------------------
+
+Since node identifiers are only required to disambiguate multiple sibling nodes, they may not exist on all nodes in a typical archetype. It is therefore possible to have a slot that carries no node identifier (e.g. due to being under a single-valued attribute). A ` use_archetype` specification within a template will accordingly only mention the archetype identifier, with no node id, as per the following example (archetype followed by a template).
+
+----------------------------------------------
+    ACTIVITY[id1] ∈ {   -- Medication activity
+        description ∈ {
+            allow_archetype ITEM_TREE[id4] ∈ {
+                include
+                    archetype_id/value ∈ {...}
+            }
+        }
+    }
+----------------------------------------------
+
+A template containing a filler for this slot would be as follows:
+
+----------------------------------------------------------------------------------------------------------------
+    use_archetype INSTRUCTION[openEHR-EHR-INSTRUCTION.medication.v1] ∈ {
+        /activities[id1]/description ∈ {
+            use_archetype ITEM_TREE[id4, 
+                                org.openehr::openEHR-EHR-                               ITEM_TREE.medication.v1]
+        }
+    }
+----------------------------------------------------------------------------------------------------------------
+
+Slots can be recursively filled in the above fashion, according to the possibilities offered by the chosen archetypes or templates. The following ADL fragment shows two levels of slot-filling:
+
+---------------------------------------------------------------------------------------------------------------------------
+    use_archetype COMPOSITION[openEHR-EHR-COMPOSITION.xxx.v1] ∈ {
+        /content ∈ {
+            use_archetype SECTION[id1, 
+                                    org.openehr::openEHR-EHR-SECTION.yyy.v1                                             ∈ {
+                /items ∈ {
+                    use_template EVALUATION
+                            [id2, uk.nhs.cfh::                      openEHR-EHR-                EVALUATION.t_xx.v1]
+                    use_archetype EVALUATION
+                            [id2, org.openehr::openEHR-EHR-                                     EVALUATION.xx.v1]
+                    use_archetype EVALUATION
+                            [id3, org.openehr::openEHR-EHR-                                     EVALUATION.xx.v1]
+                }
+            }
+        }
+    }
+---------------------------------------------------------------------------------------------------------------------------
+
+ 
+
+Note that in the above the archetype fillers are specified as published archetypes, but in reality, it is far more likely that template-specific specialisations of these archetypes would be used. The identification and organisation of such archetypes is described in the openEHR Templates document.
+
+In addition to or instead of specifying slot fillers, it is possible in a slot specialisation to narrow the slot definition, or to close it. If fillers are specified, closing the slot as well is typical. The latter is done by including an overridden version of the archetype slot object itself, with the ‘closed’ constraint set, as in the following example:
+
+----------------------------------------------------------------------------------------
+    use_archetype SECTION[org.openehr::openEHR-EHR-SECTION.history_medical_surgical.v1] ∈ {
+        /items ∈ {
+            use_archetype EVALUATION[id2] openEHR-EHR-EVALUATION.problem.v1
+            allow_archetype EVALUATION[id2] closed
+        }
+    }
+----------------------------------------------------------------------------------------
+
+Narrowing the slot is done with a replacement ` allow_archetype` statement containing a narrowed set of match criteria.
+
+=== 10.5.8 Unconstrained Attributes
+
+The ` use_archetype` keyword can be used to specify child object constraints under any attribute in the reference model that is so far unconstrained by the flat parent of an archetype or template. Technically this could occur in any kind of archetype but would normally be in a specialised archetype or template. This is no more than the standard use of an ‘external reference’ (see link:CDL.htm#59531[See External References]).
+
+Any reference specified will have no slot, and is instead validity-checked against the appropriate part of the underlying reference model.
+
+The following example from the openEHR reference model is typical.
+
+----------------------------------------------------------------------------------------------------
+    COMPOSITION[id1] matches {                                                  -- Referral document
+        category matches {...}
+        context matches {
+            EVENT_CONTEXT[id2] matches {
+                participations matches {...}
+                other_context matches {...                      }
+            }
+        }
+    }
+----------------------------------------------------------------------------------------------------
+
+The above cADL block partially specifies a ` COMPOSITION` object, via constraints (often including slot definitions) on the _category_ and _context_ attributes defined on that class in the reference model. However, the attribute of most interest in a ` COMPOSITION` object is usually the _content_ attribute, which is not constrained at all here. The reference model defines it to be of type ` List<CONTENT_ITEM>` .
+
+This kind of constraint is similar to ‘slot-filling’, except there is no slot providing any constraint, and typically occurs . Using an external reference for in an unarchetyped part of the RM structure is almost always done in specialised archetypes or templates, but is technically valid in a top-level archetype.
+
+The following example shows the use of ` use_archetype` within a specialised archetype.
+
+------------------------------------------------------------------------------------
+    COMPOSITION[id1.1] matches {    -- Referral document (specialisation)
+        content matches {
+            use_archetype SECTION[id2,
+                                    openEHR-EHR-SECTION.history_medical_surgical.v1]
+        }
+    }
+------------------------------------------------------------------------------------
+
+=== 10.5.9 Primitive Object Redefinition
+
+For terminal objects (i.e. elements of the type ` C_PRIMITIVE_OBJECT` ) redefinition consists of:
+
+* redefined value ranges or sets using a narrower value range or set;
+* exclusions on the previously defined value ranges or sets which have the effect of narrowing the original range or set.
+
+The following example shows a redefined real value range.
+
+Parent archetype:
+
+-------------------------------------
+    value ∈ {   
+        DV_QUANTITY[id3] ∈ {
+            magnitude ∈ {|2.0..10.0|}
+            units ∈ {“mmol/ml”}
+        }
+    }
+-------------------------------------
+
+Specialised archetype:
+
+------------------------------------
+    .../value ∈ {
+        DV_QUANTITY[id3] ∈ {
+            magnitude ∈ {|4.0..6.5|}
+        }
+    }
+------------------------------------
+
+The following example shows a redefined ` CODE_PHRASE` value set.
+
+Parent archetype:
+
+----------------------------------------------------------
+    ELEMENT[id7] occurrences ∈ {0..*} ∈ {   -- System
+        name ∈ {
+            DV_CODED_TEXT[id14] ∈ {
+                defining_code ∈ {
+                    [local::
+                    at8,    -- Cardiovascular system
+                    at9,    -- Respiratory system
+                    at10,   -- Gastro-intestinal system
+                    at11,   -- Reticulo-Endothelial system
+                    at12,   -- Genito-urinary system
+                    at13,   -- Endocrine System
+                    at14,   -- Central nervous system
+                    at15]    -- Musculoskeletal system
+                }
+            }
+        }
+    }
+----------------------------------------------------------
+
+Specialised archetype:
+
+----------------------------------------------
+    .../name[id14]/defining_code ∈ {
+        [local::
+        at10,   -- Gastro-intestinal system
+        at11,   -- Reticulo-Endothelial system
+        at12,   -- Genito-urinary system
+        at13,   -- Endocrine System
+        at15]    -- Musculoskeletal system
+    }
+----------------------------------------------
+
+In the following example, the exclusion operator ∉ (text form: ‘not matches’) is used to remove particular values from a value set.
+
+Parent archetype:
+
+----------------------------------------------------------
+    ELEMENT[id7] occurrences ∈ {0..*} ∈ {   -- System
+        name ∈ {
+            DV_CODED_TEXT[id14] ∈ {
+                defining_code ∈ {
+                    [local::
+                    at8,    -- Cardiovascular system
+                    at9,    -- Respiratory system
+                    at10,   -- Gastro-intestinal system
+                    at11,   -- Reticulo-Endothelial system
+                    at12,   -- Genito-urinary system
+                    at13,   -- Endocrine System
+                    at14,   -- Central nervous system
+                    at15]    -- Musculoskeletal system
+                }
+            }
+        }
+    }
+----------------------------------------------------------
+
+Specialised archetype:
+
+----------------------------------------
+    .../name[id14]/defining_code ∉ {
+        [local::
+        at12,   -- Genito-urinary system
+        at13]   -- Endocrine System
+    }
+----------------------------------------
+
+=== 10.5.10 Tuple Redefinition
+
+Tuple constraints can be redefined by narrowing, as for other primitive constraints. A typical example is as follows.
+
+Parent archetype:
+
+-------------------------------------
+    DV_QUANTITY[id42] ∈ {
+        property ∈ {[at29]}
+        [magnitude, units] ∈ {
+            [{|>=50.0|}, {"mm[Hg]"}]
+            [{|>=68.0|}, {"cm[H20]"}]
+        }
+    }
+-------------------------------------
+
+Child archetype:
+
+------------------------------------
+    DV_QUANTITY[id42] ∈ {
+        property ∈ {[at29]}
+        [magnitude, units] ∈ {
+            [{|>=50.0|}, {"mm[Hg]"}]
+        }
+    }
+------------------------------------
+
+== Rules
+
+The ` rules` section in an archetype consists of definitions and assertion statements. Assertions in archetypes have the effect of further reducing the instance space that conforms to an archetype by specifying relationships between values that must hold. For example the main part of an archetype may specify that the existence of a subtree, containing data points related to ‘tobacco use’ for example, is dependent on the value of another data point representing ‘smoker?’ being True.
+
+In specialised archetypes, further invariants can be added, but existing ones cannot be changed. New invariants cannot logically contradict existing invariants and are considered to be logically related to invariants from the flat parent by the logical semi-strict operator ‘and then’.
+
+== Languages
+
+A specialised archetype or template is only required to have one language in common with its flat precursor, enabling a flat output containing this language. This supports the common situation in which an international standard archetype with numerous translations is used as a basis for further specialisation in a particular country or project. Clearly, the latter has no need of, and quite probably no capability for including all the original translations in the specialisation.
+
+However, if the specialised archetype language is not present at all in the parent flat, it will need to be added to the archetypes in the specialisation lineage first.
+
+The languages present in the flat output will therefore be those languages available in both the flat parent (implying all previous archetypes / templates in the specialisation lineage) and the new specialisation. Any new languages introduced in the latter not available in the flat parent will be discarded.
+
+Locale-specific overrides can be introduced for any linguistic element in an archetype, including the terminology. Such an override has a language code conforming to a subset of the IETF RFC 5646 language tag standard (see http://tools.ietf.org/html/rfc5646), namely the common 2-part language-region tag exemplified by ‘en-GB’ (British English), ‘pt-BR’ (Brazilian Portuguese), and so on. The tags are case-insensitive, but tools that create tags should follow the recommendation from the standard, which is that:
+
+* language tag is lowercase;
+* region tags are uppercase.
+
+== Description Section
+
+The ` description` section of a specialised archetype or template always replaces that of the parent in the flattened result. Tools could of course provide views of each part of the description back up the specialisation hierarchy if required.
+
+== Terminology
+
+Specialisation in the ` terminology` section manifests in terms of specialised and added terms in the ` term_definitions` sub-section.
+
+Value sets can be specialised, which has the effect in the flattened form of replacing the original rather than adding to it, as shown in the following example.
+
+Parent archetype:
+
+------------------------------------------------------------------------------------------------------------
+    archetype (adl_version=2.0.0; generated)
+        openEHR-EHR-EVALUATION.code_list_parent.v1.0.0
+    language
+        original_language = <[ISO_639-1::en]>
+    description
+        ...
+     
+    definition
+        EVALUATION[id1] matches {   -- General statement of exclusions or states
+            data matches {
+                ITEM_TREE[id2] matches {
+                    items cardinality matches {1..*; unordered} matches {
+                        ELEMENT[id3] occurrences matches {1..*} matches {   -- Statement
+                            value matches {
+                                DV_CODED_TEXT[id4] matches {
+                                    defining_code matches {[ac1]}       -- Statement
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+     
+    terminology
+        term_definitions = <
+            ["en"] = <
+                ["id1"] = <
+                    text = <"General statement of exclusions or states">
+                    description = <"A category of ... have been excluded">
+                >
+                ["id3"] = <
+                    text = <"Statement">
+                    description = <"The statement about what is excluded">
+                >
+                ["at4"] = <
+                    text = <"No significant illness">
+                    description = <"The person ... condition">
+                >
+                ["at5"] = <
+                    text = <"No significant past history">
+                    description = <"The person has no ... history">
+                >
+                ...
+                ["at13"] = <
+                    text = <"No relevant family history">
+                    description = <"No family history ... situation">
+                >
+                ["at14"] = <
+                    text = <"No known allergies">
+                    description = <"No allergies known to any ... or substances">
+                >
+                ["ac1"] = <
+                    text = <"Statement">
+                    description = <"The statement about what is excluded">
+                >
+            >
+        >
+        value_sets = <
+            ["ac1"] = <
+                id = <"ac1">
+                members = <"at4", "at5", "at6", "at7", "at10", "at13", "at14", "at11", "at12", "at8", "at9">
+            >
+        >
+------------------------------------------------------------------------------------------------------------
+
+Flattened child archetype:
+
+-----------------------------------------------------------------------------
+    archetype (adl_version=2.0.0; generated)
+        openEHR-EHR-EVALUATION.code_list_constrained.v1.0.0
+    ...
+    terminology
+        term_definitions = <
+            ["en"] = <
+                ["id1"] = <
+                    text = <"General statement of exclusions or states">
+                    description = <"A category of ...have been excluded">
+                >
+                ["id3"] = <
+                    text = <"Statement">
+                    description = <"The statement about what is excluded">
+                >
+                ...
+                ["at13"] = <
+                    text = <"No relevant family history">
+                    description = <"No family history relevant .. situation">
+                >
+                ["ac1"] = <
+                    text = <"Statement">
+                    description = <"The statement about what is excluded">
+                >
+                ["ac1.1"] = <
+                    text = <"(added by post-parse processor)">
+                    description = <"(added by post-parse processor)">
+                >
+                ["id1.1"] = <
+                    text = <"Adverse reaction exclusions">
+                    description = <"A category of ... of adverse reaction">
+                >
+            >
+        >
+        value_sets = <
+            ["ac1.1"] = <
+                id = <"ac1.1">
+                members = <"at6", "at7", "at10", "at13">
+            >
+        >
+-----------------------------------------------------------------------------
+
+The flattened result always includes the sum of term definitions from the parent.
+
+== Bindings
+
+Bindings in a specialised archetype can include a binding to an at-code or ac-code defined in the current archetype or any parent archetype. A binding may be defined that overrides one from the flat parent, in which case the binding target - a term (at-code binding) or value set (ac-code binding) should be a proper specialised concept or subset respectively of the binding they replace. Since the binding target is an external code or subset, authoring tools need a connection to an appropriate terminology service to validate the relationship.
+
+'''''
+
+ 1. see http://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)
+
+ 2. https://github.com/openEHR/adl-archetypes/blob/master/Reference/CKM_2013_12_09/entry/observation/openEHR-EHR-OBSERVATION.lab_test.v1.adls
+
+ 3. See the openEHR data types specification at See%20the%20openEHR%20data%20types%20specification%20at%20http://www.openehr.org/releases/1.0.1/architecture/rm/data_types_im.pdf%20for%20details[http://www.openehr.org/releases/1.0.1/architecture/rm/data_types_im.pdf] for details.

@@ -1,0 +1,390 @@
+|2.0.6
+|Add semantic slot definitions.
+|T Beale
+|15 Jun 2015
+
+|2.0.5
+|Upgrade specification to ADL 2.x level. Reduce overview text.
+|openEHR
+|12 Nov 2014
+
+|2.0.4
+|Change `use_archetype` syntax to include id-code.
+|T Beale, +
+ P Langford
+|17 July 2014
+
+|2.0.3
+|Corrections on semantics of node id redefinition in Specialisation section; correct further typos.
+|H Solbrig
+|25 June 2014
+
+|2.0.2
+|Add support for constraints on enumeration types.
+|T Beale, +
+ CIMI
+|20 June 2014
+
+|2.0.1
+|Move terminology value set constraints to terminology section, convert external term references to URIs.
+|T Beale, +
+ H Solbrig
+|17 May 2014
+
+|2.0.0
+|New format term codes & mandatory node ids.
+|T Beale
+|7 Jan 2014
+
+|
+|Convert ‘placeholder’ (ac-code) constraint to primitive terminology type constraint.
+|H Solbrig
+|
+
+|1.7.0
+|Add archetype id namespacing.
+|T Beale, +
+ I McNicoll
+|24 Nov 2014
+
+|1.6.0
+|Add tuple construct.
+|T Beale
+|20 Aug 2013
+
+|1.5.1
+|Remove dADLsyntax description to new ODIN specification.
+|T Beale
+|22 Apr 2013
+
+|1.5.0
+|SPEC-316: Allow ‘cardinality’ keyword on its own to indicate container attributes, even if no other constraints required.
+|D Moner
+|21 Mar 2012
+
+|
+|SPEC-270: Add specialisation semantics to ADL and AOM. +
+ Improve explanation of node identifiers. +
+ Correct typographical errors. +
+ Make concept optional. +
+ Refine slot include/exclude rules. +
+ Review of text & validity rules.
+|S Heard +
+ O Pishev +
+ T Beale
+|
+
+|
+|Deprecate _terminologies_available_ statement in terminology section.
+|T Beale
+|
+
+|
+|Add fractional seconds to dADL grammar.
+|S Arikan
+|
+
+|
+|SPEC-303. Make existence, occurrences and cardinality optional in AOM.
+|S Garde +
+ S Heard
+|
+
+|
+|SPEC-300. Archetype slot regular expressions should cover whole identifier. Added `C_STRING`._is_pattern_.
+|A Flinton
+|
+
+4+^|*R E L E A S E{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}1.0.2*
+{set:cellbgcolor:aqua}
+
+|1.4.1
+{set:cellbgcolor!}
+|SPEC-268: Correct missing parentheses in dADL type identifiers. dADL grammar and cADL scanner rules updated.
+|R Chen
+|12 Dec 2008
+
+|
+|SPEC-284: Correct inconsistencies in naming of term_definitions, constraint_definitions, term_bindings, constraint_bindings attributes in XML-schema and specifications. +
+ Improved explanatory text for composite identifiers, including statement on case-sensitivity. Warning on .v1draft non-conformance
+|A Torrisi
+|
+
+|
+|SPEC-260: Correct the regex published for the ARCHETYPE_ID type. Update ADL grammar `ARCHEYTPE_ID` definition.
+|P Gummer, +
+ J Arnett, +
+ E Browne
+|
+
+4+^|*R E L E A S E{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}1.0.1*
+{set:cellbgcolor:aqua}
+
+|1.4.0
+{set:cellbgcolor!}
+|CR-000203: Release 1.0 explanatory text improvements. Improve Archetype slot explanation.
+|T Beale
+|13 Mar 2007
+
+|
+|CR-000208: Improve ADL grammar for assertion expressions.
+|T Beale
+|
+
+|
+|CR-000160: Duration constraints. Added ISO 8601 patterns for duration in cADL.
+|S Heard
+|
+
+|
+|CR-000213: Correct ADL grammar for date/times to be properly ISO8601-compliant. Include ‘T’ in cADL patterns and dADL and cADL Date/time, Time and Duration values.
+|T Beale
+|
+
+|
+|CR-000216: Allow mixture of W, D etc in ISO8601 Duration (deviation from standard).
+|S Heard
+|
+
+|
+|CR-000200: Correct Release 1.0 typographical errors.
+|A Patterson +
+ R Chen +
+ S Garde +
+ T Beale
+|
+
+|
+|CR-000225: Allow generic type names in ADL.
+|M Forss
+|
+
+|
+|CR-000226: Rename `C_CODED_TEXT` to `C_CODE_PHRASE`
+|T Beale
+|
+
+|
+|CR-000233: Define semantics for `occurrences` on `ARCHETYPE_INTERNAL_REF`.
+|K Atalag
+|
+
+|
+|CR-000241: Correct cADL grammar for archeype slot match expressions
+|S Heard
+|
+
+|
+|A Patterson
+|CR-000223: Clarify quoting rules in ADL
+|
+
+|
+|CR-000242: Allow non-inclusive two-sided ranges in ADL.
+|S Heard
+|
+
+|
+|CR-000245: Allow term bindings to paths in archetypes.
+|S Heard
+|
+
+4+^|*R E L E A S E{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}1.0*
+{set:cellbgcolor:aqua}
+
+|1.3.1
+{set:cellbgcolor!}
+|CR-000136. Add validity rules to ADL document.
+|T Beale
+|18 Jan 2006
+
+|
+|CR-000171. Add validity check for cardinality & occurrences
+|A Maldondo
+|
+
+|1.3.0
+|CR-000141. Allow point intervals in ADL. Updated atomic types part of cADL section and dADL grammar section.
+|S Heard
+|18 Jun 2005
+
+|
+|CR-000142. Update dADL grammar to support assumed values. +
+ CR-000143. Add partial date/time values to dADL syntax. +
+ CR-000149. Add URIs to dADL and remove query() syntax. +
+ CR-000153. Synchronise ADL and AOM for language attributes +
+ CR-000156. Update documentation of container types. +
+ CR-000138. Archetype-level assertions.
+|T Beale
+|
+
+4+^|*R E L E A S E{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}0.95*
+{set:cellbgcolor:aqua}
+
+|1.2.1
+{set:cellbgcolor!}
+|CR-000125. `C_QUANTITY` example in ADL manual uses old dADL syntax. +
+ CR-000115. Correct "/[xxx]" path grammar error in ADL. +
+ Create new section describing ADL path syntax. +
+ CR-000127. Restructure archetype specifications. Remove clinical constraint types section of document.
+|T Beale
+|11 Feb 2005
+
+|1.2
+|CR-000110. Update ADL document and create AOM document.
+|T Beale
+|15 Nov 2004
+
+|
+|Added explanatory material; added domain type support; rewrote of most dADL sections. Added section on assumed values, “controlled” flag, nested container structures. Change language handling. +
+ Rewrote OWL section based on input from: University of Manchester, UK; University Seville, Spain.
+|A Rector +
+ R Qamar +
+ I Román Martínez
+|
+
+|
+|Various changes to assertions due to input from the DSTC.
+|A Goodchild +
+ Z Z Tun
+| 
+
+|
+|Detailed review from Clinical Information Project, Australia.
+|E Browne
+|
+
+|
+|*Remove UML models to “Archetype Object Model” document.*
+|T Beale
+|
+
+|
+|Detailed review from CHIME, UCL.
+|T Austin
+|
+
+|
+|CR-000103. Redevelop archetype UML model, add new keywords: `allow_archetype`, `include`, `exclude`.
+|T Beale
+|
+
+|
+|CR-000104. Fix ordering bug when `use_node` used. Required parser rules for identifiers to make class and attribute identifiers distinct.
+|K Atalag
+|
+
+|
+|Added grammars for all parts of ADL, as well as new UML diagrams.
+|T Beale
+|
+
+
+4+^|*R E L E A S E{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}0.9*
+{set:cellbgcolor:aqua}
+
+|1.1
+{set:cellbgcolor!}
+|CR-000079. Change interval syntax in ADL.
+|T Beale
+|24 Jan 2004
+
+|1.0
+|CR-000077. Add cADL date/time pattern constraints. +
+ CR-000078. Add predefined clinical types.
+|Better explanation of cardinality, occurrences and existence.
+|S Heard, +
+ T Beale
+|14 Jan 2004
+
+|0.9.9
+|CR-000073. Allow lists of Reals and Integers in cADL. +
+ CR-000075. Add predefined clinical types library to ADL. +
+ Added cADL and dADL object models.
+|T Beale, +
+ S Heard
+|28 Dec 2003
+
+|0.9.8
+|CR-000070. Create Archetype System Description.
+|Moved Archetype Identification Section to new Archetype System document.  Copyright Assgined by Ocean Informatics P/L Australia to The openEHR Foundation.
+|T Beale, +
+ S Heard
+|29 Nov 2003
+
+|0.9.7
+|Added simple value list continuation (“,...”). Changed path syntax so that trailing ‘/’ required for object paths. +
+ Remove ranges with excluded limits. +
+ Added terms and term lists to dADL leaf types.
+|T Beale
+|01 Nov 2003
+
+|0.9.6
+|Additions during HL7 WGM Memphis Sept 2003
+|T Beale
+|09 Sep 2003
+
+|0.9.5
+|Added comparison to other formalisms. Renamed CDL to cADL and dDL to dADL. Changed path syntax to conform (nearly) to Xpath. Numerous small changes.
+|T Beale
+|03 Sep 2003
+
+|0.9
+|Rewritten with sections on cADL and dDL.
+|T Beale
+|28 July 2003
+
+|0.8.1
+|Added basic type constraints, re-arranged sections.
+|T Beale
+|15 July 2003
+
+|0.8
+|Initial Writing
+|T Beale
+|10 July 2003
+
+== Acknowledgements
+=== Primary Author
+
+* Thomas Beale, Ocean Informatics UK; openEHR Foundation Management Board
+
+=== Contributors
+This specification and its sibling Archetype Definition Language specification have benefited from wide formal and informal input from the openEHR and wider health informatics community. The openEHR Foundation would like to recognise the following people and institutions.
+
+* Seref Arikan, MEcon, Ocean Informatics UK, Centre for Health Informatics and Multi-professional Education (CHIME), UCL, UK
+* John Arnett, NHS Connecting for Health, UK
+* Koray Atalag PhD, University of Auckland, NZ 
+* Tony Austin PhD, Centre for Health Informatics and Multi-professional Education (CHIME), UCL, UK
+* Eric Browne PhD, HealthBase Australia
+* Rong Chen MD, PhD, Cambio Heath Systems, Sweden
+* Adam Flinton, NHS Connecting for Health, UK
+* Matias Forss MSc, Institute of Technology at Linköping University
+* Sebastian Garde, PhD, Ocean Informatics
+* Andrew Goodchild PhD, Distributed Systems Technology Centre, Australia
+* Peter Gummer MSc, Ocean Informatics
+* Sam Heard MD, Ocean Informatics
+* Jose Alberto Maldondo PhD, Universitat Politècnica de València, Spain
+* David Moner PhD, Universitat Politècnica de València, Spain
+* Isabel Román Martínez PhD, Universitat de Sevilla, Spain
+* Ian McNicoll MD, MSc, Ocean Informatics UK
+* Andrew Patterson PhD, LLM, Federation Health Software, Australia
+* Ognian Pishev PhD, Australia, Ocean Informatics * Rahil Qamar Siddiqui PhD, NHS Health & Social Care Information Centre, UK
+* Prof Alan Rector MD, PhD, University of Manchester, UK
+* Harold Solbrig PhD, Mayo Clinic, Rochester, USA
+* Alessandro Torrisi, Code24, Netherlands
+* Zar Zar Tun, Distributed Systems Technology Centre, Australia
+
+Thanks to Sebastian Garde, Central Qld University, Australia, for German translations.
+
+== Trademarks
+
+* 'Microsoft' and '.Net' are registered trademarks of the Microsoft Corporation.
+* 'Java' is a registered trademark of Oracle Corporation
+* 'Linux' is a registered trademark of Linus Torvalds.
+
+== Supporters
+The work reported in this document was funded by:
+
+* Ocean Informatics;
+* University College London, Centre for Health Informatics and Multi-professional Education (CHIME).

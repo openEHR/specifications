@@ -1,0 +1,32 @@
+Publications
+
+* Beale T. Archetypes: Constraint-based Domain Models for Future-proof Information Systems. OOPSLA 2002 workshop on behavioural semantics. +
+ Available at _http://www.deepthought.com.au/it/archetypes.html[http://www.deepthought.com.au/it/archetypes.html.]_
+* Beale T. Archetypes: Constraint-based Domain Models for Future-proof Information Systems. 2000. +
+ Available at _http://www.deepthought.com.au/it/archetypes.html_ .
+* Beale T, Heard S. The openEHR Archetype Object Model. See _http://www.openehr.org/repositories/spec-dev/latest/publishing/architecture/archetypes/archetype_model/REV_HIST.html_ .
+* Beale T. A Short Review of OCL. +
+ See _http://www.deepthought.com.au/it/ocl_review.html_ .
+* Dolin R, Elkin P, Mead C et al. HL7 Templates Proposal. 2002. +
+ Available at _http://www.hl7.org_ .
+* Heard S, Beale T. Archetype Definitions and Principles. See _http://www.openehr.org/repositories/spec-dev/latest/publishing/architecture/archetypes/principles/REV_HIST.html_ .
+* Heard S, Beale T. The openEHR Archetype System. See _http://www.openehr.org/repositories/spec-dev/latest/publishing/architecture/archetypes/system/REV_HIST.html_ .
+* Hein J L. Discrete Structures, Logic and Computability (2nd Ed). Jones and Bartlett 2002.
+* Kilov H, Ross J. Information Modelling: an Object-Oriented Approach. Prentice Hall 1994.
+* Gruber T R. Toward Principles for the Design of Ontologies Used for Knowledge Sharing. in Formal Ontology in Conceptual Analysis and Knowledge Representation. Eds Guarino N, Poli R. Kluwer Academic Publishers. 1993 (Aug revision).
+* Martin P. Translations between UML, OWL, KIF and the WebKB-2 languages (For-Taxonomy, Frame-CG, Formalized English). May/June 2003. Available at _http://meganesia.int.gu.edu.au/~phmartin/WebKB/doc/model/comparisons.html_ as at Aug 2004.
+* Meyer B. Eiffel the Language (2nd Ed). Prentice Hall, 1992.
+* Patel-Schneider P, Horrocks I, Hayes P. OWL Web Ontology Language Semantics and Abstract Syntax. +
+ See _http://w3c.org/TR/owl-semantics/_ .
+* Smith G. The Object Z Specification Language. Kluwer Academic Publishers 2000. See +
+ _http://www.itee.uq.edu.au/~smith/objectz.html_ .
+* Sowa J F. _Knowledge Representation: Logical, philosophical and Computational Foundations_ . 2000, Brooks/Cole, California.
+
+* HL7 v3 RIM. See _http://www.hl7.org_ .
+* HL7 Templates Proposal. See _http://www.hl7.org_ .
+* openEHR. EHR Reference Model. See _http://www.openehr.org/repositories/spec-dev/latest/publishing/architecture/top.html_ .
+* Perl Regular Expressions. See _http://www.perldoc.com/perl5.6/pod/perlre.html_ .
+* SynEx project, UCL. _http://www.chime.ucl.ac.uk/HealthI/SynEx/_ .
+* W3C. OWL - the Web Ontology Language. +
+ See _http://www.w3.org/TR/2003/CR-owl-ref-20030818/_ .
+* W3C. XML Path Language. See _http://w3c.org/TR/xpath_ .

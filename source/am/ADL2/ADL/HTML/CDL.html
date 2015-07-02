@@ -1,0 +1,2895 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 7.0/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="CDL.css" CHARSET="UTF-8" TYPE="text/css">
+<TITLE> 4    cADL - Constraint ADL</TITLE></HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<H1>
+cADL - Constraint ADL<DIV>
+<IMG SRC="CDL-1.png">
+</DIV>
+</H1>
+<DIV>
+<h2>
+Overview</H2>
+<P CLASS="Body">
+cADL is a block-structured syntax which enables constraints on data defined by object-oriented information models to be expressed in archetypes or other knowledge definition formalisms. It is most useful for defining the specific allowable configurations of data whose instances conform to very general object models. cADL is used both at design time, by authors and/or tools, and at runtime, by computational systems which validate data by comparing it to the appropriate sections of cADL in an archetype. The general appearance of cADL is illustrated by the following example:</P>
+<pre>
+    PERSON[id1] matches {                                               -- constraint on a PERSON instance
+        name matches {                                         -- constraint on PERSON.name
+            TEXT[id2] matches {/.+/}                                    -- any non-empty string
+        }
+        addresses cardinality matches {1..*} matches {     -- constraint on
+            ADDRESS[id3] matches {                                    -- PERSON.addresses
+                -- etc --
+            }
+        }
+    }
+</pre>
+<P CLASS="Body">
+Some of the textual keywords in this example can be more efficiently rendered using common mathematical logic symbols. In the following example, the <CODE CLASS="Code">matches</CODE> keyword have been replaced by an equivalent symbol:</P>
+<pre>    
+    PERSON[id1] &isin; {                                               -- constraint on a PERSON instance
+        name &isin; {                                         -- constraint on PERSON.name
+            TEXT[id2] &isin; {/..*/}                                    -- any non-empty string
+        }
+        addresses cardinality &isin; {1..*} &isin; {     -- constraint on
+            ADDRESS[id3] &isin; {                                    -- PERSON.addresses
+                -- etc --
+            }
+        }
+    }
+</pre>    
+<P CLASS="Body">
+The full set of equivalences appears below. Raw cADL is persisted in the text-based form, to remove any difficulties when authoring cADL text in normal text editors, and to aid reading in English. However, the symbolic form might be more widely used for display purposes and in more sophisticated tools, as it is more succinct and less language-dependent. The use of symbols or text is completely a matter of taste, and no meaning whatsoever is lost by completely ignoring one or other format according to one’s personal preference. This document uses both conventions.</P>
+<P CLASS="Body">
+In the standard cADL documented in this section, literal leaf values (such as the regular expression <CODE CLASS="Code">
+/.+/</CODE>
+ in the above example) are always constraints on a set of ‘standard’ widely-accepted primitive types, as described in the openEHR ODIN syntax specification.</P>
+</DIV>
+<DIV>
+<h2>Basics</H2>
+<DIV>
+<h3>
+Keywords</h3>
+<P CLASS="BodyFirst">
+The following keywords are recognised in cADL:</P>
+<UL>
+<LI CLASS="LstU1">
+<EM CLASS="Keyword">
+matches, ~matches, is_in, ~is_in</EM>
+</LI>
+<LI CLASS="LstU1">
+<EM CLASS="Keyword">
+occurrences, existence, cardinality</EM>
+</LI>
+<LI CLASS="LstU1">
+<EM CLASS="Keyword">
+ordered, unordered, unique</EM>
+</LI>
+<LI CLASS="LstU1">
+<EM CLASS="Keyword">
+use_node, allow_archetype</EM>
+</LI>
+<LI CLASS="LstU1">
+<EM CLASS="Keyword">
+include, exclude</EM>
+</LI>
+<LI CLASS="LstU1">
+<EM CLASS="Keyword">
+before</EM>
+, <EM CLASS="Keyword">
+after</EM>
+</LI>
+</UL>
+<P CLASS="Body">
+Symbol equivalents for some of the above are given in the following table.</P>
+<TABLE BORDER="1">
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+Textual <BR>
+Rendering</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+Symbolic<BR>
+Rendering</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+Meaning</P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+<EM CLASS="Keyword">
+matches</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+&isin;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+Set membership, “p is in P”</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+not, ~</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+∼</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+Negation, “not p”</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+*</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+∗</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+Infinity, ‘any number of...’</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="Body">
+Keywords are shown in blue in this document.</P>
+</DIV>
+<DIV>
+<h3>
+Block / Node Structure</h3>
+<P CLASS="BodyFirst">
+cADL constraints are written in a block-structured style, similar to block-structured programming languages like C. A typical block resembles the following (the recurring pattern <CODE CLASS="Code">/.+/</CODE> is a regular expression meaning “non-empty string”):</P>
+<pre>    
+    PERSON[id1] &isin; {
+        name &isin; {
+            PERSON_NAME[id2] &isin; {
+                forenames cardinality &isin; {1..*} &isin; {/.+/}
+                family_name &isin; {/.+/}
+                title &isin; {“Dr”, “Miss”, “Mrs”, “Mr”}
+            }
+        }
+        addresses cardinality &isin; {1..*} &isin; {
+            LOCATION_ADDRESS[id3] &isin; {
+                street_number existence &isin; {0..1} &isin; {/.+/}
+                street_name &isin; {/.+/}
+                locality &isin; {/.+/}
+                post_code &isin; {/.+/}
+                state &isin; {/.+/}
+                country &isin; {/.+/}
+            }
+        }
+    }
+</pre>
+<P CLASS="Body">
+In the above, an identifier (shown in green in this document) followed by the &isin; operator (equivalent text keyword: <CODE CLASS="Code">
+matches</CODE>
+ or <CODE CLASS="Code">
+is_in</CODE>
+) followed by an open brace, is the start of a ‘block’, which continues until the closing matching brace (normally visually indented to match the line at the beginning of the block).</P>
+<P CLASS="Body">
+Two kinds of identifiers from the underlying information model are used, in alternation: type names (shown in upper case in this document) and attribute names (shown in lower case).</P>
+<P CLASS="BodyFirst">
+Blocks introduced by a type name are known as object blocks or object nodes, while those introduced by an attribute name are attribute blocks or attribute nodes as illustrated below.</P>
+<DIV>
+<MAP NAME="CDL-2">
+</MAP>
+<IMG SRC="CDL-2.png" USEMAP="#CDL-2">
+</DIV>
+<P CLASS="Body">
+An object block or node can be thought of as a constraint matching a set of instances of the type which introduces the block.</P>
+<P CLASS="Body">
+The example above expresses a constraint on an instance of the type <CODE CLASS="Code">
+PERSON</CODE>
+; the constraint is expressed by everything inside the <CODE CLASS="Code">
+PERSON</CODE>
+ block. The two blocks at the next level define constraints on properties of <CODE CLASS="Code">
+PERSON</CODE>
+, in this case <EM CLASS="Emphasis">
+name</EM>
+ and <EM CLASS="Emphasis">
+addresses</EM>
+. Each of these constraints is expressed in turn by the next level containing constraints on further types, and so on. The general structure is therefore a recursive nesting of constraints on types, followed by constraints on attributes (of that type), followed by types (being the types of the attribute under which it appears) until leaf nodes are reached.</P>
+<P CLASS="LangRule">
+A cADL text is a structure of alternating object and attribute blocks each introduced respectively by type names and attribute names from an underlying information model.</P>
+</DIV>
+<DIV>
+<h3>
+Comments</h3>
+<P CLASS="BodyFirst">
+In a cADL text, comments are defined as follows:</P>
+<P CLASS="LangRule">
+Comments are indicated by the characters “--”. Multi-line comments are achieved using the “--” leader on each line where the comment continues. </P>
+<P CLASS="Body">
+In this document, comments are shown in brown.</P>
+</DIV>
+<DIV>
+<h3>
+The Underlying Information Model</h3>
+<P CLASS="BodyFirst">
+Identifiers in cADL texts correspond to entities - types and attributes - in an information model. The latter is typically an object-oriented model, but may just as easily be an entity-relationship model or any other typed model of information. A UML model compatible with the example above is shown in <A HREF="CDL.htm#11444" CLASS="XRef">See UML Model of PERSON</A>. Note that there can be more than one model compatible with a given fragment of cADL syntax, and in particular, there are usually more properties and classes in the reference model than are mentioned in the cADL constraints. In other words, a cADL text includes constraints only for those parts of a model that are useful or meaningful to constrain.</P>
+<DIV>
+<MAP NAME="CDL-3">
+</MAP>
+<IMG SRC="CDL-3.png" USEMAP="#CDL-3">
+</DIV>
+<P CLASS="Body">
+Constraints expressed in cADL cannot be stronger than those from the information model. For example, the <CODE CLASS="Code">
+PERSON</CODE>
+.<EM CLASS="Emphasis">
+family_name</EM>
+ attribute is mandatory in the model in <A HREF="CDL.htm#11444" CLASS="XRef">See UML Model of PERSON</A>, so it is not valid to express a constraint allowing the attribute to be optional. In general, a cADL archetype can only further constrain an existing information model. However, it must be remembered that for very generic models consisting of only a few classes and a lot of optionality, this rule is not so much a limitation as a way of adding meaning to information. Thus, for a demographic information model which has only the types <CODE CLASS="Code">
+PARTY</CODE>
+ and <CODE CLASS="Code">
+PERSON</CODE>
+, one can write cADL which defines the concepts of entities such as <CODE CLASS="Code">
+COMPANY</CODE>
+, <CODE CLASS="Code">
+EMPLOYEE</CODE>
+, <CODE CLASS="Code">
+PROFESSIONAL</CODE>
+, and so on, in terms of constraints on the types available in the information model.</P>
+<P CLASS="Body">
+This general approach can be used to express constraints for instances of any information model. The following example shows how to express a constraint on the <EM CLASS="Emphasis">
+value</EM> property of an <CODE CLASS="Code">ELEMENT</CODE> class to be a <CODE CLASS="Code">DV_QUANTITY</CODE> with a suitable range for expressing blood pressure.</P>
+<pre>
+    ELEMENT[id10] matches {                                    -- diastolic blood pressure
+        value matches {
+            DV_QUANTITY[id11] matches {
+                magnitude matches {|0..1000|}
+                property matches {"pressure"}
+                units matches {"mm[Hg]"}
+            }
+        }
+    }
+</pre>
+<P CLASS="Body">
+In this specification, the terms underlying information model and <EM CLASS="Emphasis">
+reference model</EM>
+ are equivalent and refer to the information model on which a cADL text is based.</P>
+<DIV>
+<h4>
+Information Model Identifiers</h4>
+<P CLASS="BodyFirst">
+Identifiers from the underlying information model are used to introduce all cADL nodes. Identifiers obey the same rules as in ODIN: type names commence with an upper case letter, while attribute and function names commence with a lower case letter. In cADL, names of types and the name of any property (i.e. attribute or parameterless function) can be used. </P>
+<P CLASS="LangRule">
+A type name is any identifier with an initial upper case letter, followed by any combination of letters, digits and underscores. A generic type name (including nested forms) additionally may include commas and angle brackets, but no spaces, and must be syntactically correct as per the OMG UML 2.x specification or higher. An attribute name is any identifier with an initial lower case letter, followed by any combination of letters, digits and underscores. Any convention that obeys this rule is allowed.</P>
+<P CLASS="Body">
+Type identifiers are shown in this document in all uppercase, e.g. <CODE CLASS="Code">
+PERSON</CODE>
+, while attribute identifiers are shown in all lowercase, e.g. <CODE CLASS="Code">
+home_address</CODE>
+. In both cases, underscores are used to represent word breaks. This convention is used to improve the readability of this document, and other conventions may be used, such as the common programmer’s mixed-case convention exemplified by <CODE CLASS="Code">Person</CODE> and <CODE CLASS="Code">homeAddress</CODE>. The convention chosen for any particular cADL document should be based on that used in the underlying information model.</P>
+</DIV>
+</DIV>
+<DIV>
+<h3>
+Node Identifiers</h3>
+<P CLASS="BodyFirst">
+Node identifier codes appear after all type identifiers in a cADL text. They take the form of an ‘id-code’ in brackets, e.g. [id3]. The id-code of a root object in a structure is always ‘id1’, or for specialised archetypes, ‘id1.1’, id’ etc. The rules and use of node identifiers is described in more detail below.</P>
+</DIV>
+<DIV>
+<h3>
+The matches Operator</h3>
+<P CLASS="BodyFirst">
+The <CODE CLASS="Code">
+matches</CODE>
+ or <CODE CLASS="Code">
+is_in</CODE>
+ operator deserves special mention, since it is the key operator in cADL. This operator can be understood mathematically as set membership. When it occurs between an identifier and a block delimited by braces, the meaning is: the set of values allowed for the entity referred to by the name (either an object, or parts of an object - attributes) is specified between the braces. What appears between any matching pair of braces can be thought of as a specification for a set of values. Since blocks can be nested, this approach to specifying values can be understood in terms of nested sets, or in terms of a value space for instances of a type. Thus, in the following example, the <CODE CLASS="Code">
+matches</CODE>
+ operator links the name of an entity to a linear value space (i.e. a list), consisting of all words ending in “ion”.</P>
+    aaa <CODE CLASS="Code">matches</CODE>
+ {/[^\s\n\t    ]+ion[\s\n\t    ]/}                            -- the set of words ending in ‘ion’
+    &nbsp;
+<P CLASS="Body">
+The following example links the name of a type <CODE CLASS="Code">XXX</CODE> with a hierarchical value space.</P>
+<pre>
+    XXX[id2] matches {
+        xxx_attr1 matches {                    
+            YYY[id3] matches {
+                yyy_attr1 matches {0..3}                    
+            }
+        }                                        
+        xxx_attr2 matches {                
+            ZZZ[id4] matches {
+                zzz_attr1 matches {&gt;1992-12-01}                        
+            }
+        }
+    }
+</pre>
+<P CLASS="Body">
+The meaning of the syntax above is: data matching the constraints conssists of an instance of type <CODE CLASS="Code">
+XXX</CODE>
+, or any subtype allowed by the underlying information model, for which the value of attribute <EM CLASS="Emphasis">
+aaa</EM>
+ is of type <CODE CLASS="Code">
+YYY</CODE>
+, or any subtype allowed by the underlying information model, and so on, recursively until leaf level constraints are reached.</P>
+<P CLASS="Body">
+Occasionally the <CODE CLASS="Code">
+matches</CODE>
+ operator needs to be used in the negative, usually at a leaf block. Any of the following can be used to constrain the value space of the attribute <CODE CLASS="Code">
+aaa</CODE>
+ to any number except 5:</P>
+    aaa <CODE CLASS="Code">~matches</CODE>
+ {5}
+    aaa <CODE CLASS="Code">~is_in</CODE>
+ {5}
+    aaa ∉{5}
+<P CLASS="Body">
+The choice of whether to use <CODE CLASS="Code">
+matches</CODE>
+ or <CODE CLASS="Code">
+is_in</CODE>
+ is a matter of taste and background; those with a mathematical background will probably prefer <CODE CLASS="Code">
+is_in</CODE>
+, while those with a data processing background may prefer <CODE CLASS="Code">
+matches</CODE>
+.</P>
+</DIV>
+<DIV>
+<h3>
+Natural Language</h3>
+<P CLASS="BodyFirst">
+cADL is completely independent of all natural languages. The only potential exception is where constraints include literal values from some language, and this is easily and routinely avoided by the use of separate language and terminology definitions, as used in ADL archetypes. However, for the purposes of readability, comments in English have been included in this document to aid the reader. In real cADL documents, comments are generated from the archetype terminology in the language of the locale.</P>
+</DIV>
+</DIV>
+<DIV>
+<h2>
+Constraints on Complex types</H2>
+<P CLASS="BodyFirst">
+This section describes the semantics for constraining objects of complex, i.e. non-primitive types. The semantics apply recursively through a constraint structure until leaf nodes constraining primitive types are reached.</P>
+<DIV>
+<h3>
+Attribute Constraints</h3>
+<P CLASS="BodyFirst">
+In any information model, attributes are either single-valued or multiply-valued, i.e. of a generic container type such as <CODE CLASS="Code">
+List&lt;Contact&gt;</CODE>
+. Both have <EM CLASS="Emphasis">
+existence</EM>
+, while multiply-valued attributes also have <EM CLASS="Emphasis">
+cardinality</EM>
+.</P>
+<DIV>
+<h4>
+Existence</h4>
+<P CLASS="BodyFirst">
+The existence constraint may be used with any attribute to further constrain the existence defined by the underlying reference model. An existence constraint indicates whether an attribute value is mandatory or optional, and is indicated by “0..1” or “1” markers at line ends in UML diagrams (and often mistakenly referred to as a “cardinality of 1..1”). Attributes defined in the reference model have an effective existence constraint, defined by the invariants (or lack thereof) of the relevant class. For example, the <EM CLASS="Emphasis">
+protocol</EM>
+ attribute in the openEHR <CODE CLASS="Code">
+OBSERVATION</CODE>
+ class<A HREF="#pgfId-1156103" CLASS="footnote">1</A> is defined in the reference model as being optional, i.e. 0..1. An archetype may redefine this to {1..1}, making the attribute mandatory. Existence constraints are expressed in cADL as follows:</P>
+<pre>    
+    OBSERVATION matches {
+        protocol existence matches {1..1} matches {
+            -- details
+        }
+    }
+</pre>
+<P CLASS="Body">
+The meaning of an existence constraint is to indicate whether a value - i.e. an object - is mandatory or optional (i.e. obligatory or not) in runtime data for the attribute in question. The same logic applies whether the attribute is of single or multiple cardinality, i.e. whether it is a container type or not. For container attributes, the existence constraint indicates whether the whole container (usually a list or set) is mandatory or not; a further cardinality constraint (described below) indicates how many members in the container are allowed.</P>
+<P CLASS="LangRule">
+An existence constraint may be used directly after any attribute identifier, and indicates whether the object to which the attribute refers is mandatory or optional in the data.</P>
+<P CLASS="Body">
+Existence is shown using the same constraint language as the rest of the archetype definition. Existence constraints can take the values <CODE CLASS="Code">
+{0}</CODE>
+, <CODE CLASS="Code">
+{0..0}</CODE>
+, <CODE CLASS="Code">
+{0..1}</CODE>
+, <CODE CLASS="Code">
+{1}</CODE>
+, or <CODE CLASS="Code">
+{1..1}</CODE>
+. The first two of these constraints may not seem initially obvious, but can be used to indicate that an attribute must not be present in the particular situation modelled by the archetype. This may be reasonable in some cases.</P>
+</DIV>
+</DIV>
+<DIV>
+<h3>
+Single-valued Attributes</h3>
+<P CLASS="BodyFirst">
+A single-valued attribute is an attribute whose type as declared in the underlying class model is of a single object type rather than a container type such as a list or set. Single-valued attributes can be constrained with a single object constraint as shown in the following example.</P>
+<pre>
+    value matches {
+        DV_QUANTITY[id22] matches {
+            magnitude matches {|0..55|}
+            property matches {"velocity"}
+            units matches {"mph"}                            
+        }
+    }
+</pre>
+<P CLASS="Body">
+Multiple alternative object constraints can also be defined, using a number of sibling blocks, as shown in the following example. Each block defines an alternative constraint, only one of which needs to be matched by the data.</P>
+<pre>    
+    value matches {
+        DV_QUANTITY[id22] matches {                                    -- miles per hour
+            magnitude matches {|0..55|}
+            property matches {"velocity"}
+            units matches {"mph"}                            
+        }
+        DV_QUANTITY[id23] matches {                                    -- km per hour
+            magnitude matches {|0..100|}
+            property matches {"velocity"}
+            units matches {"km/h"}
+        }
+    }
+</pre>    
+<P CLASS="Body">
+Here the occurrences of both <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ constraints is not stated, leading to the result that only one <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ instance can appear in runtime data, matching either one of the constraints. </P>
+<P CLASS="LangRule">
+Two or more object constraints introduced by type names appearing after a single-valued attribute (i.e. one for which there is no cardinality constraint) are taken to be alternative constraints, only one of which is matched by the data.</P>
+</DIV>
+<DIV>
+<h3>
+Container Attributes</h3>
+<DIV>
+<h4>
+Cardinality</h4>
+<P CLASS="BodyFirst">
+The cardinality of container attributes may be constrained in cADL with the <EM CLASS="Emphasis">
+cardinality</EM>
+ constraint. Cardinality indicates limits on the number of instance members of a container types such as lists and sets. Consider the following example:</P>
+<pre>    
+    HISTORY[id2] occurrences &isin; {1} &isin; {            
+        periodic &isin; {False}
+        events cardinality &isin; {*} &isin; {     
+            EVENT[id3] occurrences &isin; {0..1} &isin; {    }                                        -- 1 min sample
+            EVENT[id4] occurrences &isin; {0..1} &isin; {    }                                         -- 2 min sample
+            EVENT[id5] occurrences &isin; {0..1} &isin; {    }                                        -- 3 min sample
+        }
+    }
+</pre>    
+<P CLASS="Body">
+The <CODE CLASS="Code">
+cardinality </CODE>
+keyword implies firstly that the property events must be of a container type, such as <CODE CLASS="Code">
+List&lt;T&gt;</CODE>
+, <CODE CLASS="Code">
+Set&lt;T&gt;</CODE>
+, <CODE CLASS="Code">
+Bag&lt;T&gt;</CODE>
+. The integer range indicates the valid membership of the container; a single ‘*’ means the range 0..*, i.e. ‘0 to many’. The type of the container is not explicitly indicated, since it is usually defined by the information model. However, the semantics of a logical set (unique membership, ordering not significant), a logical list (ordered, non-unique membership) or a bag (unordered, non-unique membership) can be constrained using the additional keywords <CODE CLASS="Code">
+ordered</CODE>
+, <CODE CLASS="Code">
+unordered</CODE>
+, <CODE CLASS="Code">
+unique</CODE>
+ and <CODE CLASS="Code">
+non-unique</CODE>
+ within the cardinality constraint, as per the following examples:</P>
+<pre>    
+        events cardinality &isin; {*; ordered} &isin; {                                                    -- logical list
+        events cardinality &isin; {*; unordered; unique} &isin; {                                                    -- logical set
+        events cardinality &isin; {*; unordered} &isin; {                                                    -- logical bag
+</pre>
+<P CLASS="Body">
+If no numeric or ordering constraint on the cardinality of a container attribute is required, the keyword is used on its own, and simply indicates that the attribute is a container, as in the following example:</P>
+        events cardinality &isin; {                                    -- indicates ‘events’ is a container
+<P CLASS="Body">
+Although this is not strictly ncessary for the purpose of expressing valid archetypes if the Reference Model can usually be referred to, it enables early stage parsing to generate the correct type of attributes without referring to a Reference Model schema, which in any case may not always be available. This in turn enables more faithful visualisation at an earlier point in the archetype compilation process.</P>
+<P CLASS="Body">
+In theory, no cardinality constraint can be stronger than the semantics of the corresponding container in the relevant part of the reference model. However, in practice, developers often use lists to facilitate data integration, when the actual semantics are intended to be of a set; in such cases, they typically ensure set-like semantics in their own code rather than by using an <CODE CLASS="Code">
+Set&lt;T&gt;</CODE>
+ type. How such constraints are evaluated in practice may depend somewhat on knowledge of the software system.</P>
+<P CLASS="LangRule">
+A cardinality constraint must be used after any Reference Model container attribute name (or after its existence constraint, if there is one) in order to designate it as a container attribute. Additionally, it may constrain the number of member items it may have in the data, and whether it has “list”, “set”, or “bag” semantics, via the use of the keywords ‘ordered’, ‘unordered’, ‘unique’ and ‘non-unique’.</P>
+<P CLASS="Body">
+The numeric part of the cardinality contraint can take the values <CODE CLASS="Code">
+{0}</CODE>
+, <CODE CLASS="Code">
+{0..0}</CODE>
+, <CODE CLASS="Code">
+{0..n}</CODE>
+, <CODE CLASS="Code">
+{m..n}</CODE>
+, <CODE CLASS="Code">
+{0..*}</CODE>
+, or <CODE CLASS="Code">
+{*}</CODE>
+, or a syntactic equivalent. The first two of these constraints are unlikely to be useful, but there is no reason to prevent them. There is no default cardinality, since if none is shown, the relevant attribute is assumed to be single-valued (in the interests of uniformity in archetypes, this holds even for smarter parsers that can access the reference model and determine that the attribute is in fact a container.</P>
+<P CLASS="Body">
+Cardinality and existence constraints can co-occur, in order to indicate various combinations on a container type property, e.g. that it is optional, but if present, is a container that may be empty, as in the following:</P>
+        events existence &isin; {0..1} cardinality &isin; {0..*} &isin; {-- etc --}
+</DIV>
+</DIV>
+<DIV>
+<h3>
+Object Constraints</h3>
+<DIV>
+<h4>
+Node Identifiers</h4>
+<P CLASS="BodyFirst">
+In cADL, an entity in brackets of the form <CODE CLASS="Code">
+[idN]</CODE>
+ following a type name is used to identify an object node, i.e. a node constraint delimiting a set of instances of the type as defined by the reference model. Object nodes always commence with a type name. Although any node identifier format could be supported, the current version of ADL assumes that node identifiers are of the form of an archetype term identifier, i.e. <CODE CLASS="Code">
+[idN]</CODE>
+, e.g. <CODE CLASS="Code">
+[id42]</CODE>
+. Node identifiers are shown in magenta in this document.</P>
+<P CLASS="Body">
+The structural function of node identifiers is to allow the formation of paths:</P>
+<UL>
+<LI CLASS="LstU1">
+enable cADL nodes in an archetype definition to be unambiguously referred to within the same archetype;</LI>
+<LI CLASS="LstU1">
+enable data created using a given archetype to be matched at runtime;</LI>
+<LI CLASS="LstU1">
+to enable cADL nodes in a parent archetype to be unambiguously referred to from a specialised child archetype;</LI>
+<LI CLASS="LstU1">
+to enable unique paths to be formed.</LI>
+</UL>
+<P CLASS="Body">
+All object nodes require a node identifier, guaranteeing the ability to generate unique paths, and to process specialised archetypes with respect to inheritance parents.</P>
+<P CLASS="LangRule">
+A Node identifier is required for every object node in an archetype.</P>
+<P CLASS="Body">
+The node identifier can also perform a semantic function, that of giving a design-time meaning to the node, by equating the node identifier to some description. The use of node identifiers in archetypes is the main source of their expressive power. Each node identifier acts as a ‘semantic marker’ or ‘override’ on the node. Thus, in the example shown in <A HREF="CDL.htm#81343" CLASS="XRef">See The Underlying Information Model</A>, the <CODE CLASS="Code">
+ELEMENT</CODE>
+ node is identified by the code <CODE CLASS="Code">
+[id10]</CODE>
+, which can be designated elsewhere in an archetype as meaning “diastolic blood pressure”. In this way rich meaning is given to data constructed from a limited number of object types.</P>
+<P CLASS="Body">
+Not every node identifier needs to be defined in the archetype terminology: it is only mandatory for nodes defined under container attributes. Nodes defined under single-valued attributes may have terminology definitions, but don’t typically need them, since the meaning is obvious from the attribute.</P>
+</DIV>
+<DIV>
+<h4>
+Occurrences</h4>
+<P CLASS="BodyFirst">
+A constraint on occurrences is used only with cADL object nodes, to indicate how many times in data an instance conforming to the constraint can occur. It is usually only defined on objects that are children of a container attribute, since by definition, the occurrences of an object that is the value of a single-valued attribute can only be 0..1 or 1..1, and this is already defined by the attribute’s <CODE CLASS="Code">
+existence</CODE>
+. However, it may be used in specialised archetypes to exclude a possibility defined in a parent archetype (see <A HREF="specialisation.htm#97568" CLASS="XRef">See Attribute Redefinition</A>).</P>
+<P CLASS="Body">
+In the example below, three <CODE CLASS="Code">
+EVENT</CODE>    
+ constraints are shown; the first one (“1 minute sample”) is shown as mandatory, while the other two are optional.</P>
+<pre>    
+    events cardinality &isin; {*} &isin; {     
+        EVENT[id2] occurrences &isin; {1..1} &isin; {    }                                    -- 1 min sample
+        EVENT[id3] occurrences &isin; {0..1} &isin; {    }                                         -- 2 min sample
+        EVENT[id4] occurrences &isin; {0..1} &isin; {    }                                    -- 3 min sample
+    }
+</pre>    
+<P CLASS="Body">
+The following example expresses a constraint on instances of <CODE CLASS="Code">
+GROUP</CODE>
+ such that for <CODE CLASS="Code">
+GROUPs</CODE>
+ representing tribes, clubs and families, there can only be one “head”, but there may be many members.</P>
+<pre>
+    GROUP[id103] &isin; {
+        kind &isin; {/tribe|family|club/}
+        members cardinality &isin; {*} &isin; {
+            PERSON[id104] occurrences &isin; {1} &isin; {    
+                title &isin; {“head”}
+                -- etc --
+            }
+            PERSON[id105] occurrences &isin; {0..*} &isin; {    
+                title &isin; {“member”}
+                -- etc --
+            }
+        }
+    }
+</pre>
+<P CLASS="Body">
+The first <CODE CLASS="Code">
+occurrences</CODE>
+ constraint indicates that a <CODE CLASS="Code">
+PERSON</CODE>
+ with the title <CODE CLASS="Code">
+“head”</CODE>
+ is mandatory in the <CODE CLASS="Code">
+GROUP</CODE>
+, while the second indicates that at runtime, instances of <CODE CLASS="Code">
+PERSON</CODE>
+ with the title <CODE CLASS="Code">
+“member”</CODE>
+ can number from none to many. Occurrences may take the value of any range including <CODE CLASS="Code">
+{0..*}</CODE>
+, meaning that any number of instances of the given type may appear in data, each conforming to the one constraint block in the archetype. A single positive integer, or the infinity indicator, may also be used on its own, thus: <CODE CLASS="Code">
+{2}</CODE>
+, <CODE CLASS="Code">
+{*}</CODE>
+. A range of <CODE CLASS="Code">
+{0..0}</CODE>
+ or <CODE CLASS="Code">
+{0}</CODE>
+ indicates that no occurrences of this object are allowed in this archetype. If no occurrences constraint is stated, the occurrences of the object is define by the underlying reference model.</P>
+<P CLASS="LangRule">
+An occurrences constraint may appear directly after the type name of any object constraint within a container attribute, in order to indicate how many times data objects conforming to the block may occur in the data.</P>
+<P CLASS="Body">
+Where cardinality constraints are used (remembering that occurrences is always there by default, if not explicitly specified), cardinality and occurrences must always be compatible. The rules for this are formally stated in the Archetype Object Model specification. The key elements of these rules are as follows:</P>
+<UL>
+<LI CLASS="LstU1">
+where a cardinality constraint is stated with a finite upper bound:</LI>
+<LI CLASS="LstU2">
+any child object with either stated occurrences with an open upper bound (typically 0..* or 1..*) or else inferred occurrences (0..*) is legal, since the occurrences open upper bound is interpreted to mean the maximum value allowed by the cardinality upper bound.</LI>
+<LI CLASS="LstU2">
+the sum of all child object occurrences lower bounds must be less than the cardinality upper bound;</LI>
+<LI CLASS="LstU1">
+no ‘orphans’: at least instance of one optional child object (occurrences lower bound = 0), and one instance of every mandatory child object (occurrences lower bound &gt; 0) must be includable within the cardinality range.</LI>
+</UL>
+</DIV>
+</DIV>
+<DIV>
+<h3>
+“Any” Constraints</h3>
+<P CLASS="BodyFirst">
+There are two cases where it is useful to state a completely open, or ‘any’, constraint. The first is when it is desired to override the existence or cardinality of a property, such as in the following:</P>
+<pre>    
+    PERSON[id2] &isin; {
+        name existence &isin; {1}
+        -- etc --
+    }
+</pre>    
+<P CLASS="Body">
+In the above, no further ‘matches {}’ part is required in the statement, since no more constraints are to be stated.</P>
+<P CLASS="Body">
+The second use of “any” as a constraint value is for types, such as in the following:</P>
+<pre>    
+    ELEMENT[id4] &isin; {                                    -- speed limit
+        value &isin; {
+            DV_QUANTITY[id5]                            -- type was ‘DATA_VALUE’ in RM
+        }
+    }
+</pre>    
+<P CLASS="Body">
+The meaning of this constraint is that in the data at runtime, the <EM CLASS="Emphasis">
+value</EM>
+ property of <CODE CLASS="Code">
+ELEMENT</CODE>
+ must be of type <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+, but can have any value internally. This is most useful for constraining objects to be of a certain type, without further constraining value, and is especially useful where the information model contains subtyping, and there is a need to restrict data to be of certain subtypes in certain contexts.</P>
+<UL>
+<LI CLASS="Deprecated">
+In ADL 1.4, ‘any’ constraints were represented with an additional “matches {*}” at the end of the statement. This is deprecated. It is recommended that parsers silently accept this form, but output the modern ADL 1.5 form.</LI>
+</UL>
+</DIV>
+<DIV>
+<h3>
+Reference Model Type Matching</h3>
+<P CLASS="BodyFirst">
+All cADL object constraints state a type from an underlying reference model. This may be an abstract type or a concrete type. The part of the data conforming to the constraint can be of any concrete type from the reference model that conforms to the type mentioned in the constraint, i.e. the same type if it is concrete, or any subtype. Correctly evaluating data/archetype conformance is up to tools to implement, and requires access to a formal description of the reference model.</P>
+<P CLASS="Body">
+One of the consequences of subtype-based type matching is that semantics are needed for when more than one reference model subtype is declared under the same attribute node in cADL. Consider the reference model inheritance structure shown below, in which the abstract <CODE CLASS="Code">
+PARTY</CODE>
+ class has abstract and concrete descendants including <CODE CLASS="Code">
+ACTOR</CODE>
+, <CODE CLASS="Code">
+ROLE</CODE>
+, and so on.</P>
+<DIV>
+<MAP NAME="CDL-4">
+</MAP>
+<IMG SRC="CDL-4.png" USEMAP="#CDL-4">
+</DIV>
+<DIV>
+<h4>
+Narrowed Subtype Constraints</h4>
+<P CLASS="BodyFirst">
+The following cADL statement defines an instance space that includes instances of any of the concrete subtypes of the <CODE CLASS="Code">
+PARTY</CODE>
+ class within an instance of the class <CODE CLASS="Code">
+XXXX</CODE>
+ in the figure (the ellipsis indicates particular constrraints not shown here).</P>
+<pre>    
+    counter_party &isin; {        
+        PARTY[id4] &isin; {             ... }
+    }
+</pre>    
+<P CLASS="Body">
+However, in some circumstances, it may be desirable to define a constraint that will match a particular subtype in a specific way, while other subtypes are matched by the more general rule. Under a single-valued attribute, this can be done as follows:</P>
+<pre>    
+    counter_party &isin; {        
+        PARTY[id4] &isin; {        ... }
+        PERSON[id5] &isin; {
+            date_of_birth &isin; { ... }
+        }
+    }
+</pre>    
+<P CLASS="Body">
+This cADL text says that the instance value of the <EM CLASS="Emphasis">
+counter_party</EM>
+ attribute in the data can either be a <CODE CLASS="Code">
+PERSON</CODE>
+ object matching the <CODE CLASS="Code">
+PERSON</CODE>
+ block, with a <EM CLASS="Emphasis">
+date_of_birth</EM>
+ matching the given range, or else any other kind of <CODE CLASS="Code">
+PARTY</CODE>
+ object.</P>
+<P CLASS="Body">
+Under a multiply-valued attribute, the alternative subtypes are included as identified child members. The following example illustrates a constraint on the <EM CLASS="Emphasis">
+counter_parties</EM>
+ attribute of instances of the class <CODE CLASS="Code">
+YYYY</CODE>
+ in <A HREF="CDL.htm#38970" CLASS="XRef">See Reference model with abstract and concrete subtypes</A>.</P>
+<pre>    
+    counter_parties &isin; {        
+        PERSON[id4] &isin; {
+            date_of_birth &isin; { ... }
+        }
+        ORGANISATION[id5] &isin; {
+            date_of_registration &isin; { ... }
+        }
+        PARTY[id6] &isin; {             ... }
+    }
+</pre>    
+<P CLASS="Body">
+The above says that <CODE CLASS="Code">
+ORGANISATION</CODE>
+ and <CODE CLASS="Code">
+PERSON</CODE>
+ instances in the data can only match the <CODE CLASS="Code">
+ORGANISATION</CODE>
+ and <CODE CLASS="Code">
+PERSON</CODE>
+ constraints stated above, while an instance any other subtype of <CODE CLASS="Code">
+PARTY</CODE>
+ must match the <CODE CLASS="Code">
+PARTY</CODE>
+ constraint.</P>
+</DIV>
+<DIV>
+<h4>
+Remove Specified Subtypes</h4>
+<P CLASS="BodyFirst">
+In some cases it is required to remove some subtypes altogether. This is achieved by stating a constraint on the specific subtypes with <CODE CLASS="Code">
+occurrences</CODE>
+ limited to zero. The following example matches any <CODE CLASS="Code">
+PARTY</CODE>
+ instance with the exception of instances of <CODE CLASS="Code">
+COMPANY</CODE>
+ or <CODE CLASS="Code">
+GROUP</CODE>
+ subtypes.</P>
+<pre>    
+    counter_party &isin; {        
+        PARTY[id4] &isin; {        ... }
+        COMPANY[id5] occurrences &isin; {0}
+        GROUP[id6] occurrences &isin; {0}
+    }
+</pre>
+</DIV>
+</DIV>
+<DIV>
+<h3>
+Paths</h3>
+<DIV>
+<h4>
+Archetype Path Formation</h4>
+<P CLASS="BodyFirst">
+The use of identified object nodes allows the formation of archetype paths, which can be used to unambiguously reference object nodes within the same archetype or within a specialised child. The syntax of archetype paths is designed to be close to the W3C Xpath syntax, and can be directly converted to it for use in XML. </P>
+<P CLASS="LangRule">
+Archetype paths are paths extracted from the definition section of an archetype, and refer to object nodes within the definition. A path is constructed as a concatenation of ‘/’ characters and attribute names, with the latter including node identifiers as predicates where required for disambiguation.</P>
+<P CLASS="BodyFirst">
+In the following example, the <CODE CLASS="Code">
+PERSON</CODE>
+ constraint node is the sole object constraint under the single-valued attribute manager:</P>
+<pre>    
+        manager &isin; {
+            PERSON[id104] &isin; {    
+                title &isin; {“head of finance”, “head of engineering”}
+            }
+        }
+</pre>        
+<P CLASS="Body">
+Two valid paths to the object under the <EM CLASS="Emphasis">
+title</EM>
+ attribute are possible:</P>
+    manager[id104]/title
+    manager/title
+    &nbsp;
+<P CLASS="Body">
+Where there are more than one sibling node, node identifiers must be used to ensure unique referencing:</P>
+<pre>    
+        employees &isin; {
+            PERSON[id104] &isin; {    
+                title &isin; {“head”}
+            }
+            PERSON[id105] matches {    
+                title &isin; {“member”}
+            }
+        }
+</pre>
+<P CLASS="Body">
+The paths to the respective <EM CLASS="Emphasis">
+title</EM>
+ attributes are now:</P>
+<pre>    
+        employees[id104]/title
+        employees[id105]/title
+</pre>        
+<P CLASS="Body">
+The following gives another example:</P>
+<pre>    
+    HISTORY[id1] occurrences &isin; {1} &isin; {            
+        periodic &isin; {False}
+        events cardinality &isin; {*} &isin; {     
+            EVENT[id2] occurrences &isin; {0..1} &isin; {    }                                        -- 1 min sample
+            EVENT[id3] occurrences &isin; {0..1} &isin; {    }                                         -- 2 min sample
+            EVENT[id4] occurrences &isin; {0..1} &isin; {    }                                        -- 3 min sample
+        }
+    }
+</pre>    
+<P CLASS="Body">
+The following paths can be constructed:</P>
+<pre>    
+    /                                -- the HISTORY (root) object
+    /periodic                                -- the HISTORY.periodic attribute
+    /events    [id2]                            -- the 1 minute event object
+    /events    [id3]                            -- the 2 minute event object
+    /events    [id4]                            -- the 3 minute event object
+</pre>    
+<P CLASS="Body">
+The above paths can all be used to reference the relevant nodes within the archetype in which they are defined, or within any specialised child archetype.</P>
+<P CLASS="Body">
+Paths used in cADL are expressed in the ADL path syntax, described in detail in <A HREF="paths.htm#84089" CLASS="XRef">See ADL Paths</A>. ADL paths have the same alternating object/attribute structure implied in the general hierarchical structure of cADL, obeying the pattern <CODE CLASS="Code">
+TYPE/attribute/TYPE/attribute/</CODE>
+... .</P>
+<P CLASS="Body">
+The examples above are <EM CLASS="Emphasis">
+physical</EM>
+ paths because they refer to object nodes using node identifier codes such as “id4”. Physical paths can be converted to <EM CLASS="Emphasis">
+logical</EM>
+ paths by adding the code meanings as annotations for node identifiers, if defined. Thus, the following two paths might be equivalent:</P>
+<pre>    
+    /events    [id4]                                    -- the 3 minute event object
+    /events    [id4|3 minute event|]                                    -- the 3 minute event object
+</pre>    
+</DIV>
+<DIV>
+<h4>
+External Use of Paths</h4>
+<P CLASS="BodyFirst">
+None of the paths shown above are valid outside the cADL text in which they occur, since they do not include an identifier of the enclosing artefact, normally an archetype. To reference a cADL node in an archetype from elsewhere (e.g. another archetype or a template), the identifier of the containing itself must be prefixed to the path, as in the following example:</P>
+<pre>    
+    [openehr-ehr-entry.apgar-result.v]/events    [id2]
+</pre>    
+<P CLASS="Body">
+This kind of path expression is necessary to form the paths that occur when archetypes are composed to form larger structures.</P>
+</DIV>
+<DIV>
+<h4>
+Runtime Paths</h4>
+<P CLASS="BodyFirst">
+Paths for use with runtime data can be constructed in the same way as archetype paths, and are the same except for single-valued attributes. Since in data only a single instance can appear as the value of a single-valued attribute, there is never any ambiguity in referencing it, whereas an archetype path to or through the same attribute may require a node identifier due to he possible presence of multiple alternatives. Consider the example from above:</P>
+<pre>    
+    items cardinality matches {*} matches
+        ELEMENT[id4] matches {                                            -- speed limit
+            value matches {
+                DV_QUANTITY[id22] matches {                                    -- miles per hour
+                    magnitude matches {|0..55|}
+                    property matches {"velocity"}
+                    units matches {"mph"}                            
+                }
+                DV_QUANTITY[id23] matches {                                    -- km per hour
+                    magnitude matches {|0..100|}
+                    property matches {"velocity"}
+                    units matches {"km/h"}
+                }
+            }
+        }
+    }
+</pre>    
+<P CLASS="Body">
+The following archetype paths can be constructed:</P>
+<pre>    
+    items[id4]/value[id22]
+    items[id4]/value[id23]
+</pre>    
+<P CLASS="Body">
+For instance data created according to this archetype, the following runtime path can be used:</P>
+<pre>    
+    items[id4]/value                            -- since there is only one DV_QUANTITY in the data
+</pre>
+<P CLASS="Body">
+A query using this path will match the data regardless of which type of <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ object is there. However, in some circumstances, queries may need to be specific, in which case they will use the full archetype path, i.e. items[id4]/value[id22] or items[id4]/value[id23] to select only ‘miles’ or ‘kilometres’ data. This will only work if the node ids (id-codes) are in fact stored in all types of the reference model data. If for example this was not the case with the <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ type, another facet of the <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ objects from the archetype such as ‘units = “km/h”’ would need to be used in the query to correctly locate only metric <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ objects.</P>
+</DIV>
+</DIV>
+<DIV>
+<h3>
+Internal References (Proxy Constraint Objects)</h3>
+<P CLASS="BodyFirst">
+It is possible to define a constraint structure at a certain point to be the same as a structure defined elsewhere in the archetype, rather than copying the desired structure. This is achieved using a proxy constraint object, using the following syntax: </P>
+        use_node TYPE[idN] archetype_path
+<P CLASS="Body">
+This statement defines a node of type <CODE CLASS="Code">
+TYPE</CODE>
+, whose definition is the same as the one found at path <CODE CLASS="Code">
+archetype_path</CODE>
+. The type mentioned in the <CODE CLASS="Code">
+use_node</CODE>
+ reference must always be the same type as the referenced type. </P>
+<P CLASS="Body">
+The path must not be in the parent path of the proxy object itself, but may be a sibling of the proxy object. The sibling case is a special case, and the meaning of the proxy constraint is that the target object’s children should be re-used, but not the target itself (since that would illegally create two siblings with the same identifier). The general case is that the proxy object and target object locations are different, and the meaning is that the proxy object is logically replaced by a deep copy of the target object. (In theory the sibling case could be banned, and proxies defined one level further down with targets of the children of the originally intended target, but this creates inconvenience for the archetype author, and can easily be dealt with in tools).</P>
+<P CLASS="Body">
+Occurrences from the target are also assumed, or may be explicitly overridden:</P>
+        use_node TYPE[id4] occurrences &isin; {occ} archetype_path
+<P CLASS="Body">
+Proxy objects provide an internal reuse mechanism. Specialised archetypes may redefine structures on such nodes as if they had been defined inline. This is described in more detail in <A HREF="specialisation.htm#14886" CLASS="XRef">See Internal Reference (Proxy Object) Redefinition</A> in the Specialisation section.</P>
+<P CLASS="LangRule">
+A proxy constraint object allows object constraints defined elsewhere to be re-used within the same archetype or a specialised child.</P>
+<P CLASS="Body">
+The following example shows the definitions of the <CODE CLASS="Code">
+ADDRESS</CODE>
+ nodes for phone, fax and email for a home <CODE CLASS="Code">
+CONTACT</CODE>
+ being reused for a work <CODE CLASS="Code">
+CONTACT</CODE>
+.</P>
+<pre>    
+    PERSON[id1] &isin; {
+        identities &isin; {            
+            -- etc --
+        }
+        contacts cardinality &isin; {0..*} &isin; {
+            CONTACT[id2] &isin; {                                                -- home address
+                purpose &isin; {-- etc --}        
+                addresses &isin; {-- etc --}
+            }
+            CONTACT[id3] &isin; {                                                -- postal address
+                purpose &isin; {-- etc --}
+                addresses &isin; {-- etc --}
+            }
+            CONTACT[id4] &isin; {                                                -- home contact
+                purpose &isin; {-- etc --}    
+                addresses cardinality &isin; {0..*} &isin; { 
+                    ADDRESS[id5] &isin; {                                        -- phone
+                        type &isin; {-- etc --}
+                        details &isin; {-- etc --}
+                    }
+                    ADDRESS[id6] &isin; {                                        -- fax
+                        type &isin; {-- etc --}
+                        details &isin; {-- etc --}
+                    }
+                    ADDRESS[id7] &isin; {                                        -- email
+                        type &isin; {-- etc --}
+                        details &isin; {-- etc --}
+                    }
+                }
+            }
+            CONTACT[id8] &isin; {                                                -- work contact
+                purpose &isin; {-- etc --}
+                addresses cardinality &isin; {0..*} &isin; { 
+                    use_node ADDRESS[id9] /contacts[id4]/addresses[id5]                                             -- phone
+                    use_node ADDRESS[id10] /contacts[id4]/addresses[id6]                                             -- fax 
+                    use_node ADDRESS[id11] /contacts[id4]/addresses[id7]                                             -- email
+                }
+            }
+        }
+</pre>        
+<P CLASS="Body">
+The following example shows the occurrences being overridden in the referring node, to enable the specification for ‘phone’ to be re-used, but with a different occurrences constraint.</P>
+<pre>    
+    PERSON[id1] &isin; {
+        contacts cardinality &isin; {0..*} &isin; {
+            CONTACT[id4] &isin; {                                                -- home contact
+                addresses cardinality &isin; {0..*} &isin; { 
+                    ADDRESS[id5] occurrences &isin; {1} &isin; {    ...}                                    -- phone
+                }
+            }
+            CONTACT[id8] &isin; {                                                -- work contact
+                addresses cardinality &isin; {0..*} &isin; { 
+                    use_node ADDRESS[id9] occurrences &isin; {0..*} 
+                            /contacts[id4]/addresses[id5]                                     -- phone
+                }
+            }
+        }
+</pre>        
+<DIV>
+<h4>
+Paths and Proxy Objects</h4>
+<P CLASS="BodyFirst">
+In forming paths through the proxy and to nodes below the target, two cases can be identified:</P>
+<UL>
+<LI CLASS="LstU1">
+if the proxy object is a sibling of the target object, the proxy object node identifier is used in paths, and the node id of the target object is not;</LI>
+<LI CLASS="LstU1">
+otherwise, paths are formed using the identifier from the proxy target object.</LI>
+</UL>
+</DIV>
+</DIV>
+<DIV>
+<h3>
+External References</h3>
+<P CLASS="BodyFirst">
+Another kind of reference in an archetype is to another archetype. There are two ways this can be done: using a direct reference, and using an archetype ‘slot’. The first is used when the need is to refer to one specific archetype (or to a template from another template), while the second is a constraint that allows for various archetypes matching specified criteria to be used. The slot concept is described in the next section.</P>
+<P CLASS="LangRule">
+An external reference defines a fixed compositional connection between two archetypes.</P>
+<P CLASS="Body">
+Direct references, or external references as they will be denoted here occur for two main reasons: re-use and templating. In the first case, an archetype has originally been built using inline constraints when it is discovered that another archetype contains the same or very similar inline constraints at a similar point. As would be normal in software design, a refactoring exercise is conducted that results in the common part being created as its own, new archetype, and both original archetypes ‘referring’ to it. They do this using an external reference, which has syntax of the form:</P>
+    use_archetype TYPE[idN, archetype_id] [occurrences constraint] 
+<P CLASS="Body">
+In the above, the <CODE CLASS="Code">
+archetype_id</CODE>
+ is included with the usual archetype node identifier (id-code). The usual occurrence constraints can be applied at the end.</P>
+<P CLASS="Body">
+The following example shows sections of two parent archetypes both referring to the same child archetype. The first section is from an openEHR <CODE CLASS="Code">
+INSTRUCTION</CODE>
+ archetype to do with a medication order.</P>
+<pre>    
+    INSTRUCTION[id1] &isin; {    -- Medication order
+        activities cardinality &isin; {0..*; unordered} matches {
+            ACTIVITY[id2] &isin; {    -- Medication activity
+                action_archetype_id &isin; {/openEHR-EHR-ACTION\.medication\.v1/}
+                description &isin; {
+                    use_archetype ITEM_TREE[                            id3, 
+                                                openEHR-EHR-ITEM_TREE.medication.v1]
+                }
+            }
+        }
+    }
+</pre>    
+<P CLASS="Body">
+This section is from an openEHR <CODE CLASS="Code">
+ACTION</CODE>
+ archetype defining medication administration actions.</P>
+<pre>    
+    ACTION[id1] &isin; {    -- Medication action
+        ism_transition &isin; {
+            ISM_TRANSITION[id2] &isin; {...            }
+            ...
+        }
+        description &isin; {
+            use_archetype ITEM_TREE[            id3, openEHR-EHR-ITEM_TREE.medication.v1]
+        }
+    }
+</pre>    
+<P CLASS="Body">
+Each of these archetypes refers to the openEHR <CODE CLASS="Code">
+ITEM_TREE</CODE>
+ archetype <CODE CLASS="Code">
+openEHR-EHR-ITEM_TREE.medication.v1</CODE>
+, which is a normal archetype describing medication. </P>
+<P CLASS="Body">
+Following the standard object-oriented semantics of type substitutability, and also the ontological subsumption notion, specialisations of the referenced archetype (including templates) are also valid substitutions at design or runtime. At design time, this takes the form of a redefinition, e.g.:</P>
+<pre>    
+    description &isin; {
+        use_archetype ITEM_TREE[                            id3.1,         openEHR-EHR-ITEM_TREE.vaccine.v1]
+    }
+</pre>    
+<P CLASS="Body">
+where the ‘vaccine’ archetype is a specialisation of the ‘medication’ archetype. Redefinitions of this kind are described in more detail in <A HREF="specialisation.htm#43875" CLASS="XRef">See External Reference Redefinition</A>.</P>
+<P CLASS="Body">
+External references can of course also be defined under container attributes.</P>
+<P CLASS="Body">
+The second use of external references is typically in templates, to specify an archetype or sub-template of a template for an attribute where no slot has been defined. This use is described in the openEHR Template specification.</P>
+<DIV>
+<h4>
+Paths</h4>
+<P CLASS="BodyFirst">
+Paths that terminate in external reference nodes in source-form archetypes will include only the id-codes, as in the following examples:</P>
+<pre>    
+    /activities[id2]/description[id3]
+    /description[id2]
+</pre>    
+<P CLASS="Body">
+Howver, in flattened archetypes, the corresponding paths will include the archetype identifier(s) rather than the id-codes, and may continue down through the structure of the included archetypes, as in the following example.</P>
+<pre>    
+    /activities[id2]/description[openEHR-EHR-ITEM_TREE.medication.v1]/...
+    /description[openEHR-EHR-ITEM_TREE.medication.v1]/...
+</pre>    
+</DIV>
+</DIV>
+<DIV>
+<h3>
+Archetype Slots</h3>
+<P CLASS="BodyFirst">
+At any point in a cADL definition, a constraint can be defined that allows other archetypes to be used, rather than defining the desired constraints inline. This is known as an archetype ‘slot’, i.e. a connection point whose allowable ‘fillers’ are constrained by a set of statements, written in the ADL assertion language (defined in <A HREF="assertion.htm#68334" CLASS="XRef">See Assertions</A>). </P>
+<P CLASS="LangRule">
+An archetype slot defines a constrained compositional chaining point in an archetype at which other archetypes can be inserted, if they are in the set defined by the slot constraint.</P>
+<P CLASS="Body">
+An archetype slot is introduced with the keyword <CODE CLASS="Code">
+allow_archetype</CODE>
+ and defined in terms of two lists of assertion statements defining which archetypes are allowed and/or which are excluded from filling that slot, introduced with the keywords <CODE CLASS="Code">
+include</CODE>
+ and <CODE CLASS="Code">
+exclude</CODE>
+, respectively. The following example illustrates the general form of an archetype slot.</P>
+<pre>    
+    allow_archetype SECTION[id5] occurrences &isin; {0..*} &isin; {
+        include
+            -- constraints for inclusion
+        exclude
+            -- constraints for exclusion
+    }
+</pre>    
+<P CLASS="Body">
+A slot constraint evaluates to a set of archetype identifiers from whatever is considered in the current model environment to be the total available set of archetypes.</P>
+<P CLASS="Body">
+The simplest possible slot has no includes or excludes, and effectively imposes no constraint. However, it is allowed in order to enable authoring tools to create a slot whose actual constraint definition will be defined at a later point in time.</P>
+<P CLASS="Body">
+A slot is designed to be ‘filled’, i.e. to have one of the allowed archetypes chosen for use. This is done in a child archetype, almost always a template. A slot can also be ‘closed’, meaning no further fillers can be added.</P>
+<P CLASS="Body">
+The actual specification of slot fillers, and also the ‘closing’ of slots is done in specialised archetypes, and is described in <A HREF="specialisation.htm#29068" CLASS="XRef">See Slot Filling and Redefinition</A>, in the chapter on specialisation.</P>
+<DIV>
+<h4>
+Formal Semantics of include and exclude Constraints</h4>
+<P CLASS="BodyFirst">
+The semantics of the <CODE CLASS="Code">
+include</CODE>
+ and <CODE CLASS="Code">
+exclude</CODE>
+ lists are somewhat subtle. They are as follows:</P>
+<UL>
+<LI CLASS="LstU1">
+The meaning of the ‘set of all archetypes’ in any given environment is evaluable (and evaluated) to a finite set consisting of all archetypes available within the current archetype Library, not some notional virtual / global set of archetypes, or theoretical possible set.</LI>
+<LI CLASS="LstU1">
+Either the <CODE CLASS="Code">
+include</CODE>
+ or <CODE CLASS="Code">
+exclude</CODE>
+ constraint, but not both, may be ‘substantive’, i.e. define a particular set of archetypes that would be matched within a given slot, or ‘open’, i.e. matching all possible archetypes.</LI>
+<LI CLASS="LstU1">
+A slot constraint may consist of a single <CODE CLASS="Code">
+include</CODE>
+ or <CODE CLASS="Code">
+exclude</CODE>
+ constraint, or of an <CODE CLASS="Code">
+include</CODE>
+ / <CODE CLASS="Code">
+exclude</CODE>
+ pair.</LI>
+<LI CLASS="LstU1">
+If an <CODE CLASS="Code">
+include</CODE>
+ or <CODE CLASS="Code">
+exclude</CODE>
+ constraint is present on its own, it is understood as a recommendation, i.e. it does not constitute a formal constraint for matching or exclusion, but tools and applications may use the recommended match set in an intelligent way. The result set for such an <CODE CLASS="Code">
+include</CODE>
+ or <CODE CLASS="Code">
+exclude </CODE>
+is the whole current archetype set.</LI>
+<LI CLASS="LstU1">
+If a substantive <CODE CLASS="Code">
+include</CODE>
+ or <CODE CLASS="Code">
+exclude</CODE>
+ constraint is present with a corresponding open <CODE CLASS="Code">
+exclude</CODE>
+ or <CODE CLASS="Code">
+include</CODE>
+, respectively, the substantive constraint is considered formally binding.</LI>
+</UL>
+<P CLASS="Body">
+The meaning of the slot constraint overall is that only archetypes matching the <CODE CLASS="Code">
+include</CODE>
+ constraint are allowed, and no others. The same logic applies in the reverse sense when the <CODE CLASS="Code">
+exclude</CODE>
+ constraint is substantive.</P>
+</DIV>
+<DIV>
+<h4>
+Semantic Slot Definition</h4>
+<P CLASS="BodyFirst">
+There are various ways to define any other form of slot. The preferred approach is to define the set of allowable archetypes in terms of subsumption hierarchies within the archetype model space of the working Archetype Library. Such a constraint is formed from one or more expressions of the form:</P>
+    archetype_id matches {subsumption_expression}
+<P CLASS="Body">
+where subsumption_expression is one of:</P>
+<UL>
+<LI CLASS="LstU1">
+an archetype ontology entity</LI>
+<LI CLASS="LstU1">
+‘&lt;‘ | ‘&lt;&lt;‘ an archetype ontology entity</LI>
+</UL>
+<P CLASS="Body">
+and the unary operators ‘&lt;‘ and ‘&lt;&lt;‘ have the following meanings:</P>
+<UL>
+<LI CLASS="LstU1">
+&lt; : descendant-of</LI>
+<LI CLASS="LstU1">
+&lt;&lt; : descendant-of-or-self</LI>
+</UL>
+<P CLASS="Body">
+An archetype ontology entity is either a Reference Model class name or an Archetype semantic identifier.</P>
+<P CLASS="Body">
+A simple slot definition of this form is as follows:</P>
+<pre>    
+    allow_archetype ENTRY[id4] occurrences matches {0..*} matches {
+        include
+            archetype_id matches {&lt; openEHR-EHR-OBSERVATION}
+    }
+</pre>    
+<P CLASS="Body">
+This constrains the archetype that can be used in the slot to being any based on the openEHR <CODE CLASS="Code">
+OBSERVATION</CODE>
+ class.</P>
+<P CLASS="Body">
+The following example shows a more typical slot definition:</P>
+<pre>    
+    allow_archetype CLUSTER[id26] &isin; {
+        include
+            archetype_id &isin; {&lt;&lt; openEHR-EHR-CLUSTER.medical_device.v1}
+    }
+</pre>    
+<P CLASS="Body">
+Here, the archetype openEHR-EHR-CLUSTER.medical_device.v1 or any child can be used.</P>
+<P CLASS="Body">
+More complex constraints can be created using Boolean expressions containing subsumption terms, for example:</P>
+<pre>    
+    allow_archetype CLUSTER[id26] &isin; {
+        include
+            archetype_id &isin; {
+                (&lt;&lt; openEHR-EHR-CLUSTER.medical_device.v1 or 
+                    &lt;&lt; openEHR-EHR-CLUSTER.method.v1) and
+                not &lt;&lt; openEHR-EHR-CLUSTER.protocol.v1
+            }
+    }
+</pre>    
+</DIV>
+<DIV>
+<h4>
+Slots based on Lexical Archetype Identifiers</h4>
+<P CLASS="BodyFirst">
+Prior to ADL2, slots were defined using regular expressions on the archetype lexical identifier. This form remains legal in ADL2.0.x, but will be deprecated in future.</P>
+<P CLASS="Body">
+In this kind of slot constraint, the core expression type is of the following form:</P>
+    archetype_id/value &isin; {/openEHR-EHR-\.SECTION\..*\..*/}
+<P CLASS="Body">
+where archetype_id/value stands for the literal String value of the archetype identifier, and the regular expression is recognised as occurring between two slash delimiters (//).</P>
+<P CLASS="Body">
+The following example shows how the “Objective” <CODE CLASS="Code">
+SECTION</CODE>
+ in a problem/SOAP headings archetype defines two slots, indicating which <CODE CLASS="Code">
+OBSERVATION</CODE>
+ and <CODE CLASS="Code">
+SECTION</CODE>
+ archetypes are allowed and excluded under the <EM CLASS="Emphasis">
+items</EM>
+ property.</P>
+<pre>    
+    SECTION [at2000] occurrences &isin; {0..1} &isin; {                                                                -- objective
+        items cardinality &isin; {0..*} &isin; {
+            allow_archetype SECTION[at2002] occurrences &isin; {0..*} &isin; {
+                include
+                    archetype_id/value &isin; {/.*/}
+                exclude
+                    archetype_id/value &isin;                             
+                                {/openEHR-EHR-SECTION\.patient_details\..+/}
+            }
+        }
+    }
+</pre>    
+<P CLASS="Body">
+Here, every constraint inside the block starting on an <CODE CLASS="Code">
+allow_archetype</CODE>
+ line contains constraints that must be met by archetypes in order to fill the slot. In the examples above, the constraints are in the form of regular expressions on archetype identifiers. In cADL, the PERL regular expression syntax is assumed.</P>
+<P CLASS="Body">
+There are two ways in which <EM CLASS="Emphasis">
+archetype_id</EM>
+ regular expressions patterns can be used:</P>
+<UL>
+<LI CLASS="LstU1">
+as a pattern against which to test a particular archetype identifier being proposed for that slot;</LI>
+<LI CLASS="LstU1">
+as a pattern to use against a population of archetypes (e.g. all archetypes in a particular repository) in order to generate a list of all possible archetypes for filling the slot.</LI>
+</UL>
+<P CLASS="Body">
+Due to the second use, it is required that the regular expression pattern always cover a full archetype identifier rather than only sub-parts. As a consequence, a ‘meta-pattern’ can be defined to check <EM CLASS="Emphasis">
+archetype_id</EM>
+ regular expressions for validity:</P>
+<UL>
+<LI CLASS="LstU1">
+^.+-.+-.+\..*\..+$</LI>
+</UL>
+<P CLASS="Body">
+Because identifier matching is an inherently lexical operation, subtypes of mentioned types are not matched unless explicitly stated. Consider the following example:</P>
+<pre>    
+    allow_archetype ENTRY[id2] &isin; {    -- any kind of ENTRY
+        include
+            archetype_id/value &isin; {            /openEHR-EHR-ENTRY..+\.v1/        }
+    }
+</pre>    
+<P CLASS="Body">
+The intention is to allow any kind of <CODE CLASS="Code">
+ENTRY</CODE>
+, but the above constraint won’t have the desired effect, because the pattern <CODE CLASS="Code">
+openEHR-EHR-ENTRY</CODE>
+ is unlikely to match any actual archetypes. Instead the following kind of constraint should be used:</P>
+<pre>    
+    allow_archetype ENTRY[id2] &isin; {    -- any kind of ENTRY
+        include
+            archetype_id/value &isin; {
+                /openEHR-EHR-EVALUATION\..+\.v1|openEHR-EHR-OBSERVATION\..+\.v1/
+            }
+    }
+</pre>    
+<P CLASS="Body">
+The above would allow any <CODE CLASS="Code">
+EVALUATION</CODE>
+ and any <CODE CLASS="Code">
+OBSERVATION</CODE>
+ archetypes to be used in the slot. Note that since no exclude clause was used, the above slot definition constitutes a recommendation. To make it a hard constraint, the following would be needed:</P>
+<pre>    
+    allow_archetype ENTRY[id2] &isin; {    -- any kind of ENTRY
+        include
+            archetype_id/value &isin; {
+                /openEHR-EHR-EVALUATION\..+\.v1|openEHR-EHR-OBSERVATION\..+\.v1/
+            }
+        exclude
+            archetype_id/value &isin; {            /.*/}
+    }
+</pre>    
+</DIV>
+<DIV>
+<h4>
+Slots based on other Constraints</h4>
+<P CLASS="BodyFirst">
+Other constraints are possible as well, including that the allowed archetype must contain a certain keyword, or a certain path. The latter allows archetypes to be linked together on the basis of content. For example, under a “genetic relatives” heading in a Family History Organiser archetype, the following slot constraint might be used:</P>
+<pre>    
+    allow_archetype EVALUATION[id2] occurrences &isin; {0..*} matches {
+        include
+            archetype_id &isin; {openEHR-EHR-EVALUATION.family_history.v1}
+                ∧ ∃ /subject/relationship/defining_code &#174;
+                ∼ ( [openehr::0] &isin; /subject/relationship/defining_code) -- self
+    }
+</pre>    
+<P CLASS="Body">
+This says that the slot allows archetypes on the <CODE CLASS="Code">
+EVALUATION</CODE>
+ class, which either have as their concept ‘family_history’ or, if there is a constraint on the subject relationship, then it may not include the code <CODE CLASS="Code">
+[openehr::0]</CODE>
+ (the openEHR term for “self”) - i.e. it must be an archetype designed for family members rather than the subject of care his/herself.</P>
+</DIV>
+<DIV>
+<h4>
+Slot-filling</h4>
+<P CLASS="BodyFirst">
+Slots are ‘filled’ in specialised archetypes or templates by the use of use_archetype statements, i.e. the same construct as for an external reference described above. The typical form of a filled slot is as follows:</P>
+<pre>    
+    SECTION[id1] &isin; {    -- Past history
+        /items &isin; {
+            use_archetype EVALUATION[id2, 
+                                org.openehr::openEHR-EHR-                                EVALUATION.problem.v1] 
+            use_archetype EVALUATION[id2, 
+                                org.openehr::openEHR-EHR-                                EVALUATION.        clin_synopsis.v1]
+        }
+    }
+</pre>    
+<P CLASS="Body">
+In ADL, slot-filling is considered a kind of specialisation of a slot, which enables slots to be filled by the same mechanism as any other kind of specialisation found in a child archetype. Slot-filling and other forms of slot redefinition are described in more detail in <A HREF="specialisation.htm#29068" CLASS="XRef">See Slot Filling and Redefinition</A>.</P>
+</DIV>
+</DIV>
+<DIV>
+<h3>
+1    Mixed Structures</h3>
+<P CLASS="BodyFirst">
+Four types of structure representing constraints on complex objects have been presented so far:</P>
+<UL>
+<LI CLASS="LstU1">
+complex object structures: any node introduced by a type name and followed by {} containing constraints on attributes;</LI>
+<LI CLASS="LstU1">
+internal references: any node introduced by the keyword <CODE CLASS="Code">
+use_node</CODE>
+, followed by a type name; such nodes indicate re-use of a complex object constraint that has already been expressed elsewhere in the archetype;</LI>
+<LI CLASS="LstU1">
+archetype slots: any node introduced by the keyword <CODE CLASS="Code">
+allow_archetype</CODE>
+, followed by a type name; such nodes indicate a complex object constraint which is expressed in some other archetype;</LI>
+<LI CLASS="LstU1">
+<EM CLASS="Emphasis">
+placeholder constraints</EM>
+: any node whose constraint is of the form <CODE CLASS="Code">
+[acNNNN]</CODE>
+.</LI>
+</UL>
+<P CLASS="Body">
+At any given node, any combination of these types can co-exist, as in the following example:</P>
+<pre>    
+    SECTION[id2000] &isin; {                        
+        items cardinality &isin; {0..*; ordered} &isin; {
+            ENTRY[id2001] &isin; {-- etc --}
+            allow_archetype ENTRY[id2002] &isin; {-- etc --}
+            use_node ENTRY[id2003] /some_path[id4]
+            ENTRY[id2004] &isin; {-- etc --}
+            use_node ENTRY[id2005] /[id1002]/some_path[id1012]/
+            use_node ENTRY[id2006] /[id1005]/some_path[id1052]/
+            ENTRY[id2007] &isin; {-- etc --}
+        }
+    }
+</pre>    
+<P CLASS="Body">
+Here we have a constraint on an attribute called <EM CLASS="Emphasis">
+items</EM>
+ (of cardinality 0..*), expressed as a series of possible constraints on objects of type <CODE CLASS="Code">
+ENTRY</CODE>
+. The 1st, 4th and 7th are described ‘in place’; the 3rd, 5th and 6th are expressed in terms of internal references to other nodes earlier in the archetype, while the 2nd is an archetype slot, whose constraints are expressed in other archetypes matching the include/exclude constraints appearing between the braces of this node. Note also that the <CODE CLASS="Code">
+ordered</CODE>
+ keyword has been used to indicate that the list order is intended to be significant.</P>
+</DIV>
+</DIV>
+<DIV>
+<h2>
+Second-order Constraints</h2>
+<DIV>
+<h3>
+Tuple Constraints</h3>
+<P CLASS="BodyFirst">
+In realistic data, it is not uncommon to need to constrain object properties in a covarying way. A simple example is the need to state range constraints on a temperature, represented as a <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ type, for both Centigrade and Fahrenheit scales. The default way to do this in ADL is (assuming a simple <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ class consisting of property, units and magnitude properties):</P>
+<pre>    
+    value &isin; {
+        DV_QUANTITY [id14] &isin; {
+            property &isin; {[openehr::151|temperature|]}
+            units &isin; {“deg F”}
+            magnitude &isin; {|32.0..212.0|}
+        }
+        DV_QUANTITY [id15] &isin; {
+            property &isin; {[openehr::151|temperature|]}
+            units &isin; {“deg C”}
+            magnitude &isin; {|0.0..100.0|}
+        }
+    }
+</pre>    
+<P CLASS="BodyFirst">
+What we logically want to do is to state a single constraint on a <CODE CLASS="Code">
+DV_QUANTITY</CODE>
+ that sets the magnitude range constraint dependent on the units constraint.</P>
+<P CLASS="BodyFirst">
+The covarying requirement could be met using rules of the form:</P>
+<pre>    
+    .../value/units = “deg F” &#174; magnitude &isin; {|32.0..212.0|}
+    .../value/units = “deg C” &#174; magnitude &isin; {|0.0..100.0|}
+</pre>
+<P CLASS="BodyFirst">
+However, this seems obscure for what is logically a very simple kind of constraint. </P>
+<P CLASS="BodyFirst">
+A generic solution involves treating covarying properties formally as tuples, and providing syntax to express ‘constraints on tuples’. The following syntax achieves this:</P>
+<pre>    
+    value &isin; {
+        DV_QUANTITY[id4] &isin; {
+            property &isin; {[openehr::151]}                                    -- temperature
+            [units, magnitude] &isin; { 
+                [{“deg F”}, {|32.0..212.0|}] ,
+                [{“deg C”}, {|0.0..100.0|}] 
+            }
+        }
+    }
+</pre>    
+<P CLASS="Body">
+The {} surrounding each leaf level constraint are needed because although such constraints are typically atomic, as above, they may also take other standard ADL forms such as a list of strings, list of integers etc. In the latter case, the ',' characters from such lists will be conflated with the ',' separator of the distinct constraints in the tuple. Use of {} is also logically justified: each such entity is indeed a 'constraint' in the ADL sense, and all constraints are delimited by {}.</P>
+<P CLASS="Body">
+The above is actually short-hand for the following structure, with the added constraint that only corresponding units and magnitude leaf level constraints can occur together, while other combinations like <CODE CLASS="Code">
+“deg F”</CODE>
+ and <CODE CLASS="Code">
+|0.0..100.0|</CODE>
+ would be illegal:</P>
+<pre>    
+    value &isin; {
+    DV_QUANTITY[id4] &isin; {
+            property &isin; {[openehr::151]} -- temperature
+            units &isin; { 
+                String &isin;             {“deg F”}
+                String &isin;             {“deg C”} 
+            }
+            magnitude &isin; {
+                Integer &isin;             {|32.0..212.0|}
+                Integer &isin;     {|0.0..100.0|} 
+            }
+        }
+    }
+</pre>    
+<DIV>
+<p>TBD: need to check path semantics to leaf nodes in tuples.</p>
+<P CLASS="Body">
+The above defines constraints on units and magnitude together, as tuples like <CODE CLASS="Code">
+[{“deg F”}, {|32.0..212.0|}] </CODE>
+. </P>
+<UL>
+<LI CLASS="Deprecated">
+In the openEHR ADL 1.4 Archetype Profile, a custom constrainer type <CODE CLASS="Code">
+C_DV_QUANTITY</CODE>
+ was used to to provide the above constraint. However, this is specific to the Reference Model type, and does not solve similar constraints occurring in other types. This type and also the <CODE CLASS="Code">
+C_DV_ORDINAL</CODE>
+ type have been removed from ADL 1.5 altogether.</LI>
+</UL>
+<P CLASS="Body">
+This same syntax will work for tuples of 3 or more co-varying properties, and is mathematically clean. It does involve some extra work for compiler implementers, but this only needs to be performed once to support any use of tuple constraints, regardless of Reference Model type. </P>
+<P CLASS="Body">
+If we look at the <CODE CLASS="Code">
+DV_ORDINAL</CODE>
+ data type constraint in the same light. First, doing a typical ordinal constraint (a scale of +, ++, +++) with just standard ADL:</P>
+<pre>    
+    ordinal_attr &isin; {
+        DV_ORDINAL[id3] &isin; {
+            value &isin; {0}
+            symbol &isin; {
+                DV_CODED_TEXT[id4] &isin; {
+                    code &isin; {"at1"}                                 -- +
+                }
+            }
+        }
+        DV_ORDINAL[id5] &isin; {
+            value &isin; {1}
+            symbol &isin; {
+                DV_CODED_TEXT[id6] &isin; {
+                    code &isin; {"at2"}                                 -- ++
+                        }
+                    }
+                }
+            }
+        }
+        DV_ORDINAL[id7] &isin; {
+            value &isin; {2}
+            symbol &isin; {
+                DV_CODED_TEXT[id8] &isin; {
+                    code &isin; {"at3"}                         -- +++
+                }
+            }
+        }
+    }
+</pre>    
+<P CLASS="BodyFirst">
+This hides the <CODE CLASS="Code">
+DV_ORDINAL</CODE>
+ type altogether, but as for the <CODE CLASS="Code">
+C_DV_QUANTITY</CODE>
+ example above, it was a custom solution. </P>
+<P CLASS="Body">
+By the use of tuple constraint, almost the same thing can be chieved much more efficiently. We can now write:</P>
+<pre>    
+    ordinal_attr &isin; {
+        DV_ORDINAL[id3] &isin; {
+            [value ,symbol] &isin; {
+                [{0}, {[at1]}], -- +             
+                [{1}, {[at2]}], -- ++          
+                [{2}, {[at3]}] -- +++           
+            }
+        }
+    }
+</pre>
+<UL>
+<LI CLASS="Deprecated">
+in the openEHR profiled version of ADL 1.4, a custom syntax was used, below, which is now replaced by the above generic form:</LI>
+</UL>
+<pre>    
+    ordinal_attr &isin; {
+        0|[local::at1],                                -- +
+        1|[local::at2],                                -- ++
+        2|[local::at3]                                 -- +++
+    }
+</pre>    
+</DIV>
+</DIV>
+<DIV>
+<h3>
+Group Constraints</h3>
+<P CLASS="BodyFirst">
+Within a container attribute, any number of object constraints may be defined. The cardinality and occurrences constraints described above show how to control respectively, the overall container contents, and the occurrence of any particular object constraint within data. However, sometimes finer control is needed on repetition and grouping of members within the container. This can be achieved by the <CODE CLASS="Code">
+group</CODE>
+ construct, which provides an interior block where a sub-group of the overall container can be treated as a sub-group. The following example shows a typical used of the group construct.</P>
+<pre>    
+    ITEM_TREE[id1] &isin; {
+        items matches {
+            ELEMENT[id2] occurrences &isin; {1} &isin; {...}                                                -- Investigation type
+            ELEMENT[id3] occurrences &isin; {0..1} &isin; {...}                                                -- reason
+            group cardinality &isin; {1} occurrences &isin; {0..1} &isin; {                                                    
+                                                                -- Methodology
+                ELEMENT[id6] occurrences &isin; {0..1} &isin; {...}                                                -- as Text
+                ELEMENT[id7] occurrences &isin; {0..1} &isin; {...}                                                -- Coded
+                CLUSTER[id8] occurrences &isin; {0..1} &isin; {...}                                                -- structured
+            }
+            ELEMENT[id11] occurrences &isin; {0..1} &isin; {...}                                                -- (other details)
+            CLUSTER[id12] occurrences &isin; {0..1} &isin; {...}                                                -- (other details)
+        }
+    }
+</pre>    
+<P CLASS="Body">
+In the above, the group is used to state a logical choice of methodology representations, each defined by one of the three constraints within the group. The group construct includes both cardinality and occurrences qualifier constraints. The former indicates the size and ordering of the group, in the same way as the cardinality constraint does for the overall contents of a container attribute. The latter defines the repeatability of the group. If the group occurrences upper limit is above 1, it means that the sub group may repeat, with each repetition respecting the order and size defined by the group cardinality.</P>
+<P CLASS="LangRule">
+A group constraint may be used to delimit a sub-list of objects within the total list of object constraints defined within a container attribute. A cardinality, defining size, ordering and uniqueness of the sub-list must be defined. An occurrences defining the repeatbility of the sub-list must also be defined. Group constraints can be nested.</P>
+<P CLASS="Body">
+The use of group cardinality and occurrences constraints, coupled with the occurrences constraints on each group member provide a means of specifying a number of logical constraint types found in other formalisms, including XML, as follows.</P>
+<TABLE BORDER="1">
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+Logical constraint</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+Group<BR>
+cardinality</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+Group<BR>
+occurrences</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+Item</P>
+<P CLASS="CellHeading">
+occurrences</P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+1 of N choice</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+1..1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+upper = 1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+0..1</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+1 of N choice, repeating</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+1..1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+upper &gt; 1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+0..1</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+N of M choice</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+N..N</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+upper = 1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+0..1</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+N of M choice, repeating</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+N..N</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+upper &gt; 1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+0..1</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+sequence, repeating</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+upper &gt; 1, ordered</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+upper &gt; 1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+any</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+sub-group, repeating</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+upper &gt; 1, unordered</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+upper &gt; 1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+any</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="Body">
+Group blocks can be nested, enabling sub-lists of sub-lists to be defined, as illustrated below.</P>
+<pre>    
+    items &isin; {
+        ELEMENT[id2] occurrences &isin; {1} &isin; {...}                                                -- Investigation type
+        ELEMENT[id3] occurrences &isin; {0..1} &isin; {...}                                                -- Investigation reason
+        group cardinality &isin; {2} occurrences &isin; {*} &isin; {
+                                                        -- pick any 2 &amp; repeat
+            ELEMENT[id6] occurrences matches {0..1} &isin; {...}
+            ELEMENT[id7] occurrences matches {0..1} &isin; {...}
+            CLUSTER[id8] occurrences matches {0..1} &isin; {...}
+            group cardinality &isin; {1} occurrences &isin; {0..1} &isin; {
+                                                        -- at least one
+                ELEMENT[id9] occurrences &isin; {0..1} &isin; {...}
+                CLUSTER[id10] occurrences &isin; {0..1} &isin; {...}
+            }
+        }
+        ELEMENT[id11] occurrences &isin; {0..1} &isin; {...}    -- (other details)
+        CLUSTER[id12] occurrences &isin; {0..1} &isin; {...}    -- (other details)
+    }
+</pre>    
+<DIV>
+<h4>
+Slots and Grouping</h4>
+<P CLASS="BodyFirst">
+The group constraint is often useful with a slot definition, in order to control the ordering and occurrences of items defined by other archetypes, within an overall container. Consider the example of data of the general structure: 'any number of problem and diagnosis Entries, followed by one or more plan &amp; treatment Entries'. An example of data following this structure would be:</P>
+<UL>
+<LI CLASS="LstU1">
+<CODE CLASS="Code">
+EVALUATION</CODE>
+: problem #1</LI>
+<LI CLASS="LstU1">
+<CODE CLASS="Code">
+EVALUATION</CODE>
+: diagnosis #1</LI>
+<LI CLASS="LstU1">
+<CODE CLASS="Code">
+EVALUATION</CODE>
+: problem #2</LI>
+<LI CLASS="LstU1">
+<CODE CLASS="Code">
+EVALUATION</CODE>
+: problem #3</LI>
+<LI CLASS="LstU1">
+<CODE CLASS="Code">
+EVALUATION</CODE>
+: plan</LI>
+<LI CLASS="LstU1">
+<CODE CLASS="Code">
+INSTRUCTION</CODE>
+: medication #1</LI>
+<LI CLASS="LstU1">
+<CODE CLASS="Code">
+INSTRUCTION</CODE>
+: therapy #1</LI>
+</UL>
+<P CLASS="BodyFirst">
+It might be expected that the slot constraints needed to define this are as follows:</P>
+<pre>    
+    SECTION[id2] occurrences &isin; {0..1} &isin; {    -- Subjective
+        items cardinality &isin; {0..*; ordered} &isin; {
+            allow_archetype EVALUATION[id6] occurrences &isin; {*} &isin; { -- Problem
+                include
+                    archetype_id/value &isin; {/openEHR-EHR-EVALUATION\.problem\.v*/}
+            }
+            allow_archetype EVALUATION[id7] occurrences &isin; {*} &isin; { -- Diagnosis
+                include
+                    archetype_id/value &isin; {/openEHR-EHR-EVALUATION\.problem-diagnosis\.v*/}
+            }
+            allow_archetype EVALUATION[id8] occurrences &isin; {1} &isin; { -- Plan
+                include
+                    archetype_id/value &isin; {/openEHR-EHR-EVALUATION\.plan\.v*/}
+            }
+            allow_archetype INSTRUCTION[id9] occurrences &isin; {*} &isin; {
+                                                                -- Intervention
+                include
+                    archetype_id/value &isin; {/openEHR-EHR-INSTRUCTION\.plan\.v*/}
+            }
+        }
+    }
+</pre>    
+<P CLASS="Body">
+The above says that the <CODE CLASS="Code">
+SECTION</CODE>
+.<EM CLASS="Emphasis">
+items</EM>
+ attribute is an ordered list, and that its contents include multiple <CODE CLASS="Code">
+EVALUATION</CODE>
+ objects representing problem, diagnosis and plan, and also multiple <CODE CLASS="Code">
+INSTRUCTION</CODE>
+ objects representing interventions. The problem is now apparent. Each slot definition is set of possibilities, but we do not necessarily want to follow the slot ordering for the ordering of the archetypes chosen to fill the slots. To impose the required ordering and occurrences, we can use the group construct as follows.</P>
+<pre>    
+    SECTION[id2] occurrences &isin; {0..1} &isin; {    -- Subjective
+        items cardinality &isin; {0..*; ordered} &isin; {
+            group cardinality &isin; {0..1} occurrences &isin; {0..*} &isin; {                                   
+                                    -- sub-group of any number of problems &amp; diagnoses
+                allow_archetype EVALUATION[id6] occurrences &isin; {1} &isin; {--Problem
+                    include
+                      archetype_id/value &isin; {/openEHR-EHR-EVALUATION\.problem\.v*/}
+                }
+                allow_archetype EVALUATION[id7] occurrences &isin; {1} &isin; {--Diagnosi
+                    include
+                      archetype_id/value &isin; 
+                                            {/openEHR-EHR-EVALUATION\.diagnosis\.v*/}
+                }
+            }
+            allow_archetype EVALUATION[id8] occurrences &isin; {1} &isin; { -- Plan
+                include
+                    archetype_id/value &isin; {/openEHR-EHR-EVALUATION\.plan\.v*/}
+            }
+            allow_archetype INSTRUCTION[id9] occurrences &isin; {*} &isin; {
+                                                                -- Intervention
+                include
+                    archetype_id/value &isin; {/openEHR-EHR-INSTRUCTION\.plan\.v*/}
+            }
+        }
+    }
+</pre>    
+<P CLASS="Body">
+The above has the desired result in data: a group of any number of problems and diagnoses, followed by a plan, followed by one or more Interventions.</P>
+</DIV>
+</DIV>
+</DIV>
+<DIV>
+<h2>Constraints on Primitive Types</H2>
+<P CLASS="BodyFirst">
+At the leaf nodes in a cADL text, constraints can be expressed on the following primitive types:</P>
+<UL>
+<LI CLASS="LstU1">
+Boolean;</LI>
+<LI CLASS="LstU1">
+Character, String;</LI>
+<LI CLASS="LstU1">
+Integer, Real;</LI>
+<LI CLASS="LstU1">
+Date, Time, Date_time, Duration;</LI>
+<LI CLASS="LstU1">
+Terminology_code;</LI>
+<LI CLASS="LstU1">
+lists and intervals of some of the above.</LI>
+</UL>
+<P CLASS="Body">
+While constraints on complex types follow the rules described so far, constraints on attributes of primitive types in cADL are expressed without type names, and omitting one level of braces, as follows:</P>
+    some_attr matches {some_pattern}
+<P CLASS="Body">
+rather than:</P>
+<pre>    
+    some_attr matches {
+        PRIMITIVE_TYPE[id3] matches {
+            some_pattern
+        }
+    }
+</pre>    
+<P CLASS="Body">
+This is made possible because the syntax patterns of all primitive type constraints are mutually distinguishable, i.e. the type can always be inferred from the syntax alone. Since all leaf attributes of all object models are of primitive types, or lists or sets of them, cADL archetypes using the brief form for primitive types are significantly less verbose overall, as well as being more directly comprehensible to human readers. Currently the cADL grammar only supports the brief form used in this specification since no practical reason has been identified for supporting the more verbose version. Theoretically however, there is nothing to prevent it being used in the future, or in some specialist application.</P>
+<DIV>
+<h3>
+Assumed Values</h3>
+<P CLASS="BodyFirst">
+In an archetype containing optional data elements, an ability to define ‘assumed’ values is useful. For example, an archetype for ‘blood pressure measurement’ might include an optional data element describing the patient position, with choices ‘lying’, ‘sitting’ and ‘standing’. Since this element is optional, data could be created according to the archetype that does not contain it. However, a blood pressure cannot be taken without the patient in some position, so clearly there is an implied value.</P>
+<P CLASS="Body">
+The archetype allows this to be explicitly stated so that all users/systems know what value to assume when optional items are not included in the data. Assumed values are definable on any primitive type, and are expressed after the constraint expression, by a semi-colon (‘;’) followed by a value of the same type as that implied by the preceding part of the constraint. Example constraints containing assumed values are shown in the sections below.</P>
+<P CLASS="Body">
+If no assumed value is stated, no reliable assumption can be made by the receiver of the archetyped data about what the values of removed optional parts might be, from inspecting the archetype. However, this usually corresponds to a situation where the assumed value does not even need to be stated - the same value will be assumed by all users of this data, if its value is not transmitted. In most cases, if an element specified as optional in the archetype, data users only care about the value if it is actually present. The ‘assumed value’ concept is therefore not likely to be needed in most cases.</P>
+</DIV>
+<DIV>
+<h3>
+Constraints on String</h3>
+<P CLASS="BodyFirst">
+Strings can be constrained in two ways: using a list of fixed strings, and using using a regular expression. All constraints on strings are case-sensitive. </P>
+<DIV>
+<h4>
+List of Strings</h4>
+<P CLASS="BodyFirst">
+A String-valued attribute can be constrained by a list of strings (using the ODIN syntax for string lists), including the simple case of a single string. Examples are as follows:</P>
+<pre>    
+    species &isin; {“platypus”}
+    species &isin; {“platypus”, “kangaroo”}
+    species &isin; {“platypus”, “kangaroo”, “wombat”}
+</pre>    
+<P CLASS="Body">
+The first example constraints the runtime value of the <EM CLASS="Emphasis">
+species</EM>
+ attribute of some object to take the value “platypus”; the second constrains it be either “platypus” or “kangaroo”, and so on. In almost all cases, this kind of string constraint should be avoided, since it usually renders the body of the archetype language-dependent. Exceptions are proper names (e.g. “NHS”, “Apgar”), product tradenames (but note even these are typically different in different language locales, even if the different names are not literally translations of each other). The preferred way of constraining string attributes in a language independent way is with value sets of terminology codes. See <A HREF="CDL.htm#99912" CLASS="XRef">See Terminology Constraints</A>.</P>
+</DIV>
+<DIV>
+<h4>
+Regular Expression</h4>
+<P CLASS="BodyFirst">
+The second way of constraining strings is with regular expressions, a widely used syntax for expressing patterns for matching strings. The regular expression syntax used in cADL is a proper subset of that used in the Perl language (see <A HREF="references.htm#51150" CLASS="XRef">[19]</A> for a full specification of the regular expression language of Perl). Two uses of it are accepted in cADL:</P>
+    string_attr matches {/regular expression/}
+    string_attr matches {!~ /regular expression/}
+<P CLASS="Body">
+The first indicates that the attribute value must match the supplied regular expression. The last indicates that the value must not match the expression. If the delimiter character is required in the pattern, it must be quoted with the backslash (‘\’) character, or else alternative delimiters can be used, enabling more comprehensible patterns. A typical example is regular expressions including units. The following two patterns are equivalent:</P>
+    units &isin; {/km\/h|mi\/h/}
+    units &isin; {^km/h|mi/h^}
+<P CLASS="Body">
+The rules for including special characters within strings are described in <A HREF="file_encoding.htm#13178" CLASS="XRef">See File Encoding and Character Quoting</A>.</P>
+<P CLASS="Body">
+The regular expression patterns supported in cADL are as follows.</P>
+<P CLASS="Hdr4U">
+Character Class</P>
+<UL>
+<LI CLASS="LstV1">
+<CODE CLASS="Code">
+. </CODE>
+match any single character. E.g. <CODE CLASS="Code">
+...</CODE>
+ matches any 3 characters;</LI>
+<LI CLASS="LstV1">
+<CODE CLASS="Code">
+[xyz] </CODE>
+match any of the characters in the set <CODE CLASS="Code">
+xyz</CODE>
+ (case sensitive). E.g. <CODE CLASS="Code">
+[0-9]</CODE>
+ matches any string containing a single decimal digit;</LI>
+<LI CLASS="LstV1">
+<CODE CLASS="Code">
+[a-m] </CODE>
+match any of the characters in the set of characters formed by the continuous range from <CODE CLASS="Code">
+a</CODE>
+ to <CODE CLASS="Code">
+m</CODE>
+ (case sensitive). E.g. <CODE CLASS="Code">
+[0-9]</CODE>
+ matches any single character string containing a single decimal digit, <CODE CLASS="Code">
+[S-Z]</CODE>
+ matches any single character in the range <CODE CLASS="Code">
+S</CODE>
+ - <CODE CLASS="Code">
+Z</CODE>
+;</LI>
+<LI CLASS="LstV1">
+<CODE CLASS="Code">
+[^a-m] </CODE>
+match any character except those in the set of characters formed by the continuous range from <CODE CLASS="Code">
+a</CODE>
+ to <CODE CLASS="Code">
+m</CODE>
+. E.g. <CODE CLASS="Code">
+[^0-9]</CODE>
+ matches any single character string as long as it does not contain a single decimal digit;</LI>
+</UL>
+<P CLASS="Hdr4U">
+Grouping</P>
+<UL>
+<LI CLASS="LstV1">
+<CODE CLASS="Code">
+(pattern)    </CODE>
+parentheses are used to group items; any pattern appearing within parentheses is treated as an atomic item for the purposes of the occurrences operators. E.g. <CODE CLASS="Code">
+([1-9][0-9])</CODE>
+ matches any 2-digit number.</LI>
+</UL>
+<P CLASS="Hdr4U">
+Occurrences</P>
+<UL>
+<LI CLASS="LstV1">
+<CODE CLASS="Code">
+* </CODE>
+match 0 or more of the preceding atomic item. E.g. <CODE CLASS="Code">
+.*</CODE>
+ matches any string; <CODE CLASS="Code">
+[a-z][a-z0-9]*</CODE>
+ matches any alphanumeric string starting with a letter;</LI>
+<LI CLASS="LstV1">
+<CODE CLASS="Code">
++ </CODE>
+match 1 or more occurrences of the preceding atomic item. E.g. <CODE CLASS="Code">
+a[^\s]+</CODE>
+ matches any string starting with ‘a’, followed by at least one further non-whitespace character;</LI>
+<LI CLASS="LstV1">
+<CODE CLASS="Code">
+? </CODE>
+match 0 or 1 occurrences of the preceding atomic item. E.g. <CODE CLASS="Code">
+ab?</CODE>
+ matches the strings <CODE CLASS="Code">
+“a”</CODE>
+ and <CODE CLASS="Code">
+“ab”</CODE>
+;</LI>
+<LI CLASS="LstV1">
+<CODE CLASS="Code">
+{m,n} </CODE>
+match m to n occurrences of the preceding atomic item. E.g. <CODE CLASS="Code">
+ab{1,3}</CODE>
+ matches the strings <CODE CLASS="Code">
+“ab”</CODE>
+ and <CODE CLASS="Code">
+“abb”</CODE>
+ and <CODE CLASS="Code">
+“abbb”</CODE>
+; <CODE CLASS="Code">
+[a-z]{1,3}</CODE>
+ matches all lower-case alphabetic strings of one to three characters in length;</LI>
+<LI CLASS="LstV1">
+<CODE CLASS="Code">
+{m,} </CODE>
+match at least m occurrences of the preceding atomic item;</LI>
+<LI CLASS="LstV1">
+<CODE CLASS="Code">
+{,n} </CODE>
+match at most n occurrences of the preceding atomic item;</LI>
+<LI CLASS="LstV1">
+<CODE CLASS="Code">
+{m} </CODE>
+match exactly m occurrences of the preceding atomic item;</LI>
+</UL>
+<P CLASS="Hdr4U">
+Special Character Classes</P>
+<UL>
+<LI CLASS="LstV1">
+<CODE CLASS="Code">
+\d</CODE>
+, <CODE CLASS="Code">
+\D</CODE>
+     match a decimal digit character; match a non-digit character;</LI>
+<LI CLASS="LstV1">
+<CODE CLASS="Code">
+\s</CODE>
+, <CODE CLASS="Code">
+\S</CODE>
+     match a whitespace character; match a non-whitespace character;</LI>
+</UL>
+<P CLASS="Hdr4U">
+Alternatives</P>
+<UL>
+<LI CLASS="LstV1">
+<CODE CLASS="Code">
+pattern1|pattern2    </CODE>
+            match either pattern1 or pattern2. E.g. <CODE CLASS="Code">
+lying|sitting|standing</CODE>
+ matches any of the words <CODE CLASS="Code">
+“lying”</CODE>
+, <CODE CLASS="Code">
+“sitting”</CODE>
+ and <CODE CLASS="Code">
+“standing”</CODE>
+.</LI>
+</UL>
+<P CLASS="Body">
+A similar warning should be noted for the use of regular expressions to constrain strings: they should be limited to non-linguistically dependent patterns, such as proper and scientific names. The use of regular expressions for constraints on normal words will render an archetype linguistically dependent, and potentially unusable by others.</P>
+</DIV>
+</DIV>
+<DIV>
+<h3>
+Constraints on Integer</h3>
+<P CLASS="BodyFirst">
+Integers can be constrained using a list of integer values, and using an integer interval.</P>
+<DIV>
+<h4>
+List of Integers</h4>
+<P CLASS="BodyFirst">
+Lists of integers expressed in the syntax from ODIN can be used as a constraint, e.g.:</P>
+    length matches {1000}                                        -- fixed value of 1000
+    magnitude matches {0, 5, 8}                                        -- any of 0, 5 or 8
+<P CLASS="Body">
+The first constraint requires the attribute length to be 1000, while the second limits the value of magnitude to be 0, 5, or 8 only. A list may contain a single integer only:</P>
+    magnitude matches {0}                                        -- matches 0
+</DIV>
+<DIV>
+<h4>
+Interval of Integer</h4>
+<P CLASS="BodyFirst">
+Integer intervals are expressed using the interval syntax from ODIN (described in the ODIN specification). Examples of 2-sided intervals include:</P>
+<pre>    
+    length matches {|1000|}                                        -- point interval of 1000 (=fixed value)
+    length matches {|950..1050|}                                        -- allow 950 - 1050
+    length matches {|0..1000|}                                        -- allow 0 - 1000
+    length matches {|0..&lt;1000|}                                        -- allow 0&gt;= x &lt;1000
+    length matches {|0&gt;..&lt;1000|}                                        -- allow 0&gt; x &lt;1000
+    length matches {|100+/-5|}                                        -- allow 100 +/- 5, i.e. 95 - 105
+</pre>    
+<P CLASS="Body">
+Examples of one-sided intervals include:</P>
+<pre>    
+    length matches {|&lt;10|}                                        -- allow up to 9
+    length matches {|&gt;10|}                                        -- allow 11 or more
+    length matches {|&lt;=10|}                                        -- allow up to 10
+    length matches {|&gt;=10|}                                        -- allow 10 or more
+    length matches {|&gt;=10|;5}                                        -- allow 10 or more; assumed value = 5
+</pre>    
+</DIV>
+</DIV>
+<DIV>
+<h3>
+Constraints on Real</h3>
+<P CLASS="BodyFirst">
+Constraints on Real values follow exactly the same syntax as for Integers, in both list and interval forms. The only difference is that the real number values used in the constraints are indicated by the use of the decimal point and at least one succeeding digit, which may be 0. Typical examples are:</P>
+<pre>    
+    magnitude &isin; {5.5}                                                -- list of one (fixed value)
+    magnitude &isin; {|5.5|}                                                -- point interval (=fixed value)
+    magnitude &isin; {|5.5..6.0|}                                                -- interval
+    magnitude &isin; {5.5, 6.0, 6.5}                                                -- list
+    magnitude &isin; {|0.0..&lt;1000.0|}                                                -- allow 0&gt;= x &lt;1000.0
+    magnitude &isin; {|&lt;10.0|}                                                -- allow anything less than 10.0
+    magnitude &isin; {|&gt;10.0|}                                                -- allow greater than 10.0
+    magnitude &isin; {|&lt;=10.0|}                                                -- allow up to 10.0
+    magnitude &isin; {|&gt;=10.0|}                                                -- allow 10.0 or more
+    magnitude &isin; {|80.0+/-12.0|}                                                -- allow 80 +/- 12
+</pre>    
+</DIV>
+<DIV>
+<h3>
+Constraints on Boolean</h3>
+<P CLASS="BodyFirst">
+Boolean runtime values can be constrained to be True, False, or either, as follows:</P>
+<pre>    
+    some_flag matches {True}
+    some_flag matches {False}
+    some_flag matches {True, False}
+    some_flag matches {True, False; False}                                                -- with assumed value
+</pre>    
+</DIV>
+<DIV>
+<h3>
+Constraints on Character</h3>
+<P CLASS="BodyFirst">
+Characters can be constrained in two ways: using a list of characters, and using a regular expression.</P>
+<DIV>
+<h4>
+List of Characters</h4>
+<P CLASS="BodyFirst">
+The following examples show how a character value may be constrained using a list of fixed character values. Each character is enclosed in single quotes.</P>
+<pre>    
+    color_name matches {‘r’}
+    color_name matches {‘r’, ‘g’, ‘b’}
+</pre>    
+</DIV>
+<DIV>
+<h4>
+Regular Expression</h4>
+<P CLASS="BodyFirst">
+Character values can also be constrained using a single-character regular expression character class, also enclosed in single quotes, as per the following examples:</P>
+<pre>    
+    color_name matches {‘[rgbcmyk]’}
+    color_name matches {‘[^\s\t\n]’}
+</pre>    
+<P CLASS="Body">
+The only allowed elements of the regular expression syntax in character expressions are the following:</P>
+<UL>
+<LI CLASS="LstU1">
+any item from the <A HREF="CDL.htm#88236" CLASS="XRef">See Character Class</A> list above;</LI>
+<LI CLASS="LstU1">
+any item from the <A HREF="CDL.htm#75085" CLASS="XRef">See Special Character Classes</A> list above;</LI>
+<LI CLASS="LstU1">
+an alternative expression whose parts are any item types, e.g. <CODE CLASS="Code">
+‘a’|‘b’|[m-z]</CODE>
+</LI>
+</UL>
+</DIV>
+</DIV>
+<DIV>
+<h3>
+Constraints on Dates, Times and Durations</h3>
+<P CLASS="BodyFirst">
+Dates, times, date/times and durations may all be constrained in three ways: using a list of values, using intervals, and using patterns. The first two ways allow values to be constrained to actual date, time etc values, while the last allows values to be constrained on the basis of which parts of the date, time etc are present or missing, regardless of value. The pattern method is described first, since patterns can also be used in lists and intervals.</P>
+<DIV>
+<h4>
+Date, Time and Date/Time</h4>
+<P CLASS="Hdr4U">
+Patterns</P>
+<P CLASS="BodyFirst">
+Dates, times, and date/times (i.e. timestamps), can be constrained using patterns based on the ISO 8601 date/time syntax, which indicate which parts of the date or time must be supplied. A constraint pattern is formed from the abstract pattern <CODE CLASS="Code">
+yyyy-mm-ddThh:mm:ss</CODE>
+ (itself formed by translating each field of an ISO 8601 date/time into a letter representing its type), with either <CODE CLASS="Code">
+‘?’</CODE>
+ (meaning optional) or <CODE CLASS="Code">
+‘X’</CODE>
+ (not allowed) characters substituted in appropriate places. The syntax of legal patterns is shown by the following regular expressions:</P>
+<pre>    
+    date_pattern:                                 yyyy-(mm|??|XX)-(dd|??|XX)
+    time_pattern:                                 hh:(mm|??|XX):(ss|??|XX)
+    time_in_date_pattern:                                 T(hh|??|XX):(mm|??|XX):(ss|??|XX)
+    date_time_pattern:                                 date_constraint time_in_date_pattern
+</pre>    
+<P CLASS="Body">
+All expressions generated by these patterns must also satisfy the validity rules:</P>
+<UL>
+<LI CLASS="LstU1">
+where ‘??’ appears in a field, only ‘??’ or ‘XX’ can appear in fields to the right</LI>
+<LI CLASS="LstU1">
+where ‘XX’ appears in a field, only ‘XX’ can appear in fields to the right</LI>
+</UL>
+<P CLASS="Body">
+The following table shows the valid patterns that can be used, and the types implied by each pattern.</P>
+<TABLE BORDER="1">
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+Implied Type</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+Pattern</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+Explanation</P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+Date</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+yyyy-mm-dd</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+full date must be specified</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+Date</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+yyyy-mm-??            </P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+optional day;<BR>
+e.g. day in month forgotten</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+Date</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+yyyy-??-??</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+optional month, optional day;<BR>
+i.e. any date allowed; e.g. mental health questionnaires which include well known historical dates</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+Date</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+yyyy-mm-XX            </P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+mandatory month, no day</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+Date</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+yyyy-??-XX            </P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+optional month, no day</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+        </P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+hh:mm:ss</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+full time must be specified</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+hh:mm:XX</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+no seconds;<BR>
+e.g. appointment time</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+hh:??:XX</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+optional minutes, no seconds;<BR>
+e.g. normal clock times</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+hh:??:??</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+optional minutes, seconds;<BR>
+i.e. any time allowed</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+Date/Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+yyyy-mm-ddThh:mm:ss</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+full date/time must be specified</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+Date/Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+yyyy-mm-ddThh:mm:??</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+optional seconds;<BR>
+e.g. appointment date/time</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+Date/Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+yyyy-mm-ddThh:mm:XX</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+no seconds;<BR>
+e.g. appointment date/time</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+Date/Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+yyyy-mm-ddThh:??:XX</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+no seconds, minutes optional;<BR>
+e.g. in patient-recollected date/times</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+Date/Time</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+yyyy-??-??T??:??:??</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="Body">
+minimum valid date/time constraint</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="Body">
+An assumed value can be used with any of the above as follows:</P>
+    yyyy-??-??; 1970-01-01
+<P CLASS="Hdr4U">
+Intervals</P>
+<P CLASS="BodyFirst">
+Dates, times and date/times can also be constrained using intervals. Each date, time etc in an interval may be a literal date, time etc value, or a value based on a pattern. In the latter case, the limit values are specified using the patterns from the above table, but with numbers in the positions where <CODE CLASS="Code">
+‘X’</CODE>
+ and <CODE CLASS="Code">
+‘?’</CODE>
+ do not appear. For example, the pattern <CODE CLASS="Code">
+yyyy-??-XX</CODE>
+ could be transformed into <CODE CLASS="Code">
+1995-??-XX</CODE>
+ to mean any partial date in 1995. Examples of such constraints:</P>
+<pre>    
+    |1995-??-XX|                                            -- any partial date in 1995
+    |09:30:00|                                            -- exactly 9:30 am
+    |&lt; 09:30:00|                                            -- any time before 9:30 am
+    |&lt;= 09:30:00            |                                -- any time at or before 9:30 am
+    |&gt; 09:30:00|                                            -- any time after 9:30 am
+    |&gt;= 09:30:00            |                                -- any time at or after 9:30 am
+    |2004-05-20..2004-06-02                            |                -- a date range
+    |2004-05-20T00:00:00..2005-05-19T23:59:59|                                                -- a date/time range
+    |&gt;= 09:30:00            |    ;09:30:00                            -- any time at or after 9:30 am                                            -- assume 9:30 am
+</pre>
+</DIV>
+<DIV>
+<h4>
+Duration Constraints</h4>
+<P CLASS="Hdr4U">
+Patterns</P>
+<P CLASS="BodyFirst">
+Patterns based on ISO 8601 can be used to constraint durations in the same way as for Date/time types. The general form of a pattern is (EBNF; all tokens are literals):</P>
+    P[Y|y][M|m][W|w][D|d][T[H|h][M|m][S|s]]
+<UL>
+<LI CLASS="NotaBene">
+Note that allowing the ‘W’ designator to be used with the other designators corresponds to a deviation from the published ISO 8601 standard used in openEHR, namely:</LI>
+<LI CLASS="LstU1">
+durations are supposed to take the form of PnnW or PnnYnnMnnDTnnHnnMnnS, but in openEHR, the W (week) designator can be used with the other designators, since it is very common to state durations of pregnancy as some combination of weeks and days.</LI>
+</UL>
+<P CLASS="Body">
+The use of this pattern indicates which “slots” in an ISO duration string may be filled. Where multiple letters are supplied in a given pattern, the meaning is “or”, i.e. any one or more of the slots may be supplied in the data. This syntax allows specifications like the following to be made:</P>
+<pre>    
+    Pd            -- a duration containing days only, e.g. P5d
+    Pm            -- a duration containing months only, e.g. P5m
+    PTm            -- a duration containing minutes only, e.g. PT5m
+    Pwd            -- a duration containing weeks and/or days only, e.g. P4w
+    PThm            -- a duration containing hours and/or minutes only, e.g. PT2h30m
+</pre>    
+<P CLASS="Hdr4U">
+List and Intervals</P>
+<P CLASS="BodyFirst">
+Durations can also be constrained by using absolute ISO 8601 duration values, or ranges of the same, e.g.:</P>
+<pre>    
+    PT1m                        -- 1 minute
+    P1dT8h                        -- 1 day 8 hrs
+    |PT0m..PT1m30s|                        -- Reasonable time offset of first apgar sample
+</pre>    
+<P CLASS="Hdr4U">
+Mixed Pattern and Interval</P>
+<P CLASS="BodyFirst">
+In some cases there is a need to be able to limit the allowed units as well as state a duration interval. This is common in obstetrics, where physicians want to be able to set an interval from say 0-50 weeks and limit the units to only weeks and days. This can be done as follows:</P>
+<pre>    
+    PWD/|P0W..P50W|                        -- 0-50 weeks, expressed only using weeks and days
+</pre>    
+<P CLASS="Body">
+The general form is a pattern followed by a slash (‘/’) followed by an interval, as follows:</P>
+    duration_pattern ‘/’ duration_interval
+</DIV>
+</DIV>
+<DIV>
+<h3>
+Terminology Constraints</h3>
+<DIV>
+<h4>
+Overview</h4>
+<P CLASS="BodyFirst">
+Terminology constraints deal with a special category of data values typically known as ‘coded terms’ or ‘terminology’. Coded data values are both textual (e.g. “diastolic blood pressure”) and semantic (may have relationships to each other). The idea is that instead of using text, the possible values are represented in structured vocabularies, terminologies or ontologies that define both the possible text (including translations) and also the relationships, if any, between the terms (sometimes known as ‘concepts’). In health, typical examples include ‘terminology’ resources such as WHO ICDx<A HREF="#pgfId-1169404" CLASS="footnote">2</A> and SNOMED terminologies and drug databases. </P>
+<P CLASS="Body">
+Coded terms are treated as a primitive type in ADL in order to enable the formalism and tools to work with terminology constraints<A HREF="#pgfId-1169358" CLASS="footnote">3</A>. Unlike other primitive constraints, terminology constraints may be complex, because they refer to external resources, either directly or via ‘bindings’ defined elsewhere in the archeype. This section describes the syntactical representations and relationships between these. The full semantics, including binding and resolution are described in <A HREF="main.htm#33142" CLASS="XRef">See Terminology Integration</A>.</P>
+</DIV>
+<DIV>
+<h4>
+Requirement</h4>
+<P CLASS="BodyFirst">
+There are two general categories of terminology constraint:</P>
+<UL>
+<LI CLASS="LstU1">
+‘inline’ terminology value or value set;</LI>
+<LI CLASS="LstU1">
+external terminology value set.</LI>
+</UL>
+<P CLASS="Body">
+In the first, it is the constraint locally in the archetype that establishes the term or set of possible terms to be used for a given purpose, e.g. ‘position of patient when measuring blood pressure’. This is true even if each term in the value set is mapped individually to a term in an external terminology. </P>
+<P CLASS="Body">
+In the second, the value set is defined and maintained by an external party, and the archetype references it via a reliable URI.</P>
+<P CLASS="Body">
+The general form of a terminology constraint in cADL is shown below:</P>
+<pre>    
+    ENTRY[id1] &isin; {                                               -- blood pressure measurement
+        name &isin; {                                         -- any synonym of BP
+            DV_CODED_TEXT[id2] &isin; {
+                defining_code &isin; {[ac1]} -- terminology constraint
+            }
+        }
+    }
+</pre>    
+<P CLASS="Body">
+In the above, the constraint on <CODE CLASS="Code">
+DV_CODED_TEXT</CODE>
+.<EM CLASS="Emphasis">
+defining_code</EM>
+ is defined as a terminology constraint containing an ‘ac’ code <CODE CLASS="Code">
+[acN]</CODE>
+, which acts as an internal identifier of a value set. The various types of terminology constraint are described below.</P>
+</DIV>
+<DIV>
+<h4>
+Design Basis</h4>
+<P CLASS="BodyFirst">
+A fully qualified coded term primitive data item is assumed by ADL to consist of:</P>
+<UL>
+<LI CLASS="LstU1">
+a terminology identifier</LI>
+<LI CLASS="LstU1">
+optionally, a terminology version identifier</LI>
+<LI CLASS="LstU1">
+a code or ‘code string’ (an expression made from codes, permitted in some terminologies).</LI>
+</UL>
+<P CLASS="Body">
+The special terminology identifier “local” is understood as meaning ‘this archetype’. The qualified form of the term ‘at4’ from within the same archetype is “local::at4”. An archetype term referenced from an external context where the archetype identifier is not otherwise known uses the archetype identifier as the terminology identifier. Thus the term <CODE CLASS="Code">
+at4</CODE>
+ can be referenced externally as:</P>
+    org.openehr::openEHR-EHR-OBSERVATION.bp_measurement.v1::at4
+<P CLASS="Body">
+Terminology constraints in an archetype can be in three ‘forms’: ‘source’, ‘expanded’, ‘substituted’and ‘resolved’. </P>
+<P CLASS="Body">
+Currently an archetype may contain terminology constraints in more than one form.</P>
+</DIV>
+<DIV>
+<h4>
+Source Form</h4>
+<P CLASS="BodyFirst">
+A ‘source form’ terminology constraint is the form used to define value sets in source archetypes, i.e. it is the authored form of constraint, prior to any further tool processing. The lexical form is a single ac-code, optionally with an at-code denoting an assumed value, i.e.:</P>
+<UL>
+<LI CLASS="LstU1">
+<CODE CLASS="Code">
+[acN]</CODE>
+</LI>
+<LI CLASS="LstU1">
+[acN; atN]        -- with assumed value</LI>
+</UL>
+<P CLASS="Body">
+The ac-code is defined in the archetype terminology. Associated with the ac-code must be a local value set, and/or a binding to an external value set. If both a local value set and a binding exist, tooling and configuration parameters are used to decide how to generate the resolved form (below). </P>
+<P CLASS="Body">
+This type of constraint is used when there is a proproper value set, i.e. a set of coded values with more than one member. For the degenerate case of a constraint consisting of a single term, the first expanded form below is used, i.e. there is no ac-coded source form.</P>
+</DIV>
+<DIV>
+<h4>
+Expanded Form</h4>
+<P CLASS="BodyFirst">
+The expanded form of a terminology constraint is a form in which archetype-local terms or sets of terms forming the constraint are inlined in the constraint definition. In this form, all source form ac-coded constraints are replaced by the archetype-local value set they define. This can be thought of as converting a source form value set constraint to an ‘inline’ value set constraint. Single-value constraints are also represented this way, and in fact don’t have a source form (since it would serve no useful purpose to define an ac-code and value set containing a single at-code).</P>
+<P CLASS="Body">
+The syntax for the expanded form is as follows:</P>
+<UL>
+<LI CLASS="LstU1">
+[local::atN]                -- single term</LI>
+<LI CLASS="LstU1">
+<CODE CLASS="Code">
+[local::atN, atN, ... , atN]                -- value set</CODE>
+</LI>
+<LI CLASS="LstU1">
+<CODE CLASS="Code">
+[local::atN, atN, ... , atN; atN]                -- with assumed value</CODE>
+</LI>
+</UL>
+<P CLASS="Body">
+The first variant is the single value case. This type is used when the constraint is intended to fix single coded value only, e.g. the code for a physical property like ‘mass’ in a constraint that defines possible mass values.</P>
+<P CLASS="Body">
+The second variant represents an expanded value set, and the third is the same with an assumed value. For purely practical purposes, a multi-line form with interpolated comments is often used (e.g. by ADL serialisers, documentation), to make the constraint more comprehensible:</P>
+<pre>    
+    defining_code matches {
+        [local::
+            at31,     -- Naked
+            at32,     -- Reduced clothing/bedding
+            at33,     -- Appropriate clothing/bedding
+            at34]     -- Increased clothing/bedding
+    }
+</pre>    
+<P CLASS="Body">
+or with assumed value:</P>
+<pre>    
+    defining_code matches {
+        [local::
+            at31,     -- Naked
+            at32,     -- Reduced clothing/bedding
+            at33,     -- Appropriate clothing/bedding
+            at34; -- Increased clothing/bedding
+            at33]     -- assumed value
+    }
+</pre>    
+<P CLASS="Body">
+An archetype whose terminology constraints are all in expanded form will contain only at-codes in those constraints.</P>
+</DIV>
+<DIV>
+<h4>
+Substituted Form</h4>
+<P CLASS="BodyFirst">
+The next form is ‘substituted’ form, which is used to represent terminology constraints in the final concrete form intended at point of use. The substituted form is create by replacing each terminology constraint in its expanded form with the appropriate one of:</P>
+<UL>
+<LI CLASS="LstU1">
+the single external term bound to an internal at-code, e.g. an ISO term for the property ‘mass’;</LI>
+<LI CLASS="LstU1">
+the set of terms from the intended external resource (e.g. a terminology like SNOMED CT or LOINC) - typically for small value sets;</LI>
+<LI CLASS="LstU1">
+an external reference to which the value set ac-code is bound in the archetype terminology - typically for large and changing value sets. This includes the logical constraint ‘any term in terminology X’.</LI>
+</UL>
+<P CLASS="Body">
+The concrete form for all substituted form terms is one or more URIs. The URI syntax is normally an http reference to a real resource. The lexical form for the single code case is as follows:</P>
+<UL>
+<LI CLASS="LstU1">
+<CODE CLASS="Code">
+[http://terminology_publisher_domain/terminology_specifier/code_string]                    </CODE>
+</LI>
+<LI CLASS="LstU1">
+<CODE CLASS="Code">
+[http://terminology_publisher_domain/terminology_specifier/teminology_version_specifier/code_string]            </CODE>
+</LI>
+</UL>
+<P CLASS="Body">
+For the inline value set case, it will be a comma-separated list of these within [], optionally with a final URI representing an assumed value, i.e.:</P>
+<UL>
+<LI CLASS="LstU1">
+<CODE CLASS="Code">
+[uri, uri, ... , uri]        </CODE>
+</LI>
+<LI CLASS="LstU1">
+<CODE CLASS="Code">
+[uri, uri, ... , uri]    ; uri    </CODE>
+</LI>
+</UL>
+<P CLASS="Body">
+In the external value set reference case, a single URI will be used that denotes the external value set, rather than individual terminology codes, i.e.:</P>
+<UL>
+<LI CLASS="LstU1">
+<CODE CLASS="Code">
+[uri]        </CODE>
+</LI>
+</UL>
+<P CLASS="Body">
+The exact form of the URIs will value across industries, and will eventually be standardised by appropriate standards organisations or industry groups. In the health domain, this is done by the IHTSDO<A HREF="#pgfId-1169233" CLASS="footnote">4</A> organisation.</P>
+</DIV>
+<DIV>
+<h4>
+Resolved Form</h4>
+<P CLASS="BodyFirst">
+A final ‘resolved’ form of a terminology constraint specified by a binding reference to an externally defined value set, can be generated by attempting to resolve the reference against the target terminology and returning the actual terms in the value set according to the terminology. This form would be used in flattened archetypes, operational templates and documentation for local use. </P>
+<P CLASS="Body">
+Since an archetype might not contain external terminology bindings for all (or even any) of its terminological constraints, a ‘resolved’ archetype might still contain at-codes in its cADL definition. These at-codes would be treated as real coded terms in any implementation that was creating data, and as a consequence, archetype at-codes could occur in real data.</P>
+</DIV>
+</DIV>
+<DIV>
+<h3>
+Constraints on Lists of Primitive types</h3>
+<P CLASS="BodyFirst">
+In many cases, the type in the information model of an attribute to be constrained is a list or set of primitive types, e.g. List&lt;Integer&gt;, Set&lt;String&gt; etc. As for complex types, this is indicated in cADL using the <CODE CLASS="Code">
+cardinality</CODE>
+ keyword, as follows:</P>
+    some_attr cardinality &isin; {0..*} &isin; {some_constraint}
+<P CLASS="Body">
+The pattern to match in the final braces will then have the meaning of a list or set of value constraints, rather than a single value constraint. Any constraint described above for single-valued attributes, which is commensurate with the type of the attribute in question, may be used. However, as with complex objects, the meaning is now that every item in the list is constrained to be any one of the values implied by the constraint expression. For example, </P>
+    speed_limits cardinality &isin; {0..*; ordered} &isin; {50, 60, 70, 80, 100, 130}
+<P CLASS="Body">
+constrains each value in the list corresponding to the value of the attribute <EM CLASS="Emphasis">
+speed_limits</EM>
+ (of type <CODE CLASS="Code">
+List&lt;Integer&gt;</CODE>
+), to be any one of the values 50, 60, 70 etc.</P>
+</DIV>
+<DIV>
+<h3>
+0    Constraints on Enumerated Types</h3>
+<P CLASS="BodyFirst">
+Enumeration types in the reference model are assumed to have the semantics defined in UML and mainstream programming languages, i.e. to be a distinct type based on a primitive type, normally Integer or String. Each such type consists of a set of values from the domain of its underlying type, thus, a set of Integer, String or other primitive values. Each of these values is assumed to be named in the manner of a symbolic constant. Although stricly speaking UML doesn’t require an enumerated type to be based on an underlying primitive type, programming languages do, hence the assumption here that values from the domain of such a type are involved.</P>
+<P CLASS="Body">
+In ADL, constraints on enumerated types are represented by constraints on the underlying primitive values. The following example shows 2 constraints on an attribute of the type <CODE CLASS="Code">
+PROPORTION_KIND</CODE>
+ from the openEHR Reference Model.</P>
+<pre>    
+    ITEM_TREE[id4] &isin; {
+        items &isin; {
+            ELEMENT[id5] occurrences &isin; {0..1} matches {    -- test enum 1
+                value &isin; {
+                    DV_PROPORTION[id6] &isin; {
+                        numerator &isin; {|0.0..1.0|; 0.0}
+                        type &isin; {1} -- pk_unitary
+                    }
+                }
+            }
+            ELEMENT[id7] &isin; {    -- test enum 2
+                value &isin; {
+                    DV_PROPORTION[id8] &isin; {
+                        numerator &isin; {|0.0..1.0|; 0.0}
+                        type &isin; {2, 3} -- pk_percent, pk_fraction
+                    }
+                }
+            }
+        }
+    }
+</pre>    
+<P CLASS="Body">
+<CODE CLASS="Code">
+PROPORTION_KIND</CODE>
+ is defined as <CODE CLASS="Code">
+{pk_ratio = 0; pk_unitary = 1; pk_percent = 2; pk_fraction = 3; pk_integer_fraction = 4}</CODE>
+. Modelling tools are relied on to visualise enumeration constraints in a suitable way, by inferring the type based on inspection of the reference model on which the archetype is based.</P>
+</DIV>
+</DIV>
+<DIV>
+<h2>
+Syntax Validity Rules</H2>
+<P CLASS="BodyFirst">
+Various coded syntax rules have been defined for the cADL syntax, for use by parser and compiler authors. These can be found on at the GitHub location <A HREF="https://github.com/openEHR/adl-resources/blob/master/messages/ADL/adl_syntax_errors.txt" CLASS="URL">https://github.com/openEHR/adl-resources/blob/master/messages/ADL/adl_syntax_errors.txt</A>.</P>
+<P CLASS="Body">
+The state of this file at the issue of this document is as follows.</P>
+<pre>
+    ["SUNK"] = &lt;"Syntax error (unknown cause)"&gt;
+    ["SARID"] = &lt;"Syntax error in artefact identification clause; expecting archetype id (format = model_issuer-package-class.concept.version)"&gt;
+    &nbsp;
+    ["SASID"] = &lt;"Syntax error in 'specialise' clause; expecting parent archetype id (model_issuer-ref_model-model_class.concept.version)"&gt;
+    &nbsp;
+    ["SACO"] = &lt;"Syntax error in 'concept' clause; expecting TERM_CODE reference"&gt;
+    ["SALA"] = &lt;"Syntax error in language section"&gt;
+    ["SALAN"] = &lt;"Syntax error no language section found"&gt;
+    ["SADS"] = &lt;"Syntax error in description section"&gt;
+    ["SADF"] = &lt;"Syntax error in definition section"&gt;
+    ["SAIV"] = &lt;"Syntax error in invariant section"&gt;
+    ["SAON"] = &lt;"Syntax error in terminology section"&gt;
+    ["SAAN"] = &lt;"Syntax error in annotations section"&gt;
+    &nbsp;
+    ["SDSF"] = &lt;"Syntax error: differential syntax not allowed in top-level archetype"&gt;
+    ["SDINV"] = &lt;"Syntax error: invalid ODIN section; error: $1"&gt;
+    ["SCCOG"] = &lt;"Syntax error: expecting a new node definition, primitive node definition, 'use' path, or 'archetype' reference"&gt;
+    ["SUAID"] = &lt;"Syntax error: expecting [archetype_id] in use_archetype statement"&gt;
+    ["SUAIDI"] = &lt;"Syntax error: invalid archetype id $1"&gt;
+    ["SOCCF"] = &lt;"Syntax error: expecting an 'occurrences expression', e.g. 'occurrences matches {n..m}'"&gt;
+    ["SUNPA"] = &lt;"Syntax error: expecting absolute path in use_node statement"&gt;
+    ["SCOAT"] = &lt;"Syntax error: expecting attribute definition(s)"&gt;
+    ["SUAS"] = &lt;"Syntax error: error after 'use_archetype' keyword; expecting Object node definition"&gt;
+    ["SCAS"] = &lt;"Syntax error: expecting a 'any' node, 'leaf' node, or new node definition"&gt;
+    ["SINVS"] = &lt;"Syntax error: illegal invariant expression at identifier $1"&gt;
+    ["SEXPT"] = &lt;"Syntax error: expecting absolute path after exists keyword"&gt;
+    ["SEXLSG"] = &lt;"Syntax error: existence single value must be 0 or 1"&gt;
+    ["SEXLU1"] = &lt;"Syntax error: existence upper limit must be 0 or 1 when lower limit is 0"&gt;
+    ["SEXLU2"] = &lt;"Syntax error: existence upper limit must be 1 when lower limit is 1"&gt;
+    ["SEXLMG"] = &lt;"Syntax error: existence must be one of 0..0, 0..1, or 1..1"&gt;
+    &nbsp;
+    ["SCIAV"] = &lt;"Syntax error: invalid assumed value; must be an integer"&gt;
+    ["SCRAV"] = &lt;"Syntax error: invalid assumed value; must be a real number"&gt;
+    ["SCDAV"] = &lt;"Syntax error: invalid assumed value; must be an ISO8601 date"&gt;
+    ["SCTAV"] = &lt;"Syntax error: invalid assumed value; must be an ISO8601 time"&gt;
+    ["SCDTAV"] = &lt;"Syntax error: invalid assumed value; must be an ISO8601 date/time"&gt;
+    ["SCDUAV"] = &lt;"Syntax error: invalid assumed value; must be an ISO8601 duration"&gt;
+    ["SCSAV"] = &lt;"Syntax error: invalid assumed value; must be a string"&gt;
+    ["SCBAV"] = &lt;"Syntax error: invalid assumed value; must be a 'True' or 'False'"&gt;
+    ["SCOAV"] = &lt;"Syntax error: invalid assumed value; must be an ordinal integer value"&gt;
+    &nbsp;
+    ["SCDPT"] = &lt;"Syntax error: invalid date constraint pattern '$1'; allowed patterns: $2"&gt;
+    ["SCTPT"] = &lt;"Syntax error: invalid time constraint pattern '$1'; allowed patterns: $2"&gt;
+    ["SCDTPT"] = &lt;"Syntax error: invalid date/time constraint pattern '$1'; allowed patterns: $2"&gt;
+    ["SCDUPT"] = &lt;"Syntax error: invalid duration constraint pattern '$1'; legal pattern: P[Y|y][M|m][W|w][D|d][T[H|h][M|m][S|s]] or P[W|w] [/duration_interval]"&gt;
+    &nbsp;
+    ["SCSRE"] = &lt;"Syntax error: regular expression compile error '$1' is not a valid regular expression"&gt;
+    ["STCCP"] = &lt;"Syntax error: invalid term code constraint pattern '$1': $2"&gt;
+    ["STCDC"] = &lt;"Syntax error: duplicate code(s) found in code list"&gt;
+    ["STCAC"] = &lt;"Syntax error: assumed value code $1 not found in code list"&gt;
+    ["STCNT"] = &lt;"Syntax error: terminology not specified"&gt;
+</pre>
+<P CLASS="Body">
+&nbsp;</P>
+</DIV>
+</DIV>
+<HR>
+<DIV CLASS="footnotes">
+<DIV CLASS="footnote">
+<P CLASS="Footnote">
+<SPAN CLASS="footnoteNumber">
+1.</SPAN>
+See <A HREF="http://www.openehr.org/releases//architecture/rm/ehr_im.pdf" CLASS="URL">http://www.openehr.org/releases//architecture/rm/ehr_im.pdf</A></P>
+</DIV>
+<DIV CLASS="footnote">
+<P CLASS="Footnote">
+<SPAN CLASS="footnoteNumber">
+2.</SPAN>
+<A HREF="http://www.who.int/classifications/icd/en/" CLASS="URL">http://www.who.int/classifications/icd/en/</A></P>
+</DIV>
+<DIV CLASS="footnote">
+<P CLASS="Footnote">
+<SPAN CLASS="footnoteNumber">
+3.</SPAN>
+The alternative would be that ADL and its tooling was agnostic, and that tools would implement multiple private models of terminology constraining.</P>
+</DIV>
+<DIV CLASS="footnote">
+<P CLASS="Footnote">
+<SPAN CLASS="footnoteNumber">
+4.</SPAN>
+<A HREF="http://www.ihtsdo.org/" CLASS="URL">http://www.ihtsdo.org/</A></P>
+</DIV>
+</DIV>
+</BODY>
+</HTML>

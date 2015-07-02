@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 7.0/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="overview.css" CHARSET="UTF-8" TYPE="text/css">
+<TITLE> 2	Overview</TITLE></HEAD>
+<BODY BGCOLOR="#ffffff">
+<H4 CLASS="Hdr1">
+<A NAME="pgfId-1140301"></A>Overview<DIV>
+<IMG SRC="overview-1.png">
+</DIV>
+</H4>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1137912"></A>ADL uses three syntaxes, cADL (constraint form of ADL), ODIN (Object Data Instance Notation), and a version of first-order predicate logic (FOPL), to express constraints on data which are instances of an underlying information model, which may be expressed in UML, relational form, or in a programming language. ADL itself is a very simple ‘glue’ syntax, which uses two other syntaxes for expressing structured constraints and data, respectively. The cADL syntax is used to express the archetype <EM CLASS="Code">
+definition</EM>
+, while the ODIN syntax is used to express data which appears in the <EM CLASS="Code">
+language</EM>
+, <EM CLASS="Code">
+description</EM>
+, <EM CLASS="Code">
+terminology</EM>
+, and <EM CLASS="Code">
+revision_history</EM>
+ sections of an ADL archetype. The top-level structure of an ADL archetype is shown in <A HREF="overview.htm#74291" CLASS="XRef">See ADL Archetype Structure</A>.</P>
+<P CLASS="Body">
+<A NAME="pgfId-1147958"></A>This main part of this document describes cADL and ADL path syntax, before going on to describe the combined ADL syntax, archetypes and domain-specific type libraries.</P>
+<DIV>
+<MAP NAME="overview-2">
+</MAP>
+<IMG SRC="overview-2.png" USEMAP="#overview-2">
+</DIV>
+<DIV>
+<H5 CLASS="Hdr2">
+<A NAME="pgfId-1141492"></A>An Example</H5>
+<P CLASS="BodyFirst">
+<A NAME="pgfId-1141493"></A>The following is an example of a very simple archetype, giving a feel for the syntax. The main point to glean from the following is that the notion of ‘guitar’ is defined in terms of constraints on a generic model of the concept <EM CLASS="Code">
+INSTRUMENT</EM>
+. The names mentioned down the left-hand side of the definition section (“INSTRUMENT”, “size” etc) are alternately class and attribute names from an object model. Each block of braces encloses a specification for some particular set of instances that conform to a specific concept, such as ‘guitar’ or ‘neck’, defined in terms of constraints on types from a generic class model. The leaf pairs of braces enclose constraints on primitive types such as Integer, String, Boolean and so on.</P>
+
+<pre>
+archetype (adl_version=2.0.5)</PRE>
+	adl-test-instrument.guitar.v1.0.4</PRE>
+language</PRE>
+	original_language = &lt;[iso_639-1::en]&gt;</PRE>
+definition</PRE>
+	INSTRUMENT[id1] matches {</PRE>
+		size matches {|60..120|		}									-- size in cm</PRE>
+		date_of_manufacture matches {yyyy-mm-??}											-- year &amp; month ok</PRE>
+		parts cardinality matches {0..*} matches {</PRE>
+			PART[id2] matches {										-- neck</PRE>
+				material matches {[ac1]}									-- timber or nickel alloy								</PRE>
+			}</PRE>
+			PART[id3] matches {										-- body</PRE>
+				material matches {[at3]}									-- timber								</PRE>
+			}</PRE>
+		}</PRE>
+	}				</PRE>
+terminology </PRE>
+	term_definitions = &lt;</PRE>
+		[&quot;en&quot;] = &lt;</PRE>
+			[&quot;id1&quot;] = &lt;</PRE>
+				text = &lt;&quot;guitar&quot;&gt;; </PRE>
+				description = &lt;&quot;stringed instrument&quot;&gt;</PRE>
+			&gt;</PRE>
+			[&quot;id2&quot;] = &lt;</PRE>
+				text = &lt;&quot;neck&quot;&gt;; </PRE>
+				description = &lt;&quot;neck of guitar&quot;&gt;</PRE>
+			&gt;</PRE>
+			[&quot;id3&quot;] = &lt;</PRE>
+				text = &lt;&quot;body&quot;&gt;; </PRE>
+				description = &lt;&quot;body of guitar&quot;&gt;</PRE>
+			&gt;</PRE>
+			[&quot;at3&quot;] = &lt;</PRE>
+				text = &lt;&quot;timber&quot;&gt;; </PRE>
+				description = &lt;&quot;straight, seasoned timber&quot;&gt;</PRE>
+			&gt;</PRE>
+			[&quot;at4&quot;] = &lt;</PRE>
+				text = &lt;&quot;nickel alloy&quot;&gt;; </PRE>
+				description = &lt;&quot;frets&quot;&gt;</PRE>
+			&gt;</PRE>
+		&gt;</PRE>
+	&gt;</PRE>
+	value_sets = &lt;</PRE>
+		[&quot;ac1&quot;] = &lt;</PRE>
+			id = &lt;&quot;ac1&quot;&gt;</PRE>
+			members = &lt;&quot;at3&quot;, &quot;at4&quot;&gt;</PRE>
+		&gt;</PRE>
+	&gt;</PRE>
+<P CLASS="Body">
+<A NAME="pgfId-1148048"></A>&nbsp;</P>
+</DIV>
+</BODY>
+</HTML>
